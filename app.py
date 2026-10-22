@@ -108,22 +108,37 @@ else:
     with st.expander("How the current baseline works", expanded=True):
         st.write(
             "The public projection board uses recent points scored blended with the opponent's recent points allowed. "
-            "A fixed 1.5-point home adjustment is applied. This is not yet the efficiency model and is not validated."
+            "A fixed 1.5-point home adjustment is applied. It remains a simple baseline, not the historical efficiency model."
         )
         st.write(
-            "Not yet included in the public board: current-season opponent-adjusted EPA/play, injuries, weather, rest, "
-            "verified sportsbook odds, calibrated probabilities or model uncertainty."
+            "The baseline still does not automatically ingest injury reports, weather, opponent-adjusted EPA/play, "
+            "or sportsbook odds. Use the manual QB adjustment preview below when the starting-quarterback situation is known."
         )
+    st.markdown("**Manual starting-QB adjustment (preview only)**")
+    st.caption("Choose the expected QB situation for this matchup. These are transparent point deductions, not learned or validated injury coefficients. They affect this matchup's adjusted preview, not the underlying historical model.")
+    qb_penalties = {"Expected starter": 0.0, "Questionable / limited": 1.5, "Backup starting": 5.0, "Emergency / third-string": 8.0}
+    qb1, qb2 = st.columns(2)
+    with qb1:
+        away_qb = st.selectbox(f"{g['away_team']} QB status", list(qb_penalties), key=f"away_qb_{g['game_id']}")
+    with qb2:
+        home_qb = st.selectbox(f"{g['home_team']} QB status", list(qb_penalties), key=f"home_qb_{g['game_id']}")
+    adjusted_away = max(0.0, float(g["projected_away"]) - qb_penalties[away_qb])
+    adjusted_home = max(0.0, float(g["projected_home"]) - qb_penalties[home_qb])
+    q1, q2, q3 = st.columns(3)
+    q1.metric("QB-adjusted preview", f"{g['away_team']} {adjusted_away:.1f} – {g['home_team']} {adjusted_home:.1f}")
+    q2.metric("Adjusted total", f"{adjusted_away + adjusted_home:.1f}")
+    q3.metric("Change vs baseline", f"{(adjusted_away + adjusted_home) - float(g['projected_total']):+.1f} pts")
 
 st.divider()
 st.subheader("Efficiency model & historical validation")
 st.write(
-    "The historical efficiency model uses offensive EPA/play, offensive success rate, defensive EPA allowed, "
-    "and defensive success rate allowed. It is evaluated chronologically by weekly blocks."
+    "The historical efficiency model now tests offensive/defensive EPA and success rate, offense-versus-defense matchup differences, "
+    "plays per game as a pace proxy, red-zone touchdown rate when available, turnovers per play when available, and rest-day differences. "
+    "It is evaluated chronologically by weekly blocks. Optional PBP fields are used only when present."
 )
 st.info(
     "The backtest compares the efficiency model with a simple recent-scoring baseline on the same test games. "
-    "The first run downloads play-by-play data for 2021–2025 and may take several minutes."
+    "The first run downloads play-by-play data for 2021–2026 and may take several minutes."
 )
 
 if run_backtest:
