@@ -214,9 +214,13 @@ if run_backtest:
             st.dataframe(total_accuracy.round(2), width="stretch", hide_index=True)
 
             def grade_totals(frame, edge_col, threshold):
-                bets = frame[frame[edge_col].abs() >= threshold].copy()
+                # At threshold zero, require a nonzero edge; do not create a bet when projection equals the line.
+                edge_size = frame[edge_col].abs()
+                mask = edge_size > 0 if threshold == 0 else edge_size >= threshold
+                bets = frame[mask].copy()
+                threshold_label = "Any nonzero edge" if threshold == 0 else f"{threshold:.1f}+ pts"
                 if bets.empty:
-                    return {"Edge threshold": f"{threshold:.1f}+ pts", "Bets": 0, "Over": 0, "Under": 0,
+                    return {"Edge threshold": threshold_label, "Bets": 0, "Over": 0, "Under": 0,
                             "Wins": 0, "Losses": 0, "Pushes": 0, "Win % (no pushes)": np.nan,
                             "Net units at -110": 0.0, "ROI": np.nan}
                 bets["side"] = np.where(bets[edge_col] > 0, "Over", "Under")
@@ -234,12 +238,13 @@ if run_backtest:
                 net_units = wins * (100 / 110) - losses
                 decided = wins + losses
                 return {
-                    "Edge threshold": f"{threshold:.1f}+ pts", "Bets": len(bets),
+                    "Edge threshold": threshold_label, "Bets": len(bets),
                     "Over": int((bets["side"] == "Over").sum()), "Under": int((bets["side"] == "Under").sum()),
                     "Wins": wins, "Losses": losses, "Pushes": pushes,
                     "Win % (no pushes)": (100 * wins / decided) if decided else np.nan,
                     "Net units at -110": net_units,
-                    "ROI": (net_units / decided * 100) if decided else np.nan,
+                    # One unit was staked on every bet; pushes return the stake but remain part of total handle.
+                    "ROI": (net_units / len(bets) * 100) if len(bets) else np.nan,
                 }
 
             st.markdown("**EPA / efficiency model: simulated totals record**")
@@ -256,6 +261,51 @@ if run_backtest:
             baseline_grades["ROI"] = baseline_grades["ROI"].map(lambda x: f"{x:+.1f}%" if pd.notna(x) else "—")
             st.dataframe(baseline_grades, width="stretch", hide_index=True)
 
+            st.markdown("**Season-by-season totals results**")
+            st.caption(
+                "Each row is evaluated independently by season, model, and edge threshold. ROI is net units divided by all bets placed, "
+                "including pushes in the denominator; win percentage excludes pushes. Small seasonal samples can be very noisy."
+            )
+            seasonal_rows = []
+            model_edge_cols = [
+                ("EPA / efficiency model", "efficiency_edge"),
+                ("Recent scoring baseline", "baseline_edge"),
+            ]
+            for yr, season_part in totals.groupby("season", dropna=True):
+                for model_name, edge_col in model_edge_cols:
+                    for threshold in (0, 1.5, 2.5, 3.5, 4.5):
+                        graded = grade_totals(season_part, edge_col, threshold)
+                        seasonal_rows.append({
+                            "Season": int(yr),
+                            "Model": model_name,
+                            "Edge threshold": graded["Edge threshold"],
+                            "Bets": graded["Bets"],
+                            "Wins": graded["Wins"],
+                            "Losses": graded["Losses"],
+                            "Pushes": graded["Pushes"],
+                            "Win % (no pushes)": graded["Win % (no pushes)"],
+                            "Net units at -110": graded["Net units at -110"],
+                            "ROI": graded["ROI"],
+                        })
+            seasonal_table = pd.DataFrame(seasonal_rows)
+            seasonal_display = seasonal_table.copy()
+            seasonal_display["Win % (no pushes)"] = seasonal_display["Win % (no pushes)"].map(
+                lambda x: f"{x:.1f}%" if pd.notna(x) else "—"
+            )
+            seasonal_display["Net units at -110"] = seasonal_display["Net units at -110"].map(
+                lambda x: f"{x:+.2f}"
+            )
+            seasonal_display["ROI"] = seasonal_display["ROI"].map(
+                lambda x: f"{x:+.1f}%" if pd.notna(x) else "—"
+            )
+            st.dataframe(seasonal_display, width="stretch", hide_index=True)
+            st.download_button(
+                "Download season-by-season totals results CSV",
+                seasonal_table.to_csv(index=False).encode("utf-8"),
+                "nfl_totals_season_results.csv",
+                "text/csv",
+            )
+
             with st.expander("Inspect every totals prediction"):
                 inspect = totals[["gameday", "season", "week", "away_team", "home_team", "actual_total", "total_line",
                                   "efficiency_projected_total", "efficiency_edge", "baseline_projected_total", "baseline_edge"]].copy()
@@ -271,7 +321,8 @@ if run_backtest:
             )
             st.caption(
                 "Simulated betting assumptions: 1 unit risked per bet, -110 odds, +0.909 units per win, -1 unit per loss, "
-                "0 units on pushes. ROI uses decided bets (wins + losses); pushes are excluded. Edge thresholds are exploratory, "
+                "0 units on pushes. ROI is net units divided by all bets placed (including pushes); win percentage excludes pushes. "
+                "A zero-edge game is not counted as a bet in the 'Any nonzero edge' row. Edge thresholds are exploratory, "
                 "not proven optimal. Historical recorded lines are not guaranteed to match the price you could have bet at."
             )
 
@@ -295,4 +346,4 @@ with st.expander("Methodology, data and record policy"):
     """)
     st.markdown("[nflverse data releases](https://github.com/nflverse/nflverse-data/releases)")
 
-st.caption("Prototype v0.5.3 • Model comparison audit • Not betting advice")
+st.caption("Prototype v0.5.5 • Totals audit improvements • Not betting advice")
