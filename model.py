@@ -1,51 +1,88 @@
-"""Starter math for transparent score and market comparisons.
+"""Transparent, experimental NFL score baseline using public schedule/results data."""
+from __future__ import annotations
+import pandas as pd
 
-These helpers do not themselves create reliable predictions. A trained model and
-point-in-time data pipeline must supply the projected scores.
-"""
-from dataclasses import dataclass
+SCHEDULE_URLS = [
+    "https://github.com/nflverse/nfldata/raw/master/data/games.csv",
+    "https://github.com/nflverse/nflverse-data/releases/download/schedules/games.csv",
+]
 
-@dataclass
-class GameProjection:
-    away_team: str
-    home_team: str
-    away_points: float
-    home_points: float
-    market_home_spread: float | None = None  # e.g. -3.5 means home team favored by 3.5
-    market_total: float | None = None
+def load_schedule_data() -> pd.DataFrame:
+    errors = []
+    df = None
+    for url in SCHEDULE_URLS:
+        try:
+            candidate = pd.read_csv(url, low_memory=False)
+            if {"season", "away_team", "home_team", "away_score", "home_score"}.issubset(candidate.columns):
+                df = candidate
+                break
+        except Exception as exc:
+            errors.append(f"{url}: {exc}")
+    if df is None:
+        raise RuntimeError("Could not load a compatible schedule CSV. " + " | ".join(errors))
 
-    @property
-    def projected_home_margin(self) -> float:
-        return self.home_points - self.away_points
+    for col in ["season", "week", "away_score", "home_score", "spread_line", "total_line"]:
+        if col in df.columns:
+            df[col] = pd.to_numeric(df[col], errors="coerce")
+    if "gameday" in df.columns:
+        df["gameday"] = pd.to_datetime(df["gameday"], errors="coerce")
+    else:
+        df["gameday"] = pd.NaT
+    if "spread_line" not in df.columns:
+        df["spread_line"] = float("nan")
+    if "total_line" not in df.columns:
+        df["total_line"] = float("nan")
+    return df.sort_values(["season", "week", "gameday"], na_position="last").reset_index(drop=True)
 
-    @property
-    def projected_total(self) -> float:
-        return self.home_points + self.away_points
+def summarize_record(results: list[str]) -> dict[str, int]:
+    return {key: sum(1 for result in results if result == key) for key in ["W", "L", "P"]}
 
-    @property
-    def model_home_spread(self) -> float:
-        # Convention: a negative spread means the home team is favored.
-        return -self.projected_home_margin
+def _team_recent_stats(history: pd.DataFrame, team: str, before_date, lookback: int):
+    prior = history[
+        (history["gameday"] < before_date)
+        & (
+            (history["home_team"] == team) | (history["away_team"] == team)
+        )
+        & history["home_score"].notna()
+        & history["away_score"].notna()
+    ].sort_values("gameday").tail(lookback)
 
-    @property
-    def spread_difference(self) -> float | None:
-        if self.market_home_spread is None:
-            return None
-        # Positive means the model is more favorable to the away side than market.
-        return self.market_home_spread - self.model_home_spread
+    if prior.empty:
+        return None
+    scored, allowed = [], []
+    for _, row in prior.iterrows():
+        if row["home_team"] == team:
+            scored.append(float(row["home_score"]))
+            allowed.append(float(row["away_score"]))
+        else:
+            scored.append(float(row["away_score"]))
+            allowed.append(float(row["home_score"]))
+    return {"scored": sum(scored) / len(scored), "allowed": sum(allowed) / len(allowed), "n": len(prior)}
 
-    @property
-    def total_difference(self) -> float | None:
-        if self.market_total is None:
-            return None
-        return self.projected_total - self.market_total
-
-
-def ats_result(team_points: float, opponent_points: float, team_spread: float) -> str:
-    """Grade one team's spread result; team_spread is the team's listed handicap."""
-    adjusted = team_points + team_spread
-    if adjusted > opponent_points:
-        return "W"
-    if adjusted < opponent_points:
-        return "L"
-    return "P"
+def build_baseline_projections(games: pd.DataFrame, season: int, lookback: int = 6) -> pd.DataFrame:
+    season_games = games[games["season"] == season].copy()
+    if season_games.empty:
+        return pd.DataFrame()
+    # Use all prior seasons plus completed games earlier than each fixture in this season.
+    output = []
+    for _, game in season_games.iterrows():
+        if pd.notna(game["home_score"]) and pd.notna(game["away_score"]):
+            continue
+        game_date = game.get("gameday", pd.NaT)
+        if pd.isna(game_date):
+            continue
+        history = games[games["gameday"] < game_date]
+        away = _team_recent_stats(history, str(game["away_team"]), game_date, lookback)
+        home = _team_recent_stats(history, str(game["home_team"]), game_date, lookback)
+        if away is None or home is None:
+            continue
+        # Blend each team's recent scoring with its opponent's recent points allowed.
+        away_points = 0.5 * away["scored"] + 0.5 * home["allowed"]
+        home_points = 0.5 * home["scored"] + 0.5 * away["allowed"] + 1.5
+        item = game.to_dict()
+        item["projected_away"] = max(0.0, away_points)
+        item["projected_home"] = max(0.0, home_points)
+        item["model_home_spread"] = -(item["projected_home"] - item["projected_away"])
+        item["projected_total"] = item["projected_home"] + item["projected_away"]
+        output.append(item)
+    return pd.DataFrame(output)
