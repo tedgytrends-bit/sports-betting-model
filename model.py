@@ -104,10 +104,10 @@ def _get_plays(pbp: pd.DataFrame) -> pd.DataFrame:
 
 
 def build_efficiency_table(pbp: pd.DataFrame) -> pd.DataFrame:
-    """Build team-game efficiency, pace, red-zone, and turnover features from PBP.
+    """Build prior-game team features from play-by-play.
 
-    Optional columns are used only when present. Rates are aggregated at team-game
-    level and later averaged over prior games, so target-game information is excluded.
+    Red-zone rate is explicitly a touchdown-play proxy (not drive conversion rate).
+    Missing optional source fields remain missing and are imputed from training data only.
     """
     plays = _get_plays(pbp)
     group_cols = ["game_id", "season", "week", "posteam"]
@@ -123,34 +123,55 @@ def build_efficiency_table(pbp: pd.DataFrame) -> pd.DataFrame:
     ).reset_index().rename(columns={"defteam": "team"})
     out = off.merge(deff, on=["game_id", "season", "week", "team"], how="outer")
 
-    # Offense-only add-on features; do not assume optional PBP columns exist.
     extra = plays.copy()
-    if "yardline_100" in extra.columns:
-        extra["yardline_100"] = pd.to_numeric(extra["yardline_100"], errors="coerce")
+    has_yardline = "yardline_100" in extra.columns
+    has_touchdown = "touchdown" in extra.columns
+    has_interception = "interception" in extra.columns
+    has_fumble_lost = "fumble_lost" in extra.columns
+    # Explicitly create optional columns so the output schema is stable across source versions.
+    for col in ["yardline_100", "touchdown", "interception", "fumble_lost"]:
+        if col not in extra.columns:
+            extra[col] = np.nan
+        extra[col] = pd.to_numeric(extra[col], errors="coerce")
+
+    if has_yardline:
         extra["red_zone_play"] = extra["yardline_100"].between(1, 20, inclusive="both").astype(float)
-        if "touchdown" in extra.columns:
-            extra["red_zone_td"] = ((extra["red_zone_play"] == 1) & (pd.to_numeric(extra["touchdown"], errors="coerce") == 1)).astype(float)
-    if "interception" in extra.columns:
-        extra["interception"] = pd.to_numeric(extra["interception"], errors="coerce").fillna(0)
-    if "fumble_lost" in extra.columns:
-        extra["fumble_lost"] = pd.to_numeric(extra["fumble_lost"], errors="coerce").fillna(0)
-    aggs = {"off_plays_per_game": ("epa", "size")}
-    if "red_zone_play" in extra.columns:
-        aggs["red_zone_plays"] = ("red_zone_play", "sum")
-        if "red_zone_td" in extra.columns:
-            aggs["red_zone_td_plays"] = ("red_zone_td", "sum")
-    if "interception" in extra.columns:
-        aggs["interceptions"] = ("interception", "sum")
-    if "fumble_lost" in extra.columns:
-        aggs["fumbles_lost"] = ("fumble_lost", "sum")
-    add = extra.groupby(group_cols).agg(**aggs).reset_index().rename(columns={"posteam": "team"})
-    if "red_zone_plays" in add.columns and "red_zone_td_plays" in add.columns:
-        add["red_zone_td_rate"] = add["red_zone_td_plays"] / add["red_zone_plays"].replace(0, np.nan)
-    if "interceptions" in add.columns or "fumbles_lost" in add.columns:
-        add["turnovers_per_play"] = (
-            add.get("interceptions", 0) + add.get("fumbles_lost", 0)
-        ) / add["off_plays_per_game"].replace(0, np.nan)
+    else:
+        extra["red_zone_play"] = np.nan
+    if has_yardline and has_touchdown:
+        extra["red_zone_td_play"] = (
+            (extra["red_zone_play"] == 1) & (extra["touchdown"] == 1)
+        ).astype(float)
+    else:
+        extra["red_zone_td_play"] = np.nan
+    if has_interception or has_fumble_lost:
+        interceptions = extra["interception"].fillna(0) if has_interception else pd.Series(0.0, index=extra.index)
+        fumbles_lost = extra["fumble_lost"].fillna(0) if has_fumble_lost else pd.Series(0.0, index=extra.index)
+        extra["turnover_play"] = (interceptions.clip(lower=0, upper=1) + fumbles_lost.clip(lower=0, upper=1)).clip(upper=1)
+    else:
+        extra["turnover_play"] = np.nan
+
+    add = extra.groupby(group_cols).agg(
+        off_plays_per_game=("epa", "size"),
+        red_zone_plays=("red_zone_play", lambda x: x.sum(min_count=1)),
+        red_zone_td_plays=("red_zone_td_play", lambda x: x.sum(min_count=1)),
+        turnovers=("turnover_play", lambda x: x.sum(min_count=1)),
+    ).reset_index().rename(columns={"posteam": "team"})
+    add["red_zone_td_rate"] = add["red_zone_td_plays"] / add["red_zone_plays"].replace(0, np.nan)
+    add["turnovers_per_play"] = add["turnovers"] / add["off_plays_per_game"].replace(0, np.nan)
+    # Attribute each offense's turnovers to the opposing defense as takeaways.
+    def_extra = extra.groupby(["game_id", "season", "week", "defteam"]).agg(
+        def_takeaways=("turnover_play", "sum"),
+        def_opponent_plays=("epa", "size"),
+    ).reset_index().rename(columns={"defteam": "team"})
+    def_extra["def_takeaways_per_play"] = def_extra["def_takeaways"] / def_extra["def_opponent_plays"].replace(0, np.nan)
     out = out.merge(add, on=["game_id", "season", "week", "team"], how="left")
+    out = out.merge(def_extra[["game_id", "season", "week", "team", "def_takeaways_per_play"]],
+                    on=["game_id", "season", "week", "team"], how="left")
+    # Use a stable schema and distinguish true zero from unavailable source data.
+    for col in ["off_plays_per_game", "red_zone_plays", "red_zone_td_plays", "turnovers"]:
+        if col not in out:
+            out[col] = np.nan
     return out
 
 
@@ -175,6 +196,8 @@ def _game_features_for_target(history_eff: pd.DataFrame, home_team: str,
             "plays_per_game": avg("off_plays_per_game"),
             "red_zone_td_rate": avg("red_zone_td_rate"),
             "turnovers_per_play": avg("turnovers_per_play"),
+            "def_takeaways_per_play": avg("def_takeaways_per_play"),
+            "red_zone_opportunities": avg("red_zone_plays"),
         }
 
     h, a = team_stats(home_team), team_stats(away_team)
@@ -193,6 +216,8 @@ def _game_features_for_target(history_eff: pd.DataFrame, home_team: str,
         "home_plays_per_game": h["plays_per_game"], "away_plays_per_game": a["plays_per_game"],
         "home_red_zone_td_rate": h["red_zone_td_rate"], "away_red_zone_td_rate": a["red_zone_td_rate"],
         "home_turnovers_per_play": h["turnovers_per_play"], "away_turnovers_per_play": a["turnovers_per_play"],
+        "home_def_takeaways_per_play": h["def_takeaways_per_play"],
+        "away_def_takeaways_per_play": a["def_takeaways_per_play"],
         "home_field": 1.0,
     }
 
@@ -247,7 +272,10 @@ def chronological_backtest(dataset: pd.DataFrame, min_train_games=500) -> dict:
         train = data[data["gameday"] < test["gameday"].min()]
         if len(train) < min_train_games:
             continue
-        X_train, X_test = train[features].fillna(0), test[features].fillna(0)
+        # Impute using each training window only; never learn missing-value replacements from test games.
+        train_medians = train[features].median(numeric_only=True).fillna(0)
+        X_train = train[features].fillna(train_medians).fillna(0)
+        X_test = test[features].fillna(train_medians).fillna(0)
         test = test.copy()
         for target in ["home_score", "away_score"]:
             estimator = Ridge(alpha=10.0)
