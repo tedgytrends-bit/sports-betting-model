@@ -1,6 +1,6 @@
 """NFL efficiency features, chronological backtesting, and baseline comparison.
 
-Experimental research utilities. Not a validated betting system.
+Experimental research utilities. Loads current-season play-by-play when requested and fails loudly on missing seasons. Not a validated betting system.
 """
 from __future__ import annotations
 
@@ -49,7 +49,7 @@ def normalize_schedule(df: pd.DataFrame) -> pd.DataFrame:
     return df.sort_values(["gameday", "season", "week"], na_position="last").reset_index(drop=True)
 
 
-def load_pbp(seasons=(2021, 2022, 2023, 2024, 2025)) -> pd.DataFrame:
+def load_pbp(seasons=(2021, 2022, 2023, 2024, 2025, 2026)) -> pd.DataFrame:
     """Load only fields needed for the model; fall back if a source lacks optional columns."""
     frames, errors = [], []
     for season in seasons:
@@ -70,9 +70,17 @@ def load_pbp(seasons=(2021, 2022, 2023, 2024, 2025)) -> pd.DataFrame:
             frames.append(frame)
         except Exception as exc:
             errors.append(f"{season}: {exc}")
+    if errors:
+        # Fail loudly instead of silently using stale/incomplete seasons in a backtest.
+        raise RuntimeError("Unable to load all requested play-by-play seasons: " + " | ".join(errors))
     if not frames:
-        raise RuntimeError("Unable to load play-by-play data. " + " | ".join(errors))
-    return pd.concat(frames, ignore_index=True)
+        raise RuntimeError("Unable to load play-by-play data; no requested seasons were loaded.")
+    combined = pd.concat(frames, ignore_index=True)
+    loaded = set(pd.to_numeric(combined["season"], errors="coerce").dropna().astype(int).unique())
+    missing_seasons = sorted(set(int(s) for s in seasons) - loaded)
+    if missing_seasons:
+        raise RuntimeError(f"Play-by-play data did not contain requested season(s): {missing_seasons}")
+    return combined
 
 
 def _get_plays(pbp: pd.DataFrame) -> pd.DataFrame:
