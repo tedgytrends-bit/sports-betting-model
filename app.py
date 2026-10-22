@@ -224,13 +224,39 @@ if run_backtest:
             st.caption(f"Play-by-play seasons loaded: {", ".join(map(str, loaded_seasons))}. Features for each game use only earlier-dated games.")
             dataset = build_efficiency_model_dataset(games, pbp, lookback_games=lookback)
             results = chronological_backtest(dataset, min_train_games=500)
-            diagnostics = [c for c in ["home_red_zone_td_rate", "away_red_zone_td_rate", "home_turnovers_per_play", "away_turnovers_per_play", "home_def_takeaways_per_play", "away_def_takeaways_per_play"] if c in dataset.columns]
+            diagnostics = [c for c in [
+                "home_red_zone_td_rate", "away_red_zone_td_rate",
+                "home_turnovers_per_play", "away_turnovers_per_play",
+                "home_def_takeaways_per_play", "away_def_takeaways_per_play",
+            ] if c in dataset.columns]
             if diagnostics:
                 st.subheader("Feature availability audit")
                 diag_rows = []
+                broken_features = []
                 for col in diagnostics:
-                    diag_rows.append({"Feature": col, "Non-missing rows": int(dataset[col].notna().sum()), "Missing %": round(float(dataset[col].isna().mean() * 100), 1)})
+                    valid = dataset[col].dropna()
+                    row = {
+                        "Feature": col,
+                        "Non-missing rows": int(valid.size),
+                        "Missing %": round(float(dataset[col].isna().mean() * 100), 1),
+                        "Unique values": int(valid.nunique()),
+                        "Min": round(float(valid.min()), 4) if not valid.empty else np.nan,
+                        "Max": round(float(valid.max()), 4) if not valid.empty else np.nan,
+                    }
+                    diag_rows.append(row)
+                    if valid.empty or valid.nunique() <= 1:
+                        broken_features.append(col)
                 st.dataframe(pd.DataFrame(diag_rows), width="stretch", hide_index=True)
+                if broken_features:
+                    st.error(
+                        "These metrics are missing or constant and therefore cannot add useful predictive information: "
+                        + ", ".join(broken_features)
+                        + ". Check source-field availability before interpreting the model comparison."
+                    )
+                else:
+                    st.success("All audited red-zone and turnover features have non-missing variation in the dataset.")
+            if "n_active_features" in dataset.columns:
+                st.caption("The training pipeline excludes features that are entirely missing in each training window and imputes other missing values using that training window only.")
             efficiency_pred = results["predictions"].copy()
             compared = add_scoring_baseline_predictions(efficiency_pred, games, lookback=6)
             metrics = score_prediction_metrics(compared, "pred_home_score", "pred_away_score")
@@ -441,9 +467,12 @@ with st.expander("Methodology, data and record policy"):
     - Success rate measures the share of plays meeting the source's down-and-distance success definition.
     - Defensive metrics describe EPA and success rate allowed.
     - Ridge regression reduces overfitting among correlated features.
+    - Red-zone touchdown rate is a play-level proxy (touchdown on plays starting inside the opponent's 20), not a drive conversion rate.
+    - Turnovers use interception and lost-fumble indicators with schema fallbacks; defensive takeaways are assigned to the defense on that play.
+    - Features entirely absent from a training window are excluded; other missing values are imputed using that training window only.
     - The historical test is chronological, but must still be audited for data leakage and compared with simple baselines.
     - No betting record should be published until picks are prospectively timestamped with the line and odds available at publication.
     """)
     st.markdown("[nflverse data releases](https://github.com/nflverse/nflverse-data/releases)")
 
-st.caption("Prototype v0.6.1 • Feature audit and manual injury/weather preview • Not betting advice")
+st.caption("Prototype v0.6.2 • Turnover/red-zone feature repair and audit • Not betting advice")
