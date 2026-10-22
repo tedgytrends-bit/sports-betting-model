@@ -114,20 +114,95 @@ else:
             "The baseline still does not automatically ingest injury reports, weather, opponent-adjusted EPA/play, "
             "or sportsbook odds. Use the manual QB adjustment preview below when the starting-quarterback situation is known."
         )
-    st.markdown("**Manual starting-QB adjustment (preview only)**")
-    st.caption("Choose the expected QB situation for this matchup. These are transparent point deductions, not learned or validated injury coefficients. They affect this matchup's adjusted preview, not the underlying historical model.")
+    st.markdown("**Manual injury and severe-weather adjustment preview**")
+    st.caption(
+        "These controls adjust only the selected matchup preview; they do not change historical backtest results. "
+        "The point values are conservative starting heuristics, not fitted or validated injury coefficients. "
+        "Enter missing players by position group; do not count the QB twice."
+    )
     qb_penalties = {"Expected starter": 0.0, "Questionable / limited": 1.5, "Backup starting": 5.0, "Emergency / third-string": 8.0}
     qb1, qb2 = st.columns(2)
     with qb1:
         away_qb = st.selectbox(f"{g['away_team']} QB status", list(qb_penalties), key=f"away_qb_{g['game_id']}")
     with qb2:
         home_qb = st.selectbox(f"{g['home_team']} QB status", list(qb_penalties), key=f"home_qb_{g['game_id']}")
-    adjusted_away = max(0.0, float(g["projected_away"]) - qb_penalties[away_qb])
-    adjusted_home = max(0.0, float(g["projected_home"]) - qb_penalties[home_qb])
+
+    injury_weights = {
+        "Offensive line": 0.65,
+        "WR / TE": 0.60,
+        "Running back": 0.30,
+        "Defensive front / LB": 0.50,
+        "Secondary": 0.50,
+        "Kicker": 0.25,
+    }
+    injury_key = f"injuries_{g['game_id']}"
+    if injury_key not in st.session_state:
+        st.session_state[injury_key] = pd.DataFrame({
+            "Position group": list(injury_weights.keys()),
+            "Away OUT": [0] * len(injury_weights),
+            "Away questionable": [0] * len(injury_weights),
+            "Home OUT": [0] * len(injury_weights),
+            "Home questionable": [0] * len(injury_weights),
+        })
+    injuries = st.data_editor(
+        st.session_state[injury_key],
+        key=f"injury_editor_{g['game_id']}",
+        hide_index=True, width="stretch", num_rows="fixed",
+        disabled=["Position group"],
+        column_config={
+            "Position group": st.column_config.TextColumn("Position group"),
+            "Away OUT": st.column_config.NumberColumn(f"{g['away_team']} OUT", min_value=0, max_value=5, step=1),
+            "Away questionable": st.column_config.NumberColumn(f"{g['away_team']} Q", min_value=0, max_value=5, step=1),
+            "Home OUT": st.column_config.NumberColumn(f"{g['home_team']} OUT", min_value=0, max_value=5, step=1),
+            "Home questionable": st.column_config.NumberColumn(f"{g['home_team']} Q", min_value=0, max_value=5, step=1),
+        },
+    )
+    st.session_state[injury_key] = injuries
+
+    away_off_penalty = 0.0
+    home_off_penalty = 0.0
+    away_def_penalty = 0.0
+    home_def_penalty = 0.0
+    for _, injury in injuries.iterrows():
+        group = injury["Position group"]
+        weight = injury_weights[group]
+        away_load = float(injury["Away OUT"] or 0) + 0.4 * float(injury["Away questionable"] or 0)
+        home_load = float(injury["Home OUT"] or 0) + 0.4 * float(injury["Home questionable"] or 0)
+        if group in ["Defensive front / LB", "Secondary"]:
+            away_def_penalty += weight * away_load
+            home_def_penalty += weight * home_load
+        else:
+            away_off_penalty += weight * away_load
+            home_off_penalty += weight * home_load
+
+    weather = st.selectbox(
+        "Expected game conditions",
+        ["Normal / roofed", "Heavy rain", "Snow / icy field", "Sustained high wind", "Extreme cold"],
+        key=f"weather_{g['game_id']}",
+        help="Use only when the forecast known before kickoff supports it. This is a small total-scoring adjustment, not a weather forecast.",
+    )
+    weather_total_penalty = {
+        "Normal / roofed": 0.0,
+        "Heavy rain": 1.5,
+        "Snow / icy field": 2.0,
+        "Sustained high wind": 2.5,
+        "Extreme cold": 1.0,
+    }[weather]
+
+    # Offense injuries reduce that team's scoring; defensive injuries increase the opponent's scoring.
+    adjusted_away = max(0.0, float(g["projected_away"]) - qb_penalties[away_qb] - away_off_penalty + home_def_penalty)
+    adjusted_home = max(0.0, float(g["projected_home"]) - qb_penalties[home_qb] - home_off_penalty + away_def_penalty)
+    adjusted_away = max(0.0, adjusted_away - weather_total_penalty / 2)
+    adjusted_home = max(0.0, adjusted_home - weather_total_penalty / 2)
     q1, q2, q3 = st.columns(3)
-    q1.metric("QB-adjusted preview", f"{g['away_team']} {adjusted_away:.1f} – {g['home_team']} {adjusted_home:.1f}")
+    q1.metric("Adjusted score preview", f"{g['away_team']} {adjusted_away:.1f} – {g['home_team']} {adjusted_home:.1f}")
     q2.metric("Adjusted total", f"{adjusted_away + adjusted_home:.1f}")
     q3.metric("Change vs baseline", f"{(adjusted_away + adjusted_home) - float(g['projected_total']):+.1f} pts")
+    st.caption(
+        f"Estimated own-offense deductions: {g['away_team']} {away_off_penalty:.1f} pts, {g['home_team']} {home_off_penalty:.1f} pts. "
+        f"Defensive injury allowances to opponent: {g['away_team']} defense {away_def_penalty:.1f} pts, "
+        f"{g['home_team']} defense {home_def_penalty:.1f} pts. Weather adjustment: -{weather_total_penalty:.1f} total points."
+    )
 
 st.divider()
 st.subheader("Efficiency model & historical validation")
@@ -149,6 +224,13 @@ if run_backtest:
             st.caption(f"Play-by-play seasons loaded: {", ".join(map(str, loaded_seasons))}. Features for each game use only earlier-dated games.")
             dataset = build_efficiency_model_dataset(games, pbp, lookback_games=lookback)
             results = chronological_backtest(dataset, min_train_games=500)
+            diagnostics = [c for c in ["home_red_zone_td_rate", "away_red_zone_td_rate", "home_turnovers_per_play", "away_turnovers_per_play", "home_def_takeaways_per_play", "away_def_takeaways_per_play"] if c in dataset.columns]
+            if diagnostics:
+                st.subheader("Feature availability audit")
+                diag_rows = []
+                for col in diagnostics:
+                    diag_rows.append({"Feature": col, "Non-missing rows": int(dataset[col].notna().sum()), "Missing %": round(float(dataset[col].isna().mean() * 100), 1)})
+                st.dataframe(pd.DataFrame(diag_rows), width="stretch", hide_index=True)
             efficiency_pred = results["predictions"].copy()
             compared = add_scoring_baseline_predictions(efficiency_pred, games, lookback=6)
             metrics = score_prediction_metrics(compared, "pred_home_score", "pred_away_score")
@@ -364,4 +446,4 @@ with st.expander("Methodology, data and record policy"):
     """)
     st.markdown("[nflverse data releases](https://github.com/nflverse/nflverse-data/releases)")
 
-st.caption("Prototype v0.5.6 • Current-season inputs and totals audit • Not betting advice")
+st.caption("Prototype v0.6.1 • Feature audit and manual injury/weather preview • Not betting advice")
