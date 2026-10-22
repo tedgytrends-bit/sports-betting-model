@@ -1,5 +1,6 @@
 import pandas as pd
 import streamlit as st
+from datetime import date, timedelta
 from model import load_schedule_data, build_baseline_projections
 
 st.set_page_config(page_title="Sports Model | NFL", page_icon="🏈", layout="wide")
@@ -17,7 +18,8 @@ with st.sidebar:
     st.header("Projection settings")
     season = st.selectbox("Season", [2026, 2025, 2024, 2023, 2022], index=0)
     lookback = st.slider("Recent completed games per team", 3, 12, 6)
-    st.caption("Each projection uses games played before the scheduled matchup.")
+    show_full_schedule = st.checkbox("Show full remaining season", value=False)
+    st.caption("By default, the board shows games scheduled in the next 14 days.")
 
 @st.cache_data(ttl=1800, show_spinner="Loading NFL schedule and results...")
 def get_data():
@@ -36,30 +38,52 @@ if games.empty:
     st.stop()
 
 season_games = games[games["season"] == season].copy()
-projections = build_baseline_projections(games, season=season, lookback=lookback)
+all_projections = build_baseline_projections(games, season=season, lookback=lookback)
+
+today = pd.Timestamp(date.today())
+end_date = today + pd.Timedelta(days=14)
+if not all_projections.empty:
+    all_projections["gameday"] = pd.to_datetime(all_projections["gameday"], errors="coerce")
+    if show_full_schedule:
+        projections = all_projections[all_projections["gameday"] >= today].copy()
+    else:
+        projections = all_projections[
+            (all_projections["gameday"] >= today)
+            & (all_projections["gameday"] < end_date + pd.Timedelta(days=1))
+        ].copy()
+else:
+    projections = all_projections
 
 completed_count = int(
     (season_games["home_score"].notna() & season_games["away_score"].notna()).sum()
 )
 scheduled_count = int(len(season_games))
-upcoming_count = int(len(projections))
+next_window_count = int(
+    (
+        (pd.to_datetime(all_projections["gameday"], errors="coerce") >= today)
+        & (pd.to_datetime(all_projections["gameday"], errors="coerce") < end_date + pd.Timedelta(days=1))
+    ).sum()
+) if not all_projections.empty else 0
 
 m1, m2, m3 = st.columns(3)
 m1.metric("Games in schedule feed", f"{scheduled_count:,}")
 m2.metric("Completed games", f"{completed_count:,}")
-m3.metric("Upcoming projections", f"{upcoming_count:,}")
+m3.metric("Projections in next 14 days", f"{next_window_count:,}")
 
 st.caption(
     "These counts describe the data feed, not model performance. We will publish an ATS record only "
-    "after every eligible model recommendation is timestamped and graded under documented rules."
+    "after recommendations are timestamped before kickoff and graded under documented rules."
 )
 
-st.subheader(f"{season} projections")
+title = f"{season} projections"
+if not show_full_schedule:
+    title += " · Next 14 days"
+else:
+    title += " · Full remaining season"
+st.subheader(title)
+
 if projections.empty:
-    st.info(
-        "No upcoming games could be projected from the current feed for this season. "
-        "Check the season selector or refresh the app."
-    )
+    st.info("No upcoming games found in this date window. Try enabling 'Show full remaining season' in the sidebar.")
 else:
     display = projections.copy()
     display["Date"] = pd.to_datetime(display["gameday"], errors="coerce").dt.strftime("%a, %b %d")
@@ -104,8 +128,7 @@ else:
         st.write(
             "**Not included yet:** opponent-adjusted EPA/play, success rate, quarterback and other "
             "injury impacts, weather, rest, verified sportsbook lines, calibrated probabilities, "
-            "or model uncertainty. The fixed home adjustment and lookback window must be evaluated "
-            "using chronological backtests before this baseline is considered useful."
+            "or model uncertainty. This baseline must be evaluated with chronological backtests."
         )
 
 with st.expander("Methodology, data and record policy"):
@@ -115,15 +138,14 @@ with st.expander("Methodology, data and record policy"):
 
         **Data source:** public NFL schedule/results data retrieved from nflverse-related releases.
 
-        **Record policy:** we will not present the raw historical spread tally as the model's record.
-        A model record will include only timestamped recommendations made before kickoff, the exact
-        line and odds available at publication, final results, pushes, and documented grading rules.
+        **Record policy:** the public model record will include only timestamped recommendations made
+        before kickoff, the exact line and odds at publication, final results, pushes, and documented
+        grading rules. Historical league results are not the model's record.
 
-        **Next development steps:** validate the feed, build point-in-time team-efficiency features,
-        run chronological walk-forward backtests, add permitted odds and current injury data, and
-        preserve a permanent record of every published projection.
+        **Next development steps:** point-in-time team-efficiency features, chronological walk-forward
+        backtests, permitted odds and current injury data, and permanent tracking of every projection.
         """
     )
     st.markdown("[nflverse data releases](https://github.com/nflverse/nflverse-data/releases)")
 
-st.caption("Prototype v0.3 • Experimental projections • Not betting advice")
+st.caption("Prototype v0.4 • Experimental projections • Not betting advice")
