@@ -1,6 +1,6 @@
 import pandas as pd
 import streamlit as st
-from model import load_schedule_data, build_baseline_projections, summarize_record
+from model import load_schedule_data, build_baseline_projections
 
 st.set_page_config(page_title="Sports Model | NFL", page_icon="🏈", layout="wide")
 
@@ -8,111 +8,122 @@ st.title("Sports Model")
 st.caption("NFL projections • Transparent methodology • Public record")
 
 st.warning(
-    "Experimental baseline only. These projections use historical team scoring averages, "
-    "not a validated betting model. No injury adjustments or live sportsbook odds are included. "
-    "Do not treat these outputs as betting advice."
+    "EXPERIMENTAL BASELINE — Scores are preliminary estimates based on recent scoring and points allowed. "
+    "This is not a validated betting model. Injury adjustments, verified live odds, and out-of-sample "
+    "validation are not yet included. Do not treat these estimates as betting advice."
 )
 
 with st.sidebar:
-    st.header("Model settings")
+    st.header("Projection settings")
     season = st.selectbox("Season", [2026, 2025, 2024, 2023, 2022], index=0)
-    lookback = st.slider("Recent games used per team", min_value=3, max_value=12, value=6)
-    st.caption("The baseline uses completed games before each matchup. Future game results are excluded.")
+    lookback = st.slider("Recent completed games per team", 3, 12, 6)
+    st.caption("Each projection uses games played before the scheduled matchup.")
 
-@st.cache_data(ttl=1800, show_spinner="Loading public NFL schedule and results...")
+@st.cache_data(ttl=1800, show_spinner="Loading NFL schedule and results...")
 def get_data():
     return load_schedule_data()
 
 try:
     games = get_data()
 except Exception as e:
-    st.error("Couldn't load the public NFL schedule data. Try refreshing the app in a minute.")
+    st.error("Couldn't load the NFL data feed. Refresh the app in a minute. If it continues, send this error to ChatGPT.")
     st.code(str(e))
-    st.markdown("[Open the nflverse data releases](https://github.com/nflverse/nflverse-data/releases)")
+    st.markdown("[View nflverse data releases](https://github.com/nflverse/nflverse-data/releases)")
     st.stop()
 
 if games.empty:
     st.error("The data source returned no games.")
     st.stop()
 
+season_games = games[games["season"] == season].copy()
 projections = build_baseline_projections(games, season=season, lookback=lookback)
 
-# Grade a simple closing-spread baseline only where a spread exists in the data.
-graded = games[
-    games["home_score"].notna()
-    & games["away_score"].notna()
-    & games["spread_line"].notna()
-].copy()
-if not graded.empty:
-    graded["home_margin"] = graded["home_score"] - graded["away_score"]
-    # nflverse spread_line convention: positive value means home team favored.
-    graded["home_cover_margin"] = graded["home_margin"] - graded["spread_line"]
-    graded["ats_result"] = graded["home_cover_margin"].apply(
-        lambda x: "W" if x > 0 else ("L" if x < 0 else "P")
-    )
-    rec = summarize_record(graded["ats_result"].tolist())
-else:
-    rec = {"W": 0, "L": 0, "P": 0}
+completed_count = int(
+    (season_games["home_score"].notna() & season_games["away_score"].notna()).sum()
+)
+scheduled_count = int(len(season_games))
+upcoming_count = int(len(projections))
 
-c1, c2, c3 = st.columns(3)
-c1.metric("Historical games with a listed spread", f"{len(graded):,}")
-c2.metric("Market result sample", f'{rec["W"]}-{rec["L"]}-{rec["P"]}')
-c3.metric("Projection status", "Baseline / unvalidated")
+m1, m2, m3 = st.columns(3)
+m1.metric("Games in schedule feed", f"{scheduled_count:,}")
+m2.metric("Completed games", f"{completed_count:,}")
+m3.metric("Upcoming projections", f"{upcoming_count:,}")
 
 st.caption(
-    "The historical ATS sample above describes recorded game outcomes against the spread_line field "
-    "in the data source. It is not the model's record and should not be interpreted as its performance."
+    "These counts describe the data feed, not model performance. We will publish an ATS record only "
+    "after every eligible model recommendation is timestamped and graded under documented rules."
 )
 
-st.subheader(f"{season} schedule and score projections")
+st.subheader(f"{season} projections")
 if projections.empty:
-    st.info("No upcoming games found for this season in the current schedule feed.")
+    st.info(
+        "No upcoming games could be projected from the current feed for this season. "
+        "Check the season selector or refresh the app."
+    )
 else:
     display = projections.copy()
-    display["Projected away score"] = display["projected_away"].round(1)
-    display["Projected home score"] = display["projected_home"].round(1)
-    display["Model home spread"] = display["model_home_spread"].round(1)
-    display["Projected total"] = display["projected_total"].round(1)
-    cols = ["gameday", "away_team", "home_team", "Projected away score",
-            "Projected home score", "Model home spread", "Projected total"]
-    if "spread_line" in display.columns:
-        cols.append("spread_line")
-    if "total_line" in display.columns:
-        cols.append("total_line")
-    st.dataframe(display[cols], use_container_width=True, hide_index=True)
+    display["Date"] = pd.to_datetime(display["gameday"], errors="coerce").dt.strftime("%a, %b %d")
+    display["Matchup"] = display["away_team"].astype(str) + " at " + display["home_team"].astype(str)
+    display["Projected score"] = (
+        display["away_team"].astype(str) + " " + display["projected_away"].round(1).astype(str)
+        + " — " + display["home_team"].astype(str) + " " + display["projected_home"].round(1).astype(str)
+    )
+    display["Model home spread"] = display["model_home_spread"].map(lambda x: f"{x:+.1f}")
+    display["Projected total"] = display["projected_total"].map(lambda x: f"{x:.1f}")
+    display = display.sort_values("gameday")
+    st.dataframe(
+        display[["Date", "Matchup", "Projected score", "Model home spread", "Projected total"]],
+        use_container_width=True,
+        hide_index=True,
+        column_config={
+            "Date": st.column_config.TextColumn("Date", width="small"),
+            "Matchup": st.column_config.TextColumn("Matchup", width="medium"),
+            "Projected score": st.column_config.TextColumn("Projected score", width="large"),
+            "Model home spread": st.column_config.TextColumn("Model home spread", width="small"),
+            "Projected total": st.column_config.TextColumn("Projected total", width="small"),
+        },
+    )
 
-    display["matchup"] = display["away_team"] + " at " + display["home_team"]
-    choice = st.selectbox("Game breakdown", display["matchup"].tolist())
-    g = display.loc[display["matchup"] == choice].iloc[0]
-    st.markdown("### " + choice)
+    st.subheader("Game breakdown")
+    matchups = display["Matchup"].tolist()
+    selected_matchup = st.selectbox("Select a matchup", matchups)
+    g = display.loc[display["Matchup"] == selected_matchup].iloc[0]
+
     a, b, c = st.columns(3)
     a.metric("Projected score", f'{g["projected_away"]:.1f} – {g["projected_home"]:.1f}')
     b.metric("Model home spread", f'{g["model_home_spread"]:+.1f}')
     c.metric("Projected total", f'{g["projected_total"]:.1f}')
-    st.markdown("**How this baseline works**")
-    st.write(
-        f"The model averages each team's points scored and points allowed over its last "
-        f"{lookback} completed games before this matchup, then blends the team's offense "
-        "with the opponent's points-allowed average. A small home-field adjustment is included. "
-        "This is a transparent starting benchmark, not the final model."
-    )
-    st.write(
-        "Not yet included: EPA/play, success rate, quarterback or other injuries, weather, "
-        "rest adjustments, point-in-time odds, uncertainty estimates, or trained model weights."
-    )
 
-with st.expander("Data source and methodology"):
+    with st.expander("Why does the baseline project this score?", expanded=True):
+        st.write(
+            f"For this matchup, the baseline uses each team's average points scored and allowed "
+            f"over its last {lookback} completed games available before kickoff. It blends the "
+            "away team's scoring average with the home team's points-allowed average, and vice versa. "
+            "A fixed 1.5-point home adjustment is currently applied."
+        )
+        st.write(
+            "**Not included yet:** opponent-adjusted EPA/play, success rate, quarterback and other "
+            "injury impacts, weather, rest, verified sportsbook lines, calibrated probabilities, "
+            "or model uncertainty. The fixed home adjustment and lookback window must be evaluated "
+            "using chronological backtests before this baseline is considered useful."
+        )
+
+with st.expander("Methodology, data and record policy"):
     st.markdown(
         """
-        - **Data source:** nflverse public NFL schedule/results data.
-        - **Projection:** recent points scored blended with recent points allowed.
-        - **Home field:** fixed small baseline adjustment, which must be estimated and tested.
-        - **Important:** a simple scoring-average model can be weak and is not evidence of a betting edge.
-        - **Validation still required:** chronological walk-forward testing, no future-data leakage,
-          odds timestamping, prospective tracking, and comparison with a market baseline.
+        **Current model:** transparent scoring-average baseline; not yet validated.
+
+        **Data source:** public NFL schedule/results data retrieved from nflverse-related releases.
+
+        **Record policy:** we will not present the raw historical spread tally as the model's record.
+        A model record will include only timestamped recommendations made before kickoff, the exact
+        line and odds available at publication, final results, pushes, and documented grading rules.
+
+        **Next development steps:** validate the feed, build point-in-time team-efficiency features,
+        run chronological walk-forward backtests, add permitted odds and current injury data, and
+        preserve a permanent record of every published projection.
         """
     )
     st.markdown("[nflverse data releases](https://github.com/nflverse/nflverse-data/releases)")
-    st.markdown("[nflverse data update documentation](https://nflreadr.nflverse.com/articles/nflverse_data_schedule.html)")
 
-st.caption("Version 0.2 • Experimental baseline • All projections should be timestamped before kickoff.")
+st.caption("Prototype v0.3 • Experimental projections • Not betting advice")
