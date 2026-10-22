@@ -18,7 +18,9 @@ SCHEDULE_URLS = [
 PBP_COLUMNS = [
     "game_id", "season", "week", "posteam", "defteam", "epa", "success",
     "play_type", "qb_kneel", "qb_spike", "yardline_100", "touchdown",
-    "interception", "fumble_lost", "game_seconds_remaining",
+    "pass_touchdown", "rush_touchdown", "return_touchdown", "interception",
+    "interception_player_id", "fumble_lost", "fumble", "fumble_recovery_1_team",
+    "fumble_recovery_2_team", "fixed_drive", "drive", "game_seconds_remaining",
 ]
 
 
@@ -85,95 +87,139 @@ def load_pbp(seasons=(2021, 2022, 2023, 2024, 2025, 2026)) -> pd.DataFrame:
 
 
 def _get_plays(pbp: pd.DataFrame) -> pd.DataFrame:
-    required = {"game_id", "posteam", "defteam", "epa", "success", "play_type"}
+    """Return scrimmage plays without dropping rows just because a metric is missing.
+
+    EPA/success averages ignore missing values naturally, but red-zone and turnover
+    indicators must still be calculated from the underlying play even if EPA is null.
+    """
+    required = {"game_id", "posteam", "defteam", "play_type"}
     missing = required - set(pbp.columns)
     if missing:
         raise ValueError(f"Play-by-play file is missing required columns: {sorted(missing)}")
-    # Avoid copying the entire source dataframe; retain only columns used downstream.
     keep = [c for c in PBP_COLUMNS if c in pbp.columns]
     df = pbp.loc[:, keep].copy()
-    df["epa"] = pd.to_numeric(df["epa"], errors="coerce")
-    df["success"] = pd.to_numeric(df["success"], errors="coerce")
+    df["epa"] = pd.to_numeric(df["epa"], errors="coerce") if "epa" in df else np.nan
+    df["success"] = pd.to_numeric(df["success"], errors="coerce") if "success" in df else np.nan
     df = df[df["play_type"].isin(["run", "pass"]) & df["posteam"].notna() & df["defteam"].notna()]
-    df = df[df["epa"].notna() & df["success"].notna()]
-    if "qb_kneel" in df.columns:
-        df = df[df["qb_kneel"].fillna(0) != 1]
-    if "qb_spike" in df.columns:
-        df = df[df["qb_spike"].fillna(0) != 1]
+    for col in ["qb_kneel", "qb_spike"]:
+        if col in df.columns:
+            df = df[pd.to_numeric(df[col], errors="coerce").fillna(0) != 1]
     return df
 
 
-def build_efficiency_table(pbp: pd.DataFrame) -> pd.DataFrame:
-    """Build prior-game team features from play-by-play.
+def _binary_indicator(series: pd.Series) -> pd.Series:
+    """Normalize a source indicator to 0/1 while preserving genuinely missing data."""
+    values = pd.to_numeric(series, errors="coerce")
+    # nflverse indicators are 0/1. Clip odd values rather than letting them inflate rates.
+    return values.where(values.isna(), values.fillna(0).clip(0, 1))
 
-    Red-zone rate is explicitly a touchdown-play proxy (not drive conversion rate).
-    Missing optional source fields remain missing and are imputed from training data only.
+
+def _first_usable_indicator(frame: pd.DataFrame, candidates: list[str]) -> pd.Series:
+    """Choose a usable indicator; do not mistake an all-null/all-zero field for valid data."""
+    for col in candidates:
+        if col not in frame.columns:
+            continue
+        candidate = _binary_indicator(frame[col])
+        if candidate.notna().any() and float(candidate.fillna(0).sum()) > 0:
+            return candidate.fillna(0)
+    # If fields exist but there were no events, an all-zero indicator is plausible only
+    # when at least one source column has observed values. Otherwise keep unavailable as NA.
+    for col in candidates:
+        if col in frame.columns:
+            candidate = _binary_indicator(frame[col])
+            if candidate.notna().any():
+                return candidate.fillna(0)
+    return pd.Series(np.nan, index=frame.index, dtype=float)
+
+
+def build_efficiency_table(pbp: pd.DataFrame) -> pd.DataFrame:
+    """Build game-level team features from scrimmage play-by-play.
+
+    Red-zone touchdown rate is touchdowns on plays beginning inside the opponent's
+    20-yard line divided by red-zone scrimmage plays. It is explicitly a play-level
+    proxy, not drive conversion rate. Turnovers use interception indicators/player IDs
+    and lost-fumble/recovery fields with fallbacks across nflverse schema variants.
     """
     plays = _get_plays(pbp)
     group_cols = ["game_id", "season", "week", "posteam"]
-    off = plays.groupby(group_cols).agg(
+    off = plays.groupby(group_cols, dropna=False).agg(
         off_epa=("epa", "mean"),
         off_success=("success", "mean"),
-        offensive_plays=("epa", "size"),
+        offensive_plays=("play_type", "size"),
     ).reset_index().rename(columns={"posteam": "team"})
-    deff = plays.groupby(["game_id", "season", "week", "defteam"]).agg(
+    deff = plays.groupby(["game_id", "season", "week", "defteam"], dropna=False).agg(
         def_epa_allowed=("epa", "mean"),
         def_success_allowed=("success", "mean"),
-        defensive_plays=("epa", "size"),
+        defensive_plays=("play_type", "size"),
     ).reset_index().rename(columns={"defteam": "team"})
     out = off.merge(deff, on=["game_id", "season", "week", "team"], how="outer")
 
     extra = plays.copy()
-    has_yardline = "yardline_100" in extra.columns
-    has_touchdown = "touchdown" in extra.columns
-    has_interception = "interception" in extra.columns
-    has_fumble_lost = "fumble_lost" in extra.columns
-    # Explicitly create optional columns so the output schema is stable across source versions.
-    for col in ["yardline_100", "touchdown", "interception", "fumble_lost"]:
-        if col not in extra.columns:
-            extra[col] = np.nan
-        extra[col] = pd.to_numeric(extra[col], errors="coerce")
-
-    if has_yardline:
+    # Normalize key fields and handle source variants / all-null optional columns.
+    for col in ["yardline_100", "touchdown", "pass_touchdown", "rush_touchdown", "return_touchdown",
+                "interception", "fumble_lost", "fumble"]:
+        if col in extra.columns:
+            extra[col] = pd.to_numeric(extra[col], errors="coerce")
+    if "yardline_100" in extra.columns and extra["yardline_100"].notna().any():
         extra["red_zone_play"] = extra["yardline_100"].between(1, 20, inclusive="both").astype(float)
     else:
         extra["red_zone_play"] = np.nan
-    if has_yardline and has_touchdown:
-        extra["red_zone_td_play"] = (
-            (extra["red_zone_play"] == 1) & (extra["touchdown"] == 1)
-        ).astype(float)
+
+    td_candidates = [c for c in ["touchdown", "pass_touchdown", "rush_touchdown", "return_touchdown"] if c in extra.columns]
+    td_indicator = _first_usable_indicator(extra, td_candidates) if td_candidates else pd.Series(np.nan, index=extra.index)
+    if extra["red_zone_play"].notna().any() and td_indicator.notna().any():
+        extra["red_zone_td_play"] = np.where(
+            extra["red_zone_play"].eq(1), td_indicator.fillna(0), 0.0
+        )
     else:
         extra["red_zone_td_play"] = np.nan
-    if has_interception or has_fumble_lost:
-        interceptions = extra["interception"].fillna(0) if has_interception else pd.Series(0.0, index=extra.index)
-        fumbles_lost = extra["fumble_lost"].fillna(0) if has_fumble_lost else pd.Series(0.0, index=extra.index)
-        extra["turnover_play"] = (interceptions.clip(lower=0, upper=1) + fumbles_lost.clip(lower=0, upper=1)).clip(upper=1)
+
+    int_candidates = [c for c in ["interception"] if c in extra.columns]
+    interceptions = _first_usable_indicator(extra, int_candidates) if int_candidates else pd.Series(np.nan, index=extra.index)
+    # In some releases the play-level indicator is absent/unusable but the intercepted-player ID is present.
+    if (not interceptions.notna().any() or float(interceptions.fillna(0).sum()) == 0) and "interception_player_id" in extra.columns:
+        fallback = extra["interception_player_id"].notna().astype(float)
+        if fallback.sum() > 0:
+            interceptions = fallback
+
+    lost_fumbles = _first_usable_indicator(extra, ["fumble_lost"] if "fumble_lost" in extra.columns else [])
+    if (not lost_fumbles.notna().any() or float(lost_fumbles.fillna(0).sum()) == 0) and "fumble" in extra.columns:
+        fumbles = _binary_indicator(extra["fumble"])
+        if "fumble_recovery_1_team" in extra.columns:
+            recovered_by_def = extra["fumble_recovery_1_team"].notna() & (
+                extra["fumble_recovery_1_team"].astype(str) == extra["defteam"].astype(str)
+            )
+            fallback = (fumbles.fillna(0).eq(1) & recovered_by_def).astype(float)
+            if fallback.sum() > 0:
+                lost_fumbles = fallback
+
+    if interceptions.notna().any() or lost_fumbles.notna().any():
+        int_values = interceptions.fillna(0) if interceptions.notna().any() else pd.Series(0.0, index=extra.index)
+        fum_values = lost_fumbles.fillna(0) if lost_fumbles.notna().any() else pd.Series(0.0, index=extra.index)
+        extra["turnover_play"] = (int_values + fum_values).clip(upper=1).astype(float)
     else:
         extra["turnover_play"] = np.nan
 
-    add = extra.groupby(group_cols).agg(
-        off_plays_per_game=("epa", "size"),
+    add = extra.groupby(group_cols, dropna=False).agg(
+        off_plays_per_game=("play_type", "size"),
         red_zone_plays=("red_zone_play", lambda x: x.sum(min_count=1)),
         red_zone_td_plays=("red_zone_td_play", lambda x: x.sum(min_count=1)),
         turnovers=("turnover_play", lambda x: x.sum(min_count=1)),
     ).reset_index().rename(columns={"posteam": "team"})
     add["red_zone_td_rate"] = add["red_zone_td_plays"] / add["red_zone_plays"].replace(0, np.nan)
     add["turnovers_per_play"] = add["turnovers"] / add["off_plays_per_game"].replace(0, np.nan)
-    # Attribute each offense's turnovers to the opposing defense as takeaways.
-    def_extra = extra.groupby(["game_id", "season", "week", "defteam"]).agg(
-        def_takeaways=("turnover_play", "sum"),
-        def_opponent_plays=("epa", "size"),
+
+    # Every turnover play is attributed to the defense on the field for that play.
+    def_extra = extra.groupby(["game_id", "season", "week", "defteam"], dropna=False).agg(
+        def_takeaways=("turnover_play", lambda x: x.sum(min_count=1)),
+        def_opponent_plays=("play_type", "size"),
     ).reset_index().rename(columns={"defteam": "team"})
     def_extra["def_takeaways_per_play"] = def_extra["def_takeaways"] / def_extra["def_opponent_plays"].replace(0, np.nan)
+
     out = out.merge(add, on=["game_id", "season", "week", "team"], how="left")
     out = out.merge(def_extra[["game_id", "season", "week", "team", "def_takeaways_per_play"]],
                     on=["game_id", "season", "week", "team"], how="left")
-    # Use a stable schema and distinguish true zero from unavailable source data.
-    for col in ["off_plays_per_game", "red_zone_plays", "red_zone_td_plays", "turnovers"]:
-        if col not in out:
-            out[col] = np.nan
     return out
-
 
 def _game_features_for_target(history_eff: pd.DataFrame, home_team: str,
                               away_team: str, target_date: pd.Timestamp,
@@ -272,11 +318,16 @@ def chronological_backtest(dataset: pd.DataFrame, min_train_games=500) -> dict:
         train = data[data["gameday"] < test["gameday"].min()]
         if len(train) < min_train_games:
             continue
-        # Impute using each training window only; never learn missing-value replacements from test games.
-        train_medians = train[features].median(numeric_only=True).fillna(0)
-        X_train = train[features].fillna(train_medians).fillna(0)
-        X_test = test[features].fillna(train_medians).fillna(0)
+        # Train-window-only feature availability and imputation: a feature that is
+        # entirely absent in training is excluded, not silently converted into zeros.
+        active_features = [c for c in features if train[c].notna().any()]
+        if not active_features:
+            continue
+        train_medians = train[active_features].median(numeric_only=True).fillna(0)
+        X_train = train[active_features].fillna(train_medians).fillna(0)
+        X_test = test[active_features].fillna(train_medians).fillna(0)
         test = test.copy()
+        test["n_active_features"] = len(active_features)
         for target in ["home_score", "away_score"]:
             estimator = Ridge(alpha=10.0)
             estimator.fit(X_train, train[target])
