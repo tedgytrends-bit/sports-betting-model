@@ -1,7 +1,13 @@
 import pandas as pd
 import streamlit as st
 from datetime import date
-from model import load_schedule_data, load_pbp, build_efficiency_model_dataset, chronological_backtest, baseline_projection
+from model import (
+    load_schedule_data,
+    load_pbp,
+    build_efficiency_model_dataset,
+    chronological_backtest,
+    baseline_projection,
+)
 
 st.set_page_config(page_title="Sports Model | NFL", page_icon="🏈", layout="wide")
 st.title("Sports Model")
@@ -23,7 +29,7 @@ with st.sidebar:
 def get_schedule():
     return load_schedule_data()
 
-@st.cache_data(ttl=3600, show_spinner="Downloading historical NFL play-by-play...")
+@st.cache_data(ttl=3600, show_spinner="Downloading compact historical NFL play-by-play data...")
 def get_pbp():
     return load_pbp((2021, 2022, 2023, 2024, 2025))
 
@@ -45,13 +51,10 @@ end_date = today + pd.Timedelta(days=14)
 if show_full_schedule:
     projections = all_projections.copy()
 else:
-    projections = all_projections[
-        (all_projections["gameday"] < end_date + pd.Timedelta(days=1))
-    ].copy()
+    projections = all_projections[all_projections["gameday"] < end_date + pd.Timedelta(days=1)].copy()
 
 completed_count = int((season_games["home_score"].notna() & season_games["away_score"].notna()).sum())
 scheduled_count = int(len(season_games))
-upcoming_count = int(len(all_projections))
 window_count = int(len(projections))
 
 m1, m2, m3 = st.columns(3)
@@ -83,14 +86,14 @@ else:
     display = display.sort_values("gameday")
     st.dataframe(
         display[["Date", "Matchup", "Projected score", "Model home spread", "Projected total"]],
-        use_container_width=True, hide_index=True,
+        width="stretch", hide_index=True,
         column_config={
             "Date": st.column_config.TextColumn("Date", width="small"),
             "Matchup": st.column_config.TextColumn("Matchup", width="medium"),
             "Projected score": st.column_config.TextColumn("Projected score", width="large"),
             "Model home spread": st.column_config.TextColumn("Model home spread", width="small"),
             "Projected total": st.column_config.TextColumn("Projected total", width="small"),
-        }
+        },
     )
     st.subheader("Game breakdown")
     matchup = st.selectbox("Select a matchup", display["Matchup"].tolist())
@@ -116,14 +119,16 @@ st.write(
     "This experimental model uses offensive EPA/play, offensive success rate, defensive EPA allowed, "
     "and defensive success rate allowed. Its historical evaluation uses chronological weekly blocks."
 )
-st.info("Click below to run a backtest. The first run downloads play-by-play data for 2021–2025 and may take several minutes.")
+st.info("Click below to run a backtest. The first run downloads compact play-by-play data for 2021–2025 and may take several minutes.")
 
 if run_backtest:
     try:
-        with st.spinner("Building efficiency features and running chronological backtest..."):
+        with st.spinner("Loading compact play-by-play data and running chronological backtest..."):
             pbp = get_pbp()
             dataset = build_efficiency_model_dataset(games, pbp, lookback_games=lookback)
+            del pbp
             results = chronological_backtest(dataset, min_train_games=500)
+            del dataset
         pred = results["predictions"]
         x1, x2, x3, x4 = st.columns(4)
         x1.metric("Out-of-sample games", f'{results["n"]:,}')
@@ -133,11 +138,11 @@ if run_backtest:
         st.metric("Away score RMSE", f'{results["away_rmse"]:.2f} pts')
         st.caption("MAE is average absolute score error; RMSE penalizes larger misses more heavily. These are score metrics, not ATS performance.")
         cols = ["gameday", "away_team", "home_team", "pred_away_score", "away_score", "pred_home_score", "home_score"]
-        st.dataframe(pred[cols].tail(50).sort_values("gameday", ascending=False), use_container_width=True, hide_index=True)
+        st.dataframe(pred[cols].tail(50).sort_values("gameday", ascending=False), width="stretch", hide_index=True)
         st.download_button("Download backtest predictions CSV", pred.to_csv(index=False).encode("utf-8"), "nfl_backtest_predictions.csv", "text/csv")
     except Exception as e:
-        st.error("The backtest did not complete. This may be due to a changed data feed, a schema difference, or a data issue.")
-        st.code(str(e))
+        st.error("The backtest did not complete. The underlying error is shown below so we can diagnose it.")
+        st.code(f"{type(e).__name__}: {e}")
 
 with st.expander("Methodology, data and record policy"):
     st.markdown("""
@@ -150,4 +155,4 @@ with st.expander("Methodology, data and record policy"):
     """)
     st.markdown("[nflverse data releases](https://github.com/nflverse/nflverse-data/releases)")
 
-st.caption("Prototype v0.5.1 • Experimental efficiency research • Not betting advice")
+st.caption("Prototype v0.5.2 • Experimental efficiency research • Not betting advice")
