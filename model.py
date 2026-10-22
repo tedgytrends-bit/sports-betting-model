@@ -17,7 +17,8 @@ SCHEDULE_URLS = [
 # Only columns used by the feature pipeline are downloaded, reducing memory use.
 PBP_COLUMNS = [
     "game_id", "season", "week", "posteam", "defteam", "epa", "success",
-    "play_type", "qb_kneel", "qb_spike",
+    "play_type", "qb_kneel", "qb_spike", "yardline_100", "touchdown",
+    "interception", "fumble_lost", "game_seconds_remaining",
 ]
 
 
@@ -103,6 +104,11 @@ def _get_plays(pbp: pd.DataFrame) -> pd.DataFrame:
 
 
 def build_efficiency_table(pbp: pd.DataFrame) -> pd.DataFrame:
+    """Build team-game efficiency, pace, red-zone, and turnover features from PBP.
+
+    Optional columns are used only when present. Rates are aggregated at team-game
+    level and later averaged over prior games, so target-game information is excluded.
+    """
     plays = _get_plays(pbp)
     group_cols = ["game_id", "season", "week", "posteam"]
     off = plays.groupby(group_cols).agg(
@@ -115,7 +121,37 @@ def build_efficiency_table(pbp: pd.DataFrame) -> pd.DataFrame:
         def_success_allowed=("success", "mean"),
         defensive_plays=("epa", "size"),
     ).reset_index().rename(columns={"defteam": "team"})
-    return off.merge(deff, on=["game_id", "season", "week", "team"], how="outer")
+    out = off.merge(deff, on=["game_id", "season", "week", "team"], how="outer")
+
+    # Offense-only add-on features; do not assume optional PBP columns exist.
+    extra = plays.copy()
+    if "yardline_100" in extra.columns:
+        extra["yardline_100"] = pd.to_numeric(extra["yardline_100"], errors="coerce")
+        extra["red_zone_play"] = extra["yardline_100"].between(1, 20, inclusive="both").astype(float)
+        if "touchdown" in extra.columns:
+            extra["red_zone_td"] = ((extra["red_zone_play"] == 1) & (pd.to_numeric(extra["touchdown"], errors="coerce") == 1)).astype(float)
+    if "interception" in extra.columns:
+        extra["interception"] = pd.to_numeric(extra["interception"], errors="coerce").fillna(0)
+    if "fumble_lost" in extra.columns:
+        extra["fumble_lost"] = pd.to_numeric(extra["fumble_lost"], errors="coerce").fillna(0)
+    aggs = {"off_plays_per_game": ("epa", "size")}
+    if "red_zone_play" in extra.columns:
+        aggs["red_zone_plays"] = ("red_zone_play", "sum")
+        if "red_zone_td" in extra.columns:
+            aggs["red_zone_td_plays"] = ("red_zone_td", "sum")
+    if "interception" in extra.columns:
+        aggs["interceptions"] = ("interception", "sum")
+    if "fumble_lost" in extra.columns:
+        aggs["fumbles_lost"] = ("fumble_lost", "sum")
+    add = extra.groupby(group_cols).agg(**aggs).reset_index().rename(columns={"posteam": "team"})
+    if "red_zone_plays" in add.columns and "red_zone_td_plays" in add.columns:
+        add["red_zone_td_rate"] = add["red_zone_td_plays"] / add["red_zone_plays"].replace(0, np.nan)
+    if "interceptions" in add.columns or "fumbles_lost" in add.columns:
+        add["turnovers_per_play"] = (
+            add.get("interceptions", 0) + add.get("fumbles_lost", 0)
+        ) / add["off_plays_per_game"].replace(0, np.nan)
+    out = out.merge(add, on=["game_id", "season", "week", "team"], how="left")
+    return out
 
 
 def _game_features_for_target(history_eff: pd.DataFrame, home_team: str,
@@ -136,6 +172,9 @@ def _game_features_for_target(history_eff: pd.DataFrame, home_team: str,
             "off_success": avg("off_success"),
             "def_epa_allowed": avg("def_epa_allowed"),
             "def_success_allowed": avg("def_success_allowed"),
+            "plays_per_game": avg("off_plays_per_game"),
+            "red_zone_td_rate": avg("red_zone_td_rate"),
+            "turnovers_per_play": avg("turnovers_per_play"),
         }
 
     h, a = team_stats(home_team), team_stats(away_team)
@@ -148,6 +187,12 @@ def _game_features_for_target(history_eff: pd.DataFrame, home_team: str,
         "home_def_success_allowed": h["def_success_allowed"], "away_def_success_allowed": a["def_success_allowed"],
         "home_off_minus_away_def": h["off_epa"] - a["def_epa_allowed"],
         "away_off_minus_home_def": a["off_epa"] - h["def_epa_allowed"],
+        # Relative matchup features expose offense-vs-defense strength directly.
+        "home_success_matchup": h["off_success"] - a["def_success_allowed"],
+        "away_success_matchup": a["off_success"] - h["def_success_allowed"],
+        "home_plays_per_game": h["plays_per_game"], "away_plays_per_game": a["plays_per_game"],
+        "home_red_zone_td_rate": h["red_zone_td_rate"], "away_red_zone_td_rate": a["red_zone_td_rate"],
+        "home_turnovers_per_play": h["turnovers_per_play"], "away_turnovers_per_play": a["turnovers_per_play"],
         "home_field": 1.0,
     }
 
@@ -163,6 +208,18 @@ def _feature_frame(schedule: pd.DataFrame, efficiency: pd.DataFrame, lookback_ga
         f = _game_features_for_target(hist_eff, g["home_team"], g["away_team"], g["gameday"], lookback_games)
         if not f:
             continue
+        # Rest-day features use only schedule dates strictly before this game.
+        prior_games = schedule[(schedule["gameday"] < g["gameday"]) &
+                               (schedule["home_score"].notna()) & (schedule["away_score"].notna())]
+        def rest_days(team):
+            played = prior_games[(prior_games["home_team"] == team) | (prior_games["away_team"] == team)]
+            if played.empty:
+                return 7.0
+            last_date = pd.to_datetime(played["gameday"], errors="coerce").max()
+            return float(np.clip((g["gameday"] - last_date).days, 0, 30))
+        f["home_rest_days"] = rest_days(g["home_team"])
+        f["away_rest_days"] = rest_days(g["away_team"])
+        f["rest_days_diff"] = f["home_rest_days"] - f["away_rest_days"]
         f.update({
             "game_id": g["game_id"], "gameday": g["gameday"], "season": g["season"], "week": g["week"],
             "home_team": g["home_team"], "away_team": g["away_team"],
