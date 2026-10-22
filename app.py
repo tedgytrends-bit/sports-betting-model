@@ -16,7 +16,7 @@ st.set_page_config(page_title="Sports Model | NFL", page_icon="🏈", layout="wi
 st.title("Sports Model")
 st.caption("NFL projections • Transparent methodology • Public record")
 st.warning(
-    "EXPERIMENTAL — This version adds a same-game baseline comparison. "
+    "EXPERIMENTAL — This version includes current-season play-by-play in the historical feature pipeline. "
     "It is not a validated betting model. No live odds or injury adjustments are included."
 )
 
@@ -34,7 +34,7 @@ def get_schedule():
 
 @st.cache_data(ttl=3600, show_spinner="Downloading historical NFL play-by-play...")
 def get_pbp():
-    return load_pbp((2021, 2022, 2023, 2024, 2025))
+    return load_pbp((2021, 2022, 2023, 2024, 2025, 2026))
 
 try:
     games = get_schedule()
@@ -130,6 +130,8 @@ if run_backtest:
     try:
         with st.spinner("Loading data, building features, and comparing models..."):
             pbp = get_pbp()
+            loaded_seasons = sorted(pd.to_numeric(pbp["season"], errors="coerce").dropna().astype(int).unique().tolist())
+            st.caption(f"Play-by-play seasons loaded: {", ".join(map(str, loaded_seasons))}. Features for each game use only earlier-dated games.")
             dataset = build_efficiency_model_dataset(games, pbp, lookback_games=lookback)
             results = chronological_backtest(dataset, min_train_games=500)
             efficiency_pred = results["predictions"].copy()
@@ -327,9 +329,10 @@ if run_backtest:
             )
 
         st.warning(
-            "Audit note: historical efficiency features are derived from 2021–2025 play-by-play. "
-            "2026 rows therefore do not incorporate 2026 game-level efficiency data. The total-line backtest is a historical "
-            "closing-line comparison, not proof of a repeatable betting edge or a record at a specific sportsbook."
+            "Audit note: the backtest requests 2021–2026 play-by-play. Features for each target game are filtered to games dated "
+            "strictly before that target date, so completed 2026 games can inform later 2026 predictions without using "
+            "the target game or future games. If any requested season fails to load, the loader reports an error rather "
+            "than silently running with stale data. The total-line comparison is not proof of a repeatable betting edge."
         )
     except Exception as e:
         st.error("The backtest comparison did not complete. The dashboard should remain available.")
@@ -346,4 +349,4 @@ with st.expander("Methodology, data and record policy"):
     """)
     st.markdown("[nflverse data releases](https://github.com/nflverse/nflverse-data/releases)")
 
-st.caption("Prototype v0.5.5 • Totals audit improvements • Not betting advice")
+st.caption("Prototype v0.5.6 • Current-season inputs and totals audit • Not betting advice")
