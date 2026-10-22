@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 import streamlit as st
 from datetime import date
@@ -179,10 +180,105 @@ if run_backtest:
             "nfl_backtest_comparison.csv",
             "text/csv"
         )
+        # Totals evaluation: join the model's out-of-sample predictions to the schedule's recorded total line.
+        st.divider()
+        st.subheader("Historical totals backtest")
+        st.write(
+            "This section compares each model's projected combined score with the recorded NFLverse total line. "
+            "The schedule's total_line is treated as the recorded closing market number; it is not a specific sportsbook quote."
+        )
+        line_cols = ["game_id", "total_line"]
+        if "total_line" not in games.columns:
+            st.error("The schedule feed does not include total_line, so the totals backtest cannot run.")
+        else:
+            lines = games[line_cols].drop_duplicates(subset=["game_id"])
+            totals = compared.merge(lines, on="game_id", how="left")
+            totals["actual_total"] = totals["home_score"] + totals["away_score"]
+            totals["efficiency_projected_total"] = totals["pred_home_score"] + totals["pred_away_score"]
+            totals["baseline_projected_total"] = totals["baseline_home_score"] + totals["baseline_away_score"]
+            totals = totals.dropna(subset=["total_line", "actual_total", "efficiency_projected_total", "baseline_projected_total"]).copy()
+            totals["efficiency_total_error"] = (totals["efficiency_projected_total"] - totals["actual_total"]).abs()
+            totals["baseline_total_error"] = (totals["baseline_projected_total"] - totals["actual_total"]).abs()
+            totals["efficiency_edge"] = totals["efficiency_projected_total"] - totals["total_line"]
+            totals["baseline_edge"] = totals["baseline_projected_total"] - totals["total_line"]
+
+            total_accuracy = pd.DataFrame([
+                {"Model": "EPA / efficiency model", "Games": len(totals),
+                 "Total MAE": totals["efficiency_total_error"].mean(),
+                 "Average projection minus line": totals["efficiency_edge"].mean()},
+                {"Model": "Recent scoring baseline", "Games": len(totals),
+                 "Total MAE": totals["baseline_total_error"].mean(),
+                 "Average projection minus line": totals["baseline_edge"].mean()},
+            ])
+            st.caption(f"{len(totals):,} historical games with both model predictions and a recorded total line.")
+            st.dataframe(total_accuracy.round(2), width="stretch", hide_index=True)
+
+            def grade_totals(frame, edge_col, threshold):
+                bets = frame[frame[edge_col].abs() >= threshold].copy()
+                if bets.empty:
+                    return {"Edge threshold": f"{threshold:.1f}+ pts", "Bets": 0, "Over": 0, "Under": 0,
+                            "Wins": 0, "Losses": 0, "Pushes": 0, "Win % (no pushes)": np.nan,
+                            "Net units at -110": 0.0, "ROI": np.nan}
+                bets["side"] = np.where(bets[edge_col] > 0, "Over", "Under")
+                bets["result"] = np.where(
+                    bets["actual_total"] == bets["total_line"], "Push",
+                    np.where(
+                        ((bets["side"] == "Over") & (bets["actual_total"] > bets["total_line"])) |
+                        ((bets["side"] == "Under") & (bets["actual_total"] < bets["total_line"])),
+                        "Win", "Loss"
+                    )
+                )
+                wins = int((bets["result"] == "Win").sum())
+                losses = int((bets["result"] == "Loss").sum())
+                pushes = int((bets["result"] == "Push").sum())
+                net_units = wins * (100 / 110) - losses
+                decided = wins + losses
+                return {
+                    "Edge threshold": f"{threshold:.1f}+ pts", "Bets": len(bets),
+                    "Over": int((bets["side"] == "Over").sum()), "Under": int((bets["side"] == "Under").sum()),
+                    "Wins": wins, "Losses": losses, "Pushes": pushes,
+                    "Win % (no pushes)": (100 * wins / decided) if decided else np.nan,
+                    "Net units at -110": net_units,
+                    "ROI": (net_units / decided * 100) if decided else np.nan,
+                }
+
+            st.markdown("**EPA / efficiency model: simulated totals record**")
+            efficiency_grades = pd.DataFrame([grade_totals(totals, "efficiency_edge", t) for t in (0, 1.5, 2.5, 3.5, 4.5)])
+            efficiency_grades["Win % (no pushes)"] = efficiency_grades["Win % (no pushes)"].map(lambda x: f"{x:.1f}%" if pd.notna(x) else "—")
+            efficiency_grades["Net units at -110"] = efficiency_grades["Net units at -110"].map(lambda x: f"{x:+.2f}")
+            efficiency_grades["ROI"] = efficiency_grades["ROI"].map(lambda x: f"{x:+.1f}%" if pd.notna(x) else "—")
+            st.dataframe(efficiency_grades, width="stretch", hide_index=True)
+
+            st.markdown("**Recent-scoring baseline: simulated totals record**")
+            baseline_grades = pd.DataFrame([grade_totals(totals, "baseline_edge", t) for t in (0, 1.5, 2.5, 3.5, 4.5)])
+            baseline_grades["Win % (no pushes)"] = baseline_grades["Win % (no pushes)"].map(lambda x: f"{x:.1f}%" if pd.notna(x) else "—")
+            baseline_grades["Net units at -110"] = baseline_grades["Net units at -110"].map(lambda x: f"{x:+.2f}")
+            baseline_grades["ROI"] = baseline_grades["ROI"].map(lambda x: f"{x:+.1f}%" if pd.notna(x) else "—")
+            st.dataframe(baseline_grades, width="stretch", hide_index=True)
+
+            with st.expander("Inspect every totals prediction"):
+                inspect = totals[["gameday", "season", "week", "away_team", "home_team", "actual_total", "total_line",
+                                  "efficiency_projected_total", "efficiency_edge", "baseline_projected_total", "baseline_edge"]].copy()
+                inspect = inspect.rename(columns={"gameday": "Date", "season": "Season", "week": "Week",
+                    "away_team": "Away", "home_team": "Home", "actual_total": "Actual total", "total_line": "Market total",
+                    "efficiency_projected_total": "Efficiency projected total", "efficiency_edge": "Efficiency edge",
+                    "baseline_projected_total": "Baseline projected total", "baseline_edge": "Baseline edge"})
+                st.dataframe(inspect.sort_values("Date", ascending=False), width="stretch", hide_index=True)
+            st.download_button(
+                "Download historical totals backtest CSV",
+                totals.to_csv(index=False).encode("utf-8"),
+                "nfl_totals_backtest.csv", "text/csv"
+            )
+            st.caption(
+                "Simulated betting assumptions: 1 unit risked per bet, -110 odds, +0.909 units per win, -1 unit per loss, "
+                "0 units on pushes. ROI uses decided bets (wins + losses); pushes are excluded. Edge thresholds are exploratory, "
+                "not proven optimal. Historical recorded lines are not guaranteed to match the price you could have bet at."
+            )
+
         st.warning(
             "Audit note: historical efficiency features are derived from 2021–2025 play-by-play. "
-            "2026 rows therefore do not incorporate 2026 game-level efficiency data. Also, a better score MAE does not "
-            "prove positive betting ROI; market-line testing is a separate stage."
+            "2026 rows therefore do not incorporate 2026 game-level efficiency data. The total-line backtest is a historical "
+            "closing-line comparison, not proof of a repeatable betting edge or a record at a specific sportsbook."
         )
     except Exception as e:
         st.error("The backtest comparison did not complete. The dashboard should remain available.")
