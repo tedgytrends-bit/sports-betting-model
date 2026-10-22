@@ -1,13 +1,11 @@
-"""NFL efficiency-based baseline and chronological backtesting utilities.
+"""NFL efficiency features, chronological backtesting, and baseline comparison.
 
-Educational, experimental model; not a validated betting system.
-Historical features are constructed using games dated strictly before kickoff.
+Experimental research utilities. Not a validated betting system.
 """
 from __future__ import annotations
 
-import gc
-import pandas as pd
 import numpy as np
+import pandas as pd
 from sklearn.linear_model import Ridge
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 
@@ -16,12 +14,12 @@ SCHEDULE_URLS = [
     "https://github.com/nflverse/nflverse-data/releases/download/schedules/games.csv",
 ]
 
-# Only these fields are needed for the efficiency calculations. Reading them at
-# source avoids loading dozens of unused columns from each multi-million-row CSV.
-PBP_REQUIRED_COLUMNS = [
-    "game_id", "season", "week", "posteam", "defteam",
-    "epa", "success", "play_type", "qb_kneel", "qb_spike",
+# Only columns used by the feature pipeline are downloaded, reducing memory use.
+PBP_COLUMNS = [
+    "game_id", "season", "week", "posteam", "defteam", "epa", "success",
+    "play_type", "qb_kneel", "qb_spike",
 ]
+
 
 def load_schedule_data() -> pd.DataFrame:
     errors = []
@@ -34,6 +32,7 @@ def load_schedule_data() -> pd.DataFrame:
         except Exception as exc:
             errors.append(f"{url}: {exc}")
     raise RuntimeError("Unable to load compatible schedule data. " + " | ".join(errors))
+
 
 def normalize_schedule(df: pd.DataFrame) -> pd.DataFrame:
     df = df.copy()
@@ -49,55 +48,43 @@ def normalize_schedule(df: pd.DataFrame) -> pd.DataFrame:
             df[col] = np.nan
     return df.sort_values(["gameday", "season", "week"], na_position="last").reset_index(drop=True)
 
+
 def load_pbp(seasons=(2021, 2022, 2023, 2024, 2025)) -> pd.DataFrame:
-    """Load only the columns used by the model, one season at a time."""
+    """Load only fields needed for the model; fall back if a source lacks optional columns."""
     frames, errors = [], []
-    required = {"game_id", "posteam", "defteam", "epa", "success", "play_type"}
     for season in seasons:
         url = f"https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_{season}.csv"
         try:
-            # First try the narrowest read. Some historical files may omit an
-            # optional kneel/spike column, so retry with required fields only.
             try:
-                frame = pd.read_csv(url, usecols=lambda c: c in PBP_REQUIRED_COLUMNS, low_memory=False)
+                frame = pd.read_csv(url, usecols=lambda c: c in PBP_COLUMNS, low_memory=False)
             except Exception:
-                frame = pd.read_csv(url, usecols=lambda c: c in required.union({"season", "week"}), low_memory=False)
-            missing = required - set(frame.columns)
-            if missing:
-                raise ValueError(f"Missing required columns: {sorted(missing)}")
+                # A fallback for source/schema changes; still reduce to known required columns after loading.
+                frame = pd.read_csv(url, low_memory=False)
+                frame = frame[[c for c in PBP_COLUMNS if c in frame.columns]]
             if "season" not in frame.columns:
                 frame["season"] = season
-            if "week" not in frame.columns:
-                frame["week"] = np.nan
-            for col in ["posteam", "defteam", "play_type"]:
-                frame[col] = frame[col].astype("category")
-            for col in ["epa", "success"]:
-                frame[col] = pd.to_numeric(frame[col], errors="coerce", downcast="float")
+            required = {"game_id", "posteam", "defteam", "epa", "success", "play_type"}
+            missing = required - set(frame.columns)
+            if missing:
+                raise ValueError(f"missing required columns: {sorted(missing)}")
             frames.append(frame)
-            del frame
-            gc.collect()
         except Exception as exc:
             errors.append(f"{season}: {exc}")
     if not frames:
         raise RuntimeError("Unable to load play-by-play data. " + " | ".join(errors))
-    combined = pd.concat(frames, ignore_index=True, copy=False)
-    del frames
-    gc.collect()
-    return combined
+    return pd.concat(frames, ignore_index=True)
+
 
 def _get_plays(pbp: pd.DataFrame) -> pd.DataFrame:
-    """Filter to offensive scrimmage plays and required fields, avoiding wide copies."""
     required = {"game_id", "posteam", "defteam", "epa", "success", "play_type"}
     missing = required - set(pbp.columns)
     if missing:
         raise ValueError(f"Play-by-play file is missing required columns: {sorted(missing)}")
-    cols = list(required)
-    for col in ["season", "week", "qb_kneel", "qb_spike"]:
-        if col in pbp.columns:
-            cols.append(col)
-    df = pbp.loc[:, cols].copy()
-    df["epa"] = pd.to_numeric(df["epa"], errors="coerce", downcast="float")
-    df["success"] = pd.to_numeric(df["success"], errors="coerce", downcast="float")
+    # Avoid copying the entire source dataframe; retain only columns used downstream.
+    keep = [c for c in PBP_COLUMNS if c in pbp.columns]
+    df = pbp.loc[:, keep].copy()
+    df["epa"] = pd.to_numeric(df["epa"], errors="coerce")
+    df["success"] = pd.to_numeric(df["success"], errors="coerce")
     df = df[df["play_type"].isin(["run", "pass"]) & df["posteam"].notna() & df["defteam"].notna()]
     df = df[df["epa"].notna() & df["success"].notna()]
     if "qb_kneel" in df.columns:
@@ -106,31 +93,32 @@ def _get_plays(pbp: pd.DataFrame) -> pd.DataFrame:
         df = df[df["qb_spike"].fillna(0) != 1]
     return df
 
+
 def build_efficiency_table(pbp: pd.DataFrame) -> pd.DataFrame:
-    """Return one row per team/game with offensive and defensive metrics."""
     plays = _get_plays(pbp)
-    group_keys = ["game_id", "season", "week"]
-    off = plays.groupby(group_keys + ["posteam"], observed=True).agg(
+    group_cols = ["game_id", "season", "week", "posteam"]
+    off = plays.groupby(group_cols).agg(
         off_epa=("epa", "mean"),
         off_success=("success", "mean"),
         offensive_plays=("epa", "size"),
     ).reset_index().rename(columns={"posteam": "team"})
-    deff = plays.groupby(group_keys + ["defteam"], observed=True).agg(
+    deff = plays.groupby(["game_id", "season", "week", "defteam"]).agg(
         def_epa_allowed=("epa", "mean"),
         def_success_allowed=("success", "mean"),
         defensive_plays=("epa", "size"),
     ).reset_index().rename(columns={"defteam": "team"})
-    out = off.merge(deff, on=group_keys + ["team"], how="outer", copy=False)
-    del plays, off, deff
-    gc.collect()
-    return out
+    return off.merge(deff, on=["game_id", "season", "week", "team"], how="outer")
 
-def _game_features_for_target(history_eff: pd.DataFrame, home_team: str, away_team: str,
-                              target_date: pd.Timestamp, lookback_games: int = 10) -> dict:
+
+def _game_features_for_target(history_eff: pd.DataFrame, home_team: str,
+                              away_team: str, target_date: pd.Timestamp,
+                              lookback_games: int = 10) -> dict:
     hist = history_eff
-    hist = hist[hist["gameday"] < target_date]
+    if "gameday" in hist.columns:
+        hist = hist[hist["gameday"] < target_date]
+
     def team_stats(team):
-        th = hist.loc[hist["team"] == team].sort_values("gameday").tail(lookback_games)
+        th = hist[hist["team"] == team].sort_values("gameday").tail(lookback_games)
         if th.empty:
             return None
         def avg(col):
@@ -141,6 +129,7 @@ def _game_features_for_target(history_eff: pd.DataFrame, home_team: str, away_te
             "def_epa_allowed": avg("def_epa_allowed"),
             "def_success_allowed": avg("def_success_allowed"),
         }
+
     h, a = team_stats(home_team), team_stats(away_team)
     if h is None or a is None:
         return {}
@@ -154,18 +143,16 @@ def _game_features_for_target(history_eff: pd.DataFrame, home_team: str, away_te
         "home_field": 1.0,
     }
 
+
 def _feature_frame(schedule: pd.DataFrame, efficiency: pd.DataFrame, lookback_games=10):
-    game_meta = schedule[["game_id", "gameday", "season", "week", "home_team", "away_team", "home_score", "away_score"]].copy()
-    eff = efficiency.merge(game_meta[["game_id", "gameday"]], on="game_id", how="left", copy=False)
-    eff = eff.dropna(subset=["gameday"])
-    eff = eff.sort_values("gameday").reset_index(drop=True)
+    game_meta = schedule[["game_id", "gameday"]].copy()
+    eff = efficiency.merge(game_meta, on="game_id", how="left")
     rows = []
-    # Keep the strict prior-date cutoff. The history is team-game-sized, not play-sized.
-    for _, g in game_meta.sort_values("gameday").iterrows():
+    for _, g in schedule.sort_values("gameday").iterrows():
         if pd.isna(g["gameday"]):
             continue
-        hist_eff = eff.loc[eff["gameday"] < g["gameday"], ["team", "gameday", "off_epa", "off_success", "def_epa_allowed", "def_success_allowed"]]
-        f = _game_features_for_target(hist_eff, str(g["home_team"]), str(g["away_team"]), g["gameday"], lookback_games)
+        hist_eff = eff[eff["gameday"] < g["gameday"]]
+        f = _game_features_for_target(hist_eff, g["home_team"], g["away_team"], g["gameday"], lookback_games)
         if not f:
             continue
         f.update({
@@ -174,18 +161,15 @@ def _feature_frame(schedule: pd.DataFrame, efficiency: pd.DataFrame, lookback_ga
             "home_score": g["home_score"], "away_score": g["away_score"],
         })
         rows.append(f)
-    del eff
-    gc.collect()
     return pd.DataFrame(rows)
+
 
 def build_efficiency_model_dataset(schedule: pd.DataFrame, pbp: pd.DataFrame, lookback_games=10) -> pd.DataFrame:
     efficiency = build_efficiency_table(pbp)
-    del pbp
-    gc.collect()
     return _feature_frame(schedule, efficiency, lookback_games=lookback_games)
 
+
 def chronological_backtest(dataset: pd.DataFrame, min_train_games=500) -> dict:
-    """Chronological expanding-window Ridge regression predicting home/away scores."""
     data = dataset.dropna(subset=["home_score", "away_score"]).sort_values("gameday").copy()
     exclude = {"game_id", "gameday", "season", "week", "home_team", "away_team", "home_score", "away_score"}
     features = [c for c in data.columns if c not in exclude and pd.api.types.is_numeric_dtype(data[c])]
@@ -200,22 +184,78 @@ def chronological_backtest(dataset: pd.DataFrame, min_train_games=500) -> dict:
             continue
         X_train, X_test = train[features].fillna(0), test[features].fillna(0)
         test = test.copy()
-        for target, pred_col in [("home_score", "pred_home_score"), ("away_score", "pred_away_score")]:
-            model = Ridge(alpha=10.0)
-            model.fit(X_train, train[target])
-            test[pred_col] = model.predict(X_test)
+        for target in ["home_score", "away_score"]:
+            estimator = Ridge(alpha=10.0)
+            estimator.fit(X_train, train[target])
+            test[f"pred_{target}"] = estimator.predict(X_test)
         preds.append(test)
     if not preds:
         raise ValueError("No test predictions were generated; check history and minimum training size.")
     result = pd.concat(preds, ignore_index=True).drop_duplicates(subset=["game_id"])
+    metrics = score_prediction_metrics(result, "pred_home_score", "pred_away_score")
     return {
         "predictions": result,
         "n": len(result),
-        "home_mae": float(mean_absolute_error(result["home_score"], result["pred_home_score"])),
-        "away_mae": float(mean_absolute_error(result["away_score"], result["pred_away_score"])),
-        "home_rmse": float(np.sqrt(mean_squared_error(result["home_score"], result["pred_home_score"]))),
-        "away_rmse": float(np.sqrt(mean_squared_error(result["away_score"], result["pred_away_score"]))),
+        "home_mae": metrics["Home MAE"],
+        "away_mae": metrics["Away MAE"],
+        "home_rmse": metrics["Home RMSE"],
+        "away_rmse": metrics["Away RMSE"],
     }
+
+
+def score_prediction_metrics(data: pd.DataFrame, home_pred: str, away_pred: str) -> dict:
+    return {
+        "Home MAE": float(mean_absolute_error(data["home_score"], data[home_pred])),
+        "Away MAE": float(mean_absolute_error(data["away_score"], data[away_pred])),
+        "Home RMSE": float(np.sqrt(mean_squared_error(data["home_score"], data[home_pred]))),
+        "Away RMSE": float(np.sqrt(mean_squared_error(data["away_score"], data[away_pred]))),
+    }
+
+
+def add_scoring_baseline_predictions(predictions: pd.DataFrame, schedule: pd.DataFrame, lookback: int = 6) -> pd.DataFrame:
+    """Add a recent points-for/against baseline for the same historical test games.
+
+    Every baseline prediction uses only completed games dated strictly before the target date.
+    """
+    games = schedule.copy()
+    games["gameday"] = pd.to_datetime(games["gameday"], errors="coerce")
+    output = predictions.copy()
+    home_preds, away_preds = [], []
+
+    for _, game in output.iterrows():
+        target_date = pd.to_datetime(game["gameday"], errors="coerce")
+        history = games[
+            (games["gameday"] < target_date)
+            & games["home_score"].notna()
+            & games["away_score"].notna()
+        ]
+
+        def stats(team):
+            prior = history[
+                (history["home_team"] == team) | (history["away_team"] == team)
+            ].sort_values("gameday").tail(lookback)
+            if prior.empty:
+                return None
+            home_mask = prior["home_team"] == team
+            scored = np.where(home_mask, prior["home_score"], prior["away_score"]).astype(float)
+            allowed = np.where(home_mask, prior["away_score"], prior["home_score"]).astype(float)
+            return float(scored.mean()), float(allowed.mean())
+
+        h = stats(game["home_team"])
+        a = stats(game["away_team"])
+        if h is None or a is None:
+            home_preds.append(np.nan)
+            away_preds.append(np.nan)
+            continue
+        home_score = 0.5 * h[0] + 0.5 * a[1] + 1.5
+        away_score = 0.5 * a[0] + 0.5 * h[1]
+        home_preds.append(max(0.0, home_score))
+        away_preds.append(max(0.0, away_score))
+
+    output["baseline_home_score"] = home_preds
+    output["baseline_away_score"] = away_preds
+    return output.dropna(subset=["baseline_home_score", "baseline_away_score"]).copy()
+
 
 def baseline_projection(games: pd.DataFrame, season: int, lookback: int = 6) -> pd.DataFrame:
     """Recent points-for/against baseline for future scheduled games."""
@@ -237,15 +277,10 @@ def baseline_projection(games: pd.DataFrame, season: int, lookback: int = 6) -> 
             ].sort_values("gameday").tail(lookback)
             if prior.empty:
                 return None
-            scored, allowed = [], []
-            for _, row in prior.iterrows():
-                if row["home_team"] == team:
-                    scored.append(float(row["home_score"]))
-                    allowed.append(float(row["away_score"]))
-                else:
-                    scored.append(float(row["away_score"]))
-                    allowed.append(float(row["home_score"]))
-            return sum(scored) / len(scored), sum(allowed) / len(allowed)
+            home_mask = prior["home_team"] == team
+            scored = np.where(home_mask, prior["home_score"], prior["away_score"]).astype(float)
+            allowed = np.where(home_mask, prior["away_score"], prior["home_score"]).astype(float)
+            return float(scored.mean()), float(allowed.mean())
         h, a = stats(str(game["home_team"])), stats(str(game["away_team"]))
         if h is None or a is None:
             continue
