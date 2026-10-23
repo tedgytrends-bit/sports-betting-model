@@ -3,7 +3,7 @@ A Streamlit dashboard and experimental NFL score-projection project. The
 goal is to build a transparent, repeatable data pipeline and evaluate
 projections on games not used to fit the model.
 
-Current code version: v0.6.2
+Current code version: v0.6.3
 Important status
 This is not a validated betting model. Historical backtests are
 exploratory and do not establish a repeatable betting edge. Do not use
@@ -131,3 +131,15 @@ Recommended next steps
    market lines, and odds before kickoff.
 6. Do not describe the model as profitable unless an adequate untouched
    and prospective record supports that conclusion.
+Version 0.6.3 — reproducible backtest exports
+This version adds provenance fields to the downloadable historical totals CSV and a separate JSON run manifest. Each run records:
+- model version and UTC run timestamp / run ID;
+- requested and loaded play-by-play seasons;
+- efficiency-model lookback and minimum training-game requirement;
+- feature column list and row counts at the dataset, prediction, comparison, and totals-export stages;
+- a SHA-256 fingerprint of the exported game-ID sequence.
+The totals export is generated from the current run's chronological predictions and includes run metadata. The JSON manifest documents why row counts can differ between model predictions, comparison predictions, and totals rows (e.g. missing baseline predictions or market totals).
+Important validation note
+The previous exploratory feature-ablation package was fit using the exported game-level CSV, which does not contain all original training history (notably the full 2021 play-by-play-derived training rows). Its numerical comparisons should therefore be treated as exploratory only, not as a definitive reproduction of the production backtest. Use the new in-app run manifest and newly exported predictions as the reproducibility baseline before making model changes.
+
+The manifest does not prove the recorded market line was available at a particular sportsbook or that the model is profitable. It is a provenance and row-count audit aid.
