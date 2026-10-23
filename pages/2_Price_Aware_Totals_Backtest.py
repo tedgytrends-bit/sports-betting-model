@@ -382,6 +382,99 @@ if "price_aware_data" in st.session_state:
             use_container_width=True,
         )
 
+    st.subheader("Model-versus-market validation")
+
+    # These diagnostics evaluate whether the model's disagreement with the
+    # closing total contains information about the final total. They are
+    # descriptive only; thresholds must not be selected from these same rows
+    # and then presented as an independent test.
+    edge_data = price_data.copy()
+    edge_data["market_error"] = (
+        pd.to_numeric(edge_data["actual_total"], errors="coerce")
+        - pd.to_numeric(edge_data["total_line"], errors="coerce")
+    )
+    edge_data["model_edge"] = (
+        pd.to_numeric(edge_data["efficiency_projected_total"], errors="coerce")
+        - pd.to_numeric(edge_data["total_line"], errors="coerce")
+    )
+    edge_data = edge_data.dropna(subset=["market_error", "model_edge"]).copy()
+    edge_data["direction_correct"] = (
+        np.sign(edge_data["model_edge"]) == np.sign(edge_data["market_error"])
+    ) & edge_data["market_error"].ne(0) & edge_data["model_edge"].ne(0)
+
+    corr = edge_data["model_edge"].corr(edge_data["market_error"])
+    eligible = edge_data[edge_data["model_edge"].abs() >= used_threshold].copy()
+    eligible = eligible[eligible["market_error"].ne(0)]
+    direction_accuracy = (
+        100 * eligible["direction_correct"].mean()
+        if not eligible.empty else np.nan
+    )
+
+    m1, m2, m3 = st.columns(3)
+    m1.metric("Edge / market-error correlation", f"{corr:.3f}" if pd.notna(corr) else "N/A")
+    m2.metric(
+        f"Direction correct (edge ≥ {used_threshold:.1f})",
+        f"{direction_accuracy:.1f}%" if pd.notna(direction_accuracy) else "N/A",
+    )
+    m3.metric("Games in direction check", f"{len(eligible):,}")
+
+    st.caption(
+        "Market error = actual total minus closing total. Model edge = projected "
+        "total minus closing total. A positive correlation means the model edge "
+        "tends to point in the same direction as the market's eventual error. "
+        "This is a diagnostic on the displayed historical sample, not proof of "
+        "future profitability."
+    )
+
+    edge_bins = [
+        (0.0, 1.0, "0 to <1"),
+        (1.0, 2.0, "1 to <2"),
+        (2.0, 3.5, "2 to <3.5"),
+        (3.5, 5.0, "3.5 to <5"),
+        (5.0, 7.5, "5 to <7.5"),
+        (7.5, np.inf, "7.5+"),
+    ]
+    bin_rows = []
+    for lower, upper, label in edge_bins:
+        part = edge_data[
+            (edge_data["model_edge"].abs() >= lower)
+            & (edge_data["model_edge"].abs() < upper)
+            & edge_data["market_error"].ne(0)
+        ].copy()
+        if part.empty:
+            bin_rows.append({
+                "Absolute model edge (points)": label,
+                "Games": 0,
+                "Direction correct %": np.nan,
+                "Mean absolute market error (points)": np.nan,
+            })
+            continue
+        bin_rows.append({
+            "Absolute model edge (points)": label,
+            "Games": len(part),
+            "Direction correct %": round(100 * part["direction_correct"].mean(), 1),
+            "Mean absolute market error (points)": round(part["market_error"].abs().mean(), 2),
+        })
+    st.dataframe(pd.DataFrame(bin_rows), hide_index=True, use_container_width=True)
+
+    season_rows = []
+    for season, part in edge_data.groupby("season"):
+        selected = part[
+            (part["model_edge"].abs() >= used_threshold)
+            & part["market_error"].ne(0)
+        ]
+        season_rows.append({
+            "Season": int(season),
+            "Games with edge": len(selected),
+            "Direction correct %": (
+                round(100 * selected["direction_correct"].mean(), 1)
+                if not selected.empty else np.nan
+            ),
+            "Edge / market-error correlation": round(part["model_edge"].corr(part["market_error"]), 3),
+        })
+    st.caption("Season split uses the same fixed edge threshold as the backtest above.")
+    st.dataframe(pd.DataFrame(season_rows), hide_index=True, use_container_width=True)
+
     st.subheader("Bet-level results")
 
     strategy_choice = st.selectbox(
