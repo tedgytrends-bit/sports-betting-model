@@ -1,4 +1,5 @@
-Changelog — v0.6.3
+# Changelog — v0.6.3
+
 - Added explicit model version constant.
 - Added UTC run ID/timestamp and model configuration metadata to exported predictions.
 - Added requested/loaded PBP seasons, dataset/prediction/comparison counts, and feature list metadata.
