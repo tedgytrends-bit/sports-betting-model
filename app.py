@@ -281,6 +281,10 @@ if run_backtest:
                 "run_id": run_id,
                 "run_started_utc": run_started_utc.isoformat(),
                 "model_version": MODEL_VERSION,
+                "schedule_source_url": games.attrs.get("schedule_source_url"),
+                "schedule_source_rows": games.attrs.get("schedule_source_rows"),
+                "schedule_total_line_rows": games.attrs.get("schedule_total_line_rows"),
+                "schedule_game_id_unique": games.attrs.get("schedule_game_id_unique"),
                 "min_train_games": 500,
                 "lookback_games": int(lookback),
                 "baseline_lookback_games": 6,
@@ -501,7 +505,7 @@ if run_backtest:
                 **run_metadata,
                 "totals_export_rows": int(len(totals)),
                 "total_line_nonmissing_rows": int(games["total_line"].notna().sum()) if "total_line" in games else 0,
-                    "exported_game_ids_sha256": hashlib.sha256(
+                "exported_game_ids_sha256": hashlib.sha256(
                     "\n".join(
                         totals["game_id"].astype(str).tolist()
                     ).encode("utf-8")
