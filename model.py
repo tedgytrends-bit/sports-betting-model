@@ -9,6 +9,8 @@ import pandas as pd
 from sklearn.linear_model import Ridge
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 
+MODEL_VERSION = "0.6.3"
+
 SCHEDULE_URLS = [
     "https://github.com/nflverse/nfldata/raw/master/data/games.csv",
     "https://github.com/nflverse/nflverse-data/releases/download/schedules/games.csv",
