@@ -26,17 +26,53 @@ PBP_COLUMNS = [
 ]
 
 
+
 def load_schedule_data() -> pd.DataFrame:
+    """Load a schedule source only if it passes basic integrity checks."""
     errors = []
+    required = {
+        "game_id", "gameday", "season", "week", "away_team",
+        "home_team", "away_score", "home_score", "total_line",
+    }
+
     for url in SCHEDULE_URLS:
         try:
             df = pd.read_csv(url, low_memory=False)
-            required = {"season", "away_team", "home_team", "away_score", "home_score"}
-            if required.issubset(df.columns):
-                return normalize_schedule(df)
+            missing = required - set(df.columns)
+
+            if missing:
+                errors.append(f"{url}: missing columns {sorted(missing)}")
+                continue
+
+            if df["game_id"].isna().any():
+                errors.append(f"{url}: missing game_id values")
+                continue
+
+            if df["game_id"].duplicated().any():
+                errors.append(f"{url}: duplicate game_id values")
+                continue
+
+            normalized = normalize_schedule(df)
+            line_count = int(normalized["total_line"].notna().sum())
+
+            if line_count == 0:
+                errors.append(f"{url}: no valid total_line values")
+                continue
+
+            normalized.attrs["schedule_source_url"] = url
+            normalized.attrs["schedule_source_rows"] = int(len(normalized))
+            normalized.attrs["schedule_total_line_rows"] = line_count
+            normalized.attrs["schedule_game_id_unique"] = True
+
+            return normalized
+
         except Exception as exc:
-            errors.append(f"{url}: {exc}")
-    raise RuntimeError("Unable to load compatible schedule data. " + " | ".join(errors))
+            errors.append(f"{url}: {type(exc).__name__}: {exc}")
+
+    raise RuntimeError(
+        "Unable to load a validated schedule source. " + " | ".join(errors)
+    )
+
 
 
 def normalize_schedule(df: pd.DataFrame) -> pd.DataFrame:
