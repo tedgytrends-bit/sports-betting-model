@@ -1,4 +1,3 @@
-
 """NFL efficiency features, chronological backtesting, and baseline comparison.
 
 Experimental research utilities. Loads current-season play-by-play when requested and fails loudly on missing seasons. Not a validated betting system.
