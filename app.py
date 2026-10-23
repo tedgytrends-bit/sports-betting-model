@@ -1,8 +1,11 @@
 import numpy as np
 import pandas as pd
 import streamlit as st
-from datetime import date
+from datetime import date, timezone, datetime
+import json
+import hashlib
 from model import (
+    MODEL_VERSION,
     load_schedule_data,
     load_pbp,
     build_efficiency_model_dataset,
@@ -14,7 +17,7 @@ from model import (
 
 st.set_page_config(page_title="Sports Model | NFL", page_icon="🏈", layout="wide")
 st.title("Sports Model")
-st.caption("NFL projections • Transparent methodology • Public record")
+st.caption(f"NFL projections • Transparent methodology • Public record • Model v{MODEL_VERSION}")
 st.warning(
     "EXPERIMENTAL — This version includes current-season play-by-play in the historical feature pipeline. "
     "It is not a validated betting model. No live odds or injury adjustments are included."
@@ -217,6 +220,8 @@ st.info(
 )
 
 if run_backtest:
+    run_started_utc = datetime.now(timezone.utc)
+    run_id = run_started_utc.strftime("%Y%m%dT%H%M%SZ")
     try:
         with st.spinner("Loading data, building features, and comparing models..."):
             pbp = get_pbp()
@@ -261,6 +266,33 @@ if run_backtest:
             compared = add_scoring_baseline_predictions(efficiency_pred, games, lookback=6)
             metrics = score_prediction_metrics(compared, "pred_home_score", "pred_away_score")
             baseline_metrics = score_prediction_metrics(compared, "baseline_home_score", "baseline_away_score")
+
+            # Reproducibility metadata is attached to every exported prediction row.
+            excluded_feature_cols = {
+                "game_id", "gameday", "season", "week", "home_team", "away_team",
+                "home_score", "away_score", "test_block", "n_active_features",
+                "pred_home_score", "pred_away_score"
+            }
+            model_feature_columns = [
+                c for c in dataset.columns
+                if c not in excluded_feature_cols and pd.api.types.is_numeric_dtype(dataset[c])
+            ]
+            run_metadata = {
+                "run_id": run_id,
+                "run_started_utc": run_started_utc.isoformat(),
+                "model_version": MODEL_VERSION,
+                "min_train_games": 500,
+                "lookback_games": int(lookback),
+                "baseline_lookback_games": 6,
+                "requested_pbp_seasons": json.dumps([2021, 2022, 2023, 2024, 2025, 2026]),
+                "loaded_pbp_seasons": json.dumps(loaded_seasons),
+                "dataset_rows": int(len(dataset)),
+                "efficiency_prediction_rows": int(results["n"]),
+                "comparison_prediction_rows": int(len(compared)),
+                "feature_columns_json": json.dumps(model_feature_columns),
+            }
+            for key, value in run_metadata.items():
+                compared[key] = value
         st.subheader("Overall model comparison")
         st.caption(
             f"{len(compared):,} games with both models' predictions. Lower MAE/RMSE is better. "
@@ -322,6 +354,13 @@ if run_backtest:
             totals["efficiency_projected_total"] = totals["pred_home_score"] + totals["pred_away_score"]
             totals["baseline_projected_total"] = totals["baseline_home_score"] + totals["baseline_away_score"]
             totals = totals.dropna(subset=["total_line", "actual_total", "efficiency_projected_total", "baseline_projected_total"]).copy()
+            # Preserve exact run provenance and final row counts in the downloadable CSV.
+            totals["totals_export_rows"] = int(len(totals))
+            if len(totals) > len(compared):
+                raise RuntimeError(
+                    f"Integrity check failed: totals export has {len(totals)} rows but only "
+                    f"{len(compared)} comparison predictions exist."
+                )
             totals["efficiency_total_error"] = (totals["efficiency_projected_total"] - totals["actual_total"]).abs()
             totals["baseline_total_error"] = (totals["baseline_projected_total"] - totals["actual_total"]).abs()
             totals["efficiency_edge"] = totals["efficiency_projected_total"] - totals["total_line"]
@@ -444,6 +483,24 @@ if run_backtest:
                 totals.to_csv(index=False).encode("utf-8"),
                 "nfl_totals_backtest.csv", "text/csv"
             )
+            export_manifest = {
+                **run_metadata,
+                "totals_export_rows": int(len(totals)),
+                "total_line_nonmissing_rows": int(games["total_line"].notna().sum()) if "total_line" in games else 0,
+                "exported_game_ids_sha256": hashlib.sha256(
+                    "\\n".join(totals["game_id"].astype(str).tolist()).encode("utf-8")
+                ).hexdigest(),
+                "notes": [
+                    "CSV rows are generated from this run's chronological_backtest predictions.",
+                    "Rows can be fewer than efficiency_prediction_rows because baseline and market-line joins can drop rows.",
+                    "Historical total_line is the schedule-feed value, not a verified sportsbook quote."
+                ],
+            }
+            st.download_button(
+                "Download backtest run manifest (JSON)",
+                json.dumps(export_manifest, indent=2).encode("utf-8"),
+                "nfl_backtest_run_manifest.json", "application/json"
+            )
             st.caption(
                 "Simulated betting assumptions: 1 unit risked per bet, -110 odds, +0.909 units per win, -1 unit per loss, "
                 "0 units on pushes. ROI is net units divided by all bets placed (including pushes); win percentage excludes pushes. "
@@ -475,4 +532,4 @@ with st.expander("Methodology, data and record policy"):
     """)
     st.markdown("[nflverse data releases](https://github.com/nflverse/nflverse-data/releases)")
 
-st.caption("Prototype v0.6.2 • Turnover/red-zone feature repair and audit • Not betting advice")
+st.caption(f"Prototype v{MODEL_VERSION} • Reproducible exports and run manifest • Not betting advice")
