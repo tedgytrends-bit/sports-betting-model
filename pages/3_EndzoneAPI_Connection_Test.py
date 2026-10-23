@@ -280,6 +280,10 @@ with st.expander("Test 5 — full-season sportsbook odds coverage (10 credits)")
                             "total": snap.get("total"),
                             "over_odds": snap.get("total_over_odds"),
                             "under_odds": snap.get("total_under_odds"),
+                            "both_prices_available": (
+                                snap.get("total_over_odds") is not None
+                                and snap.get("total_under_odds") is not None
+                            ),
                             "captured_at": snap.get("captured_at"),
                             "kickoff": game.get("kickoff"),
                             "timestamp_before_kickoff": (
@@ -300,8 +304,8 @@ with st.expander("Test 5 — full-season sportsbook odds coverage (10 credits)")
                             rows=("game_id", "size"),
                             rows_with_total=("total", lambda x: x.notna().sum()),
                             rows_with_both_prices=(
-                                "over_odds",
-                                lambda x: x.notna().sum(),
+                                "both_prices_available",
+                                "sum",
                             ),
                             timestamps_before_kickoff=(
                                 "timestamp_before_kickoff",
