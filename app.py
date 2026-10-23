@@ -226,7 +226,7 @@ if run_backtest:
         with st.spinner("Loading data, building features, and comparing models..."):
             pbp = get_pbp()
             loaded_seasons = sorted(pd.to_numeric(pbp["season"], errors="coerce").dropna().astype(int).unique().tolist())
-            st.caption(f"Play-by-play seasons loaded: {", ".join(map(str, loaded_seasons))}. Features for each game use only earlier-dated games.")
+            st.caption("Play-by-play seasons loaded: " + ", ".join(map(str, loaded_seasons)) + ". Features for each game use only earlier-dated games.")
             dataset = build_efficiency_model_dataset(games, pbp, lookback_games=lookback)
             results = chronological_backtest(dataset, min_train_games=500)
             diagnostics = [c for c in [
