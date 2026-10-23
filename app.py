@@ -356,7 +356,7 @@ if run_backtest:
             totals = totals.dropna(subset=["total_line", "actual_total", "efficiency_projected_total", "baseline_projected_total"]).copy()
             # Preserve exact run provenance and final row counts in the downloadable CSV.
             totals["totals_export_rows"] = int(len(totals))
-                        if totals["game_id"].isna().any():
+            if totals["game_id"].isna().any():
                 raise RuntimeError(
                     "Integrity check failed: totals export contains missing game_id values."
                 )
