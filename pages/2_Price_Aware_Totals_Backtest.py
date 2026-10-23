@@ -22,10 +22,26 @@ st.title("Price-Aware NFL Totals Backtest")
 st.caption(f"Experimental research page • Model v{MODEL_VERSION}")
 
 st.warning(
-    "Historical simulation only. The schedule feed's odds have not been "
-    "independently verified as prices available before kickoff. Results are "
-    "not proof of a profitable live betting strategy."
+    "Historical closing-line simulation only. The schedule feed is the public "
+    "nflverse games dataset, which provides closing totals and over/under prices. "
+    "These fields are not tied here to a named sportsbook or a timestamp proving "
+    "the price was available when a bet could have been placed. Results are not "
+    "proof of a profitable live betting strategy."
 )
+
+with st.expander("Odds source and limitations"):
+    st.markdown(
+        "- **Source:** public nflverse schedule dataset (games.csv).\n"
+        "- **Market fields:** historical closing total, over price, and under price.\n"
+        "- **Not available in this backtest:** a verified sportsbook name and exact "
+        "pre-kickoff capture timestamp for each price.\n"
+        "- **Interpretation:** useful for exploratory comparison against closing "
+        "market numbers, but not a verified simulation of prices actually available "
+        "to you at bet time."
+    )
+    st.markdown(
+        "[nflverse schedule data documentation](https://nflreadr.nflverse.com/reference/load_schedules.html)"
+    )
 
 st.write(
     "This page compares the efficiency model with the recent-scoring baseline. "
@@ -404,6 +420,18 @@ if "price_aware_data" in st.session_state:
         use_container_width=True,
     )
 
+    # Carry odds provenance with every exported row so results are not detached
+    # from the limitations of the historical schedule-price source.
+    graded["odds_source"] = "nflverse public games.csv schedule dataset"
+    graded["odds_type"] = "Historical closing total and over/under prices"
+    graded["sportsbook_verified"] = False
+    graded["pre_kickoff_price_timestamp_verified"] = False
+
+    st.caption(
+        "Export provenance is included: source dataset, closing-price classification, "
+        "and explicit flags that sportsbook identity and exact bet-time availability "
+        "have not been verified."
+    )
     st.download_button(
         "Download all price-aware bet results",
         graded.to_csv(index=False).encode("utf-8"),
@@ -419,9 +447,10 @@ if "price_aware_data" in st.session_state:
         "can produce very different sample sizes and results."
     )
     st.write(
-        "The price fields have passed basic format checks, but their timing and "
-        "sportsbook provenance remain unverified. Treat results as exploratory "
-        "until that is resolved."
+        "The historical schedule prices are closing-line fields from nflverse. "
+        "Their exact sportsbook and capture time are not attached to this backtest, "
+        "so the ROI should be treated as exploratory market-close research—not as "
+        "proof that the same bets could have been placed at those prices."
     )
 else:
     st.info(
