@@ -20,7 +20,7 @@ st.caption(
 
 st.info(
     "Run each test separately. Estimated costs: schedule 2 credits, historical games 5, "
-    "one game's sportsbook odds 10, historical injuries 2. Failed server requests are "
+    "one game's or one season's sportsbook odds 10, historical injuries 2. Failed server requests are "
     "normally refunded by EndzoneAPI. Your API key is never displayed."
 )
 
@@ -220,6 +220,122 @@ with st.expander("Test 4 — historical injury report (2 credits)"):
                     ]),
                     use_container_width=True,
                     hide_index=True,
+                )
+
+
+with st.expander("Test 5 — full-season sportsbook odds coverage (10 credits)"):
+    st.write(
+        "Fetches one season of per-book odds in a single request, then summarizes game coverage, "
+        "bookmaker coverage, and whether recorded closing timestamps precede kickoff. "
+        "This is the next recommended test before model integration."
+    )
+    odds_season = st.selectbox(
+        "Season to audit",
+        options=[2025, 2024, 2023, 2022, 2021, 2020],
+        index=0,
+        key="odds_season",
+    )
+    if st.button("Audit full-season odds", key="season_odds_test"):
+        status, data = post_api(
+            "get_odds",
+            {
+                "season": odds_season,
+                "snapshot_type": "closing",
+                "limit": 500,
+            },
+        )
+        show_result("get_odds (season)", status, data)
+        payload = unwrap_response(data)
+        if status == 200 and isinstance(payload, dict):
+            games = payload.get("games", [])
+            if isinstance(games, list) and games:
+                import pandas as pd
+
+                game_rows = []
+                book_rows = []
+                for game in games:
+                    if not isinstance(game, dict):
+                        continue
+                    kickoff = pd.to_datetime(game.get("kickoff"), utc=True, errors="coerce")
+                    game_rows.append({
+                        "game_id": game.get("game_id"),
+                        "kickoff": game.get("kickoff"),
+                        "bookmakers": len(game.get("books", []))
+                            if isinstance(game.get("books"), list) else 0,
+                    })
+                    for book in game.get("books", []) if isinstance(game.get("books"), list) else []:
+                        if not isinstance(book, dict):
+                            continue
+                        snap = book.get("closing")
+                        if not isinstance(snap, dict):
+                            snap = book.get("latest")
+                        if not isinstance(snap, dict):
+                            continue
+                        captured = pd.to_datetime(
+                            snap.get("captured_at"), utc=True, errors="coerce"
+                        )
+                        book_rows.append({
+                            "game_id": game.get("game_id"),
+                            "bookmaker": book.get("bookmaker"),
+                            "total": snap.get("total"),
+                            "over_odds": snap.get("total_over_odds"),
+                            "under_odds": snap.get("total_under_odds"),
+                            "captured_at": snap.get("captured_at"),
+                            "kickoff": game.get("kickoff"),
+                            "timestamp_before_kickoff": (
+                                bool(captured < kickoff)
+                                if pd.notna(captured) and pd.notna(kickoff)
+                                else None
+                            ),
+                        })
+                books_df = pd.DataFrame(book_rows)
+                games_df = pd.DataFrame(game_rows)
+                st.metric("Games returned", len(games_df))
+                if not books_df.empty:
+                    st.metric("Bookmaker-game price rows", len(books_df))
+                    st.write("Bookmaker coverage:")
+                    st.dataframe(
+                        books_df.groupby("bookmaker", dropna=False).agg(
+                            games_with_prices=("game_id", "nunique"),
+                            rows=("game_id", "size"),
+                            rows_with_total=("total", lambda x: x.notna().sum()),
+                            rows_with_both_prices=(
+                                "over_odds",
+                                lambda x: x.notna().sum(),
+                            ),
+                            timestamps_before_kickoff=(
+                                "timestamp_before_kickoff",
+                                lambda x: (x == True).sum(),
+                            ),
+                        ).reset_index().sort_values("games_with_prices", ascending=False),
+                        use_container_width=True,
+                        hide_index=True,
+                    )
+                    known_timestamps = books_df["timestamp_before_kickoff"].dropna()
+                    if len(known_timestamps):
+                        pct = 100 * known_timestamps.mean()
+                        st.write(
+                            f"Rows with a parseable timestamp before kickoff: "
+                            f"**{int(known_timestamps.sum())}/{len(known_timestamps)} "
+                            f"({pct:.1f}%)**."
+                        )
+                    st.write("Sample bookmaker prices:")
+                    st.dataframe(books_df.head(20), use_container_width=True, hide_index=True)
+                    st.download_button(
+                        "Download season odds audit CSV",
+                        data=books_df.to_csv(index=False).encode("utf-8"),
+                        file_name=f"endzoneapi_odds_audit_{odds_season}.csv",
+                        mime="text/csv",
+                    )
+                else:
+                    st.warning(
+                        "The response contained games but no recognizable per-book closing "
+                        "snapshots. Inspect the response fields above before proceeding."
+                    )
+            else:
+                st.warning(
+                    "No list of games was found in the season response. Inspect the response "
+                    "fields above; the endpoint may use a different wrapper/schema."
                 )
 
 st.divider()
