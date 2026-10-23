@@ -59,12 +59,22 @@ def load_schedule_data() -> pd.DataFrame:
                 errors.append(f"{url}: no valid total_line values")
                 continue
 
+
+            source_rows = int(len(normalized))
+
             normalized.attrs["schedule_source_url"] = url
-            normalized.attrs["schedule_source_rows"] = int(len(normalized))
+            normalized.attrs["schedule_source_rows"] = source_rows
             normalized.attrs["schedule_total_line_rows"] = line_count
             normalized.attrs["schedule_game_id_unique"] = True
 
+            # Store provenance as columns so it survives cached DataFrame handling.
+            normalized["schedule_source_url"] = url
+            normalized["schedule_source_rows"] = source_rows
+            normalized["schedule_total_line_rows"] = line_count
+            normalized["schedule_game_id_unique"] = True
+
             return normalized
+
 
         except Exception as exc:
             errors.append(f"{url}: {type(exc).__name__}: {exc}")
