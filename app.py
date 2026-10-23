@@ -501,8 +501,10 @@ if run_backtest:
                 **run_metadata,
                 "totals_export_rows": int(len(totals)),
                 "total_line_nonmissing_rows": int(games["total_line"].notna().sum()) if "total_line" in games else 0,
-                "exported_game_ids_sha256": hashlib.sha256(
-                    "\\n".join(totals["game_id"].astype(str).tolist()).encode("utf-8")
+                    "exported_game_ids_sha256": hashlib.sha256(
+                    "\n".join(
+                        totals["game_id"].astype(str).tolist()
+                    ).encode("utf-8")
                 ).hexdigest(),
                 "notes": [
                     "CSV rows are generated from this run's chronological_backtest predictions.",
