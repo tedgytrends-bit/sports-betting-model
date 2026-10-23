@@ -356,6 +356,20 @@ if run_backtest:
             totals = totals.dropna(subset=["total_line", "actual_total", "efficiency_projected_total", "baseline_projected_total"]).copy()
             # Preserve exact run provenance and final row counts in the downloadable CSV.
             totals["totals_export_rows"] = int(len(totals))
+                        if totals["game_id"].isna().any():
+                raise RuntimeError(
+                    "Integrity check failed: totals export contains missing game_id values."
+                )
+
+            if totals["game_id"].duplicated().any():
+                duplicates = totals.loc[
+                    totals["game_id"].duplicated(keep=False), "game_id"
+                ].astype(str).unique().tolist()
+
+                raise RuntimeError(
+                    "Integrity check failed: totals export contains duplicate game_id values: "
+                    + ", ".join(duplicates[:10])
+                )
             if len(totals) > len(compared):
                 raise RuntimeError(
                     f"Integrity check failed: totals export has {len(totals)} rows but only "
