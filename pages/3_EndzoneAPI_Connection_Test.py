@@ -342,6 +342,46 @@ with st.expander("Test 5 — full-season sportsbook odds coverage (10 credits)")
                     "fields above; the endpoint may use a different wrapper/schema."
                 )
 
+
+with st.expander("Test 6 — estimate API cost without spending credits"):
+    st.write(
+        "Uses EndzoneAPI's estimate_only option. This should return a quote without running "
+        "the data request. Start here before any further odds calls."
+    )
+    estimate_scope = st.radio(
+        "Request size",
+        ["One game", "One team's 2025 games", "Full 2025 season"],
+        index=0,
+        key="estimate_scope",
+    )
+    if st.button("Estimate cost only", key="estimate_cost"):
+        if estimate_scope == "One game":
+            estimate_payload = {
+                "game_id": "2025_01_KC_LAC",
+                "estimate_only": True,
+            }
+        elif estimate_scope == "One team's 2025 games":
+            estimate_payload = {
+                "season": 2025,
+                "team": "KC",
+                "snapshot_type": "closing",
+                "limit": 20,
+                "estimate_only": True,
+            }
+        else:
+            estimate_payload = {
+                "season": 2025,
+                "snapshot_type": "closing",
+                "limit": 500,
+                "estimate_only": True,
+            }
+        status, data = post_api("get_odds", estimate_payload)
+        show_result("get_odds estimate_only", status, data)
+        st.warning(
+            "Do not run the corresponding data request until the quoted cost is affordable "
+            "and we explicitly choose to spend the credits."
+        )
+
 st.divider()
 st.caption(
     "No response is treated as proof of a betting edge. Historical odds must be checked for "
