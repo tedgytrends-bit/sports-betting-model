@@ -78,6 +78,13 @@ def show_result(endpoint, status, data):
     st.json(data)
 
 
+def unwrap_response(data):
+    """EndzoneAPI responses may wrap the endpoint payload inside a top-level data field."""
+    if isinstance(data, dict) and isinstance(data.get("data"), dict):
+        return data["data"]
+    return data
+
+
 def show_game_summary(games):
     if not isinstance(games, list):
         st.warning("No list was found at the expected 'games' response field.")
@@ -109,8 +116,9 @@ with st.expander("Test 1 — upcoming schedule (2 credits)", expanded=True):
     if st.button("Run schedule test", key="schedule_test", type="primary"):
         status, data = post_api("get_schedule", {"days": 7})
         show_result("get_schedule", status, data)
-        if status == 200 and isinstance(data, dict):
-            games = data.get("upcoming_games", data.get("games", []))
+        payload = unwrap_response(data)
+        if status == 200 and isinstance(payload, dict):
+            games = payload.get("upcoming_games", payload.get("games", []))
             show_game_summary(games)
 
 with st.expander("Test 2 — historical games and closing lines (5 credits)"):
@@ -125,9 +133,10 @@ with st.expander("Test 2 — historical games and closing lines (5 credits)"):
             {"season": 2025, "game_type": "REG", "limit": 300},
         )
         show_result("get_games", status, data)
-        if status == 200 and isinstance(data, dict):
-            show_game_summary(data.get("games", []))
-            games = data.get("games", [])
+        payload = unwrap_response(data)
+        if status == 200 and isinstance(payload, dict):
+            show_game_summary(payload.get("games", []))
+            games = payload.get("games", [])
             if isinstance(games, list) and games:
                 total_lines = sum(
                     isinstance(g, dict) and g.get("total_line") is not None for g in games
@@ -157,8 +166,9 @@ with st.expander("Test 3 — sportsbook-specific historical odds (10 credits)"):
         else:
             status, data = post_api("get_odds", {"game_id": game_id.strip()})
             show_result("get_odds", status, data)
-            if status == 200 and isinstance(data, dict):
-                books = data.get("books", [])
+            payload = unwrap_response(data)
+            if status == 200 and isinstance(payload, dict):
+                books = payload.get("books", [])
                 st.metric("Bookmakers returned", len(books) if isinstance(books, list) else 0)
                 if isinstance(books, list):
                     summaries = []
@@ -177,9 +187,9 @@ with st.expander("Test 3 — sportsbook-specific historical odds (10 credits)"):
                     if summaries:
                         import pandas as pd
                         st.dataframe(pd.DataFrame(summaries), use_container_width=True, hide_index=True)
-                if isinstance(data.get("consensus_closing"), dict):
+                if isinstance(payload.get("consensus_closing"), dict):
                     st.write("Consensus closing line:")
-                    st.json(data["consensus_closing"])
+                    st.json(payload["consensus_closing"])
 
 with st.expander("Test 4 — historical injury report (2 credits)"):
     st.write(
@@ -192,8 +202,9 @@ with st.expander("Test 4 — historical injury report (2 credits)"):
             {"team": "KC", "season": 2025, "week": 9},
         )
         show_result("get_injuries", status, data)
-        if status == 200 and isinstance(data, dict):
-            injuries = data.get("injuries", [])
+        payload = unwrap_response(data)
+        if status == 200 and isinstance(payload, dict):
+            injuries = payload.get("injuries", [])
             st.metric("Injury records returned", len(injuries) if isinstance(injuries, list) else 0)
             if isinstance(injuries, list) and injuries:
                 import pandas as pd
