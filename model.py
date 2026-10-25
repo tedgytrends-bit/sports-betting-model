@@ -400,6 +400,59 @@ def chronological_backtest(dataset: pd.DataFrame, min_train_games=500) -> dict:
     }
 
 
+def chronological_direct_total_backtest(
+    dataset: pd.DataFrame,
+    min_train_games: int = 500,
+) -> pd.DataFrame:
+    """Predict actual combined score directly using chronological training.
+
+    Each weekly test block is trained only on completed games dated before
+    that block. Identifier fields and scores are excluded from predictors.
+    """
+    data = dataset.dropna(
+        subset=["gameday", "home_score", "away_score"]
+    ).sort_values("gameday").copy()
+    data["actual_total"] = (
+        pd.to_numeric(data["home_score"], errors="coerce")
+        + pd.to_numeric(data["away_score"], errors="coerce")
+    )
+    data = data.dropna(subset=["actual_total"]).copy()
+    exclude = {
+        "game_id", "gameday", "season", "week", "home_team", "away_team",
+        "home_score", "away_score", "actual_total",
+    }
+    features = [
+        c for c in data.columns
+        if c not in exclude and pd.api.types.is_numeric_dtype(data[c])
+    ]
+    if len(data) <= min_train_games:
+        raise ValueError(
+            f"Need more than {min_train_games} completed games; found {len(data)}."
+        )
+
+    data["test_block"] = data["gameday"].dt.to_period("W").astype(str)
+    predictions = []
+    for block in data["test_block"].drop_duplicates().tolist():
+        test = data[data["test_block"] == block].copy()
+        train = data[data["gameday"] < test["gameday"].min()].copy()
+        if len(train) < min_train_games:
+            continue
+        active_features = [c for c in features if train[c].notna().any()]
+        if not active_features:
+            continue
+        medians = train[active_features].median(numeric_only=True).fillna(0)
+        X_train = train[active_features].fillna(medians).fillna(0)
+        X_test = test[active_features].fillna(medians).fillna(0)
+        model = Ridge(alpha=10.0)
+        model.fit(X_train, train["actual_total"])
+        test["direct_total_prediction"] = model.predict(X_test)
+        predictions.append(test[["game_id", "direct_total_prediction"]])
+
+    if not predictions:
+        raise ValueError("No chronological direct-total predictions were generated.")
+    return pd.concat(predictions, ignore_index=True).drop_duplicates("game_id")
+
+
 def chronological_market_residual_backtest(
     dataset: pd.DataFrame,
     schedule: pd.DataFrame,
