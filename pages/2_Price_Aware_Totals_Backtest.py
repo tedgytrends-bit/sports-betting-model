@@ -393,49 +393,72 @@ if "price_aware_data" in st.session_state:
         "American odds. No-bets are excluded from the record."
     )
 
-    # Audit the leading candidate's individual bets before interpreting its ROI.
-    st.subheader("Market residual model: individual bet audit")
-    residual_audit = residual_bets[
-        residual_bets["bet_side"].isin(["Over", "Under"])
-    ].copy()
+    # Audit all model predictions, not only games that qualified as bets.
+    st.subheader("Market residual model: individual game audit")
+    residual_audit = price_data.copy()
+    residual_audit["projected_edge"] = (
+        pd.to_numeric(residual_audit["market_residual_projected_total"], errors="coerce")
+        - pd.to_numeric(residual_audit["total_line"], errors="coerce")
+    )
+    residual_audit["threshold_signal"] = np.select(
+        [
+            residual_audit["projected_edge"] >= used_threshold,
+            residual_audit["projected_edge"] <= -used_threshold,
+        ],
+        ["Over", "Under"],
+        default="No bet",
+    )
+    residual_audit = residual_audit.dropna(
+        subset=["market_residual_projected_total", "projected_edge"]
+    ).copy()
     audit_columns = [
         "gameday", "season", "week", "away_team", "home_team",
-        "total_line", "projected_total", "edge", "bet_side", "bet_odds",
-        "actual_total", "result", "net_units",
+        "total_line", "market_residual_projected_total", "projected_edge",
+        "threshold_signal", "actual_total",
     ]
     audit_columns = [col for col in audit_columns if col in residual_audit.columns]
     residual_audit = residual_audit[audit_columns].sort_values(
-        ["gameday", "away_team", "home_team"]
+        "projected_edge", key=lambda values: values.abs(), ascending=False
     )
-    if not residual_audit.empty:
-        display_audit = residual_audit.copy()
-        if "gameday" in display_audit.columns:
-            display_audit["gameday"] = pd.to_datetime(
-                display_audit["gameday"], errors="coerce"
-            ).dt.strftime("%Y-%m-%d")
-        for col in ["total_line", "projected_total", "edge", "net_units"]:
-            if col in display_audit.columns:
-                display_audit[col] = pd.to_numeric(
-                    display_audit[col], errors="coerce"
-                ).round(2)
-        st.dataframe(
-            display_audit,
-            hide_index=True,
-            use_container_width=True,
+    qualifying_count = int(residual_audit["threshold_signal"].isin(["Over", "Under"]).sum())
+    st.caption(
+        f"{qualifying_count} games qualify at the {used_threshold:.1f}-point threshold; "
+        f"{len(residual_audit)} games have residual-model predictions."
+    )
+    if qualifying_count == 0:
+        st.info(
+            "No market-residual bets qualified. The table below shows the largest "
+            "absolute model edges anyway, so we can inspect predictions without "
+            "lowering the threshold just to create bets."
         )
-        st.download_button(
-            "Download residual-model bets (CSV)",
-            data=residual_audit.to_csv(index=False).encode("utf-8"),
-            file_name="market_residual_model_bet_audit.csv",
-            mime="text/csv",
-        )
-        st.caption(
-            "Use this audit to check whether returns are concentrated in a few "
-            "seasons, sides, or unusually large-price payouts. The underlying "
-            "historical odds are still not verified as executable prices."
-        )
-    else:
-        st.info("No market-residual bets qualified under the current threshold.")
+    display_audit = residual_audit.head(30).copy()
+    if "gameday" in display_audit.columns:
+        display_audit["gameday"] = pd.to_datetime(
+            display_audit["gameday"], errors="coerce"
+        ).dt.strftime("%Y-%m-%d")
+    for col in [
+        "total_line", "market_residual_projected_total", "projected_edge", "actual_total"
+    ]:
+        if col in display_audit.columns:
+            display_audit[col] = pd.to_numeric(
+                display_audit[col], errors="coerce"
+            ).round(2)
+    st.dataframe(
+        display_audit,
+        hide_index=True,
+        use_container_width=True,
+    )
+    st.download_button(
+        "Download all residual-model game predictions (CSV)",
+        data=residual_audit.to_csv(index=False).encode("utf-8"),
+        file_name="market_residual_model_game_audit.csv",
+        mime="text/csv",
+    )
+    st.caption(
+        "The table displays the 30 largest absolute edges. The CSV includes all "
+        "games with a residual-model prediction. Historical prices remain "
+        "unverified as executable prices."
+    )
 
     st.subheader("Market residual model: weekly signal audit")
     st.caption(
