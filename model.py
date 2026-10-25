@@ -358,6 +358,50 @@ def build_efficiency_model_dataset(schedule: pd.DataFrame, pbp: pd.DataFrame, lo
     return _feature_frame(schedule, efficiency, lookback_games=lookback_games)
 
 
+def project_upcoming_efficiency(
+    dataset: pd.DataFrame,
+    min_train_games: int = 500,
+) -> pd.DataFrame:
+    """Fit on completed games and project scheduled games with missing scores."""
+    data = dataset.copy()
+    data["gameday"] = pd.to_datetime(data["gameday"], errors="coerce")
+    completed = data.dropna(subset=["home_score", "away_score", "gameday"]).copy()
+    upcoming = data[
+        data["gameday"].notna()
+        & (data["home_score"].isna() | data["away_score"].isna())
+    ].copy()
+    if len(completed) < min_train_games:
+        raise ValueError(
+            f"Need at least {min_train_games} completed games; found {len(completed)}."
+        )
+    exclude = {
+        "game_id", "gameday", "season", "week", "home_team", "away_team",
+        "home_score", "away_score",
+    }
+    features = [
+        c for c in data.columns
+        if c not in exclude and pd.api.types.is_numeric_dtype(data[c])
+    ]
+    active_features = [c for c in features if completed[c].notna().any()]
+    if not active_features:
+        raise ValueError("No usable numeric features for upcoming projections.")
+    medians = completed[active_features].median(numeric_only=True).fillna(0)
+    X_train = completed[active_features].fillna(medians).fillna(0)
+    predictions = upcoming[["game_id", "gameday", "season", "week", "away_team", "home_team"]].copy()
+    X_future = upcoming[active_features].fillna(medians).fillna(0)
+    for target, output in [
+        ("home_score", "projected_home"),
+        ("away_score", "projected_away"),
+    ]:
+        estimator = Ridge(alpha=10.0)
+        estimator.fit(X_train, completed[target])
+        predictions[output] = estimator.predict(X_future)
+    predictions["projected_total"] = predictions["projected_home"] + predictions["projected_away"]
+    predictions["model_home_spread"] = predictions["projected_away"] - predictions["projected_home"]
+    predictions["training_games"] = len(completed)
+    return predictions
+
+
 def chronological_backtest(dataset: pd.DataFrame, min_train_games=500) -> dict:
     data = dataset.dropna(subset=["home_score", "away_score"]).sort_values("gameday").copy()
     exclude = {"game_id", "gameday", "season", "week", "home_team", "away_team", "home_score", "away_score"}
