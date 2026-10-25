@@ -162,7 +162,9 @@ else:
         ).map(lambda x: f"{x:+.1f}" if pd.notna(x) else "—")
     display = display.sort_values("gameday")
 
-    table_columns = ["Date", "Matchup", "Projected score", "Model home spread", "Projected total"]
+    # Keep the main board compact: the projected score already identifies
+    # both teams, and the score margin is not yet a validated ATS model.
+    table_columns = ["Date", "Projected score", "Projected total"]
     if "Market total" in display.columns:
         table_columns += ["Market total", "Model vs market", "Total lean"]
     st.dataframe(
@@ -171,12 +173,10 @@ else:
         hide_index=True,
         column_config={
             "Date": st.column_config.TextColumn("Date", width="small"),
-            "Matchup": st.column_config.TextColumn("Matchup", width="medium"),
             "Projected score": st.column_config.TextColumn("Projected score", width="large"),
-            "Model home spread": st.column_config.TextColumn("Model home spread", width="small"),
-            "Projected total": st.column_config.TextColumn("Projected total", width="small"),
-            "Market total": st.column_config.TextColumn("Market total", width="small"),
-            "Model vs market": st.column_config.TextColumn("Model vs market", width="small"),
+            "Projected total": st.column_config.TextColumn("Model total", width="small"),
+            "Market total": st.column_config.TextColumn("Market", width="small"),
+            "Model vs market": st.column_config.TextColumn("Difference", width="small"),
             "Total lean": st.column_config.TextColumn("Total lean", width="small"),
         },
     )
