@@ -11,7 +11,7 @@ from io import BytesIO
 from sklearn.linear_model import Ridge
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 
-MODEL_VERSION = "0.6.3"
+MODEL_VERSION = "0.7.0"
 
 SCHEDULE_URLS = [
     "https://github.com/nflverse/nfldata/raw/master/data/games.csv",
