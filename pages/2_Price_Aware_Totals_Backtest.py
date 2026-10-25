@@ -437,6 +437,54 @@ if "price_aware_data" in st.session_state:
     else:
         st.info("No market-residual bets qualified under the current threshold.")
 
+    st.subheader("Market residual model: weekly signal audit")
+    st.caption(
+        "This checks whether the model's projected edge is concentrated in "
+        "particular weeks or mostly points in one direction. It is diagnostic, "
+        "not a way to tune the threshold."
+    )
+    weekly_signal = price_data.copy()
+    weekly_signal["residual_edge"] = (
+        pd.to_numeric(weekly_signal["market_residual_projected_total"], errors="coerce")
+        - pd.to_numeric(weekly_signal["total_line"], errors="coerce")
+    )
+    weekly_signal = weekly_signal.dropna(subset=["season", "week", "residual_edge"])
+    if not weekly_signal.empty:
+        weekly_signal["season"] = pd.to_numeric(
+            weekly_signal["season"], errors="coerce"
+        )
+        weekly_signal["week"] = pd.to_numeric(
+            weekly_signal["week"], errors="coerce"
+        )
+        weekly_signal = weekly_signal.dropna(subset=["season", "week"])
+        weekly_rows = []
+        for (season_value, week_value), part in weekly_signal.groupby(
+            ["season", "week"]
+        ):
+            edges = part["residual_edge"]
+            weekly_rows.append({
+                "Season": int(season_value),
+                "Week": int(week_value),
+                "Games": len(part),
+                "Mean projected edge": round(edges.mean(), 2),
+                "Median projected edge": round(edges.median(), 2),
+                "Under signals": int((edges <= -used_threshold).sum()),
+                "Over signals": int((edges >= used_threshold).sum()),
+            })
+        st.dataframe(
+            pd.DataFrame(weekly_rows).sort_values(["Season", "Week"]),
+            hide_index=True,
+            use_container_width=True,
+        )
+        st.download_button(
+            "Download weekly residual signal audit (CSV)",
+            data=pd.DataFrame(weekly_rows).sort_values(
+                ["Season", "Week"]
+            ).to_csv(index=False).encode("utf-8"),
+            file_name="market_residual_weekly_signal_audit.csv",
+            mime="text/csv",
+        )
+
     st.subheader("Season-by-season results")
 
     season_results = summarize(graded, ["strategy", "season"])
