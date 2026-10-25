@@ -14,6 +14,7 @@ from model import (
     baseline_projection,
     add_scoring_baseline_predictions,
     score_prediction_metrics,
+    project_upcoming_efficiency,
 )
 
 st.set_page_config(page_title="Sports Model | NFL", page_icon="🏈", layout="wide")
@@ -52,7 +53,39 @@ except Exception as e:
 
 today = pd.Timestamp(date.today())
 season_games = games[games["season"] == season].copy()
-all_projections = baseline_projection(games, season=season, lookback=6)
+# The main board uses the efficiency model for projections. Keep the simple
+# recent-scoring baseline as a transparent fallback if historical PBP is unavailable.
+try:
+    pbp_for_board = get_pbp()
+    feature_data_for_board = build_efficiency_model_dataset(
+        games,
+        pbp_for_board,
+        lookback_games=lookback,
+    )
+    all_projections = project_upcoming_efficiency(
+        feature_data_for_board,
+        min_train_games=500,
+    )
+    if not all_projections.empty:
+        market_lines = games[["game_id", "total_line"]].drop_duplicates("game_id")
+        all_projections = all_projections.merge(
+            market_lines, on="game_id", how="left", validate="one_to_one"
+        )
+        all_projections["market_total"] = pd.to_numeric(
+            all_projections["total_line"], errors="coerce"
+        )
+        all_projections["total_edge"] = (
+            all_projections["projected_total"] - all_projections["market_total"]
+        )
+    projection_source = "Efficiency model"
+except Exception as projection_error:
+    all_projections = baseline_projection(games, season=season, lookback=6)
+    projection_source = "Recent-scoring fallback"
+    st.warning(
+        "The efficiency projection could not be generated, so the board is showing "
+        f"the simple recent-scoring baseline instead. Details: {projection_error}"
+    )
+
 if not all_projections.empty:
     all_projections["gameday"] = pd.to_datetime(all_projections["gameday"], errors="coerce")
     all_projections = all_projections[all_projections["gameday"] >= today].copy()
@@ -84,6 +117,10 @@ st.caption(
 heading = f"{season} projections"
 heading += " · Full remaining season" if show_full_schedule else " · Next 14 days"
 st.subheader(heading)
+st.caption(
+    f"Projection source: {projection_source}. These are analytical estimates, "
+    "not instructions to place a bet. Market totals are shown when available."
+)
 
 if projections.empty:
     st.info(
@@ -107,10 +144,26 @@ else:
     )
     display["Model home spread"] = display["model_home_spread"].map(lambda x: f"{x:+.1f}")
     display["Projected total"] = display["projected_total"].map(lambda x: f"{x:.1f}")
+    if "market_total" in display.columns:
+        display["Market total"] = pd.to_numeric(
+            display["market_total"], errors="coerce"
+        ).map(lambda x: f"{x:.1f}" if pd.notna(x) else "—")
+        display["Total lean"] = pd.to_numeric(
+            display["total_edge"], errors="coerce"
+        ).map(
+            lambda x: "Over" if pd.notna(x) and x > 0
+            else ("Under" if pd.notna(x) and x < 0 else "Even / unavailable")
+        )
+        display["Model vs market"] = pd.to_numeric(
+            display["total_edge"], errors="coerce"
+        ).map(lambda x: f"{x:+.1f}" if pd.notna(x) else "—")
     display = display.sort_values("gameday")
 
+    table_columns = ["Date", "Matchup", "Projected score", "Model home spread", "Projected total"]
+    if "Market total" in display.columns:
+        table_columns += ["Market total", "Model vs market", "Total lean"]
     st.dataframe(
-        display[["Date", "Matchup", "Projected score", "Model home spread", "Projected total"]],
+        display[table_columns],
         width="stretch",
         hide_index=True,
         column_config={
@@ -119,6 +172,9 @@ else:
             "Projected score": st.column_config.TextColumn("Projected score", width="large"),
             "Model home spread": st.column_config.TextColumn("Model home spread", width="small"),
             "Projected total": st.column_config.TextColumn("Projected total", width="small"),
+            "Market total": st.column_config.TextColumn("Market total", width="small"),
+            "Model vs market": st.column_config.TextColumn("Model vs market", width="small"),
+            "Total lean": st.column_config.TextColumn("Total lean", width="small"),
         },
     )
 
@@ -130,14 +186,19 @@ else:
     a.metric("Projected score", f'{g["projected_away"]:.1f} – {g["projected_home"]:.1f}')
     b.metric("Model home spread", f'{g["model_home_spread"]:+.1f}')
     c.metric("Projected total", f'{g["projected_total"]:.1f}')
+    if "market_total" in g.index and pd.notna(g["market_total"]):
+        d, e = st.columns(2)
+        d.metric("Market total", f'{g["market_total"]:.1f}')
+        edge_value = g.get("total_edge", np.nan)
+        e.metric("Model vs market", f'{edge_value:+.1f} pts' if pd.notna(edge_value) else "Unavailable")
 
-    with st.expander("How the current baseline works", expanded=True):
+    with st.expander("How the current projection works", expanded=True):
         st.write(
-            "The public projection board uses recent points scored blended with the opponent's recent points allowed. "
-            "A fixed 1.5-point home adjustment is applied. It remains a simple baseline, not the historical efficiency model."
+            "The primary board fits the historical efficiency model on completed games and projects scheduled games "
+            "using pregame team features. It is experimental and has not demonstrated a durable betting edge."
         )
         st.write(
-            "The baseline still does not automatically ingest injury reports, weather, opponent-adjusted EPA/play, "
+            "The model does not automatically ingest current injury reports, weather, or verified live sportsbook prices. "
             "or sportsbook odds. Use the manual QB adjustment preview below when the starting-quarterback situation is known."
         )
 
