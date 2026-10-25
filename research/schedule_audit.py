@@ -109,8 +109,22 @@ if st.button("Run Data Audit", type="primary"):
 
     st.subheader("ATS spread-data audit")
 
+    # Keep this diagnostic focused on recent, relevant seasons.
+    ats_df = df[df["season"] >= 2017].copy()
+    ats_df["Has spread line"] = ats_df["spread_line"].notna()
+    ats_df["Completed with spread"] = (
+        ats_df["Completed"] & ats_df["Has spread line"]
+    )
+    ats_df["Actual home margin"] = ats_df["home_score"] - ats_df["away_score"]
+
+    # nflverse/PFR convention: positive spread_line means home team favored.
+    # Cover margin = actual home margin - spread_line.
+    ats_df["Home ATS margin"] = (
+        ats_df["Actual home margin"] - ats_df["spread_line"]
+    )
+
     spread_report = (
-        df.groupby("season")
+        ats_df.groupby("season")
         .agg(
             Scheduled_games=("game_id", "size"),
             Completed_games=("Completed", "sum"),
@@ -126,12 +140,12 @@ if st.button("Run Data Audit", type="primary"):
     ]:
         spread_report[col] = spread_report[col].astype(int)
 
-    total_completed = df[df["Completed"]]
+    total_completed = ats_df[ats_df["Completed"]]
     completed_with_spread = total_completed[
         total_completed["spread_line"].notna()
     ].copy()
     x, y, z = st.columns(3)
-    x.metric("Completed games", f"{len(total_completed):,}")
+    x.metric("Completed games (2017 onward)", f"{len(total_completed):,}")
     y.metric("Completed games with spread", f"{len(completed_with_spread):,}")
     z.metric(
         "Spread coverage",
@@ -141,28 +155,29 @@ if st.button("Run Data Audit", type="primary"):
     st.dataframe(spread_report, hide_index=True, use_container_width=True)
 
     st.caption(
-        "For the diagnostic below only, we test the convention that spread_line "
-        "is the home team's handicap: home ATS margin = home score − away score "
-        "+ spread_line. This convention must be confirmed against the source "
-        "documentation and known games before grading ATS results. The schedule "
-        "feed does not establish a sportsbook, price, or line timestamp."
+        "Using the nflverse/PFR convention, a positive spread_line means the "
+        "home team was favored and a negative value means the home team was "
+        "an underdog. Home ATS margin = (home score − away score) − spread_line. "
+        "Positive margin means the home team covered; negative means the away "
+        "team covered; zero is a push. Source: "
+        "https://sportsdataverse-py.sportsdataverse.org/docs/nfl/reference/additional/nflverse-data-releases-3"
     )
 
     if completed_with_spread.empty:
         st.warning("No completed games have spread_line values; ATS backtesting cannot proceed from this feed.")
     else:
-        margin = completed_with_spread["Home ATS margin (assumes home spread)"]
+        margin = completed_with_spread["Home ATS margin"]
         graded = margin.dropna()
         q1, q2, q3 = st.columns(3)
-        q1.metric("Assumed home covers", f"{int((graded > 0).sum()):,}")
-        q2.metric("Assumed away covers", f"{int((graded < 0).sum()):,}")
-        q3.metric("Assumed pushes", f"{int((graded == 0).sum()):,}")
+        q1.metric("Home covers", f"{int((graded > 0).sum()):,}")
+        q2.metric("Away covers", f"{int((graded < 0).sum()):,}")
+        q3.metric("Pushes", f"{int((graded == 0).sum()):,}")
 
-        st.write("Example completed games for sign-convention review")
+        st.write("Example completed games for ATS sign-convention review")
         example_cols = [
             "season", "week", "gameday", "game_id", "away_team", "home_team",
             "away_score", "home_score", "spread_line", "Actual home margin",
-            "Home ATS margin (assumes home spread)",
+            "Home ATS margin",
         ]
         st.dataframe(
             completed_with_spread[
@@ -337,8 +352,7 @@ if st.button("Run Data Audit", type="primary"):
 
     st.subheader("What this audit does—and does not—prove")
     st.write(
-        "- Adds season-by-season coverage for historical spread_line values and an assumed home-spread sign check.\n"
-        "- The spread sign convention must be verified before ATS results are graded.\n"
+        "- Adds season-by-season spread coverage from 2017 onward and grades the home/away cover margin using the documented nflverse/PFR convention.\n"
         "- The schedule feed does not verify sportsbook, line timestamp, or ATS odds; any ROI at assumed -110 would be illustrative only.\n"
         "- Confirms how many completed games have totals and both odds fields.\n"
         "- Shows the actual values and checks whether they resemble American odds.\n"
