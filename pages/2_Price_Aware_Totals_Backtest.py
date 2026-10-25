@@ -767,6 +767,40 @@ if "price_aware_data" in st.session_state:
         use_container_width=True,
     )
 
+    st.markdown("**Market residual model: full-slate results by season**")
+    residual_season_rows = []
+    for season_value, season_games in price_data.groupby("season"):
+        residual_picks = grade_bets(
+            season_games,
+            "market_residual_projected_total",
+            1e-9,
+            "Market residual model",
+        )
+        residual_picks = residual_picks[
+            residual_picks["bet_side"].isin(["Over", "Under"])
+        ]
+        wins = int(residual_picks["result"].eq("Win").sum())
+        losses = int(residual_picks["result"].eq("Loss").sum())
+        pushes = int(residual_picks["result"].eq("Push").sum())
+        decided = wins + losses
+        risked = float(residual_picks["units_risked"].sum())
+        profit = float(residual_picks["net_units"].sum())
+        residual_season_rows.append({
+            "Season": int(season_value),
+            "Directional picks": len(residual_picks),
+            "Wins": wins,
+            "Losses": losses,
+            "Pushes": pushes,
+            "Accuracy %": round(100 * wins / decided, 2) if decided else np.nan,
+            "Net units": round(profit, 2),
+            "ROI %": round(100 * profit / risked, 2) if risked else np.nan,
+        })
+    st.dataframe(
+        pd.DataFrame(residual_season_rows).sort_values("Season"),
+        hide_index=True,
+        use_container_width=True,
+    )
+
     comparison = price_data[
         ["efficiency_projected_total", "direct_total_projected_total"]
     ].dropna()
