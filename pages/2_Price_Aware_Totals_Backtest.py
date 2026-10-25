@@ -772,6 +772,63 @@ if "price_aware_data" in st.session_state:
         "from the same unverified historical source."
     )
 
+    st.subheader("Does the model predict market error better than zero?")
+    st.write(
+        "A model that adds no information should do no better than predicting "
+        "that the closing total will be exactly right (zero error). This compares "
+        "the residual model against that simple benchmark on the same games. "
+        "Lower MAE is better; improvement must persist in the later period."
+    )
+    residual_check = price_data.copy()
+    residual_check["actual_market_error"] = (
+        pd.to_numeric(residual_check["actual_total"], errors="coerce")
+        - pd.to_numeric(residual_check["total_line"], errors="coerce")
+    )
+    residual_check["predicted_market_error"] = (
+        pd.to_numeric(residual_check["market_residual_projected_total"], errors="coerce")
+        - pd.to_numeric(residual_check["total_line"], errors="coerce")
+    )
+    residual_check = residual_check.dropna(
+        subset=["actual_market_error", "predicted_market_error"]
+    ).copy()
+    residual_check["zero_benchmark_abs_error"] = residual_check["actual_market_error"].abs()
+    residual_check["model_abs_error"] = (
+        residual_check["actual_market_error"] - residual_check["predicted_market_error"]
+    ).abs()
+    residual_check["period"] = np.where(
+        pd.to_numeric(residual_check["season"], errors="coerce") <= 2024,
+        "Earlier period (2022–2024)",
+        "Later holdout (2025–2026)",
+    )
+    residual_rows = []
+    for period_name, part in [
+        ("All eligible games", residual_check),
+        *list(residual_check.groupby("period", sort=True)),
+    ]:
+        zero_mae = part["zero_benchmark_abs_error"].mean()
+        model_mae = part["model_abs_error"].mean()
+        residual_rows.append({
+            "Period": period_name,
+            "Games": len(part),
+            "Zero-error benchmark MAE": round(zero_mae, 3),
+            "Residual model MAE": round(model_mae, 3),
+            "MAE improvement (points)": round(zero_mae - model_mae, 3),
+            "Residual correlation": round(
+                part["predicted_market_error"].corr(part["actual_market_error"]), 3
+            ) if len(part) > 1 else np.nan,
+            "Mean predicted error": round(part["predicted_market_error"].mean(), 3),
+        })
+    st.dataframe(
+        pd.DataFrame(residual_rows),
+        hide_index=True,
+        use_container_width=True,
+    )
+    st.caption(
+        "Positive MAE improvement means the model beats the zero-error benchmark; "
+        "negative means it makes the market forecast worse. The later period is "
+        "a historical holdout, not a guarantee of future performance."
+    )
+
     st.subheader("Over/under results by side")
     side_rows = []
     for strategy_name, strategy_data in graded.groupby("strategy"):
