@@ -732,6 +732,64 @@ if "price_aware_data" in st.session_state:
     else:
         st.info("No eligible bets were available for the period comparison.")
 
+    st.subheader("All-games directional evaluation")
+    st.caption(
+        "This separate view grades every game with a nonzero model-vs-market "
+        "difference, regardless of the 3.5-point betting threshold. A positive "
+        "difference recommends Over; a negative difference recommends Under. "
+        "This is a retrospective diagnostic, not a recommendation to bet every game."
+    )
+    all_game_rows = []
+    all_game_strategies = [
+        ("Efficiency model", "efficiency_projected_total"),
+        ("Direct total model", "direct_total_projected_total"),
+        ("Market residual model", "market_residual_projected_total"),
+    ]
+    for strategy_label, projection_col in all_game_strategies:
+        all_picks = grade_bets(
+            price_data,
+            projection_col,
+            1e-9,
+            strategy_label,
+        )
+        picks = all_picks[all_picks["bet_side"].isin(["Over", "Under"])].copy()
+        wins = int(picks["result"].eq("Win").sum())
+        losses = int(picks["result"].eq("Loss").sum())
+        pushes = int(picks["result"].eq("Push").sum())
+        decided = wins + losses
+        risked = float(picks["units_risked"].sum())
+        net_units = float(picks["net_units"].sum())
+        all_game_rows.append({
+            "Model": strategy_label,
+            "Directional picks": len(picks),
+            "Wins": wins,
+            "Losses": losses,
+            "Pushes": pushes,
+            "Accuracy %": round(100 * wins / decided, 2) if decided else np.nan,
+            "Net units": round(net_units, 2),
+            "ROI %": round(100 * net_units / risked, 2) if risked else np.nan,
+        })
+    st.dataframe(
+        pd.DataFrame(all_game_rows),
+        hide_index=True,
+        use_container_width=True,
+    )
+
+    comparison = price_data[
+        ["efficiency_projected_total", "direct_total_projected_total"]
+    ].dropna()
+    if not comparison.empty:
+        differences = (
+            comparison["direct_total_projected_total"]
+            - comparison["efficiency_projected_total"]
+        ).abs()
+        st.caption(
+            f"Direct-total vs. efficiency projection check: {len(comparison):,} "
+            f"shared games; {int((differences < 1e-8).sum()):,} effectively "
+            f"identical projections; maximum absolute difference "
+            f"{differences.max():.6f} points."
+        )
+
     st.subheader("Projection accuracy vs. market")
 
     accuracy = price_data.copy()
