@@ -59,6 +59,20 @@ if st.button("Run Data Audit", type="primary"):
         df["Completed"] & df["Has both odds"]
     )
 
+    # ATS data audit: spread_line is treated as the home team's handicap
+    # only for diagnostics. The sign convention is explicitly surfaced below
+    # and must be confirmed before any ATS model is trusted.
+    if "spread_line" in df.columns:
+        df["spread_line"] = pd.to_numeric(df["spread_line"], errors="coerce")
+    else:
+        df["spread_line"] = float("nan")
+    df["Has spread line"] = df["spread_line"].notna()
+    df["Completed with spread"] = df["Completed"] & df["Has spread line"]
+    df["Actual home margin"] = df["home_score"] - df["away_score"]
+    df["Home ATS margin (assumes home spread)"] = (
+        df["Actual home margin"] + df["spread_line"]
+    )
+
     report = (
         df.groupby("season")
         .agg(
@@ -92,6 +106,71 @@ if st.button("Run Data Audit", type="primary"):
         "Completed games with both odds",
         f"{int(df['Completed with both odds'].sum()):,}",
     )
+
+    st.subheader("ATS spread-data audit")
+
+    spread_report = (
+        df.groupby("season")
+        .agg(
+            Scheduled_games=("game_id", "size"),
+            Completed_games=("Completed", "sum"),
+            Games_with_spread=("Has spread line", "sum"),
+            Completed_with_spread=("Completed with spread", "sum"),
+        )
+        .reset_index()
+        .sort_values("season")
+    )
+    for col in [
+        "Scheduled_games", "Completed_games", "Games_with_spread",
+        "Completed_with_spread",
+    ]:
+        spread_report[col] = spread_report[col].astype(int)
+
+    total_completed = df[df["Completed"]]
+    completed_with_spread = total_completed[
+        total_completed["spread_line"].notna()
+    ].copy()
+    x, y, z = st.columns(3)
+    x.metric("Completed games", f"{len(total_completed):,}")
+    y.metric("Completed games with spread", f"{len(completed_with_spread):,}")
+    z.metric(
+        "Spread coverage",
+        f"{len(completed_with_spread) / len(total_completed) * 100:.1f}%"
+        if len(total_completed) else "—",
+    )
+    st.dataframe(spread_report, hide_index=True, use_container_width=True)
+
+    st.caption(
+        "For the diagnostic below only, we test the convention that spread_line "
+        "is the home team's handicap: home ATS margin = home score − away score "
+        "+ spread_line. This convention must be confirmed against the source "
+        "documentation and known games before grading ATS results. The schedule "
+        "feed does not establish a sportsbook, price, or line timestamp."
+    )
+
+    if completed_with_spread.empty:
+        st.warning("No completed games have spread_line values; ATS backtesting cannot proceed from this feed.")
+    else:
+        margin = completed_with_spread["Home ATS margin (assumes home spread)"]
+        graded = margin.dropna()
+        q1, q2, q3 = st.columns(3)
+        q1.metric("Assumed home covers", f"{int((graded > 0).sum()):,}")
+        q2.metric("Assumed away covers", f"{int((graded < 0).sum()):,}")
+        q3.metric("Assumed pushes", f"{int((graded == 0).sum()):,}")
+
+        st.write("Example completed games for sign-convention review")
+        example_cols = [
+            "season", "week", "gameday", "game_id", "away_team", "home_team",
+            "away_score", "home_score", "spread_line", "Actual home margin",
+            "Home ATS margin (assumes home spread)",
+        ]
+        st.dataframe(
+            completed_with_spread[
+                [c for c in example_cols if c in completed_with_spread.columns]
+            ].sort_values(["season", "week"]).tail(30),
+            hide_index=True,
+            use_container_width=True,
+        )
 
     st.subheader("Odds field availability")
 
@@ -258,6 +337,9 @@ if st.button("Run Data Audit", type="primary"):
 
     st.subheader("What this audit does—and does not—prove")
     st.write(
+        "- Adds season-by-season coverage for historical spread_line values and an assumed home-spread sign check.\n"
+        "- The spread sign convention must be verified before ATS results are graded.\n"
+        "- The schedule feed does not verify sportsbook, line timestamp, or ATS odds; any ROI at assumed -110 would be illustrative only.\n"
         "- Confirms how many completed games have totals and both odds fields.\n"
         "- Shows the actual values and checks whether they resemble American odds.\n"
         "- Does not verify the sportsbook, the timing of the prices, or whether "
