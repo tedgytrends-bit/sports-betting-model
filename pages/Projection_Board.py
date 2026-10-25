@@ -117,7 +117,8 @@ st.caption(
     "not instructions to place a bet. Market totals are shown when available. "
     "An Over/Under lean only shows the direction of the model's difference; "
     "it does not establish a profitable edge or account for price, uncertainty, "
-    "injuries, or weather."
+    "injuries, or weather. Market lines come from the schedule feed; the app does not "
+    "currently verify a live sportsbook quote or provide a line timestamp."
 )
 
 if projections.empty:
@@ -145,16 +146,16 @@ else:
     if "market_total" in display.columns:
         display["Market total"] = pd.to_numeric(
             display["market_total"], errors="coerce"
-        ).map(lambda x: f"{x:.1f}" if pd.notna(x) else "—")
+        ).map(lambda x: f"{x:.1f}" if pd.notna(x) else "Not available yet")
         display["Total lean"] = pd.to_numeric(
             display["total_edge"], errors="coerce"
         ).map(
             lambda x: "Over lean" if pd.notna(x) and x > 0
-            else ("Under lean" if pd.notna(x) and x < 0 else "Even / unavailable")
+            else ("Under lean" if pd.notna(x) and x < 0 else "No market line")
         )
         display["Model vs market"] = pd.to_numeric(
             display["total_edge"], errors="coerce"
-        ).map(lambda x: f"{x:+.1f}" if pd.notna(x) else "—")
+        ).map(lambda x: f"{x:+.1f}" if pd.notna(x) else "Not available")
     display = display.sort_values("gameday")
 
     # Keep the main board compact: the projected score already identifies
