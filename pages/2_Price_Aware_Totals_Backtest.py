@@ -475,6 +475,32 @@ if "price_aware_data" in st.session_state:
     st.caption("Season split uses the same fixed edge threshold as the backtest above.")
     st.dataframe(pd.DataFrame(season_rows), hide_index=True, use_container_width=True)
 
+    st.subheader("Fixed chronological holdout")
+
+    st.write(
+        "For a more conservative check, this section separates earlier seasons "
+        "(2022–2024) from later seasons (2025–2026). The 3.5-point threshold is "
+        "kept fixed rather than optimized separately for each period. Because "
+        "the odds source and exact pre-kickoff availability are unverified, this "
+        "remains a historical diagnostic, not a live-betting result."
+    )
+    holdout = graded.copy()
+    holdout["period"] = np.where(
+        pd.to_numeric(holdout["season"], errors="coerce") <= 2024,
+        "Earlier period (2022–2024)",
+        "Later holdout (2025–2026)",
+    )
+    holdout_summary = summarize(holdout, ["strategy", "period"])
+    if not holdout_summary.empty:
+        holdout_summary = holdout_summary.sort_values(["strategy", "period"])
+        st.dataframe(
+            holdout_summary,
+            hide_index=True,
+            use_container_width=True,
+        )
+    else:
+        st.info("No eligible bets were available for the period comparison.")
+
     st.subheader("Bet-level results")
 
     strategy_choice = st.selectbox(
