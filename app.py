@@ -122,7 +122,10 @@ heading += " · Full remaining season" if show_full_schedule else " · Next 14 d
 st.subheader(heading)
 st.caption(
     f"Projection source: {projection_source}. These are analytical estimates, "
-    "not instructions to place a bet. Market totals are shown when available."
+    "not instructions to place a bet. Market totals are shown when available. "
+    "An Over/Under lean only shows the direction of the model's difference; "
+    "it does not establish a profitable edge or account for price, uncertainty, "
+    "injuries, or weather."
 )
 
 if projections.empty:
@@ -154,8 +157,8 @@ else:
         display["Total lean"] = pd.to_numeric(
             display["total_edge"], errors="coerce"
         ).map(
-            lambda x: "Over" if pd.notna(x) and x > 0
-            else ("Under" if pd.notna(x) and x < 0 else "Even / unavailable")
+            lambda x: "Over lean" if pd.notna(x) and x > 0
+            else ("Under lean" if pd.notna(x) and x < 0 else "Even / unavailable")
         )
         display["Model vs market"] = pd.to_numeric(
             display["total_edge"], errors="coerce"
