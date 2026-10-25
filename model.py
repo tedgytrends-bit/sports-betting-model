@@ -427,6 +427,9 @@ def chronological_market_residual_backtest(
         "game_id", "gameday", "season", "week", "home_team", "away_team",
         "home_score", "away_score", "total_line", "actual_total",
         "market_residual",
+        # Absolute rest-day values are capped at 30, making offseason games
+        # indistinguishable from a long rest/bye. Keep only relative rest.
+        "home_rest_days", "away_rest_days",
     }
     features = [
         c for c in data.columns
