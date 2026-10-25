@@ -501,6 +501,83 @@ if "price_aware_data" in st.session_state:
     else:
         st.info("No eligible bets were available for the period comparison.")
 
+    st.subheader("Projection accuracy vs. market")
+
+    accuracy = price_data.copy()
+    accuracy["efficiency_abs_error"] = (
+        accuracy["efficiency_projected_total"] - accuracy["actual_total"]
+    ).abs()
+    accuracy["baseline_abs_error"] = (
+        accuracy["baseline_projected_total"] - accuracy["actual_total"]
+    ).abs()
+    accuracy["market_abs_error"] = (
+        accuracy["total_line"] - accuracy["actual_total"]
+    ).abs()
+    accuracy["efficiency_signed_error"] = (
+        accuracy["efficiency_projected_total"] - accuracy["actual_total"]
+    )
+    accuracy["baseline_signed_error"] = (
+        accuracy["baseline_projected_total"] - accuracy["actual_total"]
+    )
+
+    accuracy_summary = pd.DataFrame([
+        {
+            "Forecast": "Efficiency model",
+            "Games": len(accuracy),
+            "Mean absolute error (points)": round(accuracy["efficiency_abs_error"].mean(), 2),
+            "Mean signed error (points)": round(accuracy["efficiency_signed_error"].mean(), 2),
+        },
+        {
+            "Forecast": "Recent scoring baseline",
+            "Games": len(accuracy),
+            "Mean absolute error (points)": round(accuracy["baseline_abs_error"].mean(), 2),
+            "Mean signed error (points)": round(accuracy["baseline_signed_error"].mean(), 2),
+        },
+        {
+            "Forecast": "Closing market total",
+            "Games": len(accuracy),
+            "Mean absolute error (points)": round(accuracy["market_abs_error"].mean(), 2),
+            "Mean signed error (points)": round((accuracy["total_line"] - accuracy["actual_total"]).mean(), 2),
+        },
+    ])
+    st.dataframe(accuracy_summary, hide_index=True, use_container_width=True)
+    st.caption(
+        "Mean absolute error (MAE) is lower-is-better. Signed error is forecast "
+        "minus actual total; positive values mean overprojection and negative "
+        "values mean underprojection. The market comparison uses closing totals "
+        "from the same unverified historical source."
+    )
+
+    st.subheader("Over/under results by side")
+    side_rows = []
+    for strategy_name, strategy_data in graded.groupby("strategy"):
+        selected = strategy_data[strategy_data["bet_side"].isin(["Over", "Under"])]
+        for side in ["Over", "Under"]:
+            part = selected[selected["bet_side"] == side]
+            wins = int(part["result"].eq("Win").sum())
+            losses = int(part["result"].eq("Loss").sum())
+            pushes = int(part["result"].eq("Push").sum())
+            risked = float(part["units_risked"].sum())
+            profit = float(part["net_units"].sum())
+            decisions = wins + losses
+            side_rows.append({
+                "Strategy": strategy_name,
+                "Side": side,
+                "Bets": len(part),
+                "Wins": wins,
+                "Losses": losses,
+                "Pushes": pushes,
+                "Win rate %": round(100 * wins / decisions, 2) if decisions else np.nan,
+                "Net units": round(profit, 2),
+                "ROI %": round(100 * profit / risked, 2) if risked else np.nan,
+            })
+    st.dataframe(pd.DataFrame(side_rows), hide_index=True, use_container_width=True)
+    st.caption(
+        "Side results use the fixed threshold from this run and the recorded "
+        "over/under prices. They are descriptive diagnostics, not a basis for "
+        "choosing a side-specific threshold after seeing results."
+    )
+
     st.subheader("Bet-level results")
 
     strategy_choice = st.selectbox(
