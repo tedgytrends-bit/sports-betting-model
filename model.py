@@ -400,6 +400,66 @@ def chronological_backtest(dataset: pd.DataFrame, min_train_games=500) -> dict:
     }
 
 
+def chronological_market_residual_backtest(
+    dataset: pd.DataFrame,
+    schedule: pd.DataFrame,
+    min_train_games: int = 500,
+) -> pd.DataFrame:
+    """Predict actual game-total residual versus the market using chronological training.
+
+    Target = actual combined score minus the recorded market total.
+    Each weekly test block is predicted only from games dated before that block.
+    Market totals are targets/benchmarks, not model input features.
+    """
+    lines = schedule[["game_id", "total_line"]].copy()
+    lines["total_line"] = pd.to_numeric(lines["total_line"], errors="coerce")
+    data = dataset.merge(lines, on="game_id", how="left", validate="one_to_one")
+    data["actual_total"] = (
+        pd.to_numeric(data["home_score"], errors="coerce")
+        + pd.to_numeric(data["away_score"], errors="coerce")
+    )
+    data["market_residual"] = data["actual_total"] - data["total_line"]
+    data = data.dropna(
+        subset=["gameday", "actual_total", "total_line", "market_residual"]
+    ).sort_values("gameday").copy()
+
+    exclude = {
+        "game_id", "gameday", "season", "week", "home_team", "away_team",
+        "home_score", "away_score", "total_line", "actual_total",
+        "market_residual",
+    }
+    features = [
+        c for c in data.columns
+        if c not in exclude and pd.api.types.is_numeric_dtype(data[c])
+    ]
+    if len(data) <= min_train_games:
+        raise ValueError(
+            f"Need more than {min_train_games} games with market totals; found {len(data)}."
+        )
+
+    data["test_block"] = data["gameday"].dt.to_period("W").astype(str)
+    predictions = []
+    for block in data["test_block"].drop_duplicates().tolist():
+        test = data[data["test_block"] == block].copy()
+        train = data[data["gameday"] < test["gameday"].min()].copy()
+        if len(train) < min_train_games:
+            continue
+        active_features = [c for c in features if train[c].notna().any()]
+        if not active_features:
+            continue
+        medians = train[active_features].median(numeric_only=True).fillna(0)
+        X_train = train[active_features].fillna(medians).fillna(0)
+        X_test = test[active_features].fillna(medians).fillna(0)
+        model = Ridge(alpha=10.0)
+        model.fit(X_train, train["market_residual"])
+        test["pred_market_residual"] = model.predict(X_test)
+        predictions.append(test[["game_id", "pred_market_residual"]])
+
+    if not predictions:
+        raise ValueError("No chronological market-residual predictions were generated.")
+    return pd.concat(predictions, ignore_index=True).drop_duplicates("game_id")
+
+
 def score_prediction_metrics(data: pd.DataFrame, home_pred: str, away_pred: str) -> dict:
     return {
         "Home MAE": float(mean_absolute_error(data["home_score"], data[home_pred])),
