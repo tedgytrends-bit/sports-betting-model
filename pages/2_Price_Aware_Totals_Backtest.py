@@ -475,6 +475,82 @@ if "price_aware_data" in st.session_state:
     st.caption("Season split uses the same fixed edge threshold as the backtest above.")
     st.dataframe(pd.DataFrame(season_rows), hide_index=True, use_container_width=True)
 
+    st.subheader("Over/under performance by season")
+
+    # Keep the original 3.5-point threshold fixed. This table diagnoses whether
+    # the over/under difference survives the later-season period; it is not used
+    # to optimize a new threshold.
+    side_season_rows = []
+    for strategy_name, strategy_data in graded.groupby("strategy"):
+        for season, season_data in strategy_data.groupby("season"):
+            for side in ["Over", "Under"]:
+                part = season_data[season_data["bet_side"] == side]
+                wins = int(part["result"].eq("Win").sum())
+                losses = int(part["result"].eq("Loss").sum())
+                pushes = int(part["result"].eq("Push").sum())
+                risked = float(part["units_risked"].sum())
+                profit = float(part["net_units"].sum())
+                decisions = wins + losses
+                side_season_rows.append({
+                    "Strategy": strategy_name,
+                    "Season": int(season),
+                    "Side": side,
+                    "Bets": len(part),
+                    "Wins": wins,
+                    "Losses": losses,
+                    "Pushes": pushes,
+                    "Win rate %": round(100 * wins / decisions, 2) if decisions else np.nan,
+                    "Net units": round(profit, 2),
+                    "ROI %": round(100 * profit / risked, 2) if risked else np.nan,
+                })
+    side_season = pd.DataFrame(side_season_rows)
+    if not side_season.empty:
+        st.dataframe(
+            side_season.sort_values(["Strategy", "Season", "Side"]),
+            hide_index=True,
+            use_container_width=True,
+        )
+
+    st.subheader("Over/under performance: earlier vs. later seasons")
+    side_season["period"] = np.where(
+        pd.to_numeric(side_season["Season"], errors="coerce") <= 2024,
+        "Earlier period (2022–2024)",
+        "Later holdout (2025–2026)",
+    )
+    period_rows = []
+    for (strategy_name, period, side), part in side_season.groupby(
+        ["Strategy", "period", "Side"], dropna=False
+    ):
+        wins = int(part["Wins"].sum())
+        losses = int(part["Losses"].sum())
+        pushes = int(part["Pushes"].sum())
+        bets = int(part["Bets"].sum())
+        risked = float(bets)
+        profit = float(part["Net units"].sum())
+        decisions = wins + losses
+        period_rows.append({
+            "Strategy": strategy_name,
+            "Period": period,
+            "Side": side,
+            "Bets": bets,
+            "Wins": wins,
+            "Losses": losses,
+            "Pushes": pushes,
+            "Win rate %": round(100 * wins / decisions, 2) if decisions else np.nan,
+            "Net units": round(profit, 2),
+            "ROI %": round(100 * profit / risked, 2) if risked else np.nan,
+        })
+    st.dataframe(
+        pd.DataFrame(period_rows).sort_values(["Strategy", "Period", "Side"]),
+        hide_index=True,
+        use_container_width=True,
+    )
+    st.caption(
+        "The threshold is unchanged from the main backtest. Empty side/season "
+        "cells indicate no qualifying bets. Use the later period as a stress test, "
+        "not as proof of future performance."
+    )
+
     st.subheader("Fixed chronological holdout")
 
     st.write(
