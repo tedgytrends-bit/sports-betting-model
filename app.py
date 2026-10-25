@@ -67,6 +67,9 @@ try:
         min_train_games=500,
     )
     if not all_projections.empty:
+        all_projections = all_projections[
+            pd.to_numeric(all_projections["season"], errors="coerce") == season
+        ].copy()
         market_lines = games[["game_id", "total_line"]].drop_duplicates("game_id")
         all_projections = all_projections.merge(
             market_lines, on="game_id", how="left", validate="one_to_one"
