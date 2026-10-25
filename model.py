@@ -6,6 +6,8 @@ from __future__ import annotations
 
 import numpy as np
 import pandas as pd
+import requests
+from io import BytesIO
 from sklearn.linear_model import Ridge
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 
@@ -37,7 +39,10 @@ def load_schedule_data() -> pd.DataFrame:
 
     for url in SCHEDULE_URLS:
         try:
-            df = pd.read_csv(url, low_memory=False)
+            # Bound network waits so the app cannot spin indefinitely if a source hangs.
+            response = requests.get(url, timeout=(5, 20), headers={"User-Agent": "sports-betting-model/1.0"})
+            response.raise_for_status()
+            df = pd.read_csv(BytesIO(response.content), low_memory=False)
             missing = required - set(df.columns)
 
             if missing:
