@@ -10,6 +10,7 @@ from model import (
     build_efficiency_model_dataset,
     chronological_backtest,
     add_scoring_baseline_predictions,
+    chronological_market_residual_backtest,
 )
 
 st.set_page_config(
@@ -234,6 +235,18 @@ if run:
                 lookback=6,
             )
 
+            residual_predictions = chronological_market_residual_backtest(
+                dataset,
+                games,
+                min_train_games=500,
+            )
+            compared = compared.merge(
+                residual_predictions,
+                on="game_id",
+                how="left",
+                validate="one_to_one",
+            )
+
             required_odds = ["over_odds", "under_odds"]
             missing_odds = [
                 col for col in required_odds if col not in games.columns
@@ -279,6 +292,10 @@ if run:
             )
             data["baseline_projected_total"] = (
                 data["baseline_home_score"] + data["baseline_away_score"]
+            )
+
+            data["market_residual_projected_total"] = (
+                data["total_line"] + data["pred_market_residual"]
             )
 
             data = data.dropna(
@@ -349,9 +366,15 @@ if "price_aware_data" in st.session_state:
         used_threshold,
         "Recent scoring baseline",
     )
+    residual_bets = grade_bets(
+        price_data,
+        "market_residual_projected_total",
+        used_threshold,
+        "Market residual model",
+    )
 
     graded = pd.concat(
-        [efficiency_bets, baseline_bets],
+        [efficiency_bets, baseline_bets, residual_bets],
         ignore_index=True,
     )
 
@@ -615,6 +638,16 @@ if "price_aware_data" in st.session_state:
             "Mean absolute error (points)": round(accuracy["market_abs_error"].mean(), 2),
             "Mean signed error (points)": round((accuracy["total_line"] - accuracy["actual_total"]).mean(), 2),
         },
+        {
+            "Forecast": "Market residual model",
+            "Games": int(accuracy["market_residual_projected_total"].notna().sum()),
+            "Mean absolute error (points)": round(
+                (accuracy["market_residual_projected_total"] - accuracy["actual_total"]).abs().mean(), 2
+            ),
+            "Mean signed error (points)": round(
+                (accuracy["market_residual_projected_total"] - accuracy["actual_total"]).mean(), 2
+            ),
+        },
     ])
     st.dataframe(accuracy_summary, hide_index=True, use_container_width=True)
     st.caption(
@@ -658,7 +691,7 @@ if "price_aware_data" in st.session_state:
 
     strategy_choice = st.selectbox(
         "Choose model to inspect",
-        ["Efficiency model", "Recent scoring baseline"],
+        ["Efficiency model", "Recent scoring baseline", "Market residual model"],
     )
     bet_details = graded[
         (graded["strategy"] == strategy_choice)
