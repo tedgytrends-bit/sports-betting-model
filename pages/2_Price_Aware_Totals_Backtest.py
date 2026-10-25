@@ -11,6 +11,7 @@ from model import (
     chronological_backtest,
     add_scoring_baseline_predictions,
     chronological_market_residual_backtest,
+    chronological_direct_total_backtest,
 )
 
 st.set_page_config(
@@ -240,8 +241,17 @@ if run:
                 games,
                 min_train_games=500,
             )
+            direct_total_predictions = chronological_direct_total_backtest(
+                dataset,
+                min_train_games=500,
+            )
             compared = compared.merge(
                 residual_predictions,
+                on="game_id",
+                how="left",
+                validate="one_to_one",
+            ).merge(
+                direct_total_predictions,
                 on="game_id",
                 how="left",
                 validate="one_to_one",
@@ -297,6 +307,7 @@ if run:
             data["market_residual_projected_total"] = (
                 data["total_line"] + data["pred_market_residual"]
             )
+            data["direct_total_projected_total"] = data["direct_total_prediction"]
 
             data = data.dropna(
                 subset=[
@@ -372,9 +383,15 @@ if "price_aware_data" in st.session_state:
         used_threshold,
         "Market residual model",
     )
+    direct_total_bets = grade_bets(
+        price_data,
+        "direct_total_projected_total",
+        used_threshold,
+        "Direct total model",
+    )
 
     graded = pd.concat(
-        [efficiency_bets, baseline_bets, residual_bets],
+        [efficiency_bets, baseline_bets, residual_bets, direct_total_bets],
         ignore_index=True,
     )
 
@@ -761,6 +778,16 @@ if "price_aware_data" in st.session_state:
             ),
             "Mean signed error (points)": round(
                 (accuracy["market_residual_projected_total"] - accuracy["actual_total"]).mean(), 2
+            ),
+        },
+        {
+            "Forecast": "Direct total model",
+            "Games": int(accuracy["direct_total_projected_total"].notna().sum()),
+            "Mean absolute error (points)": round(
+                (accuracy["direct_total_projected_total"] - accuracy["actual_total"]).abs().mean(), 2
+            ),
+            "Mean signed error (points)": round(
+                (accuracy["direct_total_projected_total"] - accuracy["actual_total"]).mean(), 2
             ),
         },
     ])
