@@ -62,6 +62,36 @@ def roi_at_minus_110(edges, actual_margins, threshold=EDGE_THRESHOLD):
     }
 
 
+def grouped_diagnostics(frame, season_col, edge_col, actual_margin_col, model_name, market):
+    """Report season and edge-band results without tuning thresholds on the same sample."""
+    data = frame.copy()
+    data[season_col] = pd.to_numeric(data[season_col], errors="coerce")
+    data[edge_col] = pd.to_numeric(data[edge_col], errors="coerce")
+    data[actual_margin_col] = pd.to_numeric(data[actual_margin_col], errors="coerce")
+    data = data.dropna(subset=[season_col, edge_col, actual_margin_col]).copy()
+    data["season"] = data[season_col].astype(int)
+    data["edge_abs"] = data[edge_col].abs()
+    data["edge_band"] = pd.cut(
+        data["edge_abs"], bins=[-np.inf, 1.5, 2.5, 3.5, 4.5, 5.5, np.inf],
+        labels=["0-1.5", "1.51-2.5", "2.51-3.5", "3.51-4.5", "4.51-5.5", "5.51+"],
+        right=True,
+    )
+    reports = []
+    for grouping, key in [("season", "season"), ("edge_band", "edge_band")]:
+        for value, group in data.groupby(key, observed=False):
+            if group.empty:
+                continue
+            metrics = roi_at_minus_110(group[edge_col], group[actual_margin_col])
+            # All-game prediction diagnostics, independent of betting threshold.
+            reports.append({
+                "market": market, "model": model_name, "grouping": grouping,
+                "group": str(value), "games": int(len(group)),
+                "mean_abs_edge": float(group[edge_col].abs().mean()),
+                **metrics,
+            })
+    return reports
+
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     print(f"Starting automated historical audit for model v{MODEL_VERSION}")
@@ -84,6 +114,11 @@ def main():
     pred["total_edge_score_model"] = pred["predicted_total_from_scores"] - pred["total_line"]
 
     metrics = []
+    diagnostics = []
+    diagnostics.extend(grouped_diagnostics(pred, "season", "ats_edge_score_model",
+        "actual_home_margin", "Efficiency score model", "ATS"))
+    diagnostics.extend(grouped_diagnostics(pred, "season", "total_edge_score_model",
+        "actual_total", "Efficiency score sum", "Totals"))
     metrics.append({"market": "ATS", "model": "Efficiency score model", "games": int(pred.dropna(subset=["spread_line", "actual_home_margin", "predicted_home_margin"]).shape[0]),
                     "model_mae": mae(pred["actual_home_margin"], pred["predicted_home_margin"]),
                     "market_benchmark_mae": mae(pred["actual_home_margin"], pred["spread_line"]),
@@ -103,6 +138,9 @@ def main():
         direct_totals["actual_total"] = pd.to_numeric(direct_totals["home_score"], errors="coerce") + pd.to_numeric(direct_totals["away_score"], errors="coerce")
         pred_col = "direct_total_prediction"
         direct_totals["edge"] = pd.to_numeric(direct_totals[pred_col], errors="coerce") - pd.to_numeric(direct_totals["total_line"], errors="coerce")
+        diagnostics.extend(grouped_diagnostics(direct_totals, "season", "edge",
+            "actual_total", "Direct total model", "Totals"))
+        direct_totals.to_csv(OUT / "automated_direct_total_predictions.csv", index=False)
         metrics.append({"market": "Totals", "model": "Direct total model", "games": int(direct_totals.dropna(subset=["total_line", "actual_total", pred_col]).shape[0]),
                         "model_mae": mae(direct_totals["actual_total"], direct_totals[pred_col]),
                         "market_benchmark_mae": mae(direct_totals["actual_total"], direct_totals["total_line"]),
@@ -124,6 +162,8 @@ def main():
                         "model_mae": mae(residual_eval["actual_total"], residual_eval["predicted_total"]),
                         "market_benchmark_mae": mae(residual_eval["actual_total"], residual_eval["total_line"]),
                         **roi_at_minus_110(residual_eval["edge"], residual_eval["actual_total"] - residual_eval["total_line"])})
+        diagnostics.extend(grouped_diagnostics(residual_eval, "season", "edge",
+            "actual_total", "Market residual model", "Totals"))
         residual_eval.to_csv(OUT / "automated_totals_market_residual_predictions.csv", index=False)
     except Exception as exc:
         print(f"WARNING: market-residual totals audit failed: {type(exc).__name__}: {exc}")
@@ -141,6 +181,8 @@ def main():
                         "model_mae": mae(ats_eval["actual_home_margin"] - ats_eval["spread_line"], ats_eval["edge"]),
                         "market_benchmark_mae": mae(ats_eval["actual_home_margin"], ats_eval["spread_line"]),
                         **roi_at_minus_110(ats_eval["edge"], ats_eval["actual_home_margin"] - ats_eval["spread_line"])})
+        diagnostics.extend(grouped_diagnostics(ats_eval, "season", "edge",
+            "actual_home_margin", "ATS residual model", "ATS"))
         ats_eval.to_csv(OUT / "automated_ats_residual_predictions.csv", index=False)
     except Exception as exc:
         print(f"WARNING: ATS residual audit failed: {type(exc).__name__}: {exc}")
@@ -158,12 +200,18 @@ def main():
                         "model_mae": mae(anchored_eval["actual_home_margin"], anchored_eval["market_anchored_home_margin"]),
                         "market_benchmark_mae": mae(anchored_eval["actual_home_margin"], anchored_eval["spread_line"]),
                         **roi_at_minus_110(anchored_eval["edge"], anchored_eval["actual_home_margin"] - anchored_eval["spread_line"])})
+        diagnostics.extend(grouped_diagnostics(anchored_eval, "season", "edge",
+            "actual_home_margin", "Market-anchored ATS model", "ATS"))
         anchored_eval.to_csv(OUT / "automated_ats_market_anchored_predictions.csv", index=False)
     except Exception as exc:
         print(f"WARNING: market-anchored ATS audit failed: {type(exc).__name__}: {exc}")
 
     metric_df = pd.DataFrame(metrics)
     metric_df.insert(0, "model_version", MODEL_VERSION)
+    diagnostic_df = pd.DataFrame(diagnostics)
+    if not diagnostic_df.empty:
+        diagnostic_df.insert(0, "model_version", MODEL_VERSION)
+        diagnostic_df.to_csv(OUT / "automated_historical_diagnostics.csv", index=False)
     metric_df.insert(1, "generated_at_utc", pd.Timestamp.now(tz="UTC").isoformat())
     metric_df.to_csv(OUT / "automated_historical_audit_summary.csv", index=False)
     pred.to_csv(OUT / "automated_score_model_predictions.csv", index=False)
