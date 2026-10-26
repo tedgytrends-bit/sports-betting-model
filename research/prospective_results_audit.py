@@ -47,8 +47,9 @@ data["total_edge"] = data["baseline_projected_total"] - data["total_line_source_
 def grade(edge_col, actual_col, line_col):
     d = data[data["final_available"] & data[edge_col].notna() & data[actual_col].notna() & data[line_col].notna()].copy()
     d = d[d[edge_col].abs() >= 3.5]
-    d["result"] = np.where(d[actual_col] == d[line_col], "Push",
-        np.where((d[actual_col] - d[line_col]) * np.sign(d[edge_col]) > 0, "Win", "Loss"))
+    d["actual_margin_vs_line"] = d[actual_col] - d[line_col]
+    d["result"] = np.where(d["actual_margin_vs_line"] == 0, "Push",
+        np.where(d["actual_margin_vs_line"] * np.sign(d[edge_col]) > 0, "Win", "Loss"))
     d["net_units"] = np.select([d.result.eq("Win"), d.result.eq("Loss")], [100/110, -1.0], default=0.0)
     return d
 
