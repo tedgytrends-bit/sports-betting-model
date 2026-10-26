@@ -39,6 +39,18 @@ data["spread_value_available"] = data.get("spread_value_available", data["spread
 data["injury_week_has_rows"] = data.get("injury_week_has_rows", pd.Series(False, index=data.index)).fillna(False).astype(bool)
 data = data.sort_values(["gameday_utc", "captured_at_utc"], ascending=[True, False])
 
+capture_times = sorted(data["captured_at_utc"].dropna().unique(), reverse=True)
+if capture_times:
+    latest_capture = capture_times[0]
+    view_mode = st.radio(
+        "View",
+        ["Latest capture only", "All historical captures"],
+        horizontal=True,
+        index=0,
+    )
+    if view_mode == "Latest capture only":
+        data = data[data["captured_at_utc"] == latest_capture].copy()
+
 a, b, c, d = st.columns(4)
 a.metric("Snapshot files", int(data["snapshot_file"].nunique()))
 b.metric("Game observations", len(data))
