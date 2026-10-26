@@ -159,7 +159,7 @@ def main():
         residual = chronological_market_residual_backtest(dataset, schedule, min_train_games=MIN_TRAIN_GAMES)
         print("Market residual totals output columns:", list(residual.columns))
         residual_eval = residual.merge(
-            schedule[["game_id", "home_score", "away_score", "total_line"]].drop_duplicates("game_id"),
+            schedule[["game_id", "season", "home_score", "away_score", "total_line"]].drop_duplicates("game_id"),
             on="game_id", how="left", validate="one_to_one"
         )
         residual_eval["actual_total"] = pd.to_numeric(residual_eval["home_score"], errors="coerce") + pd.to_numeric(residual_eval["away_score"], errors="coerce")
@@ -204,7 +204,7 @@ def main():
         anchored = chronological_market_anchored_ats_backtest(dataset, schedule, min_train_games=MIN_TRAIN_GAMES)
         print("Market-anchored ATS output columns:", list(anchored.columns))
         anchored_eval = anchored.merge(
-            schedule[["game_id", "home_score", "away_score", "spread_line"]].drop_duplicates("game_id"),
+            schedule[["game_id", "season", "home_score", "away_score", "spread_line"]].drop_duplicates("game_id"),
             on="game_id", how="left", validate="one_to_one"
         )
         anchored_eval["actual_home_margin"] = pd.to_numeric(anchored_eval["home_score"], errors="coerce") - pd.to_numeric(anchored_eval["away_score"], errors="coerce")
