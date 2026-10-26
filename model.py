@@ -651,6 +651,109 @@ def load_injury_reports(seasons=(2022, 2023, 2024, 2025, 2026)) -> pd.DataFrame:
     return injuries
 
 
+def audit_injury_report_coverage(
+    schedule: pd.DataFrame,
+    injuries: pd.DataFrame,
+) -> pd.DataFrame:
+    """Audit source volume and usable pre-kickoff coverage by season.
+
+    Counts each scheduled team-game separately. A report counts as usable only
+    when it matches season/week/team/type and its timestamp is before kickoff.
+    If kickoff time is missing, same-day rows are conservatively not usable.
+    """
+    if injuries.empty:
+        raise ValueError("The injury report source returned no rows.")
+    required = {"season", "week", "team", "position", "date_modified"}
+    missing = required - set(injuries.columns)
+    if missing:
+        raise ValueError(f"Injury report is missing required audit columns: {sorted(missing)}")
+
+    reports = injuries.copy()
+    reports["season"] = pd.to_numeric(reports["season"], errors="coerce")
+    reports["week"] = pd.to_numeric(reports["week"], errors="coerce")
+    reports["team"] = reports["team"].astype(str).str.upper().str.strip()
+    reports["position"] = reports["position"].astype(str).str.upper().str.strip()
+    reports["date_modified"] = pd.to_datetime(reports["date_modified"], errors="coerce", utc=True).dt.tz_convert(None)
+    if "season_type" not in reports.columns:
+        reports["season_type"] = "REG"
+    reports["season_type"] = reports["season_type"].fillna("REG").astype(str).str.upper().str.strip()
+    reports["season_type"] = reports["season_type"].replace({"REGULAR": "REG", "POSTSEASON": "POST"})
+
+    games = schedule.copy()
+    games["season"] = pd.to_numeric(games["season"], errors="coerce")
+    games["week"] = pd.to_numeric(games["week"], errors="coerce")
+    games["gameday"] = pd.to_datetime(games["gameday"], errors="coerce").dt.normalize()
+    if "game_type" in games.columns:
+        games["season_type"] = games["game_type"].astype(str).str.upper().str.strip()
+    elif "season_type" in games.columns:
+        games["season_type"] = games["season_type"].astype(str).str.upper().str.strip()
+    else:
+        games["season_type"] = "REG"
+    games["season_type"] = games["season_type"].replace({"REGULAR": "REG", "POSTSEASON": "POST"})
+    if "gametime" in games.columns:
+        local_kickoff = pd.to_datetime(
+            games["gameday"].dt.strftime("%Y-%m-%d") + " " + games["gametime"].astype(str),
+            errors="coerce",
+        )
+        games["kickoff_utc"] = local_kickoff.dt.tz_localize(
+            "America/New_York", ambiguous="NaT", nonexistent="shift_forward"
+        ).dt.tz_convert("UTC").dt.tz_localize(None)
+    else:
+        games["kickoff_utc"] = pd.NaT
+
+    team_slots = []
+    for _, game in games.iterrows():
+        if pd.isna(game["season"]) or pd.isna(game["week"]) or pd.isna(game["gameday"]):
+            continue
+        matched_week = reports[
+            (reports["season"] == game["season"])
+            & (reports["week"] == game["week"])
+            & (reports["season_type"] == game["season_type"])
+        ]
+        cutoff = game["kickoff_utc"]
+        for side, col in [("home", "home_team"), ("away", "away_team")]:
+            team = str(game[col]).upper().strip()
+            team_rows = matched_week[matched_week["team"] == team]
+            timestamped = team_rows[team_rows["date_modified"].notna()]
+            if pd.notna(cutoff):
+                usable = timestamped[timestamped["date_modified"] < cutoff]
+            else:
+                usable = timestamped[timestamped["date_modified"].dt.normalize() < game["gameday"]]
+            qb_rows = usable[usable["position"] == "QB"]
+            team_slots.append({
+                "season": int(game["season"]),
+                "team_slot": side,
+                "has_any_source_row": not team_rows.empty,
+                "has_timestamp": not timestamped.empty,
+                "has_usable_pregame_row": not usable.empty,
+                "has_usable_qb_row": not qb_rows.empty,
+                "kickoff_time_missing": pd.isna(cutoff),
+            })
+
+    slots = pd.DataFrame(team_slots)
+    if slots.empty:
+        raise ValueError("No scheduled team-games available for injury coverage audit.")
+    summary = []
+    for season in sorted(set(reports["season"].dropna().astype(int)) | set(slots["season"].unique())):
+        raw = reports[reports["season"] == season]
+        part = slots[slots["season"] == season]
+        n = len(part)
+        summary.append({
+            "Season": season,
+            "Raw injury rows": len(raw),
+            "Rows missing timestamp": int(raw["date_modified"].isna().sum()),
+            "Scheduled team-games": n,
+            "Any report row %": 100 * part["has_any_source_row"].mean() if n else np.nan,
+            "Timestamped report %": 100 * part["has_timestamp"].mean() if n else np.nan,
+            "Usable pre-kickoff report %": 100 * part["has_usable_pregame_row"].mean() if n else np.nan,
+            "Usable QB report %": 100 * part["has_usable_qb_row"].mean() if n else np.nan,
+            "No report row %": 100 * (~part["has_any_source_row"]).mean() if n else np.nan,
+            "Reports but none usable %": 100 * (part["has_any_source_row"] & ~part["has_usable_pregame_row"]).mean() if n else np.nan,
+            "Kickoff time missing %": 100 * part["kickoff_time_missing"].mean() if n else np.nan,
+        })
+    return pd.DataFrame(summary)
+
+
 def add_pregame_injury_features(
     dataset: pd.DataFrame,
     schedule: pd.DataFrame,
