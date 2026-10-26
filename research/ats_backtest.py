@@ -56,6 +56,7 @@ if run:
             chronological_market_anchored_ats_backtest,
             load_injury_reports,
             add_pregame_injury_features,
+            audit_injury_report_coverage,
         )
 
         spread_cols = ["game_id", "gameday", "season", "week", "home_team", "away_team", "home_score", "away_score", "spread_line"]
@@ -89,6 +90,7 @@ if run:
 
         with st.spinner("Loading free historical injury reports and testing the injury-enhanced model..."):
             injury_reports = load_injury_reports((2022, 2023, 2024, 2025, 2026))
+            injury_audit = audit_injury_report_coverage(games, injury_reports)
             injury_dataset = add_pregame_injury_features(dataset, games, injury_reports)
             injury_anchored_predictions = chronological_market_anchored_ats_backtest(
                 injury_dataset, games, min_train_games=500
@@ -277,6 +279,19 @@ if run:
         st.caption(
             f"Pregame injury report coverage in the feature dataset: home teams {injury_dataset['home_injury_report_available'].mean():.1%}, "
             f"away teams {injury_dataset['away_injury_report_available'].mean():.1%}. Source: free public nflverse weekly injury reports."
+        )
+
+        st.subheader("Injury data coverage audit")
+        st.write(
+            "This separates missing source records from reports that exist but cannot safely be used before kickoff. "
+            "QB coverage counts team-games with at least one timestamp-valid quarterback report; it does not mean the starting QB was injured."
+        )
+        st.dataframe(injury_audit.round(1), hide_index=True, use_container_width=True)
+        st.download_button(
+            "Download injury coverage audit CSV",
+            injury_audit.to_csv(index=False).encode("utf-8"),
+            "nfl_injury_coverage_audit.csv",
+            "text/csv",
         )
 
         st.subheader("Inspect predictions")
