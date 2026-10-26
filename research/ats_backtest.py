@@ -89,7 +89,39 @@ def build_injury_coverage_audit(schedule, injuries):
     for year in seasons:
         raw, part = reports[reports["season"] == year], slots[slots["season"] == year]
         n = len(part)
-        rows.append({"Season": year, "Raw injury rows": len(raw), "Rows missing timestamp": int(raw["date_modified"].isna().sum()), "Scheduled team-games": n, "Any report row %": 100 * part["Any source row"].mean() if n else np.nan, "Timestamped report %": 100 * part["Timestamped row"].mean() if n else np.nan, "Usable pre-kickoff report %": 100 * part["Usable pre-kickoff row"].mean() if n else np.nan, "Usable QB report %": 100 * part["Usable QB row"].mean() if n else np.nan, "No report row %": 100 * (~part["Any source row"]).mean() if n else np.nan, "Reports but none usable %": 100 * (part["Any source row"] & ~part["Usable pre-kickoff row"]).mean() if n else np.nan, "Kickoff time missing %": 100 * part["Kickoff time missing"].mean() if n else np.nan})
+        timestamp_columns = (
+            raw["source_timestamp_like_columns"].dropna().astype(str).drop_duplicates().tolist()
+            if "source_timestamp_like_columns" in raw.columns else []
+        )
+        raw_nonempty = (
+            int(pd.to_numeric(raw["source_date_modified_nonempty"], errors="coerce").max())
+            if "source_date_modified_nonempty" in raw.columns and not raw.empty else 0
+        )
+        raw_parseable = (
+            int(pd.to_numeric(raw["source_date_modified_parseable"], errors="coerce").max())
+            if "source_date_modified_parseable" in raw.columns and not raw.empty else 0
+        )
+        raw_examples = (
+            raw["source_date_modified_examples"].dropna().astype(str).drop_duplicates().head(1).tolist()
+            if "source_date_modified_examples" in raw.columns else []
+        )
+        rows.append({
+            "Season": year,
+            "Raw injury rows": len(raw),
+            "Source timestamp-like columns": " ; ".join(timestamp_columns) if timestamp_columns else "(not recorded)",
+            "Raw date_modified nonempty rows": raw_nonempty,
+            "Raw date_modified parseable rows": raw_parseable,
+            "date_modified examples": raw_examples[0] if raw_examples else "",
+            "Rows missing timestamp after parsing": int(raw["date_modified"].isna().sum()),
+            "Scheduled team-games": n,
+            "Any report row %": 100 * part["Any source row"].mean() if n else np.nan,
+            "Timestamped report %": 100 * part["Timestamped row"].mean() if n else np.nan,
+            "Usable pre-kickoff report %": 100 * part["Usable pre-kickoff row"].mean() if n else np.nan,
+            "Usable QB report %": 100 * part["Usable QB row"].mean() if n else np.nan,
+            "No report row %": 100 * (~part["Any source row"]).mean() if n else np.nan,
+            "Reports but none usable %": 100 * (part["Any source row"] & ~part["Usable pre-kickoff row"]).mean() if n else np.nan,
+            "Kickoff time missing %": 100 * part["Kickoff time missing"].mean() if n else np.nan
+        })
     return pd.DataFrame(rows)
 
 run = st.button("Run ATS backtest", type="primary")
