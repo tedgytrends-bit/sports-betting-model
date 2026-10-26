@@ -115,10 +115,13 @@ def main():
 
     metrics = []
     diagnostics = []
+    # Evaluate each wager against the market line, not raw score margin/total.
+    pred["actual_ats_cover_margin"] = pred["actual_home_margin"] - pred["spread_line"]
+    pred["actual_total_over_margin"] = pred["actual_total"] - pred["total_line"]
     diagnostics.extend(grouped_diagnostics(pred, "season", "ats_edge_score_model",
-        "actual_home_margin", "Efficiency score model", "ATS"))
+        "actual_ats_cover_margin", "Efficiency score model", "ATS"))
     diagnostics.extend(grouped_diagnostics(pred, "season", "total_edge_score_model",
-        "actual_total", "Efficiency score sum", "Totals"))
+        "actual_total_over_margin", "Efficiency score sum", "Totals"))
     metrics.append({"market": "ATS", "model": "Efficiency score model", "games": int(pred.dropna(subset=["spread_line", "actual_home_margin", "predicted_home_margin"]).shape[0]),
                     "model_mae": mae(pred["actual_home_margin"], pred["predicted_home_margin"]),
                     "market_benchmark_mae": mae(pred["actual_home_margin"], pred["spread_line"]),
@@ -138,8 +141,9 @@ def main():
         direct_totals["actual_total"] = pd.to_numeric(direct_totals["home_score"], errors="coerce") + pd.to_numeric(direct_totals["away_score"], errors="coerce")
         pred_col = "direct_total_prediction"
         direct_totals["edge"] = pd.to_numeric(direct_totals[pred_col], errors="coerce") - pd.to_numeric(direct_totals["total_line"], errors="coerce")
+        direct_totals["actual_total_over_margin"] = direct_totals["actual_total"] - pd.to_numeric(direct_totals["total_line"], errors="coerce")
         diagnostics.extend(grouped_diagnostics(direct_totals, "season", "edge",
-            "actual_total", "Direct total model", "Totals"))
+            "actual_total_over_margin", "Direct total model", "Totals"))
         direct_totals.to_csv(OUT / "automated_direct_total_predictions.csv", index=False)
         metrics.append({"market": "Totals", "model": "Direct total model", "games": int(direct_totals.dropna(subset=["total_line", "actual_total", pred_col]).shape[0]),
                         "model_mae": mae(direct_totals["actual_total"], direct_totals[pred_col]),
@@ -162,8 +166,9 @@ def main():
                         "model_mae": mae(residual_eval["actual_total"], residual_eval["predicted_total"]),
                         "market_benchmark_mae": mae(residual_eval["actual_total"], residual_eval["total_line"]),
                         **roi_at_minus_110(residual_eval["edge"], residual_eval["actual_total"] - residual_eval["total_line"])})
+        residual_eval["actual_total_over_margin"] = residual_eval["actual_total"] - pd.to_numeric(residual_eval["total_line"], errors="coerce")
         diagnostics.extend(grouped_diagnostics(residual_eval, "season", "edge",
-            "actual_total", "Market residual model", "Totals"))
+            "actual_total_over_margin", "Market residual model", "Totals"))
         residual_eval.to_csv(OUT / "automated_totals_market_residual_predictions.csv", index=False)
     except Exception as exc:
         print(f"WARNING: market-residual totals audit failed: {type(exc).__name__}: {exc}")
@@ -181,8 +186,9 @@ def main():
                         "model_mae": mae(ats_eval["actual_home_margin"] - ats_eval["spread_line"], ats_eval["edge"]),
                         "market_benchmark_mae": mae(ats_eval["actual_home_margin"], ats_eval["spread_line"]),
                         **roi_at_minus_110(ats_eval["edge"], ats_eval["actual_home_margin"] - ats_eval["spread_line"])})
+        ats_eval["actual_ats_cover_margin"] = ats_eval["actual_home_margin"] - pd.to_numeric(ats_eval["spread_line"], errors="coerce")
         diagnostics.extend(grouped_diagnostics(ats_eval, "season", "edge",
-            "actual_home_margin", "ATS residual model", "ATS"))
+            "actual_ats_cover_margin", "ATS residual model", "ATS"))
         ats_eval.to_csv(OUT / "automated_ats_residual_predictions.csv", index=False)
     except Exception as exc:
         print(f"WARNING: ATS residual audit failed: {type(exc).__name__}: {exc}")
@@ -200,8 +206,9 @@ def main():
                         "model_mae": mae(anchored_eval["actual_home_margin"], anchored_eval["market_anchored_home_margin"]),
                         "market_benchmark_mae": mae(anchored_eval["actual_home_margin"], anchored_eval["spread_line"]),
                         **roi_at_minus_110(anchored_eval["edge"], anchored_eval["actual_home_margin"] - anchored_eval["spread_line"])})
+        anchored_eval["actual_ats_cover_margin"] = anchored_eval["actual_home_margin"] - pd.to_numeric(anchored_eval["spread_line"], errors="coerce")
         diagnostics.extend(grouped_diagnostics(anchored_eval, "season", "edge",
-            "actual_home_margin", "Market-anchored ATS model", "ATS"))
+            "actual_ats_cover_margin", "Market-anchored ATS model", "ATS"))
         anchored_eval.to_csv(OUT / "automated_ats_market_anchored_predictions.csv", index=False)
     except Exception as exc:
         print(f"WARNING: market-anchored ATS audit failed: {type(exc).__name__}: {exc}")
