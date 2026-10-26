@@ -1,8 +1,8 @@
 {
   "model_version": "0.8.0",
-  "generated_at_utc": "2026-10-26T21:19:54.575526+00:00",
+  "generated_at_utc": "2026-10-26T21:27:25.517747+00:00",
   "status": "completed",
   "games_in_score_model_backtest": 1006,
-  "summary_rows": 2,
+  "summary_rows": 6,
   "note": "Historical research only. Public schedule lines are not verified sportsbook-timestamp records. ROI assumes a fixed 3.5-point edge threshold and -110 odds, so treat as exploratory."
 }
