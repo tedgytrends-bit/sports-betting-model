@@ -32,11 +32,22 @@ connection_page = st.Page(
     title="Data Connection Diagnostics",
     icon="🔌",
 )
+endzone_injury_test_page = st.Page(
+    "pages/Endzone_Injury_Sample_Test.py",
+    title="EndzoneAPI Injury Sample Test",
+    icon="🩹",
+)
 
 navigation = st.navigation(
     {
         "Model": [projection_page],
-        "Research & Diagnostics": [totals_page, ats_page, schedule_page, connection_page],
+        "Research & Diagnostics": [
+            totals_page,
+            ats_page,
+            schedule_page,
+            connection_page,
+            endzone_injury_test_page,
+        ],
     }
 )
 navigation.run()
