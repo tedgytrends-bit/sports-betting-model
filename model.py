@@ -11,7 +11,7 @@ from io import BytesIO
 from sklearn.linear_model import Ridge
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 
-MODEL_VERSION = "0.7.0"
+MODEL_VERSION = "0.8.0"
 
 SCHEDULE_URLS = [
     "https://github.com/nflverse/nfldata/raw/master/data/games.csv",
@@ -616,6 +616,144 @@ def chronological_ats_residual_backtest(
     if not predictions:
         raise ValueError("No chronological ATS-residual predictions were generated.")
     return pd.concat(predictions, ignore_index=True).drop_duplicates("game_id")
+
+
+
+
+def load_injury_reports(seasons=(2022, 2023, 2024, 2025, 2026)) -> pd.DataFrame:
+    """Load public nflverse weekly injury reports (free; no EndzoneAPI credits)."""
+    frames = []
+    for season in seasons:
+        url = f"https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_{int(season)}.csv"
+        try:
+            response = requests.get(url, timeout=(5, 30))
+            response.raise_for_status()
+            frame = pd.read_csv(BytesIO(response.content), low_memory=False)
+            if not frame.empty:
+                frame["source_season"] = int(season)
+                frames.append(frame)
+        except Exception as exc:
+            raise RuntimeError(
+                f"Could not load nflverse injury report for season {season}: {type(exc).__name__}: {exc}"
+            ) from exc
+    if not frames:
+        raise ValueError("No historical injury reports were loaded.")
+    injuries = pd.concat(frames, ignore_index=True)
+    if "season_type" not in injuries.columns and "game_type" in injuries.columns:
+        injuries["season_type"] = injuries["game_type"]
+    for col in ["season", "week"]:
+        if col in injuries.columns:
+            injuries[col] = pd.to_numeric(injuries[col], errors="coerce")
+    if "date_modified" in injuries.columns:
+        injuries["date_modified"] = pd.to_datetime(injuries["date_modified"], errors="coerce", utc=True).dt.tz_convert(None)
+    else:
+        injuries["date_modified"] = pd.NaT
+    return injuries
+
+
+def add_pregame_injury_features(
+    dataset: pd.DataFrame,
+    schedule: pd.DataFrame,
+    injuries: pd.DataFrame,
+) -> pd.DataFrame:
+    """Attach team injury counts only when report updates predate the game's date.
+
+    This deliberately excludes same-day updates to avoid accidentally using injury
+    information published after kickoff. The source is a weekly snapshot, not a full
+    archived feed of every report revision, so missing counts mean unavailable data.
+    """
+    required = {"season", "week", "team", "position", "report_status", "practice_status", "date_modified"}
+    missing = required - set(injuries.columns)
+    if missing:
+        raise ValueError(f"Injury report is missing required columns: {sorted(missing)}")
+
+    reports = injuries.copy()
+    reports["season"] = pd.to_numeric(reports["season"], errors="coerce")
+    reports["week"] = pd.to_numeric(reports["week"], errors="coerce")
+    reports["team"] = reports["team"].astype(str).str.upper().str.strip()
+    reports["position"] = reports["position"].astype(str).str.upper().str.strip()
+    reports["report_status_norm"] = reports["report_status"].fillna("").astype(str).str.upper().str.strip()
+    reports["practice_status_norm"] = reports["practice_status"].fillna("").astype(str).str.upper().str.strip()
+
+    games = schedule[["game_id", "season", "week", "gameday", "home_team", "away_team"]].copy()
+    games["season"] = pd.to_numeric(games["season"], errors="coerce")
+    games["week"] = pd.to_numeric(games["week"], errors="coerce")
+    games["gameday"] = pd.to_datetime(games["gameday"], errors="coerce").dt.normalize()
+    game_types = schedule["game_type"] if "game_type" in schedule.columns else (
+        schedule["season_type"] if "season_type" in schedule.columns else None
+    )
+    if game_types is not None:
+        games["season_type"] = pd.Series(game_types, index=schedule.index).astype(str).str.upper().str.strip().values
+    else:
+        games["season_type"] = "REG"
+
+    if "season_type" not in reports.columns:
+        reports["season_type"] = "REG"
+    reports["season_type"] = reports["season_type"].fillna("REG").astype(str).str.upper().str.strip()
+    games["season_type"] = games["season_type"].replace({"REGULAR": "REG", "POSTSEASON": "POST"})
+    reports["season_type"] = reports["season_type"].replace({"REGULAR": "REG", "POSTSEASON": "POST"})
+
+    # Use the latest available report row per player/team/week from the source, but
+    # only if its recorded modification date is strictly before game day.
+    team_game_rows = []
+    feature_names = [
+        "inj_out", "inj_doubtful", "inj_questionable",
+        "practice_dnp", "practice_limited",
+        "qb_out", "qb_questionable",
+        "ol_out", "ol_questionable",
+        "skill_out", "skill_questionable",
+        "defense_out", "defense_questionable",
+    ]
+    for _, game in games.iterrows():
+        if pd.isna(game["gameday"]) or pd.isna(game["season"]) or pd.isna(game["week"]):
+            continue
+        game_reports = reports[
+            (reports["season"] == game["season"])
+            & (reports["week"] == game["week"])
+            & (reports["season_type"] == game["season_type"])
+            & (reports["date_modified"].dt.normalize() < game["gameday"])
+        ]
+        row = {"game_id": game["game_id"]}
+        for side, team_col in [("home", "home_team"), ("away", "away_team")]:
+            team_rows = game_reports[game_reports["team"] == str(game[team_col]).upper()].copy()
+            status = team_rows["report_status_norm"]
+            practice = team_rows["practice_status_norm"]
+            pos = team_rows["position"]
+            out = status.str.contains(r"\\bOUT\\b", regex=True)
+            doubtful = status.str.contains("DOUBTFUL", regex=False)
+            questionable = status.str.contains("QUESTIONABLE", regex=False)
+            qb = pos.eq("QB")
+            ol = pos.isin(["C", "G", "OG", "OT", "T", "OL", "LT", "LG", "RG", "RT"])
+            skill = pos.isin(["RB", "FB", "WR", "TE"])
+            defense = pos.isin(["DL", "DE", "DT", "NT", "LB", "ILB", "OLB", "CB", "DB", "S", "FS", "SS"])
+            vals = {
+                "inj_out": int(out.sum()),
+                "inj_doubtful": int(doubtful.sum()),
+                "inj_questionable": int(questionable.sum()),
+                "practice_dnp": int(practice.str.contains("DID NOT PARTICIPATE", regex=False).sum()),
+                "practice_limited": int(practice.str.contains("LIMITED", regex=False).sum()),
+                "qb_out": int((out & qb).sum()),
+                "qb_questionable": int((questionable & qb).sum()),
+                "ol_out": int((out & ol).sum()),
+                "ol_questionable": int((questionable & ol).sum()),
+                "skill_out": int((out & skill).sum()),
+                "skill_questionable": int((questionable & skill).sum()),
+                "defense_out": int((out & defense).sum()),
+                "defense_questionable": int((questionable & defense).sum()),
+            }
+            for name, value in vals.items():
+                row[f"{side}_{name}"] = value
+        for name in feature_names:
+            row[f"diff_{name}"] = row.get(f"away_{name}", 0) - row.get(f"home_{name}", 0)
+        team_game_rows.append(row)
+
+    if not team_game_rows:
+        raise ValueError("No game-level injury features could be assembled.")
+    feature_frame = pd.DataFrame(team_game_rows).drop_duplicates("game_id")
+    merged = dataset.merge(feature_frame, on="game_id", how="left", validate="one_to_one")
+    new_cols = [col for col in feature_frame.columns if col != "game_id"]
+    merged[new_cols] = merged[new_cols].fillna(0)
+    return merged
 
 
 
