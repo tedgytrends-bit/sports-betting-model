@@ -1,8 +1,15 @@
 {
   "model_version": "0.8.0",
-  "generated_at_utc": "2026-10-26T21:37:48.856155+00:00",
+  "generated_at_utc": "2026-10-26T21:43:25.875850+00:00",
   "status": "completed",
   "games_in_score_model_backtest": 1006,
   "summary_rows": 5,
-  "note": "Historical research only. Public schedule lines are not verified sportsbook-timestamp records. ROI assumes a fixed 3.5-point edge threshold and -110 odds, so treat as exploratory."
+  "diagnostic_rows": 22,
+  "warnings": [
+    "direct totals audit failed: KeyError: 'season'",
+    "market-residual totals audit failed: KeyError: 'season'",
+    "ATS residual audit failed: KeyError: 'season'",
+    "market-anchored ATS audit failed: KeyError: 'season'"
+  ],
+  "note": "Historical research only. Public schedule lines are not verified sportsbook-timestamp records. Fixed -110 ROI uses a 3.5-point threshold for point-valued model edges. Residual-model adjustments are much smaller and are not directly comparable to score-model edges."
 }
