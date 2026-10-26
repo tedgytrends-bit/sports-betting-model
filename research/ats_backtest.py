@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 
-from model import MODEL_VERSION, load_schedule_data, load_pbp, build_efficiency_model_dataset, chronological_backtest
+from model import MODEL_VERSION, load_schedule_data, load_pbp, build_efficiency_model_dataset, chronological_backtest, chronological_ats_residual_backtest
 
 st.title("NFL ATS Backtest")
 st.caption(f"Experimental research page • Model v{MODEL_VERSION}")
@@ -68,9 +68,14 @@ if run:
         backtest["market_margin_error"] = (backtest["spread_line"] - backtest["actual_home_margin"]).abs()
         backtest["model_margin_error"] = (backtest["predicted_home_margin"] - backtest["actual_home_margin"]).abs()
 
-        def grade(frame):
+        with st.spinner("Testing a direct ATS-residual model..."):
+            residual_predictions = chronological_ats_residual_backtest(dataset, games, min_train_games=500)
+        backtest = backtest.merge(residual_predictions, on="game_id", how="left", validate="one_to_one")
+        backtest["residual_model_edge"] = pd.to_numeric(backtest["predicted_ats_residual"], errors="coerce")
+
+        def grade(frame, edge_col="model_ats_edge"):
             out = frame.copy()
-            out["picked_side"] = np.where(out["model_ats_edge"] > 0, "Home", "Away")
+            out["picked_side"] = np.where(out[edge_col] > 0, "Home", "Away")
             out["result"] = np.where(
                 out["actual_home_ats_margin"] == 0, "Push",
                 np.where(
@@ -100,7 +105,17 @@ if run:
             {"Reference": "Efficiency model", "Games": len(backtest), "Projected home-margin MAE": backtest["model_margin_error"].mean()},
             {"Reference": "Closing spread", "Games": len(backtest), "Projected home-margin MAE": backtest["market_margin_error"].mean()},
         ])
+        accuracy.loc[len(accuracy)] = {
+            "Reference": "Direct ATS-residual model",
+            "Games": int(backtest["residual_model_edge"].notna().sum()),
+            "Projected home-margin MAE": (
+                backtest.loc[backtest["residual_model_edge"].notna(), "residual_model_edge"]
+                .sub(backtest.loc[backtest["residual_model_edge"].notna(), "actual_home_ats_margin"])
+                .abs().mean()
+            ),
+        }
         st.dataframe(accuracy.round(2), hide_index=True, use_container_width=True)
+        st.caption("The direct ATS-residual model predicts the home team's margin relative to the spread. A zero residual is the market baseline; lower residual MAE than the market benchmark would be encouraging.")
 
         st.subheader("All-game directional results")
         st.write("This grades the side the model favors on every game with a nonzero edge. It is a diagnostic, not a claim that each game is a worthwhile bet.")
@@ -140,6 +155,33 @@ if run:
                 "3.5+ net units": sm["Net units at -110"], "3.5+ ROI": sm["ROI"],
             })
         st.dataframe(pd.DataFrame(season_rows).round(2), hide_index=True, use_container_width=True)
+
+        st.subheader("Direct ATS-residual model")
+        st.write("This separately predicts how far the home team's final margin finishes above or below the spread, instead of subtracting two independently predicted scores.")
+        residual_games = backtest.dropna(subset=["residual_model_edge"]).copy()
+        residual_directional = grade(residual_games[residual_games["residual_model_edge"].abs() > 0], "residual_model_edge")
+        residual_all = summarize(residual_directional, "ATS residual: any nonzero edge")
+        residual_fixed = grade(residual_games[residual_games["residual_model_edge"].abs() >= threshold], "residual_model_edge")
+        residual_fixed_summary = summarize(residual_fixed, "ATS residual: 3.5+ edge")
+        r1, r2, r3, r4 = st.columns(4)
+        r1.metric("Directional games", f"{len(residual_directional):,}")
+        r2.metric("Correct side", f"{residual_all['Win % (no pushes)']:.1f}%" if pd.notna(residual_all["Win % (no pushes)"]) else "—")
+        r3.metric("3.5+ bets", f"{len(residual_fixed):,}")
+        r4.metric("3.5+ ROI", f"{residual_fixed_summary['ROI']:+.2f}%" if pd.notna(residual_fixed_summary["ROI"]) else "—")
+
+        residual_seasons = []
+        for year, part in residual_games.groupby("season", dropna=True):
+            d = grade(part[part["residual_model_edge"].abs() > 0], "residual_model_edge")
+            s = grade(part[part["residual_model_edge"].abs() >= threshold], "residual_model_edge")
+            dm = summarize(d, "ATS residual: any nonzero edge")
+            sm = summarize(s, "ATS residual: 3.5+ edge")
+            residual_seasons.append({
+                "Season": int(year), "Games": len(part), "Directional games": len(d),
+                "Directional win %": dm["Win % (no pushes)"], "3.5+ bets": len(s),
+                "3.5+ wins": sm["Wins"], "3.5+ losses": sm["Losses"], "3.5+ pushes": sm["Pushes"],
+                "3.5+ net units": sm["Net units at -110"], "3.5+ ROI": sm["ROI"],
+            })
+        st.dataframe(pd.DataFrame(residual_seasons).round(2), hide_index=True, use_container_width=True)
 
         st.subheader("Inspect predictions")
         inspect_cols = ["gameday", "season", "week", "away_team", "home_team", "away_score", "home_score",
