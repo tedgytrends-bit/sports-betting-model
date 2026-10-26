@@ -136,7 +136,7 @@ def main():
         # This backtest returns predictions only, so join actual scores and lines from schedule.
         direct_totals = chronological_direct_total_backtest(dataset, min_train_games=MIN_TRAIN_GAMES)
         direct_totals = direct_totals.merge(
-            schedule[["game_id", "home_score", "away_score", "total_line"]].drop_duplicates("game_id"),
+            schedule[["game_id", "season", "home_score", "away_score", "total_line"]].drop_duplicates("game_id"),
             on="game_id", how="left", validate="one_to_one"
         )
         direct_totals["actual_total"] = pd.to_numeric(direct_totals["home_score"], errors="coerce") + pd.to_numeric(direct_totals["away_score"], errors="coerce")
@@ -182,7 +182,7 @@ def main():
         ats_resid = chronological_ats_residual_backtest(dataset, schedule, min_train_games=MIN_TRAIN_GAMES)
         print("ATS residual output columns:", list(ats_resid.columns))
         ats_eval = ats_resid.merge(
-            schedule[["game_id", "home_score", "away_score", "spread_line"]].drop_duplicates("game_id"),
+            schedule[["game_id", "season", "home_score", "away_score", "spread_line"]].drop_duplicates("game_id"),
             on="game_id", how="left", validate="one_to_one"
         )
         ats_eval["actual_home_margin"] = pd.to_numeric(ats_eval["home_score"], errors="coerce") - pd.to_numeric(ats_eval["away_score"], errors="coerce")
