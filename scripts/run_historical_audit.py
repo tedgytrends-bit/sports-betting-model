@@ -1,6 +1,13 @@
 #!/usr/bin/env python3
 """Automated chronological NFL ATS/totals audit. Research only; not a betting recommendation."""
 from pathlib import Path
+import sys
+
+# Running a script from scripts/ puts that directory first on sys.path; add the repository root
+# so the shared model.py module can be imported in GitHub Actions and local CLI runs.
+REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
 import json
 import numpy as np
 import pandas as pd
