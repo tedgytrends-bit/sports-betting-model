@@ -48,6 +48,12 @@ prospective_ats_page = st.Page(
     icon="📈",
 )
 
+results_audit_page = st.Page(
+    "research/prospective_results_audit.py",
+    title="Prospective Results Audit",
+    icon="✅",
+)
+
 navigation = st.navigation(
     {
         "Model": [projection_page],
@@ -55,6 +61,7 @@ navigation = st.navigation(
             totals_page,
             ats_page,
             prospective_ats_page,
+            results_audit_page,
             schedule_page,
             connection_page,
             endzone_injury_test_page,
