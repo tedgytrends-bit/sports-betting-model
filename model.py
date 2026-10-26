@@ -719,7 +719,7 @@ def add_pregame_injury_features(
             status = team_rows["report_status_norm"]
             practice = team_rows["practice_status_norm"]
             pos = team_rows["position"]
-            out = status.str.contains(r"\\bOUT\\b", regex=True)
+            out = status.eq("OUT")
             doubtful = status.str.contains("DOUBTFUL", regex=False)
             questionable = status.str.contains("QUESTIONABLE", regex=False)
             qb = pos.eq("QB")
@@ -741,18 +741,25 @@ def add_pregame_injury_features(
                 "defense_out": int((out & defense).sum()),
                 "defense_questionable": int((questionable & defense).sum()),
             }
+            row[f"{side}_injury_report_available"] = int(not team_rows.empty)
             for name, value in vals.items():
-                row[f"{side}_{name}"] = value
+                row[f"{side}_{name}"] = value if not team_rows.empty else np.nan
         for name in feature_names:
-            row[f"diff_{name}"] = row.get(f"away_{name}", 0) - row.get(f"home_{name}", 0)
+            away_value = row.get(f"away_{name}", np.nan)
+            home_value = row.get(f"home_{name}", np.nan)
+            row[f"diff_{name}"] = (
+                away_value - home_value
+                if pd.notna(away_value) and pd.notna(home_value)
+                else np.nan
+            )
         team_game_rows.append(row)
 
     if not team_game_rows:
         raise ValueError("No game-level injury features could be assembled.")
     feature_frame = pd.DataFrame(team_game_rows).drop_duplicates("game_id")
     merged = dataset.merge(feature_frame, on="game_id", how="left", validate="one_to_one")
-    new_cols = [col for col in feature_frame.columns if col != "game_id"]
-    merged[new_cols] = merged[new_cols].fillna(0)
+    availability_cols = ["home_injury_report_available", "away_injury_report_available"]
+    merged[availability_cols] = merged[availability_cols].fillna(0)
     return merged
 
 
