@@ -115,6 +115,7 @@ def main():
 
     metrics = []
     diagnostics = []
+    audit_warnings = []
     # Evaluate each wager against the market line, not raw score margin/total.
     pred["actual_ats_cover_margin"] = pred["actual_home_margin"] - pred["spread_line"]
     pred["actual_total_over_margin"] = pred["actual_total"] - pred["total_line"]
@@ -150,7 +151,9 @@ def main():
                         "market_benchmark_mae": mae(direct_totals["actual_total"], direct_totals["total_line"]),
                         **roi_at_minus_110(direct_totals["edge"], direct_totals["actual_total"] - direct_totals["total_line"])})
     except Exception as exc:
-        print(f"WARNING: direct totals audit failed: {type(exc).__name__}: {exc}")
+        message = f"direct totals audit failed: {type(exc).__name__}: {exc}"
+        audit_warnings.append(message)
+        print(f"WARNING: {message}")
 
     try:
         residual = chronological_market_residual_backtest(dataset, schedule, min_train_games=MIN_TRAIN_GAMES)
@@ -171,7 +174,9 @@ def main():
             "actual_total_over_margin", "Market residual model", "Totals"))
         residual_eval.to_csv(OUT / "automated_totals_market_residual_predictions.csv", index=False)
     except Exception as exc:
-        print(f"WARNING: market-residual totals audit failed: {type(exc).__name__}: {exc}")
+        message = f"market-residual totals audit failed: {type(exc).__name__}: {exc}"
+        audit_warnings.append(message)
+        print(f"WARNING: {message}")
 
     try:
         ats_resid = chronological_ats_residual_backtest(dataset, schedule, min_train_games=MIN_TRAIN_GAMES)
@@ -191,7 +196,9 @@ def main():
             "actual_ats_cover_margin", "ATS residual model", "ATS"))
         ats_eval.to_csv(OUT / "automated_ats_residual_predictions.csv", index=False)
     except Exception as exc:
-        print(f"WARNING: ATS residual audit failed: {type(exc).__name__}: {exc}")
+        message = f"ATS residual audit failed: {type(exc).__name__}: {exc}"
+        audit_warnings.append(message)
+        print(f"WARNING: {message}")
 
     try:
         anchored = chronological_market_anchored_ats_backtest(dataset, schedule, min_train_games=MIN_TRAIN_GAMES)
@@ -211,7 +218,9 @@ def main():
             "actual_ats_cover_margin", "Market-anchored ATS model", "ATS"))
         anchored_eval.to_csv(OUT / "automated_ats_market_anchored_predictions.csv", index=False)
     except Exception as exc:
-        print(f"WARNING: market-anchored ATS audit failed: {type(exc).__name__}: {exc}")
+        message = f"market-anchored ATS audit failed: {type(exc).__name__}: {exc}"
+        audit_warnings.append(message)
+        print(f"WARNING: {message}")
 
     metric_df = pd.DataFrame(metrics)
     metric_df.insert(0, "model_version", MODEL_VERSION)
@@ -229,7 +238,9 @@ def main():
             "status": "completed",
             "games_in_score_model_backtest": int(len(pred)),
             "summary_rows": int(len(metric_df)),
-            "note": "Historical research only. Public schedule lines are not verified sportsbook-timestamp records. ROI assumes a fixed 3.5-point edge threshold and -110 odds, so treat as exploratory."
+            "diagnostic_rows": int(len(diagnostic_df)),
+            "warnings": audit_warnings,
+            "note": "Historical research only. Public schedule lines are not verified sportsbook-timestamp records. Fixed -110 ROI uses a 3.5-point threshold for point-valued model edges. Residual-model adjustments are much smaller and are not directly comparable to score-model edges."
         }, indent=2),
         encoding="utf-8",
     )
