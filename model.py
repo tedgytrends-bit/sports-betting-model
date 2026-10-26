@@ -630,7 +630,25 @@ def load_injury_reports(seasons=(2022, 2023, 2024, 2025, 2026)) -> pd.DataFrame:
             response.raise_for_status()
             frame = pd.read_csv(BytesIO(response.content), low_memory=False)
             if not frame.empty:
+                # Preserve source-schema diagnostics BEFORE normalizing timestamps.
+                timestamp_like = [
+                    col for col in frame.columns
+                    if any(token in str(col).lower() for token in ("date", "time", "timestamp", "modified", "updated", "published"))
+                ]
                 frame["source_season"] = int(season)
+                frame["source_timestamp_like_columns"] = ", ".join(timestamp_like) if timestamp_like else "(none)"
+                if "date_modified" in frame.columns:
+                    raw_ts = frame["date_modified"].astype("string").str.strip()
+                    nonempty_ts = raw_ts.notna() & raw_ts.ne("")
+                    parsed_ts = pd.to_datetime(raw_ts.where(nonempty_ts), errors="coerce", utc=True)
+                    frame["source_date_modified_nonempty"] = int(nonempty_ts.sum())
+                    frame["source_date_modified_parseable"] = int(parsed_ts.notna().sum())
+                    examples = raw_ts[nonempty_ts].drop_duplicates().head(3).tolist()
+                    frame["source_date_modified_examples"] = " | ".join(map(str, examples))
+                else:
+                    frame["source_date_modified_nonempty"] = 0
+                    frame["source_date_modified_parseable"] = 0
+                    frame["source_date_modified_examples"] = "(date_modified column missing)"
                 frames.append(frame)
         except Exception as exc:
             raise RuntimeError(
