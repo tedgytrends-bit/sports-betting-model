@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 
-from model import MODEL_VERSION, load_schedule_data, load_pbp, build_efficiency_model_dataset, chronological_backtest, chronological_ats_residual_backtest
+from model import MODEL_VERSION, load_schedule_data, load_pbp, build_efficiency_model_dataset, chronological_backtest, chronological_ats_residual_backtest, chronological_market_anchored_ats_backtest
 
 st.title("NFL ATS Backtest")
 st.caption(f"Experimental research page • Model v{MODEL_VERSION}")
@@ -73,6 +73,11 @@ if run:
         backtest = backtest.merge(residual_predictions, on="game_id", how="left", validate="one_to_one")
         backtest["residual_model_edge"] = pd.to_numeric(backtest["predicted_ats_residual"], errors="coerce")
 
+        with st.spinner("Testing the market-anchored ATS model..."):
+            anchored_predictions = chronological_market_anchored_ats_backtest(dataset, games, min_train_games=500)
+        backtest = backtest.merge(anchored_predictions, on="game_id", how="left", validate="one_to_one")
+        backtest["market_anchored_edge"] = backtest["market_anchored_home_margin"] - backtest["spread_line"]
+
         def grade(frame, edge_col="model_ats_edge"):
             out = frame.copy()
             out["picked_side"] = np.where(out[edge_col] > 0, "Home", "Away")
@@ -114,8 +119,16 @@ if run:
                 .abs().mean()
             ),
         }
+        anchored_valid = backtest.dropna(subset=["market_anchored_home_margin"]).copy()
+        accuracy.loc[len(accuracy)] = {
+            "Reference": "Market-anchored model",
+            "Games": len(anchored_valid),
+            "Projected home-margin MAE": (
+                anchored_valid["market_anchored_home_margin"] - anchored_valid["actual_home_margin"]
+            ).abs().mean(),
+        }
         st.dataframe(accuracy.round(2), hide_index=True, use_container_width=True)
-        st.caption("The direct ATS-residual model predicts the home team's margin relative to the spread. A zero residual is the market baseline; lower residual MAE than the market benchmark would be encouraging.")
+        st.caption("The market-anchored model includes the closing spread as an input, then predicts the final home margin. We judge whether its adjusted margin forecast beats simply using the spread itself.")
 
         st.subheader("All-game directional results")
         st.write("This grades the side the model favors on every game with a nonzero edge. It is a diagnostic, not a claim that each game is a worthwhile bet.")
@@ -183,10 +196,37 @@ if run:
             })
         st.dataframe(pd.DataFrame(residual_seasons).round(2), hide_index=True, use_container_width=True)
 
+        st.subheader("Market-anchored ATS model")
+        st.write("This model starts with the closing spread and adjusts it using the pregame team-efficiency features. The adjustment is evaluated out of sample; it is not assumed to be valuable just because it produces a different number.")
+        anchored_games = backtest.dropna(subset=["market_anchored_edge"]).copy()
+        anchored_directional = grade(anchored_games[anchored_games["market_anchored_edge"].abs() > 0], "market_anchored_edge")
+        anchored_all = summarize(anchored_directional, "Market anchored: any nonzero edge")
+        anchored_fixed = grade(anchored_games[anchored_games["market_anchored_edge"].abs() >= threshold], "market_anchored_edge")
+        anchored_fixed_summary = summarize(anchored_fixed, "Market anchored: 3.5+ edge")
+        a1, a2, a3, a4 = st.columns(4)
+        a1.metric("Directional games", f"{len(anchored_directional):,}")
+        a2.metric("Correct side", f"{anchored_all['Win % (no pushes)']:.1f}%" if pd.notna(anchored_all["Win % (no pushes)"]) else "—")
+        a3.metric("3.5+ bets", f"{len(anchored_fixed):,}")
+        a4.metric("3.5+ ROI", f"{anchored_fixed_summary['ROI']:+.2f}%" if pd.notna(anchored_fixed_summary["ROI"]) else "—")
+
+        anchored_seasons = []
+        for year, part in anchored_games.groupby("season", dropna=True):
+            d = grade(part[part["market_anchored_edge"].abs() > 0], "market_anchored_edge")
+            s = grade(part[part["market_anchored_edge"].abs() >= threshold], "market_anchored_edge")
+            dm = summarize(d, "Market anchored: any nonzero edge")
+            sm = summarize(s, "Market anchored: 3.5+ edge")
+            anchored_seasons.append({
+                "Season": int(year), "Games": len(part), "Directional games": len(d),
+                "Directional win %": dm["Win % (no pushes)"], "3.5+ bets": len(s),
+                "3.5+ wins": sm["Wins"], "3.5+ losses": sm["Losses"], "3.5+ pushes": sm["Pushes"],
+                "3.5+ net units": sm["Net units at -110"], "3.5+ ROI": sm["ROI"],
+            })
+        st.dataframe(pd.DataFrame(anchored_seasons).round(2), hide_index=True, use_container_width=True)
+
         st.subheader("Inspect predictions")
         inspect_cols = ["gameday", "season", "week", "away_team", "home_team", "away_score", "home_score",
                         "spread_line", "pred_away_score", "pred_home_score", "predicted_home_margin",
-                        "model_ats_edge", "actual_home_ats_margin"]
+                        "model_ats_edge", "actual_home_ats_margin", "predicted_ats_residual", "residual_model_edge", "market_anchored_home_margin", "market_anchored_edge"]
         st.dataframe(backtest[[c for c in inspect_cols if c in backtest.columns]].sort_values("gameday", ascending=False).head(100),
                      hide_index=True, use_container_width=True)
         st.download_button("Download ATS backtest CSV", backtest.to_csv(index=False).encode("utf-8"),
