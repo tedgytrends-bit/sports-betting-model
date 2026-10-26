@@ -68,7 +68,7 @@ def main():
     unplayed = schedule["home_score"].isna() | schedule["away_score"].isna()
     upcoming = schedule[
         schedule["gameday"].notna()
-        & (schedule_day > today_utc)
+        & (schedule_day >= today_utc)
         & (schedule_day <= horizon_date)
         & unplayed
     ].copy()
