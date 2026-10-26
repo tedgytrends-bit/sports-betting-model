@@ -37,6 +37,11 @@ endzone_injury_test_page = st.Page(
     title="EndzoneAPI Injury Sample Test",
     icon="🩹",
 )
+injury_snapshot_audit_page = st.Page(
+    "research/injury_snapshot_audit.py",
+    title="Injury Snapshot Audit",
+    icon="🕒",
+)
 
 navigation = st.navigation(
     {
@@ -47,6 +52,7 @@ navigation = st.navigation(
             schedule_page,
             connection_page,
             endzone_injury_test_page,
+            injury_snapshot_audit_page,
         ],
     }
 )
