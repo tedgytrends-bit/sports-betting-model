@@ -76,4 +76,4 @@ def report(title, df):
 report("ATS results (3.5+ point edge)", ats)
 report("Totals results (3.5+ point edge)", totals)
 st.warning("Schedule-feed lines are not verified sportsbook prices, and capture time does not prove a line was available before kickoff. Latest-snapshot grading is a research audit, not proof of a profitable strategy.")
-st.download_button("Download graded snapshot archive", data.to_csv(index=False).to_csv(index=False) if False else data.to_csv(index=False).encode("utf-8"), "prospective_results_audit.csv", "text/csv")
+st.download_button("Download graded snapshot archive", data.to_csv(index=False).encode("utf-8"), "prospective_results_audit.csv", "text/csv")
