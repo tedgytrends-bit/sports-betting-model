@@ -618,6 +618,61 @@ def chronological_ats_residual_backtest(
     return pd.concat(predictions, ignore_index=True).drop_duplicates("game_id")
 
 
+
+def chronological_market_anchored_ats_backtest(
+    dataset: pd.DataFrame,
+    schedule: pd.DataFrame,
+    min_train_games: int = 500,
+) -> pd.DataFrame:
+    """Predict actual home margin from pregame features plus closing spread.
+
+    The closing spread is an input feature, while actual home margin is the target.
+    Every weekly test block is trained only on games dated before that block.
+    """
+    spreads = schedule[["game_id", "spread_line"]].copy()
+    spreads["spread_line"] = pd.to_numeric(spreads["spread_line"], errors="coerce")
+    data = dataset.merge(spreads, on="game_id", how="left", validate="one_to_one")
+    data["actual_home_margin"] = (
+        pd.to_numeric(data["home_score"], errors="coerce")
+        - pd.to_numeric(data["away_score"], errors="coerce")
+    )
+    data = data.dropna(
+        subset=["gameday", "actual_home_margin", "spread_line"]
+    ).sort_values("gameday").copy()
+    exclude = {
+        "game_id", "gameday", "season", "week", "home_team", "away_team",
+        "home_score", "away_score", "actual_home_margin",
+    }
+    features = [
+        col for col in data.columns
+        if col not in exclude and pd.api.types.is_numeric_dtype(data[col])
+    ]
+    if len(data) <= min_train_games:
+        raise ValueError(
+            f"Need more than {min_train_games} completed games with spreads; found {len(data)}."
+        )
+    data["test_block"] = data["gameday"].dt.to_period("W").astype(str)
+    predictions = []
+    for block in data["test_block"].drop_duplicates().tolist():
+        test = data[data["test_block"] == block].copy()
+        train = data[data["gameday"] < test["gameday"].min()].copy()
+        if len(train) < min_train_games:
+            continue
+        active_features = [col for col in features if train[col].notna().any()]
+        if not active_features:
+            continue
+        medians = train[active_features].median(numeric_only=True).fillna(0)
+        X_train = train[active_features].fillna(medians).fillna(0)
+        X_test = test[active_features].fillna(medians).fillna(0)
+        model = Ridge(alpha=10.0)
+        model.fit(X_train, train["actual_home_margin"])
+        test["market_anchored_home_margin"] = model.predict(X_test)
+        predictions.append(test[["game_id", "market_anchored_home_margin"]])
+    if not predictions:
+        raise ValueError("No chronological market-anchored ATS predictions were generated.")
+    return pd.concat(predictions, ignore_index=True).drop_duplicates("game_id")
+
+
 def score_prediction_metrics(data: pd.DataFrame, home_pred: str, away_pred: str) -> dict:
     return {
         "Home MAE": float(mean_absolute_error(data["home_score"], data[home_pred])),
