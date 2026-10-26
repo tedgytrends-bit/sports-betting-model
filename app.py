@@ -17,6 +17,11 @@ totals_page = st.Page(
     title="Totals Backtest",
     icon="📊",
 )
+ats_page = st.Page(
+    "research/ats_backtest.py",
+    title="ATS Backtest",
+    icon="🏈",
+)
 schedule_page = st.Page(
     "research/schedule_audit.py",
     title="Schedule Data Audit",
@@ -31,7 +36,7 @@ connection_page = st.Page(
 navigation = st.navigation(
     {
         "Model": [projection_page],
-        "Research & Diagnostics": [totals_page, schedule_page, connection_page],
+        "Research & Diagnostics": [totals_page, ats_page, schedule_page, connection_page],
     }
 )
 navigation.run()
