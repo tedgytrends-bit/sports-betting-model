@@ -94,38 +94,71 @@ def main():
                     **roi_at_minus_110(pred["total_edge_score_model"], pred["actual_total"] - pred["total_line"])})
 
     try:
+        # This backtest returns predictions only, so join actual scores and lines from schedule.
         direct_totals = chronological_direct_total_backtest(dataset, min_train_games=MIN_TRAIN_GAMES)
-        if "actual_total" not in direct_totals:
-            direct_totals["actual_total"] = pd.to_numeric(direct_totals["home_score"], errors="coerce") + pd.to_numeric(direct_totals["away_score"], errors="coerce")
-        direct_totals = direct_totals.merge(schedule[["game_id", "total_line"]], on="game_id", how="left", validate="one_to_one")
-        pred_col = next((c for c in ["direct_projected_total", "predicted_total", "pred_total", "pred_actual_total"] if c in direct_totals.columns), None)
-        if pred_col:
-            direct_totals["edge"] = pd.to_numeric(direct_totals[pred_col], errors="coerce") - pd.to_numeric(direct_totals["total_line"], errors="coerce")
-            metrics.append({"market": "Totals", "model": "Direct total model", "games": int(direct_totals.dropna(subset=["total_line", "actual_total", pred_col]).shape[0]),
-                            "model_mae": mae(direct_totals["actual_total"], direct_totals[pred_col]),
-                            "market_benchmark_mae": mae(direct_totals["actual_total"], direct_totals["total_line"]),
-                            **roi_at_minus_110(direct_totals["edge"], direct_totals["actual_total"] - direct_totals["total_line"])})
+        direct_totals = direct_totals.merge(
+            schedule[["game_id", "home_score", "away_score", "total_line"]].drop_duplicates("game_id"),
+            on="game_id", how="left", validate="one_to_one"
+        )
+        direct_totals["actual_total"] = pd.to_numeric(direct_totals["home_score"], errors="coerce") + pd.to_numeric(direct_totals["away_score"], errors="coerce")
+        pred_col = "direct_total_prediction"
+        direct_totals["edge"] = pd.to_numeric(direct_totals[pred_col], errors="coerce") - pd.to_numeric(direct_totals["total_line"], errors="coerce")
+        metrics.append({"market": "Totals", "model": "Direct total model", "games": int(direct_totals.dropna(subset=["total_line", "actual_total", pred_col]).shape[0]),
+                        "model_mae": mae(direct_totals["actual_total"], direct_totals[pred_col]),
+                        "market_benchmark_mae": mae(direct_totals["actual_total"], direct_totals["total_line"]),
+                        **roi_at_minus_110(direct_totals["edge"], direct_totals["actual_total"] - direct_totals["total_line"])})
     except Exception as exc:
         print(f"WARNING: direct totals audit failed: {type(exc).__name__}: {exc}")
 
     try:
         residual = chronological_market_residual_backtest(dataset, schedule, min_train_games=MIN_TRAIN_GAMES)
         print("Market residual totals output columns:", list(residual.columns))
-        residual.to_csv(OUT / "automated_totals_market_residual_predictions.csv", index=False)
+        residual_eval = residual.merge(
+            schedule[["game_id", "home_score", "away_score", "total_line"]].drop_duplicates("game_id"),
+            on="game_id", how="left", validate="one_to_one"
+        )
+        residual_eval["actual_total"] = pd.to_numeric(residual_eval["home_score"], errors="coerce") + pd.to_numeric(residual_eval["away_score"], errors="coerce")
+        residual_eval["edge"] = pd.to_numeric(residual_eval["pred_market_residual"], errors="coerce")
+        residual_eval["predicted_total"] = pd.to_numeric(residual_eval["total_line"], errors="coerce") + residual_eval["edge"]
+        metrics.append({"market": "Totals", "model": "Market residual model", "games": int(residual_eval.dropna(subset=["total_line", "actual_total", "predicted_total"]).shape[0]),
+                        "model_mae": mae(residual_eval["actual_total"], residual_eval["predicted_total"]),
+                        "market_benchmark_mae": mae(residual_eval["actual_total"], residual_eval["total_line"]),
+                        **roi_at_minus_110(residual_eval["edge"], residual_eval["actual_total"] - residual_eval["total_line"])})
+        residual_eval.to_csv(OUT / "automated_totals_market_residual_predictions.csv", index=False)
     except Exception as exc:
         print(f"WARNING: market-residual totals audit failed: {type(exc).__name__}: {exc}")
 
     try:
         ats_resid = chronological_ats_residual_backtest(dataset, schedule, min_train_games=MIN_TRAIN_GAMES)
         print("ATS residual output columns:", list(ats_resid.columns))
-        ats_resid.to_csv(OUT / "automated_ats_residual_predictions.csv", index=False)
+        ats_eval = ats_resid.merge(
+            schedule[["game_id", "home_score", "away_score", "spread_line"]].drop_duplicates("game_id"),
+            on="game_id", how="left", validate="one_to_one"
+        )
+        ats_eval["actual_home_margin"] = pd.to_numeric(ats_eval["home_score"], errors="coerce") - pd.to_numeric(ats_eval["away_score"], errors="coerce")
+        ats_eval["edge"] = pd.to_numeric(ats_eval["predicted_ats_residual"], errors="coerce")
+        metrics.append({"market": "ATS", "model": "ATS residual model", "games": int(ats_eval.dropna(subset=["spread_line", "actual_home_margin", "edge"]).shape[0]),
+                        "model_mae": mae(ats_eval["actual_home_margin"] - ats_eval["spread_line"], ats_eval["edge"]),
+                        "market_benchmark_mae": mae(ats_eval["actual_home_margin"], ats_eval["spread_line"]),
+                        **roi_at_minus_110(ats_eval["edge"], ats_eval["actual_home_margin"] - ats_eval["spread_line"])})
+        ats_eval.to_csv(OUT / "automated_ats_residual_predictions.csv", index=False)
     except Exception as exc:
         print(f"WARNING: ATS residual audit failed: {type(exc).__name__}: {exc}")
 
     try:
         anchored = chronological_market_anchored_ats_backtest(dataset, schedule, min_train_games=MIN_TRAIN_GAMES)
         print("Market-anchored ATS output columns:", list(anchored.columns))
-        anchored.to_csv(OUT / "automated_ats_market_anchored_predictions.csv", index=False)
+        anchored_eval = anchored.merge(
+            schedule[["game_id", "home_score", "away_score", "spread_line"]].drop_duplicates("game_id"),
+            on="game_id", how="left", validate="one_to_one"
+        )
+        anchored_eval["actual_home_margin"] = pd.to_numeric(anchored_eval["home_score"], errors="coerce") - pd.to_numeric(anchored_eval["away_score"], errors="coerce")
+        anchored_eval["edge"] = pd.to_numeric(anchored_eval["market_anchored_home_margin"], errors="coerce") - pd.to_numeric(anchored_eval["spread_line"], errors="coerce")
+        metrics.append({"market": "ATS", "model": "Market-anchored ATS model", "games": int(anchored_eval.dropna(subset=["spread_line", "actual_home_margin", "market_anchored_home_margin"]).shape[0]),
+                        "model_mae": mae(anchored_eval["actual_home_margin"], anchored_eval["market_anchored_home_margin"]),
+                        "market_benchmark_mae": mae(anchored_eval["actual_home_margin"], anchored_eval["spread_line"]),
+                        **roi_at_minus_110(anchored_eval["edge"], anchored_eval["actual_home_margin"] - anchored_eval["spread_line"])})
+        anchored_eval.to_csv(OUT / "automated_ats_market_anchored_predictions.csv", index=False)
     except Exception as exc:
         print(f"WARNING: market-anchored ATS audit failed: {type(exc).__name__}: {exc}")
 
