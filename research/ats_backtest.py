@@ -51,7 +51,12 @@ if run:
 
         # Load experimental functions lazily so an optional model import cannot
         # prevent the entire Streamlit app and its other pages from loading.
-        from model import chronological_ats_residual_backtest, chronological_market_anchored_ats_backtest
+        from model import (
+            chronological_ats_residual_backtest,
+            chronological_market_anchored_ats_backtest,
+            load_injury_reports,
+            add_pregame_injury_features,
+        )
 
         spread_cols = ["game_id", "gameday", "season", "week", "home_team", "away_team", "home_score", "away_score", "spread_line"]
         lines = games[[c for c in spread_cols if c in games.columns]].drop_duplicates("game_id")
@@ -81,6 +86,15 @@ if run:
             anchored_predictions = chronological_market_anchored_ats_backtest(dataset, games, min_train_games=500)
         backtest = backtest.merge(anchored_predictions, on="game_id", how="left", validate="one_to_one")
         backtest["market_anchored_edge"] = backtest["market_anchored_home_margin"] - backtest["spread_line"]
+
+        with st.spinner("Loading free historical injury reports and testing the injury-enhanced model..."):
+            injury_reports = load_injury_reports((2022, 2023, 2024, 2025, 2026))
+            injury_dataset = add_pregame_injury_features(dataset, games, injury_reports)
+            injury_anchored_predictions = chronological_market_anchored_ats_backtest(
+                injury_dataset, games, min_train_games=500
+            ).rename(columns={"market_anchored_home_margin": "injury_anchored_home_margin"})
+        backtest = backtest.merge(injury_anchored_predictions, on="game_id", how="left", validate="one_to_one")
+        backtest["injury_anchored_edge"] = backtest["injury_anchored_home_margin"] - backtest["spread_line"]
 
         def grade(frame, edge_col="model_ats_edge"):
             out = frame.copy()
@@ -131,8 +145,16 @@ if run:
                 anchored_valid["market_anchored_home_margin"] - anchored_valid["actual_home_margin"]
             ).abs().mean(),
         }
+        injury_valid = backtest.dropna(subset=["injury_anchored_home_margin"]).copy()
+        accuracy.loc[len(accuracy)] = {
+            "Reference": "Market-anchored + injuries",
+            "Games": len(injury_valid),
+            "Projected home-margin MAE": (
+                injury_valid["injury_anchored_home_margin"] - injury_valid["actual_home_margin"]
+            ).abs().mean(),
+        }
         st.dataframe(accuracy.round(2), hide_index=True, use_container_width=True)
-        st.caption("The market-anchored model includes the closing spread as an input, then predicts the final home margin. We judge whether its adjusted margin forecast beats simply using the spread itself.")
+        st.caption("The market-anchored model includes the closing spread as an input. The injury-enhanced version adds pregame injury-report counts; only reports updated before game day are used, and unavailable reports are treated as missing rather than healthy players.")
 
         st.subheader("All-game directional results")
         st.write("This grades the side the model favors on every game with a nonzero edge. It is a diagnostic, not a claim that each game is a worthwhile bet.")
@@ -227,10 +249,40 @@ if run:
             })
         st.dataframe(pd.DataFrame(anchored_seasons).round(2), hide_index=True, use_container_width=True)
 
+        st.subheader("Market-anchored model + injuries")
+        st.write("This version adds weekly injury-report counts by team and position to the market-anchored model. Same-day updates are excluded to reduce the risk of using information that arrived after kickoff.")
+        injury_directional = grade(injury_valid[injury_valid["injury_anchored_edge"].abs() > 0], "injury_anchored_edge")
+        injury_all = summarize(injury_directional, "Market anchored + injuries: any nonzero edge")
+        injury_fixed = grade(injury_valid[injury_valid["injury_anchored_edge"].abs() >= threshold], "injury_anchored_edge")
+        injury_fixed_summary = summarize(injury_fixed, "Market anchored + injuries: 3.5+ edge")
+        i1, i2, i3, i4 = st.columns(4)
+        i1.metric("Directional games", f"{len(injury_directional):,}")
+        i2.metric("Correct side", f"{injury_all['Win % (no pushes)']:.1f}%" if pd.notna(injury_all["Win % (no pushes)"]) else "—")
+        i3.metric("3.5+ bets", f"{len(injury_fixed):,}")
+        i4.metric("3.5+ ROI", f"{injury_fixed_summary['ROI']:+.2f}%" if pd.notna(injury_fixed_summary["ROI"]) else "—")
+
+        injury_seasons = []
+        for year, part in injury_valid.groupby("season", dropna=True):
+            d = grade(part[part["injury_anchored_edge"].abs() > 0], "injury_anchored_edge")
+            s = grade(part[part["injury_anchored_edge"].abs() >= threshold], "injury_anchored_edge")
+            dm = summarize(d, "Market anchored + injuries: any nonzero edge")
+            sm = summarize(s, "Market anchored + injuries: 3.5+ edge")
+            injury_seasons.append({
+                "Season": int(year), "Games": len(part), "Directional games": len(d),
+                "Directional win %": dm["Win % (no pushes)"], "3.5+ bets": len(s),
+                "3.5+ wins": sm["Wins"], "3.5+ losses": sm["Losses"], "3.5+ pushes": sm["Pushes"],
+                "3.5+ net units": sm["Net units at -110"], "3.5+ ROI": sm["ROI"],
+            })
+        st.dataframe(pd.DataFrame(injury_seasons).round(2), hide_index=True, use_container_width=True)
+        st.caption(
+            f"Pregame injury report coverage in the feature dataset: home teams {injury_dataset['home_injury_report_available'].mean():.1%}, "
+            f"away teams {injury_dataset['away_injury_report_available'].mean():.1%}. Source: free public nflverse weekly injury reports."
+        )
+
         st.subheader("Inspect predictions")
         inspect_cols = ["gameday", "season", "week", "away_team", "home_team", "away_score", "home_score",
                         "spread_line", "pred_away_score", "pred_home_score", "predicted_home_margin",
-                        "model_ats_edge", "actual_home_ats_margin", "predicted_ats_residual", "residual_model_edge", "market_anchored_home_margin", "market_anchored_edge"]
+                        "model_ats_edge", "actual_home_ats_margin", "predicted_ats_residual", "residual_model_edge", "market_anchored_home_margin", "market_anchored_edge", "injury_anchored_home_margin", "injury_anchored_edge"]
         st.dataframe(backtest[[c for c in inspect_cols if c in backtest.columns]].sort_values("gameday", ascending=False).head(100),
                      hide_index=True, use_container_width=True)
         st.download_button("Download ATS backtest CSV", backtest.to_csv(index=False).encode("utf-8"),
