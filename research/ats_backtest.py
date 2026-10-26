@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 
-from model import MODEL_VERSION, load_schedule_data, load_pbp, build_efficiency_model_dataset, chronological_backtest, chronological_ats_residual_backtest, chronological_market_anchored_ats_backtest
+from model import MODEL_VERSION, load_schedule_data, load_pbp, build_efficiency_model_dataset, chronological_backtest
 
 st.title("NFL ATS Backtest")
 st.caption(f"Experimental research page • Model v{MODEL_VERSION}")
@@ -48,6 +48,10 @@ if run:
             dataset = build_efficiency_model_dataset(games, pbp, lookback_games=10)
             results = chronological_backtest(dataset, min_train_games=500)
             predictions = results["predictions"].copy()
+
+        # Load experimental functions lazily so an optional model import cannot
+        # prevent the entire Streamlit app and its other pages from loading.
+        from model import chronological_ats_residual_backtest, chronological_market_anchored_ats_backtest
 
         spread_cols = ["game_id", "gameday", "season", "week", "home_team", "away_team", "home_score", "away_score", "spread_line"]
         lines = games[[c for c in spread_cols if c in games.columns]].drop_duplicates("game_id")
