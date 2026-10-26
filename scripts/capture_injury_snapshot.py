@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
-"""Capture a dated snapshot of the upcoming NFL week's public injury report.
+"""Capture a dated snapshot of the next future NFL week's public injury feed.
 
 The capture timestamp records when this repository observed the source, not when
-the league first published each underlying report.
+the league first published each underlying report. This collector intentionally
+skips games scheduled for the current UTC date to avoid selecting a week already
+underway or one whose earlier games have already started.
 """
 from __future__ import annotations
 
@@ -32,7 +34,7 @@ def fetch_csv(url: str) -> pd.DataFrame:
 def main() -> int:
     captured_at = datetime.now(timezone.utc).replace(microsecond=0)
     season = captured_at.year
-    today = pd.Timestamp(captured_at.date())
+    today = captured_at.date()
 
     schedule = None
     errors = []
@@ -54,23 +56,29 @@ def main() -> int:
 
     schedule["season"] = pd.to_numeric(schedule["season"], errors="coerce")
     schedule["gameday_parsed"] = pd.to_datetime(schedule["gameday"], errors="coerce", utc=True)
+    # Strictly future calendar dates: do not pick a slate that has already started today.
     upcoming = schedule[
         (schedule["season"] == season)
         & schedule["gameday_parsed"].notna()
-        & (schedule["gameday_parsed"].dt.date >= today.date())
+        & (schedule["gameday_parsed"].dt.date > today)
     ].copy()
 
     if upcoming.empty:
-        print(f"No upcoming {season} games found; skipping snapshot.")
+        print(f"No games scheduled after {today.isoformat()} for season {season}; skipping snapshot.")
         return 0
 
-    next_date = upcoming["gameday_parsed"].min()
-    next_games = upcoming[upcoming["gameday_parsed"].dt.date == next_date.date()]
+    next_date = upcoming["gameday_parsed"].dt.date.min()
+    next_games = upcoming[upcoming["gameday_parsed"].dt.date == next_date]
     week_values = pd.to_numeric(next_games["week"], errors="coerce").dropna()
     if week_values.empty:
-        print("Upcoming games found, but their week number is not numeric; skipping snapshot.")
+        print("Future games found, but their week number is not numeric; skipping snapshot.")
         return 0
-    week = int(week_values.iloc[0])
+    weeks = sorted(set(int(value) for value in week_values))
+    if len(weeks) != 1:
+        print(f"Future games on {next_date} map to multiple weeks {weeks}; skipping snapshot to avoid ambiguity.")
+        return 1
+    week = weeks[0]
+    print(f"Selecting season {season}, Week {week}; next scheduled game date is {next_date}.")
 
     url = INJURY_URL.format(season=season)
     injuries = fetch_csv(url)
