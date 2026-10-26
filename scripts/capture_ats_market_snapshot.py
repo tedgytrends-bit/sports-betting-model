@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Record pregame schedule, market spread, simple baseline prediction, and injury-feed coverage."""
+"""Capture upcoming NFL games within seven calendar days for prospective ATS research."""
 from datetime import datetime, timezone
 from io import BytesIO
 from pathlib import Path
@@ -14,7 +14,8 @@ SCHEDULE_URLS = [
 ]
 INJURY_URL = "https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_{season}.csv"
 OUT = Path("data/prospective_ats_tracking")
-HEADERS = {"User-Agent": "sports-betting-model-prospective-tracker/1.0"}
+HEADERS = {"User-Agent": "sports-betting-model-prospective-tracker/1.1"}
+HORIZON_DAYS = 7
 
 
 def fetch_csv(url):
@@ -40,14 +41,18 @@ def team_points_history(games, team, before_date, lookback=6):
 
 def main():
     captured = datetime.now(timezone.utc).replace(microsecond=0)
+    today_utc = pd.Timestamp(captured.date())
+    horizon_date = today_utc + pd.Timedelta(days=HORIZON_DAYS)
     schedule = None
     errors = []
+    required = {"game_id", "season", "week", "gameday", "home_team", "away_team", "home_score", "away_score"}
     for url in SCHEDULE_URLS:
         try:
-            schedule = fetch_csv(url)
-            if {"game_id", "season", "week", "gameday", "home_team", "away_team", "home_score", "away_score"}.issubset(schedule.columns):
+            candidate = fetch_csv(url)
+            if required.issubset(candidate.columns):
+                schedule = candidate
                 break
-            schedule = None
+            errors.append(f"{url}: required columns missing")
         except Exception as exc:
             errors.append(f"{url}: {type(exc).__name__}: {exc}")
     if schedule is None:
@@ -59,14 +64,16 @@ def main():
     if "spread_line" not in schedule:
         schedule["spread_line"] = np.nan
     schedule["gameday"] = pd.to_datetime(schedule["gameday"], errors="coerce", utc=True).dt.tz_convert(None)
-    now = pd.Timestamp(captured.replace(tzinfo=None))
+    schedule_day = schedule["gameday"].dt.normalize()
+    unplayed = schedule["home_score"].isna() | schedule["away_score"].isna()
     upcoming = schedule[
         schedule["gameday"].notna()
-        & (schedule["gameday"] > now)
-        & (schedule["home_score"].isna() | schedule["away_score"].isna())
+        & (schedule_day >= today_utc)
+        & (schedule_day <= horizon_date)
+        & unplayed
     ].copy()
     if upcoming.empty:
-        print("No future unplayed games in schedule; no tracking row saved.")
+        print(f"No unplayed games scheduled from {today_utc.date()} through {horizon_date.date()}; no snapshot saved.")
         return
 
     season_values = pd.to_numeric(upcoming["season"], errors="coerce").dropna()
@@ -75,17 +82,19 @@ def main():
         return
     season = int(season_values.max())
     upcoming = upcoming[upcoming["season"] == season].copy()
-    injury_rows = pd.DataFrame()
     injury_url = INJURY_URL.format(season=season)
+    injury_rows = pd.DataFrame()
+    injury_feed_status = "unavailable"
     try:
-        injury_rows = fetch_csv(injury_url)
+        fetched_injuries = fetch_csv(injury_url)
+        if {"week", "team"}.issubset(fetched_injuries.columns):
+            fetched_injuries["week"] = pd.to_numeric(fetched_injuries["week"], errors="coerce")
+            injury_rows = fetched_injuries
+            injury_feed_status = "loaded"
+        else:
+            injury_feed_status = "missing_required_columns"
     except Exception as exc:
         print(f"WARNING: injury feed unavailable: {type(exc).__name__}: {exc}")
-
-    if not injury_rows.empty and {"week", "team"}.issubset(injury_rows.columns):
-        injury_rows["week"] = pd.to_numeric(injury_rows["week"], errors="coerce")
-    else:
-        injury_rows = pd.DataFrame()
 
     records = []
     for _, game in upcoming.iterrows():
@@ -98,13 +107,23 @@ def main():
             predicted_home_margin = projected_home - projected_away
         else:
             projected_home = projected_away = predicted_home_margin = np.nan
+
         week = int(game["week"]) if pd.notna(game["week"]) else np.nan
-        if not injury_rows.empty and pd.notna(week):
+        week_rows = pd.DataFrame()
+        if injury_feed_status == "loaded" and pd.notna(week):
             week_rows = injury_rows[injury_rows["week"] == week]
-            home_injuries = int((week_rows["team"].astype(str).str.upper() == home.upper()).sum())
-            away_injuries = int((week_rows["team"].astype(str).str.upper() == away.upper()).sum())
+        week_available = not week_rows.empty
+        if week_available:
+            home_count = int((week_rows["team"].astype(str).str.upper() == home.upper()).sum())
+            away_count = int((week_rows["team"].astype(str).str.upper() == away.upper()).sum())
+            coverage_status = "week_rows_present"
+        elif injury_feed_status == "loaded":
+            home_count = away_count = np.nan
+            coverage_status = "no_rows_for_week"
         else:
-            home_injuries = away_injuries = np.nan
+            home_count = away_count = np.nan
+            coverage_status = injury_feed_status
+
         record = {
             "captured_at_utc": captured.isoformat().replace("+00:00", "Z"),
             "game_id": game.get("game_id"),
@@ -114,23 +133,28 @@ def main():
             "home_team": home,
             "away_team": away,
             "spread_line_source_value": game.get("spread_line", np.nan),
+            "spread_value_available": bool(pd.notna(game.get("spread_line", np.nan))),
             "baseline_projected_home_points": round(projected_home, 3) if pd.notna(projected_home) else np.nan,
             "baseline_projected_away_points": round(projected_away, 3) if pd.notna(projected_away) else np.nan,
             "baseline_predicted_home_margin": round(predicted_home_margin, 3) if pd.notna(predicted_home_margin) else np.nan,
-            "home_injury_rows_in_current_feed": home_injuries,
-            "away_injury_rows_in_current_feed": away_injuries,
+            "injury_feed_status": injury_feed_status,
+            "injury_week_coverage_status": coverage_status,
+            "injury_week_has_rows": week_available,
+            "home_injury_report_rows": home_count,
+            "away_injury_report_rows": away_count,
             "injury_feed_has_source_timestamp": bool("date_modified" in injury_rows.columns) if not injury_rows.empty else False,
             "injury_feed_source": injury_url,
-            "note": "Capture time is when this workflow observed the feed; source report publication time may be earlier and is not established here.",
+            "note": "Team row counts describe records in the current weekly feed only; zero is not interpreted as no injuries. Reports can omit long-term injuries and current statuses can change. Capture time does not establish source publication time or guarantee capture before kickoff.",
         }
         records.append(record)
 
     OUT.mkdir(parents=True, exist_ok=True)
     path = OUT / f"ats_market_snapshot_{captured.strftime('%Y%m%dT%H%M%SZ')}.csv"
     pd.DataFrame(records).to_csv(path, index=False)
-    print(f"Saved {len(records)} upcoming-game tracking rows: {path}")
+    print(f"Saved {len(records)} upcoming-game rows for {today_utc.date()} through {horizon_date.date()}: {path}")
     print(f"Capture time UTC: {captured.isoformat()}")
-    print("Contains market spread field as published by schedule feed and a simple points-based baseline, not the full efficiency ATS model.")
+    print("Spread availability: " + str(sum(bool(r["spread_value_available"]) for r in records)) + f"/{len(records)}")
+    print("Injury counts are reported only when the injury feed has rows for that game week; missing feed data is stored as unavailable.")
 
 
 if __name__ == "__main__":
