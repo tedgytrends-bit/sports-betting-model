@@ -55,12 +55,13 @@ a, b, c, d = st.columns(4)
 a.metric("Snapshot files", int(data["snapshot_file"].nunique()))
 b.metric("Game observations", len(data))
 c.metric("Rows with a spread", int(data["spread_value_available"].sum()))
-d.metric("Snapshots with injury-week rows", int(data["injury_week_has_rows"].sum()))
+d.metric("Rows with a total", int(data.get("total_value_available", pd.Series(False, index=data.index)).fillna(False).sum()))
 
 st.subheader("Upcoming game observations")
 columns = [
     "captured_at_utc", "gameday_utc", "season", "week", "away_team", "home_team",
     "spread_line_source_value", "baseline_predicted_home_margin", "spread_value_available",
+    "total_line_source_value", "baseline_projected_total", "baseline_total_edge", "total_value_available",
     "injury_feed_status", "injury_week_coverage_status", "home_injury_report_rows",
     "away_injury_report_rows", "injury_feed_has_source_timestamp", "snapshot_file",
 ]
@@ -74,6 +75,10 @@ visible = visible.rename(columns={
     "home_team": "Home",
     "spread_line_source_value": "Schedule spread field",
     "baseline_predicted_home_margin": "Baseline projected home margin",
+    "total_line_source_value": "Schedule total field",
+    "baseline_projected_total": "Baseline projected total",
+    "baseline_total_edge": "Baseline total edge",
+    "total_value_available": "Total available",
     "spread_value_available": "Spread available",
     "injury_feed_status": "Injury feed status",
     "injury_week_coverage_status": "Injury week coverage",
