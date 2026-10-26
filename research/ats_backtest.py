@@ -154,7 +154,7 @@ if run:
             ).abs().mean(),
         }
         st.dataframe(accuracy.round(2), hide_index=True, use_container_width=True)
-        st.caption("The market-anchored model includes the closing spread as an input. The injury-enhanced version adds pregame injury-report counts; only reports updated before game day are used, and unavailable reports are treated as missing rather than healthy players.")
+        st.caption("The market-anchored model includes the closing spread as an input. The injury-enhanced version adds pregame injury-report counts; reports are used only if updated before kickoff when kickoff time is available, and unavailable reports are treated as missing rather than healthy players.")
 
         st.subheader("All-game directional results")
         st.write("This grades the side the model favors on every game with a nonzero edge. It is a diagnostic, not a claim that each game is a worthwhile bet.")
@@ -250,7 +250,7 @@ if run:
         st.dataframe(pd.DataFrame(anchored_seasons).round(2), hide_index=True, use_container_width=True)
 
         st.subheader("Market-anchored model + injuries")
-        st.write("This version adds weekly injury-report counts by team and position to the market-anchored model. Same-day updates are excluded to reduce the risk of using information that arrived after kickoff.")
+        st.write("This version adds weekly injury-report counts by team and position to the market-anchored model. When kickoff time is available, injury updates are included only if their recorded timestamp is before kickoff; if kickoff time is missing, same-day updates are excluded.")
         injury_directional = grade(injury_valid[injury_valid["injury_anchored_edge"].abs() > 0], "injury_anchored_edge")
         injury_all = summarize(injury_directional, "Market anchored + injuries: any nonzero edge")
         injury_fixed = grade(injury_valid[injury_valid["injury_anchored_edge"].abs() >= threshold], "injury_anchored_edge")
