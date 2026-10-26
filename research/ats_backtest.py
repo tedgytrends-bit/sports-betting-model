@@ -81,6 +81,10 @@ def build_injury_coverage_audit(schedule, injuries):
     if slots.empty:
         raise ValueError("No scheduled team-games available for injury coverage audit.")
     rows = []
+# The ATS backtest begins in 2022; older schedule years are irrelevant here.
+    audit_start_season = 2022
+    slots = slots[slots["season"] >= audit_start_season].copy()
+    reports = reports[reports["season"] >= audit_start_season].copy()
     seasons = sorted(set(reports["season"].dropna().astype(int)) | set(slots["season"].unique()))
     for year in seasons:
         raw, part = reports[reports["season"] == year], slots[slots["season"] == year]
