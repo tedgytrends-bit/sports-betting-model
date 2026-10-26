@@ -1,79 +1,254 @@
-import glob
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
 import streamlit as st
+
 from model import load_schedule_data
 
 st.title("Prospective Results Audit")
-st.caption("Forward-looking snapshot grading • Research only")
+st.caption("Forward-looking snapshot grading • Research only • No claim of sportsbook execution")
 
-files = sorted(glob.glob("data/prospective_ats_tracking/ats_market_snapshot_*.csv"))
+SNAPSHOT_DIR = Path("data/prospective_ats_tracking")
+SNAPSHOT_PATTERN = "ats_market_snapshot_*.csv"
+EDGE_THRESHOLD = 3.5
+UNIT_RISK = 1.0
+WIN_PROFIT_AT_MINUS_110 = 100 / 110
+
+files = sorted(SNAPSHOT_DIR.glob(SNAPSHOT_PATTERN))
 if not files:
-    st.info("No saved snapshots found yet. Run the Capture prospective ATS snapshots workflow.")
+    st.info("No saved snapshots found yet. Run the GitHub Actions workflow named 'Capture prospective ATS snapshots'.")
     st.stop()
 
 parts = []
+read_errors = []
 for path in files:
-    df = pd.read_csv(path, low_memory=False)
-    if not df.empty:
-        df["snapshot_file"] = path.rsplit("/", 1)[-1]
-        parts.append(df)
+    try:
+        frame = pd.read_csv(path, low_memory=False)
+        if not frame.empty:
+            frame["snapshot_file"] = path.name
+            parts.append(frame)
+    except Exception as exc:
+        read_errors.append(f"{path.name}: {exc}")
+
+for message in read_errors:
+    st.warning(f"Could not read snapshot file — {message}")
+
 if not parts:
-    st.info("Snapshot files are empty.")
+    st.info("Snapshot files are empty or could not be read.")
     st.stop()
 
-data = pd.concat(parts, ignore_index=True, sort=False)
-data["captured_at_utc"] = pd.to_datetime(data["captured_at_utc"], errors="coerce", utc=True)
-for col in ["spread_line_source_value", "total_line_source_value", "baseline_predicted_home_margin", "baseline_projected_total"]:
-    if col not in data:
-        data[col] = np.nan
-    data[col] = pd.to_numeric(data[col], errors="coerce")
+archive = pd.concat(parts, ignore_index=True, sort=False)
+required_snapshot_columns = ["game_id", "captured_at_utc"]
+missing_columns = [col for col in required_snapshot_columns if col not in archive.columns]
+if missing_columns:
+    st.error(f"Snapshot archive is missing required columns: {missing_columns}")
+    st.stop()
 
-# Grade each game once using its latest saved snapshot, never a postgame prediction.
-data = data.sort_values("captured_at_utc").drop_duplicates("game_id", keep="last")
+archive["captured_at_utc"] = pd.to_datetime(archive["captured_at_utc"], errors="coerce", utc=True)
+for col in [
+    "spread_line_source_value",
+    "total_line_source_value",
+    "baseline_predicted_home_margin",
+    "baseline_projected_total",
+]:
+    if col not in archive.columns:
+        archive[col] = np.nan
+    archive[col] = pd.to_numeric(archive[col], errors="coerce")
+
+# Freeze the earliest captured row for each game. Later six-hour snapshots are
+# retained in the raw archive but cannot replace the original prediction or line.
+archive = archive.sort_values(
+    ["game_id", "captured_at_utc", "snapshot_file"],
+    ascending=[True, True, True],
+    na_position="last",
+)
+duplicate_observations = int(archive.duplicated("game_id", keep="first").sum())
+first_snapshot = archive.drop_duplicates("game_id", keep="first").copy()
+
+# Schedule dates from nflverse are date-level in this workflow, not precise
+# kickoff timestamps. Only snapshots captured before the UTC scheduled date are
+# treated as definitely pregame. Same-day and unparseable captures are uncertain.
+if "gameday_utc" in first_snapshot.columns:
+    first_snapshot["scheduled_date_utc"] = pd.to_datetime(
+        first_snapshot["gameday_utc"], errors="coerce", utc=True
+    ).dt.floor("D")
+elif "gameday" in first_snapshot.columns:
+    first_snapshot["scheduled_date_utc"] = pd.to_datetime(
+        first_snapshot["gameday"], errors="coerce", utc=True
+    ).dt.floor("D")
+else:
+    first_snapshot["scheduled_date_utc"] = pd.NaT
+
+first_snapshot["capture_date_utc"] = first_snapshot["captured_at_utc"].dt.floor("D")
+first_snapshot["timing_status"] = np.select(
+    [
+        first_snapshot["captured_at_utc"].isna() | first_snapshot["scheduled_date_utc"].isna(),
+        first_snapshot["capture_date_utc"] < first_snapshot["scheduled_date_utc"],
+        first_snapshot["capture_date_utc"] == first_snapshot["scheduled_date_utc"],
+        first_snapshot["capture_date_utc"] > first_snapshot["scheduled_date_utc"],
+    ],
+    ["Unknown timing", "Definitely before scheduled date", "Same-day timing uncertain", "Captured after scheduled date"],
+    default="Unknown timing",
+)
+
 try:
-    scores = load_schedule_data()[["game_id", "home_score", "away_score"]]
+    schedule = load_schedule_data()
 except Exception as exc:
-    st.error(f"Unable to load final scores: {exc}")
+    st.error(f"Unable to load schedule/final scores: {exc}")
     st.stop()
 
-data = data.merge(scores, on="game_id", how="left", suffixes=("", "_final"))
-data["final_available"] = data["home_score"].notna() & data["away_score"].notna()
-data["actual_margin"] = data["home_score"] - data["away_score"]
-data["actual_total"] = data["home_score"] + data["away_score"]
-data["ats_edge"] = data["baseline_predicted_home_margin"] - data["spread_line_source_value"]
-data["total_edge"] = data["baseline_projected_total"] - data["total_line_source_value"]
+score_columns = ["game_id", "home_score", "away_score"]
+missing_score_columns = [col for col in score_columns if col not in schedule.columns]
+if missing_score_columns:
+    st.error(f"Schedule source is missing score fields: {missing_score_columns}")
+    st.stop()
 
-def grade(edge_col, actual_col, line_col):
-    d = data[data["final_available"] & data[edge_col].notna() & data[actual_col].notna() & data[line_col].notna()].copy()
-    d = d[d[edge_col].abs() >= 3.5]
-    d["actual_margin_vs_line"] = d[actual_col] - d[line_col]
-    d["result"] = np.where(d["actual_margin_vs_line"] == 0, "Push",
-        np.where(d["actual_margin_vs_line"] * np.sign(d[edge_col]) > 0, "Win", "Loss"))
-    d["net_units"] = np.select([d.result.eq("Win"), d.result.eq("Loss")], [100/110, -1.0], default=0.0)
-    return d
+scores = schedule[score_columns].copy()
+scores["home_score"] = pd.to_numeric(scores["home_score"], errors="coerce")
+scores["away_score"] = pd.to_numeric(scores["away_score"], errors="coerce")
+scores = scores.drop_duplicates("game_id", keep="first")
+graded = first_snapshot.merge(scores, on="game_id", how="left", validate="one_to_one")
+graded["final_available"] = graded["home_score"].notna() & graded["away_score"].notna()
+graded["actual_margin"] = graded["home_score"] - graded["away_score"]
+graded["actual_total"] = graded["home_score"] + graded["away_score"]
+graded["ats_edge"] = graded["baseline_predicted_home_margin"] - graded["spread_line_source_value"]
+graded["total_edge"] = graded["baseline_projected_total"] - graded["total_line_source_value"]
 
-ats = grade("ats_edge", "actual_margin", "spread_line_source_value")
-totals = grade("total_edge", "actual_total", "total_line_source_value")
+# Primary results only use snapshots demonstrably captured before the scheduled
+# UTC date. This is intentionally conservative because exact kickoff timestamps
+# are not part of the saved snapshot schema.
+pregame = graded[graded["timing_status"] == "Definitely before scheduled date"].copy()
+timing_uncertain_count = int(graded["timing_status"].isin(["Same-day timing uncertain", "Unknown timing"]).sum())
+late_capture_count = int(graded["timing_status"].eq("Captured after scheduled date").sum())
 
-st.metric("Games in snapshot archive", len(data))
-st.metric("Games with final scores", int(data.final_available.sum()))
-st.caption("Fixed 3.5-point model-edge filter; one unit risked at assumed -110 odds. This is a research convention, not a tuned recommendation.")
 
-def report(title, df):
+def grade_market(frame, edge_col, actual_col, line_col):
+    market = frame.copy()
+    market["line_available"] = market[line_col].notna()
+    market["prediction_available"] = market[edge_col].notna()
+    market["eligible_edge"] = market[edge_col].abs() >= EDGE_THRESHOLD
+    eligible = market[
+        market["final_available"]
+        & market["line_available"]
+        & market["prediction_available"]
+        & market["eligible_edge"]
+    ].copy()
+
+    # Positive spread_line means home favored in the nflverse schedule convention.
+    # Therefore actual home margin minus spread_line is the home ATS cover margin.
+    eligible["actual_margin_vs_line"] = eligible[actual_col] - eligible[line_col]
+    eligible["result"] = np.select(
+        [
+            eligible["actual_margin_vs_line"].eq(0),
+            eligible["actual_margin_vs_line"] * np.sign(eligible[edge_col]) > 0,
+        ],
+        ["Push", "Win"],
+        default="Loss",
+    )
+    eligible["units_risked"] = UNIT_RISK
+    eligible["net_units"] = np.select(
+        [eligible["result"].eq("Win"), eligible["result"].eq("Loss")],
+        [WIN_PROFIT_AT_MINUS_110, -UNIT_RISK],
+        default=0.0,
+    )
+    return market, eligible
+
+
+ats_population, ats = grade_market(pregame, "ats_edge", "actual_margin", "spread_line_source_value")
+totals_population, totals = grade_market(pregame, "total_edge", "actual_total", "total_line_source_value")
+
+st.subheader("Snapshot coverage and data quality")
+a, b, c, d = st.columns(4)
+a.metric("Unique games in archive", f"{len(first_snapshot):,}")
+b.metric("Repeated observations not re-graded", f"{duplicate_observations:,}")
+c.metric("Games with final scores", f"{int(graded['final_available'].sum()):,}")
+d.metric("Definitely pregame snapshots", f"{len(pregame):,}")
+
+st.write(
+    f"Timing not sufficiently certain for primary grading: **{timing_uncertain_count:,}** games. "
+    f"Captured after the scheduled UTC date: **{late_capture_count:,}** games."
+)
+st.caption(
+    "Because the archive does not establish the exact source publication time or exact kickoff timestamp, "
+    "same-day captures are excluded from primary performance figures rather than assumed to be pregame."
+)
+
+
+def report(title, population, bets, line_col, edge_col):
     st.subheader(title)
-    n = len(df)
-    wins = int(df.result.eq("Win").sum()) if n else 0
-    losses = int(df.result.eq("Loss").sum()) if n else 0
-    pushes = int(df.result.eq("Push").sum()) if n else 0
-    net = float(df.net_units.sum()) if n else 0.0
-    st.write(f"Record: {wins}-{losses}-{pushes} • {n} bets • Net: {net:+.2f} units")
-    st.write(f"ROI: {100*net/n:.1f}%" if n else "No graded bets meet the threshold yet.")
-    if n:
-        cols = ["captured_at_utc", "away_team", "home_team", "spread_line_source_value", "baseline_predicted_home_margin", "ats_edge", "total_line_source_value", "baseline_projected_total", "total_edge", "actual_margin", "actual_total", "result", "net_units", "snapshot_file"]
-        st.dataframe(df[[c for c in cols if c in df]].sort_values("captured_at_utc", ascending=False), hide_index=True, use_container_width=True)
+    missing_line = int(population[line_col].isna().sum())
+    missing_prediction = int(population[edge_col].isna().sum())
+    missing_final = int((~population["final_available"]).sum())
+    edge_candidates = population[population[edge_col].notna() & (population[edge_col].abs() >= EDGE_THRESHOLD)]
+    no_line_among_candidates = int(edge_candidates[line_col].isna().sum())
 
-report("ATS results (3.5+ point edge)", ats)
-report("Totals results (3.5+ point edge)", totals)
-st.warning("Schedule-feed lines are not verified sportsbook prices, and capture time does not prove a line was available before kickoff. Latest-snapshot grading is a research audit, not proof of a profitable strategy.")
-st.download_button("Download graded snapshot archive", data.to_csv(index=False).encode("utf-8"), "prospective_results_audit.csv", "text/csv")
+    x, y, z = st.columns(3)
+    x.metric("Missing market lines", f"{missing_line:,}")
+    y.metric("Missing predictions", f"{missing_prediction:,}")
+    z.metric("Eligible-edge games missing lines", f"{no_line_among_candidates:,}")
+
+    wins = int(bets["result"].eq("Win").sum())
+    losses = int(bets["result"].eq("Loss").sum())
+    pushes = int(bets["result"].eq("Push").sum())
+    net = float(bets["net_units"].sum())
+    risked = float(bets["units_risked"].sum())
+    roi = 100 * net / risked if risked else np.nan
+
+    m1, m2, m3, m4, m5 = st.columns(5)
+    m1.metric("Record (W-L-P)", f"{wins}-{losses}-{pushes}")
+    m2.metric("Bets", f"{len(bets):,}")
+    m3.metric("Net units", f"{net:+.2f}")
+    m4.metric("Units risked", f"{risked:.2f}")
+    m5.metric("ROI at assumed -110", f"{roi:+.2f}%" if risked else "—")
+
+    if bets.empty:
+        st.info("No games currently meet the data, timing, and fixed 3.5-point edge requirements.")
+        return
+
+    cols = [
+        "game_id", "captured_at_utc", "scheduled_date_utc", "away_team", "home_team",
+        line_col, edge_col, "actual_margin", "actual_total", "result", "net_units",
+        "timing_status", "snapshot_file",
+    ]
+    st.dataframe(
+        bets[[col for col in cols if col in bets.columns]].sort_values("captured_at_utc", ascending=False),
+        hide_index=True,
+        use_container_width=True,
+    )
+
+
+st.caption(
+    f"Fixed absolute model-edge threshold: {EDGE_THRESHOLD:.1f} points. One unit risked per bet; wins earn "
+    f"{WIN_PROFIT_AT_MINUS_110:.3f} units at assumed -110, losses lose one unit, pushes earn zero. "
+    "This convention is illustrative because schedule-feed prices are not verified sportsbook prices."
+)
+report("ATS results", ats_population, ats, "spread_line_source_value", "ats_edge")
+report("Totals results", totals_population, totals, "total_line_source_value", "total_edge")
+
+st.warning(
+    "Important limitations: the saved line fields come from a public schedule feed and are not verified executable "
+    "sportsbook prices or odds. The audit grades the first saved snapshot per game and never overwrites it with a later "
+    "capture. Same-day/unknown timing is excluded from primary results. Injury-feed coverage is descriptive only; "
+    "this page does not establish that the model had complete or actionable injury information."
+)
+
+st.subheader("Download audit data")
+st.download_button(
+    "Download first-snapshot audit archive (one row per game)",
+    data=graded.to_csv(index=False).encode("utf-8"),
+    file_name="prospective_results_audit.csv",
+    mime="text/csv",
+)
+st.download_button(
+    "Download eligible ATS bets",
+    data=ats.to_csv(index=False).encode("utf-8"),
+    file_name="prospective_ats_graded.csv",
+    mime="text/csv",
+)
+st.download_button(
+    "Download eligible totals bets",
+    data=totals.to_csv(index=False).encode("utf-8"),
+    file_name="prospective_totals_graded.csv",
+    mime="text/csv",
+)
