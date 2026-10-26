@@ -116,6 +116,7 @@ def main():
     metrics = []
     diagnostics = []
     audit_warnings = []
+    direct_total_equivalence_max_abs_diff = None
     # Evaluate each wager against the market line, not raw score margin/total.
     pred["actual_ats_cover_margin"] = pred["actual_home_margin"] - pred["spread_line"]
     pred["actual_total_over_margin"] = pred["actual_total"] - pred["total_line"]
@@ -142,14 +143,23 @@ def main():
         direct_totals["actual_total"] = pd.to_numeric(direct_totals["home_score"], errors="coerce") + pd.to_numeric(direct_totals["away_score"], errors="coerce")
         pred_col = "direct_total_prediction"
         direct_totals["edge"] = pd.to_numeric(direct_totals[pred_col], errors="coerce") - pd.to_numeric(direct_totals["total_line"], errors="coerce")
+        # With the same features and Ridge alpha, predicting home and away scores
+        # separately and summing them is mathematically equivalent to directly
+        # predicting the total. Keep this as a parity check, not a separate model.
+        score_totals = pred[["game_id", "pred_home_score", "pred_away_score"]].copy()
+        score_totals["score_sum_prediction"] = (
+            pd.to_numeric(score_totals["pred_home_score"], errors="coerce")
+            + pd.to_numeric(score_totals["pred_away_score"], errors="coerce")
+        )
+        parity = direct_totals.merge(score_totals[["game_id", "score_sum_prediction"]],
+                                     on="game_id", how="inner", validate="one_to_one")
+        parity_diff = (
+            pd.to_numeric(parity[pred_col], errors="coerce")
+            - pd.to_numeric(parity["score_sum_prediction"], errors="coerce")
+        ).abs().dropna()
+        direct_total_equivalence_max_abs_diff = float(parity_diff.max()) if not parity_diff.empty else None
         direct_totals["actual_total_over_margin"] = direct_totals["actual_total"] - pd.to_numeric(direct_totals["total_line"], errors="coerce")
-        diagnostics.extend(grouped_diagnostics(direct_totals, "season", "edge",
-            "actual_total_over_margin", "Direct total model", "Totals"))
         direct_totals.to_csv(OUT / "automated_direct_total_predictions.csv", index=False)
-        metrics.append({"market": "Totals", "model": "Direct total model", "games": int(direct_totals.dropna(subset=["total_line", "actual_total", pred_col]).shape[0]),
-                        "model_mae": mae(direct_totals["actual_total"], direct_totals[pred_col]),
-                        "market_benchmark_mae": mae(direct_totals["actual_total"], direct_totals["total_line"]),
-                        **roi_at_minus_110(direct_totals["edge"], direct_totals["actual_total"] - direct_totals["total_line"])})
     except Exception as exc:
         message = f"direct totals audit failed: {type(exc).__name__}: {exc}"
         audit_warnings.append(message)
@@ -239,6 +249,7 @@ def main():
             "games_in_score_model_backtest": int(len(pred)),
             "summary_rows": int(len(metric_df)),
             "diagnostic_rows": int(len(diagnostic_df)),
+            "direct_total_equivalence_max_abs_diff": direct_total_equivalence_max_abs_diff,
             "warnings": audit_warnings,
             "note": "Historical research only. Public schedule lines are not verified sportsbook-timestamp records. Fixed -110 ROI uses a 3.5-point threshold for point-valued model edges. Residual-model adjustments are much smaller and are not directly comparable to score-model edges."
         }, indent=2),
