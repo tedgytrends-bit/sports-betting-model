@@ -58,11 +58,13 @@ def main():
     if schedule is None:
         raise RuntimeError("Could not load schedule: " + " | ".join(errors))
 
-    for col in ["season", "week", "home_score", "away_score", "spread_line"]:
+    for col in ["season", "week", "home_score", "away_score", "spread_line", "total_line"]:
         if col in schedule:
             schedule[col] = pd.to_numeric(schedule[col], errors="coerce")
     if "spread_line" not in schedule:
         schedule["spread_line"] = np.nan
+    if "total_line" not in schedule:
+        schedule["total_line"] = np.nan
     schedule["gameday"] = pd.to_datetime(schedule["gameday"], errors="coerce", utc=True).dt.tz_convert(None)
     schedule_day = schedule["gameday"].dt.normalize()
     unplayed = schedule["home_score"].isna() | schedule["away_score"].isna()
@@ -134,6 +136,10 @@ def main():
             "away_team": away,
             "spread_line_source_value": game.get("spread_line", np.nan),
             "spread_value_available": bool(pd.notna(game.get("spread_line", np.nan))),
+            "total_line_source_value": game.get("total_line", np.nan),
+            "total_value_available": bool(pd.notna(game.get("total_line", np.nan))),
+            "baseline_projected_total": round(projected_home + projected_away, 3) if pd.notna(projected_home) and pd.notna(projected_away) else np.nan,
+            "baseline_total_edge": round(projected_home + projected_away - float(game.get("total_line")), 3) if pd.notna(projected_home) and pd.notna(projected_away) and pd.notna(game.get("total_line")) else np.nan,
             "baseline_projected_home_points": round(projected_home, 3) if pd.notna(projected_home) else np.nan,
             "baseline_projected_away_points": round(projected_away, 3) if pd.notna(projected_away) else np.nan,
             "baseline_predicted_home_margin": round(predicted_home_margin, 3) if pd.notna(predicted_home_margin) else np.nan,
@@ -154,6 +160,7 @@ def main():
     print(f"Saved {len(records)} upcoming-game rows for {today_utc.date()} through {horizon_date.date()}: {path}")
     print(f"Capture time UTC: {captured.isoformat()}")
     print("Spread availability: " + str(sum(bool(r["spread_value_available"]) for r in records)) + f"/{len(records)}")
+    print("Total availability: " + str(sum(bool(r["total_value_available"]) for r in records)) + f"/{len(records)}")
     print("Injury counts are reported only when the injury feed has rows for that game week; missing feed data is stored as unavailable.")
 
 
