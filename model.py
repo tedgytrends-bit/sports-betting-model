@@ -675,10 +675,33 @@ def add_pregame_injury_features(
     reports["report_status_norm"] = reports["report_status"].fillna("").astype(str).str.upper().str.strip()
     reports["practice_status_norm"] = reports["practice_status"].fillna("").astype(str).str.upper().str.strip()
 
-    games = schedule[["game_id", "season", "week", "gameday", "home_team", "away_team"]].copy()
+    game_columns = ["game_id", "season", "week", "gameday", "home_team", "away_team"]
+    if "gametime" in schedule.columns:
+        game_columns.append("gametime")
+    games = schedule[game_columns].copy()
     games["season"] = pd.to_numeric(games["season"], errors="coerce")
     games["week"] = pd.to_numeric(games["week"], errors="coerce")
     games["gameday"] = pd.to_datetime(games["gameday"], errors="coerce").dt.normalize()
+
+    # The injury feed's latest row can be updated on game day. Use it only if
+    # its timestamp is before kickoff, rather than discarding every same-day row.
+    # nflverse schedule gametime is represented in Eastern Time.
+    if "gametime" in games.columns:
+        local_kickoff = pd.to_datetime(
+            games["gameday"].dt.strftime("%Y-%m-%d") + " " + games["gametime"].astype(str),
+            errors="coerce",
+        )
+        try:
+            games["injury_cutoff"] = (
+                local_kickoff.dt.tz_localize(
+                    "America/New_York", ambiguous="NaT", nonexistent="shift_forward"
+                ).dt.tz_convert("UTC").dt.tz_localize(None)
+            )
+        except Exception:
+            games["injury_cutoff"] = pd.NaT
+    else:
+        games["injury_cutoff"] = pd.NaT
+    games["injury_cutoff"] = games["injury_cutoff"].fillna(games["gameday"])
     game_types = schedule["game_type"] if "game_type" in schedule.columns else (
         schedule["season_type"] if "season_type" in schedule.columns else None
     )
@@ -693,8 +716,9 @@ def add_pregame_injury_features(
     games["season_type"] = games["season_type"].replace({"REGULAR": "REG", "POSTSEASON": "POST"})
     reports["season_type"] = reports["season_type"].replace({"REGULAR": "REG", "POSTSEASON": "POST"})
 
-    # Use the latest available report row per player/team/week from the source, but
-    # only if its recorded modification date is strictly before game day.
+    # Use the latest available report row per player/team/week only when its
+    # timestamp predates kickoff. If kickoff time is unavailable, fall back to
+    # the conservative rule of excluding all game-day updates.
     team_game_rows = []
     feature_names = [
         "inj_out", "inj_doubtful", "inj_questionable",
@@ -711,7 +735,11 @@ def add_pregame_injury_features(
             (reports["season"] == game["season"])
             & (reports["week"] == game["week"])
             & (reports["season_type"] == game["season_type"])
-            & (reports["date_modified"].dt.normalize() < game["gameday"])
+            & (
+                (reports["date_modified"] < game["injury_cutoff"])
+                if pd.notna(game["injury_cutoff"]) and game["injury_cutoff"] != game["gameday"]
+                else (reports["date_modified"].dt.normalize() < game["gameday"])
+            )
         ]
         row = {"game_id": game["game_id"]}
         for side, team_col in [("home", "home_team"), ("away", "away_team")]:
