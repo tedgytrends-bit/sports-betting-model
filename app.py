@@ -42,6 +42,11 @@ injury_snapshot_audit_page = st.Page(
     title="Injury Snapshot Audit",
     icon="🕒",
 )
+prospective_ats_page = st.Page(
+    "research/prospective_ats_tracker.py",
+    title="Prospective ATS Tracker",
+    icon="📈",
+)
 
 navigation = st.navigation(
     {
@@ -49,6 +54,7 @@ navigation = st.navigation(
         "Research & Diagnostics": [
             totals_page,
             ats_page,
+            prospective_ats_page,
             schedule_page,
             connection_page,
             endzone_injury_test_page,
