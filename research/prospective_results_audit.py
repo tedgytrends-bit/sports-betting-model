@@ -144,7 +144,7 @@ unmatched = graded["home_score"].isna() | graded["away_score"].isna()
 fallback_scores = score_lookup.dropna(subset=["gameday", "home_score", "away_score"]).rename(
     columns={"gameday": "gameday_join"}
 ).drop_duplicates(["gameday_join", "home_team", "away_team"], keep="first")
-fallback = snapshots_for_join.loc[unmatched].drop(
+fallback = snapshots_for_join.loc[unmatched.to_numpy()].drop(
     columns=["home_score", "away_score", "score_match_method"], errors="ignore"
 ).merge(
     fallback_scores[["gameday_join", "home_team", "away_team", "home_score", "away_score"]],
@@ -300,6 +300,46 @@ st.caption(
 )
 report("ATS results", ats_population, ats, "spread_line_source_value", "ats_edge")
 report("Totals results", totals_population, totals, "total_line_source_value", "total_edge")
+
+def threshold_summary(population, edge_col, actual_col, line_col):
+    rows = []
+    for threshold in [3.5, 4.5, 5.5, 6.5, 7.5]:
+        eligible = population[
+            population["final_available"]
+            & population[line_col].notna()
+            & population[edge_col].notna()
+            & (population[edge_col].abs() >= threshold)
+        ].copy()
+        cover_or_total_margin = eligible[actual_col] - eligible[line_col]
+        eligible["result"] = np.select(
+            [cover_or_total_margin.eq(0), cover_or_total_margin * np.sign(eligible[edge_col]) > 0],
+            ["Push", "Win"],
+            default="Loss",
+        )
+        wins = int(eligible["result"].eq("Win").sum())
+        losses = int(eligible["result"].eq("Loss").sum())
+        pushes = int(eligible["result"].eq("Push").sum())
+        bets = wins + losses + pushes
+        net = wins * WIN_PROFIT_AT_MINUS_110 - losses
+        rows.append({
+            "Minimum edge": f"{threshold:.1f}+",
+            "Record (W-L-P)": f"{wins}-{losses}-{pushes}",
+            "Bets": bets,
+            "Net units": round(net, 2),
+            "Units risked": bets,
+            "ROI %": round(100 * net / bets, 2) if bets else np.nan,
+        })
+    return pd.DataFrame(rows)
+
+st.subheader("Cumulative edge-threshold records")
+st.caption("Each row includes every eligible pick at or above that edge; higher-edge picks also count in lower thresholds. Assumes one unit risked and -110 odds.")
+left, right = st.columns(2)
+with left:
+    st.markdown("**ATS**")
+    st.dataframe(threshold_summary(ats_population, "ats_edge", "actual_margin", "spread_line_source_value"), hide_index=True, use_container_width=True)
+with right:
+    st.markdown("**Totals**")
+    st.dataframe(threshold_summary(totals_population, "total_edge", "actual_total", "total_line_source_value"), hide_index=True, use_container_width=True)
 
 st.warning(
     "Important limitations: the saved line fields come from a public schedule feed and are not verified executable "
