@@ -444,6 +444,43 @@ if run:
             on_click="ignore",
         )
 
+        st.subheader("Small-edge results by season")
+        st.caption("Season splits are a robustness check, not a way to choose the best threshold. Interpret short seasons and small bet counts cautiously.")
+        small_edge_season_rows = []
+        for model_label, edge_name in [
+            ("Direct ATS residual", "residual_model_edge"),
+            ("Market anchored", "market_anchored_edge"),
+            ("Market anchored + injuries", "injury_anchored_edge"),
+        ]:
+            available = backtest.dropna(subset=[edge_name]).copy()
+            for minimum_edge in [1.0, 1.5]:
+                eligible = available[pd.to_numeric(available[edge_name], errors="coerce").abs() >= minimum_edge].copy()
+                eligible = grade(eligible, edge_name)
+                for year, group in eligible.groupby("season", dropna=True):
+                    summary = summarize(group, f"{model_label} {minimum_edge:.1f}+")
+                    small_edge_season_rows.append({
+                        "Season": int(year),
+                        "Model": model_label,
+                        "Minimum edge": f"{minimum_edge:.1f}+",
+                        "Record (W-L-P)": f"{summary['Wins']}-{summary['Losses']}-{summary['Pushes']}",
+                        "Bets": len(group),
+                        "Net units": round(summary["Net units at -110"], 4),
+                        "ROI %": round(summary["ROI"], 4) if pd.notna(summary["ROI"]) else np.nan,
+                    })
+        small_edge_season_table = pd.DataFrame(small_edge_season_rows)
+        if not small_edge_season_table.empty:
+            st.dataframe(
+                small_edge_season_table.sort_values(["Model", "Minimum edge", "Season"]),
+                hide_index=True, use_container_width=True
+            )
+            st.download_button(
+                "Download small-edge season breakdown CSV",
+                small_edge_season_table.to_csv(index=False).encode("utf-8"),
+                "nfl_ats_small_edge_by_season.csv",
+                "text/csv",
+                on_click="ignore",
+            )
+
         st.subheader("Results by season")
         season_rows = []
         for year, part in backtest.groupby("season", dropna=True):
