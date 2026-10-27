@@ -406,6 +406,15 @@ if efficiency_parts:
     y.metric("Unique games with a clearly pre-scheduled-date forecast", f"{efficiency.loc[efficiency['timing_status'].eq('Definitely before scheduled date'), 'game_id'].nunique():,}")
     z.metric("Model version(s)", ", ".join(sorted(efficiency["model_version"].dropna().astype(str).unique())) if "model_version" in efficiency else "Unknown")
 
+    # Distinguish raw forecasts from actionable-looking rows and graded results.
+    # A line alone is not a bet; the forecast must also clear the fixed edge threshold.
+    m1, m2, m3, m4 = st.columns(4)
+    m1.metric("Games with spread line", f"{int(efficiency['spread_line'].notna().sum()):,}")
+    m2.metric("Games with total line", f"{int(efficiency['total_line'].notna().sum()):,}")
+    m3.metric("ATS forecasts at 3.5+ edge", f"{int((efficiency['model_ats_edge'].abs() >= EDGE_THRESHOLD).where(efficiency['spread_line'].notna(), False).sum()):,}")
+    m4.metric("Totals forecasts at 3.5+ edge", f"{int((efficiency['model_total_edge'].abs() >= EDGE_THRESHOLD).where(efficiency['total_line'].notna(), False).sum()):,}")
+    st.caption("Counts above are raw archived rows and can include repeat snapshots. Performance grading below uses only the earliest clearly pre-scheduled-date forecast per game and market.")
+
     def efficiency_summary(title, population, bets, edge_col, line_col, actual_col):
         wins = int(bets["result"].eq("Win").sum())
         losses = int(bets["result"].eq("Loss").sum())
