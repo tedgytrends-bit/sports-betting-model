@@ -398,6 +398,22 @@ if run:
         st.dataframe(seasonal_accuracy, hide_index=True, use_container_width=True)
         st.caption("Positive Market advantage means the market spread beats the raw efficiency model. Positive Anchored improvement means the model that also uses the spread beats the market baseline on margin MAE. The market-anchored model is diagnostic and uses the recorded market spread as an input; it is not proof of betting edge.")
 
+        st.subheader("Model audit conclusion")
+        pooled_anchored_mae = float(calibration["market_anchored_margin_error_abs"].mean())
+        pooled_market_mae = float(calibration["market_margin_error_abs"].mean())
+        pooled_efficiency_mae = float(calibration["model_margin_error_abs"].mean())
+        anchored_delta = pooled_market_mae - pooled_anchored_mae
+        efficiency_delta = pooled_market_mae - pooled_efficiency_mae
+        c1, c2, c3 = st.columns(3)
+        c1.metric("Efficiency model vs market", f"{efficiency_delta:+.2f} MAE points")
+        c2.metric("Market-anchored model vs market", f"{anchored_delta:+.2f} MAE points")
+        c3.metric("Anchored model vs raw model", f"{pooled_efficiency_mae - pooled_anchored_mae:+.2f} MAE points")
+        if anchored_delta > 0:
+            st.info("The market-anchored model has lower pooled margin MAE than the market spread in this historical test. This is a modeling signal to investigate, not evidence of profitable ATS bets.")
+        else:
+            st.warning("The market-anchored model does not beat the market spread on pooled margin MAE in this historical test. Do not treat its predicted differences as an edge without further validation.")
+        st.caption("These are pooled historical comparisons. Seasonal variation and the small observed differences matter; a small MAE improvement can easily be noise and does not imply positive betting ROI.")
+
         st.subheader("ATS model coverage and edge-size audit")
         st.caption("This separates missing model predictions from models that produce predictions but rarely clear a large edge threshold. Edge thresholds are held fixed for comparison; do not select a threshold based on the best historical ROI.")
         coverage_rows = []
