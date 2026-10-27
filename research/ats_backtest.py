@@ -297,7 +297,9 @@ if run:
         weekly_table = pd.DataFrame(weekly_rows)
         if not weekly_table.empty:
             st.dataframe(weekly_table.sort_values(["Season", "Week", "Minimum edge"]), hide_index=True, use_container_width=True)
-            st.download_button("Download ATS weekly records CSV", weekly_table.to_csv(index=False).encode("utf-8"), "nfl_ats_weekly_records.csv", "text/csv")
+            st.download_button("Download ATS weekly records CSV", weekly_table.to_csv(index=False).encode("utf-8"), "nfl_ats_weekly_records.csv", "text/csv",
+            on_click="ignore"
+        )
         else:
             st.info("No completed out-of-sample games met the selected thresholds.")
         
@@ -410,7 +412,9 @@ if run:
             "Download injury coverage audit CSV",
             injury_audit.to_csv(index=False).encode("utf-8"),
             "nfl_injury_coverage_audit.csv",
-            "text/csv",
+            "text/csv",,
+            on_click="ignore"
+        
         )
 
         st.subheader("Inspect predictions")
@@ -420,7 +424,9 @@ if run:
         st.dataframe(backtest[[c for c in inspect_cols if c in backtest.columns]].sort_values("gameday", ascending=False).head(100),
                      hide_index=True, use_container_width=True)
         st.download_button("Download ATS backtest CSV", backtest.to_csv(index=False).encode("utf-8"),
-                           "nfl_ats_backtest.csv", "text/csv")
+                           "nfl_ats_backtest.csv", "text/csv",
+            on_click="ignore"
+        )
         st.warning(
             "Closing-line spread coverage is useful for research, but the feed does not prove the line was available at a particular "
             "sportsbook or timestamp. A positive ROI is not enough on its own; look for stable later-season results and prospective tracking."
