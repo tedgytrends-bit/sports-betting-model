@@ -303,6 +303,40 @@ if run:
         else:
             st.info("No completed out-of-sample games met the selected thresholds.")
         
+        st.subheader("Season-by-season ATS robustness — efficiency model")
+        st.caption("Fixed thresholds shown by season to reveal whether aggregate results depend heavily on one year. These are historical diagnostics, not proof of future profitability.")
+        season_rows = []
+        for threshold_value in [3.5, 4.5, 5.5, 6.5, 7.5]:
+            selected = backtest[backtest["model_ats_edge"].abs() >= threshold_value].copy()
+            selected = grade(selected)
+            for year, part in selected.groupby("season", dropna=False):
+                wins = int(part["result"].eq("Win").sum())
+                losses = int(part["result"].eq("Loss").sum())
+                pushes = int(part["result"].eq("Push").sum())
+                bets = wins + losses + pushes
+                net = wins * (100 / 110) - losses
+                season_rows.append({
+                    "Season": int(year) if pd.notna(year) else None,
+                    "Minimum edge": f"{threshold_value:.1f}+",
+                    "Record (W-L-P)": f"{wins}-{losses}-{pushes}",
+                    "Bets": bets,
+                    "Net units": round(net, 2),
+                    "Units risked": bets,
+                    "ROI %": round(100 * net / bets, 2) if bets else np.nan,
+                })
+        season_table = pd.DataFrame(season_rows)
+        if not season_table.empty:
+            st.dataframe(season_table.sort_values(["Season", "Minimum edge"]), hide_index=True, use_container_width=True)
+            st.download_button(
+                "Download ATS season-by-season records CSV",
+                season_table.to_csv(index=False).encode("utf-8"),
+                "nfl_ats_season_records.csv",
+                "text/csv",
+                on_click="ignore",
+            )
+        else:
+            st.info("No season-by-season results available at these fixed thresholds.")
+
         st.subheader("ATS model coverage and edge-size audit")
         st.caption("This separates missing model predictions from models that produce predictions but rarely clear a large edge threshold. Edge thresholds are held fixed for comparison; do not select a threshold based on the best historical ROI.")
         coverage_rows = []
