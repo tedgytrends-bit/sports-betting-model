@@ -72,10 +72,17 @@ def main():
     projections["captured_at_utc"] = captured.isoformat().replace("+00:00", "Z")
     projections["model_version"] = "0.8.0"
     projections["projection_source"] = "nflverse play-by-play efficiency Ridge model"
+    projections["line_source"] = "nflverse public schedule feed"
+    projections["line_source_type"] = "schedule_feed_value_not_verified_sportsbook_quote"
+    projections["sportsbook_name"] = ""
+    projections["odds_price_american"] = float("nan")
+    projections["source_published_at_utc"] = ""
+    projections["source_timestamp_available"] = False
     projections["note"] = (
         "Frozen efficiency-model projection generated at capture time using completed-game "
-        "play-by-play features. Public schedule-feed lines are not verified executable sportsbook "
-        "prices. Capture time alone does not prove prediction preceded kickoff."
+        "play-by-play features. Lines come from the nflverse public schedule feed; bookmaker, executable "
+        "odds price, and source publication timestamp are not supplied or verified. Do not treat these as "
+        "sportsbook quotes. Capture time alone does not prove prediction preceded kickoff."
     )
 
     columns = [
@@ -83,7 +90,9 @@ def main():
         "away_team", "home_team", "spread_line", "total_line",
         "projected_home", "projected_away", "model_predicted_home_margin",
         "model_projected_total", "model_ats_edge", "model_total_edge",
-        "training_games", "model_version", "projection_source", "note",
+        "training_games", "model_version", "projection_source", "line_source",
+        "line_source_type", "sportsbook_name", "odds_price_american",
+        "source_published_at_utc", "source_timestamp_available", "note",
     ]
     result = projections[[c for c in columns if c in projections.columns]].copy()
     OUT.mkdir(parents=True, exist_ok=True)
