@@ -6,8 +6,14 @@ Predictions are saved as immutable, timestamped rows; they are not overwritten.
 """
 from datetime import datetime, timezone
 from pathlib import Path
+import sys
 
-import numpy as np
+# GitHub Actions executes this file with scripts/ as sys.path[0]. Add the
+# repository root so the top-level model.py module can be imported reliably.
+REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
 import pandas as pd
 
 from model import load_schedule_data, load_pbp, build_efficiency_model_dataset, project_upcoming_efficiency
