@@ -562,7 +562,7 @@ if run:
             )
 
         st.subheader("Small-edge diagnostic for residual and market-anchored models")
-        st.caption("These lower cutoffs are for diagnosis only, not recommended betting thresholds. They help reveal whether small predicted adjustments contain useful signal; no cutoff should be selected from this historical table alone.")
+        st.caption("These lower cutoffs are for diagnosis only, not recommended betting thresholds. We have now examined multiple models and thresholds, so isolated positive rows are especially vulnerable to selection bias. Treat these results as exploratory unless the same pre-specified model and threshold hold up on untouched future games.")
         small_edge_rows = []
         for model_label, edge_name in [
             ("Direct ATS residual", "residual_model_edge"),
