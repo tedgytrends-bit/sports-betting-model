@@ -303,6 +303,51 @@ if run:
         else:
             st.info("No completed out-of-sample games met the selected thresholds.")
         
+        st.subheader("Week-by-week comparison across ATS models")
+        st.caption("Same completed games where each model has a prediction. One unit risked per pick; -110 assumed. These are historical simulations, not verified executable prices.")
+        weekly_model_rows = []
+        model_edges = [
+            ("Efficiency model", "model_ats_edge"),
+            ("Direct ATS residual", "residual_model_edge"),
+            ("Market anchored", "market_anchored_edge"),
+            ("Market anchored + injuries", "injury_anchored_edge"),
+        ]
+        for model_label, edge_name in model_edges:
+            available = backtest.dropna(subset=[edge_name]).copy()
+            for minimum_edge in [3.5, 4.5, 5.5, 6.5, 7.5]:
+                eligible = available[available[edge_name].abs() >= minimum_edge].copy()
+                eligible = grade(eligible, edge_name)
+                for (year, week), group in eligible.groupby(["season", "week"], dropna=False):
+                    w = int(group["result"].eq("Win").sum())
+                    l = int(group["result"].eq("Loss").sum())
+                    p = int(group["result"].eq("Push").sum())
+                    n = w + l + p
+                    net_units = w * (100 / 110) - l
+                    weekly_model_rows.append({
+                        "Season": int(year) if pd.notna(year) else None,
+                        "Week": int(week) if pd.notna(week) else None,
+                        "Model": model_label,
+                        "Minimum edge": f"{minimum_edge:.1f}+",
+                        "Record (W-L-P)": f"{w}-{l}-{p}",
+                        "Bets": n,
+                        "Net units": round(net_units, 2),
+                        "Units risked": n,
+                        "ROI %": round(100 * net_units / n, 2) if n else np.nan,
+                    })
+        weekly_model_table = pd.DataFrame(weekly_model_rows)
+        if not weekly_model_table.empty:
+            st.dataframe(
+                weekly_model_table.sort_values(["Season", "Week", "Model", "Minimum edge"]),
+                hide_index=True, use_container_width=True
+            )
+            st.download_button(
+                "Download all-model weekly ATS comparison CSV",
+                weekly_model_table.to_csv(index=False).encode("utf-8"),
+                "nfl_ats_weekly_model_comparison.csv",
+                "text/csv",
+                on_click="ignore",
+            )
+
         st.subheader("Results by season")
         season_rows = []
         for year, part in backtest.groupby("season", dropna=True):
