@@ -69,7 +69,6 @@ archive = archive.sort_values(
 )
 unique_game_count = int(archive["game_id"].nunique())
 duplicate_observations = int(len(archive) - unique_game_count)
-first_snapshot = archive.drop_duplicates("game_id", keep="first").copy()
 
 # Timing classification must be available before choosing market snapshots.
 # Use the raw archive to determine whether each observation was captured before
@@ -95,6 +94,12 @@ archive["timing_status"] = np.select(
     ["Unknown timing", "Definitely before scheduled date", "Same-day timing uncertain", "Captured after scheduled date"],
     default="Unknown timing",
 )
+
+# Compute edge fields on every archived observation before selecting the first
+# complete observation for each market.
+archive["ats_edge"] = archive["baseline_predicted_home_margin"] - archive["spread_line_source_value"]
+archive["total_edge"] = archive["baseline_projected_total"] - archive["total_line_source_value"]
+first_snapshot = archive.drop_duplicates("game_id", keep="first").copy()
 
 try:
     schedule = load_schedule_data()
