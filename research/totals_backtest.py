@@ -456,7 +456,9 @@ if "price_aware_data" in st.session_state:
         "Download all residual-model game predictions (CSV)",
         data=residual_audit.to_csv(index=False).encode("utf-8"),
         file_name="market_residual_model_game_audit.csv",
-        mime="text/csv",
+        mime="text/csv",,
+            on_click="ignore"
+        
     )
     st.caption(
         "The table displays the 30 largest absolute edges. The CSV includes all "
@@ -509,7 +511,9 @@ if "price_aware_data" in st.session_state:
                 ["Season", "Week"]
             ).to_csv(index=False).encode("utf-8"),
             file_name="market_residual_weekly_signal_audit.csv",
-            mime="text/csv",
+            mime="text/csv",,
+            on_click="ignore"
+        
         )
 
     st.subheader("Season-by-season results")
@@ -843,7 +847,9 @@ if "price_aware_data" in st.session_state:
     weekly_table = pd.DataFrame(weekly_rows)
     if not weekly_table.empty:
         st.dataframe(weekly_table.sort_values(["Season", "Week", "Model", "Minimum edge"]), hide_index=True, use_container_width=True)
-        st.download_button("Download totals weekly records CSV", weekly_table.to_csv(index=False).encode("utf-8"), "nfl_totals_weekly_records.csv", "text/csv")
+        st.download_button("Download totals weekly records CSV", weekly_table.to_csv(index=False).encode("utf-8"), "nfl_totals_weekly_records.csv", "text/csv",
+            on_click="ignore"
+        )
     else:
         st.info("No weekly totals records are available for the selected models and thresholds.")
 
@@ -1045,7 +1051,9 @@ if "price_aware_data" in st.session_state:
         "Download all price-aware bet results",
         graded.to_csv(index=False).encode("utf-8"),
         "nfl_price_aware_totals_backtest.csv",
-        "text/csv",
+        "text/csv",,
+            on_click="ignore"
+        
     )
 
     st.subheader("Interpretation")
