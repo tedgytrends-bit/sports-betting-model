@@ -113,11 +113,49 @@ if missing_score_columns:
     st.error(f"Schedule source is missing score fields: {missing_score_columns}")
     st.stop()
 
-scores = schedule[score_columns].copy()
+scores = schedule.copy()
 scores["home_score"] = pd.to_numeric(scores["home_score"], errors="coerce")
 scores["away_score"] = pd.to_numeric(scores["away_score"], errors="coerce")
+scores["gameday"] = pd.to_datetime(scores["gameday"], errors="coerce", utc=True).dt.floor("D")
+scores["home_team"] = scores["home_team"].astype(str).str.upper().str.strip()
+scores["away_team"] = scores["away_team"].astype(str).str.upper().str.strip()
 scores = scores.drop_duplicates("game_id", keep="first")
-graded = first_snapshot.merge(scores, on="game_id", how="left", validate="one_to_one")
+score_lookup = scores[["game_id", "home_score", "away_score", "gameday", "home_team", "away_team"]].copy()
+
+# Join by source game_id first; use date + both teams only as a fallback.
+snapshots_for_join = first_snapshot.copy()
+snapshots_for_join["gameday_join"] = pd.to_datetime(
+    snapshots_for_join.get("gameday_utc", snapshots_for_join.get("gameday")),
+    errors="coerce", utc=True
+).dt.floor("D")
+for col in ["home_team", "away_team"]:
+    if col not in snapshots_for_join.columns:
+        snapshots_for_join[col] = ""
+    snapshots_for_join[col] = snapshots_for_join[col].astype(str).str.upper().str.strip()
+
+graded = snapshots_for_join.merge(
+    score_lookup[["game_id", "home_score", "away_score"]],
+    on="game_id", how="left", validate="one_to_one"
+)
+graded["score_match_method"] = np.where(
+    graded["home_score"].notna() & graded["away_score"].notna(), "game_id", ""
+)
+unmatched = graded["home_score"].isna() | graded["away_score"].isna()
+fallback_scores = score_lookup.dropna(subset=["gameday", "home_score", "away_score"]).rename(
+    columns={"gameday": "gameday_join"}
+).drop_duplicates(["gameday_join", "home_team", "away_team"], keep="first")
+fallback = snapshots_for_join.loc[unmatched].drop(
+    columns=["home_score", "away_score", "score_match_method"], errors="ignore"
+).merge(
+    fallback_scores[["gameday_join", "home_team", "away_team", "home_score", "away_score"]],
+    on=["gameday_join", "home_team", "away_team"], how="left", validate="many_to_one"
+)
+fallback["score_match_method"] = np.where(
+    fallback["home_score"].notna() & fallback["away_score"].notna(), "date+teams", ""
+)
+matched_ids = set(fallback.loc[fallback["score_match_method"].eq("date+teams"), "game_id"])
+graded = graded[~graded["game_id"].isin(matched_ids)].copy()
+graded = pd.concat([graded, fallback], ignore_index=True, sort=False)
 graded["final_available"] = graded["home_score"].notna() & graded["away_score"].notna()
 graded["actual_margin"] = graded["home_score"] - graded["away_score"]
 graded["actual_total"] = graded["home_score"] + graded["away_score"]
@@ -138,7 +176,10 @@ def first_complete_market_snapshot(edge_col, line_col):
 ats_selected = first_complete_market_snapshot("ats_edge", "spread_line_source_value")
 totals_selected = first_complete_market_snapshot("total_edge", "total_line_source_value")
 def attach_scores(selected):
-    result = selected.merge(scores, on="game_id", how="left", validate="one_to_one")
+    result = selected.drop(columns=["home_score", "away_score"], errors="ignore").merge(
+        graded[["game_id", "home_score", "away_score", "score_match_method"]].drop_duplicates("game_id"),
+        on="game_id", how="left", validate="one_to_one"
+    )
     result["final_available"] = result["home_score"].notna() & result["away_score"].notna()
     result["actual_margin"] = result["home_score"] - result["away_score"]
     result["actual_total"] = result["home_score"] + result["away_score"]
@@ -194,6 +235,10 @@ a.metric("Unique games in archive", f"{unique_game_count:,}")
 b.metric("Repeated observations not re-graded", f"{duplicate_observations:,}")
 c.metric("Games with final scores", f"{int(graded['final_available'].sum()):,}")
 d.metric("Definitely pregame snapshots", f"{len(pregame):,}")
+
+id_matches = int(graded["score_match_method"].eq("game_id").sum())
+fallback_matches = int(graded["score_match_method"].eq("date+teams").sum())
+st.caption(f"Final-score join: {id_matches:,} matched by game ID; {fallback_matches:,} matched by scheduled date and teams.")
 
 st.write(
     f"Timing not sufficiently certain for primary grading: **{timing_uncertain_count:,}** games. "
