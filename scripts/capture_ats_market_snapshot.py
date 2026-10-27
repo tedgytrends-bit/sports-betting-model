@@ -138,6 +138,12 @@ def main():
             "spread_value_available": bool(pd.notna(game.get("spread_line", np.nan))),
             "total_line_source_value": game.get("total_line", np.nan),
             "total_value_available": bool(pd.notna(game.get("total_line", np.nan))),
+            "line_source": "nflverse public schedule feed",
+            "line_source_type": "schedule_feed_value_not_verified_sportsbook_quote",
+            "sportsbook_name": np.nan,
+            "odds_price_american": np.nan,
+            "source_published_at_utc": np.nan,
+            "source_timestamp_available": False,
             "baseline_projected_total": round(projected_home + projected_away, 3) if pd.notna(projected_home) and pd.notna(projected_away) else np.nan,
             "baseline_total_edge": round(projected_home + projected_away - float(game.get("total_line")), 3) if pd.notna(projected_home) and pd.notna(projected_away) and pd.notna(game.get("total_line")) else np.nan,
             "baseline_projected_home_points": round(projected_home, 3) if pd.notna(projected_home) else np.nan,
@@ -150,7 +156,7 @@ def main():
             "away_injury_report_rows": away_count,
             "injury_feed_has_source_timestamp": bool("date_modified" in injury_rows.columns) if not injury_rows.empty else False,
             "injury_feed_source": injury_url,
-            "note": "Team row counts describe records in the current weekly feed only; zero is not interpreted as no injuries. Reports can omit long-term injuries and current statuses can change. Capture time does not establish source publication time or guarantee capture before kickoff.",
+            "note": "Spread/total values are from the nflverse public schedule feed; bookmaker, executable odds price, and source publication timestamp are not supplied or verified. Do not treat these as sportsbook quotes. Team row counts describe records in the current weekly feed only; zero is not interpreted as no injuries. Reports can omit long-term injuries and current statuses can change. Capture time does not establish source publication time or guarantee capture before kickoff.",
         }
         records.append(record)
 
