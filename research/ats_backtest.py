@@ -411,6 +411,39 @@ if run:
                 on_click="ignore",
             )
 
+        st.subheader("Small-edge diagnostic for residual and market-anchored models")
+        st.caption("These lower cutoffs are for diagnosis only, not recommended betting thresholds. They help reveal whether small predicted adjustments contain useful signal; no cutoff should be selected from this historical table alone.")
+        small_edge_rows = []
+        for model_label, edge_name in [
+            ("Direct ATS residual", "residual_model_edge"),
+            ("Market anchored", "market_anchored_edge"),
+            ("Market anchored + injuries", "injury_anchored_edge"),
+        ]:
+            available = backtest.dropna(subset=[edge_name]).copy()
+            for minimum_edge in [0.5, 1.0, 1.5, 2.0, 2.5]:
+                eligible = available[pd.to_numeric(available[edge_name], errors="coerce").abs() >= minimum_edge].copy()
+                eligible = grade(eligible, edge_name)
+                summary = summarize(eligible, f"{model_label} {minimum_edge:.1f}+")
+                small_edge_rows.append({
+                    "Model": model_label,
+                    "Minimum absolute edge": f"{minimum_edge:.1f}+",
+                    "Predictions available": len(available),
+                    "Record (W-L-P)": f"{summary['Wins']}-{summary['Losses']}-{summary['Pushes']}",
+                    "Bets": len(eligible),
+                    "Net units": round(summary["Net units at -110"], 4),
+                    "Units risked": len(eligible),
+                    "ROI %": round(summary["ROI"], 4) if pd.notna(summary["ROI"]) else np.nan,
+                })
+        small_edge_table = pd.DataFrame(small_edge_rows)
+        st.dataframe(small_edge_table, hide_index=True, use_container_width=True)
+        st.download_button(
+            "Download small-edge ATS diagnostics CSV",
+            small_edge_table.to_csv(index=False).encode("utf-8"),
+            "nfl_ats_small_edge_diagnostics.csv",
+            "text/csv",
+            on_click="ignore",
+        )
+
         st.subheader("Results by season")
         season_rows = []
         for year, part in backtest.groupby("season", dropna=True):
