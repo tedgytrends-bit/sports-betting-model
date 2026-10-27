@@ -352,17 +352,23 @@ st.download_button(
     "Download raw snapshot audit archive (all observations)",
     data=archive.to_csv(index=False).encode("utf-8"),
     file_name="prospective_results_audit.csv",
-    mime="text/csv",
+    mime="text/csv",,
+            on_click="ignore"
+        
 )
 st.download_button(
     "Download eligible ATS bets",
     data=ats.to_csv(index=False).encode("utf-8"),
     file_name="prospective_ats_graded.csv",
-    mime="text/csv",
+    mime="text/csv",,
+            on_click="ignore"
+        
 )
 st.download_button(
     "Download eligible totals bets",
     data=totals.to_csv(index=False).encode("utf-8"),
     file_name="prospective_totals_graded.csv",
-    mime="text/csv",
+    mime="text/csv",,
+            on_click="ignore"
+        
 )
