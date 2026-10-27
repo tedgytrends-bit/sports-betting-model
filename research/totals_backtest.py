@@ -810,6 +810,43 @@ if "price_aware_data" in st.session_state:
             f"{differences.max():.6f} points."
         )
 
+    st.subheader("Week-by-week record and ROI — totals")
+    st.caption("Chronological out-of-sample projections. Thresholds are cumulative. One unit risked per bet; actual recorded over/under prices are used when available.")
+    weekly_rows = []
+    for threshold_value in [3.5, 4.5, 5.5, 6.5, 7.5]:
+        for strategy_name, projected_col in [
+            ("Efficiency model", "efficiency_projected_total"),
+            ("Recent scoring baseline", "baseline_projected_total"),
+            ("Market residual model", "market_residual_projected_total"),
+        ]:
+            candidate = price_data.dropna(subset=["season", "week", "actual_total", "total_line", projected_col]).copy()
+            threshold_graded = grade_bets(candidate, projected_col, threshold_value, strategy_name)
+            bets = threshold_graded[threshold_graded["bet_side"].isin(["Over", "Under"])].copy()
+            for (year, week), part in bets.groupby(["season", "week"], dropna=False):
+                wins = int(part["result"].eq("Win").sum())
+                losses = int(part["result"].eq("Loss").sum())
+                pushes = int(part["result"].eq("Push").sum())
+                n = wins + losses + pushes
+                risked = float(part["units_risked"].sum())
+                net = float(part["net_units"].sum())
+                weekly_rows.append({
+                    "Season": int(year) if pd.notna(year) else None,
+                    "Week": int(week) if pd.notna(week) else None,
+                    "Model": strategy_name,
+                    "Minimum edge": f"{threshold_value:.1f}+",
+                    "Record (W-L-P)": f"{wins}-{losses}-{pushes}",
+                    "Bets": n,
+                    "Net units": round(net, 2),
+                    "Units risked": round(risked, 2),
+                    "ROI %": round(100 * net / risked, 2) if risked else np.nan,
+                })
+    weekly_table = pd.DataFrame(weekly_rows)
+    if not weekly_table.empty:
+        st.dataframe(weekly_table.sort_values(["Season", "Week", "Model", "Minimum edge"]), hide_index=True, use_container_width=True)
+        st.download_button("Download totals weekly records CSV", weekly_table.to_csv(index=False).encode("utf-8"), "nfl_totals_weekly_records.csv", "text/csv")
+    else:
+        st.info("No weekly totals records are available for the selected models and thresholds.")
+
     st.subheader("Projection accuracy vs. market")
 
     accuracy = price_data.copy()
