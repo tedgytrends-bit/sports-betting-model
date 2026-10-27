@@ -56,37 +56,41 @@ for col in [
         archive[col] = np.nan
     archive[col] = pd.to_numeric(archive[col], errors="coerce")
 
-# Freeze the earliest captured row for each game. Later six-hour snapshots are
-# retained in the raw archive but cannot replace the original prediction or line.
+# Preserve the raw archive, but do not let an early incomplete observation
+# permanently disqualify a game. Older collector versions sometimes saved the
+# matchup before a line/prediction was available. For each market, select the
+# earliest pregame observation containing both its prediction and market line.
+# The selection is made independently for ATS and totals; no later result or
+# score is used to choose a snapshot.
 archive = archive.sort_values(
     ["game_id", "captured_at_utc", "snapshot_file"],
     ascending=[True, True, True],
     na_position="last",
 )
-duplicate_observations = int(archive.duplicated("game_id", keep="first").sum())
+unique_game_count = int(archive["game_id"].nunique())
+duplicate_observations = int(len(archive) - unique_game_count)
 first_snapshot = archive.drop_duplicates("game_id", keep="first").copy()
 
-# Schedule dates from nflverse are date-level in this workflow, not precise
-# kickoff timestamps. Only snapshots captured before the UTC scheduled date are
-# treated as definitely pregame. Same-day and unparseable captures are uncertain.
-if "gameday_utc" in first_snapshot.columns:
-    first_snapshot["scheduled_date_utc"] = pd.to_datetime(
-        first_snapshot["gameday_utc"], errors="coerce", utc=True
+# Timing classification must be available before choosing market snapshots.
+# Use the raw archive to determine whether each observation was captured before
+# the scheduled UTC date; exact kickoff/publication timestamps are unavailable.
+if "gameday_utc" in archive.columns:
+    archive["scheduled_date_utc"] = pd.to_datetime(
+        archive["gameday_utc"], errors="coerce", utc=True
     ).dt.floor("D")
-elif "gameday" in first_snapshot.columns:
-    first_snapshot["scheduled_date_utc"] = pd.to_datetime(
-        first_snapshot["gameday"], errors="coerce", utc=True
+elif "gameday" in archive.columns:
+    archive["scheduled_date_utc"] = pd.to_datetime(
+        archive["gameday"], errors="coerce", utc=True
     ).dt.floor("D")
 else:
-    first_snapshot["scheduled_date_utc"] = pd.NaT
-
-first_snapshot["capture_date_utc"] = first_snapshot["captured_at_utc"].dt.floor("D")
-first_snapshot["timing_status"] = np.select(
+    archive["scheduled_date_utc"] = pd.NaT
+archive["capture_date_utc"] = archive["captured_at_utc"].dt.floor("D")
+archive["timing_status"] = np.select(
     [
-        first_snapshot["captured_at_utc"].isna() | first_snapshot["scheduled_date_utc"].isna(),
-        first_snapshot["capture_date_utc"] < first_snapshot["scheduled_date_utc"],
-        first_snapshot["capture_date_utc"] == first_snapshot["scheduled_date_utc"],
-        first_snapshot["capture_date_utc"] > first_snapshot["scheduled_date_utc"],
+        archive["captured_at_utc"].isna() | archive["scheduled_date_utc"].isna(),
+        archive["capture_date_utc"] < archive["scheduled_date_utc"],
+        archive["capture_date_utc"] == archive["scheduled_date_utc"],
+        archive["capture_date_utc"] > archive["scheduled_date_utc"],
     ],
     ["Unknown timing", "Definitely before scheduled date", "Same-day timing uncertain", "Captured after scheduled date"],
     default="Unknown timing",
@@ -115,12 +119,34 @@ graded["actual_total"] = graded["home_score"] + graded["away_score"]
 graded["ats_edge"] = graded["baseline_predicted_home_margin"] - graded["spread_line_source_value"]
 graded["total_edge"] = graded["baseline_projected_total"] - graded["total_line_source_value"]
 
-# Primary results only use snapshots demonstrably captured before the scheduled
-# UTC date. This is intentionally conservative because exact kickoff timestamps
-# are not part of the saved snapshot schema.
+# Select earliest complete pregame observation separately for each market.
+# Incomplete early rows remain visible in the raw archive, but do not block a
+# later valid pregame observation from being evaluated.
+def first_complete_market_snapshot(edge_col, line_col):
+    candidates = archive[
+        archive["timing_status"].eq("Definitely before scheduled date")
+        & archive[edge_col].notna()
+        & archive[line_col].notna()
+    ].copy()
+    return candidates.drop_duplicates("game_id", keep="first")
+
+ats_selected = first_complete_market_snapshot("ats_edge", "spread_line_source_value")
+totals_selected = first_complete_market_snapshot("total_edge", "total_line_source_value")
+ats_game_ids = set(ats_selected["game_id"])
+totals_game_ids = set(totals_selected["game_id"])
+ats_population = graded[graded["game_id"].isin(ats_game_ids)].copy()
+totals_population = graded[graded["game_id"].isin(totals_game_ids)].copy()
+ats_population = ats_population.drop(columns=["captured_at_utc", "snapshot_file"], errors="ignore").merge(
+    ats_selected[["game_id", "captured_at_utc", "snapshot_file", "timing_status"]].drop_duplicates("game_id"),
+    on="game_id", how="left", validate="one_to_one", suffixes=("", "_selected")
+)
+totals_population = totals_population.drop(columns=["captured_at_utc", "snapshot_file"], errors="ignore").merge(
+    totals_selected[["game_id", "captured_at_utc", "snapshot_file", "timing_status"]].drop_duplicates("game_id"),
+    on="game_id", how="left", validate="one_to_one", suffixes=("", "_selected")
+)
+timing_uncertain_count = int(first_snapshot["timing_status"].isin(["Same-day timing uncertain", "Unknown timing"]).sum())
+late_capture_count = int(first_snapshot["timing_status"].eq("Captured after scheduled date").sum())
 pregame = graded[graded["timing_status"] == "Definitely before scheduled date"].copy()
-timing_uncertain_count = int(graded["timing_status"].isin(["Same-day timing uncertain", "Unknown timing"]).sum())
-late_capture_count = int(graded["timing_status"].eq("Captured after scheduled date").sum())
 
 
 def grade_market(frame, edge_col, actual_col, line_col):
@@ -155,12 +181,12 @@ def grade_market(frame, edge_col, actual_col, line_col):
     return market, eligible
 
 
-ats_population, ats = grade_market(pregame, "ats_edge", "actual_margin", "spread_line_source_value")
-totals_population, totals = grade_market(pregame, "total_edge", "actual_total", "total_line_source_value")
+ats_population, ats = grade_market(ats_population, "ats_edge", "actual_margin", "spread_line_source_value")
+totals_population, totals = grade_market(totals_population, "total_edge", "actual_total", "total_line_source_value")
 
 st.subheader("Snapshot coverage and data quality")
 a, b, c, d = st.columns(4)
-a.metric("Unique games in archive", f"{len(first_snapshot):,}")
+a.metric("Unique games in archive", f"{unique_game_count:,}")
 b.metric("Repeated observations not re-graded", f"{duplicate_observations:,}")
 c.metric("Games with final scores", f"{int(graded['final_available'].sum()):,}")
 d.metric("Definitely pregame snapshots", f"{len(pregame):,}")
@@ -235,8 +261,8 @@ st.warning(
 
 st.subheader("Download audit data")
 st.download_button(
-    "Download first-snapshot audit archive (one row per game)",
-    data=graded.to_csv(index=False).encode("utf-8"),
+    "Download raw snapshot audit archive (all observations)",
+    data=archive.to_csv(index=False).encode("utf-8"),
     file_name="prospective_results_audit.csv",
     mime="text/csv",
 )
