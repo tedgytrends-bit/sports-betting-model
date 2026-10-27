@@ -369,6 +369,22 @@ if run:
         c3.metric("Market spread margin MAE", f"{overall_market_mae:.2f}" if pd.notna(overall_market_mae) else "—", delta=f"{delta:+.2f} points vs model")
         st.caption("Lower MAE is better. The market line is a benchmark, not necessarily an executable closing quote in this dataset. A model can have a reasonable score MAE and still fail to beat the spread market.")
 
+        st.subheader("Model-versus-market accuracy by season")
+        seasonal_accuracy = calibration.groupby("season", dropna=False).agg(
+            Games=("game_id", "count"),
+            **{
+                "Model margin MAE": ("model_margin_error_abs", "mean"),
+                "Market margin MAE": ("market_margin_error_abs", "mean"),
+                "Model signed error": ("predicted_home_margin", lambda x: float((x - calibration.loc[x.index, "actual_home_margin"]).mean())),
+            }
+        ).reset_index().rename(columns={"season": "Season"})
+        seasonal_accuracy["Market MAE advantage"] = (
+            seasonal_accuracy["Model margin MAE"] - seasonal_accuracy["Market margin MAE"]
+        ).round(2)
+        seasonal_accuracy[["Model margin MAE", "Market margin MAE", "Model signed error"]] = seasonal_accuracy[["Model margin MAE", "Market margin MAE", "Model signed error"]].round(2)
+        st.dataframe(seasonal_accuracy, hide_index=True, use_container_width=True)
+        st.caption("Positive Market MAE advantage means the market's spread was closer to the actual margin. Model signed error is predicted minus actual home margin; positive means the model leaned too far toward the home team on average.")
+
         st.subheader("ATS model coverage and edge-size audit")
         st.caption("This separates missing model predictions from models that produce predictions but rarely clear a large edge threshold. Edge thresholds are held fixed for comparison; do not select a threshold based on the best historical ROI.")
         coverage_rows = []
