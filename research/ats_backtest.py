@@ -477,6 +477,45 @@ if run:
             on_click="ignore",
         )
 
+        st.subheader("Season-by-season comparison across ATS models")
+        st.caption("Fixed 3.5-point edge threshold, evaluated independently by season for each model. One unit risked per pick; wins net 0.909 units at -110. Use this to check consistency, not to select the best-looking historical model.")
+        seasonal_model_rows = []
+        for model_label, edge_name in model_edges:
+            available = backtest.dropna(subset=[edge_name]).copy()
+            eligible = available[pd.to_numeric(available[edge_name], errors="coerce").abs() >= 3.5].copy()
+            eligible = grade(eligible, edge_name)
+            for year, part in eligible.groupby("season", dropna=False):
+                wins = int(part["result"].eq("Win").sum())
+                losses = int(part["result"].eq("Loss").sum())
+                pushes = int(part["result"].eq("Push").sum())
+                bets = wins + losses + pushes
+                net = wins * (100 / 110) - losses
+                seasonal_model_rows.append({
+                    "Season": int(year) if pd.notna(year) else None,
+                    "Model": model_label,
+                    "Record (W-L-P)": f"{wins}-{losses}-{pushes}",
+                    "Bets": bets,
+                    "Net units": round(net, 2),
+                    "Units risked": bets,
+                    "ROI %": round(100 * net / bets, 2) if bets else np.nan,
+                })
+        seasonal_model_table = pd.DataFrame(seasonal_model_rows)
+        if not seasonal_model_table.empty:
+            st.dataframe(
+                seasonal_model_table.sort_values(["Season", "Model"]),
+                hide_index=True,
+                use_container_width=True,
+            )
+            st.download_button(
+                "Download season-by-season all-model ATS results CSV",
+                seasonal_model_table.to_csv(index=False).encode("utf-8"),
+                "nfl_ats_season_model_comparison.csv",
+                "text/csv",
+                on_click="ignore",
+            )
+        else:
+            st.info("No season-by-season model results met the 3.5-point threshold.")
+
         st.subheader("Week-by-week comparison across ATS models")
         st.caption("Same completed games where each model has a prediction. One unit risked per pick; -110 assumed. Weekly net units retain precision so they reconcile to overall totals. These are historical simulations, not verified executable prices.")
         weekly_model_rows = []
