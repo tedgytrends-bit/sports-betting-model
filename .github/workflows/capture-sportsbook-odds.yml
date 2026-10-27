@@ -27,15 +27,11 @@ jobs:
       - name: Install dependencies
         run: python -m pip install pandas requests
       - name: Capture bookmaker odds
-        if: ${{ secrets.ODDS_API_KEY != '' }}
         env:
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
           ODDS_API_REGIONS: us
           ODDS_API_MARKETS: spreads,totals
         run: python scripts/capture_sportsbook_odds.py
-      - name: Report missing API key
-        if: ${{ secrets.ODDS_API_KEY == '' }}
-        run: echo "ODDS_API_KEY repository secret is not configured; capture skipped without failure."
       - name: Commit odds snapshots
         run: |
           if [ -n "$(git status --porcelain data/prospective_ats_tracking)" ]; then
