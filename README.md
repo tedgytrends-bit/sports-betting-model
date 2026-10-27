@@ -15,6 +15,8 @@ The public projection board includes the experimental play-by-play efficiency mo
 - app.py: Streamlit dashboard for projections, model comparison, data-quality checks, and historical backtesting.
 - model.py: Data loading, feature engineering, projections, and chronological evaluation.
 - scripts/capture_efficiency_projections.py: Daily frozen upcoming-game forecasts from the play-by-play efficiency model.
+- scripts/capture_sportsbook_odds.py: Optional bookmaker-specific spreads/totals capture from The Odds API v4.
+- .github/workflows/capture-sportsbook-odds.yml: Six-hour odds capture workflow; safely skips when no API key is configured.
 - research/prospective_results_audit.py: Separate grading for baseline snapshots and efficiency-model forecasts.
 - .github/workflows/capture-prospective-efficiency-projections.yml: Daily scheduled capture of efficiency projections.
 - requirements.txt: Python dependencies.
@@ -66,3 +68,10 @@ The manifest helps explain differences between dataset, prediction, comparison, 
 - Keeps the simple recent-scoring baseline archive separate from the efficiency-model archive.
 
 Prospective results remain experimental. Public schedule-feed lines are not verified executable sportsbook prices, and captures on the scheduled UTC date are excluded from primary results because exact kickoff timing is unavailable. Do not infer a betting edge from projections alone.
+
+## Optional sportsbook odds capture
+
+The repository now includes an optional collector for The Odds API v4. To enable it, add an API key as a GitHub Actions repository secret named `ODDS_API_KEY` (Repository → Settings → Secrets and variables → Actions → New repository secret). The `Capture sportsbook odds snapshots` workflow runs every six hours and can also be started manually. Without the secret, the workflow skips capture without failing. It stores one row per event, bookmaker, market, and outcome, including American odds prices, the bookmaker/market update timestamp when supplied, and the local capture timestamp. These third-party feed snapshots still do not guarantee account-specific availability or successful execution.
+
+The collector requests US-region `spreads,totals` only. Check the provider's current plan, NFL access, historical-data entitlement, and quota before purchasing or enabling it; provider plan details can change. The collector does not require the API key to be committed to the repository.
+
