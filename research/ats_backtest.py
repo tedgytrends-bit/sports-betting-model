@@ -337,6 +337,38 @@ if run:
         else:
             st.info("No season-by-season results available at these fixed thresholds.")
 
+        st.subheader("Margin calibration and market comparison")
+        st.caption("Groups games by the model's predicted home margin. Compare average predicted margin with actual margin, and compare model margin error with the market spread's margin error. All predictions are chronological out-of-sample; this tests calibration, not bet profitability by itself.")
+        calibration = backtest.copy()
+        calibration["predicted_home_margin"] = pd.to_numeric(calibration["predicted_home_margin"], errors="coerce")
+        calibration["actual_home_margin"] = pd.to_numeric(calibration["actual_home_margin"], errors="coerce")
+        calibration["model_margin_error_abs"] = (calibration["predicted_home_margin"] - calibration["actual_home_margin"]).abs()
+        calibration["market_margin_error_abs"] = (calibration["spread_line"] - calibration["actual_home_margin"]).abs()
+        calibration = calibration.dropna(subset=["predicted_home_margin", "actual_home_margin", "spread_line"]).copy()
+        calibration["Predicted-margin band"] = pd.cut(
+            calibration["predicted_home_margin"],
+            bins=[-np.inf, -14, -7, 0, 7, 14, np.inf],
+            labels=["Away by 14+", "Away by 7–14", "Away by 0–7", "Home by 0–7", "Home by 7–14", "Home by 14+"],
+            right=False,
+        )
+        calibration_table = calibration.groupby("Predicted-margin band", observed=False).agg(
+            Games=("game_id", "count"),
+            **{"Average predicted home margin": ("predicted_home_margin", "mean"),
+               "Average actual home margin": ("actual_home_margin", "mean"),
+               "Model margin MAE": ("model_margin_error_abs", "mean"),
+               "Market spread margin MAE": ("market_margin_error_abs", "mean")}
+        ).reset_index()
+        calibration_table[["Average predicted home margin", "Average actual home margin", "Model margin MAE", "Market spread margin MAE"]] = calibration_table[["Average predicted home margin", "Average actual home margin", "Model margin MAE", "Market spread margin MAE"]].round(2)
+        st.dataframe(calibration_table, hide_index=True, use_container_width=True)
+        overall_model_mae = calibration["model_margin_error_abs"].mean()
+        overall_market_mae = calibration["market_margin_error_abs"].mean()
+        delta = overall_market_mae - overall_model_mae
+        c1, c2, c3 = st.columns(3)
+        c1.metric("Games compared", f"{len(calibration):,}")
+        c2.metric("Model home-margin MAE", f"{overall_model_mae:.2f}" if pd.notna(overall_model_mae) else "—")
+        c3.metric("Market spread margin MAE", f"{overall_market_mae:.2f}" if pd.notna(overall_market_mae) else "—", delta=f"{delta:+.2f} points vs model")
+        st.caption("Lower MAE is better. The market line is a benchmark, not necessarily an executable closing quote in this dataset. A model can have a reasonable score MAE and still fail to beat the spread market.")
+
         st.subheader("ATS model coverage and edge-size audit")
         st.caption("This separates missing model predictions from models that produce predictions but rarely clear a large edge threshold. Edge thresholds are held fixed for comparison; do not select a threshold based on the best historical ROI.")
         coverage_rows = []
