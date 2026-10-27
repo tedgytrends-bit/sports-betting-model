@@ -370,20 +370,33 @@ if run:
         st.caption("Lower MAE is better. The market line is a benchmark, not necessarily an executable closing quote in this dataset. A model can have a reasonable score MAE and still fail to beat the spread market.")
 
         st.subheader("Model-versus-market accuracy by season")
+        calibration["market_anchored_margin_error_abs"] = (
+            pd.to_numeric(backtest.loc[calibration.index, "market_anchored_home_margin"], errors="coerce")
+            - calibration["actual_home_margin"]
+        ).abs()
         seasonal_accuracy = calibration.groupby("season", dropna=False).agg(
             Games=("game_id", "count"),
             **{
-                "Model margin MAE": ("model_margin_error_abs", "mean"),
-                "Market margin MAE": ("market_margin_error_abs", "mean"),
-                "Model signed error": ("predicted_home_margin", lambda x: float((x - calibration.loc[x.index, "actual_home_margin"]).mean())),
+                "Efficiency model MAE": ("model_margin_error_abs", "mean"),
+                "Market spread MAE": ("market_margin_error_abs", "mean"),
+                "Market-anchored model MAE": ("market_anchored_margin_error_abs", "mean"),
+                "Efficiency model signed error": ("predicted_home_margin", lambda x: float((x - calibration.loc[x.index, "actual_home_margin"]).mean())),
             }
         ).reset_index().rename(columns={"season": "Season"})
-        seasonal_accuracy["Market MAE advantage"] = (
-            seasonal_accuracy["Model margin MAE"] - seasonal_accuracy["Market margin MAE"]
+        seasonal_accuracy["Market advantage vs efficiency"] = (
+            seasonal_accuracy["Efficiency model MAE"] - seasonal_accuracy["Market spread MAE"]
         ).round(2)
-        seasonal_accuracy[["Model margin MAE", "Market margin MAE", "Model signed error"]] = seasonal_accuracy[["Model margin MAE", "Market margin MAE", "Model signed error"]].round(2)
+        seasonal_accuracy["Anchored improvement vs market"] = (
+            seasonal_accuracy["Market spread MAE"] - seasonal_accuracy["Market-anchored model MAE"]
+        ).round(2)
+        numeric_cols = [
+            "Efficiency model MAE", "Market spread MAE", "Market-anchored model MAE",
+            "Efficiency model signed error", "Market advantage vs efficiency",
+            "Anchored improvement vs market",
+        ]
+        seasonal_accuracy[numeric_cols] = seasonal_accuracy[numeric_cols].round(2)
         st.dataframe(seasonal_accuracy, hide_index=True, use_container_width=True)
-        st.caption("Positive Market MAE advantage means the market's spread was closer to the actual margin. Model signed error is predicted minus actual home margin; positive means the model leaned too far toward the home team on average.")
+        st.caption("Positive Market advantage means the market spread beats the raw efficiency model. Positive Anchored improvement means the model that also uses the spread beats the market baseline on margin MAE. The market-anchored model is diagnostic and uses the recorded market spread as an input; it is not proof of betting edge.")
 
         st.subheader("ATS model coverage and edge-size audit")
         st.caption("This separates missing model predictions from models that produce predictions but rarely clear a large edge threshold. Edge thresholds are held fixed for comparison; do not select a threshold based on the best historical ROI.")
