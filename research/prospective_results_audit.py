@@ -140,22 +140,21 @@ graded = snapshots_for_join.merge(
 graded["score_match_method"] = np.where(
     graded["home_score"].notna() & graded["away_score"].notna(), "game_id", ""
 )
+
+# Use a strict date + home/away team key only to fill scores missing from the
+# game_id join. Update the existing rows rather than appending duplicate rows.
 unmatched = graded["home_score"].isna() | graded["away_score"].isna()
 fallback_scores = score_lookup.dropna(subset=["gameday", "home_score", "away_score"]).rename(
     columns={"gameday": "gameday_join"}
 ).drop_duplicates(["gameday_join", "home_team", "away_team"], keep="first")
-fallback = snapshots_for_join.loc[unmatched.to_numpy()].drop(
-    columns=["home_score", "away_score", "score_match_method"], errors="ignore"
-).merge(
+fallback = graded.loc[unmatched, ["gameday_join", "home_team", "away_team"]].merge(
     fallback_scores[["gameday_join", "home_team", "away_team", "home_score", "away_score"]],
     on=["gameday_join", "home_team", "away_team"], how="left", validate="many_to_one"
 )
-fallback["score_match_method"] = np.where(
-    fallback["home_score"].notna() & fallback["away_score"].notna(), "date+teams", ""
-)
-matched_ids = set(fallback.loc[fallback["score_match_method"].eq("date+teams"), "game_id"])
-graded = graded[~graded["game_id"].isin(matched_ids)].copy()
-graded = pd.concat([graded, fallback], ignore_index=True, sort=False)
+graded.loc[unmatched, "home_score"] = fallback["home_score"].to_numpy()
+graded.loc[unmatched, "away_score"] = fallback["away_score"].to_numpy()
+fallback_matched = unmatched & graded["home_score"].notna() & graded["away_score"].notna()
+graded.loc[fallback_matched, "score_match_method"] = "date+teams"
 graded["final_available"] = graded["home_score"].notna() & graded["away_score"].notna()
 graded["actual_margin"] = graded["home_score"] - graded["away_score"]
 graded["actual_total"] = graded["home_score"] + graded["away_score"]
@@ -234,7 +233,7 @@ a, b, c, d = st.columns(4)
 a.metric("Unique games in archive", f"{unique_game_count:,}")
 b.metric("Repeated observations not re-graded", f"{duplicate_observations:,}")
 c.metric("Games with final scores", f"{int(graded['final_available'].sum()):,}")
-d.metric("Definitely pregame snapshots", f"{len(pregame):,}")
+d.metric("Unique games with definitely pregame snapshots", f"{pregame['game_id'].nunique():,}")
 
 id_matches = int(graded["score_match_method"].eq("game_id").sum())
 fallback_matches = int(graded["score_match_method"].eq("date+teams").sum())
