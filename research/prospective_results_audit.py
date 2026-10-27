@@ -340,6 +340,104 @@ with right:
     st.markdown("**Totals**")
     st.dataframe(threshold_summary(totals_population, "total_edge", "actual_total", "total_line_source_value"), hide_index=True, use_container_width=True)
 
+
+# Separately grade the frozen efficiency-model forecasts. These files are created by
+# a daily, model-specific job and are never mixed with the scoring-baseline snapshots.
+efficiency_files = sorted(SNAPSHOT_DIR.glob("efficiency_projection_*.csv"))
+efficiency_parts = []
+for path in efficiency_files:
+    try:
+        frame = pd.read_csv(path, low_memory=False)
+        if not frame.empty:
+            frame["snapshot_file"] = path.name
+            efficiency_parts.append(frame)
+    except Exception as exc:
+        st.warning(f"Could not read efficiency projection file {path.name}: {exc}")
+
+if efficiency_parts:
+    efficiency = pd.concat(efficiency_parts, ignore_index=True, sort=False)
+    efficiency["captured_at_utc"] = pd.to_datetime(efficiency["captured_at_utc"], errors="coerce", utc=True)
+    efficiency["gameday"] = pd.to_datetime(efficiency["gameday"], errors="coerce", utc=True)
+    for col in ["spread_line", "total_line", "model_predicted_home_margin", "model_projected_total", "model_ats_edge", "model_total_edge"]:
+        if col not in efficiency:
+            efficiency[col] = np.nan
+        efficiency[col] = pd.to_numeric(efficiency[col], errors="coerce")
+    efficiency["scheduled_date_utc"] = efficiency["gameday"].dt.floor("D")
+    efficiency["capture_date_utc"] = efficiency["captured_at_utc"].dt.floor("D")
+    efficiency["timing_status"] = np.select(
+        [
+            efficiency["captured_at_utc"].isna() | efficiency["scheduled_date_utc"].isna(),
+            efficiency["capture_date_utc"] < efficiency["scheduled_date_utc"],
+            efficiency["capture_date_utc"] == efficiency["scheduled_date_utc"],
+            efficiency["capture_date_utc"] > efficiency["scheduled_date_utc"],
+        ],
+        ["Unknown timing", "Definitely before scheduled date", "Same-day timing uncertain", "Captured after scheduled date"],
+        default="Unknown timing",
+    )
+    efficiency = efficiency.sort_values(["game_id", "captured_at_utc", "snapshot_file"])
+    eff_ats_selected = efficiency[
+        efficiency["timing_status"].eq("Definitely before scheduled date")
+        & efficiency["model_ats_edge"].notna()
+        & efficiency["spread_line"].notna()
+    ].drop_duplicates("game_id", keep="first").copy()
+    eff_totals_selected = efficiency[
+        efficiency["timing_status"].eq("Definitely before scheduled date")
+        & efficiency["model_total_edge"].notna()
+        & efficiency["total_line"].notna()
+    ].drop_duplicates("game_id", keep="first").copy()
+
+    eff_score_lookup = score_lookup[["game_id", "home_score", "away_score"]].drop_duplicates("game_id")
+    def attach_efficiency_scores(frame):
+        frame = frame.merge(eff_score_lookup, on="game_id", how="left", validate="one_to_one")
+        frame["final_available"] = frame["home_score"].notna() & frame["away_score"].notna()
+        frame["actual_margin"] = frame["home_score"] - frame["away_score"]
+        frame["actual_total"] = frame["home_score"] + frame["away_score"]
+        return frame
+
+    eff_ats_population = attach_efficiency_scores(eff_ats_selected)
+    eff_totals_population = attach_efficiency_scores(eff_totals_selected)
+    _, eff_ats = grade_market(eff_ats_population, "model_ats_edge", "actual_margin", "spread_line")
+    _, eff_totals = grade_market(eff_totals_population, "model_total_edge", "actual_total", "total_line")
+
+    st.header("Efficiency-model prospective results")
+    st.caption("Separate from the recent-scoring baseline. One earliest eligible pre-scheduled-date snapshot per game and market; schedule-feed lines are not verified sportsbook prices.")
+    x, y, z = st.columns(3)
+    x.metric("Saved efficiency snapshots", f"{len(efficiency):,}")
+    y.metric("Unique games with a clearly pre-scheduled-date forecast", f"{efficiency.loc[efficiency['timing_status'].eq('Definitely before scheduled date'), 'game_id'].nunique():,}")
+    z.metric("Model version(s)", ", ".join(sorted(efficiency["model_version"].dropna().astype(str).unique())) if "model_version" in efficiency else "Unknown")
+
+    def efficiency_summary(title, population, bets, edge_col, line_col, actual_col):
+        wins = int(bets["result"].eq("Win").sum())
+        losses = int(bets["result"].eq("Loss").sum())
+        pushes = int(bets["result"].eq("Push").sum())
+        net = float(bets["net_units"].sum())
+        risked = float(bets["units_risked"].sum())
+        roi = 100 * net / risked if risked else np.nan
+        st.subheader(title)
+        a, b, d, e, f = st.columns(5)
+        a.metric("Record (W-L-P)", f"{wins}-{losses}-{pushes}")
+        b.metric("Bets", f"{len(bets):,}")
+        d.metric("Net units", f"{net:+.2f}")
+        e.metric("Units risked", f"{risked:.2f}")
+        f.metric("ROI at assumed -110", f"{roi:+.2f}%" if risked else "—")
+        if not bets.empty:
+            display_cols = ["game_id", "captured_at_utc", "away_team", "home_team", line_col, edge_col, "actual_margin", "actual_total", "result", "net_units", "snapshot_file"]
+            st.dataframe(bets[[col for col in display_cols if col in bets]].sort_values("captured_at_utc", ascending=False), hide_index=True, use_container_width=True)
+        st.dataframe(threshold_summary(population, edge_col, actual_col, line_col), hide_index=True, use_container_width=True)
+
+    efficiency_summary("Efficiency-model ATS", eff_ats_population, eff_ats, "model_ats_edge", "spread_line", "actual_margin")
+    efficiency_summary("Efficiency-model totals", eff_totals_population, eff_totals, "model_total_edge", "total_line", "actual_total")
+    st.download_button(
+        "Download efficiency-model projection archive",
+        data=efficiency.to_csv(index=False).encode("utf-8"),
+        file_name="prospective_efficiency_projection_archive.csv",
+        mime="text/csv",
+        on_click="ignore",
+    )
+else:
+    st.header("Efficiency-model prospective results")
+    st.info("No efficiency-model projection files have been saved yet. The daily GitHub Actions workflow must complete successfully before this section can grade the stronger model.")
+
 st.warning(
     "Important limitations: the saved line fields come from a public schedule feed and are not verified executable "
     "sportsbook prices or odds. The audit grades the first saved snapshot per game and never overwrites it with a later "
