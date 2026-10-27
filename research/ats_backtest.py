@@ -412,7 +412,7 @@ if run:
             "Download injury coverage audit CSV",
             injury_audit.to_csv(index=False).encode("utf-8"),
             "nfl_injury_coverage_audit.csv",
-            "text/csv",,
+            "text/csv",
             on_click="ignore"
         
         )
