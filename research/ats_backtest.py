@@ -272,6 +272,35 @@ if run:
         c4.metric("ROI", f"{fixed['ROI']:+.2f}%" if pd.notna(fixed["ROI"]) else "—")
         st.caption("The 3.5-point threshold is fixed for this first test, not selected as optimal. One unit risked per bet; wins earn 0.909 units; losses lose one unit; pushes return zero.")
 
+        st.subheader("Week-by-week record and ROI — efficiency model")
+        st.caption("Chronological out-of-sample predictions only. Each threshold is cumulative; one unit risked per bet, wins net 0.909 units at -110, losses -1 unit, pushes 0.")
+        weekly_rows = []
+        for threshold_value in [3.5, 4.5, 5.5, 6.5, 7.5]:
+            selected = backtest[backtest["model_ats_edge"].abs() >= threshold_value].copy()
+            selected = grade(selected)
+            for (year, week), part in selected.groupby(["season", "week"], dropna=False):
+                wins = int(part["result"].eq("Win").sum())
+                losses = int(part["result"].eq("Loss").sum())
+                pushes = int(part["result"].eq("Push").sum())
+                bets = wins + losses + pushes
+                net = wins * (100 / 110) - losses
+                weekly_rows.append({
+                    "Season": int(year) if pd.notna(year) else None,
+                    "Week": int(week) if pd.notna(week) else None,
+                    "Minimum edge": f"{threshold_value:.1f}+",
+                    "Record (W-L-P)": f"{wins}-{losses}-{pushes}",
+                    "Bets": bets,
+                    "Net units": round(net, 2),
+                    "Units risked": bets,
+                    "ROI %": round(100 * net / bets, 2) if bets else np.nan,
+                })
+        weekly_table = pd.DataFrame(weekly_rows)
+        if not weekly_table.empty:
+            st.dataframe(weekly_table.sort_values(["Season", "Week", "Minimum edge"]), hide_index=True, use_container_width=True)
+            st.download_button("Download ATS weekly records CSV", weekly_table.to_csv(index=False).encode("utf-8"), "nfl_ats_weekly_records.csv", "text/csv")
+        else:
+            st.info("No completed out-of-sample games met the selected thresholds.")
+        
         st.subheader("Results by season")
         season_rows = []
         for year, part in backtest.groupby("season", dropna=True):
