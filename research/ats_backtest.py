@@ -444,6 +444,50 @@ if run:
             on_click="ignore",
         )
 
+        st.subheader("Historical robustness summary (completed seasons)")
+        st.caption("Excludes the current calendar year so partial-season results are not compared with full seasons. Historical ROI is descriptive, not evidence of a durable edge.")
+        completed_season_rows = []
+        current_calendar_year = pd.Timestamp.now().year
+        for model_label, edge_name in [
+            ("Direct ATS residual", "residual_model_edge"),
+            ("Market anchored", "market_anchored_edge"),
+            ("Market anchored + injuries", "injury_anchored_edge"),
+        ]:
+            available = backtest.dropna(subset=[edge_name]).copy()
+            available = available[pd.to_numeric(available["season"], errors="coerce") < current_calendar_year]
+            for minimum_edge in [1.0, 1.5]:
+                eligible = available[pd.to_numeric(available[edge_name], errors="coerce").abs() >= minimum_edge].copy()
+                eligible = grade(eligible, edge_name)
+                summary = summarize(eligible, f"{model_label} {minimum_edge:.1f}+")
+                profitable_seasons = 0
+                seasons_included = 0
+                for year, group in eligible.groupby("season", dropna=True):
+                    wins = int(group["result"].eq("Win").sum())
+                    losses = int(group["result"].eq("Loss").sum())
+                    pushes = int(group["result"].eq("Push").sum())
+                    net = wins * (100 / 110) - losses
+                    seasons_included += 1
+                    profitable_seasons += int(net > 0)
+                completed_season_rows.append({
+                    "Model": model_label,
+                    "Minimum edge": f"{minimum_edge:.1f}+",
+                    "Seasons included": seasons_included,
+                    "Profitable seasons": profitable_seasons,
+                    "Bets": len(eligible),
+                    "Record (W-L-P)": f"{summary['Wins']}-{summary['Losses']}-{summary['Pushes']}",
+                    "Net units": round(summary["Net units at -110"], 4),
+                    "ROI %": round(summary["ROI"], 4) if pd.notna(summary["ROI"]) else np.nan,
+                })
+        completed_season_table = pd.DataFrame(completed_season_rows)
+        st.dataframe(completed_season_table, hide_index=True, use_container_width=True)
+        st.download_button(
+            "Download completed-season robustness summary CSV",
+            completed_season_table.to_csv(index=False).encode("utf-8"),
+            "nfl_ats_completed_season_robustness.csv",
+            "text/csv",
+            on_click="ignore",
+        )
+
         st.subheader("Small-edge results by season")
         st.caption("Season splits are a robustness check, not a way to choose the best threshold. Interpret short seasons and small bet counts cautiously.")
         small_edge_season_rows = []
