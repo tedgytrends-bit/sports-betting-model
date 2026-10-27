@@ -132,18 +132,17 @@ def first_complete_market_snapshot(edge_col, line_col):
 
 ats_selected = first_complete_market_snapshot("ats_edge", "spread_line_source_value")
 totals_selected = first_complete_market_snapshot("total_edge", "total_line_source_value")
-ats_game_ids = set(ats_selected["game_id"])
-totals_game_ids = set(totals_selected["game_id"])
-ats_population = graded[graded["game_id"].isin(ats_game_ids)].copy()
-totals_population = graded[graded["game_id"].isin(totals_game_ids)].copy()
-ats_population = ats_population.drop(columns=["captured_at_utc", "snapshot_file"], errors="ignore").merge(
-    ats_selected[["game_id", "captured_at_utc", "snapshot_file", "timing_status"]].drop_duplicates("game_id"),
-    on="game_id", how="left", validate="one_to_one", suffixes=("", "_selected")
-)
-totals_population = totals_population.drop(columns=["captured_at_utc", "snapshot_file"], errors="ignore").merge(
-    totals_selected[["game_id", "captured_at_utc", "snapshot_file", "timing_status"]].drop_duplicates("game_id"),
-    on="game_id", how="left", validate="one_to_one", suffixes=("", "_selected")
-)
+def attach_scores(selected):
+    result = selected.merge(scores, on="game_id", how="left", validate="one_to_one")
+    result["final_available"] = result["home_score"].notna() & result["away_score"].notna()
+    result["actual_margin"] = result["home_score"] - result["away_score"]
+    result["actual_total"] = result["home_score"] + result["away_score"]
+    result["ats_edge"] = result["baseline_predicted_home_margin"] - result["spread_line_source_value"]
+    result["total_edge"] = result["baseline_projected_total"] - result["total_line_source_value"]
+    return result
+
+ats_population = attach_scores(ats_selected)
+totals_population = attach_scores(totals_selected)
 timing_uncertain_count = int(first_snapshot["timing_status"].isin(["Same-day timing uncertain", "Unknown timing"]).sum())
 late_capture_count = int(first_snapshot["timing_status"].eq("Captured after scheduled date").sum())
 pregame = graded[graded["timing_status"] == "Definitely before scheduled date"].copy()
