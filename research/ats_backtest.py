@@ -303,8 +303,71 @@ if run:
         else:
             st.info("No completed out-of-sample games met the selected thresholds.")
         
+        st.subheader("ATS model coverage and edge-size audit")
+        st.caption("This separates missing model predictions from models that produce predictions but rarely clear a large edge threshold. Edge thresholds are held fixed for comparison; do not select a threshold based on the best historical ROI.")
+        coverage_rows = []
+        model_edges = [
+            ("Efficiency model", "model_ats_edge"),
+            ("Direct ATS residual", "residual_model_edge"),
+            ("Market anchored", "market_anchored_edge"),
+            ("Market anchored + injuries", "injury_anchored_edge"),
+        ]
+        for model_label, edge_name in model_edges:
+            edge_values = pd.to_numeric(backtest[edge_name], errors="coerce").dropna()
+            abs_edges = edge_values.abs()
+            coverage_rows.append({
+                "Model": model_label,
+                "Predictions available": int(edge_values.size),
+                "Missing predictions": int(len(backtest) - edge_values.size),
+                "Nonzero edges": int((abs_edges > 0).sum()),
+                "Median absolute edge": round(float(abs_edges.median()), 3) if not abs_edges.empty else np.nan,
+                "90th percentile absolute edge": round(float(abs_edges.quantile(0.90)), 3) if not abs_edges.empty else np.nan,
+                "Max absolute edge": round(float(abs_edges.max()), 3) if not abs_edges.empty else np.nan,
+                "Picks at 3.5+": int((abs_edges >= 3.5).sum()),
+                "Picks at 4.5+": int((abs_edges >= 4.5).sum()),
+                "Picks at 5.5+": int((abs_edges >= 5.5).sum()),
+                "Picks at 6.5+": int((abs_edges >= 6.5).sum()),
+                "Picks at 7.5+": int((abs_edges >= 7.5).sum()),
+            })
+        st.dataframe(pd.DataFrame(coverage_rows), hide_index=True, use_container_width=True)
+
+        st.subheader("All-model results by fixed edge threshold")
+        st.caption("Each model is graded on its own available out-of-sample predictions. One unit risked per pick; -110 assumed. Thresholds are diagnostics, not optimized selections.")
+        overall_model_rows = []
+        model_edges = [
+            ("Efficiency model", "model_ats_edge"),
+            ("Direct ATS residual", "residual_model_edge"),
+            ("Market anchored", "market_anchored_edge"),
+            ("Market anchored + injuries", "injury_anchored_edge"),
+        ]
+        for model_label, edge_name in model_edges:
+            available = backtest.dropna(subset=[edge_name]).copy()
+            for minimum_edge in [3.5, 4.5, 5.5, 6.5, 7.5]:
+                eligible = available[pd.to_numeric(available[edge_name], errors="coerce").abs() >= minimum_edge].copy()
+                eligible = grade(eligible, edge_name)
+                summary = summarize(eligible, f"{model_label} {minimum_edge:.1f}+")
+                overall_model_rows.append({
+                    "Model": model_label,
+                    "Minimum edge": f"{minimum_edge:.1f}+",
+                    "Predictions available": len(available),
+                    "Record (W-L-P)": f"{summary['Wins']}-{summary['Losses']}-{summary['Pushes']}",
+                    "Bets": len(eligible),
+                    "Net units": round(summary["Net units at -110"], 4),
+                    "Units risked": len(eligible),
+                    "ROI %": round(summary["ROI"], 4) if pd.notna(summary["ROI"]) else np.nan,
+                })
+        overall_model_table = pd.DataFrame(overall_model_rows)
+        st.dataframe(overall_model_table, hide_index=True, use_container_width=True)
+        st.download_button(
+            "Download all-model overall ATS results CSV",
+            overall_model_table.to_csv(index=False).encode("utf-8"),
+            "nfl_ats_all_model_results.csv",
+            "text/csv",
+            on_click="ignore",
+        )
+
         st.subheader("Week-by-week comparison across ATS models")
-        st.caption("Same completed games where each model has a prediction. One unit risked per pick; -110 assumed. These are historical simulations, not verified executable prices.")
+        st.caption("Same completed games where each model has a prediction. One unit risked per pick; -110 assumed. Weekly net units retain precision so they reconcile to overall totals. These are historical simulations, not verified executable prices.")
         weekly_model_rows = []
         model_edges = [
             ("Efficiency model", "model_ats_edge"),
@@ -330,9 +393,9 @@ if run:
                         "Minimum edge": f"{minimum_edge:.1f}+",
                         "Record (W-L-P)": f"{w}-{l}-{p}",
                         "Bets": n,
-                        "Net units": round(net_units, 2),
+                        "Net units": round(net_units, 6),
                         "Units risked": n,
-                        "ROI %": round(100 * net_units / n, 2) if n else np.nan,
+                        "ROI %": round(100 * net_units / n, 6) if n else np.nan,
                     })
         weekly_model_table = pd.DataFrame(weekly_model_rows)
         if not weekly_model_table.empty:
