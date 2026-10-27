@@ -456,7 +456,7 @@ if "price_aware_data" in st.session_state:
         "Download all residual-model game predictions (CSV)",
         data=residual_audit.to_csv(index=False).encode("utf-8"),
         file_name="market_residual_model_game_audit.csv",
-        mime="text/csv",,
+        mime="text/csv",
             on_click="ignore"
         
     )
@@ -511,7 +511,7 @@ if "price_aware_data" in st.session_state:
                 ["Season", "Week"]
             ).to_csv(index=False).encode("utf-8"),
             file_name="market_residual_weekly_signal_audit.csv",
-            mime="text/csv",,
+            mime="text/csv",
             on_click="ignore"
         
         )
@@ -1051,7 +1051,7 @@ if "price_aware_data" in st.session_state:
         "Download all price-aware bet results",
         graded.to_csv(index=False).encode("utf-8"),
         "nfl_price_aware_totals_backtest.csv",
-        "text/csv",,
+        "text/csv",
             on_click="ignore"
         
     )
