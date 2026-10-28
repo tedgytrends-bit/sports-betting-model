@@ -28,6 +28,11 @@ def main() -> int:
         print("ENDZONE_GAME_ID is missing or invalid. Expected format like 2026_09_KC_BUF.")
         return 2
 
+    # EndzoneAPI's documented response includes game_id, but avoid assuming that
+    # exact echo is the only proof of identity. Validate both team codes too.
+    game_parts = game_id.split("_")
+    requested_away, requested_home = game_parts[-2], game_parts[-1]
+
     captured = datetime.now(timezone.utc).replace(microsecond=0)
     response = requests.post(
         API_URL,
@@ -37,13 +42,40 @@ def main() -> int:
     )
     if response.status_code >= 400:
         raise RuntimeError(f"EndzoneAPI returned HTTP {response.status_code}: {response.text[:1000]}")
-    payload = response.json()
-    if not isinstance(payload, dict) or payload.get("game_id") != game_id:
-        raise RuntimeError("EndzoneAPI response did not match the requested game ID.")
+    try:
+        payload = response.json()
+    except ValueError:
+        raise RuntimeError(f"EndzoneAPI returned non-JSON content: {response.text[:500]}")
+
+    if not isinstance(payload, dict):
+        raise RuntimeError(f"Unexpected EndzoneAPI response type: {type(payload).__name__}")
+    if payload.get("error"):
+        raise RuntimeError(f"EndzoneAPI reported an error: {str(payload.get('error'))[:800]}")
+
+    returned_away = str(payload.get("away_team", "")).upper()
+    returned_home = str(payload.get("home_team", "")).upper()
+    if returned_away != requested_away or returned_home != requested_home:
+        raise RuntimeError(
+            "EndzoneAPI response did not match requested teams. "
+            f"Requested away/home={requested_away}/{requested_home}; "
+            f"returned away/home={returned_away or 'missing'}/{returned_home or 'missing'}; "
+            f"response keys={','.join(sorted(payload.keys()))}. No snapshot saved."
+        )
+
+    provider_game_id = str(payload.get("game_id", "") or "")
+    if provider_game_id and provider_game_id != game_id:
+        print(
+            f"Note: provider game_id {provider_game_id!r} differs from requested ID "
+            f"{game_id!r}, but both team codes match; retaining both identifiers."
+        )
 
     books = payload.get("books", [])
     if not isinstance(books, list) or not books:
-        raise RuntimeError("No bookmaker rows returned; no snapshot saved.")
+        raise RuntimeError(
+            "No bookmaker rows returned; no snapshot saved. "
+            f"Response keys={','.join(sorted(payload.keys()))}; "
+            f"provider game_id={provider_game_id or 'missing'}."
+        )
 
     records = []
     for book in books:
@@ -55,10 +87,11 @@ def main() -> int:
                 continue
             records.append({
                 "captured_at_utc": captured.isoformat().replace("+00:00", "Z"),
-                "game_id": payload.get("game_id"),
+                "game_id": game_id,
+                "provider_game_id": provider_game_id,
                 "kickoff_utc": payload.get("kickoff", ""),
-                "away_team": payload.get("away_team", ""),
-                "home_team": payload.get("home_team", ""),
+                "away_team": returned_away,
+                "home_team": returned_home,
                 "bookmaker": book.get("bookmaker", snap.get("bookmaker", "")),
                 "snapshot_type": snapshot_type,
                 "source_snapshot_at_utc": snap.get("captured_at", ""),
