@@ -69,9 +69,11 @@ The manifest helps explain differences between dataset, prediction, comparison, 
 
 Prospective results remain experimental. Public schedule-feed lines are not verified executable sportsbook prices, and captures on the scheduled UTC date are excluded from primary results because exact kickoff timing is unavailable. Do not infer a betting edge from projections alone.
 
-## Optional sportsbook odds capture
+## Optional EndzoneAPI sportsbook odds capture
 
-The repository now includes an optional collector for The Odds API v4. To enable it, add an API key as a GitHub Actions repository secret named `ODDS_API_KEY` (Repository → Settings → Secrets and variables → Actions → New repository secret). The `Capture sportsbook odds snapshots` workflow runs every six hours and can also be started manually. Without the secret, the workflow skips capture without failing. It stores one row per event, bookmaker, market, and outcome, including American odds prices, the bookmaker/market update timestamp when supplied, and the local capture timestamp. These third-party feed snapshots still do not guarantee account-specific availability or successful execution.
-
-The collector requests US-region `spreads,totals` only. Check the provider's current plan, NFL access, historical-data entitlement, and quota before purchasing or enabling it; provider plan details can change. The collector does not require the API key to be committed to the repository.
+- `.github/workflows/capture-sportsbook-odds.yml` supports manual, single-game EndzoneAPI captures.
+- Add the existing API key as a GitHub Actions repository secret named `ENDZONE_API_KEY`; never commit it or paste it into chat.
+- Run the workflow only for a game whose odds you specifically want to preserve. Each game request consumes provider credits; there is no scheduled polling and no season-wide request.
+- Output files preserve bookmaker, opening/closing/latest values, provider snapshot timestamps, and local capture timestamps. A record is not eligible for prospective grading unless its provider timestamp can be verified as before kickoff.
+- No The Odds API key is needed.
 
