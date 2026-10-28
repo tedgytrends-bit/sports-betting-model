@@ -516,6 +516,50 @@ if "price_aware_data" in st.session_state:
         
         )
 
+    st.subheader("All-game weekly totals record — efficiency model")
+    st.caption(
+        "Every completed game with a valid efficiency-model total prediction, market total, and recorded usable over/under prices is graded by the model's predicted direction, regardless of edge size. "
+        "Exact zero-edge games have no directional pick and are excluded. Net units use each game's recorded American odds; this remains a historical closing-line simulation, not verified bet-time pricing."
+    )
+    all_game_totals = price_data.dropna(
+        subset=["efficiency_projected_total", "total_line", "actual_total", "season", "week"]
+    ).copy()
+    all_game_totals["all_game_edge"] = (
+        pd.to_numeric(all_game_totals["efficiency_projected_total"], errors="coerce")
+        - pd.to_numeric(all_game_totals["total_line"], errors="coerce")
+    )
+    all_game_totals = all_game_totals[all_game_totals["all_game_edge"].abs() > 0].copy()
+    all_game_totals = grade_bets(
+        all_game_totals, "efficiency_projected_total", 0.000001, "Efficiency model — all directional games"
+    )
+    all_game_totals = all_game_totals[all_game_totals["bet_side"].isin(["Over", "Under"])].copy()
+    all_game_week_rows = []
+    for (season_value, week_value), part in all_game_totals.groupby(["season", "week"], dropna=False):
+        wins = int(part["result"].eq("Win").sum())
+        losses = int(part["result"].eq("Loss").sum())
+        pushes = int(part["result"].eq("Push").sum())
+        bets = wins + losses + pushes
+        net = float(part["net_units"].sum())
+        risked = float(part["units_risked"].sum())
+        all_game_week_rows.append({
+            "Season": int(season_value), "Week": int(week_value),
+            "Record (W-L-P)": f"{wins}-{losses}-{pushes}", "Bets": bets,
+            "Net units": round(net, 4), "Units risked": round(risked, 4),
+            "ROI %": round(100 * net / risked, 4) if risked else np.nan,
+        })
+    all_game_week_table = pd.DataFrame(all_game_week_rows)
+    if not all_game_week_table.empty:
+        all_game_week_table = all_game_week_table.sort_values(["Season", "Week"])
+        all_game_week_table["Cumulative units (season)"] = all_game_week_table.groupby("Season")["Net units"].cumsum().round(4)
+        st.dataframe(all_game_week_table, hide_index=True, use_container_width=True)
+        st.download_button(
+            "Download all-game weekly totals record CSV",
+            all_game_week_table.to_csv(index=False).encode("utf-8"),
+            "nfl_totals_all_game_weekly_record.csv",
+            "text/csv",
+            on_click="ignore",
+        )
+
     st.subheader("Season-by-season results")
 
     season_results = summarize(graded, ["strategy", "season"])
