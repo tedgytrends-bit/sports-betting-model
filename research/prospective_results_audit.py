@@ -670,12 +670,24 @@ if odds_files:
         if not latest_odds.empty:
             ats_grades = latest_odds.apply(lambda row: grade_actual_price(row, "ATS"), axis=1)
             totals_grades = latest_odds.apply(lambda row: grade_actual_price(row, "Totals"), axis=1)
-            odds.loc[latest_mask, "ATS result"] = ats_grades["result"].to_numpy()
-            odds.loc[latest_mask, "ATS net units"] = ats_grades["net_units"].to_numpy()
-            odds.loc[latest_mask, "ATS units risked"] = ats_grades["units_risked"].to_numpy()
-            odds.loc[latest_mask, "Totals result"] = totals_grades["result"].to_numpy()
-            odds.loc[latest_mask, "Totals net units"] = totals_grades["net_units"].to_numpy()
-            odds.loc[latest_mask, "Totals units risked"] = totals_grades["units_risked"].to_numpy()
+            # Assign whole columns rather than masked .loc writes. This avoids
+            # pandas 3.x strict dtype/upcast errors when mixed-type apply results
+            # contain nullable values for pending games.
+            for result_col, grades, source_col in [
+                ("ATS result", ats_grades, "result"),
+                ("ATS net units", ats_grades, "net_units"),
+                ("ATS units risked", ats_grades, "units_risked"),
+                ("Totals result", totals_grades, "result"),
+                ("Totals net units", totals_grades, "net_units"),
+                ("Totals units risked", totals_grades, "units_risked"),
+            ]:
+                full_values = pd.Series(np.nan, index=odds.index, dtype="object")
+                if result_col.endswith("result"):
+                    full_values.loc[latest_odds.index] = grades[source_col].astype(str).to_numpy()
+                else:
+                    numeric_values = pd.to_numeric(grades[source_col], errors="coerce").astype("float64").to_numpy()
+                    full_values.loc[latest_odds.index] = numeric_values
+                odds[result_col] = full_values
 
         odds["timing_eligible"] = (
             odds["provider_time_before_kickoff"]
