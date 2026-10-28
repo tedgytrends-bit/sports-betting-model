@@ -1,15 +1,18 @@
-name: Capture sportsbook odds snapshots
+name: Capture one EndzoneAPI sportsbook odds snapshot
 
 on:
-  schedule:
-    - cron: "11 */6 * * *"
   workflow_dispatch:
+    inputs:
+      game_id:
+        description: "One NFL game ID, e.g. 2026_09_KC_BUF (one request; provider charges credits)"
+        required: true
+        type: string
 
 permissions:
   contents: write
 
 concurrency:
-  group: prospective-sportsbook-odds
+  group: endzoneapi-single-game-odds
   cancel-in-progress: false
 
 jobs:
@@ -26,21 +29,20 @@ jobs:
           python-version: "3.11"
       - name: Install dependencies
         run: python -m pip install pandas requests
-      - name: Capture bookmaker odds
+      - name: Capture one game's odds from EndzoneAPI
         env:
-          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
-          ODDS_API_REGIONS: us
-          ODDS_API_MARKETS: spreads,totals
+          ENDZONE_API_KEY: \${{ secrets.ENDZONE_API_KEY }}
+          ENDZONE_GAME_ID: \${{ inputs.game_id }}
         run: python scripts/capture_sportsbook_odds.py
-      - name: Commit odds snapshots
+      - name: Commit immutable odds snapshot
         run: |
           if [ -n "$(git status --porcelain data/prospective_ats_tracking)" ]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add data/prospective_ats_tracking/sportsbook_odds_*.csv
-            git commit -m "Capture bookmaker-specific NFL odds snapshot"
+            git add data/prospective_ats_tracking/endzone_odds_*.csv
+            git commit -m "Capture EndzoneAPI odds for \${{ inputs.game_id }}"
             git pull --rebase origin main
             git push origin HEAD:main
           else
-            echo "No sportsbook odds snapshots created."
+            echo "No EndzoneAPI odds snapshot created."
           fi
