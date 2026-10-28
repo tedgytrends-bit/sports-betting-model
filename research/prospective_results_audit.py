@@ -479,3 +479,134 @@ st.download_button(
             on_click="ignore"
         
 )
+
+
+# Verified EndzoneAPI bookmaker archive. Kept separate from schedule-feed results above:
+# spread_home uses the sportsbook team-handicap convention (e.g. home -3 when favored),
+# which is the opposite sign of nflverse's spread_line (positive when home is favored).
+odds_files = sorted(SNAPSHOT_DIR.glob("endzone_odds_*.csv"))
+if odds_files:
+    st.subheader("Verified sportsbook odds — EndzoneAPI")
+    st.caption(
+        "Bookmaker-specific odds are audited separately from schedule-feed backtests. "
+        "A row is eligible for future prospective grading only when its frozen model prediction "
+        "predates the provider's odds timestamp and that timestamp predates kickoff."
+    )
+    odds_parts = []
+    odds_errors = []
+    for path in odds_files:
+        try:
+            frame = pd.read_csv(path, low_memory=False)
+            if not frame.empty:
+                frame["odds_file"] = path.name
+                odds_parts.append(frame)
+        except Exception as exc:
+            odds_errors.append(f"{path.name}: {exc}")
+    for message in odds_errors:
+        st.warning(f"Could not read EndzoneAPI file — {message}")
+    if odds_parts:
+        odds = pd.concat(odds_parts, ignore_index=True, sort=False)
+        for col in ["captured_at_utc", "source_snapshot_at_utc", "kickoff_utc"]:
+            if col not in odds:
+                odds[col] = pd.NaT
+            odds[col] = pd.to_datetime(odds[col], errors="coerce", utc=True)
+        for col in [
+            "spread_home", "spread_home_odds", "spread_away", "spread_away_odds",
+            "total", "total_over_odds", "total_under_odds",
+        ]:
+            if col not in odds:
+                odds[col] = np.nan
+            odds[col] = pd.to_numeric(odds[col], errors="coerce")
+        odds["home_team"] = odds.get("home_team", "").astype(str).str.upper().str.strip()
+        odds["away_team"] = odds.get("away_team", "").astype(str).str.upper().str.strip()
+        odds["provider_time_before_kickoff"] = (
+            odds["source_snapshot_at_utc"].notna()
+            & odds["kickoff_utc"].notna()
+            & (odds["source_snapshot_at_utc"] < odds["kickoff_utc"])
+        )
+        odds["source_time_not_future_of_capture"] = (
+            odds["source_snapshot_at_utc"].notna()
+            & odds["captured_at_utc"].notna()
+            & (odds["source_snapshot_at_utc"] <= odds["captured_at_utc"])
+        )
+
+        # Attach the latest frozen efficiency projection that existed no later than
+        # the provider snapshot timestamp. Never use a prediction generated afterward.
+        if "efficiency" in locals() and not efficiency.empty:
+            pred_cols = [
+                "game_id", "captured_at_utc", "model_predicted_home_margin",
+                "model_projected_total", "model_ats_edge", "model_total_edge",
+                "home_team", "away_team",
+            ]
+            pred_cols = [c for c in pred_cols if c in efficiency.columns]
+            preds = efficiency[pred_cols].copy()
+            preds = preds.rename(columns={
+                "captured_at_utc": "prediction_captured_at_utc",
+                "home_team": "prediction_home_team",
+                "away_team": "prediction_away_team",
+            })
+            odds = odds.merge(preds, on="game_id", how="left")
+            odds["prediction_team_match"] = (
+                odds["home_team"].eq(odds["prediction_home_team"].astype(str).str.upper().str.strip())
+                & odds["away_team"].eq(odds["prediction_away_team"].astype(str).str.upper().str.strip())
+            )
+            odds["prediction_precedes_odds"] = (
+                odds["prediction_captured_at_utc"].notna()
+                & odds["source_snapshot_at_utc"].notna()
+                & (odds["prediction_captured_at_utc"] <= odds["source_snapshot_at_utc"])
+            )
+        else:
+            odds["prediction_captured_at_utc"] = pd.NaT
+            odds["model_predicted_home_margin"] = np.nan
+            odds["model_projected_total"] = np.nan
+            odds["prediction_team_match"] = False
+            odds["prediction_precedes_odds"] = False
+
+        odds["endzone_ats_edge"] = odds["model_predicted_home_margin"] + odds["spread_home"]
+        odds["endzone_total_edge"] = odds["model_projected_total"] - odds["total"]
+        odds["timing_eligible"] = (
+            odds["provider_time_before_kickoff"]
+            & odds["source_time_not_future_of_capture"]
+            & odds["prediction_precedes_odds"]
+            & odds["prediction_team_match"]
+        )
+        odds["timing_status"] = np.select(
+            [
+                ~odds["provider_time_before_kickoff"],
+                ~odds["source_time_not_future_of_capture"],
+                ~odds["prediction_team_match"],
+                ~odds["prediction_precedes_odds"],
+            ],
+            [
+                "Provider timestamp missing/after kickoff",
+                "Provider timestamp after collector capture",
+                "No matching frozen prediction/team pairing",
+                "Prediction missing or captured after odds",
+            ],
+            default="Timing checks passed",
+        )
+        st.write(
+            f"Saved bookmaker rows: **{len(odds):,}** · "
+            f"Games: **{odds['game_id'].nunique():,}** · "
+            f"Rows passing prediction/odds/kickoff timing checks: **{int(odds['timing_eligible'].sum()):,}**"
+        )
+        display_cols = [
+            "game_id", "away_team", "home_team", "bookmaker", "snapshot_type",
+            "source_snapshot_at_utc", "kickoff_utc", "spread_home", "spread_home_odds",
+            "spread_away", "spread_away_odds", "total", "total_over_odds", "total_under_odds",
+            "model_predicted_home_margin", "model_projected_total", "endzone_ats_edge",
+            "endzone_total_edge", "timing_status", "odds_file",
+        ]
+        st.dataframe(
+            odds[[c for c in display_cols if c in odds.columns]].sort_values(
+                ["game_id", "bookmaker", "source_snapshot_at_utc"], ascending=[True, True, False]
+            ),
+            hide_index=True,
+            use_container_width=True,
+        )
+        st.caption(
+            "Sign convention: EndzoneAPI spread_home is the home team's signed handicap (negative means home favored); "
+            "the model's home-margin ATS edge is projected home margin + spread_home. "
+            "This section is a data-quality and timing audit, not a profitability claim. Final grading with actual prices "
+            "will only be enabled after the matching frozen prediction and final score are verified."
+        )
