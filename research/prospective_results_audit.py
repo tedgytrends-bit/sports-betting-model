@@ -530,37 +530,47 @@ if odds_files:
             & (odds["source_snapshot_at_utc"] <= odds["captured_at_utc"])
         )
 
-        # Attach the latest frozen efficiency projection that existed no later than
-        # the provider snapshot timestamp. Never use a prediction generated afterward.
+        # Attach exactly one prediction per odds row: the most recent frozen
+        # efficiency projection for the same game/teams captured at or before the
+        # provider's odds timestamp. A plain merge multiplies rows when several
+        # daily predictions exist for the same game and can leak future predictions.
+        odds["prediction_captured_at_utc"] = pd.NaT
+        odds["model_predicted_home_margin"] = np.nan
+        odds["model_projected_total"] = np.nan
+        odds["prediction_team_match"] = False
+        odds["prediction_precedes_odds"] = False
+
         if "efficiency" in locals() and not efficiency.empty:
             pred_cols = [
                 "game_id", "captured_at_utc", "model_predicted_home_margin",
-                "model_projected_total", "model_ats_edge", "model_total_edge",
-                "home_team", "away_team",
+                "model_projected_total", "home_team", "away_team",
             ]
-            pred_cols = [c for c in pred_cols if c in efficiency.columns]
-            preds = efficiency[pred_cols].copy()
-            preds = preds.rename(columns={
-                "captured_at_utc": "prediction_captured_at_utc",
-                "home_team": "prediction_home_team",
-                "away_team": "prediction_away_team",
-            })
-            odds = odds.merge(preds, on="game_id", how="left")
-            odds["prediction_team_match"] = (
-                odds["home_team"].eq(odds["prediction_home_team"].astype(str).str.upper().str.strip())
-                & odds["away_team"].eq(odds["prediction_away_team"].astype(str).str.upper().str.strip())
+            preds = efficiency[[col for col in pred_cols if col in efficiency.columns]].copy()
+            preds["game_id"] = preds["game_id"].astype(str)
+            preds["captured_at_utc"] = pd.to_datetime(
+                preds["captured_at_utc"], errors="coerce", utc=True
             )
-            odds["prediction_precedes_odds"] = (
-                odds["prediction_captured_at_utc"].notna()
-                & odds["source_snapshot_at_utc"].notna()
-                & (odds["prediction_captured_at_utc"] <= odds["source_snapshot_at_utc"])
-            )
-        else:
-            odds["prediction_captured_at_utc"] = pd.NaT
-            odds["model_predicted_home_margin"] = np.nan
-            odds["model_projected_total"] = np.nan
-            odds["prediction_team_match"] = False
-            odds["prediction_precedes_odds"] = False
+            preds["home_team"] = preds["home_team"].astype(str).str.upper().str.strip()
+            preds["away_team"] = preds["away_team"].astype(str).str.upper().str.strip()
+
+            # Positional indices preserve each bookmaker/snapshot row without row multiplication.
+            for idx, odds_row in odds.iterrows():
+                candidates = preds[
+                    preds["game_id"].eq(str(odds_row["game_id"]))
+                    & preds["home_team"].eq(odds_row["home_team"])
+                    & preds["away_team"].eq(odds_row["away_team"])
+                    & preds["captured_at_utc"].notna()
+                    & odds_row["source_snapshot_at_utc"].notna()
+                    & (preds["captured_at_utc"] <= odds_row["source_snapshot_at_utc"])
+                ].sort_values("captured_at_utc")
+                if candidates.empty:
+                    continue
+                pred = candidates.iloc[-1]
+                odds.at[idx, "prediction_captured_at_utc"] = pred["captured_at_utc"]
+                odds.at[idx, "model_predicted_home_margin"] = pred["model_predicted_home_margin"]
+                odds.at[idx, "model_projected_total"] = pred["model_projected_total"]
+                odds.at[idx, "prediction_team_match"] = True
+                odds.at[idx, "prediction_precedes_odds"] = True
 
         odds["endzone_ats_edge"] = odds["model_predicted_home_margin"] + odds["spread_home"]
         odds["endzone_total_edge"] = odds["model_projected_total"] - odds["total"]
