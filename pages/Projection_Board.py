@@ -62,9 +62,31 @@ try:
         all_projections = all_projections[
             pd.to_numeric(all_projections["season"], errors="coerce") == season
         ].copy()
-        market_lines = games[["game_id", "total_line"]].drop_duplicates("game_id")
+        market_lines = games[["game_id", "spread_line", "total_line"]].drop_duplicates("game_id")
         all_projections = all_projections.merge(
             market_lines, on="game_id", how="left", validate="one_to_one"
+        )
+        all_projections["market_spread_line"] = pd.to_numeric(
+            all_projections["spread_line"], errors="coerce"
+        )
+        all_projections["predicted_home_margin"] = (
+            pd.to_numeric(all_projections["projected_home"], errors="coerce")
+            - pd.to_numeric(all_projections["projected_away"], errors="coerce")
+        )
+        # nflverse convention: positive spread_line means the home team is favored.
+        # Positive edge means the model is more favorable to the home team than market.
+        all_projections["ats_edge"] = (
+            all_projections["predicted_home_margin"] - all_projections["market_spread_line"]
+        )
+        all_projections["ats_lean"] = np.select(
+            [
+                all_projections["market_spread_line"].isna(),
+                all_projections["ats_edge"].isna(),
+                all_projections["ats_edge"] > 0,
+                all_projections["ats_edge"] < 0,
+            ],
+            ["No market line", "Unavailable", "Home team lean", "Away team lean"],
+            default="No edge",
         )
         all_projections["market_total"] = pd.to_numeric(
             all_projections["total_line"], errors="coerce"
@@ -143,6 +165,14 @@ else:
     )
     display["Model home spread"] = display["model_home_spread"].map(lambda x: f"{x:+.1f}")
     display["Projected total"] = display["projected_total"].map(lambda x: f"{x:.1f}")
+    if "market_spread_line" in display.columns:
+        display["Market spread"] = pd.to_numeric(
+            display["market_spread_line"], errors="coerce"
+        ).map(lambda x: f"{x:+.1f}" if pd.notna(x) else "Not available yet")
+        display["ATS edge"] = pd.to_numeric(
+            display["ats_edge"], errors="coerce"
+        ).map(lambda x: f"{x:+.1f}" if pd.notna(x) else "Not available")
+        display["ATS lean"] = display["ats_lean"]
     if "market_total" in display.columns:
         display["Market total"] = pd.to_numeric(
             display["market_total"], errors="coerce"
@@ -161,6 +191,8 @@ else:
     # Keep the main board compact: the projected score already identifies
     # both teams, and the score margin is not yet a validated ATS model.
     table_columns = ["Date", "Projected score", "Projected total"]
+    if "Market spread" in display.columns:
+        table_columns += ["Market spread", "ATS edge", "ATS lean"]
     if "Market total" in display.columns:
         table_columns += ["Market total", "Model vs market", "Total lean"]
     st.dataframe(
@@ -171,7 +203,10 @@ else:
             "Date": st.column_config.TextColumn("Date", width="small"),
             "Projected score": st.column_config.TextColumn("Projected score", width="large"),
             "Projected total": st.column_config.TextColumn("Model total", width="small"),
-            "Market total": st.column_config.TextColumn("Market", width="small"),
+            "Market spread": st.column_config.TextColumn("Spread", width="small"),
+            "ATS edge": st.column_config.TextColumn("ATS edge", width="small"),
+            "ATS lean": st.column_config.TextColumn("ATS lean", width="medium"),
+            "Market total": st.column_config.TextColumn("Total market", width="small"),
             "Model vs market": st.column_config.TextColumn("Difference", width="small"),
             "Total lean": st.column_config.TextColumn("Total lean", width="small"),
         },
