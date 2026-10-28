@@ -111,10 +111,6 @@ else:
     all_projections = baseline_projection(games, season=season, lookback=6)
     projection_source = "Recent-scoring baseline (fast startup)"
     if not all_projections.empty:
-        market_lines = games[["game_id", "spread_line", "total_line"]].drop_duplicates("game_id")
-        all_projections = all_projections.merge(
-            market_lines, on="game_id", how="left", validate="one_to_one"
-        )
         all_projections["market_spread_line"] = pd.to_numeric(
             all_projections["spread_line"], errors="coerce"
         )
