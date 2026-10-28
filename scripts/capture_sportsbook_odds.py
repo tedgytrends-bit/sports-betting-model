@@ -28,8 +28,6 @@ def main() -> int:
         print("ENDZONE_GAME_ID is missing or invalid. Expected format like 2026_09_KC_BUF.")
         return 2
 
-    # EndzoneAPI's documented response includes game_id, but avoid assuming that
-    # exact echo is the only proof of identity. Validate both team codes too.
     game_parts = game_id.split("_")
     requested_away, requested_home = game_parts[-2], game_parts[-1]
 
@@ -43,12 +41,33 @@ def main() -> int:
     if response.status_code >= 400:
         raise RuntimeError(f"EndzoneAPI returned HTTP {response.status_code}: {response.text[:1000]}")
     try:
-        payload = response.json()
+        envelope = response.json()
     except ValueError:
         raise RuntimeError(f"EndzoneAPI returned non-JSON content: {response.text[:500]}")
 
+    # The REST endpoint may wrap its documented result in a top-level "data".
+    payload = envelope.get("data") if isinstance(envelope, dict) and "data" in envelope else envelope
+    if isinstance(payload, list):
+        matching = [
+            item for item in payload
+            if isinstance(item, dict)
+            and str(item.get("away_team", "")).upper() == requested_away
+            and str(item.get("home_team", "")).upper() == requested_home
+        ]
+        if len(matching) == 1:
+            payload = matching[0]
+        elif len(payload) == 1 and isinstance(payload[0], dict):
+            payload = payload[0]
+        else:
+            raise RuntimeError(
+                "EndzoneAPI returned a data list that could not be uniquely matched to the requested teams. "
+                f"Items={len(payload)}; no snapshot saved."
+            )
+
     if not isinstance(payload, dict):
-        raise RuntimeError(f"Unexpected EndzoneAPI response type: {type(payload).__name__}")
+        raise RuntimeError(
+            f"Unexpected EndzoneAPI data type: {type(payload).__name__}; no snapshot saved."
+        )
     if payload.get("error"):
         raise RuntimeError(f"EndzoneAPI reported an error: {str(payload.get('error'))[:800]}")
 
@@ -56,10 +75,10 @@ def main() -> int:
     returned_home = str(payload.get("home_team", "")).upper()
     if returned_away != requested_away or returned_home != requested_home:
         raise RuntimeError(
-            "EndzoneAPI response did not match requested teams. "
+            "EndzoneAPI data did not match requested teams. "
             f"Requested away/home={requested_away}/{requested_home}; "
             f"returned away/home={returned_away or 'missing'}/{returned_home or 'missing'}; "
-            f"response keys={','.join(sorted(payload.keys()))}. No snapshot saved."
+            f"data keys={','.join(sorted(payload.keys()))}. No snapshot saved."
         )
 
     provider_game_id = str(payload.get("game_id", "") or "")
@@ -73,7 +92,7 @@ def main() -> int:
     if not isinstance(books, list) or not books:
         raise RuntimeError(
             "No bookmaker rows returned; no snapshot saved. "
-            f"Response keys={','.join(sorted(payload.keys()))}; "
+            f"Data keys={','.join(sorted(payload.keys()))}; "
             f"provider game_id={provider_game_id or 'missing'}."
         )
 
