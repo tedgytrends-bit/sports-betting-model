@@ -512,7 +512,7 @@ if odds_files:
             odds[col] = pd.to_datetime(odds[col], errors="coerce", utc=True)
         for col in [
             "spread_home", "spread_home_odds", "spread_away", "spread_away_odds",
-            "total", "total_over_odds", "total_under_odds",
+            "total", "total_over_odds", "total_under_odds", "home_moneyline", "away_moneyline",
         ]:
             if col not in odds:
                 odds[col] = np.nan
@@ -608,6 +608,13 @@ if odds_files:
         odds["Total edge qualifies (3.5+)"] = (
             odds["endzone_total_edge"].abs() >= EDGE_THRESHOLD
         ) & odds["model_projected_total"].notna() & odds["total"].notna()
+
+        odds["timing_eligible"] = (
+            odds["provider_time_before_kickoff"]
+            & odds["source_time_not_future_of_capture"]
+            & odds["prediction_precedes_odds"]
+            & odds["prediction_team_match"]
+        )
 
         # Join final scores so completed archive games can eventually be graded
         # at actual American prices. Unfinished games remain ungraded.
