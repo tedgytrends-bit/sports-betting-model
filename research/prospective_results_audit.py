@@ -560,7 +560,7 @@ if odds_files:
                     & preds["home_team"].eq(odds_row["home_team"])
                     & preds["away_team"].eq(odds_row["away_team"])
                     & preds["captured_at_utc"].notna()
-                    & odds_row["source_snapshot_at_utc"].notna()
+                    & pd.notna(odds_row["source_snapshot_at_utc"])
                     & (preds["captured_at_utc"] <= odds_row["source_snapshot_at_utc"])
                 ].sort_values("captured_at_utc")
                 if candidates.empty:
