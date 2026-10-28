@@ -727,12 +727,12 @@ if odds_files:
             f"Rows passing prediction/odds/kickoff timing checks: **{int(odds['timing_eligible'].sum()):,}**"
         )
         display_cols = [
-            "game_id", "away_team", "home_team", "bookmaker", "snapshot_type",
+            "game_id", "away_team", "home_team", "bookmaker", "snapshot_type", "selected_for_grading",
             "source_snapshot_at_utc", "kickoff_utc", "spread_home", "spread_home_odds",
             "spread_away", "spread_away_odds", "total", "total_over_odds", "total_under_odds",
             "model_predicted_home_margin", "model_projected_total", "endzone_ats_edge",
             "endzone_total_edge", "ATS lean", "Total lean", "ATS edge qualifies (3.5+)",
-            "Total edge qualifies (3.5+)", "selected_for_grading", "ATS result", "ATS net units",
+            "Total edge qualifies (3.5+)", "ATS result", "ATS net units",
             "ATS units risked", "Totals result", "Totals net units", "Totals units risked",
             "timing_status", "odds_file",
         ]
