@@ -31,8 +31,8 @@ jobs:
         run: python -m pip install pandas requests
       - name: Capture one game's odds from EndzoneAPI
         env:
-          ENDZONE_API_KEY: \${{ secrets.ENDZONE_API_KEY }}
-          ENDZONE_GAME_ID: \${{ inputs.game_id }}
+          ENDZONE_API_KEY: ${{ secrets.ENDZONE_API_KEY }}
+          ENDZONE_GAME_ID: ${{ inputs.game_id }}
         run: python scripts/capture_sportsbook_odds.py
       - name: Commit immutable odds snapshot
         run: |
@@ -40,7 +40,7 @@ jobs:
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add data/prospective_ats_tracking/endzone_odds_*.csv
-            git commit -m "Capture EndzoneAPI odds for \${{ inputs.game_id }}"
+            git commit -m "Capture EndzoneAPI odds for ${{ inputs.game_id }}"
             git pull --rebase origin main
             git push origin HEAD:main
           else
