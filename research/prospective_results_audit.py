@@ -666,10 +666,21 @@ if odds_files:
         odds["Totals net units"] = pd.Series(np.nan, index=odds.index, dtype="float64")
         odds["Totals units risked"] = pd.Series(np.nan, index=odds.index, dtype="float64")
         latest_mask = odds["snapshot_type"].astype(str).str.lower().eq("latest")
-        latest_odds = odds.loc[latest_mask].copy()
+        odds["selected_for_grading"] = False
+        latest_odds = odds.loc[latest_mask & odds["timing_eligible"]].copy()
         if not latest_odds.empty:
-            ats_grades = latest_odds.apply(lambda row: grade_actual_price(row, "ATS"), axis=1)
-            totals_grades = latest_odds.apply(lambda row: grade_actual_price(row, "Totals"), axis=1)
+            # Across repeated captures, select only the most recent eligible quote
+            # per game and bookmaker. This prevents daily recaptures of the same
+            # game/book from being counted as multiple bets. Different bookmakers
+            # remain separate executable prices, but are reported as quotes and
+            # unique games separately in the summary.
+            latest_odds = latest_odds.sort_values("source_snapshot_at_utc")
+            selected = latest_odds.drop_duplicates(
+                subset=["game_id", "bookmaker"], keep="last"
+            )
+            odds.loc[selected.index, "selected_for_grading"] = True
+            ats_grades = selected.apply(lambda row: grade_actual_price(row, "ATS"), axis=1)
+            totals_grades = selected.apply(lambda row: grade_actual_price(row, "Totals"), axis=1)
             # Assign whole columns rather than masked .loc writes. This avoids
             # pandas 3.x strict dtype/upcast errors when mixed-type apply results
             # contain nullable values for pending games.
@@ -683,10 +694,10 @@ if odds_files:
             ]:
                 full_values = pd.Series(np.nan, index=odds.index, dtype="object")
                 if result_col.endswith("result"):
-                    full_values.loc[latest_odds.index] = grades[source_col].astype(str).to_numpy()
+                    full_values.loc[selected.index] = grades[source_col].astype(str).to_numpy()
                 else:
                     numeric_values = pd.to_numeric(grades[source_col], errors="coerce").astype("float64").to_numpy()
-                    full_values.loc[latest_odds.index] = numeric_values
+                    full_values.loc[selected.index] = numeric_values
                 odds[result_col] = full_values
 
         odds["timing_eligible"] = (
@@ -721,8 +732,9 @@ if odds_files:
             "spread_away", "spread_away_odds", "total", "total_over_odds", "total_under_odds",
             "model_predicted_home_margin", "model_projected_total", "endzone_ats_edge",
             "endzone_total_edge", "ATS lean", "Total lean", "ATS edge qualifies (3.5+)",
-            "Total edge qualifies (3.5+)", "ATS result", "ATS net units", "ATS units risked",
-            "Totals result", "Totals net units", "Totals units risked", "timing_status", "odds_file",
+            "Total edge qualifies (3.5+)", "selected_for_grading", "ATS result", "ATS net units",
+            "ATS units risked", "Totals result", "Totals net units", "Totals units risked",
+            "timing_status", "odds_file",
         ]
         st.dataframe(
             odds[[c for c in display_cols if c in odds.columns]].sort_values(
