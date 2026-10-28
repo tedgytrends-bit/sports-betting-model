@@ -660,11 +660,11 @@ if odds_files:
         # closing rows remain visible for line-movement analysis but cannot be
         # counted as additional bets alongside the latest snapshot.
         odds["ATS result"] = "Pending/Not eligible"
-        odds["ATS net units"] = np.nan
-        odds["ATS units risked"] = np.nan
+        odds["ATS net units"] = pd.Series(np.nan, index=odds.index, dtype="float64")
+        odds["ATS units risked"] = pd.Series(np.nan, index=odds.index, dtype="float64")
         odds["Totals result"] = "Pending/Not eligible"
-        odds["Totals net units"] = np.nan
-        odds["Totals units risked"] = np.nan
+        odds["Totals net units"] = pd.Series(np.nan, index=odds.index, dtype="float64")
+        odds["Totals units risked"] = pd.Series(np.nan, index=odds.index, dtype="float64")
         latest_mask = odds["snapshot_type"].astype(str).str.lower().eq("latest")
         latest_odds = odds.loc[latest_mask].copy()
         if not latest_odds.empty:
