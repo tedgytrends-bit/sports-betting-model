@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Estimate EndzoneAPI NFL odds-query costs without consuming credits.
 
-Requires ENDZONE_API_KEY. This script only sends estimate_only=True requests.
+Requires the repository Actions secret ENDZONE_API_KEY. Both requests use
+estimate_only=True, which EndzoneAPI documents as returning cost without
+charging credits or running the query.
 """
 import json
 import os
@@ -12,7 +14,7 @@ import requests
 API_URL = "https://mcp.endzoneapi.com/v1/get_odds"
 
 
-def estimate(payload, api_key):
+def estimate(label, payload, api_key):
     body = {**payload, "estimate_only": True}
     response = requests.post(
         API_URL,
@@ -20,9 +22,12 @@ def estimate(payload, api_key):
         json=body,
         timeout=(10, 45),
     )
-    response.raise_for_status()
+    if not response.ok:
+        print(f"{label}: HTTP {response.status_code}")
+        print(response.text[:2000])
+        response.raise_for_status()
     data = response.json()
-    print(json.dumps({"request": body, "estimate_response": data}, indent=2))
+    print(json.dumps({"scenario": label, "request": body, "estimate_response": data}, indent=2))
     return data
 
 
@@ -31,30 +36,22 @@ def main():
     if not api_key:
         print(
             "ENDZONE_API_KEY is not configured for this GitHub workflow. "
-            "No request was sent and no credits were used."
+            "No request was sent and no credits were used. "
+            "Add your existing EndzoneAPI key in GitHub: Settings > Secrets and variables > Actions > New repository secret; "
+            "name it ENDZONE_API_KEY. Do not paste the key in code or logs."
         )
         sys.exit(0)
 
-    # Estimate a single 2026 DraftKings game query as the unit-cost baseline.
-    # This request is explicitly estimate-only and does not retrieve odds.
-    estimate(
-        {
-            "game_id": "2026_01_KC_BUF",
-            "bookmaker": "draftkings",
-        },
-        api_key,
-    )
+    # Illustrative single-game estimate. This game ID is just a known-format
+    # example; estimate_only means it does not retrieve or bill for the game.
+    estimate("single game", {"game_id": "2026_01_KC_BUF", "bookmaker": "draftkings"}, api_key)
 
-    # Estimate the season-level request to reveal the cost before any data pull.
-    # The endpoint's season mode may price by games returned, so this is the
-    # key comparison for deciding whether to query a slate game-by-game.
+    # A season-level query returns per-book lines and is charged per game
+    # returned, not a flat 10 credits. Estimating it lets us price one page
+    # before retrieving any records.
     estimate(
-        {
-            "season": 2026,
-            "bookmaker": "draftkings",
-            "snapshot_type": "closing",
-            "limit": 500,
-        },
+        "2026 season page up to 500 games",
+        {"season": 2026, "bookmaker": "draftkings", "snapshot_type": "closing", "limit": 500},
         api_key,
     )
 
