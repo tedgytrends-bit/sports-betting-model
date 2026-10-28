@@ -580,6 +580,81 @@ if odds_files:
 
         odds["endzone_ats_edge"] = odds["model_predicted_home_margin"] + odds["spread_home"]
         odds["endzone_total_edge"] = odds["model_projected_total"] - odds["total"]
+
+        # Always show directional leans when the corresponding market line and
+        # model projection exist. Edge thresholds classify stronger candidates;
+        # they do not suppress the lean itself.
+        odds["ATS lean"] = np.select(
+            [
+                odds["spread_home"].isna() | odds["model_predicted_home_margin"].isna(),
+                odds["endzone_ats_edge"] > 0,
+                odds["endzone_ats_edge"] < 0,
+            ],
+            ["No ATS lean (line/prediction unavailable)", "Home team lean", "Away team lean"],
+            default="No directional ATS lean",
+        )
+        odds["Total lean"] = np.select(
+            [
+                odds["total"].isna() | odds["model_projected_total"].isna(),
+                odds["endzone_total_edge"] > 0,
+                odds["endzone_total_edge"] < 0,
+            ],
+            ["No total lean (line/prediction unavailable)", "Over lean", "Under lean"],
+            default="No directional total lean",
+        )
+        odds["ATS edge qualifies (3.5+)"] = (
+            odds["endzone_ats_edge"].abs() >= EDGE_THRESHOLD
+        ) & odds["model_predicted_home_margin"].notna() & odds["spread_home"].notna()
+        odds["Total edge qualifies (3.5+)"] = (
+            odds["endzone_total_edge"].abs() >= EDGE_THRESHOLD
+        ) & odds["model_projected_total"].notna() & odds["total"].notna()
+
+        # Join final scores so completed archive games can eventually be graded
+        # at actual American prices. Unfinished games remain ungraded.
+        score_lookup_odds = scores[["game_id", "home_score", "away_score"]].drop_duplicates("game_id")
+        odds["game_id"] = odds["game_id"].astype(str)
+        score_lookup_odds["game_id"] = score_lookup_odds["game_id"].astype(str)
+        odds = odds.merge(score_lookup_odds, on="game_id", how="left", validate="many_to_one")
+        odds["final_available"] = odds["home_score"].notna() & odds["away_score"].notna()
+        odds["actual_home_margin"] = odds["home_score"] - odds["away_score"]
+        odds["actual_total"] = odds["home_score"] + odds["away_score"]
+
+        def american_profit_per_unit(american_odds):
+            if pd.isna(american_odds) or american_odds == 0:
+                return np.nan
+            return (american_odds / 100.0) if american_odds > 0 else (100.0 / abs(american_odds))
+
+        def grade_actual_price(row, market):
+            if not row["final_available"] or not row["timing_eligible"]:
+                return pd.Series({"result": "Pending/Not eligible", "net_units": np.nan, "units_risked": np.nan})
+            if market == "ATS":
+                edge = row["endzone_ats_edge"]
+                line = row["spread_home"]
+                price = row["spread_home_odds"] if edge > 0 else row["spread_away_odds"]
+                margin = row["actual_home_margin"] + line
+            else:
+                edge = row["endzone_total_edge"]
+                line = row["total"]
+                price = row["total_over_odds"] if edge > 0 else row["total_under_odds"]
+                margin = row["actual_total"] - line
+            if pd.isna(edge) or pd.isna(line) or pd.isna(price) or edge == 0:
+                return pd.Series({"result": "Not gradable", "net_units": np.nan, "units_risked": np.nan})
+            directional_margin = margin * np.sign(edge)
+            if directional_margin == 0:
+                result, net = "Push", 0.0
+            elif directional_margin > 0:
+                result, net = "Win", american_profit_per_unit(price)
+            else:
+                result, net = "Loss", -1.0
+            return pd.Series({"result": result, "net_units": net, "units_risked": 1.0})
+
+        ats_grades = odds.apply(lambda row: grade_actual_price(row, "ATS"), axis=1)
+        totals_grades = odds.apply(lambda row: grade_actual_price(row, "Totals"), axis=1)
+        odds["ATS result"] = ats_grades["result"]
+        odds["ATS net units"] = ats_grades["net_units"]
+        odds["Totals result"] = totals_grades["result"]
+        odds["Totals net units"] = totals_grades["net_units"]
+
         odds["timing_eligible"] = (
             odds["provider_time_before_kickoff"]
             & odds["source_time_not_future_of_capture"]
@@ -611,7 +686,9 @@ if odds_files:
             "source_snapshot_at_utc", "kickoff_utc", "spread_home", "spread_home_odds",
             "spread_away", "spread_away_odds", "total", "total_over_odds", "total_under_odds",
             "model_predicted_home_margin", "model_projected_total", "endzone_ats_edge",
-            "endzone_total_edge", "timing_status", "odds_file",
+            "endzone_total_edge", "ATS lean", "Total lean", "ATS edge qualifies (3.5+)",
+            "Total edge qualifies (3.5+)", "ATS result", "ATS net units", "Totals result",
+            "Totals net units", "timing_status", "odds_file",
         ]
         st.dataframe(
             odds[[c for c in display_cols if c in odds.columns]].sort_values(
@@ -623,6 +700,22 @@ if odds_files:
         st.caption(
             "Sign convention: EndzoneAPI spread_home is the home team's signed handicap (negative means home favored); "
             "the model's home-margin ATS edge is projected home margin + spread_home. "
-            "This section is a data-quality and timing audit, not a profitability claim. Final grading with actual prices "
-            "will only be enabled after the matching frozen prediction and final score are verified."
+            "Directional leans are shown for every row with a valid projection and market line, even when the edge is below "
+            "the 3.5-point candidate threshold. Completed eligible games are graded at the recorded American price; "
+            "upcoming games remain pending. These are hypothetical model results, not proof of a durable betting edge."
         )
+        for market_label, result_col, units_col in [
+            ("ATS", "ATS result", "ATS net units"),
+            ("Totals", "Totals result", "Totals net units"),
+        ]:
+            graded_rows = odds[odds[result_col].isin(["Win", "Loss", "Push"])]
+            if not graded_rows.empty:
+                wins = int(graded_rows[result_col].eq("Win").sum())
+                losses = int(graded_rows[result_col].eq("Loss").sum())
+                pushes = int(graded_rows[result_col].eq("Push").sum())
+                net_units = float(graded_rows[units_col].sum())
+                risked = float(graded_rows["units_risked"].sum()) if "units_risked" in graded_rows else float(len(graded_rows))
+                st.write(
+                    f"**{market_label} actual-price record:** {wins}-{losses}-{pushes}; "
+                    f"net {net_units:+.2f} units across {len(graded_rows)} graded rows."
+                )
