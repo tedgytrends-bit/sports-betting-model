@@ -920,6 +920,40 @@ if "price_aware_data" in st.session_state:
     else:
         st.info("No weekly totals records are available for the selected models and thresholds.")
 
+    st.subheader("Weekly concentration by edge threshold — 2025 totals")
+    st.caption("Efficiency-model results only. This checks whether a threshold's season result depends heavily on one week; thresholds are diagnostic comparisons, not a license to pick the best-looking historical result.")
+    if not weekly_table.empty:
+        concentration_source = weekly_table[(weekly_table["Season"] == 2025) & (weekly_table["Model"] == "Efficiency model")].copy()
+        concentration_rows = []
+        for edge_label, group in concentration_source.groupby("Minimum edge"):
+            group = group.sort_values("Week")
+            if group.empty:
+                continue
+            total_units = float(group["Net units"].sum())
+            risked = float(group["Units risked"].sum())
+            best = group.loc[group["Net units"].idxmax()]
+            worst = group.loc[group["Net units"].idxmin()]
+            concentration_rows.append({
+                "Minimum edge": edge_label,
+                "Bets": int(group["Bets"].sum()),
+                "Net units": round(total_units, 2),
+                "ROI %": round(100 * total_units / risked, 2) if risked else np.nan,
+                "Best week": int(best["Week"]),
+                "Best week units": round(float(best["Net units"]), 2),
+                "Worst week": int(worst["Week"]),
+                "Worst week units": round(float(worst["Net units"]), 2),
+                "Net excluding best week": round(total_units - float(best["Net units"]), 2),
+                "Profitable weeks": int((group["Net units"] > 0).sum()),
+                "Losing weeks": int((group["Net units"] < 0).sum()),
+                "Break-even weeks": int((group["Net units"] == 0).sum()),
+            })
+        concentration_table = pd.DataFrame(concentration_rows)
+        if not concentration_table.empty:
+            st.dataframe(concentration_table, hide_index=True, use_container_width=True)
+            st.download_button("Download 2025 totals threshold concentration CSV", concentration_table.to_csv(index=False).encode("utf-8"), "nfl_totals_2025_threshold_concentration.csv", "text/csv", on_click="ignore")
+        else:
+            st.info("No 2025 efficiency-model weekly threshold results are available in this run.")
+
     st.subheader("Projection accuracy vs. market")
 
     accuracy = price_data.copy()
