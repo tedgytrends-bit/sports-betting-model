@@ -534,7 +534,9 @@ if odds_files:
         # efficiency projection for the same game/teams captured at or before the
         # provider's odds timestamp. A plain merge multiplies rows when several
         # daily predictions exist for the same game and can leak future predictions.
-        odds["prediction_captured_at_utc"] = pd.NaT
+        # Use object dtype for timestamp assignment, then normalize to UTC after matching.
+        # This avoids pandas rejecting tz-aware timestamps assigned into a tz-naive datetime column.
+        odds["prediction_captured_at_utc"] = pd.Series([None] * len(odds), index=odds.index, dtype="object")
         odds["model_predicted_home_margin"] = np.nan
         odds["model_projected_total"] = np.nan
         odds["prediction_team_match"] = False
@@ -571,6 +573,10 @@ if odds_files:
                 odds.at[idx, "model_projected_total"] = pred["model_projected_total"]
                 odds.at[idx, "prediction_team_match"] = True
                 odds.at[idx, "prediction_precedes_odds"] = True
+
+        odds["prediction_captured_at_utc"] = pd.to_datetime(
+            odds["prediction_captured_at_utc"], errors="coerce", utc=True
+        )
 
         odds["endzone_ats_edge"] = odds["model_predicted_home_margin"] + odds["spread_home"]
         odds["endzone_total_edge"] = odds["model_projected_total"] - odds["total"]
