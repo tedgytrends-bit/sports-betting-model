@@ -516,6 +516,41 @@ if run:
         else:
             st.info("No season-by-season model results met the 3.5-point threshold.")
 
+        st.subheader("All-game weekly ATS record — efficiency model")
+        st.caption(
+            "Every completed out-of-sample game with a valid efficiency-model edge and spread is graded by the model's predicted side, regardless of edge size. "
+            "Exact zero-edge games have no directional pick and are excluded. One unit risked per pick; -110 assumed. This is separate from threshold-filtered records below."
+        )
+        all_game_ats = backtest.dropna(subset=["model_ats_edge", "spread_line", "actual_home_ats_margin", "season", "week"]).copy()
+        all_game_ats["model_ats_edge"] = pd.to_numeric(all_game_ats["model_ats_edge"], errors="coerce")
+        all_game_ats = all_game_ats[all_game_ats["model_ats_edge"].abs() > 0].copy()
+        all_game_ats = grade(all_game_ats, "model_ats_edge")
+        all_game_week_rows = []
+        for (year, week), group in all_game_ats.groupby(["season", "week"], dropna=False):
+            w = int(group["result"].eq("Win").sum())
+            l = int(group["result"].eq("Loss").sum())
+            p = int(group["result"].eq("Push").sum())
+            bets = w + l + p
+            net = w * (100 / 110) - l
+            all_game_week_rows.append({
+                "Season": int(year), "Week": int(week),
+                "Record (W-L-P)": f"{w}-{l}-{p}", "Bets": bets,
+                "Net units": round(net, 4), "Units risked": bets,
+                "ROI %": round(100 * net / bets, 4) if bets else np.nan,
+            })
+        all_game_week_table = pd.DataFrame(all_game_week_rows)
+        if not all_game_week_table.empty:
+            all_game_week_table = all_game_week_table.sort_values(["Season", "Week"])
+            all_game_week_table["Cumulative units (season)"] = all_game_week_table.groupby("Season")["Net units"].cumsum().round(4)
+            st.dataframe(all_game_week_table, hide_index=True, use_container_width=True)
+            st.download_button(
+                "Download all-game weekly ATS record CSV",
+                all_game_week_table.to_csv(index=False).encode("utf-8"),
+                "nfl_ats_all_game_weekly_record.csv",
+                "text/csv",
+                on_click="ignore",
+            )
+
         st.subheader("Week-by-week comparison across ATS models")
         st.caption("Same completed games where each model has a prediction. One unit risked per pick; -110 assumed. Weekly net units retain precision so they reconcile to overall totals. These are historical simulations, not verified executable prices.")
         weekly_model_rows = []
