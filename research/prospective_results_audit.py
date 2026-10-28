@@ -637,6 +637,7 @@ if odds_files:
             if market == "ATS":
                 edge = row["endzone_ats_edge"]
                 line = row["spread_home"]
+                # Home signed handicap: home cover margin = actual home margin + home handicap.
                 price = row["spread_home_odds"] if edge > 0 else row["spread_away_odds"]
                 margin = row["actual_home_margin"] + line
             else:
@@ -655,12 +656,26 @@ if odds_files:
                 result, net = "Loss", -1.0
             return pd.Series({"result": result, "net_units": net, "units_risked": 1.0})
 
-        ats_grades = odds.apply(lambda row: grade_actual_price(row, "ATS"), axis=1)
-        totals_grades = odds.apply(lambda row: grade_actual_price(row, "Totals"), axis=1)
-        odds["ATS result"] = ats_grades["result"]
-        odds["ATS net units"] = ats_grades["net_units"]
-        odds["Totals result"] = totals_grades["result"]
-        odds["Totals net units"] = totals_grades["net_units"]
+        # Only one predeclared snapshot type is eligible for grading. Opening and
+        # closing rows remain visible for line-movement analysis but cannot be
+        # counted as additional bets alongside the latest snapshot.
+        odds["ATS result"] = "Pending/Not eligible"
+        odds["ATS net units"] = np.nan
+        odds["ATS units risked"] = np.nan
+        odds["Totals result"] = "Pending/Not eligible"
+        odds["Totals net units"] = np.nan
+        odds["Totals units risked"] = np.nan
+        latest_mask = odds["snapshot_type"].astype(str).str.lower().eq("latest")
+        latest_odds = odds.loc[latest_mask].copy()
+        if not latest_odds.empty:
+            ats_grades = latest_odds.apply(lambda row: grade_actual_price(row, "ATS"), axis=1)
+            totals_grades = latest_odds.apply(lambda row: grade_actual_price(row, "Totals"), axis=1)
+            odds.loc[latest_mask, "ATS result"] = ats_grades["result"].to_numpy()
+            odds.loc[latest_mask, "ATS net units"] = ats_grades["net_units"].to_numpy()
+            odds.loc[latest_mask, "ATS units risked"] = ats_grades["units_risked"].to_numpy()
+            odds.loc[latest_mask, "Totals result"] = totals_grades["result"].to_numpy()
+            odds.loc[latest_mask, "Totals net units"] = totals_grades["net_units"].to_numpy()
+            odds.loc[latest_mask, "Totals units risked"] = totals_grades["units_risked"].to_numpy()
 
         odds["timing_eligible"] = (
             odds["provider_time_before_kickoff"]
@@ -694,8 +709,8 @@ if odds_files:
             "spread_away", "spread_away_odds", "total", "total_over_odds", "total_under_odds",
             "model_predicted_home_margin", "model_projected_total", "endzone_ats_edge",
             "endzone_total_edge", "ATS lean", "Total lean", "ATS edge qualifies (3.5+)",
-            "Total edge qualifies (3.5+)", "ATS result", "ATS net units", "Totals result",
-            "Totals net units", "timing_status", "odds_file",
+            "Total edge qualifies (3.5+)", "ATS result", "ATS net units", "ATS units risked",
+            "Totals result", "Totals net units", "Totals units risked", "timing_status", "odds_file",
         ]
         st.dataframe(
             odds[[c for c in display_cols if c in odds.columns]].sort_values(
@@ -711,18 +726,30 @@ if odds_files:
             "the 3.5-point candidate threshold. Completed eligible games are graded at the recorded American price; "
             "upcoming games remain pending. These are hypothetical model results, not proof of a durable betting edge."
         )
-        for market_label, result_col, units_col in [
-            ("ATS", "ATS result", "ATS net units"),
-            ("Totals", "Totals result", "Totals net units"),
+        for market_label, result_col, units_col, risk_col in [
+            ("ATS", "ATS result", "ATS net units", "ATS units risked"),
+            ("Totals", "Totals result", "Totals net units", "Totals units risked"),
         ]:
-            graded_rows = odds[odds[result_col].isin(["Win", "Loss", "Push"])]
+            graded_rows = odds[odds[result_col].isin(["Win", "Loss", "Push"])].copy()
             if not graded_rows.empty:
                 wins = int(graded_rows[result_col].eq("Win").sum())
                 losses = int(graded_rows[result_col].eq("Loss").sum())
                 pushes = int(graded_rows[result_col].eq("Push").sum())
                 net_units = float(graded_rows[units_col].sum())
-                risked = float(graded_rows["units_risked"].sum()) if "units_risked" in graded_rows else float(len(graded_rows))
+                risked = float(graded_rows[risk_col].sum())
+                roi = (net_units / risked * 100.0) if risked else np.nan
                 st.write(
-                    f"**{market_label} actual-price record:** {wins}-{losses}-{pushes}; "
-                    f"net {net_units:+.2f} units across {len(graded_rows)} graded rows."
+                    f"**{market_label} actual-price record (latest snapshots only):** "
+                    f"{wins}-{losses}-{pushes}; net {net_units:+.2f} units; "
+                    f"ROI {roi:+.1f}%; {graded_rows['game_id'].nunique()} unique games across "
+                    f"{len(graded_rows)} sportsbook quotes."
                 )
+                by_game = graded_rows.groupby("game_id").agg(
+                    result_count=(result_col, "count"),
+                    unique_results=(result_col, "nunique"),
+                )
+                if (by_game["unique_results"] > 1).any():
+                    st.warning(
+                        f"{market_label}: sportsbook quotes for the same game disagree on the lean/result. "
+                        "Review line/price normalization before interpreting aggregate ROI."
+                    )
