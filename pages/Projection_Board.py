@@ -23,7 +23,12 @@ with st.sidebar:
     lookback = st.slider("Recent team games for efficiency", 4, 16, 10)
     show_full_schedule = st.checkbox("Show full remaining season", value=False)
     run_backtest = st.button("Run historical backtest", type="primary")
-    st.caption("Default view: games in the next 14 days. The backtest downloads several seasons of play-by-play.")
+    use_efficiency_model = st.checkbox(
+        "Use efficiency model on board (downloads 2021–2026 play-by-play)",
+        value=False,
+        help="Leave off for a fast-starting board using the transparent recent-scoring baseline. Turn on to load the larger efficiency-model dataset.",
+    )
+    st.caption("Default view: games in the next 14 days. Historical backtests and efficiency projections download several seasons of play-by-play.")
 
 
 @st.cache_data(ttl=1800, show_spinner="Loading NFL schedule and results...")
@@ -46,22 +51,66 @@ except Exception as e:
 today = pd.Timestamp(date.today())
 season_games = games[games["season"] == season].copy()
 # The main board uses the efficiency model for projections. Keep the simple
-# recent-scoring baseline as a transparent fallback if historical PBP is unavailable.
-try:
-    pbp_for_board = get_pbp()
-    feature_data_for_board = build_efficiency_model_dataset(
-        games,
-        pbp_for_board,
-        lookback_games=lookback,
-    )
-    all_projections = project_upcoming_efficiency(
-        feature_data_for_board,
-        min_train_games=500,
-    )
+# recent-scoring baseline as a transparent fallback if historical PBP is unavailable.if use_efficiency_model:
+    try:
+        pbp_for_board = get_pbp()
+        feature_data_for_board = build_efficiency_model_dataset(
+            games,
+            pbp_for_board,
+            lookback_games=lookback,
+        )
+        all_projections = project_upcoming_efficiency(
+            feature_data_for_board,
+            min_train_games=500,
+        )
+        if not all_projections.empty:
+            all_projections = all_projections[
+                pd.to_numeric(all_projections["season"], errors="coerce") == season
+            ].copy()
+            market_lines = games[["game_id", "spread_line", "total_line"]].drop_duplicates("game_id")
+            all_projections = all_projections.merge(
+                market_lines, on="game_id", how="left", validate="one_to_one"
+            )
+            all_projections["market_spread_line"] = pd.to_numeric(
+                all_projections["spread_line"], errors="coerce"
+            )
+            all_projections["predicted_home_margin"] = (
+                pd.to_numeric(all_projections["projected_home"], errors="coerce")
+                - pd.to_numeric(all_projections["projected_away"], errors="coerce")
+            )
+            # nflverse convention: positive spread_line means the home team is favored.
+            # Positive edge means the model is more favorable to the home team than market.
+            all_projections["ats_edge"] = (
+                all_projections["predicted_home_margin"] - all_projections["market_spread_line"]
+            )
+            all_projections["ats_lean"] = np.select(
+                [
+                    all_projections["market_spread_line"].isna(),
+                    all_projections["ats_edge"].isna(),
+                    all_projections["ats_edge"] > 0,
+                    all_projections["ats_edge"] < 0,
+                ],
+                ["No market line", "Unavailable", "Home team lean", "Away team lean"],
+                default="No edge",
+            )
+            all_projections["market_total"] = pd.to_numeric(
+                all_projections["total_line"], errors="coerce"
+            )
+            all_projections["total_edge"] = (
+                all_projections["projected_total"] - all_projections["market_total"]
+            )
+        projection_source = "Efficiency model"
+    except Exception as projection_error:
+        all_projections = baseline_projection(games, season=season, lookback=6)
+        projection_source = "Recent-scoring fallback"
+        st.warning(
+            "The efficiency projection could not be generated, so the board is showing "
+            f"the simple recent-scoring baseline instead. Details: {projection_error}"
+        )
+else:
+    all_projections = baseline_projection(games, season=season, lookback=6)
+    projection_source = "Recent-scoring baseline (fast startup)"
     if not all_projections.empty:
-        all_projections = all_projections[
-            pd.to_numeric(all_projections["season"], errors="coerce") == season
-        ].copy()
         market_lines = games[["game_id", "spread_line", "total_line"]].drop_duplicates("game_id")
         all_projections = all_projections.merge(
             market_lines, on="game_id", how="left", validate="one_to_one"
@@ -73,8 +122,6 @@ try:
             pd.to_numeric(all_projections["projected_home"], errors="coerce")
             - pd.to_numeric(all_projections["projected_away"], errors="coerce")
         )
-        # nflverse convention: positive spread_line means the home team is favored.
-        # Positive edge means the model is more favorable to the home team than market.
         all_projections["ats_edge"] = (
             all_projections["predicted_home_margin"] - all_projections["market_spread_line"]
         )
@@ -94,14 +141,6 @@ try:
         all_projections["total_edge"] = (
             all_projections["projected_total"] - all_projections["market_total"]
         )
-    projection_source = "Efficiency model"
-except Exception as projection_error:
-    all_projections = baseline_projection(games, season=season, lookback=6)
-    projection_source = "Recent-scoring fallback"
-    st.warning(
-        "The efficiency projection could not be generated, so the board is showing "
-        f"the simple recent-scoring baseline instead. Details: {projection_error}"
-    )
 
 if not all_projections.empty:
     all_projections["gameday"] = pd.to_datetime(all_projections["gameday"], errors="coerce")
