@@ -920,6 +920,32 @@ if "price_aware_data" in st.session_state:
     else:
         st.info("No weekly totals records are available for the selected models and thresholds.")
 
+    st.subheader("Cross-season threshold comparison — totals")
+    st.caption("Efficiency-model only. Same thresholds across seasons, using recorded over/under prices. Best-week-excluded units are descriptive, not a threshold-selection rule.")
+    if not weekly_table.empty:
+        cross_source = weekly_table[weekly_table["Model"] == "Efficiency model"].copy()
+        cross_rows = []
+        for (year, edge_label), group in cross_source.groupby(["Season", "Minimum edge"]):
+            group = group.sort_values("Week")
+            total_units = float(group["Net units"].sum())
+            risked = float(group["Units risked"].sum())
+            best = group.loc[group["Net units"].idxmax()]
+            worst = group.loc[group["Net units"].idxmin()]
+            cross_rows.append({
+                "Season": int(year), "Minimum edge": edge_label,
+                "Bets": int(group["Bets"].sum()), "Net units": round(total_units, 2),
+                "ROI %": round(100 * total_units / risked, 2) if risked else np.nan,
+                "Best week": int(best["Week"]), "Best week units": round(float(best["Net units"]), 2),
+                "Worst week": int(worst["Week"]), "Worst week units": round(float(worst["Net units"]), 2),
+                "Net excluding best week": round(total_units - float(best["Net units"]), 2),
+                "Profitable weeks": int((group["Net units"] > 0).sum()),
+                "Losing weeks": int((group["Net units"] < 0).sum()),
+                "Break-even weeks": int((group["Net units"] == 0).sum()),
+            })
+        cross_table = pd.DataFrame(cross_rows)
+        st.dataframe(cross_table, hide_index=True, use_container_width=True)
+        st.download_button("Download cross-season totals threshold comparison CSV", cross_table.to_csv(index=False).encode("utf-8"), "nfl_totals_cross_season_threshold_comparison.csv", "text/csv", on_click="ignore")
+
     st.subheader("Weekly concentration by edge threshold — 2025 totals")
     st.caption("Efficiency-model results only. This checks whether a threshold's season result depends heavily on one week; thresholds are diagnostic comparisons, not a license to pick the best-looking historical result.")
     if not weekly_table.empty:
