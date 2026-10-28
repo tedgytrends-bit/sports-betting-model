@@ -302,7 +302,43 @@ if run:
         )
         else:
             st.info("No completed out-of-sample games met the selected thresholds.")
-        
+
+        st.subheader("Weekly concentration by edge threshold — 2025 ATS")
+        st.caption("This checks whether a threshold's season result is dominated by one unusually strong week. It is descriptive only; do not choose a threshold solely because it looks best historically.")
+        if not weekly_table.empty:
+            concentration_source = weekly_table[weekly_table["Season"] == 2025].copy()
+            concentration_rows = []
+            for edge_label, group in concentration_source.groupby("Minimum edge"):
+                group = group.sort_values("Week")
+                if group.empty:
+                    continue
+                total_units = float(group["Net units"].sum())
+                best_idx = group["Net units"].idxmax()
+                worst_idx = group["Net units"].idxmin()
+                best = group.loc[best_idx]
+                worst = group.loc[worst_idx]
+                concentration_rows.append({
+                    "Minimum edge": edge_label,
+                    "Bets": int(group["Bets"].sum()),
+                    "Record (W-L-P)": "threshold-specific weekly records",
+                    "Net units": round(total_units, 2),
+                    "ROI %": round(100 * total_units / group["Units risked"].sum(), 2) if group["Units risked"].sum() else np.nan,
+                    "Best week": int(best["Week"]),
+                    "Best week units": round(float(best["Net units"]), 2),
+                    "Worst week": int(worst["Week"]),
+                    "Worst week units": round(float(worst["Net units"]), 2),
+                    "Net excluding best week": round(total_units - float(best["Net units"]), 2),
+                    "Profitable weeks": int((group["Net units"] > 0).sum()),
+                    "Losing weeks": int((group["Net units"] < 0).sum()),
+                    "Break-even weeks": int((group["Net units"] == 0).sum()),
+                })
+            concentration_table = pd.DataFrame(concentration_rows)
+            if not concentration_table.empty:
+                st.dataframe(concentration_table, hide_index=True, use_container_width=True)
+                st.download_button("Download 2025 ATS threshold concentration CSV", concentration_table.to_csv(index=False).encode("utf-8"), "nfl_ats_2025_threshold_concentration.csv", "text/csv", on_click="ignore")
+            else:
+                st.info("No 2025 weekly threshold results are available in this run.")
+
         st.subheader("Season-by-season ATS robustness — efficiency model")
         st.caption("Fixed thresholds shown by season to reveal whether aggregate results depend heavily on one year. These are historical diagnostics, not proof of future profitability.")
         season_rows = []
