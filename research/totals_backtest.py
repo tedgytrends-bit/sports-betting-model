@@ -552,6 +552,29 @@ if "price_aware_data" in st.session_state:
         all_game_week_table = all_game_week_table.sort_values(["Season", "Week"])
         all_game_week_table["Cumulative units (season)"] = all_game_week_table.groupby("Season")["Net units"].cumsum().round(4)
         st.dataframe(all_game_week_table, hide_index=True, use_container_width=True)
+        focus_year = st.selectbox(
+            "Season for weekly totals breakdown",
+            sorted(all_game_week_table["Season"].dropna().unique().tolist(), reverse=True),
+            index=(sorted(all_game_week_table["Season"].dropna().unique().tolist(), reverse=True).index(2025)
+                   if 2025 in all_game_week_table["Season"].dropna().unique().tolist() else 0),
+            key="all_game_totals_focus_season",
+        )
+        focus_weeks = all_game_week_table[all_game_week_table["Season"] == focus_year].copy()
+        if not focus_weeks.empty:
+            best_week = focus_weeks.loc[focus_weeks["Net units"].idxmax()]
+            worst_week = focus_weeks.loc[focus_weeks["Net units"].idxmin()]
+            total_net = float(focus_weeks["Net units"].sum())
+            b1, b2, b3, b4 = st.columns(4)
+            b1.metric(f"{focus_year} net units", f"{total_net:+.2f}")
+            b2.metric("Best week", f"Week {int(best_week['Week'])}: {best_week['Net units']:+.2f}u")
+            b3.metric("Worst week", f"Week {int(worst_week['Week'])}: {worst_week['Net units']:+.2f}u")
+            b4.metric("Net excluding best week", f"{total_net - float(best_week['Net units']):+.2f}u")
+            st.caption(
+                f"Weeks: {(focus_weeks['Net units'] > 0).sum()} profitable, "
+                f"{(focus_weeks['Net units'] < 0).sum()} losing, "
+                f"{(focus_weeks['Net units'] == 0).sum()} break-even. "
+                "The best-week exclusion is a concentration check, not a claim that the week should be discarded."
+            )
         st.download_button(
             "Download all-game weekly totals record CSV",
             all_game_week_table.to_csv(index=False).encode("utf-8"),
