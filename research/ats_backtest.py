@@ -152,9 +152,10 @@ def build_injury_coverage_audit(schedule, injuries):
         })
     return pd.DataFrame(rows)
 
-run = st.button("Run ATS backtest", type="primary")
+run = st.button("Run ATS backtest", type="primary") or st.session_state.get("ats_backtest_has_run", False)
 
 if run:
+    st.session_state["ats_backtest_has_run"] = True
     try:
         with st.spinner("Loading schedule and historical play-by-play..."):
             games = get_schedule()
