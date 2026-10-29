@@ -748,6 +748,42 @@ if odds_files:
             & odds["prediction_team_match"]
         )
 
+        # Explicit eligibility funnel: distinguish quote availability from a
+        # fully gradeable, point-in-time model/market observation.
+        st.subheader("EndzoneAPI timing and price-quality funnel")
+        funnel_cols = st.columns(5)
+        funnel_cols[0].metric("Odds rows", f"{len(odds):,}")
+        funnel_cols[1].metric(
+            "Provider timestamp before kickoff",
+            f"{int(odds['provider_time_before_kickoff'].sum()):,}",
+        )
+        funnel_cols[2].metric(
+            "Prediction matched before odds",
+            f"{int((odds['prediction_precedes_odds'] & odds['prediction_team_match']).sum()):,}",
+        )
+        funnel_cols[3].metric(
+            "Timing-eligible rows",
+            f"{int(odds['timing_eligible'].sum()):,}",
+        )
+        price_complete = (
+            odds["spread_home"].notna()
+            & odds["spread_home_odds"].notna()
+            & odds["spread_away_odds"].notna()
+            & odds["total"].notna()
+            & odds["total_over_odds"].notna()
+            & odds["total_under_odds"].notna()
+        )
+        funnel_cols[4].metric(
+            "Timing-eligible with both markets/prices",
+            f"{int((odds['timing_eligible'] & price_complete).sum()):,}",
+        )
+        st.caption(
+            "Counts are quote rows, not unique games or bets. Missing timestamps, unmatched predictions, "
+            "or missing market prices prevent a row from qualifying for the strict prospective grade. "
+            "A timing-eligible row is not automatically a bet: the model must also have a nonzero edge, "
+            "a valid selected snapshot, a final score, and the price for the recommended side."
+        )
+
         # Join final scores so completed archive games can eventually be graded
         # at actual American prices. Unfinished games remain ungraded.
         score_lookup_odds = scores[["game_id", "home_score", "away_score"]].drop_duplicates("game_id")
