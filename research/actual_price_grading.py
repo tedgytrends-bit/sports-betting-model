@@ -13,7 +13,9 @@ def american_profit_per_unit(american_odds):
     if pd.isna(american_odds):
         return float("nan")
     odds = float(american_odds)
-    if not math.isfinite(odds) or odds == 0:
+    # American odds must be at least +100 or at most -100. Values between
+    # -100 and +100 (including zero) are not valid American odds.
+    if not math.isfinite(odds) or abs(odds) < 100:
         return float("nan")
     return odds / 100.0 if odds > 0 else 100.0 / abs(odds)
 
