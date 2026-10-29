@@ -51,7 +51,8 @@ except Exception as e:
 today = pd.Timestamp(date.today())
 season_games = games[games["season"] == season].copy()
 # The main board uses the efficiency model for projections. Keep the simple
-# recent-scoring baseline as a transparent fallback if historical PBP is unavailable.if use_efficiency_model:
+# recent-scoring baseline as a transparent fallback if historical PBP is unavailable.
+if use_efficiency_model:
     try:
         pbp_for_board = get_pbp()
         feature_data_for_board = build_efficiency_model_dataset(
