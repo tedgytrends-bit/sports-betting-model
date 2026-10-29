@@ -908,6 +908,68 @@ if run:
         
         )
 
+
+        st.subheader("Edge calibration audit — ATS")
+        st.write(
+            "This groups every nonzero efficiency-model edge into non-overlapping bands, then grades the model's chosen side "
+            "at a flat -110 for comparison. The purpose is to test whether larger predicted edges correspond to better results, "
+            "not to declare the best-looking historical band a future betting rule."
+        )
+        edge_bins = [0, 1, 2, 3.5, 4.5, 5.5, 6.5, 7.5, np.inf]
+        edge_labels = ["0–1", "1–2", "2–3.5", "3.5–4.5", "4.5–5.5", "5.5–6.5", "6.5–7.5", "7.5+"]
+        calibration = backtest[backtest["model_ats_edge"].abs() > 0].copy()
+        calibration["Edge band"] = pd.cut(
+            calibration["model_ats_edge"].abs(), bins=edge_bins, labels=edge_labels,
+            right=False, include_lowest=True
+        )
+        calibration = grade(calibration)
+        calibration_rows = []
+        for band, part in calibration.groupby("Edge band", observed=False):
+            wins = int(part["result"].eq("Win").sum())
+            losses = int(part["result"].eq("Loss").sum())
+            pushes = int(part["result"].eq("Push").sum())
+            bets = wins + losses + pushes
+            net = wins * (100 / 110) - losses
+            decisions = wins + losses
+            calibration_rows.append({
+                "Edge band (points)": str(band), "Bets": bets, "Wins": wins, "Losses": losses, "Pushes": pushes,
+                "Win % (no pushes)": 100 * wins / decisions if decisions else np.nan,
+                "Net units": round(net, 2), "ROI %": round(100 * net / bets, 2) if bets else np.nan,
+            })
+        calibration_table = pd.DataFrame(calibration_rows)
+        st.dataframe(calibration_table, hide_index=True, use_container_width=True)
+        st.download_button(
+            "Download ATS edge calibration CSV",
+            calibration_table.to_csv(index=False).encode("utf-8"),
+            "nfl_ats_edge_calibration.csv", "text/csv", on_click="ignore"
+        )
+        st.caption(
+            "Bands are disjoint; exact zero-edge games are excluded because they provide no directional pick. "
+            "ROI assumes one unit risked and -110 pricing. Read the band totals alongside the season breakdown below."
+        )
+        calibration_season_rows = []
+        for (year, band), part in calibration.groupby(["season", "Edge band"], observed=False, dropna=False):
+            wins = int(part["result"].eq("Win").sum())
+            losses = int(part["result"].eq("Loss").sum())
+            pushes = int(part["result"].eq("Push").sum())
+            bets = wins + losses + pushes
+            net = wins * (100 / 110) - losses
+            decisions = wins + losses
+            calibration_season_rows.append({
+                "Season": int(year) if pd.notna(year) else None, "Edge band (points)": str(band),
+                "Bets": bets, "Wins": wins, "Losses": losses, "Pushes": pushes,
+                "Win % (no pushes)": round(100 * wins / decisions, 2) if decisions else np.nan,
+                "Net units": round(net, 2), "ROI %": round(100 * net / bets, 2) if bets else np.nan,
+            })
+        calibration_season_table = pd.DataFrame(calibration_season_rows)
+        st.subheader("ATS edge bands by season")
+        st.dataframe(calibration_season_table, hide_index=True, use_container_width=True)
+        st.download_button(
+            "Download ATS edge calibration by season CSV",
+            calibration_season_table.to_csv(index=False).encode("utf-8"),
+            "nfl_ats_edge_calibration_by_season.csv", "text/csv", on_click="ignore"
+        )
+
         st.subheader("Inspect predictions")
         inspect_cols = ["gameday", "season", "week", "away_team", "home_team", "away_score", "home_score",
                         "spread_line", "pred_away_score", "pred_home_score", "predicted_home_margin",
