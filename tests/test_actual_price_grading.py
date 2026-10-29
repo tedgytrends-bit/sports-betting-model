@@ -57,6 +57,14 @@ class ActualPriceGradingTests(unittest.TestCase):
         missing = grade_actual_price(base_row(spread_home_odds=float("nan")), "ATS")
         self.assertEqual(missing["result"], "Not gradable")
 
+    def test_zero_and_infinite_prices_are_not_graded(self):
+        for bad_price in (0, float("inf"), float("-inf")):
+            with self.subTest(bad_price=bad_price):
+                result = grade_actual_price(base_row(spread_home_odds=bad_price), "ATS")
+                self.assertEqual(result["result"], "Not gradable")
+                self.assertTrue(pd.isna(result["net_units"]))
+                self.assertTrue(pd.isna(result["units_risked"]))
+
     def test_pending_or_ineligible_rows_are_not_graded(self):
         pending = grade_actual_price(base_row(final_available=False), "ATS")
         self.assertEqual(pending["result"], "Pending/Not eligible")
