@@ -203,13 +203,21 @@ ats_selected = first_complete_market_snapshot("ats_edge", "spread_line_source_va
 totals_selected = first_complete_market_snapshot("total_edge", "total_line_source_value")
 def attach_scores(selected):
     result = selected.drop(columns=["home_score", "away_score"], errors="ignore").merge(
-        graded[["game_id", "home_score", "away_score", "score_match_method", "score_team_match"]].drop_duplicates("game_id"),
+        graded[["game_id", "home_score", "away_score", "score_match_method", "score_home_team", "score_away_team"]].drop_duplicates("game_id"),
         on="game_id", how="left", validate="one_to_one"
+    )
+    result["score_team_match"] = (
+        result["home_team"].astype(str).str.upper().str.strip().eq(
+            result["score_home_team"].astype(str).str.upper().str.strip()
+        )
+        & result["away_team"].astype(str).str.upper().str.strip().eq(
+            result["score_away_team"].astype(str).str.upper().str.strip()
+        )
     )
     result["final_available"] = (
         result["home_score"].notna()
         & result["away_score"].notna()
-        & result["score_team_match"].fillna(False)
+        & result["score_team_match"]
     )
     result["actual_margin"] = result["home_score"] - result["away_score"]
     result["actual_total"] = result["home_score"] + result["away_score"]
