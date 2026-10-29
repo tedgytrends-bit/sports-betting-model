@@ -157,6 +157,32 @@ board["total_edge_latest"] = board["latest_model_total"] - board["latest_total_l
 board["original_spread_edge_frozen"] = board["frozen_home_margin"] - board["original_home_favorite_spread"]
 board["original_total_edge_frozen"] = board["frozen_model_total"] - board["original_total_line"]
 
+def ats_lean(edge, signed_home_line, home_team, away_team):
+    if pd.isna(edge) or pd.isna(signed_home_line):
+        return "Unavailable"
+    if abs(edge) < 0.05:
+        return "No clear lean"
+    if edge > 0:
+        # Positive signed line means home favorite; invert it to show the home's actual spread.
+        return f"Lean {home_team} {-signed_home_line:+.1f}"
+    return f"Lean {away_team} {signed_home_line:+.1f}"
+
+def total_lean(edge):
+    if pd.isna(edge):
+        return "Unavailable"
+    if abs(edge) < 0.05:
+        return "No clear lean"
+    return "Lean Over" if edge > 0 else "Lean Under"
+
+board["frozen_ats_lean"] = board.apply(
+    lambda r: ats_lean(r["spread_edge_frozen"], r["latest_home_favorite_spread"], r["home_team"], r["away_team"]), axis=1
+)
+board["latest_ats_lean"] = board.apply(
+    lambda r: ats_lean(r["spread_edge_latest"], r["latest_home_favorite_spread"], r["home_team"], r["away_team"]), axis=1
+)
+board["frozen_total_lean"] = board["total_edge_frozen"].map(total_lean)
+board["latest_total_lean"] = board["total_edge_latest"].map(total_lean)
+
 st.subheader("How to use this board")
 st.info("Official evaluation uses the earliest saved efficiency projection per game (frozen). The latest efficiency projection is shown separately as the current outlook. All upcoming-game edges use the latest Bovada line archived below; schedule-feed lines are not used as the market reference.")
 st.caption("The latest efficiency projection is recalculated from available completed-game play-by-play and cached for up to 60 minutes. It is not automatically injury- or weather-adjusted. Frozen projections are not replaced by later runs.")
@@ -182,6 +208,12 @@ for side, away_col, home_col in [
         if pd.notna(r[away_col]) and pd.notna(r[home_col]) else "Not captured" if side == "Frozen" else "Unavailable",
         axis=1,
     )
+visible["Frozen projected total points"] = visible["frozen_model_total"].map(lambda x: f"{x:.1f}" if pd.notna(x) else "—")
+visible["Latest projected total points"] = visible["latest_model_total"].map(lambda x: f"{x:.1f}" if pd.notna(x) else "—")
+visible["Frozen ATS lean"] = visible["frozen_ats_lean"]
+visible["Latest ATS lean"] = visible["latest_ats_lean"]
+visible["Frozen O/U lean"] = visible["frozen_total_lean"]
+visible["Latest O/U lean"] = visible["latest_total_lean"]
 for col, label, fmt in [
     ("original_home_favorite_spread", "Original Bovada spread", "{:+.1f}"),
     ("latest_home_favorite_spread", "Latest Bovada spread", "{:+.1f}"),
@@ -197,8 +229,10 @@ for col, label, fmt in [
     visible[label] = visible[col].map(lambda x: fmt.format(x) if pd.notna(x) else "—")
 columns = [
     "Matchup", "Original Bovada spread", "Latest Bovada spread", "Original total", "Latest total",
-    "Frozen projected score", "Frozen ATS edge vs latest line", "Frozen total edge vs latest line",
-    "Latest projected score", "Latest ATS edge vs latest line", "Latest total edge vs latest line",
+    "Frozen projected score", "Frozen projected total points", "Frozen ATS lean", "Frozen O/U lean",
+    "Frozen ATS edge vs latest line", "Frozen total edge vs latest line",
+    "Latest projected score", "Latest projected total points", "Latest ATS lean", "Latest O/U lean",
+    "Latest ATS edge vs latest line", "Latest total edge vs latest line",
     "Frozen ATS edge vs original line", "Frozen total edge vs original line",
     "latest_line_time_utc", "frozen_projection_time_utc", "latest_projection_time_utc",
 ]
