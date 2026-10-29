@@ -495,6 +495,26 @@ if efficiency_parts:
 
         st.subheader(f"Prospective {label}: disjoint edge bands")
         st.caption("Each game is counted once per market, using its earliest clearly pre-scheduled-date model forecast with a nonzero edge and final score. Bands are disjoint; returns assume one unit risked and -110 odds.")
+
+        # Show why the table may be empty instead of presenting zeroes without context.
+        diagnostic_cols = st.columns(5)
+        diagnostic_cols[0].metric("Selected forecasts", f"{len(population):,}")
+        diagnostic_cols[1].metric("With market line", f"{int(population[line_col].notna().sum()):,}")
+        diagnostic_cols[2].metric("With nonzero edge", f"{int((pd.to_numeric(population[edge_col], errors='coerce').abs() > 0).sum()):,}")
+        diagnostic_cols[3].metric("With final score", f"{int(population['final_available'].sum()):,}")
+        valid_count = int((
+            population["final_available"]
+            & population[line_col].notna()
+            & pd.to_numeric(population[edge_col], errors="coerce").notna()
+            & (pd.to_numeric(population[edge_col], errors="coerce").abs() > 0)
+        ).sum())
+        diagnostic_cols[4].metric("Gradeable nonzero edges", f"{valid_count:,}")
+        if valid_count == 0:
+            st.info(
+                "No rows qualify for calibration yet. Use the counts above to identify the gap: "
+                "missing saved forecasts, missing market lines, missing final scores, or zero/missing model edges."
+            )
+
         summary = summarize_bands(["Edge band"])
         if not summary.empty:
             summary = summary[["Edge band", "Bets", "Wins", "Losses", "Pushes", "Win % (no pushes)", "Net units", "ROI %"]]
