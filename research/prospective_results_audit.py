@@ -1067,3 +1067,9 @@ if odds_files:
                         f"{market_label}: sportsbook quotes for the same game disagree on the lean/result. "
                         "Review line/price normalization before interpreting aggregate ROI."
                     )
+            else:
+                st.info(
+                    f"No completed, timing-eligible {market_label} actual-price grades yet. "
+                    "Upcoming games remain pending; ROI will appear only after a final score, a matching "
+                    "home/away matchup, a valid recorded price, and all pregame timing checks are available."
+                )
