@@ -135,7 +135,9 @@ for col in ["home_team", "away_team"]:
     snapshots_for_join[col] = snapshots_for_join[col].astype(str).str.upper().str.strip()
 
 graded = snapshots_for_join.merge(
-    score_lookup[["game_id", "home_score", "away_score"]],
+    score_lookup[["game_id", "home_score", "away_score", "home_team", "away_team"]].rename(
+        columns={"home_team": "score_home_team", "away_team": "score_away_team"}
+    ),
     on="game_id", how="left", validate="one_to_one"
 )
 graded["score_match_method"] = np.where(
@@ -154,6 +156,8 @@ fallback = graded.loc[unmatched, ["gameday_join", "home_team", "away_team"]].mer
 )
 graded.loc[unmatched, "home_score"] = fallback["home_score"].to_numpy()
 graded.loc[unmatched, "away_score"] = fallback["away_score"].to_numpy()
+graded.loc[unmatched, "score_home_team"] = fallback["home_team"].to_numpy()
+graded.loc[unmatched, "score_away_team"] = fallback["away_team"].to_numpy()
 fallback_matched = unmatched & graded["home_score"].notna() & graded["away_score"].notna()
 graded.loc[fallback_matched, "score_match_method"] = "date+teams"
 # A game_id join alone is not sufficient: verify the saved matchup still
