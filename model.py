@@ -387,7 +387,17 @@ def project_upcoming_efficiency(
         raise ValueError("No usable numeric features for upcoming projections.")
     medians = completed[active_features].median(numeric_only=True).fillna(0)
     X_train = completed[active_features].fillna(medians).fillna(0)
-    predictions = upcoming[["game_id", "gameday", "season", "week", "away_team", "home_team"]].copy()
+    # Preserve injury inputs on the projection rows so the monitor can disclose
+    # coverage and absences alongside the resulting scores. Other model features
+    # remain internal to the estimator.
+    injury_prefixes = (
+        "home_injury_", "away_injury_", "home_inj_", "away_inj_",
+        "home_qb_", "away_qb_", "home_ol_", "away_ol_",
+        "home_skill_", "away_skill_", "home_defense_", "away_defense_",
+    )
+    injury_columns = [c for c in upcoming.columns if c.startswith(injury_prefixes)]
+    output_columns = ["game_id", "gameday", "season", "week", "away_team", "home_team"] + injury_columns
+    predictions = upcoming[output_columns].copy()
     X_future = upcoming[active_features].fillna(medians).fillna(0)
     for target, output in [
         ("home_score", "projected_home"),
