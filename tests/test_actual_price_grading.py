@@ -35,7 +35,7 @@ class ActualPriceGradingTests(unittest.TestCase):
         self.assertAlmostEqual(result["net_units"], 100 / 110)
 
     def test_away_side_is_selected_for_negative_edge(self):
-        row = base_row(endzone_ats_edge=-4.0, spread_away_odds=125, actual_home_margin=10)
+        row = base_row(endzone_ats_edge=-4.0, spread_away_odds=125, actual_home_margin=-10)
         result = grade_actual_price(row, "ATS")
         self.assertEqual(result["result"], "Win")
         self.assertAlmostEqual(result["net_units"], 1.25)
