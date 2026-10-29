@@ -205,13 +205,12 @@ def attach_scores(selected):
         graded[["game_id", "home_score", "away_score", "score_match_method", "score_home_team", "score_away_team"]].drop_duplicates("game_id"),
         on="game_id", how="left", validate="one_to_one"
     )
-    result["score_team_match"] = (
-        result["home_team"].astype(str).str.upper().str.strip().eq(
-            result["score_home_team"].astype(str).str.upper().str.strip()
-        )
-        & result["away_team"].astype(str).str.upper().str.strip().eq(
-            result["score_away_team"].astype(str).str.upper().str.strip()
-        )
+    result["score_team_match"] = result.apply(
+        lambda row: matchup_teams_match(
+            row["home_team"], row["away_team"],
+            row["score_home_team"], row["score_away_team"],
+        ),
+        axis=1,
     )
     result["final_available"] = (
         result["home_score"].notna()

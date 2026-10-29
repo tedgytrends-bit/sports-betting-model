@@ -75,6 +75,9 @@ def matchup_teams_match(home_team, away_team, score_home_team, score_away_team):
     if any(pd.isna(value) for value in values):
         return False
     normalized = [str(value).strip().upper() for value in values]
-    if any(not value for value in normalized):
+    # pandas/string conversions can turn missing values into ordinary strings.
+    # Treat common missing-value sentinels as absent rather than valid team codes.
+    missing_tokens = {"", "NAN", "NONE", "NAT", "<NA>", "NULL"}
+    if any(value in missing_tokens for value in normalized):
         return False
     return normalized[0] == normalized[2] and normalized[1] == normalized[3]
