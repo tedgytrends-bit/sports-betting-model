@@ -931,10 +931,16 @@ if odds_files:
                 risked = float(graded_rows[risk_col].sum())
                 roi = (net_units / risked * 100.0) if risked else np.nan
                 st.write(
-                    f"**{market_label} actual-price record (latest snapshots only):** "
+                    f"**{market_label} actual-price record (latest snapshots only, quote-weighted):** "
                     f"{wins}-{losses}-{pushes}; net {net_units:+.2f} units; "
                     f"ROI {roi:+.1f}%; {graded_rows['game_id'].nunique()} unique games across "
                     f"{len(graded_rows)} sportsbook quotes."
+                )
+                st.caption(
+                    "This aggregate weights each graded sportsbook quote as one hypothetical bet, so games "
+                    "with more eligible book quotes can contribute more than once. Quotes on the same game are "
+                    "not independent game outcomes; different lines and prices can also produce different grades. "
+                    "Use the quote count to understand the calculation, not as the number of independent games."
                 )
                 by_game = graded_rows.groupby("game_id").agg(
                     result_count=(result_col, "count"),
