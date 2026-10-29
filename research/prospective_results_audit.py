@@ -406,6 +406,19 @@ if efficiency_parts:
     y.metric("Unique games with a clearly pre-scheduled-date forecast", f"{efficiency.loc[efficiency['timing_status'].eq('Definitely before scheduled date'), 'game_id'].nunique():,}")
     z.metric("Model version(s)", ", ".join(sorted(efficiency["model_version"].dropna().astype(str).unique())) if "model_version" in efficiency else "Unknown")
 
+    st.subheader("Efficiency forecast archive diagnostics")
+    scheduled_min = efficiency["gameday"].min()
+    scheduled_max = efficiency["gameday"].max()
+    score_index = score_lookup.set_index("game_id")
+    score_home = efficiency["game_id"].map(score_index["home_score"])
+    score_away = efficiency["game_id"].map(score_index["away_score"])
+    d1, d2, d3, d4 = st.columns(4)
+    d1.metric("Forecast date range", f"{scheduled_min:%Y-%m-%d} to {scheduled_max:%Y-%m-%d}" if pd.notna(scheduled_min) and pd.notna(scheduled_max) else "Unavailable")
+    d2.metric("Rows matched to final scores", f"{int((score_home.notna() & score_away.notna()).sum()):,}")
+    d3.metric("Unique forecast game IDs", f"{efficiency['game_id'].nunique():,}")
+    d4.metric("Distinct saved forecast files", f"{efficiency['snapshot_file'].nunique():,}")
+    st.caption("If the date range only covers upcoming games, zero final scores may be expected. If it includes completed games, inspect the game-ID join and saved archive files before trusting the results.")
+
     # Distinguish raw forecasts from actionable-looking rows and graded results.
     # A line alone is not a bet; the forecast must also clear the fixed edge threshold.
     m1, m2, m3, m4 = st.columns(4)
