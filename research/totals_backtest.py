@@ -398,6 +398,72 @@ if "price_aware_data" in st.session_state:
     )
 
     # Audit all model predictions, not only games that qualified as bets.
+
+    st.subheader("Edge calibration audit — totals")
+    st.write(
+        "This grades every nonzero efficiency-model total lean with usable recorded over/under prices, regardless of the selected betting threshold. "
+        "Edges are grouped into disjoint bands to test whether larger projected differences from the market total correspond to better results."
+    )
+    calibration_bets = grade_bets(
+        price_data, "efficiency_projected_total", 0.000001, "Efficiency model — all directional edges"
+    )
+    calibration_bets = calibration_bets[
+        calibration_bets["bet_side"].isin(["Over", "Under"])
+    ].copy()
+    calibration_bets["Edge band"] = pd.cut(
+        calibration_bets["edge"].abs(),
+        bins=[0, 1, 2, 3.5, 4.5, 5.5, 6.5, 7.5, np.inf],
+        labels=["0–1", "1–2", "2–3.5", "3.5–4.5", "4.5–5.5", "5.5–6.5", "6.5–7.5", "7.5+"],
+        right=False, include_lowest=True,
+    )
+    def calibration_summary(group_columns):
+        rows = []
+        for key, part in calibration_bets.groupby(group_columns, observed=False, dropna=False):
+            wins = int(part["result"].eq("Win").sum())
+            losses = int(part["result"].eq("Loss").sum())
+            pushes = int(part["result"].eq("Push").sum())
+            bets = len(part)
+            decisions = wins + losses
+            net = float(part["net_units"].sum())
+            risked = float(part["units_risked"].sum())
+            row = {
+                "Bets": bets, "Wins": wins, "Losses": losses, "Pushes": pushes,
+                "Win % (no pushes)": round(100 * wins / decisions, 2) if decisions else np.nan,
+                "Net units": round(net, 2),
+                "ROI %": round(100 * net / risked, 2) if risked else np.nan,
+            }
+            if len(group_columns) == 1:
+                row[group_columns[0]] = key
+            else:
+                row.update(dict(zip(group_columns, key)))
+            rows.append(row)
+        return pd.DataFrame(rows)
+    totals_calibration = calibration_summary(["Edge band"])
+    totals_calibration = totals_calibration[
+        ["Edge band", "Bets", "Wins", "Losses", "Pushes", "Win % (no pushes)", "Net units", "ROI %"]
+    ]
+    st.dataframe(totals_calibration, hide_index=True, use_container_width=True)
+    st.download_button(
+        "Download totals edge calibration CSV",
+        totals_calibration.to_csv(index=False).encode("utf-8"),
+        "nfl_totals_edge_calibration.csv", "text/csv", on_click="ignore",
+    )
+    st.caption(
+        "Each bet risks one unit and winning profit uses the recorded odds for the selected side. "
+        "Exact zero-edge games are excluded. Bands are disjoint, not cumulative thresholds."
+    )
+    st.subheader("Totals edge bands by season")
+    totals_calibration_season = calibration_summary(["season", "Edge band"])
+    totals_calibration_season = totals_calibration_season[
+        ["season", "Edge band", "Bets", "Wins", "Losses", "Pushes", "Win % (no pushes)", "Net units", "ROI %"]
+    ].rename(columns={"season": "Season"})
+    st.dataframe(totals_calibration_season, hide_index=True, use_container_width=True)
+    st.download_button(
+        "Download totals edge calibration by season CSV",
+        totals_calibration_season.to_csv(index=False).encode("utf-8"),
+        "nfl_totals_edge_calibration_by_season.csv", "text/csv", on_click="ignore",
+    )
+
     st.subheader("Market residual model: individual game audit")
     residual_audit = price_data.copy()
     residual_audit["projected_edge"] = (
