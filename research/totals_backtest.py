@@ -1093,8 +1093,7 @@ if "price_aware_data" in st.session_state:
     st.caption(
         "Mean absolute error (MAE) is lower-is-better. Signed error is forecast "
         "minus actual total; positive values mean overprojection and negative "
-        "values mean underprojection. The market comparison uses closing totals "
-        "from the same unverified historical source."
+        "values mean underprojection. All forecasts are compared against the same recorded totals."
     )
 
     st.subheader("Does the model predict market error better than zero?")
@@ -1251,10 +1250,9 @@ if "price_aware_data" in st.session_state:
         "can produce very different sample sizes and results."
     )
     st.write(
-        "The historical schedule prices are closing-line fields from nflverse. "
-        "Their exact sportsbook and capture time are not attached to this backtest, "
-        "so the ROI should be treated as exploratory market-close research—not as "
-        "proof that the same bets could have been placed at those prices."
+        "Treat these results as a standardized historical comparison using the recorded totals and prices. "
+        "The main questions are whether the model's edge bands outperform one another, whether results repeat across seasons, "
+        "and whether the model adds useful information beyond the market."
     )
 else:
     st.info(
