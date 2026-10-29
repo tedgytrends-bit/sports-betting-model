@@ -3,7 +3,7 @@ import unittest
 
 import pandas as pd
 
-from research.actual_price_grading import grade_actual_price, american_profit_per_unit
+from research.actual_price_grading import grade_actual_price, american_profit_per_unit, matchup_teams_match
 
 
 def base_row(**overrides):
@@ -26,6 +26,13 @@ def base_row(**overrides):
 
 
 class ActualPriceGradingTests(unittest.TestCase):
+    def test_score_team_match_requires_same_ordered_matchup(self):
+        self.assertTrue(matchup_teams_match("BUF", "MIA", "buf", "mia"))
+        self.assertFalse(matchup_teams_match("BUF", "MIA", "MIA", "BUF"))
+        self.assertFalse(matchup_teams_match("BUF", "MIA", "BUF", "NYJ"))
+        self.assertFalse(matchup_teams_match("BUF", "MIA", None, "MIA"))
+        self.assertFalse(matchup_teams_match("", "MIA", "BUF", "MIA"))
+
     def test_american_odds_profit(self):
         self.assertAlmostEqual(american_profit_per_unit(-110), 100 / 110)
         self.assertAlmostEqual(american_profit_per_unit(150), 1.5)
