@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - "model.py"
+      - "research/**"
       - "tests/**"
       - ".github/workflows/test-feature-integrity.yml"
   workflow_dispatch:
