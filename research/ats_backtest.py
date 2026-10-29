@@ -981,8 +981,8 @@ if run:
             on_click="ignore"
         )
         st.warning(
-            "Closing-line spread coverage is useful for research, but the feed does not prove the line was available at a particular "
-            "sportsbook or timestamp. A positive ROI is not enough on its own; look for stable later-season results and prospective tracking."
+            "Interpret historical results alongside sample size, season-to-season stability, edge-band performance, and projection accuracy. "
+            "A positive ROI in one slice is not enough on its own to establish a repeatable edge."
         )
     except Exception as exc:
         st.error("The ATS backtest did not complete.")
