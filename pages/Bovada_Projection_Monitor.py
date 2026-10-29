@@ -4,6 +4,7 @@ import pandas as pd
 import streamlit as st
 
 from model import MODEL_VERSION, load_schedule_data, load_pbp, build_efficiency_model_dataset, project_upcoming_efficiency
+from injury_model import load_injury_reports, add_injury_features
 
 st.title("Bovada Projection Monitor")
 st.caption("Upcoming-game market source: user-supplied Bovada lines. Historical backtests retain their established research data sources.")
@@ -16,11 +17,13 @@ PROJECTION_DIR = ROOT / "data" / "prospective_ats_tracking"
 def get_schedule():
     return load_schedule_data()
 
-@st.cache_data(ttl=3600, show_spinner="Loading play-by-play and calculating latest efficiency projections...")
+@st.cache_data(ttl=3600, show_spinner="Loading play-by-play, injury history, and calculating injury-aware projections...")
 def get_latest_efficiency_projections():
     schedule = load_schedule_data()
     pbp = load_pbp((2021, 2022, 2023, 2024, 2025, 2026))
     features = build_efficiency_model_dataset(schedule, pbp, lookback_games=10)
+    injury_reports = load_injury_reports((2021, 2022, 2023, 2024, 2025, 2026))
+    features = add_injury_features(features, schedule, injury_reports)
     projections = project_upcoming_efficiency(features, min_train_games=500)
     if projections.empty:
         return pd.DataFrame()
@@ -36,8 +39,9 @@ def get_latest_efficiency_projections():
     projections["projected_away"] = pd.to_numeric(projections["projected_away"], errors="coerce")
     projections["model_projected_total"] = pd.to_numeric(projections["projected_total"], errors="coerce")
     projections["model_predicted_home_margin"] = projections["projected_home"] - projections["projected_away"]
-    projections["model_version"] = MODEL_VERSION
+    projections["model_version"] = f"{MODEL_VERSION}+injury-features"
     projections["projection_captured_at_utc"] = now.isoformat()
+    projections["injury_features_included"] = True
     return projections
 
 def norm_team(value):
@@ -185,7 +189,7 @@ board["latest_total_lean"] = board["total_edge_latest"].map(total_lean)
 
 st.subheader("How to use this board")
 st.info("Official evaluation uses the earliest saved efficiency projection per game (frozen). The latest efficiency projection is shown separately as the current outlook. All upcoming-game edges use the latest Bovada line archived below; schedule-feed lines are not used as the market reference.")
-st.caption("The latest efficiency projection is recalculated from available completed-game play-by-play and cached for up to 60 minutes. It is not automatically injury- or weather-adjusted. Frozen projections are not replaced by later runs.")
+st.caption("The frozen projection is the original baseline. The latest projection now trains with timestamp-filtered historical injury features and uses the latest saved injury snapshot for upcoming games when available. Injury-feed coverage can be incomplete, and this experimental adjustment is not yet proven to improve out-of-sample accuracy. Weather is not automatically adjusted. Projections are cached for up to 60 minutes.")
 
 if frozen.empty:
     st.warning("No saved frozen efficiency projection files were found. Latest projections can be monitored, but the official frozen baseline is unavailable until the capture workflow saves a projection. Do not substitute the schedule-feed baseline for the official record.")
@@ -214,6 +218,13 @@ visible["Frozen ATS lean"] = visible["frozen_ats_lean"]
 visible["Latest ATS lean"] = visible["latest_ats_lean"]
 visible["Frozen O/U lean"] = visible["frozen_total_lean"]
 visible["Latest O/U lean"] = visible["latest_total_lean"]
+if "injury_data_coverage" in visible.columns:
+    visible["Injury data coverage"] = visible["injury_data_coverage"]
+for team_side in ("home", "away"):
+    for feature, label in (("qb_out", "QB out"), ("ol_out", "OL out"), ("skill_out", "Skill out"), ("defense_out", "Defense out"), ("inj_out", "Players out"), ("inj_questionable", "Questionable")):
+        source_col = f"{team_side}_{feature}"
+        if source_col in visible.columns:
+            visible[f"Latest {team_side.title()} {label}"] = visible[source_col].map(lambda x: f"{x:.0f}" if pd.notna(x) else "Unknown")
 for col, label, fmt in [
     ("original_home_favorite_spread", "Original Bovada spread", "{:+.1f}"),
     ("latest_home_favorite_spread", "Latest Bovada spread", "{:+.1f}"),
@@ -231,7 +242,10 @@ columns = [
     "Matchup", "Original Bovada spread", "Latest Bovada spread", "Original total", "Latest total",
     "Frozen projected score", "Frozen projected total points", "Frozen ATS lean", "Frozen O/U lean",
     "Frozen ATS edge vs latest line", "Frozen total edge vs latest line",
-    "Latest projected score", "Latest projected total points", "Latest ATS lean", "Latest O/U lean",
+    "Latest projected score", "Latest projected total points", "Latest ATS lean", "Latest O/U lean", "Injury data coverage",
+    "Latest Home QB out", "Latest Away QB out", "Latest Home OL out", "Latest Away OL out",
+    "Latest Home Skill out", "Latest Away Skill out", "Latest Home Defense out", "Latest Away Defense out",
+    "Latest Home Players out", "Latest Away Players out", "Latest Home Questionable", "Latest Away Questionable",
     "Latest ATS edge vs latest line", "Latest total edge vs latest line",
     "Frozen ATS edge vs original line", "Frozen total edge vs original line",
     "latest_line_time_utc", "frozen_projection_time_utc", "latest_projection_time_utc",
