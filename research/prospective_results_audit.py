@@ -5,6 +5,7 @@ import pandas as pd
 import streamlit as st
 
 from model import load_schedule_data
+from research.actual_price_grading import matchup_teams_match
 
 st.title("Prospective Results Audit")
 st.caption("Forward-looking snapshot grading • Research only • No claim of sportsbook execution")
@@ -386,10 +387,40 @@ if efficiency_parts:
         & efficiency["total_line"].notna()
     ].drop_duplicates("game_id", keep="first").copy()
 
-    eff_score_lookup = score_lookup[["game_id", "home_score", "away_score"]].drop_duplicates("game_id")
+    eff_score_lookup = score_lookup[
+        ["game_id", "home_score", "away_score", "home_team", "away_team"]
+    ].drop_duplicates("game_id").rename(
+        columns={"home_team": "score_home_team", "away_team": "score_away_team"}
+    )
+
     def attach_efficiency_scores(frame):
         frame = frame.merge(eff_score_lookup, on="game_id", how="left", validate="one_to_one")
-        frame["final_available"] = frame["home_score"].notna() & frame["away_score"].notna()
+        frame["score_team_match"] = frame.apply(
+            lambda row: matchup_teams_match(
+                row.get("home_team"),
+                row.get("away_team"),
+                row.get("score_home_team"),
+                row.get("score_away_team"),
+            ),
+            axis=1,
+        )
+        frame["final_available"] = (
+            frame["home_score"].notna()
+            & frame["away_score"].notna()
+            & frame["score_team_match"]
+        )
+        mismatch_count = int(
+            (
+                frame["home_score"].notna()
+                & frame["away_score"].notna()
+                & ~frame["score_team_match"]
+            ).sum()
+        )
+        if mismatch_count:
+            st.error(
+                f"{mismatch_count:,} efficiency forecast rows have a game-ID score match but a home/away team mismatch. "
+                "Those rows are excluded from grading and should be investigated."
+            )
         frame["actual_margin"] = frame["home_score"] - frame["away_score"]
         frame["actual_total"] = frame["home_score"] + frame["away_score"]
         return frame
