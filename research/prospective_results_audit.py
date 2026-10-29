@@ -443,7 +443,23 @@ if efficiency_parts:
     score_index = score_lookup.set_index("game_id")
     score_home = efficiency["game_id"].map(score_index["home_score"])
     score_away = efficiency["game_id"].map(score_index["away_score"])
+    score_home_team = efficiency["game_id"].map(score_index["home_team"])
+    score_away_team = efficiency["game_id"].map(score_index["away_team"])
     schedule_match = efficiency["game_id"].isin(score_lookup["game_id"])
+    efficiency_team_match = pd.Series(
+        [
+            matchup_teams_match(home, away, score_home_name, score_away_name)
+            for home, away, score_home_name, score_away_name in zip(
+                efficiency["home_team"],
+                efficiency["away_team"],
+                score_home_team,
+                score_away_team,
+            )
+        ],
+        index=efficiency.index,
+    )
+    rows_with_final_scores = score_home.notna() & score_away.notna()
+    archive_team_mismatches = int((rows_with_final_scores & ~efficiency_team_match).sum())
     current_day_utc = pd.Timestamp.now(tz="UTC").floor("D")
     scheduled_day = efficiency["gameday"].dt.floor("D")
     upcoming_rows = scheduled_day.ge(current_day_utc) & scheduled_day.notna()
@@ -451,8 +467,13 @@ if efficiency_parts:
     d1, d2, d3, d4 = st.columns(4)
     d1.metric("Earliest scheduled game", f"{scheduled_min:%Y-%m-%d}" if pd.notna(scheduled_min) else "Unavailable")
     d2.metric("Latest scheduled game", f"{scheduled_max:%Y-%m-%d}" if pd.notna(scheduled_max) else "Unavailable")
-    d3.metric("Rows matched to final scores", f"{int((score_home.notna() & score_away.notna()).sum()):,}")
+    d3.metric("Rows with final scores + matching teams", f"{int((rows_with_final_scores & efficiency_team_match).sum()):,}")
     d4.metric("Unique forecast game IDs", f"{efficiency['game_id'].nunique():,}")
+    if archive_team_mismatches:
+        st.error(
+            f"{archive_team_mismatches:,} archived efficiency forecast rows have final scores attached by game ID, "
+            "but the saved home/away teams do not match the score feed. These rows must not be trusted for grading."
+        )
     e1, e2, e3, e4 = st.columns(4)
     e1.metric("Rows matching schedule IDs", f"{int(schedule_match.sum()):,} / {len(efficiency):,}")
     e2.metric("Scheduled today/future", f"{int(upcoming_rows.sum()):,}")
