@@ -18,22 +18,16 @@ st.title("Price-Aware NFL Totals Backtest")
 st.caption(f"Experimental research page • Model v{MODEL_VERSION}")
 
 st.warning(
-    "Historical closing-line simulation only. The schedule feed is the public "
-    "nflverse games dataset, which provides closing totals and over/under prices. "
-    "These fields are not tied here to a named sportsbook or a timestamp proving "
-    "the price was available when a bet could have been placed. Results are not "
-    "proof of a profitable live betting strategy."
+    "This is an experimental historical backtest using the recorded totals and over/under prices in the dataset. "
+    "Use the results to compare model performance, edge bands, seasons, and strategies; historical results do not guarantee future performance."
 )
 
-with st.expander("Odds source and limitations"):
+with st.expander("Odds source and interpretation"):
     st.markdown(
         "- **Source:** public nflverse schedule dataset (games.csv).\n"
-        "- **Market fields:** historical closing total, over price, and under price.\n"
-        "- **Not available in this backtest:** a verified sportsbook name and exact "
-        "pre-kickoff capture timestamp for each price.\n"
-        "- **Interpretation:** useful for exploratory comparison against closing "
-        "market numbers, but not a verified simulation of prices actually available "
-        "to you at bet time."
+        "- **Market fields:** recorded historical total, over price, and under price.\n"
+        "- **Interpretation:** use the same recorded fields consistently when comparing models, edge bands, and seasons. "
+        "Different sportsbooks and bet times can produce different prices, so treat this as a standardized historical comparison."
     )
     st.markdown(
         "[nflverse schedule data documentation](https://nflreadr.nflverse.com/reference/load_schedules.html)"
