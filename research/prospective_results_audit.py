@@ -844,6 +844,12 @@ if odds_files:
                 margin = row["actual_total"] - line
             if pd.isna(edge) or pd.isna(line) or pd.isna(price) or edge == 0:
                 return pd.Series({"result": "Not gradable", "net_units": np.nan, "units_risked": np.nan})
+            if abs(edge) < EDGE_THRESHOLD:
+                return pd.Series({
+                    "result": f"Below {EDGE_THRESHOLD:.1f}-point threshold",
+                    "net_units": np.nan,
+                    "units_risked": np.nan,
+                })
             directional_margin = margin * np.sign(edge)
             if directional_margin == 0:
                 result, net = "Push", 0.0
@@ -946,8 +952,10 @@ if odds_files:
             "Sign convention: EndzoneAPI spread_home is the home team's signed handicap (negative means home favored); "
             "the model's home-margin ATS edge is projected home margin + spread_home. "
             "Directional leans are shown for every row with a valid projection and market line, even when the edge is below "
-            "the 3.5-point candidate threshold. Completed eligible games are graded at the recorded American price; "
-            "upcoming games remain pending. These are hypothetical model results, not proof of a durable betting edge."
+            "the 3.5-point candidate threshold. The actual-price performance record grades only edges meeting the fixed "
+            "3.5-point threshold; below-threshold rows remain visible but are excluded from the record. Completed eligible "
+            "games are graded at the recorded American price; upcoming games remain pending. These are hypothetical model "
+            "results, not proof of a durable betting edge."
         )
         for market_label, result_col, units_col, risk_col in [
             ("ATS", "ATS result", "ATS net units", "ATS units risked"),
