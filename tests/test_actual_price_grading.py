@@ -32,6 +32,9 @@ class ActualPriceGradingTests(unittest.TestCase):
         self.assertFalse(matchup_teams_match("BUF", "MIA", "BUF", "NYJ"))
         self.assertFalse(matchup_teams_match("BUF", "MIA", None, "MIA"))
         self.assertFalse(matchup_teams_match("", "MIA", "BUF", "MIA"))
+        self.assertFalse(matchup_teams_match("NAN", "MIA", "NAN", "MIA"))
+        self.assertFalse(matchup_teams_match("BUF", "MIA", "BUF", "NAT"))
+        self.assertFalse(matchup_teams_match("<NA>", "MIA", "<NA>", "MIA"))
 
     def test_american_odds_profit(self):
         self.assertAlmostEqual(american_profit_per_unit(-110), 100 / 110)
