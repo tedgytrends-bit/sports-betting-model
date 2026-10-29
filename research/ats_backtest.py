@@ -34,6 +34,34 @@ def get_play_by_play():
     return load_pbp((2021, 2022, 2023, 2024, 2025, 2026))
 
 
+@st.cache_data(show_spinner=False)
+def cached_efficiency_dataset(games, pbp):
+    return build_efficiency_model_dataset(games, pbp, lookback_games=10)
+
+
+@st.cache_data(show_spinner=False)
+def cached_efficiency_backtest(dataset):
+    return chronological_backtest(dataset, min_train_games=500)
+
+
+@st.cache_data(show_spinner=False)
+def cached_ats_residual_backtest(dataset, games):
+    from model import chronological_ats_residual_backtest
+    return chronological_ats_residual_backtest(dataset, games, min_train_games=500)
+
+
+@st.cache_data(show_spinner=False)
+def cached_market_anchored_backtest(dataset, games):
+    from model import chronological_market_anchored_ats_backtest
+    return chronological_market_anchored_ats_backtest(dataset, games, min_train_games=500)
+
+
+@st.cache_data(show_spinner=False)
+def cached_injury_reports():
+    from model import load_injury_reports
+    return load_injury_reports((2022, 2023, 2024, 2025, 2026))
+
+
 def build_injury_coverage_audit(schedule, injuries):
     """Page-local audit avoids dependency on a newly deployed model.py symbol."""
     reports = injuries.copy()
@@ -136,8 +164,8 @@ if run:
             st.stop()
 
         with st.spinner("Building pregame features and chronological predictions..."):
-            dataset = build_efficiency_model_dataset(games, pbp, lookback_games=10)
-            results = chronological_backtest(dataset, min_train_games=500)
+            dataset = cached_efficiency_dataset(games, pbp)
+            results = cached_efficiency_backtest(dataset)
             predictions = results["predictions"].copy()
 
         # Load experimental functions lazily so an optional model import cannot
@@ -169,22 +197,20 @@ if run:
         backtest["model_margin_error"] = (backtest["predicted_home_margin"] - backtest["actual_home_margin"]).abs()
 
         with st.spinner("Testing a direct ATS-residual model..."):
-            residual_predictions = chronological_ats_residual_backtest(dataset, games, min_train_games=500)
+            residual_predictions = cached_ats_residual_backtest(dataset, games)
         backtest = backtest.merge(residual_predictions, on="game_id", how="left", validate="one_to_one")
         backtest["residual_model_edge"] = pd.to_numeric(backtest["predicted_ats_residual"], errors="coerce")
 
         with st.spinner("Testing the market-anchored ATS model..."):
-            anchored_predictions = chronological_market_anchored_ats_backtest(dataset, games, min_train_games=500)
+            anchored_predictions = cached_market_anchored_backtest(dataset, games)
         backtest = backtest.merge(anchored_predictions, on="game_id", how="left", validate="one_to_one")
         backtest["market_anchored_edge"] = backtest["market_anchored_home_margin"] - backtest["spread_line"]
 
         with st.spinner("Loading free historical injury reports and testing the injury-enhanced model..."):
-            injury_reports = load_injury_reports((2022, 2023, 2024, 2025, 2026))
+            injury_reports = cached_injury_reports()
             injury_audit = build_injury_coverage_audit(games, injury_reports)
             injury_dataset = add_pregame_injury_features(dataset, games, injury_reports)
-            injury_anchored_predictions = chronological_market_anchored_ats_backtest(
-                injury_dataset, games, min_train_games=500
-            ).rename(columns={"market_anchored_home_margin": "injury_anchored_home_margin"})
+            injury_anchored_predictions = cached_market_anchored_backtest(injury_dataset, games).rename(columns={"market_anchored_home_margin": "injury_anchored_home_margin"})
         backtest = backtest.merge(injury_anchored_predictions, on="game_id", how="left", validate="one_to_one")
         backtest["injury_anchored_edge"] = backtest["injury_anchored_home_margin"] - backtest["spread_line"]
 
