@@ -70,6 +70,26 @@ def get_play_by_play():
     return load_pbp((2021, 2022, 2023, 2024, 2025, 2026))
 
 
+@st.cache_data(show_spinner=False)
+def cached_efficiency_dataset(games, pbp):
+    return build_efficiency_model_dataset(games, pbp, lookback_games=10)
+
+
+@st.cache_data(show_spinner=False)
+def cached_efficiency_backtest(dataset):
+    return chronological_backtest(dataset, min_train_games=500)
+
+
+@st.cache_data(show_spinner=False)
+def cached_market_residual_backtest(dataset, games):
+    return chronological_market_residual_backtest(dataset, games, min_train_games=500)
+
+
+@st.cache_data(show_spinner=False)
+def cached_direct_total_backtest(dataset, games):
+    return chronological_direct_total_backtest(dataset, games, min_train_games=500)
+
+
 def american_profit_per_unit(odds):
     """Profit on a winning bet when exactly one unit is risked."""
     odds = pd.to_numeric(odds, errors="coerce")
