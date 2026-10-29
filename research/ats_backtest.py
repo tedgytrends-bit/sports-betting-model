@@ -457,6 +457,32 @@ if run:
         c3.metric("Market spread margin MAE", f"{overall_market_mae:.2f}" if pd.notna(overall_market_mae) else "—", delta=f"{delta:+.2f} points vs model")
         st.caption("Lower MAE is better. The market line is a benchmark, not necessarily an executable closing quote in this dataset. A model can have a reasonable score MAE and still fail to beat the spread market.")
 
+        # Paired bootstrap: positive differences mean the model's margin error is
+        # lower than the market's on the same games. This quantifies uncertainty;
+        # it does not correct for the market line's unverified timestamp.
+        paired_gain = (
+            calibration["market_margin_error_abs"].to_numpy(dtype=float)
+            - calibration["model_margin_error_abs"].to_numpy(dtype=float)
+        )
+        paired_gain = paired_gain[np.isfinite(paired_gain)]
+        if len(paired_gain) >= 2:
+            rng = np.random.default_rng(20261029)
+            bootstrap_means = np.empty(2000, dtype=float)
+            for i in range(len(bootstrap_means)):
+                sample = rng.choice(paired_gain, size=len(paired_gain), replace=True)
+                bootstrap_means[i] = sample.mean()
+            ci_low, ci_high = np.percentile(bootstrap_means, [2.5, 97.5])
+            st.metric(
+                "Model MAE improvement vs market (95% bootstrap CI)",
+                f"{paired_gain.mean():+.2f} pts",
+                delta=f"[{ci_low:+.2f}, {ci_high:+.2f}]",
+                help="Positive means lower average absolute margin error for the model. Paired resampling uses the same games for both forecasts.",
+            )
+            st.caption(
+                "If the 95% interval includes zero, the observed MAE difference is uncertain under this bootstrap. "
+                "This is a descriptive uncertainty interval, not proof of profitability or a correction for trying multiple models."
+            )
+
         st.subheader("Model-versus-market accuracy by season")
         calibration["market_anchored_margin_error_abs"] = (
             pd.to_numeric(backtest.loc[calibration.index, "market_anchored_home_margin"], errors="coerce")
