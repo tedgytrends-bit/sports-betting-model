@@ -42,6 +42,19 @@ def get_latest_efficiency_projections():
     projections["model_version"] = f"{MODEL_VERSION}+injury-features"
     projections["projection_captured_at_utc"] = now.isoformat()
     projections["injury_features_included"] = True
+    home_available = pd.to_numeric(projections.get("home_injury_report_available"), errors="coerce")
+    away_available = pd.to_numeric(projections.get("away_injury_report_available"), errors="coerce")
+    if home_available is not None and away_available is not None:
+        projections["injury_data_coverage"] = np.select(
+            [
+                home_available.eq(1) & away_available.eq(1),
+                home_available.eq(1) & away_available.eq(0),
+                home_available.eq(0) & away_available.eq(1),
+                home_available.eq(0) & away_available.eq(0),
+            ],
+            ["Both teams", "Home only", "Away only", "No report data"],
+            default="Unknown",
+        )
     return projections
 
 def norm_team(value):
