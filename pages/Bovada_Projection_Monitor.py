@@ -218,6 +218,13 @@ visible["Frozen ATS lean"] = visible["frozen_ats_lean"]
 visible["Latest ATS lean"] = visible["latest_ats_lean"]
 visible["Frozen O/U lean"] = visible["frozen_total_lean"]
 visible["Latest O/U lean"] = visible["latest_total_lean"]
+if "injury_data_coverage" in visible.columns:
+    visible["Injury data coverage"] = visible["injury_data_coverage"]
+for team_side in ("home", "away"):
+    for feature, label in (("qb_out", "QB out"), ("ol_out", "OL out"), ("skill_out", "Skill out"), ("defense_out", "Defense out"), ("inj_out", "Players out"), ("inj_questionable", "Questionable")):
+        source_col = f"{team_side}_{feature}"
+        if source_col in visible.columns:
+            visible[f"Latest {team_side.title()} {label}"] = visible[source_col].map(lambda x: f"{x:.0f}" if pd.notna(x) else "Unknown")
 for col, label, fmt in [
     ("original_home_favorite_spread", "Original Bovada spread", "{:+.1f}"),
     ("latest_home_favorite_spread", "Latest Bovada spread", "{:+.1f}"),
@@ -235,7 +242,10 @@ columns = [
     "Matchup", "Original Bovada spread", "Latest Bovada spread", "Original total", "Latest total",
     "Frozen projected score", "Frozen projected total points", "Frozen ATS lean", "Frozen O/U lean",
     "Frozen ATS edge vs latest line", "Frozen total edge vs latest line",
-    "Latest projected score", "Latest projected total points", "Latest ATS lean", "Latest O/U lean",
+    "Latest projected score", "Latest projected total points", "Latest ATS lean", "Latest O/U lean", "Injury data coverage",
+    "Latest Home QB out", "Latest Away QB out", "Latest Home OL out", "Latest Away OL out",
+    "Latest Home Skill out", "Latest Away Skill out", "Latest Home Defense out", "Latest Away Defense out",
+    "Latest Home Players out", "Latest Away Players out", "Latest Home Questionable", "Latest Away Questionable",
     "Latest ATS edge vs latest line", "Latest total edge vs latest line",
     "Frozen ATS edge vs original line", "Frozen total edge vs original line",
     "latest_line_time_utc", "frozen_projection_time_utc", "latest_projection_time_utc",
