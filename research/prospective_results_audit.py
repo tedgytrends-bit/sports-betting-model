@@ -162,13 +162,12 @@ fallback_matched = unmatched & graded["home_score"].notna() & graded["away_score
 graded.loc[fallback_matched, "score_match_method"] = "date+teams"
 # A game_id join alone is not sufficient: verify the saved matchup still
 # agrees with the schedule row before allowing any score to enter the record.
-graded["score_team_match"] = (
-    graded["home_team"].astype(str).str.upper().str.strip().eq(
-        graded["score_home_team"].astype(str).str.upper().str.strip()
-    )
-    & graded["away_team"].astype(str).str.upper().str.strip().eq(
-        graded["score_away_team"].astype(str).str.upper().str.strip()
-    )
+graded["score_team_match"] = graded.apply(
+    lambda row: matchup_teams_match(
+        row["home_team"], row["away_team"],
+        row["score_home_team"], row["score_away_team"],
+    ),
+    axis=1,
 )
 graded["final_available"] = (
     graded["home_score"].notna()
@@ -915,13 +914,12 @@ if odds_files:
         odds = odds.merge(score_lookup_odds, on="game_id", how="left", validate="many_to_one")
         # A matching game ID is necessary but not sufficient: fail closed if the
         # score feed's home/away teams disagree with the saved odds matchup.
-        odds["score_team_match"] = (
-            odds["home_team"].astype(str).str.upper().str.strip().eq(
-                odds["score_home_team"].astype(str).str.upper().str.strip()
-            )
-            & odds["away_team"].astype(str).str.upper().str.strip().eq(
-                odds["score_away_team"].astype(str).str.upper().str.strip()
-            )
+        odds["score_team_match"] = odds.apply(
+            lambda row: matchup_teams_match(
+                row["home_team"], row["away_team"],
+                row["score_home_team"], row["score_away_team"],
+            ),
+            axis=1,
         )
         odds["final_available"] = (
             odds["home_score"].notna()
