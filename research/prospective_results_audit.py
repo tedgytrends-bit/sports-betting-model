@@ -823,41 +823,7 @@ if odds_files:
         odds["actual_home_margin"] = odds["home_score"] - odds["away_score"]
         odds["actual_total"] = odds["home_score"] + odds["away_score"]
 
-        def american_profit_per_unit(american_odds):
-            if pd.isna(american_odds) or american_odds == 0:
-                return np.nan
-            return (american_odds / 100.0) if american_odds > 0 else (100.0 / abs(american_odds))
-
-        def grade_actual_price(row, market):
-            if not row["final_available"] or not row["timing_eligible"]:
-                return pd.Series({"result": "Pending/Not eligible", "net_units": np.nan, "units_risked": np.nan})
-            if market == "ATS":
-                edge = row["endzone_ats_edge"]
-                line = row["spread_home"]
-                # Home signed handicap: home cover margin = actual home margin + home handicap.
-                price = row["spread_home_odds"] if edge > 0 else row["spread_away_odds"]
-                margin = row["actual_home_margin"] + line
-            else:
-                edge = row["endzone_total_edge"]
-                line = row["total"]
-                price = row["total_over_odds"] if edge > 0 else row["total_under_odds"]
-                margin = row["actual_total"] - line
-            if pd.isna(edge) or pd.isna(line) or pd.isna(price) or edge == 0:
-                return pd.Series({"result": "Not gradable", "net_units": np.nan, "units_risked": np.nan})
-            if abs(edge) < EDGE_THRESHOLD:
-                return pd.Series({
-                    "result": f"Below {EDGE_THRESHOLD:.1f}-point threshold",
-                    "net_units": np.nan,
-                    "units_risked": np.nan,
-                })
-            directional_margin = margin * np.sign(edge)
-            if directional_margin == 0:
-                result, net = "Push", 0.0
-            elif directional_margin > 0:
-                result, net = "Win", american_profit_per_unit(price)
-            else:
-                result, net = "Loss", -1.0
-            return pd.Series({"result": result, "net_units": net, "units_risked": 1.0})
+        from research.actual_price_grading import grade_actual_price
 
         # Only one predeclared snapshot type is eligible for grading. Opening and
         # closing rows remain visible for line-movement analysis but cannot be
@@ -882,8 +848,8 @@ if odds_files:
                 subset=["game_id", "bookmaker"], keep="last"
             )
             odds.loc[selected.index, "selected_for_grading"] = True
-            ats_grades = selected.apply(lambda row: grade_actual_price(row, "ATS"), axis=1)
-            totals_grades = selected.apply(lambda row: grade_actual_price(row, "Totals"), axis=1)
+            ats_grades = selected.apply(lambda row: grade_actual_price(row, "ATS", EDGE_THRESHOLD), axis=1)
+            totals_grades = selected.apply(lambda row: grade_actual_price(row, "Totals", EDGE_THRESHOLD), axis=1)
             # Assign whole columns rather than masked .loc writes. This avoids
             # pandas 3.x strict dtype/upcast errors when mixed-type apply results
             # contain nullable values for pending games.
