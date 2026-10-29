@@ -909,12 +909,14 @@ if odds_files:
                 ~odds["source_time_not_future_of_capture"],
                 ~odds["prediction_team_match"],
                 ~odds["prediction_precedes_odds"],
+                ~odds["core_identifiers_valid"],
             ],
             [
                 "Provider timestamp missing/after kickoff",
                 "Provider timestamp after collector capture",
                 "No matching frozen prediction/team pairing",
                 "Prediction missing or captured after odds",
+                "Missing identifier or not selected snapshot type",
             ],
             default="Timing checks passed",
         )
