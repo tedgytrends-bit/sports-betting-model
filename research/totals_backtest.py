@@ -412,7 +412,11 @@ if "price_aware_data" in st.session_state:
     )
     def calibration_summary(group_columns):
         rows = []
-        for key, part in calibration_bets.groupby(group_columns, observed=False, dropna=False):
+        for key, part in calibration_bets.groupby(
+            group_columns[0] if len(group_columns) == 1 else group_columns,
+            observed=False,
+            dropna=False,
+        ):
             wins = int(part["result"].eq("Win").sum())
             losses = int(part["result"].eq("Loss").sum())
             pushes = int(part["result"].eq("Push").sum())
