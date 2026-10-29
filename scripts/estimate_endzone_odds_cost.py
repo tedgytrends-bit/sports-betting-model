@@ -40,7 +40,8 @@ def main():
             "Add your existing EndzoneAPI key in GitHub: Settings > Secrets and variables > Actions > New repository secret; "
             "name it ENDZONE_API_KEY. Do not paste the key in code or logs."
         )
-        sys.exit(0)
+        # Fail the workflow so a skipped estimate cannot look like success.
+        sys.exit(1)
 
     # Illustrative single-game estimate. This game ID is just a known-format
     # example; estimate_only means it does not retrieve or bill for the game.
