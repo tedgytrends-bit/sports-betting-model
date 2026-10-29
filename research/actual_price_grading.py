@@ -3,14 +3,18 @@
 Research only: this grades hypothetical outcomes and does not verify that a quote
 was executable. The caller is responsible for selecting timing-eligible snapshots.
 """
+import math
+
 import pandas as pd
 
 
 def american_profit_per_unit(american_odds):
     """Return net profit on one unit risked, or NaN for an invalid price."""
-    if pd.isna(american_odds) or american_odds == 0:
+    if pd.isna(american_odds):
         return float("nan")
     odds = float(american_odds)
+    if not math.isfinite(odds) or odds == 0:
+        return float("nan")
     return odds / 100.0 if odds > 0 else 100.0 / abs(odds)
 
 
@@ -39,6 +43,9 @@ def grade_actual_price(row, market, edge_threshold=3.5):
 
     if pd.isna(edge) or pd.isna(line) or pd.isna(price) or pd.isna(margin) or edge == 0:
         return {"result": "Not gradable", "net_units": float("nan"), "units_risked": float("nan")}
+    profit_per_unit = american_profit_per_unit(price)
+    if pd.isna(profit_per_unit):
+        return {"result": "Not gradable", "net_units": float("nan"), "units_risked": float("nan")}
     if abs(float(edge)) < edge_threshold:
         return {
             "result": f"Below {edge_threshold:.1f}-point threshold",
@@ -50,7 +57,7 @@ def grade_actual_price(row, market, edge_threshold=3.5):
     if directional_margin == 0:
         result, net = "Push", 0.0
     elif directional_margin > 0:
-        result, net = "Win", american_profit_per_unit(price)
+        result, net = "Win", profit_per_unit
     else:
         result, net = "Loss", -1.0
     return {"result": result, "net_units": net, "units_risked": 1.0}

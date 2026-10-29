@@ -1,6 +1,8 @@
 """Unit tests for hypothetical actual-price grading."""
 import unittest
 
+import pandas as pd
+
 from research.actual_price_grading import grade_actual_price, american_profit_per_unit
 
 
@@ -27,7 +29,8 @@ class ActualPriceGradingTests(unittest.TestCase):
     def test_american_odds_profit(self):
         self.assertAlmostEqual(american_profit_per_unit(-110), 100 / 110)
         self.assertAlmostEqual(american_profit_per_unit(150), 1.5)
-        self.assertTrue(american_profit_per_unit(0) != american_profit_per_unit(0))
+        self.assertTrue(pd.isna(american_profit_per_unit(0)))
+        self.assertTrue(pd.isna(american_profit_per_unit(float("inf"))))
 
     def test_home_underdog_cover_uses_signed_handicap(self):
         result = grade_actual_price(base_row(), "ATS")
@@ -53,6 +56,14 @@ class ActualPriceGradingTests(unittest.TestCase):
         self.assertTrue(below["result"].startswith("Below"))
         missing = grade_actual_price(base_row(spread_home_odds=float("nan")), "ATS")
         self.assertEqual(missing["result"], "Not gradable")
+
+    def test_zero_and_infinite_prices_are_not_graded(self):
+        for bad_price in (0, float("inf"), float("-inf")):
+            with self.subTest(bad_price=bad_price):
+                result = grade_actual_price(base_row(spread_home_odds=bad_price), "ATS")
+                self.assertEqual(result["result"], "Not gradable")
+                self.assertTrue(pd.isna(result["net_units"]))
+                self.assertTrue(pd.isna(result["units_risked"]))
 
     def test_pending_or_ineligible_rows_are_not_graded(self):
         pending = grade_actual_price(base_row(final_available=False), "ATS")
