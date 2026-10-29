@@ -43,6 +43,11 @@ def get_latest_efficiency_projections():
 def norm_team(value):
     return str(value).strip().upper()
 
+def key_team(value):
+    # nflverse labels the Rams as LA while Bovada commonly labels them LAR.
+    team = norm_team(value)
+    return {"LAR": "LA"}.get(team, team)
+
 if not LINE_FILE.exists():
     st.error("Bovada line archive is missing: data/bovada_lines.csv")
     st.stop()
@@ -61,7 +66,7 @@ for col in ["home_favorite_spread", "total_line", "away_spread_price", "home_spr
 lines["away_team"] = lines["away_team"].map(norm_team)
 lines["home_team"] = lines["home_team"].map(norm_team)
 lines = lines.dropna(subset=["captured_at_utc"]).sort_values("captured_at_utc")
-lines["game_key"] = lines["away_team"] + "@" + lines["home_team"]
+lines["game_key"] = lines["away_team"].map(key_team) + "@" + lines["home_team"].map(key_team)
 latest_lines = lines.drop_duplicates("game_key", keep="last").copy()
 original_lines = lines.drop_duplicates("game_key", keep="first").copy()
 latest_lines = latest_lines.rename(columns={
@@ -105,7 +110,7 @@ def prep_projection(frame):
     f = frame.copy()
     f["away_team"] = f["away_team"].map(norm_team)
     f["home_team"] = f["home_team"].map(norm_team)
-    f["game_key"] = f["away_team"] + "@" + f["home_team"]
+    f["game_key"] = f["away_team"].map(key_team) + "@" + f["home_team"].map(key_team)
     if "model_predicted_home_margin" not in f.columns:
         f["model_predicted_home_margin"] = pd.to_numeric(f.get("projected_home"), errors="coerce") - pd.to_numeric(f.get("projected_away"), errors="coerce")
     if "model_projected_total" not in f.columns:
