@@ -59,7 +59,7 @@ lookback = st.slider(
     value=10,
 )
 
-run = st.button("Run Price-Aware Backtest", type="primary")
+run = st.button("Run Price-Aware Backtest", type="primary") or st.session_state.get("totals_backtest_has_run", False)
 
 @st.cache_data(ttl=1800, show_spinner=False)
 def get_schedule():
@@ -220,6 +220,7 @@ def summarize(data, group_columns=None):
 
 
 if run:
+    st.session_state["totals_backtest_has_run"] = True
     try:
         with st.spinner(
             "Loading historical data and generating chronological predictions..."
