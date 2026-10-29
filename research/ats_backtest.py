@@ -7,8 +7,8 @@ from model import MODEL_VERSION, load_schedule_data, load_pbp, build_efficiency_
 st.title("NFL ATS Backtest")
 st.caption(f"Experimental research page • Model v{MODEL_VERSION}")
 st.warning(
-    "This is a research backtest, not a validated betting system. Historical spread lines come from the public "
-    "nflverse schedule feed; the exact sportsbook and time the line was available are not verified. Simulated ROI assumes -110 odds."
+    "This is an experimental historical backtest. Results describe how the model's directional picks and edge bands performed "
+    "against the recorded spread data; they are evidence to evaluate, not a guarantee of future performance. Simulated ROI assumes -110 odds."
 )
 st.markdown(
     "This page tests whether the existing EPA/efficiency score model can identify ATS value. It is separate from the totals research. "
