@@ -43,6 +43,9 @@ def grade_actual_price(row, market, edge_threshold=3.5):
 
     if pd.isna(edge) or pd.isna(line) or pd.isna(price) or pd.isna(margin) or edge == 0:
         return {"result": "Not gradable", "net_units": float("nan"), "units_risked": float("nan")}
+    profit_per_unit = american_profit_per_unit(price)
+    if pd.isna(profit_per_unit):
+        return {"result": "Not gradable", "net_units": float("nan"), "units_risked": float("nan")}
     if abs(float(edge)) < edge_threshold:
         return {
             "result": f"Below {edge_threshold:.1f}-point threshold",
@@ -54,7 +57,7 @@ def grade_actual_price(row, market, edge_threshold=3.5):
     if directional_margin == 0:
         result, net = "Push", 0.0
     elif directional_margin > 0:
-        result, net = "Win", american_profit_per_unit(price)
+        result, net = "Win", profit_per_unit
     else:
         result, net = "Loss", -1.0
     return {"result": result, "net_units": net, "units_risked": 1.0}
