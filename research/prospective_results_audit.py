@@ -850,9 +850,8 @@ if odds_files:
             odds.loc[selected.index, "selected_for_grading"] = True
             ats_grades = selected.apply(lambda row: grade_actual_price(row, "ATS", EDGE_THRESHOLD), axis=1)
             totals_grades = selected.apply(lambda row: grade_actual_price(row, "Totals", EDGE_THRESHOLD), axis=1)
-            # Assign whole columns rather than masked .loc writes. This avoids
-            # pandas 3.x strict dtype/upcast errors when mixed-type apply results
-            # contain nullable values for pending games.
+            # DataFrame.apply(axis=1) returns a Series of dictionaries here.
+            # Normalize it into a DataFrame before selecting result/net-unit fields.
             for result_col, grades, source_col in [
                 ("ATS result", ats_grades, "result"),
                 ("ATS net units", ats_grades, "net_units"),
@@ -861,12 +860,15 @@ if odds_files:
                 ("Totals net units", totals_grades, "net_units"),
                 ("Totals units risked", totals_grades, "units_risked"),
             ]:
+                grade_values = pd.DataFrame(grades.tolist(), index=selected.index)
                 full_values = pd.Series(np.nan, index=odds.index, dtype="object")
-                if result_col.endswith("result"):
-                    full_values.loc[selected.index] = grades[source_col].astype(str).to_numpy()
+                if source_col == "result":
+                    values = grade_values[source_col].fillna("Not gradable").astype(str).to_numpy()
                 else:
-                    numeric_values = pd.to_numeric(grades[source_col], errors="coerce").astype("float64").to_numpy()
-                    full_values.loc[selected.index] = numeric_values
+                    values = pd.to_numeric(
+                        grade_values[source_col], errors="coerce"
+                    ).astype("float64").to_numpy()
+                full_values.loc[selected.index] = values
                 odds[result_col] = full_values
 
         # Keep the strict eligibility flag defined above, including valid core identifiers.
