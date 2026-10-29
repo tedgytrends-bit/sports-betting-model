@@ -156,7 +156,29 @@ graded.loc[unmatched, "home_score"] = fallback["home_score"].to_numpy()
 graded.loc[unmatched, "away_score"] = fallback["away_score"].to_numpy()
 fallback_matched = unmatched & graded["home_score"].notna() & graded["away_score"].notna()
 graded.loc[fallback_matched, "score_match_method"] = "date+teams"
-graded["final_available"] = graded["home_score"].notna() & graded["away_score"].notna()
+# A game_id join alone is not sufficient: verify the saved matchup still
+# agrees with the schedule row before allowing any score to enter the record.
+graded["score_team_match"] = (
+    graded["home_team"].astype(str).str.upper().str.strip().eq(
+        graded["score_home_team"].astype(str).str.upper().str.strip()
+    )
+    & graded["away_team"].astype(str).str.upper().str.strip().eq(
+        graded["score_away_team"].astype(str).str.upper().str.strip()
+    )
+)
+graded["final_available"] = (
+    graded["home_score"].notna()
+    & graded["away_score"].notna()
+    & graded["score_team_match"]
+)
+score_mismatch_count = int(
+    (graded["home_score"].notna() & graded["away_score"].notna() & ~graded["score_team_match"]).sum()
+)
+if score_mismatch_count:
+    st.error(
+        f"{score_mismatch_count:,} baseline snapshot rows have a score join but a home/away matchup mismatch. "
+        "Those rows are excluded from grading and should be investigated."
+    )
 graded["actual_margin"] = graded["home_score"] - graded["away_score"]
 graded["actual_total"] = graded["home_score"] + graded["away_score"]
 graded["ats_edge"] = graded["baseline_predicted_home_margin"] - graded["spread_line_source_value"]
@@ -177,10 +199,14 @@ ats_selected = first_complete_market_snapshot("ats_edge", "spread_line_source_va
 totals_selected = first_complete_market_snapshot("total_edge", "total_line_source_value")
 def attach_scores(selected):
     result = selected.drop(columns=["home_score", "away_score"], errors="ignore").merge(
-        graded[["game_id", "home_score", "away_score", "score_match_method"]].drop_duplicates("game_id"),
+        graded[["game_id", "home_score", "away_score", "score_match_method", "score_team_match"]].drop_duplicates("game_id"),
         on="game_id", how="left", validate="one_to_one"
     )
-    result["final_available"] = result["home_score"].notna() & result["away_score"].notna()
+    result["final_available"] = (
+        result["home_score"].notna()
+        & result["away_score"].notna()
+        & result["score_team_match"].fillna(False)
+    )
     result["actual_margin"] = result["home_score"] - result["away_score"]
     result["actual_total"] = result["home_score"] + result["away_score"]
     result["ats_edge"] = result["baseline_predicted_home_margin"] - result["spread_line_source_value"]
