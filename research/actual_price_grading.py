@@ -67,3 +67,14 @@ def grade_actual_price(row, market, edge_threshold=3.5):
     else:
         result, net = "Loss", -1.0
     return {"result": result, "net_units": net, "units_risked": 1.0}
+
+
+def matchup_teams_match(home_team, away_team, score_home_team, score_away_team):
+    """Return True only when all saved and score-feed teams are present and ordered identically."""
+    values = (home_team, away_team, score_home_team, score_away_team)
+    if any(pd.isna(value) for value in values):
+        return False
+    normalized = [str(value).strip().upper() for value in values]
+    if any(not value for value in normalized):
+        return False
+    return normalized[0] == normalized[2] and normalized[1] == normalized[3]
