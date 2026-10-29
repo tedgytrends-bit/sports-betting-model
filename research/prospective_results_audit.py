@@ -815,13 +815,39 @@ if odds_files:
 
         # Join final scores so completed archive games can eventually be graded
         # at actual American prices. Unfinished games remain ungraded.
-        score_lookup_odds = scores[["game_id", "home_score", "away_score"]].drop_duplicates("game_id")
+        score_lookup_odds = scores[
+            ["game_id", "home_score", "away_score", "home_team", "away_team"]
+        ].drop_duplicates("game_id").rename(
+            columns={"home_team": "score_home_team", "away_team": "score_away_team"}
+        )
         odds["game_id"] = odds["game_id"].astype(str)
         score_lookup_odds["game_id"] = score_lookup_odds["game_id"].astype(str)
         odds = odds.merge(score_lookup_odds, on="game_id", how="left", validate="many_to_one")
-        odds["final_available"] = odds["home_score"].notna() & odds["away_score"].notna()
+        # A matching game ID is necessary but not sufficient: fail closed if the
+        # score feed's home/away teams disagree with the saved odds matchup.
+        odds["score_team_match"] = (
+            odds["home_team"].astype(str).str.upper().str.strip().eq(
+                odds["score_home_team"].astype(str).str.upper().str.strip()
+            )
+            & odds["away_team"].astype(str).str.upper().str.strip().eq(
+                odds["score_away_team"].astype(str).str.upper().str.strip()
+            )
+        )
+        odds["final_available"] = (
+            odds["home_score"].notna()
+            & odds["away_score"].notna()
+            & odds["score_team_match"]
+        )
         odds["actual_home_margin"] = odds["home_score"] - odds["away_score"]
         odds["actual_total"] = odds["home_score"] + odds["away_score"]
+        mismatch_count = int(
+            (odds["home_score"].notna() & odds["away_score"].notna() & ~odds["score_team_match"]).sum()
+        )
+        if mismatch_count:
+            st.error(
+                f"{mismatch_count:,} odds rows have a game-ID match but a home/away team mismatch in the score feed. "
+                "Those rows are excluded from grading and should be investigated."
+            )
 
         from research.actual_price_grading import grade_actual_price
 
