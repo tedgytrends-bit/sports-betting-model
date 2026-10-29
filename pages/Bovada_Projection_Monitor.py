@@ -4,6 +4,7 @@ import pandas as pd
 import streamlit as st
 
 from model import MODEL_VERSION, load_schedule_data, load_pbp, build_efficiency_model_dataset, project_upcoming_efficiency
+from injury_model import load_injury_reports, add_injury_features
 
 st.title("Bovada Projection Monitor")
 st.caption("Upcoming-game market source: user-supplied Bovada lines. Historical backtests retain their established research data sources.")
@@ -16,11 +17,13 @@ PROJECTION_DIR = ROOT / "data" / "prospective_ats_tracking"
 def get_schedule():
     return load_schedule_data()
 
-@st.cache_data(ttl=3600, show_spinner="Loading play-by-play and calculating latest efficiency projections...")
+@st.cache_data(ttl=3600, show_spinner="Loading play-by-play, injury history, and calculating injury-aware projections...")
 def get_latest_efficiency_projections():
     schedule = load_schedule_data()
     pbp = load_pbp((2021, 2022, 2023, 2024, 2025, 2026))
     features = build_efficiency_model_dataset(schedule, pbp, lookback_games=10)
+    injury_reports = load_injury_reports((2021, 2022, 2023, 2024, 2025, 2026))
+    features = add_injury_features(features, schedule, injury_reports)
     projections = project_upcoming_efficiency(features, min_train_games=500)
     if projections.empty:
         return pd.DataFrame()
@@ -36,8 +39,9 @@ def get_latest_efficiency_projections():
     projections["projected_away"] = pd.to_numeric(projections["projected_away"], errors="coerce")
     projections["model_projected_total"] = pd.to_numeric(projections["projected_total"], errors="coerce")
     projections["model_predicted_home_margin"] = projections["projected_home"] - projections["projected_away"]
-    projections["model_version"] = MODEL_VERSION
+    projections["model_version"] = f"{MODEL_VERSION}+injury-features"
     projections["projection_captured_at_utc"] = now.isoformat()
+    projections["injury_features_included"] = True
     return projections
 
 def norm_team(value):
@@ -185,7 +189,7 @@ board["latest_total_lean"] = board["total_edge_latest"].map(total_lean)
 
 st.subheader("How to use this board")
 st.info("Official evaluation uses the earliest saved efficiency projection per game (frozen). The latest efficiency projection is shown separately as the current outlook. All upcoming-game edges use the latest Bovada line archived below; schedule-feed lines are not used as the market reference.")
-st.caption("The latest efficiency projection is recalculated from available completed-game play-by-play and cached for up to 60 minutes. It is not automatically injury- or weather-adjusted. Frozen projections are not replaced by later runs.")
+st.caption("The frozen projection is the original baseline. The latest projection now trains with timestamp-filtered historical injury features and uses the latest saved injury snapshot for upcoming games when available. Injury-feed coverage can be incomplete, and this experimental adjustment is not yet proven to improve out-of-sample accuracy. Weather is not automatically adjusted. Projections are cached for up to 60 minutes.")
 
 if frozen.empty:
     st.warning("No saved frozen efficiency projection files were found. Latest projections can be monitored, but the official frozen baseline is unavailable until the capture workflow saves a projection. Do not substitute the schedule-feed baseline for the official record.")
