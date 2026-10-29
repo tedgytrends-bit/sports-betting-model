@@ -647,8 +647,10 @@ if odds_files:
             if col not in odds:
                 odds[col] = np.nan
             odds[col] = pd.to_numeric(odds[col], errors="coerce")
-        odds["home_team"] = odds.get("home_team", "").astype(str).str.upper().str.strip()
-        odds["away_team"] = odds.get("away_team", "").astype(str).str.upper().str.strip()
+        for col in ["home_team", "away_team"]:
+            if col not in odds.columns:
+                odds[col] = ""
+            odds[col] = odds[col].astype(str).str.upper().str.strip()
         odds["provider_time_before_kickoff"] = (
             odds["source_snapshot_at_utc"].notna()
             & odds["kickoff_utc"].notna()
