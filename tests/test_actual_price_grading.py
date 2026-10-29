@@ -71,6 +71,8 @@ class ActualPriceGradingTests(unittest.TestCase):
         self.assertEqual(pending["result"], "Pending/Not eligible")
         ineligible = grade_actual_price(base_row(timing_eligible=False), "Totals")
         self.assertEqual(ineligible["result"], "Pending/Not eligible")
+        mismatched_score = grade_actual_price(base_row(score_team_match=False), "ATS")
+        self.assertEqual(mismatched_score["result"], "Pending/Not eligible")
 
     def test_invalid_market_is_rejected(self):
         with self.assertRaises(ValueError):

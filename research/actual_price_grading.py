@@ -29,7 +29,11 @@ def grade_actual_price(row, market, edge_threshold=3.5):
     if market not in {"ATS", "Totals"}:
         raise ValueError("market must be 'ATS' or 'Totals'")
 
-    if not bool(row["final_available"]) or not bool(row["timing_eligible"]):
+    if (
+        not bool(row["final_available"])
+        or not bool(row["timing_eligible"])
+        or not bool(row.get("score_team_match", True))
+    ):
         return {"result": "Pending/Not eligible", "net_units": float("nan"), "units_risked": float("nan")}
 
     if market == "ATS":
