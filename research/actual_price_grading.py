@@ -3,14 +3,18 @@
 Research only: this grades hypothetical outcomes and does not verify that a quote
 was executable. The caller is responsible for selecting timing-eligible snapshots.
 """
+import math
+
 import pandas as pd
 
 
 def american_profit_per_unit(american_odds):
     """Return net profit on one unit risked, or NaN for an invalid price."""
-    if pd.isna(american_odds) or american_odds == 0:
+    if pd.isna(american_odds):
         return float("nan")
     odds = float(american_odds)
+    if not math.isfinite(odds) or odds == 0:
+        return float("nan")
     return odds / 100.0 if odds > 0 else 100.0 / abs(odds)
 
 
