@@ -101,6 +101,51 @@ try:
             "snapshot_file", "Capture time (UTC)", "Season", "Week", "gameday_date", "Date-based status"
         ]].rename(columns={"snapshot_file": "Snapshot file", "gameday_date": "Scheduled game date"})
         st.dataframe(check, hide_index=True, use_container_width=True)
+
+        st.subheader("Team coverage by snapshot")
+        team_columns = {"home_team", "away_team"}
+        if team_columns.issubset(schedule.columns) and "team" in snapshots.columns:
+            team_schedule = schedule.copy()
+            team_schedule["season"] = pd.to_numeric(team_schedule["season"], errors="coerce")
+            team_schedule["week"] = pd.to_numeric(team_schedule["week"], errors="coerce")
+            coverage_rows = []
+            for (snap_file, snap_season, snap_week), snap_rows in snapshots.groupby(
+                ["snapshot_file", "snapshot_season", "snapshot_week"], dropna=False
+            ):
+                scheduled = team_schedule[
+                    (team_schedule["season"] == snap_season)
+                    & (team_schedule["week"] == snap_week)
+                ]
+                expected_teams = set(
+                    scheduled["home_team"].dropna().astype(str).str.upper()
+                ) | set(scheduled["away_team"].dropna().astype(str).str.upper())
+                observed_teams = set(snap_rows["team"].dropna().astype(str).str.upper())
+                absent_teams = sorted(expected_teams - observed_teams)
+                extra_teams = sorted(observed_teams - expected_teams)
+                coverage_rows.append({
+                    "Snapshot file": snap_file,
+                    "Season": snap_season,
+                    "Week": snap_week,
+                    "Scheduled teams": len(expected_teams),
+                    "Teams with player rows": len(expected_teams & observed_teams),
+                    "Teams with no rows in feed": ", ".join(absent_teams) if absent_teams else "None",
+                    "Unexpected team codes": ", ".join(extra_teams) if extra_teams else "None",
+                })
+            if coverage_rows:
+                st.dataframe(
+                    pd.DataFrame(coverage_rows).sort_values(
+                        ["Season", "Week", "Snapshot file"], ascending=[False, False, False]
+                    ),
+                    hide_index=True,
+                    use_container_width=True,
+                )
+                st.caption(
+                    "A team with no player rows is not automatically a missing report: the source may have no listed players for that team at capture time. "
+                    "This checks team codes against the schedule, not whether each team's report was complete or final."
+                )
+        else:
+            st.info("Team coverage comparison unavailable: schedule must include home_team/away_team and the snapshot must include team.")
+
         st.caption(
             "Conservative screen only: a snapshot captured before the game date is potentially usable, not proof of report publication time. "
             "Same-day snapshots require kickoff-time verification before use. A snapshot after the game date must be excluded."
