@@ -903,12 +903,7 @@ if odds_files:
                     full_values.loc[selected.index] = numeric_values
                 odds[result_col] = full_values
 
-        odds["timing_eligible"] = (
-            odds["provider_time_before_kickoff"]
-            & odds["source_time_not_future_of_capture"]
-            & odds["prediction_precedes_odds"]
-            & odds["prediction_team_match"]
-        )
+        # Keep the strict eligibility flag defined above, including valid core identifiers.
         odds["timing_status"] = np.select(
             [
                 ~odds["provider_time_before_kickoff"],
