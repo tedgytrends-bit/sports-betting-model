@@ -436,6 +436,93 @@ if efficiency_parts:
 
     efficiency_summary("Efficiency-model ATS", eff_ats_population, eff_ats, "model_ats_edge", "spread_line", "actual_margin")
     efficiency_summary("Efficiency-model totals", eff_totals_population, eff_totals, "model_total_edge", "total_line", "actual_total")
+
+    # Prospective disjoint-band calibration: include all nonzero model edges,
+    # not only cumulative thresholds, and preserve season-level diagnostics.
+    def prospective_edge_calibration(population, edge_col, actual_col, line_col, label):
+        eligible = population[
+            population["final_available"]
+            & population[line_col].notna()
+            & population[edge_col].notna()
+            & (population[edge_col].abs() > 0)
+        ].copy()
+        eligible["absolute_edge"] = pd.to_numeric(eligible[edge_col], errors="coerce").abs()
+        eligible["Edge band"] = pd.cut(
+            eligible["absolute_edge"],
+            bins=[0, 1, 2, 3.5, 4.5, 5.5, 6.5, 7.5, np.inf],
+            labels=["0–1", "1–2", "2–3.5", "3.5–4.5", "4.5–5.5", "5.5–6.5", "6.5–7.5", "7.5+"],
+            right=False,
+            include_lowest=True,
+        )
+        margin = pd.to_numeric(eligible[actual_col], errors="coerce") - pd.to_numeric(eligible[line_col], errors="coerce")
+        eligible["result"] = np.select(
+            [margin.eq(0), margin * np.sign(pd.to_numeric(eligible[edge_col], errors="coerce")) > 0],
+            ["Push", "Win"],
+            default="Loss",
+        )
+        eligible["net_units"] = np.select(
+            [eligible["result"].eq("Win"), eligible["result"].eq("Loss")],
+            [WIN_PROFIT_AT_MINUS_110, -1.0],
+            default=0.0,
+        )
+        eligible["units_risked"] = 1.0
+
+        def summarize_bands(group_cols):
+            rows = []
+            grouped = eligible.groupby(group_cols[0] if len(group_cols) == 1 else group_cols, observed=False, dropna=False)
+            for key, part in grouped:
+                wins = int(part["result"].eq("Win").sum())
+                losses = int(part["result"].eq("Loss").sum())
+                pushes = int(part["result"].eq("Push").sum())
+                bets = len(part)
+                decisions = wins + losses
+                net = float(part["net_units"].sum())
+                row = {
+                    "Bets": bets,
+                    "Wins": wins,
+                    "Losses": losses,
+                    "Pushes": pushes,
+                    "Win % (no pushes)": round(100 * wins / decisions, 2) if decisions else np.nan,
+                    "Net units": round(net, 2),
+                    "ROI %": round(100 * net / bets, 2) if bets else np.nan,
+                }
+                if len(group_cols) == 1:
+                    row[group_cols[0]] = key
+                else:
+                    row.update(dict(zip(group_cols, key)))
+                rows.append(row)
+            return pd.DataFrame(rows)
+
+        st.subheader(f"Prospective {label}: disjoint edge bands")
+        st.caption("Each game is counted once per market, using its earliest clearly pre-scheduled-date model forecast with a nonzero edge and final score. Bands are disjoint; returns assume one unit risked and -110 odds.")
+        summary = summarize_bands(["Edge band"])
+        if not summary.empty:
+            summary = summary[["Edge band", "Bets", "Wins", "Losses", "Pushes", "Win % (no pushes)", "Net units", "ROI %"]]
+            st.dataframe(summary, hide_index=True, use_container_width=True)
+            st.download_button(
+                f"Download prospective {label.lower()} edge-band CSV",
+                summary.to_csv(index=False).encode("utf-8"),
+                f"prospective_{label.lower().replace(' ', '_')}_edge_bands.csv",
+                "text/csv",
+                on_click="ignore",
+            )
+        if "season" in eligible.columns:
+            season_summary = summarize_bands(["season", "Edge band"])
+            if not season_summary.empty:
+                season_summary = season_summary.rename(columns={"season": "Season"})
+                season_summary = season_summary[["Season", "Edge band", "Bets", "Wins", "Losses", "Pushes", "Win % (no pushes)", "Net units", "ROI %"]]
+                st.caption("Season breakdown for the same prospective observations; current partial seasons should not be compared directly with completed seasons.")
+                st.dataframe(season_summary, hide_index=True, use_container_width=True)
+                st.download_button(
+                    f"Download prospective {label.lower()} edge bands by season CSV",
+                    season_summary.to_csv(index=False).encode("utf-8"),
+                    f"prospective_{label.lower().replace(' ', '_')}_edge_bands_by_season.csv",
+                    "text/csv",
+                    on_click="ignore",
+                )
+
+    prospective_edge_calibration(eff_ats_population, "model_ats_edge", "actual_margin", "spread_line", "ATS")
+    prospective_edge_calibration(eff_totals_population, "model_total_edge", "actual_total", "total_line", "totals")
     st.download_button(
         "Download efficiency-model projection archive",
         data=efficiency.to_csv(index=False).encode("utf-8"),
