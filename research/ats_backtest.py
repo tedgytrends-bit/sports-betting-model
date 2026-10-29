@@ -864,7 +864,12 @@ if run:
         st.dataframe(pd.DataFrame(residual_seasons).round(2), hide_index=True, use_container_width=True)
 
         st.subheader("Market-anchored ATS model")
-        st.write("This model starts with the closing spread and adjusts it using the pregame team-efficiency features. The adjustment is evaluated out of sample; it is not assumed to be valuable just because it produces a different number.")
+        st.write("This model starts with the schedule feed's recorded spread and adjusts it using the pregame team-efficiency features. The adjustment is evaluated out of sample; it is not assumed to be valuable just because it produces a different number.")
+        st.warning(
+            "Timing limitation: the historical schedule feed does not provide a verified timestamp showing when each spread was available. "
+            "Treat these results as a retrospective market-anchored diagnostic, not proof that the same edge was available to bet before kickoff. "
+            "A stronger execution test needs timestamped odds snapshots captured before the intended betting time."
+        )
         anchored_games = backtest.dropna(subset=["market_anchored_edge"]).copy()
         anchored_directional = grade(anchored_games[anchored_games["market_anchored_edge"].abs() > 0], "market_anchored_edge")
         anchored_all = summarize(anchored_directional, "Market anchored: any nonzero edge")
@@ -892,6 +897,11 @@ if run:
 
         st.subheader("Market-anchored model + injuries")
         st.write("This version adds weekly injury-report counts by team and position to the market-anchored model. When kickoff time is available, injury updates are included only if their recorded timestamp is before kickoff; if kickoff time is missing, same-day updates are excluded.")
+        st.warning(
+            "Additional limitation: the public historical injury source is not a complete archive of every report revision as it appeared in real time. "
+            "Timestamp filtering is conservative, but missing features can reflect source-history limitations rather than a team having no injuries. "
+            "Do not treat this injury-augmented backtest as validated until source coverage and point-in-time availability are demonstrated."
+        )
         injury_directional = grade(injury_valid[injury_valid["injury_anchored_edge"].abs() > 0], "injury_anchored_edge")
         injury_all = summarize(injury_directional, "Market anchored + injuries: any nonzero edge")
         injury_fixed = grade(injury_valid[injury_valid["injury_anchored_edge"].abs() >= threshold], "injury_anchored_edge")
