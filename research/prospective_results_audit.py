@@ -651,6 +651,34 @@ if odds_files:
             if col not in odds.columns:
                 odds[col] = ""
             odds[col] = odds[col].astype(str).str.upper().str.strip()
+
+        # Core identifiers determine whether a quote can be matched and deduplicated.
+        # Keep malformed rows visible for diagnosis, but never let blank identifiers
+        # accidentally collapse into one bookmaker/game during selection.
+        missing_core_columns = [
+            col for col in ["game_id", "bookmaker", "snapshot_type"] if col not in odds.columns
+        ]
+        for col in missing_core_columns:
+            odds[col] = ""
+        odds["game_id"] = odds["game_id"].fillna("").astype(str).str.strip()
+        odds["bookmaker"] = odds["bookmaker"].fillna("").astype(str).str.strip()
+        odds["snapshot_type"] = odds["snapshot_type"].fillna("").astype(str).str.strip()
+        odds["core_identifiers_valid"] = (
+            odds["game_id"].ne("")
+            & odds["bookmaker"].ne("")
+            & odds["snapshot_type"].str.lower().eq("latest")
+        )
+        if missing_core_columns:
+            st.warning(
+                "Some EndzoneAPI archive files are missing required identifier columns "
+                f"({', '.join(missing_core_columns)}). Those rows are retained for inspection "
+                "but excluded from strict eligibility."
+            )
+        elif not odds["core_identifiers_valid"].all():
+            st.caption(
+                f"{int((~odds['core_identifiers_valid']).sum()):,} odds rows have blank identifiers "
+                "or a snapshot type other than 'latest'; they are not eligible for strict grading."
+            )
         odds["provider_time_before_kickoff"] = (
             odds["source_snapshot_at_utc"].notna()
             & odds["kickoff_utc"].notna()
@@ -746,6 +774,7 @@ if odds_files:
             & odds["source_time_not_future_of_capture"]
             & odds["prediction_precedes_odds"]
             & odds["prediction_team_match"]
+            & odds["core_identifiers_valid"]
         )
 
         # Explicit eligibility funnel: distinguish quote availability from a
@@ -880,12 +909,14 @@ if odds_files:
                 ~odds["source_time_not_future_of_capture"],
                 ~odds["prediction_team_match"],
                 ~odds["prediction_precedes_odds"],
+                ~odds["core_identifiers_valid"],
             ],
             [
                 "Provider timestamp missing/after kickoff",
                 "Provider timestamp after collector capture",
                 "No matching frozen prediction/team pairing",
                 "Prediction missing or captured after odds",
+                "Missing identifier or not selected snapshot type",
             ],
             default="Timing checks passed",
         )
