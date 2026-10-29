@@ -14,21 +14,18 @@ class EfficiencyFeatureIntegrityTests(unittest.TestCase):
     def setUp(self):
         self.pbp = pd.DataFrame(
             [
-                # Kansas City red-zone touchdown.
                 {
                     "game_id": "TEST_1", "season": 2026, "week": 8,
                     "posteam": "KC", "defteam": "BUF", "play_type": "run",
                     "epa": 4.0, "success": 1, "yardline_100": 10,
                     "touchdown": 1, "interception": 0, "fumble_lost": 0,
                 },
-                # Kansas City red-zone pass intercepted: not a touchdown.
                 {
                     "game_id": "TEST_1", "season": 2026, "week": 8,
                     "posteam": "KC", "defteam": "BUF", "play_type": "pass",
                     "epa": -4.0, "success": 0, "yardline_100": 5,
                     "touchdown": 0, "interception": 1, "fumble_lost": 0,
                 },
-                # Buffalo fumble lost while Kansas City is on defense.
                 {
                     "game_id": "TEST_1", "season": 2026, "week": 8,
                     "posteam": "BUF", "defteam": "KC", "play_type": "run",
@@ -41,7 +38,8 @@ class EfficiencyFeatureIntegrityTests(unittest.TestCase):
     def test_red_zone_rate_is_touchdowns_per_red_zone_scrimmage_play(self):
         table = build_efficiency_table(self.pbp).set_index("team")
         self.assertAlmostEqual(table.loc["KC", "red_zone_td_rate"], 0.5)
-        self.assertAlmostEqual(table.loc["BUF", "red_zone_td_rate"], 0.0)
+        # No Buffalo red-zone plays means the rate is undefined, not zero.
+        self.assertTrue(pd.isna(table.loc["BUF", "red_zone_td_rate"]))
 
     def test_turnovers_are_attributed_to_the_offense_that_lost_them(self):
         table = build_efficiency_table(self.pbp).set_index("team")
