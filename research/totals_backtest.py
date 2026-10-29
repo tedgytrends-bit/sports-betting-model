@@ -71,8 +71,8 @@ def get_play_by_play():
 
 
 @st.cache_data(show_spinner=False)
-def cached_efficiency_dataset(games, pbp):
-    return build_efficiency_model_dataset(games, pbp, lookback_games=10)
+def cached_efficiency_dataset(games, pbp, lookback):
+    return build_efficiency_model_dataset(games, pbp, lookback_games=lookback)
 
 
 @st.cache_data(show_spinner=False)
@@ -227,15 +227,8 @@ if run:
             games = get_schedule()
             pbp = get_play_by_play()
 
-            dataset = build_efficiency_model_dataset(
-                games,
-                pbp,
-                lookback_games=lookback,
-            )
-            results = chronological_backtest(
-                dataset,
-                min_train_games=500,
-            )
+            dataset = cached_efficiency_dataset(games, pbp, lookback)
+            results = cached_efficiency_backtest(dataset)
 
             predictions = results["predictions"].copy()
             compared = add_scoring_baseline_predictions(
@@ -244,15 +237,8 @@ if run:
                 lookback=6,
             )
 
-            residual_predictions = chronological_market_residual_backtest(
-                dataset,
-                games,
-                min_train_games=500,
-            )
-            direct_total_predictions = chronological_direct_total_backtest(
-                dataset,
-                min_train_games=500,
-            )
+            residual_predictions = cached_market_residual_backtest(dataset, games)
+            direct_total_predictions = cached_direct_total_backtest(dataset, games)
             compared = compared.merge(
                 residual_predictions,
                 on="game_id",
