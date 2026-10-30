@@ -131,14 +131,22 @@ def build_game_injury_features(schedule: pd.DataFrame, team_week: pd.DataFrame) 
     practice observation timestamp for both teams precedes kickoff. Missing timing
     is not treated as proof of pregame availability.
     """
-    required = {"game_id", "season", "week", "gameday", "home_team", "away_team"}
+    required = {"game_id", "season", "week", "gameday", "gametime", "home_team", "away_team"}
     missing = required - set(schedule.columns)
     if missing:
         raise ValueError(f"Schedule missing columns: {sorted(missing)}")
     games = schedule.copy()
     games["season"] = pd.to_numeric(games["season"], errors="coerce")
     games["week"] = pd.to_numeric(games["week"], errors="coerce")
-    games["gameday"] = pd.to_datetime(games["gameday"], errors="coerce", utc=True)
+    # nflverse gametime is Eastern Time, not local stadium time. Build an exact
+    # kickoff timestamp and convert to UTC before comparing with NFLMeta observations.
+    kickoff_local = pd.to_datetime(
+        games["gameday"].astype(str).str.strip() + " " + games["gametime"].astype(str).str.strip(),
+        format="%Y-%m-%d %H:%M", errors="coerce"
+    )
+    games["kickoff_at_utc"] = kickoff_local.dt.tz_localize(
+        "America/New_York", ambiguous="NaT", nonexistent="NaT"
+    ).dt.tz_convert("UTC")
     tw = team_week.copy()
     lookup = {(int(r.season_year), int(r.week), r.team): r._asdict()
               for r in tw.itertuples(index=False)}
@@ -166,7 +174,8 @@ def build_game_injury_features(schedule: pd.DataFrame, team_week: pd.DataFrame) 
             pd.to_datetime(row.get(f"{side}_latest_practice_observed_at_utc"), errors="coerce", utc=True)
             for side in ("home", "away")
         ]
-        kickoff = getattr(game, "gameday")
+        kickoff = getattr(game, "kickoff_at_utc")
+        row["kickoff_at_utc"] = kickoff.isoformat() if pd.notna(kickoff) else None
         row["injury_features_point_in_time_verified"] = bool(
             pd.notna(kickoff) and all(pd.notna(t) and t < kickoff for t in latest_times)
         )
