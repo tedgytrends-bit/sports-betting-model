@@ -137,13 +137,12 @@ Do not ask the user to run extra workflows without a clear purpose. The workflow
 
 ## 8. Next project milestones
 
-1. Confirm compileall and all unit tests pass after the latest test-fixture correction.
-2. Add/verify tests for exact ET-to-UTC conversion, daylight-saving handling, missing timestamps, each side's independent coverage, historical backfill exclusion, and post-kickoff report exclusion.
-3. Generate the separate game-level NFLMeta research export from the uploaded data and schedule.
-4. Audit feature coverage by week, team, and game; explicitly count how many games have report and practice data verified before kickoff for both teams.
-5. Join only completed-game scores/results for research outcomes. Keep postgame inactive/out fields as labels only.
-6. Conduct exploratory analysis and chronological validation by feature group. Report sample sizes and uncertainty; do not infer a betting edge from small or dependent samples.
-7. Keep all research findings separate from live projections until evidence supports a controlled experiment.
+1. Add/verify tests for exact ET-to-UTC conversion, daylight-saving handling, missing timestamps, each side's independent coverage, historical backfill exclusion, and post-kickoff report exclusion.
+2. Generate the separate game-level NFLMeta research export from the uploaded data and schedule.
+3. Audit feature coverage by week, team, and game; explicitly count how many games have report and practice data verified before kickoff for both teams.
+4. Join only completed-game scores/results for research outcomes. Keep postgame inactive/out fields as labels only.
+5. Conduct exploratory analysis and chronological validation by feature group. Report sample sizes and uncertainty; do not infer a betting edge from small or dependent samples.
+6. Keep all research findings separate from live projections until evidence supports a controlled experiment.
 
 ## 9. Handoff instructions for a new conversation
 
