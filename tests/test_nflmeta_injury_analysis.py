@@ -160,7 +160,7 @@ class NFLMetaInjuryAnalysisTests(unittest.TestCase):
         result = build_game_point_in_time_features(schedule, self.injuries, self.practice).iloc[0]
         self.assertTrue(pd.isna(result["season"]))
         self.assertTrue(pd.isna(result["week"]))
-        self.assertEqual(result["home_injury_report_players_pregame"], 0)
+        self.assertEqual(result["home_injury_report_players_weekly_export"], 0)
         self.assertEqual(result["away_practice_records_pregame"], 0)
         self.assertFalse(result["injury_features_point_in_time_verified"])
 
