@@ -1,0 +1,56 @@
+name: Probe NFLMeta 2026 injury data
+
+on:
+  workflow_dispatch:
+
+jobs:
+  probe-injuries:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Probe 2026 Week 1 injury records (maximum 100 rows)
+        env:
+          NFLMETA_API_KEY: ${{ secrets.NFLMETA_API_KEY }}
+        run: |
+          python - <<'PY'
+          import json, os
+          from collections import Counter
+          from urllib.error import HTTPError, URLError
+          from urllib.request import Request, urlopen
+          key = os.environ.get('NFLMETA_API_KEY', '').strip()
+          if not key: raise SystemExit('NFLMETA_API_KEY is missing.')
+          url = 'https://nflmeta.org/api/v1/injuries?season=2026&week=1&limit=100'
+          req = Request(url, headers={'X-NFLMeta-Key': key, 'Accept': 'application/json'})
+          try:
+              with urlopen(req, timeout=45) as response: payload = json.loads(response.read().decode('utf-8'))
+          except HTTPError as exc:
+              raise SystemExit(f'NFLMeta returned HTTP {exc.code}: {exc.read().decode("utf-8", errors="replace")[:1000]}')
+          except URLError as exc: raise SystemExit(f'Connection failed: {exc.reason}')
+          data = payload.get('data', [])
+          if isinstance(data, dict): rows = data.get('injuries', data.get('reports', data.get('items', [])))
+          elif isinstance(data, list): rows = data
+          else: rows = []
+          if not isinstance(rows, list): raise SystemExit('Unexpected response shape; inspect artifact.')
+          with open('nflmeta_injury_probe.json', 'w', encoding='utf-8') as f: json.dump(payload, f, indent=2)
+          print('Authentication and injury endpoint: SUCCESS')
+          print('Requested season=2026 week=1 limit=100')
+          print('Rows returned:', len(rows))
+          print('Top-level keys:', sorted(payload.keys()))
+          print('Meta:', json.dumps(payload.get('meta', {}))[:3000])
+          if rows:
+              print('First-row fields:', sorted(rows[0].keys()))
+              print('Rows with practice_days:', sum(bool(r.get('practice_days')) for r in rows))
+              for field in ('team','team_abbr','position','report_status','game_status'):
+                  vals = [str(r.get(field)) for r in rows if r.get(field) is not None]
+                  if vals: print(field, dict(Counter(vals).most_common(12)))
+              print('First record:', json.dumps(rows[0], indent=2)[:4000])
+          else: print('No records returned for Week 1.')
+          PY
+      - name: Upload raw probe response
+        uses: actions/upload-artifact@v4
+        with:
+          name: nflmeta-injury-probe-week-1
+          path: nflmeta_injury_probe.json
+          if-no-files-found: error
+          retention-days: 14
