@@ -28,12 +28,14 @@ jobs:
         run: python -m pip install pandas requests
       - name: Capture upcoming-week injury snapshot
         run: python scripts/capture_injury_snapshot.py
-      - name: Commit snapshot if one was created
+      - name: Compare captured snapshots
+        run: python scripts/audit_injury_snapshots.py
+      - name: Commit snapshot and audit if changed
         run: |
-          if [ -n "$(git status --porcelain data/injury_snapshots)" ]; then
+          if [ -n "$(git status --porcelain data/injury_snapshots data/injury_snapshot_audits)" ]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add data/injury_snapshots/*.csv
+            git add data/injury_snapshots/*.csv data/injury_snapshot_audits/*.csv
             git commit -m "Capture dated NFL injury snapshot"
             # Another workflow or direct GitHub edit may have updated main after checkout.
             # Rebase this snapshot-only commit on the latest main before pushing.
