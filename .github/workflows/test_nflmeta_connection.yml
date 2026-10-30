@@ -18,26 +18,31 @@ jobs:
           NFLMETA_API_KEY: ${{ secrets.NFLMETA_API_KEY }}
         run: |
           python - <<'PY'
+          import json
           import os
-          import requests
+          from urllib.error import HTTPError, URLError
+          from urllib.request import Request, urlopen
 
           key = os.environ.get("NFLMETA_API_KEY", "").strip()
           if not key:
               raise SystemExit("NFLMETA_API_KEY secret is missing or empty.")
 
-          response = requests.get(
+          request = Request(
               "https://nflmeta.org/api/v1/usage",
               headers={"X-NFLMeta-Key": key, "Accept": "application/json"},
-              timeout=30,
+              method="GET",
           )
-          if response.status_code != 200:
-              try:
-                  detail = response.json().get("error", {}).get("message", "No API error detail.")
-              except Exception:
-                  detail = response.text[:300]
-              raise SystemExit(f"NFLMeta API check failed ({response.status_code}): {detail}")
+          try:
+              with urlopen(request, timeout=30) as response:
+                  payload = json.loads(response.read().decode("utf-8"))
+          except HTTPError as exc:
+              detail = exc.read().decode("utf-8", errors="replace")[:500]
+              raise SystemExit(f"NFLMeta API check failed ({exc.code}): {detail}")
+          except URLError as exc:
+              raise SystemExit(f"Could not reach NFLMeta API: {exc.reason}")
+          except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+              raise SystemExit(f"NFLMeta returned an invalid JSON response: {exc}")
 
-          payload = response.json()
           data = payload.get("data", {})
           print("NFLMeta authentication: SUCCESS")
           for label, field in [
