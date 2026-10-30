@@ -108,15 +108,15 @@ The module is deliberately separate from the live model. It contains:
 - `2351d2b890824d601e5aeb828299259dab5c2feb` — fix malformed import line in test file.
 - `b5b537c0ce10e8a197a20d2f8e5bf6074bd4e50e` — correct test fixture: retain historical-backfill flag so that the test verifies backfilled practice records are excluded.
 
-### Immediate next step / current test status
+### Latest test and code status
 
-The latest full unittest run failed one test:
-`test_game_features_filter_each_record_at_exact_kickoff`
-Expected `home_practice_records_pregame == 2`, got 3.
+The user confirmed that GitHub Actions **Test efficiency feature integrity** passed after the test-fixture correction. The successful run was #38 (run ID `41101442766`), on commit `0020ecd9f6a05a508ce69f0a2651fa0709cce073`; it ran unittest discovery and compileall. That run predates the newest changes below, so those changes still require validation.
 
-This was a test-fixture mistake, not evidence that the production filter was wrong: the fixture explicitly changed player 2's `historical_backfill` flag from True to False, making that third practice row legitimately eligible before kickoff. The latest commit removes that incorrect override, so the row remains backfilled and should be excluded.
+New commits on 2026-10-30:
+- `01b1d4ed780c87203ff2fd708d38bfa818ec6dd8` — make `build_game_point_in_time_features()` tolerate schedule rows with missing season/week keys; such rows receive no matching records rather than crashing.
+- `c3d3c7722ba97d8ec0cf6a1ade8589815a62054c` — add tests for DST conversion, incomplete schedule rows, and independent per-team/per-data-type coverage.
 
-**The suite has NOT yet been rerun after commit `b5b537c`.** The next action is to rerun the GitHub Actions workflow **Test efficiency feature integrity** and confirm the result. If it fails, inspect the exact assertion and fix the underlying issue; do not guess.
+**Next action:** rerun **Test efficiency feature integrity** against current `main` and inspect the result. Do not claim these newest changes passed until confirmed.
 
 ## 7. GitHub Actions workflow guidance
 
@@ -137,7 +137,7 @@ Do not ask the user to run extra workflows without a clear purpose. The workflow
 
 ## 8. Next project milestones
 
-1. Add/verify tests for exact ET-to-UTC conversion, daylight-saving handling, missing timestamps, each side's independent coverage, historical backfill exclusion, and post-kickoff report exclusion.
+1. Run **Test efficiency feature integrity** on current `main` to validate the newest robustness changes.
 2. Generate the separate game-level NFLMeta research export from the uploaded data and schedule.
 3. Audit feature coverage by week, team, and game; explicitly count how many games have report and practice data verified before kickoff for both teams.
 4. Join only completed-game scores/results for research outcomes. Keep postgame inactive/out fields as labels only.
