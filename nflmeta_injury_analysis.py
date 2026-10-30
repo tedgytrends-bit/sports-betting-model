@@ -202,11 +202,127 @@ def build_game_injury_features(schedule: pd.DataFrame, team_week: pd.DataFrame) 
     return pd.DataFrame(output)
 
 
+
+def build_game_point_in_time_features(
+    schedule: pd.DataFrame, injuries: pd.DataFrame, practice: pd.DataFrame
+) -> pd.DataFrame:
+    """Build game-level features using only records actually observed before kickoff.
+
+    Historical practice backfills are excluded. Injury-list capture timestamps and
+    practice first-observation timestamps are independently checked against each
+    game's exact Eastern-time kickoff. Postgame game_status is never a predictor.
+    """
+    required = {"game_id", "season", "week", "gameday", "gametime", "home_team", "away_team"}
+    missing = required - set(schedule.columns)
+    if missing:
+        raise ValueError(f"Schedule missing columns: {sorted(missing)}")
+    i, p = _prepare(injuries, practice)
+    games = schedule.copy()
+    games["season"] = pd.to_numeric(games["season"], errors="coerce")
+    games["week"] = pd.to_numeric(games["week"], errors="coerce")
+    local = pd.to_datetime(
+        games["gameday"].astype(str).str.strip() + " " + games["gametime"].astype(str).str.strip(),
+        format="%Y-%m-%d %H:%M", errors="coerce"
+    )
+    games["kickoff_at_utc"] = local.dt.tz_localize(
+        "America/New_York", ambiguous="NaT", nonexistent="NaT"
+    ).dt.tz_convert("UTC")
+
+    p["historical_backfill_flag"] = p["historical_backfill"].astype(str).str.lower().isin(["true", "1", "yes"])
+    output = []
+    for g in games.itertuples(index=False):
+        kickoff = getattr(g, "kickoff_at_utc")
+        valid_kickoff = pd.notna(kickoff)
+        base_i = i[(i["season_year"] == g.season) & (i["week"] == g.week)]
+        base_p = p[(p["season_year"] == g.season) & (p["week"] == g.week)]
+        row = {
+            "game_id": g.game_id, "season": int(g.season), "week": int(g.week),
+            "home_team": _normalize_team(g.home_team), "away_team": _normalize_team(g.away_team),
+            "kickoff_at_utc": kickoff.isoformat() if valid_kickoff else None,
+        }
+        for side, team in (("home", row["home_team"]), ("away", row["away_team"])):
+            ti = base_i[base_i["team_abbr"].eq(team)]
+            tp = base_p[base_p["team_abbr"].eq(team)]
+            eligible_i = ti[ti["source_observed_at"].notna() & (ti["source_observed_at"] < kickoff)] if valid_kickoff else ti.iloc[0:0]
+            eligible_p = tp[
+                (~tp["historical_backfill_flag"]) & tp["first_observed_at"].notna()
+                & (tp["first_observed_at"] < kickoff)
+            ] if valid_kickoff else tp.iloc[0:0]
+
+            row[f"{side}_injury_report_records_pregame"] = int(len(eligible_i))
+            row[f"{side}_injury_report_players_pregame"] = int(eligible_i["player_id"].nunique())
+            row[f"{side}_injury_report_observation_coverage"] = (
+                "Pregame observed" if not eligible_i.empty else
+                "No records" if ti.empty else "No verified pregame observation"
+            )
+            for status, label in (("OUT", "out"), ("DOUBTFUL", "doubtful"), ("QUESTIONABLE", "questionable")):
+                row[f"{side}_report_{label}_players_pregame"] = int(
+                    eligible_i["report_status"].str.contains(status, regex=False).sum()
+                )
+            for group, positions in POSITION_GROUPS.items():
+                gp = eligible_i[eligible_i["position"].isin(positions)]
+                row[f"{side}_{group}_listed_players_pregame"] = int(gp["player_id"].nunique())
+                row[f"{side}_{group}_out_designations_pregame"] = int(
+                    gp["report_status"].str.contains("OUT", regex=False).sum()
+                )
+
+            row[f"{side}_practice_records_pregame"] = int(len(eligible_p))
+            row[f"{side}_practice_players_pregame"] = int(eligible_p["player_id"].nunique())
+            row[f"{side}_practice_observation_coverage"] = (
+                "Pregame observed" if not eligible_p.empty else
+                "Only backfilled records" if not tp.empty and tp["historical_backfill_flag"].all()
+                else "No verified pregame observation"
+            )
+            latest = eligible_p.sort_values(["first_observed_at", "practice_date"]).drop_duplicates(
+                "player_id", keep="last"
+            )
+            for code, label in (("DNP", "dnp"), ("LP", "limited"), ("FP", "full")):
+                row[f"{side}_practice_{label}_players_pregame"] = int(
+                    latest["practice_status_code"].eq(code).sum()
+                )
+            for group, positions in POSITION_GROUPS.items():
+                player_positions = eligible_i[["player_id", "position"]].drop_duplicates("player_id")
+                group_ids = set(player_positions.loc[player_positions["position"].isin(positions), "player_id"])
+                group_latest = latest[latest["player_id"].isin(group_ids)]
+                for code, label in (("DNP", "dnp"), ("LP", "limited"), ("FP", "full")):
+                    row[f"{side}_{group}_{label}_players_pregame"] = int(
+                        group_latest["practice_status_code"].eq(code).sum()
+                    )
+            row[f"{side}_latest_pregame_practice_observed_at_utc"] = (
+                eligible_p["first_observed_at"].max().isoformat() if not eligible_p.empty else None
+            )
+            row[f"{side}_latest_pregame_injury_report_observed_at_utc"] = (
+                eligible_i["source_observed_at"].max().isoformat() if not eligible_i.empty else None
+            )
+
+        for col in list(row):
+            if col.startswith("home_") and isinstance(row[col], (int, float, np.integer, np.floating)):
+                other = "away_" + col[len("home_"):]
+                if other in row:
+                    row["home_minus_away_" + col[len("home_"):]] = row[col] - row[other]
+        row["injury_report_timing_verified"] = (
+            valid_kickoff
+            and row["home_injury_report_observation_coverage"] == "Pregame observed"
+            and row["away_injury_report_observation_coverage"] == "Pregame observed"
+        )
+        row["practice_timing_verified"] = (
+            valid_kickoff
+            and row["home_practice_observation_coverage"] == "Pregame observed"
+            and row["away_practice_observation_coverage"] == "Pregame observed"
+        )
+        row["injury_features_point_in_time_verified"] = bool(
+            row["injury_report_timing_verified"] and row["practice_timing_verified"]
+        )
+        output.append(row)
+    return pd.DataFrame(output)
+
+
+
 def export_injury_research(injuries_path, practice_path, schedule, output_dir):
     """Write auditable team-week and game-level research tables."""
     injuries, practice = load_nflmeta_exports(injuries_path, practice_path)
     team_week = build_team_week_features(injuries, practice)
-    games = build_game_injury_features(schedule, team_week)
+    games = build_game_point_in_time_features(schedule, injuries, practice)
     out = Path(output_dir)
     out.mkdir(parents=True, exist_ok=True)
     team_week.to_csv(out / "nflmeta_team_week_features.csv", index=False)
