@@ -4,7 +4,7 @@ import pandas as pd
 import streamlit as st
 
 from model import MODEL_VERSION, load_schedule_data, load_pbp, build_efficiency_model_dataset, project_upcoming_efficiency
-from injury_model import load_injury_reports, add_injury_features
+from injury_model import load_injury_reports, add_injury_features, injury_coverage_diagnostics
 
 st.title("Bovada Projection Monitor")
 st.caption("Upcoming-game market source: user-supplied Bovada lines. Historical backtests retain their established research data sources.")
@@ -117,6 +117,9 @@ try:
             st.warning(f"Could not read frozen projection file {file.name}: {exc}")
     frozen = pd.concat(frozen_parts, ignore_index=True, sort=False) if frozen_parts else pd.DataFrame()
     latest = get_latest_efficiency_projections()
+    injury_diagnostics = injury_coverage_diagnostics(
+        schedule[schedule["season"].eq(schedule["season"].max())], injury_reports
+    )
 except Exception as exc:
     st.error(f"Could not build the efficiency-model view: {type(exc).__name__}: {exc}")
     st.stop()
