@@ -56,6 +56,22 @@ class NFLMetaInjuryAnalysisTests(unittest.TestCase):
         self.assertEqual(result["home_report_out_players"], 1)
         self.assertFalse(result["injury_features_point_in_time_verified"])
 
+    def test_report_observation_after_kickoff_blocks_pregame_verification(self):
+        injuries = self.injuries.copy()
+        injuries.loc[injuries.team_abbr.eq('BUF'), 'source_observed_at'] = '2026-09-14T18:00:00Z'
+        practice = pd.concat([self.practice, pd.DataFrame([{
+            'season_year': 2026, 'week': 1, 'team_abbr': 'MIA', 'player_id': 3,
+            'practice_date': '2026-09-11', 'practice_status_code': 'FP',
+            'first_observed_at': '2026-09-11T18:00:00Z', 'historical_backfill': False,
+        }])], ignore_index=True)
+        team_week = build_team_week_features(injuries, practice)
+        schedule = pd.DataFrame([{
+            'game_id': 'G3', 'season': 2026, 'week': 1, 'gameday': '2026-09-14',
+            'gametime': '13:00', 'home_team': 'BUF', 'away_team': 'MIA',
+        }])
+        result = build_game_injury_features(schedule, team_week).iloc[0]
+        self.assertFalse(result['injury_features_point_in_time_verified'])
+        self.assertIn('post-kickoff', result['injury_feature_timing_status'])
     def test_team_aliases_are_normalized(self):
         injuries = self.injuries.copy()
         injuries.loc[injuries.team_abbr.eq("BUF"), "team_abbr"] = "LAR"
