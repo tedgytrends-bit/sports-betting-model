@@ -154,3 +154,22 @@ Start by:
 5. Continuing from the immediate next step above.
 
 The user should be able to say: "Continue my NFL betting model project. Read PROJECT_HANDOFF.md, verify the latest GitHub state, and pick up at the next step."
+
+
+## 10. Corrected NFLMeta timing semantics (2026-10-30)
+
+A review of the raw export showed that the earlier game-level audit misinterpreted timestamps:
+- Injury CSV `source_observed_at` is an export/source capture timestamp. It is **not** a verified official injury-report publication timestamp. It must not be used to reject weekly report records as unavailable pregame, nor to assert they were pregame.
+- Injury `source_url` points to NFL.com league injury pages or team official weekly injury-report pages. This establishes source provenance / weekly report presence, but does not establish historical publication time.
+- Therefore report coverage must be reported as weekly export presence, with publication timing explicitly marked unknown unless a trustworthy publication/delivery timestamp is added.
+- Normalize Rams aliases (`LAR` / `LA`) before team matching. In the uploaded export, both teams have weekly injury records for all 108 completed games in Weeks 1–8; this is presence, not pregame publication verification.
+- Practice export includes `first_observed_at` and `first_delivered_at`. Use `first_delivered_at` for conservative data-availability checks. Keep `first_observed_at` as separate provenance. Exclude `historical_backfill=true` and missing delivery timestamps.
+- Prior statement that 43 games had pregame practice coverage was generated using `first_observed_at`; it is superseded and must be recalculated using `first_delivered_at`. Do not repeat the 43 count as verified until rebuilt.
+- `coverage_status` and `coverage_basis` describe practice-day report completeness: 3,039 complete and 884 partial delivered rows; 2,840 historical backfill rows have no delivery metadata. Completeness is not the same as pregame availability.
+- Postgame `game_status`, scores, and outcomes remain labels only, never predictors.
+
+Latest correction commits:
+- `021a40f7641e52bf16c5424bf52adcf8dd0b689b` — separate weekly injury report presence from publication timing; use practice `first_delivered_at` for pregame eligibility.
+- `1d5b02500664702ca6f919af6834359e69299db4` — align tests with weekly-report-presence semantics.
+
+**Next action:** validate the current tests, rebuild the CSV coverage audit using `first_delivered_at`, and only then update the sample-size figures. Injury report publication timing remains unknown in this export.
