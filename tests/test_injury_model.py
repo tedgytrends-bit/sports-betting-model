@@ -89,13 +89,15 @@ class InjuryModelTests(unittest.TestCase):
             "report_status", "practice_status", "date_modified",
         ])
         snapshot = pd.DataFrame([
-            {"season": 2026, "week": 8, "game_type": "REG", "team": "BUF",
-             "position": "QB", "player_name": "QB One", "report_status": "OUT",
-             "practice_status": "DID NOT PARTICIPATE", "date_modified": None,
+            {"season": 2026, "week": 8, "season_type": "REG", "game_type": "REG",
+             "team": "BUF", "position": "QB", "gsis_id": "QB1", "full_name": "QB One",
+             "report_status": "OUT", "practice_status": "Did Not Participate In Practice",
+             "snapshot_captured_at_utc": "2026-10-30T13:08:13Z",
              "_snapshot_captured_at_utc": pd.Timestamp("2026-10-30T13:08:13Z")},
-            {"season": 2026, "week": 8, "game_type": "REG", "team": "MIA",
-             "position": "OT", "player_name": "Tackle One", "report_status": "OUT",
-             "practice_status": "DID NOT PARTICIPATE", "date_modified": None,
+            {"season": 2026, "week": 8, "season_type": "REG", "game_type": "REG",
+             "team": "MIA", "position": "T", "gsis_id": "OT1", "full_name": "Tackle One",
+             "report_status": "OUT", "practice_status": "Did Not Participate In Practice",
+             "snapshot_captured_at_utc": "2026-10-30T13:08:13Z",
              "_snapshot_captured_at_utc": pd.Timestamp("2026-10-30T13:08:13Z")},
         ])
         with patch("injury_model._latest_snapshot_for", return_value=snapshot):
