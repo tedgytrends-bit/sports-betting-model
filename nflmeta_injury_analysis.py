@@ -233,10 +233,13 @@ def build_game_point_in_time_features(
     for g in games.itertuples(index=False):
         kickoff = getattr(g, "kickoff_at_utc")
         valid_kickoff = pd.notna(kickoff)
-        base_i = i[(i["season_year"] == g.season) & (i["week"] == g.week)]
-        base_p = p[(p["season_year"] == g.season) & (p["week"] == g.week)]
+        season = int(g.season) if pd.notna(g.season) else None
+        week = int(g.week) if pd.notna(g.week) else None
+        has_game_key = season is not None and week is not None
+        base_i = i[(i["season_year"] == season) & (i["week"] == week)] if has_game_key else i.iloc[0:0]
+        base_p = p[(p["season_year"] == season) & (p["week"] == week)] if has_game_key else p.iloc[0:0]
         row = {
-            "game_id": g.game_id, "season": int(g.season), "week": int(g.week),
+            "game_id": g.game_id, "season": season, "week": week,
             "home_team": _normalize_team(g.home_team), "away_team": _normalize_team(g.away_team),
             "kickoff_at_utc": kickoff.isoformat() if valid_kickoff else None,
         }
