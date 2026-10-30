@@ -9,6 +9,7 @@ from __future__ import annotations
 
 from pathlib import Path
 from io import BytesIO
+import re
 import requests
 import numpy as np
 import pandas as pd
@@ -49,6 +50,14 @@ def load_injury_reports(seasons=(2021, 2022, 2023, 2024, 2025, 2026)) -> pd.Data
     return reports
 
 
+def _snapshot_capture_time(path: Path) -> pd.Timestamp | pd.NaT:
+    """Read the UTC capture timestamp embedded in a snapshot filename."""
+    match = re.search(r"_(\\d{8}T\\d{6}Z)$", path.stem)
+    if not match:
+        return pd.NaT
+    return pd.to_datetime(match.group(1), format="%Y%m%dT%H%M%SZ", errors="coerce", utc=True)
+
+
 def _latest_snapshot_for(season: int, week: int) -> pd.DataFrame | None:
     if not SNAPSHOT_DIR.exists():
         return None
@@ -56,7 +65,10 @@ def _latest_snapshot_for(season: int, week: int) -> pd.DataFrame | None:
     if not files:
         return None
     # Filename timestamp is capture time, so lexicographic ordering is chronological.
-    return pd.read_csv(files[-1], low_memory=False)
+    snapshot = pd.read_csv(files[-1], low_memory=False)
+    snapshot["_snapshot_captured_at_utc"] = _snapshot_capture_time(files[-1])
+    snapshot["_snapshot_filename"] = files[-1].name
+    return snapshot
 
 
 def _normalize_reports(reports: pd.DataFrame) -> pd.DataFrame:
@@ -181,10 +193,16 @@ def add_injury_features(dataset: pd.DataFrame, schedule: pd.DataFrame, reports: 
                     & (snap["week"] == game["week"])
                     & (snap["season_type"] == game["season_type"])
                 ]
-                if not snap.empty:
+                captured_at = pd.to_datetime(
+                    snapshot["_snapshot_captured_at_utc"].iloc[0], errors="coerce", utc=True
+                ) if "_snapshot_captured_at_utc" in snapshot.columns else pd.NaT
+                # A snapshot is a point-in-time record: its filename timestamp,
+                # not each row's source date_modified, establishes when it was available.
+                if not snap.empty and pd.notna(captured_at) and pd.notna(kickoff) and captured_at < kickoff:
+                    snap["date_modified"] = captured_at
                     base = snap
             except Exception:
-                # Fall back to the timestamped feed; the UI surfaces missing coverage.
+                # Fall back to the timestamped feed; never admit an unverified snapshot.
                 pass
         if pd.notna(kickoff):
             base = base[base["date_modified"].notna() & (base["date_modified"] < kickoff)]
