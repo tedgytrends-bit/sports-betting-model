@@ -1,6 +1,12 @@
 name: Test efficiency feature integrity
 
 on:
+  push:
+    paths:
+      - "nflmeta_injury_analysis.py"
+      - "tests/**"
+      - "PROJECT_HANDOFF.md"
+      - ".github/workflows/test-feature-integrity.yml"
   pull_request:
     paths:
       - "app.py"
