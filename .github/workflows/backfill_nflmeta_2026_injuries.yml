@@ -50,14 +50,34 @@ jobs:
                   f"{base_url}?{query}",
                   headers={"X-NFLMeta-Key": key, "Accept": "application/json"},
               )
-              try:
-                  with urlopen(request, timeout=60) as response:
-                      payload = json.loads(response.read().decode("utf-8"))
-              except HTTPError as exc:
-                  body = exc.read().decode("utf-8", errors="replace")[:1000]
-                  raise SystemExit(f"NFLMeta HTTP {exc.code} for week {week}, offset {offset}: {body}")
-              except URLError as exc:
-                  raise SystemExit(f"NFLMeta connection failed for week {week}, offset {offset}: {exc.reason}")
+              for attempt in range(5):
+                  try:
+                      with urlopen(request, timeout=60) as response:
+                          payload = json.loads(response.read().decode("utf-8"))
+                      break
+                  except HTTPError as exc:
+                      body = exc.read().decode("utf-8", errors="replace")[:1000]
+                      if exc.code == 429 and attempt < 4:
+                          wait_seconds = 65
+                          print(
+                              f"Rate limit reached for week {week}, offset {offset}; "
+                              f"waiting {wait_seconds}s before retry {attempt + 1}/4."
+                          )
+                          time.sleep(wait_seconds)
+                          continue
+                      raise SystemExit(
+                          f"NFLMeta HTTP {exc.code} for week {week}, offset {offset}: {body}"
+                      )
+                  except URLError as exc:
+                      if attempt < 4:
+                          time.sleep(10)
+                          continue
+                      raise SystemExit(
+                          f"NFLMeta connection failed for week {week}, offset {offset}: {exc.reason}"
+                      )
+              else:
+                  raise SystemExit(f"NFLMeta retries exhausted for week {week}, offset {offset}.")
+
               if not isinstance(payload, dict) or not isinstance(payload.get("data"), list):
                   raise SystemExit(f"Unexpected response shape for week {week}, offset {offset}.")
               return payload
@@ -100,7 +120,7 @@ jobs:
                   offset += len(rows)
                   if page_count > 20:
                       raise SystemExit(f"Week {week}: pagination safety limit exceeded.")
-                  time.sleep(0.15)
+                  # Free plan permits 20 requests/minute; pace below that ceiling.\n              time.sleep(3.5)
 
               if expected_total is not None and len(week_rows) != expected_total:
                   raise SystemExit(
