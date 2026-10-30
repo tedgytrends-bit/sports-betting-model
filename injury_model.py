@@ -66,10 +66,20 @@ def _normalize_reports(reports: pd.DataFrame) -> pd.DataFrame:
     for col in ("team", "position", "report_status", "practice_status"):
         data[col] = data[col].fillna("").astype(str).str.upper().str.strip()
     data["date_modified"] = pd.to_datetime(data["date_modified"], errors="coerce", utc=True)
+    # nflverse injury feeds use game_type; older/local snapshots may use season_type.
+    # Preserve the source value instead of silently treating postseason rows as regular season.
     if "season_type" not in data:
-        data["season_type"] = "REG"
+        if "game_type" in data:
+            data["season_type"] = data["game_type"]
+        else:
+            data["season_type"] = "REG"
+    else:
+        missing_type = data["season_type"].isna() | data["season_type"].astype(str).str.strip().eq("")
+        if "game_type" in data:
+            data.loc[missing_type, "season_type"] = data.loc[missing_type, "game_type"]
+        data.loc[missing_type, "season_type"] = "REG"
     data["season_type"] = data["season_type"].fillna("REG").astype(str).str.upper().str.strip()
-    data["season_type"] = data["season_type"].replace({"REGULAR": "REG", "POSTSEASON": "POST"})
+    data["season_type"] = data["season_type"].replace({"REGULAR": "REG", "POSTSEASON": "POST", "PRESEASON": "PRE"})
     player_col = next((c for c in ("player_name", "full_name", "player", "gsis_id") if c in data.columns), None)
     if player_col is None:
         data["_player_key"] = data.index.astype(str)
@@ -190,3 +200,59 @@ def add_injury_features(dataset: pd.DataFrame, schedule: pd.DataFrame, reports: 
     feature_frame = pd.DataFrame(results).drop_duplicates("game_id")
     out = dataset.drop(columns=[c for c in dataset.columns if c.startswith(("home_injury_", "away_injury_", "home_inj_", "away_inj_", "home_qb_", "away_qb_", "home_ol_", "away_ol_", "home_skill_", "away_skill_", "home_defense_", "away_defense_"))], errors="ignore")
     return out.merge(feature_frame, on="game_id", how="left", validate="one_to_one")
+
+
+
+def injury_coverage_diagnostics(schedule: pd.DataFrame, reports: pd.DataFrame) -> pd.DataFrame:
+    """Explain where injury coverage is lost for scheduled games.
+
+    Counts source rows before and after game-type and pre-kickoff filters. This is
+    diagnostic only and never changes the feature-generation path.
+    """
+    normalized = _normalize_reports(reports)
+    games = schedule.copy()
+    games["season"] = pd.to_numeric(games["season"], errors="coerce")
+    games["week"] = pd.to_numeric(games["week"], errors="coerce")
+    games["gameday"] = pd.to_datetime(games["gameday"], errors="coerce")
+    type_col = "game_type" if "game_type" in games.columns else "season_type"
+    if type_col in games.columns:
+        games["season_type"] = games[type_col].fillna("REG").astype(str).str.upper().str.strip()
+    else:
+        games["season_type"] = "REG"
+    games["season_type"] = games["season_type"].replace({"REGULAR": "REG", "POSTSEASON": "POST", "PRESEASON": "PRE"})
+    rows = []
+    for _, game in games.iterrows():
+        if pd.isna(game["season"]) or pd.isna(game["week"]) or pd.isna(game["gameday"]):
+            continue
+        kickoff = _kickoff_utc(game)
+        raw = normalized[
+            normalized["season"].eq(game["season"])
+            & normalized["week"].eq(game["week"])
+        ]
+        typed = raw[raw["season_type"].eq(game["season_type"])]
+        pregame = typed
+        if pd.notna(kickoff):
+            pregame = typed[typed["date_modified"].notna() & typed["date_modified"].lt(kickoff)]
+        else:
+            pregame = typed[typed["date_modified"].dt.date < pd.Timestamp(game["gameday"]).date()]
+        snapshot = _latest_snapshot_for(int(game["season"]), int(game["week"])) if (
+            pd.isna(game.get("home_score")) or pd.isna(game.get("away_score"))
+        ) else None
+        rows.append({
+            "Matchup": f"{game.get('away_team', '?')} @ {game.get('home_team', '?')}",
+            "Season/week/type": f"{int(game['season'])}/{int(game['week'])}/{game['season_type']}",
+            "Feed rows season/week": len(raw),
+            "Rows after game-type match": len(typed),
+            "Rows with valid timestamps": int(typed["date_modified"].notna().sum()),
+            "Rows available pre-kickoff": len(pregame),
+            "Feed teams": ", ".join(sorted(typed["team"].dropna().astype(str).unique())),
+            "Snapshot file found": snapshot is not None,
+            "Snapshot rows": len(snapshot) if snapshot is not None else 0,
+            "Pregame position counts": ", ".join(
+                f"{k}={v}" for k, v in typed.loc[pregame.index, "position"].value_counts().head(8).items()
+            ) if not pregame.empty else "",
+            "Latest report timestamp UTC": (
+                typed["date_modified"].max().isoformat() if typed["date_modified"].notna().any() else "None"
+            ),
+        })
+    return pd.DataFrame(rows)
