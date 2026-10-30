@@ -1,0 +1,193 @@
+name: Backfill NFLMeta 2026 injury data
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  backfill-injuries:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Retrieve all 2026 injury records with pagination
+        env:
+          NFLMETA_API_KEY: ${{ secrets.NFLMETA_API_KEY }}
+        run: |
+          python - <<'PY'
+          import csv
+          import json
+          import os
+          import time
+          from collections import Counter
+          from urllib.error import HTTPError, URLError
+          from urllib.parse import urlencode
+          from urllib.request import Request, urlopen
+
+          key = os.environ.get("NFLMETA_API_KEY", "").strip()
+          if not key:
+              raise SystemExit("NFLMETA_API_KEY is missing.")
+
+          base_url = "https://nflmeta.org/api/v1/injuries"
+          season = 2026
+          page_size = 100
+          offset = 0
+          all_rows = []
+          page_summaries = []
+          first_meta = None
+          expected_total = None
+
+          while True:
+              query = urlencode({"season": season, "limit": page_size, "offset": offset})
+              request = Request(
+                  f"{base_url}?{query}",
+                  headers={"X-NFLMeta-Key": key, "Accept": "application/json"},
+              )
+              try:
+                  with urlopen(request, timeout=60) as response:
+                      payload = json.loads(response.read().decode("utf-8"))
+              except HTTPError as exc:
+                  body = exc.read().decode("utf-8", errors="replace")[:1000]
+                  raise SystemExit(f"NFLMeta HTTP {exc.code} at offset {offset}: {body}")
+              except URLError as exc:
+                  raise SystemExit(f"NFLMeta connection failed at offset {offset}: {exc.reason}")
+
+              if not isinstance(payload, dict) or not isinstance(payload.get("data"), list):
+                  raise SystemExit(f"Unexpected response shape at offset {offset}; refusing partial export.")
+
+              meta = payload.get("meta") or {}
+              if first_meta is None:
+                  first_meta = meta
+                  expected_total = meta.get("total")
+                  print("Season dataset total reported by API:", expected_total)
+                  print("Dataset status:", json.dumps(meta.get("data_status", {})))
+              elif meta.get("total") != expected_total:
+                  raise SystemExit(
+                      f"API total changed during pagination: expected {expected_total}, got {meta.get('total')}."
+                  )
+
+              page_rows = payload["data"]
+              returned = meta.get("returned", len(page_rows))
+              reported_offset = meta.get("offset", offset)
+              if reported_offset != offset or returned != len(page_rows):
+                  raise SystemExit(
+                      f"Pagination mismatch at offset {offset}: meta offset={reported_offset}, "
+                      f"meta returned={returned}, actual rows={len(page_rows)}."
+                  )
+
+              all_rows.extend(page_rows)
+              page_summaries.append({
+                  "offset": offset,
+                  "returned": len(page_rows),
+                  "total": meta.get("total"),
+                  "has_more": meta.get("has_more"),
+              })
+              print(f"Retrieved offset {offset}: {len(page_rows)} rows; running total {len(all_rows)}")
+
+              if not meta.get("has_more"):
+                  break
+              if not page_rows:
+                  raise SystemExit("API reported has_more=true but returned an empty page.")
+              offset += len(page_rows)
+              if len(page_summaries) > 100:
+                  raise SystemExit("Pagination safety limit exceeded.")
+              time.sleep(0.2)
+
+          if expected_total is not None and len(all_rows) != expected_total:
+              raise SystemExit(
+                  f"Incomplete export: retrieved {len(all_rows)} rows but API reported {expected_total}."
+              )
+
+          os.makedirs("nflmeta_2026_export", exist_ok=True)
+          raw = {
+              "season": season,
+              "retrieved_rows": len(all_rows),
+              "reported_total": expected_total,
+              "pages": page_summaries,
+              "meta_first_page": first_meta,
+              "data": all_rows,
+          }
+          with open("nflmeta_2026_export/injuries_2026.json", "w", encoding="utf-8") as f:
+              json.dump(raw, f, indent=2)
+
+          # Preserve all source fields. Nested practice-day data remains JSON in this
+          # table and is also expanded into a separate one-row-per-player-per-day CSV.
+          injury_fields = sorted({field for row in all_rows for field in row.keys()})
+          with open("nflmeta_2026_export/injuries_2026.csv", "w", newline="", encoding="utf-8") as f:
+              writer = csv.DictWriter(f, fieldnames=injury_fields, extrasaction="ignore")
+              writer.writeheader()
+              for row in all_rows:
+                  flat = dict(row)
+                  if isinstance(flat.get("practice_days"), (list, dict)):
+                      flat["practice_days"] = json.dumps(flat["practice_days"], separators=(",", ":"))
+                  writer.writerow(flat)
+
+          practice_rows = []
+          for row in all_rows:
+              days = row.get("practice_days") or []
+              if isinstance(days, list):
+                  for day in days:
+                      if isinstance(day, dict):
+                          practice_rows.append({
+                              "season_year": row.get("season_year"),
+                              "week": row.get("week"),
+                              "season_type": row.get("season_type"),
+                              "team_abbr": row.get("team_abbr"),
+                              "player_id": row.get("player_id"),
+                              "player_key": row.get("player_key"),
+                              "display_name": row.get("display_name"),
+                              "position": row.get("position"),
+                              "practice_date": day.get("date"),
+                              "practice_status_code": day.get("status"),
+                              "practiced": day.get("practiced"),
+                              "report_reason": day.get("report_reason"),
+                              "non_injury_related": day.get("non_injury_related"),
+                              "first_observed_at": day.get("first_observed_at"),
+                              "historical_backfill": day.get("historical_backfill"),
+                              "report_id": day.get("report_id"),
+                              "revision": day.get("revision"),
+                              "first_delivered_at": day.get("first_delivered_at"),
+                              "coverage_status": day.get("coverage_status"),
+                              "coverage_basis": day.get("coverage_basis"),
+                          })
+
+          practice_fields = [
+              "season_year", "week", "season_type", "team_abbr", "player_id",
+              "player_key", "display_name", "position", "practice_date",
+              "practice_status_code", "practiced", "report_reason",
+              "non_injury_related", "first_observed_at", "historical_backfill",
+              "report_id", "revision", "first_delivered_at", "coverage_status",
+              "coverage_basis",
+          ]
+          with open("nflmeta_2026_export/practice_days_2026.csv", "w", newline="", encoding="utf-8") as f:
+              writer = csv.DictWriter(f, fieldnames=practice_fields)
+              writer.writeheader()
+              writer.writerows(practice_rows)
+
+          print("\nBACKFILL COMPLETE")
+          print("Injury records:", len(all_rows))
+          print("Practice-day records:", len(practice_rows))
+          print("Pages:", len(page_summaries))
+          print("Report designations:", dict(Counter(str(r.get("report_status")) for r in all_rows)))
+          print("Game statuses:", dict(Counter(str(r.get("game_status")) for r in all_rows)))
+          print("Practice statuses:", dict(Counter(str(r.get("practice_status")) for r in all_rows)))
+          print("Rows with historical practice backfill:", sum(
+              bool(day.get("historical_backfill"))
+              for row in all_rows
+              for day in (row.get("practice_days") or [])
+              if isinstance(day, dict)
+          ))
+          print("Export files written without committing API data to the repository.")
+          PY
+
+      - name: Upload complete 2026 injury export
+        uses: actions/upload-artifact@v4
+        with:
+          name: nflmeta-2026-injury-backfill
+          path: nflmeta_2026_export/
+          if-no-files-found: error
+          retention-days: 30
