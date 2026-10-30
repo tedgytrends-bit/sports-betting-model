@@ -1,7 +1,8 @@
 import unittest
+from unittest.mock import patch
 import pandas as pd
 
-from injury_model import add_injury_features, _normalize_reports, _snapshot_capture_time
+from injury_model import add_injury_features, injury_coverage_diagnostics, _normalize_reports, _snapshot_capture_time
 
 
 class InjuryModelTests(unittest.TestCase):
@@ -75,6 +76,35 @@ class InjuryModelTests(unittest.TestCase):
     def test_snapshot_without_timestamp_is_rejected(self):
         from pathlib import Path
         self.assertTrue(pd.isna(_snapshot_capture_time(Path("injuries_2026_week_08_latest.csv"))))
+
+
+    def test_diagnostics_use_pregame_snapshot_for_team_counts(self):
+        schedule = pd.DataFrame([{
+            "game_id": "UPCOMING", "season": 2026, "week": 8, "gameday": "2026-11-01",
+            "gametime": "13:00", "game_type": "REG", "home_team": "BUF", "away_team": "MIA",
+            "home_score": None, "away_score": None,
+        }])
+        reports = pd.DataFrame(columns=[
+            "season", "week", "game_type", "team", "position", "player_name",
+            "report_status", "practice_status", "date_modified",
+        ])
+        snapshot = pd.DataFrame([
+            {"season": 2026, "week": 8, "game_type": "REG", "team": "BUF",
+             "position": "QB", "player_name": "QB One", "report_status": "OUT",
+             "practice_status": "DID NOT PARTICIPATE", "date_modified": None,
+             "_snapshot_captured_at_utc": pd.Timestamp("2026-10-30T13:08:13Z")},
+            {"season": 2026, "week": 8, "game_type": "REG", "team": "MIA",
+             "position": "OT", "player_name": "Tackle One", "report_status": "OUT",
+             "practice_status": "DID NOT PARTICIPATE", "date_modified": None,
+             "_snapshot_captured_at_utc": pd.Timestamp("2026-10-30T13:08:13Z")},
+        ])
+        with patch("injury_model._latest_snapshot_for", return_value=snapshot):
+            result = injury_coverage_diagnostics(schedule, reports).iloc[0]
+        self.assertEqual(result["Diagnostic source used"], "Saved snapshot")
+        self.assertEqual(result["Home report rows"], 1)
+        self.assertEqual(result["Away report rows"], 1)
+        self.assertEqual(result["Home QB out"], 1)
+        self.assertEqual(result["Away OL out"], 1)
 
 
 if __name__ == "__main__":
