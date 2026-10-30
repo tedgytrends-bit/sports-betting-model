@@ -74,7 +74,8 @@ def build_team_week_features(injuries: pd.DataFrame, practice: pd.DataFrame) -> 
         pp = p[(p["season_year"] == season) & (p["week"] == week) & (p["team_abbr"] == team)]
         player_ids = set(players["player_id"].dropna())
         pp = pp[pp["player_id"].isin(player_ids)].copy()
-        row = {"season_year": int(season), "week": int(week), "team": team,
+        row = {"season_year": int(season), "week": int(week),
+               "team": team, "team_abbr": team,
                "injury_list_players": len(player_ids)}
         # Weekly designation counts are descriptive of the API's current record.
         for label, token in (("out", "OUT"), ("doubtful", "DOUBTFUL"),
