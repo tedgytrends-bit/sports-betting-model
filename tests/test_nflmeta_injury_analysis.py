@@ -1,7 +1,10 @@
 import unittest
 import pandas as pd
 
-from nflmeta_injury_analysis import (build_team_week_features, build_game_injury_features,\n                                     build_game_point_in_time_features)
+from nflmeta_injury_analysis import (
+    build_team_week_features, build_game_injury_features,
+    build_game_point_in_time_features,
+)
 
 
 class NFLMetaInjuryAnalysisTests(unittest.TestCase):
