@@ -271,6 +271,30 @@ def injury_coverage_diagnostics(schedule: pd.DataFrame, reports: pd.DataFrame) -
             else "Timestamp unavailable" if snapshot is not None
             else "No snapshot"
         )
+        diagnostic_source = pregame
+        source_label = "Live feed"
+        if snapshot is not None and snapshot_timing == "Pregame eligible":
+            try:
+                snapshot_normalized = _normalize_reports(snapshot)
+                snapshot_normalized = snapshot_normalized[
+                    snapshot_normalized["season"].eq(game["season"])
+                    & snapshot_normalized["week"].eq(game["week"])
+                    & snapshot_normalized["season_type"].eq(game["season_type"])
+                ].copy()
+                if not snapshot_normalized.empty:
+                    snapshot_normalized["date_modified"] = snapshot_capture
+                    diagnostic_source = snapshot_normalized
+                    source_label = "Saved snapshot"
+            except Exception:
+                pass
+        home_rows = diagnostic_source[
+            diagnostic_source["team"].eq(str(game.get("home_team", "")).upper().strip())
+        ]
+        away_rows = diagnostic_source[
+            diagnostic_source["team"].eq(str(game.get("away_team", "")).upper().strip())
+        ]
+        home_features = _counts_for_team(home_rows)
+        away_features = _counts_for_team(away_rows)
         rows.append({
             "Matchup": f"{game.get('away_team', '?')} @ {game.get('home_team', '?')}",
             "Season/week/type": f"{int(game['season'])}/{int(game['week'])}/{game['season_type']}",
@@ -283,9 +307,18 @@ def injury_coverage_diagnostics(schedule: pd.DataFrame, reports: pd.DataFrame) -
             "Snapshot rows": len(snapshot) if snapshot is not None else 0,
             "Snapshot captured UTC": snapshot_capture.isoformat() if pd.notna(snapshot_capture) else "None",
             "Snapshot timing": snapshot_timing,
+            "Diagnostic source used": source_label,
             "Pregame position counts": ", ".join(
-                f"{k}={v}" for k, v in typed.loc[pregame.index, "position"].value_counts().head(8).items()
-            ) if not pregame.empty else "",
+                f"{k}={v}" for k, v in diagnostic_source["position"].value_counts().head(8).items()
+            ) if not diagnostic_source.empty else "",
+            "Home report rows": len(home_rows),
+            "Away report rows": len(away_rows),
+            "Home QB out": home_features.get("qb_out"),
+            "Away QB out": away_features.get("qb_out"),
+            "Home OL out": home_features.get("ol_out"),
+            "Away OL out": away_features.get("ol_out"),
+            "Home players out": home_features.get("inj_out"),
+            "Away players out": away_features.get("inj_out"),
             "Latest report timestamp UTC": (
                 typed["date_modified"].max().isoformat() if typed["date_modified"].notna().any() else "None"
             ),
