@@ -102,7 +102,7 @@ original_lines = original_lines[["game_key", "captured_at_utc", "home_favorite_s
 })
 
 try:
-    get_schedule()
+    schedule = get_schedule()
     frozen_files = sorted(PROJECTION_DIR.glob("efficiency_projection_*.csv"))
     frozen_parts = []
     for file in frozen_files:
@@ -269,6 +269,10 @@ columns = [
 st.dataframe(visible[[c for c in columns if c in visible.columns]], hide_index=True, use_container_width=True)
 
 st.caption("Spread convention: positive home_favorite_spread means the home team is favored; negative means the away team is favored. ATS edge = projected home margin − signed home-favorite spread. Total edge = projected total − Bovada total. Positive ATS edge favors the home side; negative favors the away side. Positive total edge leans Over; negative leans Under.")
+
+with st.expander("Injury feed coverage diagnostics", expanded=False):
+    st.caption("These counts isolate whether coverage is missing in the source feed, game-type matching, timestamp filtering, or the saved weekly snapshot. They are diagnostic only.")
+    st.dataframe(injury_diagnostics, hide_index=True, use_container_width=True)
 
 st.subheader("Archived Bovada lines")
 archive_view = lines.sort_values(["game_key", "captured_at_utc"], ascending=[True, False]).copy()
