@@ -1,0 +1,52 @@
+name: Test NFLMeta API connection
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-api:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify NFLMeta credentials and quota
+        env:
+          NFLMETA_API_KEY: ${{ secrets.NFLMETA_API_KEY }}
+        run: |
+          python - <<'PY'
+          import os
+          import requests
+
+          key = os.environ.get("NFLMETA_API_KEY", "").strip()
+          if not key:
+              raise SystemExit("NFLMETA_API_KEY secret is missing or empty.")
+
+          response = requests.get(
+              "https://nflmeta.org/api/v1/usage",
+              headers={"X-NFLMeta-Key": key, "Accept": "application/json"},
+              timeout=30,
+          )
+          if response.status_code != 200:
+              try:
+                  detail = response.json().get("error", {}).get("message", "No API error detail.")
+              except Exception:
+                  detail = response.text[:300]
+              raise SystemExit(f"NFLMeta API check failed ({response.status_code}): {detail}")
+
+          payload = response.json()
+          data = payload.get("data", {})
+          print("NFLMeta authentication: SUCCESS")
+          for label, field in [
+              ("Plan", "billing_plan"),
+              ("Requests remaining this month", "quota_remaining"),
+              ("Monthly request limit", "quota_limit"),
+              ("Rows remaining this month", "row_quota_remaining"),
+              ("Monthly row limit", "row_quota_limit"),
+              ("Per-minute request limit", "minute_limit"),
+          ]:
+              print(f"{label}: {data.get(field, 'not returned')}")
+          PY
