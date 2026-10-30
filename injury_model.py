@@ -260,6 +260,17 @@ def injury_coverage_diagnostics(schedule: pd.DataFrame, reports: pd.DataFrame) -
         snapshot = _latest_snapshot_for(int(game["season"]), int(game["week"])) if (
             pd.isna(game.get("home_score")) or pd.isna(game.get("away_score"))
         ) else None
+        snapshot_capture = (
+            pd.to_datetime(snapshot["_snapshot_captured_at_utc"].iloc[0], errors="coerce", utc=True)
+            if snapshot is not None and "_snapshot_captured_at_utc" in snapshot.columns
+            else pd.NaT
+        )
+        snapshot_timing = (
+            "Pregame eligible" if pd.notna(snapshot_capture) and pd.notna(kickoff) and snapshot_capture < kickoff
+            else "After kickoff" if pd.notna(snapshot_capture) and pd.notna(kickoff)
+            else "Timestamp unavailable" if snapshot is not None
+            else "No snapshot"
+        )
         rows.append({
             "Matchup": f"{game.get('away_team', '?')} @ {game.get('home_team', '?')}",
             "Season/week/type": f"{int(game['season'])}/{int(game['week'])}/{game['season_type']}",
@@ -270,6 +281,8 @@ def injury_coverage_diagnostics(schedule: pd.DataFrame, reports: pd.DataFrame) -
             "Feed teams": ", ".join(sorted(typed["team"].dropna().astype(str).unique())),
             "Snapshot file found": snapshot is not None,
             "Snapshot rows": len(snapshot) if snapshot is not None else 0,
+            "Snapshot captured UTC": snapshot_capture.isoformat() if pd.notna(snapshot_capture) else "None",
+            "Snapshot timing": snapshot_timing,
             "Pregame position counts": ", ".join(
                 f"{k}={v}" for k, v in typed.loc[pregame.index, "position"].value_counts().head(8).items()
             ) if not pregame.empty else "",
