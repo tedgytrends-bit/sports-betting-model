@@ -173,3 +173,14 @@ Latest correction commits:
 - `1d5b02500664702ca6f919af6834359e69299db4` — align tests with weekly-report-presence semantics.
 
 **Next action:** validate the current tests, rebuild the CSV coverage audit using `first_delivered_at`, and only then update the sample-size figures. Injury report publication timing remains unknown in this export.
+
+
+### Recalculated practice coverage using `first_delivered_at` (2026-10-30)
+
+The independent per-game audit was rebuilt from the uploaded NFLMeta ZIP and the full uploaded nflverse schedule, using exact Eastern-time kickoffs converted to UTC:
+- 108 completed regular-season games in Weeks 1–8.
+- Both teams have weekly injury-report records in the export for 108/108 games. This is weekly export presence only; official publication time remains unknown.
+- Both teams have at least one non-backfill practice record with `first_delivered_at < kickoff` for 43/108 games.
+- Weekly both-team practice-delivery coverage: W1 0/16, W2 0/16, W3 0/16, W4 0/16, W5 14/15, W6 14/14, W7 14/14, W8 1/1.
+- The result is 43, coincidentally the same as the prior first-observed calculation, but this new count is independently verified using the intended delivery timestamp.
+- CSVs exported separately: `game_level_delivery_audit.csv` and `weekly_delivery_coverage.csv`. This remains a coverage audit, not a performance/edge analysis.
