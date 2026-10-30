@@ -113,6 +113,13 @@ def build_team_week_features(injuries: pd.DataFrame, practice: pd.DataFrame) -> 
             ].shape[0])
 
         observed = pp["first_observed_at"].dropna()
+        report_observed = players["source_observed_at"].dropna()
+        row["latest_injury_report_observed_at_utc"] = (
+            report_observed.max().isoformat() if not report_observed.empty else None
+        )
+        row["earliest_injury_report_observed_at_utc"] = (
+            report_observed.min().isoformat() if not report_observed.empty else None
+        )
         row["practice_records"] = int(len(pp))
         row["practice_records_historical_backfill"] = int(
             pp["historical_backfill"].astype(str).str.lower().isin(["true", "1"]).sum()
@@ -166,22 +173,30 @@ def build_game_injury_features(schedule: pd.DataFrame, team_week: pd.DataFrame) 
             row[f"{side}_latest_practice_observed_at_utc"] = (
                 record.get("latest_practice_observed_at_utc") if record else None
             )
+            row[f"{side}_latest_injury_report_observed_at_utc"] = (
+                record.get("latest_injury_report_observed_at_utc") if record else None
+            )
         for col in numeric:
             row[f"home_minus_away_{col}"] = (
                 row.get(f"home_{col}", np.nan) - row.get(f"away_{col}", np.nan)
             )
-        latest_times = [
-            pd.to_datetime(row.get(f"{side}_latest_practice_observed_at_utc"), errors="coerce", utc=True)
-            for side in ("home", "away")
-        ]
+        latest_times = []
+        for side in ("home", "away"):
+            latest_times.append(pd.to_datetime(
+                row.get(f"{side}_latest_practice_observed_at_utc"), errors="coerce", utc=True
+            ))
+            latest_times.append(pd.to_datetime(
+                row.get(f"{side}_latest_injury_report_observed_at_utc"), errors="coerce", utc=True
+            ))
         kickoff = getattr(game, "kickoff_at_utc")
         row["kickoff_at_utc"] = kickoff.isoformat() if pd.notna(kickoff) else None
         row["injury_features_point_in_time_verified"] = bool(
             pd.notna(kickoff) and all(pd.notna(t) and t < kickoff for t in latest_times)
         )
         row["injury_feature_timing_status"] = (
-            "Both teams observed before kickoff" if row["injury_features_point_in_time_verified"]
-            else "Unverified or observed after kickoff"
+            "Both teams' practice and report data observed before kickoff"
+            if row["injury_features_point_in_time_verified"]
+            else "Unverified: missing or post-kickoff practice/report timestamp"
         )
         output.append(row)
     return pd.DataFrame(output)
