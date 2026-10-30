@@ -83,9 +83,9 @@ Uploaded 2026 backfill export contained:
 
 - NFLverse `gametime` is Eastern Time. Convert `gameday + gametime` using `America/New_York` (including daylight-saving rules) to UTC before comparing with NFLMeta observation timestamps.
 - `source_observed_at` is the capture/observation timestamp, not proof of original report publication time. Never backdate it.
-- Practice `first_observed_at` is separate and must independently precede kickoff.
+- Practice `first_delivered_at` is the conservative availability timestamp and must be strictly before kickoff for pregame eligibility. Keep `first_observed_at` as separate provenance; it does not replace delivery time.
 - Retrospectively backfilled practice rows are excluded even if they contain a plausible practice date.
-- Missing timestamps mean unknown/unverified, not eligible and not zero.
+- Missing delivery timestamps mean unknown/unverified, not eligible and not zero.
 - For a game-level dataset, filter each underlying record against that game's kickoff. Do not rely on weekly aggregates or just the latest timestamp for the whole week.
 
 ## 6. Separate NFLMeta research pipeline
@@ -164,7 +164,7 @@ A review of the raw export showed that the earlier game-level audit misinterpret
 - Therefore report coverage must be reported as weekly export presence, with publication timing explicitly marked unknown unless a trustworthy publication/delivery timestamp is added.
 - Normalize Rams aliases (`LAR` / `LA`) before team matching. In the uploaded export, both teams have weekly injury records for all 108 completed games in Weeks 1–8; this is presence, not pregame publication verification.
 - Practice export includes `first_observed_at` and `first_delivered_at`. Use `first_delivered_at` for conservative data-availability checks. Keep `first_observed_at` as separate provenance. Exclude `historical_backfill=true` and missing delivery timestamps.
-- Prior statement that 43 games had pregame practice coverage was generated using `first_observed_at`; it is superseded and must be recalculated using `first_delivered_at`. Do not repeat the 43 count as verified until rebuilt.
+- The 43-game practice-coverage figure has since been independently rebuilt using `first_delivered_at` and exact kickoff conversion; see the completed audit below. Do not describe it as injury-report coverage.
 - `coverage_status` and `coverage_basis` describe practice-day report completeness: 3,039 complete and 884 partial delivered rows; 2,840 historical backfill rows have no delivery metadata. Completeness is not the same as pregame availability.
 - Postgame `game_status`, scores, and outcomes remain labels only, never predictors.
 
@@ -172,7 +172,7 @@ Latest correction commits:
 - `021a40f7641e52bf16c5424bf52adcf8dd0b689b` — separate weekly injury report presence from publication timing; use practice `first_delivered_at` for pregame eligibility.
 - `1d5b02500664702ca6f919af6834359e69299db4` — align tests with weekly-report-presence semantics.
 
-**Next action:** validate the current tests, rebuild the CSV coverage audit using `first_delivered_at`, and only then update the sample-size figures. Injury report publication timing remains unknown in this export.
+**Completed:** the CSV coverage audit was rebuilt using `first_delivered_at` and exact Eastern-time kickoffs converted to UTC. It found 43/108 completed games with both teams having at least one non-backfill practice record delivered before kickoff. Weekly coverage: W1 0/16, W2 0/16, W3 0/16, W4 0/16, W5 14/15, W6 14/14, W7 14/14, W8 1/1. This is practice-delivery coverage only. Injury-report publication timing remains unknown in this export.
 
 
 ### Recalculated practice coverage using `first_delivered_at` (2026-10-30)
