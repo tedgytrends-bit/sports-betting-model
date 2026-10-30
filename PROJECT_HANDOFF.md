@@ -184,3 +184,15 @@ The independent per-game audit was rebuilt from the uploaded NFLMeta ZIP and the
 - Weekly both-team practice-delivery coverage: W1 0/16, W2 0/16, W3 0/16, W4 0/16, W5 14/15, W6 14/14, W7 14/14, W8 1/1.
 - The result is 43, coincidentally the same as the prior first-observed calculation, but this new count is independently verified using the intended delivery timestamp.
 - CSVs exported separately: `game_level_delivery_audit.csv` and `weekly_delivery_coverage.csv`. This remains a coverage audit, not a performance/edge analysis.
+
+
+### Prospective snapshot-difference audit (2026-10-30)
+
+- Added `scripts/audit_injury_snapshots.py` in commit `6d41f2c`.
+- Updated `.github/workflows/capture-injury-snapshots.yml` in commit `7e4451f` to run the audit after each scheduled injury-feed capture and commit both snapshot and audit CSVs when changed.
+- Audit outputs: `data/injury_snapshot_audits/snapshot_changes.csv` and `snapshot_change_summary.csv`.
+- The audit compares adjacent snapshots within the same season/week/team. It records feed-membership changes and changes to player identity/position, injury fields, report status, and practice fields. It records hours until that team's earliest scheduled kickoff using Eastern-time schedule conversion.
+- Capture timestamps mean the repository observed that version of the feed; they do not establish the NFL's original publication time. A player absent from a later feed snapshot is only a feed-membership change, not confirmed official report removal.
+- The first snapshot in a sequence has no earlier baseline and therefore does not generate an initial-state event. Interpret change counts as observed transitions between archived versions, not a complete history of all injury developments.
+- This audit is descriptive research only. Do not feed it into the live model or frozen projections until data integrity, coverage, and out-of-sample value are separately validated.
+- The workflow was updated but has not yet completed a post-change scheduled run in this handoff. Verify the next scheduled run and inspect the generated CSVs before relying on the output.
