@@ -85,7 +85,6 @@ class NFLMetaInjuryAnalysisTests(unittest.TestCase):
         practice = self.practice.copy()
         practice.loc[practice.player_id.eq(1) & practice.practice_date.eq("2026-09-11"),
                      "first_observed_at"] = "2026-09-14T18:00:00Z"
-        practice.loc[practice.player_id.eq(2), "historical_backfill"] = False
         practice = pd.concat([practice, pd.DataFrame([{
             "season_year": 2026, "week": 1, "team_abbr": "MIA", "player_id": 3,
             "practice_date": "2026-09-11", "practice_status_code": "FP",
