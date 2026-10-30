@@ -76,8 +76,12 @@ def _normalize_reports(reports: pd.DataFrame) -> pd.DataFrame:
     else:
         missing_type = data["season_type"].isna() | data["season_type"].astype(str).str.strip().eq("")
         if "game_type" in data:
-            data.loc[missing_type, "season_type"] = data.loc[missing_type, "game_type"]
-        data.loc[missing_type, "season_type"] = "REG"
+            source_type = data["game_type"].fillna("").astype(str).str.strip()
+            has_source_type = missing_type & source_type.ne("")
+            data.loc[has_source_type, "season_type"] = data.loc[has_source_type, "game_type"]
+            data.loc[missing_type & ~has_source_type, "season_type"] = "REG"
+        else:
+            data.loc[missing_type, "season_type"] = "REG"
     data["season_type"] = data["season_type"].fillna("REG").astype(str).str.upper().str.strip()
     data["season_type"] = data["season_type"].replace({"REGULAR": "REG", "POSTSEASON": "POST", "PRESEASON": "PRE"})
     player_col = next((c for c in ("player_name", "full_name", "player", "gsis_id") if c in data.columns), None)
