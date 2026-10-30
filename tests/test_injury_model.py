@@ -1,7 +1,7 @@
 import unittest
 import pandas as pd
 
-from injury_model import add_injury_features
+from injury_model import add_injury_features, _normalize_reports
 
 
 class InjuryModelTests(unittest.TestCase):
@@ -44,6 +44,26 @@ class InjuryModelTests(unittest.TestCase):
         self.assertEqual(result["home_qb_questionable"], 0)
         self.assertEqual(result["away_ol_out"], 1)
         self.assertEqual(result["home_inj_out"], 1)
+
+
+    def test_game_type_is_used_when_season_type_is_absent(self):
+        reports = pd.DataFrame([
+            {"season": 2025, "week": 19, "game_type": "POST", "team": "BUF",
+             "position": "QB", "player_name": "QB One", "report_status": "OUT",
+             "practice_status": "DID NOT PARTICIPATE", "date_modified": "2026-01-10T12:00:00Z"}
+        ])
+        normalized = _normalize_reports(reports)
+        self.assertEqual(normalized.loc[0, "season_type"], "POST")
+
+    def test_game_type_fills_missing_season_type(self):
+        reports = pd.DataFrame([
+            {"season": 2025, "week": 19, "season_type": None, "game_type": "POST",
+             "team": "BUF", "position": "QB", "player_name": "QB One",
+             "report_status": "OUT", "practice_status": "DID NOT PARTICIPATE",
+             "date_modified": "2026-01-10T12:00:00Z"}
+        ])
+        normalized = _normalize_reports(reports)
+        self.assertEqual(normalized.loc[0, "season_type"], "POST")
 
 
 if __name__ == "__main__":
