@@ -89,6 +89,8 @@ class NFLMetaInjuryAnalysisTests(unittest.TestCase):
         practice = self.practice.copy()
         practice.loc[practice.player_id.eq(1) & practice.practice_date.eq("2026-09-11"),
                      "first_observed_at"] = "2026-09-14T18:00:00Z"
+        practice.loc[practice.player_id.eq(1) & practice.practice_date.eq("2026-09-11"),
+                     "first_delivered_at"] = "2026-09-14T18:00:00Z"
         practice = pd.concat([practice, pd.DataFrame([{
             "season_year": 2026, "week": 1, "team_abbr": "MIA", "player_id": 3,
             "practice_date": "2026-09-11", "practice_status_code": "FP",
@@ -191,7 +193,7 @@ class NFLMetaInjuryAnalysisTests(unittest.TestCase):
             "gametime": "13:00", "home_team": "BUF", "away_team": "MIA",
         }])
         result = build_game_point_in_time_features(schedule, injuries, practice).iloc[0]
-        self.assertEqual(result["home_practice_records_pregame_by_delivery"], 1)
+        self.assertEqual(result["home_practice_records_pregame_by_delivery"], 2)
         self.assertFalse(result["injury_report_timing_verified"])
         self.assertFalse(result["injury_features_point_in_time_verified"])
 
