@@ -52,7 +52,7 @@ def load_injury_reports(seasons=(2021, 2022, 2023, 2024, 2025, 2026)) -> pd.Data
 
 def _snapshot_capture_time(path: Path) -> pd.Timestamp | pd.NaT:
     """Read the UTC capture timestamp embedded in a snapshot filename."""
-    match = re.search(r"_(\\d{8}T\\d{6}Z)$", path.stem)
+    match = re.search(r"_(\d{8}T\d{6}Z)$", path.stem)
     if not match:
         return pd.NaT
     return pd.to_datetime(match.group(1), format="%Y%m%dT%H%M%SZ", errors="coerce", utc=True)
