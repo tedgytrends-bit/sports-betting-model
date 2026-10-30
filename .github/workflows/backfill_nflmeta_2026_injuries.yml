@@ -9,12 +9,12 @@ permissions:
 jobs:
   backfill-injuries:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Retrieve all 2026 injury records with pagination
+      - name: Retrieve 2026 injury records week by week
         env:
           NFLMETA_API_KEY: ${{ secrets.NFLMETA_API_KEY }}
         run: |
@@ -35,14 +35,17 @@ jobs:
           base_url = "https://nflmeta.org/api/v1/injuries"
           season = 2026
           page_size = 100
-          offset = 0
           all_rows = []
-          page_summaries = []
-          first_meta = None
-          expected_total = None
+          week_summaries = []
+          seen_keys = set()
 
-          while True:
-              query = urlencode({"season": season, "limit": page_size, "offset": offset})
+          def fetch_page(week, offset):
+              query = urlencode({
+                  "season": season,
+                  "week": week,
+                  "limit": page_size,
+                  "offset": offset,
+              })
               request = Request(
                   f"{base_url}?{query}",
                   headers={"X-NFLMeta-Key": key, "Accept": "application/json"},
@@ -52,70 +55,85 @@ jobs:
                       payload = json.loads(response.read().decode("utf-8"))
               except HTTPError as exc:
                   body = exc.read().decode("utf-8", errors="replace")[:1000]
-                  raise SystemExit(f"NFLMeta HTTP {exc.code} at offset {offset}: {body}")
+                  raise SystemExit(f"NFLMeta HTTP {exc.code} for week {week}, offset {offset}: {body}")
               except URLError as exc:
-                  raise SystemExit(f"NFLMeta connection failed at offset {offset}: {exc.reason}")
-
+                  raise SystemExit(f"NFLMeta connection failed for week {week}, offset {offset}: {exc.reason}")
               if not isinstance(payload, dict) or not isinstance(payload.get("data"), list):
-                  raise SystemExit(f"Unexpected response shape at offset {offset}; refusing partial export.")
+                  raise SystemExit(f"Unexpected response shape for week {week}, offset {offset}.")
+              return payload
 
-              meta = payload.get("meta") or {}
-              if first_meta is None:
-                  first_meta = meta
-                  expected_total = meta.get("total")
-                  print("Season dataset total reported by API:", expected_total)
-                  print("Dataset status:", json.dumps(meta.get("data_status", {})))
-              elif meta.get("total") != expected_total:
+          for week in range(1, 19):
+              offset = 0
+              week_rows = []
+              expected_total = None
+              page_count = 0
+
+              while True:
+                  payload = fetch_page(week, offset)
+                  meta = payload.get("meta") or {}
+                  if expected_total is None:
+                      expected_total = meta.get("total")
+                      print(f"Week {week}: API reports {expected_total} records")
+                  elif meta.get("total") != expected_total:
+                      raise SystemExit(
+                          f"Week {week} total changed during pagination: "
+                          f"{expected_total} -> {meta.get('total')}."
+                      )
+
+                  rows = payload["data"]
+                  returned = meta.get("returned", len(rows))
+                  reported_offset = meta.get("offset", offset)
+                  if reported_offset != offset or returned != len(rows):
+                      raise SystemExit(
+                          f"Week {week} pagination mismatch at offset {offset}: "
+                          f"meta offset={reported_offset}, returned={returned}, actual={len(rows)}."
+                      )
+
+                  week_rows.extend(rows)
+                  page_count += 1
+                  print(f"  offset {offset}: {len(rows)} rows (week total so far {len(week_rows)})")
+
+                  if not meta.get("has_more"):
+                      break
+                  if not rows:
+                      raise SystemExit(f"Week {week}: has_more=true with empty page.")
+                  offset += len(rows)
+                  if page_count > 20:
+                      raise SystemExit(f"Week {week}: pagination safety limit exceeded.")
+                  time.sleep(0.15)
+
+              if expected_total is not None and len(week_rows) != expected_total:
                   raise SystemExit(
-                      f"API total changed during pagination: expected {expected_total}, got {meta.get('total')}."
+                      f"Week {week} incomplete: retrieved {len(week_rows)}, API reported {expected_total}."
                   )
 
-              page_rows = payload["data"]
-              returned = meta.get("returned", len(page_rows))
-              reported_offset = meta.get("offset", offset)
-              if reported_offset != offset or returned != len(page_rows):
-                  raise SystemExit(
-                      f"Pagination mismatch at offset {offset}: meta offset={reported_offset}, "
-                      f"meta returned={returned}, actual rows={len(page_rows)}."
+              for row in week_rows:
+                  identity = (
+                      row.get("season_year"), row.get("week"), row.get("team_abbr"),
+                      row.get("player_id"), row.get("player_key"), row.get("source_name"),
                   )
-
-              all_rows.extend(page_rows)
-              page_summaries.append({
-                  "offset": offset,
-                  "returned": len(page_rows),
-                  "total": meta.get("total"),
-                  "has_more": meta.get("has_more"),
+                  if identity in seen_keys:
+                      raise SystemExit(f"Duplicate player injury row detected: {identity}")
+                  seen_keys.add(identity)
+              all_rows.extend(week_rows)
+              week_summaries.append({
+                  "week": week,
+                  "retrieved_rows": len(week_rows),
+                  "reported_total": expected_total,
+                  "pages": page_count,
+                  "data_status": (payload.get("meta") or {}).get("data_status", {}),
               })
-              print(f"Retrieved offset {offset}: {len(page_rows)} rows; running total {len(all_rows)}")
-
-              if not meta.get("has_more"):
-                  break
-              if not page_rows:
-                  raise SystemExit("API reported has_more=true but returned an empty page.")
-              offset += len(page_rows)
-              if len(page_summaries) > 100:
-                  raise SystemExit("Pagination safety limit exceeded.")
-              time.sleep(0.2)
-
-          if expected_total is not None and len(all_rows) != expected_total:
-              raise SystemExit(
-                  f"Incomplete export: retrieved {len(all_rows)} rows but API reported {expected_total}."
-              )
 
           os.makedirs("nflmeta_2026_export", exist_ok=True)
           raw = {
               "season": season,
               "retrieved_rows": len(all_rows),
-              "reported_total": expected_total,
-              "pages": page_summaries,
-              "meta_first_page": first_meta,
+              "week_summaries": week_summaries,
               "data": all_rows,
           }
           with open("nflmeta_2026_export/injuries_2026.json", "w", encoding="utf-8") as f:
               json.dump(raw, f, indent=2)
 
-          # Preserve all source fields. Nested practice-day data remains JSON in this
-          # table and is also expanded into a separate one-row-per-player-per-day CSV.
           injury_fields = sorted({field for row in all_rows for field in row.keys()})
           with open("nflmeta_2026_export/injuries_2026.csv", "w", newline="", encoding="utf-8") as f:
               writer = csv.DictWriter(f, fieldnames=injury_fields, extrasaction="ignore")
@@ -128,32 +146,30 @@ jobs:
 
           practice_rows = []
           for row in all_rows:
-              days = row.get("practice_days") or []
-              if isinstance(days, list):
-                  for day in days:
-                      if isinstance(day, dict):
-                          practice_rows.append({
-                              "season_year": row.get("season_year"),
-                              "week": row.get("week"),
-                              "season_type": row.get("season_type"),
-                              "team_abbr": row.get("team_abbr"),
-                              "player_id": row.get("player_id"),
-                              "player_key": row.get("player_key"),
-                              "display_name": row.get("display_name"),
-                              "position": row.get("position"),
-                              "practice_date": day.get("date"),
-                              "practice_status_code": day.get("status"),
-                              "practiced": day.get("practiced"),
-                              "report_reason": day.get("report_reason"),
-                              "non_injury_related": day.get("non_injury_related"),
-                              "first_observed_at": day.get("first_observed_at"),
-                              "historical_backfill": day.get("historical_backfill"),
-                              "report_id": day.get("report_id"),
-                              "revision": day.get("revision"),
-                              "first_delivered_at": day.get("first_delivered_at"),
-                              "coverage_status": day.get("coverage_status"),
-                              "coverage_basis": day.get("coverage_basis"),
-                          })
+              for day in (row.get("practice_days") or []):
+                  if isinstance(day, dict):
+                      practice_rows.append({
+                          "season_year": row.get("season_year"),
+                          "week": row.get("week"),
+                          "season_type": row.get("season_type"),
+                          "team_abbr": row.get("team_abbr"),
+                          "player_id": row.get("player_id"),
+                          "player_key": row.get("player_key"),
+                          "display_name": row.get("display_name"),
+                          "position": row.get("position"),
+                          "practice_date": day.get("date"),
+                          "practice_status_code": day.get("status"),
+                          "practiced": day.get("practiced"),
+                          "report_reason": day.get("report_reason"),
+                          "non_injury_related": day.get("non_injury_related"),
+                          "first_observed_at": day.get("first_observed_at"),
+                          "historical_backfill": day.get("historical_backfill"),
+                          "report_id": day.get("report_id"),
+                          "revision": day.get("revision"),
+                          "first_delivered_at": day.get("first_delivered_at"),
+                          "coverage_status": day.get("coverage_status"),
+                          "coverage_basis": day.get("coverage_basis"),
+                      })
 
           practice_fields = [
               "season_year", "week", "season_type", "team_abbr", "player_id",
@@ -171,17 +187,17 @@ jobs:
           print("\nBACKFILL COMPLETE")
           print("Injury records:", len(all_rows))
           print("Practice-day records:", len(practice_rows))
-          print("Pages:", len(page_summaries))
+          print("Weeks queried:", len(week_summaries))
+          print("Weekly totals:", json.dumps(week_summaries))
           print("Report designations:", dict(Counter(str(r.get("report_status")) for r in all_rows)))
           print("Game statuses:", dict(Counter(str(r.get("game_status")) for r in all_rows)))
           print("Practice statuses:", dict(Counter(str(r.get("practice_status")) for r in all_rows)))
-          print("Rows with historical practice backfill:", sum(
+          print("Historical practice-day rows:", sum(
               bool(day.get("historical_backfill"))
               for row in all_rows
               for day in (row.get("practice_days") or [])
               if isinstance(day, dict)
           ))
-          print("Export files written without committing API data to the repository.")
           PY
 
       - name: Upload complete 2026 injury export
