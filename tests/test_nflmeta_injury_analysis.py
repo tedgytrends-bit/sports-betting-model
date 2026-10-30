@@ -48,7 +48,7 @@ class NFLMetaInjuryAnalysisTests(unittest.TestCase):
         team_week = build_team_week_features(self.injuries, self.practice)
         schedule = pd.DataFrame([{
             "game_id": "G1", "season": 2026, "week": 1, "gameday": "2026-09-14",
-            "home_team": "BUF", "away_team": "MIA",
+            "gametime": "13:00", "home_team": "BUF", "away_team": "MIA",
         }])
         result = build_game_injury_features(schedule, team_week).iloc[0]
         self.assertEqual(result["home_injury_data_available"], 1)
@@ -64,7 +64,7 @@ class NFLMetaInjuryAnalysisTests(unittest.TestCase):
         team_week = build_team_week_features(injuries, practice)
         schedule = pd.DataFrame([{
             "game_id": "G2", "season": 2026, "week": 1, "gameday": "2026-09-14",
-            "home_team": "LAR", "away_team": "MIA",
+            "gametime": "13:00", "home_team": "LAR", "away_team": "MIA",
         }])
         result = build_game_injury_features(schedule, team_week).iloc[0]
         self.assertEqual(result["home_injury_data_available"], 1)
