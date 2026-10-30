@@ -17,12 +17,16 @@ PROJECTION_DIR = ROOT / "data" / "prospective_ats_tracking"
 def get_schedule():
     return load_schedule_data()
 
+@st.cache_data(ttl=3600, show_spinner="Loading historical injury reports...")
+def get_injury_reports():
+    return load_injury_reports((2021, 2022, 2023, 2024, 2025, 2026))
+
 @st.cache_data(ttl=3600, show_spinner="Loading play-by-play, injury history, and calculating injury-aware projections...")
 def get_latest_efficiency_projections():
     schedule = load_schedule_data()
     pbp = load_pbp((2021, 2022, 2023, 2024, 2025, 2026))
     features = build_efficiency_model_dataset(schedule, pbp, lookback_games=10)
-    injury_reports = load_injury_reports((2021, 2022, 2023, 2024, 2025, 2026))
+    injury_reports = get_injury_reports()
     features = add_injury_features(features, schedule, injury_reports)
     projections = project_upcoming_efficiency(features, min_train_games=500)
     if projections.empty:
@@ -117,6 +121,7 @@ try:
             st.warning(f"Could not read frozen projection file {file.name}: {exc}")
     frozen = pd.concat(frozen_parts, ignore_index=True, sort=False) if frozen_parts else pd.DataFrame()
     latest = get_latest_efficiency_projections()
+    injury_reports = get_injury_reports()
     injury_diagnostics = injury_coverage_diagnostics(
         schedule[schedule["season"].eq(schedule["season"].max())], injury_reports
     )
