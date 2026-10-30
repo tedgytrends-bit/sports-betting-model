@@ -60,6 +60,26 @@ def build_kickoff_lookup(schedule: pd.DataFrame) -> dict[tuple[int, int, str], p
     return lookup
 
 
+def compare_snapshot_pair(previous: pd.DataFrame, current: pd.DataFrame) -> list[tuple[str, str, str, str]]:
+    """Return player-level transitions between two snapshots for one team/week."""
+    prev = previous.drop_duplicates("gsis_id").set_index("gsis_id")
+    curr = current.drop_duplicates("gsis_id").set_index("gsis_id")
+    prev_ids, curr_ids = set(prev.index), set(curr.index)
+    changes: list[tuple[str, str, str, str]] = []
+    for player_id in sorted(curr_ids - prev_ids):
+        changes.append((player_id, "feed_membership", "not_present", "present"))
+    for player_id in sorted(prev_ids - curr_ids):
+        changes.append((player_id, "feed_membership", "present", "not_present"))
+    for player_id in sorted(prev_ids & curr_ids):
+        for field in COMPARE:
+            before, after = prev.at[player_id, field], curr.at[player_id, field]
+            before = "" if pd.isna(before) else str(before).strip()
+            after = "" if pd.isna(after) else str(after).strip()
+            if before != after:
+                changes.append((player_id, field, before, after))
+    return changes
+
+
 def main() -> None:
     files = sorted(SNAPSHOT_DIR.glob("injuries_*_week_*_*.csv"))
     if not files:
@@ -87,21 +107,11 @@ def main() -> None:
     ):
         snapshots = sorted(group["snapshot_captured_at_utc"].unique())
         for previous_time, current_time in zip(snapshots, snapshots[1:]):
-            prev = group[group["snapshot_captured_at_utc"].eq(previous_time)].drop_duplicates("gsis_id").set_index("gsis_id")
-            curr = group[group["snapshot_captured_at_utc"].eq(current_time)].drop_duplicates("gsis_id").set_index("gsis_id")
-            prev_ids, curr_ids = set(prev.index), set(curr.index)
-            changes = []
-            for player_id in sorted(curr_ids - prev_ids):
-                changes.append((player_id, "feed_membership", "not_present", "present"))
-            for player_id in sorted(prev_ids - curr_ids):
-                changes.append((player_id, "feed_membership", "present", "not_present"))
-            for player_id in sorted(prev_ids & curr_ids):
-                for field in COMPARE:
-                    before, after = prev.at[player_id, field], curr.at[player_id, field]
-                    before = "" if pd.isna(before) else str(before).strip()
-                    after = "" if pd.isna(after) else str(after).strip()
-                    if before != after:
-                        changes.append((player_id, field, before, after))
+            prev_rows = group[group["snapshot_captured_at_utc"].eq(previous_time)].drop_duplicates("gsis_id")
+            curr_rows = group[group["snapshot_captured_at_utc"].eq(current_time)].drop_duplicates("gsis_id")
+            prev = prev_rows.set_index("gsis_id")
+            curr = curr_rows.set_index("gsis_id")
+            changes = compare_snapshot_pair(prev_rows, curr_rows)
             kickoff = kickoff_lookup.get((int(season), int(week), str(team)))
             hours = (kickoff - pd.Timestamp(current_time)).total_seconds() / 3600 if kickoff is not None else None
             for player_id, field, before, after in changes:
