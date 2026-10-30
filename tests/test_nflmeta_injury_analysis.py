@@ -23,16 +23,20 @@ class NFLMetaInjuryAnalysisTests(unittest.TestCase):
         self.practice = pd.DataFrame([
             {"season_year": 2026, "week": 1, "team_abbr": "BUF", "player_id": 1,
              "practice_date": "2026-09-09", "practice_status_code": "DNP",
-             "first_observed_at": "2026-09-09T18:00:00Z", "historical_backfill": False},
+             "first_observed_at": "2026-09-09T18:00:00Z",
+             "first_delivered_at": "2026-09-09T18:00:00Z", "historical_backfill": False},
             {"season_year": 2026, "week": 1, "team_abbr": "BUF", "player_id": 1,
              "practice_date": "2026-09-10", "practice_status_code": "LP",
-             "first_observed_at": "2026-09-10T18:00:00Z", "historical_backfill": False},
+             "first_observed_at": "2026-09-10T18:00:00Z",
+             "first_delivered_at": "2026-09-10T18:00:00Z", "historical_backfill": False},
             {"season_year": 2026, "week": 1, "team_abbr": "BUF", "player_id": 1,
              "practice_date": "2026-09-11", "practice_status_code": "FP",
-             "first_observed_at": "2026-09-11T18:00:00Z", "historical_backfill": False},
+             "first_observed_at": "2026-09-11T18:00:00Z",
+             "first_delivered_at": "2026-09-11T18:00:00Z", "historical_backfill": False},
             {"season_year": 2026, "week": 1, "team_abbr": "BUF", "player_id": 2,
              "practice_date": "2026-09-11", "practice_status_code": "DNP",
-             "first_observed_at": "2026-09-11T18:00:00Z", "historical_backfill": True},
+             "first_observed_at": "2026-09-11T18:00:00Z",
+             "first_delivered_at": "2026-09-11T18:00:00Z", "historical_backfill": True},
         ])
 
     def test_team_week_counts_players_not_player_days(self):
@@ -88,21 +92,23 @@ class NFLMetaInjuryAnalysisTests(unittest.TestCase):
         practice = pd.concat([practice, pd.DataFrame([{
             "season_year": 2026, "week": 1, "team_abbr": "MIA", "player_id": 3,
             "practice_date": "2026-09-11", "practice_status_code": "FP",
-            "first_observed_at": "2026-09-11T18:00:00Z", "historical_backfill": False,
+            "first_observed_at": "2026-09-11T18:00:00Z",
+             "first_delivered_at": "2026-09-11T18:00:00Z", "historical_backfill": False,
         }])], ignore_index=True)
         schedule = pd.DataFrame([{
             "game_id": "G-PIT", "season": 2026, "week": 1, "gameday": "2026-09-14",
             "gametime": "13:00", "home_team": "BUF", "away_team": "MIA",
         }])
         result = build_game_point_in_time_features(schedule, injuries, practice).iloc[0]
-        self.assertEqual(result["home_injury_report_players_pregame"], 1)
-        self.assertEqual(result["home_report_out_players_pregame"], 0)
-        self.assertEqual(result["away_injury_report_players_pregame"], 1)
-        self.assertEqual(result["home_practice_records_pregame"], 2)
-        self.assertEqual(result["away_practice_records_pregame"], 1)
-        self.assertTrue(result["injury_report_timing_verified"])
+        self.assertEqual(result["home_injury_report_players_weekly_export"], 2)
+        self.assertEqual(result["home_report_out_players_weekly_export"], 1)
+        self.assertEqual(result["away_injury_report_players_weekly_export"], 1)
+        self.assertFalse(result["injury_report_timing_verified"])
+        self.assertIn("Unknown", result["injury_report_publication_timing_status"])
+        self.assertEqual(result["home_practice_records_pregame_by_delivery"], 2)
+        self.assertEqual(result["away_practice_records_pregame_by_delivery"], 1)
         self.assertTrue(result["practice_timing_verified"])
-        self.assertTrue(result["injury_features_point_in_time_verified"])
+        self.assertFalse(result["injury_features_point_in_time_verified"])
 
     def test_game_features_exclude_backfill_and_missing_timestamps(self):
         injuries = self.injuries.copy()
@@ -114,8 +120,8 @@ class NFLMetaInjuryAnalysisTests(unittest.TestCase):
             "gametime": "13:00", "home_team": "BUF", "away_team": "MIA",
         }])
         result = build_game_point_in_time_features(schedule, injuries, practice).iloc[0]
-        self.assertEqual(result["home_injury_report_players_pregame"], 0)
-        self.assertEqual(result["home_practice_records_pregame"], 0)
+        self.assertEqual(result["home_injury_report_players_weekly_export"], 2)
+        self.assertEqual(result["home_practice_records_pregame_by_delivery"], 0)
         self.assertFalse(result["injury_features_point_in_time_verified"])
         self.assertEqual(result["home_practice_observation_coverage"], "Only backfilled records")
 
@@ -166,12 +172,28 @@ class NFLMetaInjuryAnalysisTests(unittest.TestCase):
             "gametime": "13:00", "home_team": "BUF", "away_team": "MIA",
         }])
         result = build_game_point_in_time_features(schedule, injuries, practice).iloc[0]
-        self.assertEqual(result["home_injury_report_observation_coverage"], "Pregame observed")
+        self.assertEqual(result["home_injury_report_observation_coverage"], "Weekly export records present; publication time unknown")
         self.assertEqual(result["away_injury_report_observation_coverage"], "No records")
         self.assertEqual(result["home_practice_observation_coverage"], "Pregame observed")
         self.assertEqual(result["away_practice_observation_coverage"], "No verified pregame observation")
         self.assertFalse(result["injury_report_timing_verified"])
         self.assertFalse(result["practice_timing_verified"])
+
+    def test_practice_eligibility_uses_delivery_not_observation_timestamp(self):
+        injuries = self.injuries.copy()
+        practice = self.practice.copy()
+        practice.loc[practice.player_id.eq(1) & practice.practice_date.eq("2026-09-11"),
+                     "first_observed_at"] = "2026-09-11T18:00:00Z"
+        practice.loc[practice.player_id.eq(1) & practice.practice_date.eq("2026-09-11"),
+                     "first_delivered_at"] = "2026-09-14T18:00:00Z"
+        schedule = pd.DataFrame([{
+            "game_id": "DELIVERY-CHECK", "season": 2026, "week": 1, "gameday": "2026-09-14",
+            "gametime": "13:00", "home_team": "BUF", "away_team": "MIA",
+        }])
+        result = build_game_point_in_time_features(schedule, injuries, practice).iloc[0]
+        self.assertEqual(result["home_practice_records_pregame_by_delivery"], 1)
+        self.assertFalse(result["injury_report_timing_verified"])
+        self.assertFalse(result["injury_features_point_in_time_verified"])
 
 
 if __name__ == "__main__":
