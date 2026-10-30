@@ -1,7 +1,7 @@
 import unittest
 import pandas as pd
 
-from injury_model import add_injury_features, _normalize_reports
+from injury_model import add_injury_features, _normalize_reports, _snapshot_capture_time
 
 
 class InjuryModelTests(unittest.TestCase):
@@ -64,6 +64,17 @@ class InjuryModelTests(unittest.TestCase):
         ])
         normalized = _normalize_reports(reports)
         self.assertEqual(normalized.loc[0, "season_type"], "POST")
+
+
+
+    def test_snapshot_filename_timestamp_is_parsed_as_utc(self):
+        from pathlib import Path
+        captured = _snapshot_capture_time(Path("injuries_2026_week_08_20261030T130813Z.csv"))
+        self.assertEqual(captured, pd.Timestamp("2026-10-30T13:08:13Z"))
+
+    def test_snapshot_without_timestamp_is_rejected(self):
+        from pathlib import Path
+        self.assertTrue(pd.isna(_snapshot_capture_time(Path("injuries_2026_week_08_latest.csv"))))
 
 
 if __name__ == "__main__":
