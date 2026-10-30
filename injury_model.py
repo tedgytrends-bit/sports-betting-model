@@ -77,7 +77,18 @@ def _normalize_reports(reports: pd.DataFrame) -> pd.DataFrame:
         data[col] = pd.to_numeric(data[col], errors="coerce")
     for col in ("team", "position", "report_status", "practice_status"):
         data[col] = data[col].fillna("").astype(str).str.upper().str.strip()
+    # Weekly snapshots store capture time in snapshot_captured_at_utc;
+    # unlike the live feed, they do not contain date_modified.
+    if "date_modified" not in data.columns:
+        if "snapshot_captured_at_utc" in data.columns:
+            data["date_modified"] = data["snapshot_captured_at_utc"]
+        elif "_snapshot_captured_at_utc" in data.columns:
+            data["date_modified"] = data["_snapshot_captured_at_utc"]
+        else:
+            data["date_modified"] = pd.NaT
     data["date_modified"] = pd.to_datetime(data["date_modified"], errors="coerce", utc=True)
+    if "_snapshot_captured_at_utc" not in data.columns and "snapshot_captured_at_utc" in data.columns:
+        data["_snapshot_captured_at_utc"] = pd.to_datetime(data["snapshot_captured_at_utc"], errors="coerce", utc=True)
     # nflverse injury feeds use game_type; older/local snapshots may use season_type.
     # Preserve the source value instead of silently treating postseason rows as regular season.
     if "season_type" not in data:
