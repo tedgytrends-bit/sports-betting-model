@@ -34,7 +34,7 @@ def _prepare(injuries: pd.DataFrame, practice: pd.DataFrame):
     required_i = {"season_year", "week", "team_abbr", "player_id", "position",
                   "report_status", "game_status", "source_observed_at"}
     required_p = {"season_year", "week", "team_abbr", "player_id", "practice_date",
-                  "practice_status_code", "first_observed_at", "historical_backfill"}
+                  "practice_status_code", "first_observed_at", "first_delivered_at", "historical_backfill"}
     missing_i = required_i - set(injuries.columns)
     missing_p = required_p - set(practice.columns)
     if missing_i or missing_p:
@@ -51,6 +51,7 @@ def _prepare(injuries: pd.DataFrame, practice: pd.DataFrame):
     for col in ("practice_date",):
         p[col] = pd.to_datetime(p[col], errors="coerce", utc=True)
     p["first_observed_at"] = pd.to_datetime(p["first_observed_at"], errors="coerce", utc=True)
+    p["first_delivered_at"] = pd.to_datetime(p["first_delivered_at"], errors="coerce", utc=True)
     p["practice_status_code"] = p["practice_status_code"].fillna("").astype(str).str.upper().str.strip()
     i["position"] = i["position"].fillna("").astype(str).str.upper().str.strip()
     for col in ("report_status", "game_status"):
@@ -246,30 +247,33 @@ def build_game_point_in_time_features(
         for side, team in (("home", row["home_team"]), ("away", row["away_team"])):
             ti = base_i[base_i["team_abbr"].eq(team)]
             tp = base_p[base_p["team_abbr"].eq(team)]
-            eligible_i = ti[ti["source_observed_at"].notna() & (ti["source_observed_at"] < kickoff)] if valid_kickoff else ti.iloc[0:0]
+            eligible_i = ti  # Weekly report presence only; source_observed_at is capture time, not publication time.
             eligible_p = tp[
-                (~tp["historical_backfill_flag"]) & tp["first_observed_at"].notna()
-                & (tp["first_observed_at"] < kickoff)
+                (~tp["historical_backfill_flag"]) & tp["first_delivered_at"].notna()
+                & (tp["first_delivered_at"] < kickoff)
             ] if valid_kickoff else tp.iloc[0:0]
 
-            row[f"{side}_injury_report_records_pregame"] = int(len(eligible_i))
-            row[f"{side}_injury_report_players_pregame"] = int(eligible_i["player_id"].nunique())
+            row[f"{side}_injury_report_records_weekly_export"] = int(len(eligible_i))
+            row[f"{side}_injury_report_players_weekly_export"] = int(eligible_i["player_id"].nunique())
+            row[f"{side}_injury_report_publication_timing"] = "Unknown: export has capture timestamp, not verified publication timestamp"
+            row[f"{side}_injury_report_latest_capture_at_utc"] = (ti["source_observed_at"].max().isoformat() if ti["source_observed_at"].notna().any() else None)
             row[f"{side}_injury_report_observation_coverage"] = (
-                "Pregame observed" if not eligible_i.empty else
-                "No records" if ti.empty else "No verified pregame observation"
+                "Weekly export records present; publication time unknown" if not eligible_i.empty else "No records"
             )
             for status, label in (("OUT", "out"), ("DOUBTFUL", "doubtful"), ("QUESTIONABLE", "questionable")):
-                row[f"{side}_report_{label}_players_pregame"] = int(
+                row[f"{side}_report_{label}_players_weekly_export"] = int(
                     eligible_i["report_status"].str.contains(status, regex=False).sum()
                 )
             for group, positions in POSITION_GROUPS.items():
                 gp = eligible_i[eligible_i["position"].isin(positions)]
-                row[f"{side}_{group}_listed_players_pregame"] = int(gp["player_id"].nunique())
-                row[f"{side}_{group}_out_designations_pregame"] = int(
+                row[f"{side}_{group}_listed_players_weekly_export"] = int(gp["player_id"].nunique())
+                row[f"{side}_{group}_out_designations_weekly_export"] = int(
                     gp["report_status"].str.contains("OUT", regex=False).sum()
                 )
 
             row[f"{side}_practice_records_pregame"] = int(len(eligible_p))
+            row[f"{side}_practice_records_with_delivery_timestamp"] = int(tp["first_delivered_at"].notna().sum())
+            row[f"{side}_practice_records_pregame_by_delivery"] = int(len(eligible_p))
             row[f"{side}_practice_players_pregame"] = int(eligible_p["player_id"].nunique())
             row[f"{side}_practice_observation_coverage"] = (
                 "Pregame observed" if not eligible_p.empty else
@@ -292,7 +296,10 @@ def build_game_point_in_time_features(
                         group_latest["practice_status_code"].eq(code).sum()
                     )
             row[f"{side}_latest_pregame_practice_observed_at_utc"] = (
-                eligible_p["first_observed_at"].max().isoformat() if not eligible_p.empty else None
+                eligible_p["first_observed_at"].max().isoformat() if eligible_p["first_observed_at"].notna().any() else None
+            )
+            row[f"{side}_latest_pregame_practice_delivered_at_utc"] = (
+                eligible_p["first_delivered_at"].max().isoformat() if not eligible_p.empty else None
             )
             row[f"{side}_latest_pregame_injury_report_observed_at_utc"] = (
                 eligible_i["source_observed_at"].max().isoformat() if not eligible_i.empty else None
@@ -303,19 +310,14 @@ def build_game_point_in_time_features(
                 other = "away_" + col[len("home_"):]
                 if other in row:
                     row["home_minus_away_" + col[len("home_"):]] = row[col] - row[other]
-        row["injury_report_timing_verified"] = (
-            valid_kickoff
-            and row["home_injury_report_observation_coverage"] == "Pregame observed"
-            and row["away_injury_report_observation_coverage"] == "Pregame observed"
-        )
+        row["injury_report_timing_verified"] = False  # No verified publication timestamp in this export.
+        row["injury_report_publication_timing_status"] = "Unknown: source_observed_at is an export capture timestamp"
         row["practice_timing_verified"] = (
             valid_kickoff
-            and row["home_practice_observation_coverage"] == "Pregame observed"
-            and row["away_practice_observation_coverage"] == "Pregame observed"
+            and row["home_practice_records_pregame_by_delivery"] > 0
+            and row["away_practice_records_pregame_by_delivery"] > 0
         )
-        row["injury_features_point_in_time_verified"] = bool(
-            row["injury_report_timing_verified"] and row["practice_timing_verified"]
-        )
+        row["injury_features_point_in_time_verified"] = False  # Injury-report publication time remains unknown.
         output.append(row)
     return pd.DataFrame(output)
 
