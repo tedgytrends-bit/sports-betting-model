@@ -181,11 +181,11 @@ def grade_market(
     """Grade directional picks and separately calculate ROI where odds exist."""
 
     if market == "ATS":
-        # nflverse spread_line is treated as the home-team handicap:
-        # negative = home favorite; positive = away favorite.
+        # nflverse spread_line is positive when the home team is favored.
+        # ATS edge/outcome are home margin minus the home-favorite spread.
         # Positive edge selects home; negative edge selects away.
-        edge = frame[f"{model_name}_home_margin"] + frame["spread_line"]
-        actual = frame["actual_home_margin"] + frame["spread_line"]
+        edge = frame[f"{model_name}_home_margin"] - frame["spread_line"]
+        actual = frame["actual_home_margin"] - frame["spread_line"]
 
         selected_odds = pd.Series(
             np.where(edge >= 0, frame["home_spread_odds"], frame["away_spread_odds"]),
@@ -323,7 +323,7 @@ def self_test() -> None:
         "injury_total": [50.0, 40.0, 48.0],
         "actual_home_margin": [7.0, -7.0, 3.0],
         "actual_total": [50.0, 40.0, 45.0],
-        "spread_line": [-3.0, 3.0, -3.0],
+        "spread_line": [3.0, -3.0, 3.0],
         "total_line": [47.0, 43.0, 45.0],
         "home_spread_odds": [-110.0, -110.0, -110.0],
         "away_spread_odds": [-110.0, -110.0, -110.0],
@@ -409,8 +409,8 @@ def main() -> None:
 
         "line_convention": {
             "spread": (
-                "Home-team handicap: negative spread_line indicates a home "
-                "favorite. ATS edge = predicted home margin + spread_line. "
+                "nflverse spread_line is positive when the home team is favored. "
+                "ATS edge = predicted home margin - spread_line. "
                 "Positive edge selects home; negative edge selects away."
             ),
             "total": (
