@@ -24,7 +24,8 @@ PBP_COLUMNS = [
     "play_type", "qb_kneel", "qb_spike", "yardline_100", "touchdown",
     "pass_touchdown", "rush_touchdown", "return_touchdown", "interception",
     "interception_player_id", "fumble_lost", "fumble", "fumble_recovery_1_team",
-    "fumble_recovery_2_team", "fixed_drive", "drive", "game_seconds_remaining",
+    "fumble_recovery_2_team", "fixed_drive", "drive", "game_seconds_remaining", "passer_player_id", "rusher_player_id", "receiver_player_id",
+    "solo_tackle_1_player_id", "solo_tackle_2_player_id", "sack_player_id",
 ]
 
 
@@ -394,6 +395,7 @@ def project_upcoming_efficiency(
         "home_injury_", "away_injury_", "home_inj_", "away_inj_",
         "home_qb_", "away_qb_", "home_ol_", "away_ol_",
         "home_skill_", "away_skill_", "home_defense_", "away_defense_",
+        "home_player_", "away_player_",
     )
     injury_columns = [c for c in upcoming.columns if c.startswith(injury_prefixes)]
     output_columns = ["game_id", "gameday", "season", "week", "away_team", "home_team"] + injury_columns
