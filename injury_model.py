@@ -58,6 +58,26 @@ def _snapshot_capture_time(path: Path) -> pd.Timestamp | pd.NaT:
     return pd.to_datetime(match.group(1), format="%Y%m%dT%H%M%SZ", errors="coerce", utc=True)
 
 
+def _snapshot_is_structurally_valid(snapshot: pd.DataFrame) -> bool:
+    """Reject snapshots with missing/duplicate player IDs or missing team values.
+
+    This intentionally validates structure only; it does not certify feed
+    completeness or original injury-report publication timing.
+    """
+    required = {"gsis_id", "team"}
+    if snapshot.empty or not required.issubset(snapshot.columns):
+        return False
+    ids = snapshot["gsis_id"].astype("string").str.strip()
+    if ids.isna().any() or ids.eq("").fillna(False).any():
+        return False
+    if ids.duplicated(keep=False).any():
+        return False
+    teams = snapshot["team"].astype("string").str.strip()
+    if teams.isna().any() or teams.eq("").fillna(False).any():
+        return False
+    return True
+
+
 def _latest_snapshot_for(season: int, week: int) -> pd.DataFrame | None:
     if not SNAPSHOT_DIR.exists():
         return None
@@ -66,6 +86,8 @@ def _latest_snapshot_for(season: int, week: int) -> pd.DataFrame | None:
         return None
     # Filename timestamp is capture time, so lexicographic ordering is chronological.
     snapshot = pd.read_csv(files[-1], low_memory=False)
+    if not _snapshot_is_structurally_valid(snapshot):
+        return None
     snapshot["_snapshot_captured_at_utc"] = _snapshot_capture_time(files[-1])
     snapshot["_snapshot_filename"] = files[-1].name
     return snapshot
