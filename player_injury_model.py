@@ -31,7 +31,8 @@ def _player_usage(pbp: pd.DataFrame, season: int, week: int, team: str) -> dict[
         rows = data[(data[team_col] == team) & data[col].notna()]
         counts = rows[col].astype(str).value_counts()
         for player, count in counts.items():
-            key = ("DEF|" if team_col == "defteam" else "OFF|") + player\n            values[key] = values.get(key, 0.0) + float(count) * weight
+            key = ("DEF|" if team_col == "defteam" else "OFF|") + player
+            values[key] = values.get(key, 0.0) + float(count) * weight
     # Role-weighted involvement. QB dropbacks carry the largest offensive weight.
     add("passer_player_id", 3.0)
     add("rusher_player_id", 1.0)
@@ -72,7 +73,11 @@ def build_player_injury_features(
         if pd.isna(game["season"]) or pd.isna(game["week"]) or pd.isna(game["gameday"]):
             continue
         season, week = int(game["season"]), int(game["week"])
-        game_rows = rep[(rep["season"] == season) & (rep["week"] == week)].copy()\n        game_type = str(game.get("game_type", game.get("season_type", "REG"))).upper().strip()\n        if "season_type" in rep.columns:\n            normalized_type = rep["season_type"].astype(str).str.upper().replace({"REGULAR": "REG", "POSTSEASON": "POST"})\n            game_rows = game_rows[normalized_type.eq(game_type.replace("REGULAR", "REG").replace("POSTSEASON", "POST"))]
+        game_rows = rep[(rep["season"] == season) & (rep["week"] == week)].copy()
+        game_type = str(game.get("game_type", game.get("season_type", "REG"))).upper().strip()
+        if "season_type" in rep.columns:
+            normalized_type = rep["season_type"].astype(str).str.upper().replace({"REGULAR": "REG", "POSTSEASON": "POST"})
+            game_rows = game_rows[normalized_type.eq(game_type.replace("REGULAR", "REG").replace("POSTSEASON", "POST"))]
         # A valid committed snapshot is the point-in-time source for the upcoming slate.
         snapshot = _latest_snapshot_for(season, week) if pd.isna(game.get("home_score")) or pd.isna(game.get("away_score")) else None
         if snapshot is not None and _snapshot_is_structurally_valid(snapshot):
@@ -95,7 +100,8 @@ def build_player_injury_features(
             usage = _player_usage(pbp, season, week, team)
             # Normalize each player's involvement against the team's total so the
             # index is interpretable and not dominated by raw snap volume.
-            off_total = sum(v for k, v in usage.items() if k.startswith("OFF|")) or 1.0\n            def_total = sum(v for k, v in usage.items() if k.startswith("DEF|")) or 1.0
+            off_total = sum(v for k, v in usage.items() if k.startswith("OFF|")) or 1.0
+            def_total = sum(v for k, v in usage.items() if k.startswith("DEF|")) or 1.0
             missing_off = missing_def = missing_qb = 0.0
             missing_ol = 0
             for _, player in team_rows.iterrows():
