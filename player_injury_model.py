@@ -1,0 +1,145 @@
+"""Player-level pregame injury features for experimental NFL shadow projections.
+
+Uses individual GSIS IDs and player production from prior play-by-play. These
+features are deliberately separate from the official production model until
+chronological validation demonstrates incremental value.
+"""
+from __future__ import annotations
+
+import numpy as np
+import pandas as pd
+
+STATUS_WEIGHT = {"OUT": 1.0, "DOUBTFUL": 0.8, "QUESTIONABLE": 0.4}
+POSITION_GROUPS = {
+    "qb": {"QB"},
+    "skill": {"RB", "FB", "WR", "TE"},
+    "ol": {"C", "G", "OG", "OT", "T", "OL", "LT", "LG", "RG", "RT"},
+    "defense": {"DL", "DE", "DT", "NT", "LB", "ILB", "OLB", "CB", "DB", "S", "FS", "SS"},
+}
+
+
+def _player_usage(pbp: pd.DataFrame, season: int, week: int, team: str) -> dict[str, float]:
+    """Compute player production rates using only that team's earlier games."""
+    data = pbp.copy()
+    data["season"] = pd.to_numeric(data["season"], errors="coerce")
+    data["week"] = pd.to_numeric(data["week"], errors="coerce")
+    data = data[(data["season"] == season) & (data["week"] < week)]
+    values: dict[str, float] = {}
+    def add(col: str, weight: float, team_col: str = "posteam"):
+        if col not in data.columns or team_col not in data.columns:
+            return
+        rows = data[(data[team_col] == team) & data[col].notna()]
+        counts = rows[col].astype(str).value_counts()
+        for player, count in counts.items():
+            values[player] = values.get(player, 0.0) + float(count) * weight
+    # Role-weighted involvement. QB dropbacks carry the largest offensive weight.
+    add("passer_player_id", 3.0)
+    add("rusher_player_id", 1.0)
+    add("receiver_player_id", 1.25)
+    # Defensive involvement is attributed to the defending team.
+    for col, weight in (("solo_tackle_1_player_id", 0.35), ("solo_tackle_2_player_id", 0.2),
+                        ("sack_player_id", 1.5), ("interception_player_id", 2.0)):
+        add(col, weight, "defteam")
+    return values
+
+
+def build_player_injury_features(
+    schedule: pd.DataFrame,
+    pbp: pd.DataFrame,
+    reports: pd.DataFrame,
+) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Return game-level weighted player absences and a player-by-player audit table.
+
+    Availability weights are transparent status weights, not point penalties.
+    Player value is based on prior-season-to-date PBP involvement; OL players remain
+    explicitly unvalued where individual PBP attribution is unavailable.
+    """
+    from injury_model import _normalize_reports, _latest_snapshot_for, _snapshot_is_structurally_valid
+
+    rep = _normalize_reports(reports)
+    games = schedule.copy()
+    games["season"] = pd.to_numeric(games["season"], errors="coerce")
+    games["week"] = pd.to_numeric(games["week"], errors="coerce")
+    games["gameday"] = pd.to_datetime(games["gameday"], errors="coerce")
+    rep["gsis_id"] = rep.get("gsis_id", pd.Series("", index=rep.index)).astype("string").str.strip()
+    rep["team"] = rep["team"].astype(str).str.upper().str.strip()
+    rep["position"] = rep["position"].astype(str).str.upper().str.strip()
+    rep["report_status"] = rep["report_status"].astype(str).str.upper().str.strip()
+    rep["practice_status"] = rep["practice_status"].astype(str).str.upper().str.strip()
+    details, feature_rows = [], []
+
+    for _, game in games.iterrows():
+        if pd.isna(game["season"]) or pd.isna(game["week"]) or pd.isna(game["gameday"]):
+            continue
+        season, week = int(game["season"]), int(game["week"])
+        game_rows = rep[(rep["season"] == season) & (rep["week"] == week)].copy()
+        # A valid committed snapshot is the point-in-time source for the upcoming slate.
+        snapshot = _latest_snapshot_for(season, week) if pd.isna(game.get("home_score")) or pd.isna(game.get("away_score")) else None
+        if snapshot is not None and _snapshot_is_structurally_valid(snapshot):
+            game_rows = _normalize_reports(snapshot)
+        elif "date_modified" in game_rows:
+            # Historical reports: latest update per player strictly before kickoff.
+            kickoff = pd.Timestamp(game["gameday"])
+            if "gametime" in game and pd.notna(game.get("gametime")):
+                local = pd.to_datetime(f"{kickoff.date()} {game['gametime']}", errors="coerce")
+                if pd.notna(local):
+                    kickoff = local.tz_localize("America/New_York").tz_convert("UTC").tz_localize(None)
+            game_rows["date_modified"] = pd.to_datetime(game_rows["date_modified"], errors="coerce", utc=True).dt.tz_localize(None)
+            game_rows = game_rows[game_rows["date_modified"] < kickoff]
+            game_rows = game_rows.sort_values("date_modified").drop_duplicates(["team", "gsis_id"], keep="last")
+
+        row = {"game_id": game["game_id"]}
+        for side, team_col in (("home", "home_team"), ("away", "away_team")):
+            team = str(game[team_col]).upper()
+            team_rows = game_rows[game_rows["team"].eq(team)]
+            usage = _player_usage(pbp, season, week, team)
+            # Normalize each player's involvement against the team's total so the
+            # index is interpretable and not dominated by raw snap volume.
+            total_usage = sum(usage.values()) or 1.0
+            missing_off = missing_def = missing_qb = 0.0
+            missing_ol = 0
+            for _, player in team_rows.iterrows():
+                status = str(player.get("report_status", "")).upper().strip()
+                practice = str(player.get("practice_status", "")).upper()
+                weight = STATUS_WEIGHT.get(status, 0.0)
+                if not weight and "DID NOT PARTICIPATE" in practice:
+                    weight = 0.2
+                elif not weight and "LIMITED" in practice:
+                    weight = 0.1
+                if weight <= 0:
+                    continue
+                pid = str(player.get("gsis_id", "")).strip()
+                pos = str(player.get("position", "")).upper().strip()
+                usage_value = usage.get(pid, 0.0)
+                role_value = usage_value / total_usage
+                valued = pos not in POSITION_GROUPS["ol"] and usage_value > 0
+                impact_index = role_value * weight if valued else np.nan
+                if pos == "QB":
+                    missing_qb += role_value * weight
+                elif pos in POSITION_GROUPS["skill"]:
+                    missing_off += role_value * weight
+                elif pos in POSITION_GROUPS["defense"]:
+                    missing_def += role_value * weight
+                elif pos in POSITION_GROUPS["ol"]:
+                    missing_ol += 1
+                details.append({
+                    "game_id": game["game_id"], "team": team, "side": side,
+                    "player_id": pid, "player_name": str(player.get("player_name", player.get("full_name", ""))),
+                    "position": pos, "report_status": status, "practice_status": practice,
+                    "availability_weight": weight, "prior_pbp_involvement": usage_value,
+                    "team_usage_share": role_value, "player_impact_index": impact_index,
+                    "valuation_status": "valued_from_prior_pbp_usage" if valued else
+                        ("OL_player_identity_retained_but_not_individually_valued" if pos in POSITION_GROUPS["ol"] else "no_prior_pbp_usage"),
+                })
+            row[f"{side}_player_off_absence_index"] = missing_off
+            row[f"{side}_player_def_absence_index"] = missing_def
+            row[f"{side}_player_qb_absence_index"] = missing_qb
+            row[f"{side}_unvalued_ol_absences"] = missing_ol
+            row[f"{side}_player_injury_report_available"] = int(not team_rows.empty)
+        feature_rows.append(row)
+
+    if not feature_rows:
+        raise ValueError("No player-level injury features could be generated.")
+    features = pd.DataFrame(feature_rows).drop_duplicates("game_id")
+    detail_frame = pd.DataFrame(details)
+    return features, detail_frame
