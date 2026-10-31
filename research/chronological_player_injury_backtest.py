@@ -130,8 +130,6 @@ def main() -> None:
     paired["injury_total"] = paired["pred_home_score_injury"] + paired["pred_away_score_injury"]
     paired["baseline_home_margin"] = paired["pred_home_score_baseline"] - paired["pred_away_score_baseline"]
     paired["injury_home_margin"] = paired["pred_home_score_injury"] - paired["pred_away_score_injury"]
-    actual = baseline[["game_id", "home_score", "away_score"]]
-    paired = paired.merge(actual, on="game_id", how="left", validate="one_to_one")
     paired["actual_total"] = paired["home_score"] + paired["away_score"]
     paired["actual_home_margin"] = paired["home_score"] - paired["away_score"]
     paired["baseline_total_abs_error"] = (paired["baseline_total"] - paired["actual_total"]).abs()
