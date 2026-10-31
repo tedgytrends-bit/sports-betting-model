@@ -79,7 +79,7 @@ def _evaluate(predictions: pd.DataFrame, schedule: pd.DataFrame) -> dict:
                 - metrics["market_home_margin_mae"]
             )
             model_edge = valid["pred_home_margin"] + valid["spread_line"]
-            actual_ats_margin = valid["actual_home_margin"] - valid["spread_line"]
+            actual_ats_margin = valid["actual_home_margin"] + valid["spread_line"]
             non_push = actual_ats_margin.ne(0)
             metrics["ats_directional_accuracy"] = float(
                 (np.sign(model_edge[non_push]) == np.sign(actual_ats_margin[non_push])).mean()
@@ -142,6 +142,10 @@ def main() -> None:
     # Confirm both backtests score the same historical games before comparing.
     baseline_ids, injury_ids = set(baseline["game_id"]), set(injury["game_id"])
     paired_game_ids_match = baseline_ids == injury_ids
+    if not paired_game_ids_match:
+        raise RuntimeError(
+            f"Baseline/injury test sets differ: baseline={len(baseline_ids)}, injury={len(injury_ids)}."
+        )
     coverage = {}
     for side in ("home", "away"):
         col = f"{side}_player_injury_report_available"
