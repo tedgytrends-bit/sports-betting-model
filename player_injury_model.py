@@ -98,8 +98,8 @@ def build_player_injury_features(
         game_rows = rep[(rep["season"] == season) & (rep["week"] == week)].copy()
         game_type = str(game.get("game_type", game.get("season_type", "REG"))).upper().strip()
         if "season_type" in rep.columns:
-            normalized_type = rep["season_type"].astype(str).str.upper().replace({"REGULAR": "REG", "POSTSEASON": "POST"})
-            game_rows = game_rows[normalized_type.eq(game_type.replace("REGULAR", "REG").replace("POSTSEASON", "POST"))]
+            normalized_type = game_rows["season_type"].astype(str).str.upper().replace({"REGULAR": "REG", "POSTSEASON": "POST"})
+            game_rows = game_rows.loc[normalized_type.eq(game_type.replace("REGULAR", "REG").replace("POSTSEASON", "POST"))]
         # A valid committed snapshot is the point-in-time source for the upcoming slate.
         snapshot = _latest_snapshot_for(season, week) if pd.isna(game.get("home_score")) or pd.isna(game.get("away_score")) else None
         if snapshot is not None and _snapshot_is_structurally_valid(snapshot):
