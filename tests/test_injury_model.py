@@ -132,6 +132,9 @@ class InjuryModelTests(unittest.TestCase):
         self.assertFalse(_snapshot_is_structurally_valid(pd.DataFrame([
             {"gsis_id": "P1", "team": None}
         ])))
+        self.assertFalse(_snapshot_is_structurally_valid(pd.DataFrame([
+            {"gsis_id": "P1", "team": " "}
+        ])))
 
 
 if __name__ == "__main__":
