@@ -202,14 +202,18 @@ def main():
             "Baseline and injury backtests produced no common test games."
         )
 
-    # Add season from the schedule for the betting grader.
-    season_data = schedule[["game_id", "season"]].drop_duplicates("game_id")
-    paired = paired.merge(
-        season_data,
-        on="game_id",
-        how="left",
-        validate="one_to_one",
-    )
+    # The baseline prediction frame already contains season.
+    # Merge it from the schedule only if it is genuinely missing.
+    if "season" not in paired.columns:
+        season_data = schedule[["game_id", "season"]].drop_duplicates("game_id")
+        paired = paired.merge(
+            season_data,
+            on="game_id",
+            how="left",
+            validate="one_to_one",
+        )
+
+    paired["season"] = pd.to_numeric(paired["season"], errors="coerce")
 
     if paired["season"].isna().any():
         raise RuntimeError(
