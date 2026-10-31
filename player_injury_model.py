@@ -110,8 +110,9 @@ def build_player_injury_features(
                     continue
                 pid = str(player.get("gsis_id", "")).strip()
                 pos = str(player.get("position", "")).upper().strip()
-                usage_value = usage.get(pid, 0.0)
-                role_value = usage_value / total_usage
+                is_defense = pos in POSITION_GROUPS["defense"]
+                usage_value = usage.get(("DEF|" if is_defense else "OFF|") + pid, 0.0)
+                role_value = usage_value / (def_total if is_defense else off_total)
                 valued = pos not in POSITION_GROUPS["ol"] and usage_value > 0
                 impact_index = role_value * weight if valued else np.nan
                 if pos == "QB":
