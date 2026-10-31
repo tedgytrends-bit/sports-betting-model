@@ -65,7 +65,9 @@ def _evaluate(predictions: pd.DataFrame, schedule: pd.DataFrame) -> dict:
         if "spread_line" in scored and scored["spread_line"].notna().any():
             valid = scored.dropna(subset=["spread_line"])
             metrics["games_with_spread_line"] = int(len(valid))
-            market_margin = valid["spread_line"]
+            # nflverse spread_line is the home-team handicap (e.g. -3.5 for a home favorite),
+            # so the market-implied home scoring margin is its negation.
+            market_margin = -valid["spread_line"]
             metrics["market_home_margin_mae"] = float(mean_absolute_error(
                 valid["actual_home_margin"], market_margin
             ))
@@ -76,7 +78,7 @@ def _evaluate(predictions: pd.DataFrame, schedule: pd.DataFrame) -> dict:
                 metrics["model_home_margin_mae_on_market_games"]
                 - metrics["market_home_margin_mae"]
             )
-            model_edge = valid["pred_home_margin"] - valid["spread_line"]
+            model_edge = valid["pred_home_margin"] + valid["spread_line"]
             actual_ats_margin = valid["actual_home_margin"] - valid["spread_line"]
             non_push = actual_ats_margin.ne(0)
             metrics["ats_directional_accuracy"] = float(
