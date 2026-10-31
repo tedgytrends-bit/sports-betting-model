@@ -18,30 +18,51 @@ POSITION_GROUPS = {
 }
 
 
-def _player_usage(pbp: pd.DataFrame, season: int, week: int, team: str) -> dict[str, float]:
-    """Compute player production rates using only that team's earlier games."""
-    data = pbp.copy()
-    data["season"] = pd.to_numeric(data["season"], errors="coerce")
-    data["week"] = pd.to_numeric(data["week"], errors="coerce")
-    data = data[(data["season"] == season) & (data["week"] < week)]
-    values: dict[str, float] = {}
-    def add(col: str, weight: float, team_col: str = "posteam"):
-        if col not in data.columns or team_col not in data.columns:
-            return
-        rows = data[(data[team_col] == team) & data[col].notna()]
-        counts = rows[col].astype(str).value_counts()
-        for player, count in counts.items():
-            key = ("DEF|" if team_col == "defteam" else "OFF|") + player
-            values[key] = values.get(key, 0.0) + float(count) * weight
-    # Role-weighted involvement. QB dropbacks carry the largest offensive weight.
-    add("passer_player_id", 3.0)
-    add("rusher_player_id", 1.0)
-    add("receiver_player_id", 1.25)
-    # Defensive involvement is attributed to the defending team.
-    for col, weight in (("solo_tackle_1_player_id", 0.35), ("solo_tackle_2_player_id", 0.2),
-                        ("sack_player_id", 1.5), ("interception_player_id", 2.0)):
-        add(col, weight, "defteam")
-    return values
+def _build_usage_index(pbp: pd.DataFrame) -> dict[tuple[int, str], pd.DataFrame]:
+    """Aggregate PBP player involvement once, rather than rescanning all plays per game."""
+    base_cols = ["season", "week"]
+    frames = []
+    for col, weight, team_col, prefix in (
+        ("passer_player_id", 3.0, "posteam", "OFF|"),
+        ("rusher_player_id", 1.0, "posteam", "OFF|"),
+        ("receiver_player_id", 1.25, "posteam", "OFF|"),
+        ("solo_tackle_1_player_id", 0.35, "defteam", "DEF|"),
+        ("solo_tackle_2_player_id", 0.2, "defteam", "DEF|"),
+        ("sack_player_id", 1.5, "defteam", "DEF|"),
+        ("interception_player_id", 2.0, "defteam", "DEF|"),
+    ):
+        if col not in pbp.columns or team_col not in pbp.columns:
+            continue
+        part = pbp[base_cols + [team_col, col]].dropna(subset=[team_col, col]).copy()
+        part["season"] = pd.to_numeric(part["season"], errors="coerce")
+        part["week"] = pd.to_numeric(part["week"], errors="coerce")
+        part = part.dropna(subset=["season", "week"])
+        part["player_key"] = prefix + part[col].astype(str)
+        part = part.rename(columns={team_col: "team"})
+        grouped = part.groupby(["season", "week", "team", "player_key"]).size().rename("events").reset_index()
+        grouped["value"] = grouped["events"].astype(float) * weight
+        frames.append(grouped[["season", "week", "team", "player_key", "value"]])
+    if not frames:
+        return {}
+    all_usage = pd.concat(frames, ignore_index=True).groupby(
+        ["season", "week", "team", "player_key"], as_index=False
+    )["value"].sum()
+    return {
+        (int(season), str(team)): group[["week", "player_key", "value"]].copy()
+        for (season, team), group in all_usage.groupby(["season", "team"])
+    }
+
+
+def _player_usage(usage_index: dict, season: int, week: int, team: str) -> dict[str, float]:
+    """Sum player involvement strictly before the target week."""
+    history = usage_index.get((int(season), str(team)))
+    if history is None:
+        return {}
+    prior = history[history["week"] < week]
+    if prior.empty:
+        return {}
+    totals = prior.groupby("player_key")["value"].sum()
+    return totals.to_dict()
 
 
 def build_player_injury_features(
@@ -68,6 +89,7 @@ def build_player_injury_features(
     rep["report_status"] = rep["report_status"].astype(str).str.upper().str.strip()
     rep["practice_status"] = rep["practice_status"].astype(str).str.upper().str.strip()
     details, feature_rows = [], []
+    usage_index = _build_usage_index(pbp)
 
     for _, game in games.iterrows():
         if pd.isna(game["season"]) or pd.isna(game["week"]) or pd.isna(game["gameday"]):
@@ -97,7 +119,7 @@ def build_player_injury_features(
         for side, team_col in (("home", "home_team"), ("away", "away_team")):
             team = str(game[team_col]).upper()
             team_rows = game_rows[game_rows["team"].eq(team)]
-            usage = _player_usage(pbp, season, week, team)
+            usage = _player_usage(usage_index, season, week, team)
             # Normalize each player's involvement against the team's total so the
             # index is interpretable and not dominated by raw snap volume.
             off_total = sum(v for k, v in usage.items() if k.startswith("OFF|")) or 1.0
