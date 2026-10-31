@@ -29,6 +29,9 @@ jobs:
       - name: Audit historical player injury data coverage
         run: python research/audit_player_injury_data.py
 
+      - name: Audit historical player value source coverage
+        run: python research/audit_player_value_sources.py
+
       - name: Run chronological baseline vs player-injury backtest
         run: python research/chronological_player_injury_backtest.py
 
