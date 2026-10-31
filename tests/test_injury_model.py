@@ -109,5 +109,30 @@ class InjuryModelTests(unittest.TestCase):
         self.assertEqual(result["Away OL out"], 1)
 
 
+    def test_snapshot_structural_validation(self):
+        from injury_model import _snapshot_is_structurally_valid
+
+        valid = pd.DataFrame([
+            {"gsis_id": "P1", "team": "BUF"},
+            {"gsis_id": "P2", "team": "MIA"},
+        ])
+        self.assertTrue(_snapshot_is_structurally_valid(valid))
+        self.assertFalse(_snapshot_is_structurally_valid(valid.iloc[0:0]))
+        self.assertFalse(_snapshot_is_structurally_valid(pd.DataFrame([{"team": "BUF"}])))
+        self.assertFalse(_snapshot_is_structurally_valid(pd.DataFrame([
+            {"gsis_id": None, "team": "BUF"}
+        ])))
+        self.assertFalse(_snapshot_is_structurally_valid(pd.DataFrame([
+            {"gsis_id": " ", "team": "BUF"}
+        ])))
+        self.assertFalse(_snapshot_is_structurally_valid(pd.DataFrame([
+            {"gsis_id": "P1", "team": "BUF"},
+            {"gsis_id": "P1", "team": "BUF"},
+        ])))
+        self.assertFalse(_snapshot_is_structurally_valid(pd.DataFrame([
+            {"gsis_id": "P1", "team": None}
+        ])))
+
+
 if __name__ == "__main__":
     unittest.main()
