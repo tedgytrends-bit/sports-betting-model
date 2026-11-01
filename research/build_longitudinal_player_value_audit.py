@@ -177,9 +177,9 @@ def main() -> None:
         # Provisional same-team positional benchmark. This is not claimed to be
         # the active backup; it only measures the best other historically observed
         # teammate in that broad position group.
-        peer = player_hist.sort_values("player_value_score", ascending=False).drop_duplicates(
-            ["team", "position_group"]
-        )[["team", "position_group", "player_id", "player_value_score"]].rename(
+        peer = player_hist[[
+            "team", "position_group", "player_id", "player_value_score"
+        ]].rename(
             columns={"player_id": "benchmark_player_id", "player_value_score": "replacement_benchmark_score"}
         )
         for report in cutoff_reports.itertuples(index=False):
@@ -201,7 +201,9 @@ def main() -> None:
                 (peer["team"] == str(report.team)) &
                 (peer["position_group"] == str(report.position_group)) &
                 (peer["benchmark_player_id"] != str(report.gsis_id))
-            ]
+            ].sort_values("replacement_benchmark_score", ascending=False)
+            # Exclude the injured player BEFORE choosing the highest-rated peer.
+            # Otherwise a top-rated injured player could hide the next-best teammate.
             replacement = float(candidates.iloc[0]["replacement_benchmark_score"]) if not candidates.empty else np.nan
             records.append({
                 "player_id": report.gsis_id, "season": report.season, "week": report.week,
