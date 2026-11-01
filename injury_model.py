@@ -219,8 +219,15 @@ def add_injury_features(dataset: pd.DataFrame, schedule: pd.DataFrame, reports: 
         # score nullability: some schedule feeds populate score placeholders.
         snapshot = None
         now_utc = pd.Timestamp.now(tz="UTC")
-        if pd.notna(kickoff) and kickoff > now_utc:
-            snapshot = _latest_snapshot_for(int(game["season"]), int(game["week"]))
+        if pd.notna(kickoff):
+            candidate_snapshot = _latest_snapshot_for(int(game["season"]), int(game["week"]))
+            if candidate_snapshot is not None and not candidate_snapshot.empty:
+                candidate_capture = pd.to_datetime(
+                    candidate_snapshot["_snapshot_captured_at_utc"].iloc[0],
+                    errors="coerce", utc=True
+                ) if "_snapshot_captured_at_utc" in candidate_snapshot.columns else pd.NaT
+                if pd.notna(candidate_capture) and candidate_capture < kickoff:
+                    snapshot = candidate_snapshot
         if snapshot is not None and not snapshot.empty:
             try:
                 snap = _normalize_reports(snapshot)
@@ -293,11 +300,7 @@ def injury_coverage_diagnostics(schedule: pd.DataFrame, reports: pd.DataFrame) -
             pregame = typed[typed["date_modified"].notna() & typed["date_modified"].lt(kickoff)]
         else:
             pregame = typed[typed["date_modified"].dt.date < pd.Timestamp(game["gameday"]).date()]
-        snapshot = (
-            _latest_snapshot_for(int(game["season"]), int(game["week"]))
-            if pd.notna(kickoff) and kickoff > pd.Timestamp.now(tz="UTC")
-            else None
-        )
+        snapshot = _latest_snapshot_for(int(game["season"]), int(game["week"])) if pd.notna(kickoff) else None
         snapshot_capture = (
             pd.to_datetime(snapshot["_snapshot_captured_at_utc"].iloc[0], errors="coerce", utc=True)
             if snapshot is not None and "_snapshot_captured_at_utc" in snapshot.columns
@@ -357,6 +360,8 @@ def injury_coverage_diagnostics(schedule: pd.DataFrame, reports: pd.DataFrame) -
             "Away OL out": away_features.get("ol_out"),
             "Home players out": home_features.get("inj_out"),
             "Away players out": away_features.get("inj_out"),
+            "Home questionable": home_features.get("inj_questionable"),
+            "Away questionable": away_features.get("inj_questionable"),
             "Latest report timestamp UTC": (
                 typed["date_modified"].max().isoformat() if typed["date_modified"].notna().any() else "None"
             ),
