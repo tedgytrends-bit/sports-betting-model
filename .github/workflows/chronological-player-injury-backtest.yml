@@ -38,6 +38,9 @@ jobs:
       - name: Build longitudinal point-in-time player value audit
         run: python research/build_longitudinal_player_value_audit.py
 
+      - name: Audit historical QB depth-chart replacements
+        run: python research/audit_qb_depth_chart_replacements.py
+
       - name: Run chronological baseline vs player-injury backtest
         run: python research/chronological_player_injury_backtest.py
 
