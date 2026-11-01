@@ -38,6 +38,8 @@ def load_stats(season: int) -> pd.DataFrame:
     frame["week"] = pd.to_numeric(frame["week"], errors="coerce")
     frame["player_id"] = frame["player_id"].astype("string").str.strip()
     frame["team"] = frame["team"].astype("string").str.upper().str.strip()
+    frame["season_type"] = frame["season_type"].fillna("REG").astype("string").str.upper().str.strip()
+    frame["season_type"] = frame["season_type"].replace({"REGULAR": "REG", "POSTSEASON": "POST", "PRESEASON": "PRE"})
     return frame
 
 
@@ -52,9 +54,13 @@ def main() -> None:
     reports["gsis_id"] = reports["gsis_id"].astype("string").str.strip()
     reports["team"] = reports["team"].astype("string").str.upper().str.strip()
     reports["position"] = reports["position"].astype("string").str.upper().str.strip()
+    reports["season_type"] = reports["season_type"].fillna("REG").astype("string").str.upper().str.strip()
+    reports["season_type"] = reports["season_type"].replace({"REGULAR": "REG", "POSTSEASON": "POST", "PRESEASON": "PRE"})
 
-    keys = ["season", "week", "team", "player_id"]
+    keys = ["season", "week", "season_type", "team", "player_id"]
     stats_keys = stats[keys + ["position", "player_name"]].drop_duplicates(keys)
+    player_week_keys = stats[["season", "week", "season_type", "player_id"]].drop_duplicates()
+    team_keys = stats[["season", "week", "season_type", "player_id", "team"]].drop_duplicates()
     injury = reports.rename(columns={"gsis_id": "player_id"}).copy()
     joined = injury.merge(
         stats_keys, on=keys, how="left", suffixes=("_injury", "_stats"),
@@ -64,12 +70,18 @@ def main() -> None:
         joined["position_injury"].astype("string").str.upper()
         == joined["position_stats"].astype("string").str.upper()
     )
+    joined = joined.merge(player_week_keys.assign(player_week_seen=True), on=["season", "week", "season_type", "player_id"], how="left")
+    joined = joined.merge(team_keys.assign(player_week_team_seen=True), on=["season", "week", "season_type", "player_id", "team"], how="left")
+    joined["player_week_seen"] = joined["player_week_seen"].fillna(False).astype(bool)
+    joined["player_week_team_seen"] = joined["player_week_team_seen"].fillna(False).astype(bool)
     summary = {
         "captured_at_utc": datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
         "status": "JOIN_AUDIT_ONLY_NO_MODEL_CHANGES",
         "injury_rows": int(len(injury)),
         "injury_rows_with_player_id": int(injury["player_id"].notna().sum()),
-        "rows_matching_stats_by_player_season_week_team": int(joined["_merge"].eq("both").sum()),
+        "rows_matching_stats_by_player_season_week_type_team": int(joined["_merge"].eq("both").sum()),
+        "rows_with_player_stats_same_season_week_type_any_team": int(joined["player_week_seen"].sum()),
+        "rows_with_player_stats_same_season_week_type_and_team": int(joined["player_week_team_seen"].sum()),
         "match_rate_pct": float(100 * joined["_merge"].eq("both").mean()) if len(joined) else None,
         "matched_rows_with_position_agreement": int((joined["_merge"].eq("both") & joined["position_match"]).sum()),
         "matched_rows_with_position_disagreement": int((joined["_merge"].eq("both") & ~joined["position_match"]).sum()),
@@ -77,10 +89,15 @@ def main() -> None:
         "unique_injury_players": int(injury["player_id"].nunique()),
         "unique_stats_players": int(stats["player_id"].nunique()),
         "season_coverage": [],
+        "team_mismatch_rows": int((joined["player_week_seen"] & ~joined["player_week_team_seen"]).sum()),
+        "no_weekly_stats_rows": int((~joined["player_week_seen"]).sum()),
+        "position_coverage": [],
+        "status_coverage": [],
         "interpretation": [
-            "A match requires the same player ID, season, week, and team.",
+            "A strict match requires player ID, season, week, season type, and team.",
             "A successful join establishes identity and weekly-stat availability, not player value or causal injury impact.",
-            "Unmatched rows must not be assigned a zero-value player; they remain unvalued.",
+            "Players absent from weekly statistical output are not assumed to have zero value; they remain unvalued.",
+            "Same-player-week records with a different team are flagged separately.",
         ],
     }
     for season in SEASONS:
@@ -91,7 +108,20 @@ def main() -> None:
             "matched_rows": int(part["_merge"].eq("both").sum()),
             "match_rate_pct": float(100 * part["_merge"].eq("both").mean()) if len(part) else None,
             "position_disagreements": int((part["_merge"].eq("both") & ~part["position_match"]).sum()),
+            "same_player_week_any_team": int(part["player_week_seen"].sum()),
+            "team_mismatch_rows": int((part["player_week_seen"] & ~part["player_week_team_seen"]).sum()),
+            "no_weekly_stats_rows": int((~part["player_week_seen"]).sum()),
         })
+
+    for col, target in (("position_injury", "position_coverage"), ("report_status", "status_coverage")):
+        if col in joined.columns:
+            grouped = joined.groupby(col, dropna=False).agg(
+                injury_rows=("player_id", "size"),
+                strict_matches=("_merge", lambda x: int(x.eq("both").sum())),
+                same_player_week=("player_week_seen", "sum"),
+                team_mismatches=("player_week_seen", lambda x: int((~x).sum())),
+            ).reset_index()
+            summary[target] = grouped.rename(columns={col: "category"}).to_dict(orient="records")
 
     OUT.mkdir(parents=True, exist_ok=True)
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
