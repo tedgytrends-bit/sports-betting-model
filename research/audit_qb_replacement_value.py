@@ -44,13 +44,13 @@ def score_player(stats: pd.DataFrame, player_id: str, cutoff: int, population_me
     weighted_rate = float(np.sum(rates * weights) / max(float(weights.sum()), 1e-9))
 
     reliability = weighted_opp / (weighted_opp + MIN_OPPORTUNITY * 3.0)
-    value = reliability * weighted_rate + (1.0 - reliability) * prior_mean
+    value = reliability * weighted_rate + (1.0 - reliability) * population_mean
 
     return {
         "historical_games": int(prior["sort_key"].nunique()),
         "historical_opportunities": weighted_opp,
         "weighted_raw_rate": weighted_rate,
-        "position_prior_mean": prior_mean,
+        "position_prior_mean": population_mean,
         "player_value_score": float(value),
         "latest_prior_team": str(prior.iloc[-1]["team"]),
     }
