@@ -20,7 +20,10 @@ season,week,team,change_type,change_count
 2026,8,CAR,report_secondary_injury,1
 2026,8,CAR,report_status,5
 2026,8,CHI,feed_membership,1
-2026,8,CHI,practice_status,1
+2026,8,CHI,practice_status,3
+2026,8,CHI,report_primary_injury,3
+2026,8,CHI,report_secondary_injury,1
+2026,8,CHI,report_status,3
 2026,8,CIN,feed_membership,2
 2026,8,CIN,practice_status,6
 2026,8,CIN,report_primary_injury,2
@@ -95,6 +98,9 @@ season,week,team,change_type,change_count
 2026,8,PIT,practice_status,5
 2026,8,PIT,report_primary_injury,3
 2026,8,PIT,report_status,3
+2026,8,SEA,practice_status,4
+2026,8,SEA,report_primary_injury,8
+2026,8,SEA,report_status,8
 2026,8,TB,feed_membership,3
 2026,8,TB,practice_primary_injury,1
 2026,8,TB,practice_secondary_injury,1
