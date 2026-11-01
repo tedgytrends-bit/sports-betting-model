@@ -36,12 +36,25 @@ def score_player(stats: pd.DataFrame, player_id: str, cutoff: int, population_me
             "player_value_score": np.nan, "latest_prior_team": None,
         }
 
-    prior["age"] = np.arange(len(prior) - 1, -1, -1)
-    prior["recency_weight"] = np.exp(-np.log(2) * prior["age"] / DECAY_GAMES)
-    weighted_opp = float((prior["opportunity"] * prior["recency_weight"]).sum())
-    weights = prior["recency_weight"].to_numpy()
-    rates = prior["raw_rate"].fillna(0.0).to_numpy()
-    weighted_rate = float(np.sum(rates * weights) / max(float(weights.sum()), 1e-9))
+    # Collapse trades/team rows into one player-week observation. A player
+    # with two teams in one week must not receive two recency slots.
+    prior["rate_numerator"] = prior["raw_rate"].fillna(0.0) * prior["opportunity"]
+    weekly = prior.groupby("sort_key", as_index=False).agg(
+        opportunity=("opportunity", "sum"),
+        rate_numerator=("rate_numerator", "sum"),
+    )
+    weekly["raw_rate"] = (
+        weekly["rate_numerator"] / weekly["opportunity"].clip(lower=1e-9)
+    )
+    weekly = weekly.sort_values("sort_key")
+    weekly["age"] = np.arange(len(weekly) - 1, -1, -1)
+    weekly["recency_weight"] = np.exp(-np.log(2) * weekly["age"] / DECAY_GAMES)
+    weekly["weighted_opportunity"] = weekly["opportunity"] * weekly["recency_weight"]
+    weighted_opp = float(weekly["weighted_opportunity"].sum())
+    weighted_rate = (
+        float((weekly["raw_rate"] * weekly["weighted_opportunity"]).sum() / weighted_opp)
+        if weighted_opp > 0 else population_mean
+    )
 
     reliability = weighted_opp / (weighted_opp + MIN_OPPORTUNITY * 3.0)
     value = reliability * weighted_rate + (1.0 - reliability) * population_mean
@@ -88,10 +101,18 @@ def main() -> None:
     for row in work.itertuples(index=False):
         cutoff = int(row.cutoff)
         if cutoff not in population_cache:
-            population = stats[
-                stats["sort_key"].lt(cutoff) & stats["position_group"].eq("QB")
-            ]["raw_rate"].dropna()
-            population_cache[cutoff] = float(population.mean()) if not population.empty else 0.0
+            population_rows = stats[
+                stats["sort_key"].lt(cutoff)
+                & stats["position_group"].eq("QB")
+                & stats["raw_rate"].notna()
+                & stats["opportunity"].gt(0)
+            ].copy()
+            population_opportunities = float(population_rows["opportunity"].sum())
+            population_cache[cutoff] = (
+                float((population_rows["raw_rate"] * population_rows["opportunity"]).sum()
+                      / population_opportunities)
+                if population_opportunities > 0 else 0.0
+            )
         prior_mean = population_cache[cutoff]
         injured_id = str(row.gsis_id).strip()
         replacement_id = (
