@@ -84,8 +84,15 @@ def main() -> None:
     work["cutoff"] = work["season"].astype(int) * 100 + work["week"].astype(int)
 
     cache: dict[tuple[int, str], dict] = {}
+    population_cache: dict[int, float] = {}
     for row in work.itertuples(index=False):
         cutoff = int(row.cutoff)
+        if cutoff not in population_cache:
+            population = stats[
+                stats["sort_key"].lt(cutoff) & stats["position_group"].eq("QB")
+            ]["raw_rate"].dropna()
+            population_cache[cutoff] = float(population.mean()) if not population.empty else 0.0
+        prior_mean = population_cache[cutoff]
         injured_id = str(row.gsis_id).strip()
         replacement_id = (
             str(row.listed_replacement_id).strip()
