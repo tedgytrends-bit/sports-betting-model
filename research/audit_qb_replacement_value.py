@@ -23,7 +23,7 @@ DECAY_GAMES = 24.0
 MIN_OPPORTUNITY = 40.0
 
 
-def score_player(stats: pd.DataFrame, player_id: str, cutoff: int) -> dict:
+def score_player(stats: pd.DataFrame, player_id: str, cutoff: int, population_mean: float) -> dict:
     prior = stats[
         stats["player_id"].astype(str).eq(str(player_id))
         & stats["sort_key"].lt(cutoff)
@@ -81,7 +81,7 @@ def main() -> None:
     stats["player_id"] = stats["player_id"].astype("string").str.strip()
     records = []
     # Deduplicate repeated injury updates for the same QB/game before valuation.
-    work = depth.dropna(subset=["season", "week", "gsis_id", "game_id"]).copy()
+    work = depth.dropna(subset=["season", "week", "gsis_id", "game_id"]).copy()\n    work = work.drop_duplicates(["game_id", "team", "gsis_id"], keep="last")
     work["season"] = pd.to_numeric(work["season"], errors="coerce")
     work["week"] = pd.to_numeric(work["week"], errors="coerce")
     work = work.dropna(subset=["season", "week"])
@@ -97,12 +97,12 @@ def main() -> None:
         )
         key_i = (cutoff, injured_id)
         if key_i not in cache:
-            cache[key_i] = score_player(stats, injured_id, cutoff)
+            cache[key_i] = score_player(stats, injured_id, cutoff, prior_mean)
         injured = cache[key_i]
         if replacement_id:
             key_r = (cutoff, replacement_id)
             if key_r not in cache:
-                cache[key_r] = score_player(stats, replacement_id, cutoff)
+                cache[key_r] = score_player(stats, replacement_id, cutoff, prior_mean)
             replacement = cache[key_r]
         else:
             replacement = {
