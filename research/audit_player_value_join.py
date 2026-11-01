@@ -9,11 +9,18 @@ from datetime import datetime, timezone
 from io import BytesIO
 from pathlib import Path
 import json
+import sys
 
 import pandas as pd
 import requests
 
 ROOT = Path(__file__).resolve().parents[1]
+# GitHub Actions executes this file with research/ as sys.path[0]. Add the
+# repository root so top-level project modules (for example injury_model.py)
+# can be imported reliably both in CI and when run locally.
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
 OUT = ROOT / "data" / "player_injury_backtests"
 SEASONS = (2021,  2022, 2023, 2024, 2025, 2026)
 HEADERS = {"User-Agent": "sports-betting-model-player-value-join-audit/1.0"}
