@@ -1,13 +1,13 @@
-Game,Official Bovada Spread,Official Bovada Total,Baseline ATS Projection,Baseline Total Projection,Injury ATS Projection,Injury Total Projection
-NE @ MIA,NE -7,42,Lean MIA +7.0,43.0,Lean MIA +7.0,42.6
-KC @ DEN,KC -1,41,Lean DEN +1.0,42.6,Lean KC -1.0,43.4
-LAC @ LA,LA -6.5,46,Lean LAC +6.5,43.6,Lean LAC +6.5,41.4
-TEN @ CIN,CIN -13,45.5,Lean TEN +13.0,45.2,Lean TEN +13.0,43.4
-MIN @ DET,DET -3.5,45.5,Lean DET -3.5,44.0,Lean MIN +3.5,46.7
-CLE @ PIT,PIT -3.5,39,Lean CLE +3.5,42.4,Lean CLE +3.5,44.5
-IND @ JAX,JAX -10.5,46,Lean IND +10.5,46.9,Lean IND +10.5,46.0
-BAL @ BUF,BUF -3,55,Lean BUF -3.0,49.4,Lean BUF -3.0,48.9
-ATL @ TB,TB -2,43,Lean TB -2.0,44.2,Lean TB -2.0,45.1
-ARI @ DAL,DAL -7,54.5,Lean ARI +7.0,46.2,Lean ARI +7.0,47.4
-PHI @ WAS,WAS -6,40.5,Lean PHI +6.0,44.5,Lean WAS -6.0,44.3
-LV @ NYJ,NYJ -2,46.5,Lean LV +2.0,42.6,Lean NYJ -2.0,43.5
+Game,Official Bovada Spread,Official Bovada Total,Baseline ATS Projection,Baseline Total Projection,Injury ATS Projection,Injury Total Projection,Baseline Score Projection,Injury Score Projection
+NE @ MIA,NE -7,42,Lean MIA +7.0,43.0,Lean MIA +7.0,42.6,NE 22.8 – MIA 20.1,NE 23.5 – MIA 19.2
+KC @ DEN,KC -1,41,Lean DEN +1.0,42.6,Lean KC -1.0,43.4,KC 20.8 – DEN 21.8,KC 22.5 – DEN 20.9
+LAC @ LA,LA -6.5,46,Lean LAC +6.5,43.6,Lean LAC +6.5,41.4,LAC 19.1 – LA 24.5,LAC 18.2 – LA 23.2
+TEN @ CIN,CIN -13,45.5,Lean TEN +13.0,45.2,Lean TEN +13.0,43.4,TEN 18.9 – CIN 26.3,TEN 16.8 – CIN 26.6
+MIN @ DET,DET -3.5,45.5,Lean DET -3.5,44.0,Lean MIN +3.5,46.7,MIN 20.1 – DET 23.9,MIN 21.9 – DET 24.7
+CLE @ PIT,PIT -3.5,39,Lean CLE +3.5,42.4,Lean CLE +3.5,44.5,CLE 20.1 – PIT 22.3,CLE 21.0 – PIT 23.5
+IND @ JAX,JAX -10.5,46,Lean IND +10.5,46.9,Lean IND +10.5,46.0,IND 18.9 – JAX 28.1,IND 18.3 – JAX 27.7
+BAL @ BUF,BUF -3,55,Lean BUF -3.0,49.4,Lean BUF -3.0,48.9,BAL 22.1 – BUF 27.3,BAL 22.4 – BUF 26.5
+ATL @ TB,TB -2,43,Lean TB -2.0,44.2,Lean TB -2.0,45.1,ATL 20.9 – TB 23.3,ATL 20.2 – TB 24.9
+ARI @ DAL,DAL -7,54.5,Lean ARI +7.0,46.2,Lean ARI +7.0,47.4,ARI 21.3 – DAL 25.0,ARI 22.1 – DAL 25.4
+PHI @ WAS,WAS -6,40.5,Lean PHI +6.0,44.5,Lean WAS -6.0,44.3,PHI 19.3 – WAS 25.2,PHI 17.4 – WAS 26.9
+LV @ NYJ,NYJ -2,46.5,Lean LV +2.0,42.6,Lean NYJ -2.0,43.5,LV 20.4 – NYJ 22.2,LV 19.9 – NYJ 23.5
