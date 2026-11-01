@@ -122,63 +122,93 @@ def main() -> None:
         ["gsis_id", "season", "week", "team"], keep="last"
     )
     records = []
-    for report in reports.itertuples(index=False):
-        cutoff = int(report.sort_key)
-        group = str(report.position_group)
-        hist = stats[(stats["player_id"] == str(report.gsis_id)) &
-                     (stats["sort_key"] < cutoff) &
-                     (stats["position_group"] == group)].copy()
-        if hist.empty:
-            records.append({
-                "player_id": report.gsis_id, "season": report.season, "week": report.week,
-                "team": report.team, "position": report.position, "position_group": group,
-                "historical_games": 0, "historical_opportunities": 0,
-                "player_value_score": np.nan, "replacement_benchmark_score": np.nan,
-                "value_gap": np.nan, "valuation_status": "no_prior_player_stats",
-            })
+    # Process each historical cutoff once; avoids rescanning the full stats table
+    # separately for every injured player row.
+    for cutoff, cutoff_reports in reports.groupby("sort_key", sort=True):
+        cutoff = int(cutoff)
+        prior = stats[stats["sort_key"] < cutoff].copy()
+        if prior.empty:
+            for report in cutoff_reports.itertuples(index=False):
+                records.append({
+                    "player_id": report.gsis_id, "season": report.season, "week": report.week,
+                    "team": report.team, "position": report.position, "position_group": report.position_group,
+                    "historical_games": 0, "historical_opportunities": 0,
+                    "player_value_score": np.nan, "replacement_benchmark_score": np.nan,
+                    "value_gap": np.nan, "valuation_status": "no_prior_player_stats",
+                })
             continue
 
-        # Exponential recency weights over historical player-week observations.
-        hist = hist.sort_values("sort_key")
-        age = np.arange(len(hist) - 1, -1, -1, dtype=float)
-        weights = np.exp(-np.log(2) * age / DECAY_GAMES)
-        opportunities = float(np.sum(hist["opportunity"].to_numpy() * weights))
-        raw_rate = hist["raw_rate"].fillna(0).to_numpy(dtype=float)
-        weighted_rate = float(np.average(raw_rate, weights=np.maximum(weights, 1e-9)))
-        # Shrink noisy production rates toward the positional population mean.
-        prior = stats[(stats["sort_key"] < cutoff) & (stats["position_group"] == group)]
-        prior_mean = float(prior["raw_rate"].replace([np.inf, -np.inf], np.nan).dropna().mean()) if not prior.empty else 0.0
-        min_opp = MIN_OPPORTUNITY.get(group, 10)
-        reliability = opportunities / (opportunities + min_opp * 3.0)
-        player_score = reliability * weighted_rate + (1.0 - reliability) * prior_mean
+        # Exponentially decay older player-week observations. This produces a
+        # pregame player rating with multi-season carryover and no target-week leakage.
+        prior = prior.sort_values(["player_id", "sort_key"])
+        prior["age"] = prior.groupby("player_id").cumcount(ascending=False)
+        prior["recency_weight"] = np.exp(-np.log(2) * prior["age"] / DECAY_GAMES)
+        prior["weighted_opportunity"] = prior["opportunity"] * prior["recency_weight"]
+        prior["weighted_rate"] = prior["raw_rate"].fillna(0) * prior["recency_weight"]
+        player_hist = prior.groupby(
+            ["player_id", "team", "position_group"], as_index=False
+        ).agg(
+            historical_games=("sort_key", "nunique"),
+            historical_opportunities=("weighted_opportunity", "sum"),
+            weighted_rate_sum=("weighted_rate", "sum"),
+            weight_sum=("recency_weight", "sum"),
+        )
+        player_hist["weighted_raw_rate"] = (
+            player_hist["weighted_rate_sum"] / player_hist["weight_sum"].clip(lower=1e-9)
+        )
+        prior_means = prior.groupby("position_group")["raw_rate"].mean().to_dict()
+        player_hist["position_prior_mean"] = player_hist["position_group"].map(prior_means).fillna(0.0)
+        player_hist["reliability"] = player_hist.apply(
+            lambda r: r["historical_opportunities"] /
+            (r["historical_opportunities"] + MIN_OPPORTUNITY.get(r["position_group"], 10) * 3.0),
+            axis=1,
+        )
+        player_hist["player_value_score"] = (
+            player_hist["reliability"] * player_hist["weighted_raw_rate"] +
+            (1.0 - player_hist["reliability"]) * player_hist["position_prior_mean"]
+        )
 
-        # Same-team, same-position-group historical peers form a provisional
-        # replacement benchmark; this is not a confirmed active depth-chart backup.
-        peers = stats[(stats["team"] == str(report.team)) &
-                      (stats["position_group"] == group) &
-                      (stats["sort_key"] < cutoff) &
-                      (stats["player_id"] != str(report.gsis_id))]
-        peer_scores = []
-        for pid, ph in peers.groupby("player_id"):
-            ph = ph.sort_values("sort_key")
-            p_age = np.arange(len(ph) - 1, -1, -1, dtype=float)
-            p_w = np.exp(-np.log(2) * p_age / DECAY_GAMES)
-            p_opp = float(np.sum(ph["opportunity"].to_numpy() * p_w))
-            p_rate = float(np.average(ph["raw_rate"].fillna(0).to_numpy(dtype=float), weights=np.maximum(p_w, 1e-9)))
-            p_rel = p_opp / (p_opp + min_opp * 3.0)
-            peer_scores.append(p_rel * p_rate + (1.0 - p_rel) * prior_mean)
-        replacement = float(max(peer_scores)) if peer_scores else np.nan
-        records.append({
-            "player_id": report.gsis_id, "season": report.season, "week": report.week,
-            "team": report.team, "position": report.position, "position_group": group,
-            "historical_games": int(len(hist)),
-            "historical_opportunities": opportunities,
-            "weighted_raw_rate": weighted_rate, "position_prior_mean": prior_mean,
-            "player_value_score": player_score,
-            "replacement_benchmark_score": replacement,
-            "value_gap": player_score - replacement if np.isfinite(replacement) else np.nan,
-            "valuation_status": "valued_with_prior_history" if opportunities > 0 else "history_without_opportunity",
-        })
+        # Provisional same-team positional benchmark. This is not claimed to be
+        # the active backup; it only measures the best other historically observed
+        # teammate in that broad position group.
+        peer = player_hist.sort_values("player_value_score", ascending=False).drop_duplicates(
+            ["team", "position_group"]
+        )[["team", "position_group", "player_id", "player_value_score"]].rename(
+            columns={"player_id": "benchmark_player_id", "player_value_score": "replacement_benchmark_score"}
+        )
+        for report in cutoff_reports.itertuples(index=False):
+            match = player_hist[
+                (player_hist["player_id"] == str(report.gsis_id)) &
+                (player_hist["position_group"] == str(report.position_group))
+            ]
+            if match.empty:
+                records.append({
+                    "player_id": report.gsis_id, "season": report.season, "week": report.week,
+                    "team": report.team, "position": report.position, "position_group": report.position_group,
+                    "historical_games": 0, "historical_opportunities": 0,
+                    "player_value_score": np.nan, "replacement_benchmark_score": np.nan,
+                    "value_gap": np.nan, "valuation_status": "no_prior_player_stats",
+                })
+                continue
+            p = match.iloc[-1]
+            candidates = peer[
+                (peer["team"] == str(report.team)) &
+                (peer["position_group"] == str(report.position_group)) &
+                (peer["benchmark_player_id"] != str(report.gsis_id))
+            ]
+            replacement = float(candidates.iloc[0]["replacement_benchmark_score"]) if not candidates.empty else np.nan
+            records.append({
+                "player_id": report.gsis_id, "season": report.season, "week": report.week,
+                "team": report.team, "position": report.position, "position_group": report.position_group,
+                "historical_games": int(p["historical_games"]),
+                "historical_opportunities": float(p["historical_opportunities"]),
+                "weighted_raw_rate": float(p["weighted_raw_rate"]),
+                "position_prior_mean": float(p["position_prior_mean"]),
+                "player_value_score": float(p["player_value_score"]),
+                "replacement_benchmark_score": replacement,
+                "value_gap": float(p["player_value_score"] - replacement) if np.isfinite(replacement) else np.nan,
+                "valuation_status": "valued_with_prior_history",
+            })
 
     result = pd.DataFrame(records)
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
