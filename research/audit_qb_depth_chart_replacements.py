@@ -78,10 +78,14 @@ def _add_depth_fields(joined: pd.DataFrame, rank_col: str) -> pd.DataFrame:
     joined["qb2_id"] = joined["qb_rows"].map(lambda x: next((z["player_id"] for z in x if z["depth_rank"] == 2), None))
     joined["qb3_id"] = joined["qb_rows"].map(lambda x: next((z["player_id"] for z in x if z["depth_rank"] == 3), None))
     joined["charted_qb_count"] = joined["qb_rows"].map(len)
+    # The candidate is the next depth-chart QB behind the injured player.
+    # An injured QB2 must not be assigned QB1 as a "replacement" while QB1
+    # remains the starter; QB3 is the next candidate. Uncharted/QB3 injuries
+    # are left without a candidate rather than guessing.
     joined["listed_replacement_id"] = joined.apply(
         lambda r: r["qb2_id"] if r["injury_player_chart_rank"] == 1
-        else r["qb1_id"] if r["injury_player_chart_rank"] == 2
-        else (r["qb1_id"] if r["qb1_id"] != r["gsis_id"] else r["qb2_id"]),
+        else r["qb3_id"] if r["injury_player_chart_rank"] == 2
+        else None,
         axis=1,
     )
     return joined.drop(columns=["qb_rows"], errors="ignore")
