@@ -1,0 +1,62 @@
+{
+  "captured_at_utc": "2026-11-01T00:29:34Z",
+  "status": "JOIN_AUDIT_ONLY_NO_MODEL_CHANGES",
+  "injury_rows": 31610,
+  "injury_rows_with_player_id": 31610,
+  "rows_matching_stats_by_player_season_week_team": 16119,
+  "match_rate_pct": 50.99335653274281,
+  "matched_rows_with_position_agreement": 11988,
+  "matched_rows_with_position_disagreement": 4131,
+  "unmatched_rows": 15491,
+  "unique_injury_players": 3177,
+  "unique_stats_players": 3959,
+  "season_coverage": [
+    {
+      "season": 2021,
+      "injury_rows": 5587,
+      "matched_rows": 2953,
+      "match_rate_pct": 52.85484159656345,
+      "position_disagreements": 861
+    },
+    {
+      "season": 2022,
+      "injury_rows": 5682,
+      "matched_rows": 2852,
+      "match_rate_pct": 50.19359380499824,
+      "position_disagreements": 735
+    },
+    {
+      "season": 2023,
+      "injury_rows": 5599,
+      "matched_rows": 2856,
+      "match_rate_pct": 51.00910876942311,
+      "position_disagreements": 696
+    },
+    {
+      "season": 2024,
+      "injury_rows": 6215,
+      "matched_rows": 3245,
+      "match_rate_pct": 52.21238938053098,
+      "position_disagreements": 867
+    },
+    {
+      "season": 2025,
+      "injury_rows": 6068,
+      "matched_rows": 3050,
+      "match_rate_pct": 50.2636783124588,
+      "position_disagreements": 738
+    },
+    {
+      "season": 2026,
+      "injury_rows": 2459,
+      "matched_rows": 1163,
+      "match_rate_pct": 47.295648637657585,
+      "position_disagreements": 234
+    }
+  ],
+  "interpretation": [
+    "A match requires the same player ID, season, week, and team.",
+    "A successful join establishes identity and weekly-stat availability, not player value or causal injury impact.",
+    "Unmatched rows must not be assigned a zero-value player; they remain unvalued."
+  ]
+}
