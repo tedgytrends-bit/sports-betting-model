@@ -214,9 +214,12 @@ def add_injury_features(dataset: pd.DataFrame, schedule: pd.DataFrame, reports: 
             & (normalized["week"] == game["week"])
             & (normalized["season_type"] == game["season_type"])
         ]
-        # If a saved snapshot exists for this future week, use it as the current source.
+        # For genuinely upcoming games, prefer the latest structurally valid
+        # saved snapshot captured before kickoff. Do not infer "upcoming" from
+        # score nullability: some schedule feeds populate score placeholders.
         snapshot = None
-        if pd.isna(game.get("home_score")) or pd.isna(game.get("away_score")):
+        now_utc = pd.Timestamp.now(tz="UTC")
+        if pd.notna(kickoff) and kickoff > now_utc:
             snapshot = _latest_snapshot_for(int(game["season"]), int(game["week"]))
         if snapshot is not None and not snapshot.empty:
             try:
@@ -290,9 +293,11 @@ def injury_coverage_diagnostics(schedule: pd.DataFrame, reports: pd.DataFrame) -
             pregame = typed[typed["date_modified"].notna() & typed["date_modified"].lt(kickoff)]
         else:
             pregame = typed[typed["date_modified"].dt.date < pd.Timestamp(game["gameday"]).date()]
-        snapshot = _latest_snapshot_for(int(game["season"]), int(game["week"])) if (
-            pd.isna(game.get("home_score")) or pd.isna(game.get("away_score"))
-        ) else None
+        snapshot = (
+            _latest_snapshot_for(int(game["season"]), int(game["week"]))
+            if pd.notna(kickoff) and kickoff > pd.Timestamp.now(tz="UTC")
+            else None
+        )
         snapshot_capture = (
             pd.to_datetime(snapshot["_snapshot_captured_at_utc"].iloc[0], errors="coerce", utc=True)
             if snapshot is not None and "_snapshot_captured_at_utc" in snapshot.columns
