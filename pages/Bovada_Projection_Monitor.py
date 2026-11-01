@@ -65,6 +65,21 @@ def get_live_paired_efficiency_projections():
     projections = inj.merge(base, on="game_id", how="inner", validate="one_to_one")
     meta = injury[["game_id", "gameday", "season", "week", "away_team", "home_team"]]
     projections = meta.merge(projections, on="game_id", how="inner", validate="one_to_one")
+    # Reattach raw injury counts from the exact feature frame supplied to the
+    # injury estimator. This keeps displayed inputs auditable and prevents
+    # estimator-output column filtering from silently dropping them.
+    injury_feature_cols = [
+        c for c in injury_features.columns
+        if c.startswith(("home_injury_", "away_injury_", "home_inj_", "away_inj_",
+                         "home_qb_", "away_qb_", "home_ol_", "away_ol_",
+                         "home_skill_", "away_skill_", "home_defense_", "away_defense_"))
+    ]
+    if injury_feature_cols:
+        feature_audit = injury_features[["game_id"] + injury_feature_cols].drop_duplicates("game_id")
+        projections = projections.drop(
+            columns=[c for c in injury_feature_cols if c in projections.columns],
+            errors="ignore"
+        ).merge(feature_audit, on="game_id", how="left", validate="one_to_one")
 
     projections["gameday"] = pd.to_datetime(projections["gameday"], errors="coerce", utc=True)
     now = pd.Timestamp.now(tz="UTC")
@@ -193,6 +208,13 @@ def prep_projection(frame):
     f["away_team"] = f["away_team"].map(norm_team)
     f["home_team"] = f["home_team"].map(norm_team)
     f["game_key"] = f["away_team"].map(key_team) + "@" + f["home_team"].map(key_team)
+    # The immutable schedule game_id is the authoritative fallback when a
+    # frozen projection row has null team labels. nflverse IDs end in AWAY_HOME.
+    if "game_id" in f.columns:
+        _id_parts = f["game_id"].fillna("").astype(str).str.extract(r"^\d{4}_\d{2}_([A-Z]{2,3})_([A-Z]{2,3})$")
+        _id_key = _id_parts[0].fillna("").map(key_team) + "@" + _id_parts[1].fillna("").map(key_team)
+        _valid_id_key = _id_parts[0].notna() & _id_parts[1].notna()
+        f.loc[_valid_id_key, "game_key"] = _id_key.loc[_valid_id_key]
     if "model_predicted_home_margin" not in f.columns:
         f["model_predicted_home_margin"] = pd.to_numeric(f.get("projected_home"), errors="coerce") - pd.to_numeric(f.get("projected_away"), errors="coerce")
     if "model_projected_total" not in f.columns:
