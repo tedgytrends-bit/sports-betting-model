@@ -114,6 +114,9 @@ def get_live_paired_efficiency_projections():
     return projections
 
 def norm_team(value):
+    # Preserve missing values as missing; never render the literal "NAN" as a team.
+    if pd.isna(value):
+        return ""
     return str(value).strip().upper()
 
 def key_team(value):
@@ -196,7 +199,10 @@ def prep_projection(frame):
         if col not in f.columns:
             f[col] = np.nan
         f[col] = pd.to_numeric(f[col], errors="coerce")
-    return f
+    # Market archive owns matchup labels. Projection-side team columns can be
+    # null for completed games or differ in abbreviation, and must not suffix
+    # or overwrite the authoritative Bovada team names during the left merge.
+    return f.drop(columns=["away_team", "home_team"], errors="ignore")
 
 frozen = prep_projection(frozen)
 latest = prep_projection(latest)
