@@ -101,18 +101,62 @@ def main() -> None:
         & impacts["impact"].notna()
     ].copy()
 
-    # Multiple quarterbacks can be marked OUT at QB1 depth rank in the same
-    # historical team-game (e.g. depth-chart changes across injury snapshots).
-    # They are not independent scoring observations. Collapse to one robust
-    # team-game exposure using the median estimate, while preserving counts.
+    # Verify participation from play-by-play. Require the injured QB to be
+    # absent from passer/rusher IDs and the listed replacement to appear.
+    # This is conservative but is not a full snap-level QB participation check.
+    import sys
+    if str(ROOT) not in sys.path:
+        sys.path.insert(0, str(ROOT))
+    from model import load_pbp
+
+    pbp = load_pbp()
+    required_pbp = {"game_id", "posteam", "passer_player_id", "rusher_player_id"}
+    missing_pbp = required_pbp - set(pbp.columns)
+    if missing_pbp:
+        raise ValueError(f"Play-by-play missing QB participation fields: {sorted(missing_pbp)}")
+    action_rows = []
+    for col in ("passer_player_id", "rusher_player_id"):
+        part = pbp[["game_id", "posteam", col]].dropna().copy()
+        part["player_id"] = part[col].astype(str).str.strip()
+        action_rows.append(part[["game_id", "posteam", "player_id"]])
+    qb_actions = pd.concat(action_rows, ignore_index=True).drop_duplicates()
+    qb_actions["posteam"] = qb_actions["posteam"].astype(str).str.upper().str.strip()
+    qb_action_sets = (
+        qb_actions.groupby(["game_id", "posteam"])["player_id"]
+        .agg(lambda x: set(x.astype(str))).to_dict()
+    )
+
+    exposed_player_rows["injured_qb_id"] = exposed_player_rows["injured_qb_id"].astype(str).str.strip()
+    exposed_player_rows["replacement_qb_id"] = exposed_player_rows["replacement_qb_id"].astype(str).str.strip()
+    exposed_player_rows["team"] = exposed_player_rows["team"].astype(str).str.upper().str.strip()
+    def participation(row):
+        ids = qb_action_sets.get((row["game_id"], row["team"]), set())
+        return pd.Series({
+            "injured_qb_recorded_qb_action": row["injured_qb_id"] in ids,
+            "listed_replacement_recorded_qb_action": row["replacement_qb_id"] in ids,
+            "qb_action_player_ids": ";".join(sorted(ids)),
+        })
+    exposed_player_rows = pd.concat(
+        [exposed_player_rows, exposed_player_rows.apply(participation, axis=1)], axis=1
+    )
+    exposed_player_rows["verified_absence_and_replacement"] = (
+        ~exposed_player_rows["injured_qb_recorded_qb_action"]
+        & exposed_player_rows["listed_replacement_recorded_qb_action"]
+    )
+    verified_player_rows = exposed_player_rows[
+        exposed_player_rows["verified_absence_and_replacement"]
+    ].copy()
+
+    # Collapse multiple chart/injury rows only after PBP verification.
     exposed = (
-        exposed_player_rows.groupby(["game_id", "season", "week", "team"], as_index=False)
+        verified_player_rows.groupby(["game_id", "season", "week", "team"], as_index=False)
         .agg(
             impact=("impact", "median"),
             eligible_qb_rows=("injured_qb_id", "nunique"),
             injured_qb_ids=("injured_qb_id", lambda x: ";".join(sorted(set(x.dropna().astype(str))))),
             replacement_qb_ids=("replacement_qb_id", lambda x: ";".join(sorted(set(x.dropna().astype(str))))),
             median_replacement_prior_games=("replacement_prior_games", "median"),
+            qb_action_player_ids=("qb_action_player_ids", "first"),
         )
     )
     if exposed.duplicated(["game_id", "season", "team"]).any():
@@ -173,12 +217,17 @@ def main() -> None:
             "injury_status": "OUT",
             "injured_qb_depth_rank": 1,
             "replacement_must_have_same_team_prior_history": True,
+            "play_by_play_participation_check": "injured QB absent from passer/rusher IDs; listed replacement present",
             "minimum_replacement_prior_games": MIN_REPLACEMENT_GAMES,
             "minimum_prior_opportunities": "Not available in current point-impact output; prior-game threshold used instead.",
-            "duplicate_qb1_out_rows": "Collapsed to one team-game using the median eligible player estimate; row counts and IDs retained."
+            "actual_participation_verification": "Require injured QB absent from passer/rusher IDs and listed replacement present in same-team game passer/rusher IDs; conservative proxy, not full snap verification.",
+            "duplicate_qb1_out_rows": "After PBP verification, collapse multiple eligible player rows to one team-game using median impact; row counts and IDs retained."
         },
+        "candidate_player_rows_before_pbp_verification": int(len(exposed_player_rows)),
+        "pbp_verified_player_rows": int(len(verified_player_rows)),
+        "candidate_team_games_before_pbp_verification": int(exposed_player_rows[["game_id", "team"]].drop_duplicates().shape[0]),
         "eligible_cases": int(len(exposed)),
-        "eligible_player_rows_before_team_game_aggregation": int(len(exposed_player_rows)),
+        "eligible_player_rows_before_team_game_aggregation": int(len(verified_player_rows)),
         "team_games_with_multiple_eligible_qb_rows": int(exposed["eligible_qb_rows"].gt(1).sum()),
         "unique_games": int(exposed["game_id"].nunique()),
         "control_team_games": int(len(controls)),
@@ -195,9 +244,9 @@ def main() -> None:
         "interpretation": {
             "expected_relationship": "If the estimated absence impact is meaningful, larger positive impact should generally associate with more negative actual-minus-baseline team score residuals.",
             "limitations": [
-                "The historical baseline prediction is not guaranteed to be fully injury-blind; inspect model feature construction before interpreting causality.",
-                "Depth-chart QB2 is not verified as the actual starter or active replacement.",
-                "OUT report status and historical depth chart may not prove the player missed the game.",
+                "PBP verification uses passer/rusher participation, not every offensive snap; QBs with no recorded pass/rush event may be misclassified or excluded.",
+                "The listed replacement must record a passer/rusher action, but this does not establish that they played every QB snap or were the only replacement.",
+                "OUT report status and historical depth chart still do not prove public report timing or full-game absence.",
                 "Small eligible samples and nonrandom QB absences limit statistical power.",
                 "Controls are descriptive and not matched or randomized.",
                 "Correlation is association, not causal calibration; no point adjustment is approved."
