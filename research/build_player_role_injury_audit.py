@@ -13,12 +13,19 @@ from io import BytesIO
 from pathlib import Path
 import json
 import re
+import sys
 import unicodedata
 
 import pandas as pd
 import requests
 
 ROOT = Path(__file__).resolve().parents[1]
+# When executed as `python research/<script>.py`, Python places the research/
+# directory (not the repository root) on sys.path. Add the repo root so the
+# shared top-level injury_model module can be imported reliably in Actions.
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
 OUT = ROOT / "data" / "player_injury_backtests"
 SEASONS = range(2021, 2027)
 HEADERS = {"User-Agent": "sports-betting-model-player-role-injury-audit/1.0"}
