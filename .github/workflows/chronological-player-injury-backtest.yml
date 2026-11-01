@@ -58,6 +58,9 @@ jobs:
       - name: Audit point-in-time QB replacement value
         run: python research/audit_qb_replacement_value.py
 
+      - name: Estimate research-only QB EPA point impact
+        run: python research/audit_qb_point_impact.py
+
       - name: Run chronological baseline vs player-injury backtest
         run: python research/chronological_player_injury_backtest.py
 
