@@ -1,0 +1,79 @@
+{
+  "generated_at_utc": "2026-11-01T14:52:18.988813+00:00",
+  "status": "RESEARCH_ONLY_EMPIRICAL_VALIDATION_NOT_PRODUCTION",
+  "impact_source": "qb_point_impact_audit_20261101T145036Z.csv",
+  "paired_prediction_source": "player_injury_paired_predictions_20261101T145037Z.csv",
+  "filters": {
+    "injury_status": "OUT",
+    "injured_qb_depth_rank": 1,
+    "replacement_must_have_same_team_prior_history": true,
+    "play_by_play_participation_check": "injured QB absent from passer/rusher IDs; listed replacement present",
+    "minimum_replacement_prior_games": 3,
+    "minimum_prior_opportunities": "Not available in current point-impact output; prior-game threshold used instead.",
+    "actual_participation_verification": "Require injured QB absent from passer/rusher IDs and listed replacement present in same-team game passer/rusher IDs; conservative proxy, not full snap verification.",
+    "duplicate_qb1_out_rows": "After PBP verification, collapse multiple eligible player rows to one team-game using median impact; row counts and IDs retained."
+  },
+  "candidate_player_rows_before_pbp_verification": 103,
+  "pbp_verified_player_rows": 88,
+  "candidate_team_games_before_pbp_verification": 101,
+  "eligible_cases": 66,
+  "eligible_player_rows_before_team_game_aggregation": 88,
+  "team_games_with_multiple_eligible_qb_rows": 2,
+  "unique_games": 66,
+  "control_team_games": 1950,
+  "correlation_results": {
+    "all_eligible_qb1_out_cases": {
+      "n": 66,
+      "pearson_r": -0.06342934206413661,
+      "spearman_r": -0.09170232752322306,
+      "ols_slope_points_per_impact_point": -0.15123878786313427
+    },
+    "development_2021_2023": {
+      "n": 21,
+      "pearson_r": 0.15896825888693333,
+      "spearman_r": 0.2311688311688312,
+      "ols_slope_points_per_impact_point": 0.5150248208919072
+    },
+    "holdout_2024_2026": {
+      "n": 45,
+      "pearson_r": -0.10845195707358403,
+      "spearman_r": -0.1735177865612648,
+      "ols_slope_points_per_impact_point": -0.24923272090995638,
+      "pearson_bootstrap_95_ci": {
+        "lower_95": -0.389848865132963,
+        "upper_95": 0.1768951383631465,
+        "valid_draws": 2000
+      }
+    }
+  },
+  "score_residuals": {
+    "eligible_qb1_out": {
+      "n": 66,
+      "mean_actual_minus_baseline_points": -2.49631358654467,
+      "median_actual_minus_baseline_points": -1.8786465524466127,
+      "mae_of_baseline_team_score": 8.149621919432823
+    },
+    "control_team_games": {
+      "n": 1950,
+      "mean_actual_minus_baseline_points": 0.39618214806811614,
+      "median_actual_minus_baseline_points": -0.048135499679091254,
+      "mae_of_baseline_team_score": 7.533100957083515
+    }
+  },
+  "impact_distribution": {
+    "median": 1.9122010569802659,
+    "p25": -0.0774645275635815,
+    "p75": 5.254446623298833
+  },
+  "interpretation": {
+    "expected_relationship": "If the estimated absence impact is meaningful, larger positive impact should generally associate with more negative actual-minus-baseline team score residuals.",
+    "limitations": [
+      "PBP verification uses passer/rusher participation, not every offensive snap; QBs with no recorded pass/rush event may be misclassified or excluded.",
+      "The listed replacement must record a passer/rusher action, but this does not establish that they played every QB snap or were the only replacement.",
+      "OUT report status and historical depth chart still do not prove public report timing or full-game absence.",
+      "Small eligible samples and nonrandom QB absences limit statistical power.",
+      "Controls are descriptive and not matched or randomized.",
+      "Correlation is association, not causal calibration; no point adjustment is approved."
+    ]
+  }
+}
