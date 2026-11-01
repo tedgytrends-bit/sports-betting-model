@@ -64,6 +64,9 @@ jobs:
       - name: Run chronological baseline vs player-injury backtest
         run: python research/chronological_player_injury_backtest.py
 
+      - name: Validate QB point-impact estimates against held-out scoring outcomes
+        run: python research/validate_qb_point_impact.py
+
       - name: Grade baseline vs player-injury betting results
         run: python research/grade_player_injury_backtest.py
 
