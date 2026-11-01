@@ -1,0 +1,33 @@
+{
+  "captured_at_utc": "2026-11-01T15:39:13Z",
+  "status": "RESEARCH_ONLY_NO_MODEL_CHANGES",
+  "seasons": [
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "snap_count_rows": 142690,
+  "injury_player_rows_audited": 14706,
+  "role_class_counts": {
+    "DEPTH_OR_SPECIAL_TEAMS": 12350,
+    "NO_PRIOR_SNAP_DATA": 2356
+  },
+  "injury_status_counts": {
+    "QUESTIONABLE": 7920,
+    "OUT": 5971,
+    "DOUBTFUL": 815
+  },
+  "match_method": "normalized full player name + team + position group; no forced fuzzy joins",
+  "limitations": [
+    "PFR snap counts are game-level and available after games; target-week data is excluded.",
+    "The audit uses only games strictly before the injury-report week.",
+    "Replacement candidates are recent same-team players in broad position groups, not verified depth-chart next men up.",
+    "OL grouping is broad and must not be interpreted as a precise like-for-like lineman replacement.",
+    "Snap share measures role/opportunity, not player quality or expected points.",
+    "No 2026 FTN participation feed is required or assumed.",
+    "No production model features, injury weights, or projections are changed."
+  ]
+}
