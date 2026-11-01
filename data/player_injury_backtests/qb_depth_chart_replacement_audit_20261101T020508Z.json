@@ -1,0 +1,61 @@
+{
+  "captured_at_utc": "2026-11-01T02:05:08Z",
+  "status": "QB_DEPTH_CHART_AUDIT_ONLY_NO_MODEL_CHANGES",
+  "qb_injury_report_rows": 1150,
+  "legacy_weekly_join_rows": 845,
+  "legacy_injured_qb_charted": 779,
+  "legacy_rows_with_qb1_and_qb2": 824,
+  "legacy_injury_rows_where_injured_qb_is_qb1": 586,
+  "legacy_injury_rows_where_injured_qb_is_qb2": 136,
+  "timestamped_season_summaries": [
+    {
+      "season": 2025,
+      "week": NaN,
+      "team": null,
+      "gsis_id": null,
+      "report_status": NaN,
+      "practice_status": NaN,
+      "player_id": null,
+      "depth_rank": NaN,
+      "full_name": NaN,
+      "charted_qb_count": NaN,
+      "qb1_id": NaN,
+      "qb2_id": NaN,
+      "qb3_id": NaN,
+      "depth_schema": "timestamped_espn",
+      "injury_player_chart_rank": NaN,
+      "timestamp_rows": 21429.0,
+      "unique_teams": 32.0,
+      "unique_qbs": 127.0,
+      "note": "Requires timestamp-to-game kickoff alignment; not joined to injury rows in this audit."
+    },
+    {
+      "season": 2026,
+      "week": NaN,
+      "team": null,
+      "gsis_id": null,
+      "report_status": NaN,
+      "practice_status": NaN,
+      "player_id": null,
+      "depth_rank": NaN,
+      "full_name": NaN,
+      "charted_qb_count": NaN,
+      "qb1_id": NaN,
+      "qb2_id": NaN,
+      "qb3_id": NaN,
+      "depth_schema": "timestamped_espn",
+      "injury_player_chart_rank": NaN,
+      "timestamp_rows": 28142.0,
+      "unique_teams": 32.0,
+      "unique_qbs": 125.0,
+      "note": "Requires timestamp-to-game kickoff alignment; not joined to injury rows in this audit."
+    }
+  ],
+  "errors": [],
+  "limitations": [
+    "Legacy weekly depth-chart data is available for 2021-2024 and is joined by GSIS ID, team, season and week.",
+    "2025-2026 depth charts use timestamped ESPN snapshots and require strict timestamp-to-kickoff alignment before joining.",
+    "A depth-chart QB2 is evidence of listed depth, not proof that the player was active or the actual game replacement.",
+    "This audit does not estimate point-spread impact or change production projections."
+  ]
+}
