@@ -84,21 +84,33 @@ def load_snaps() -> pd.DataFrame:
     for col in ("offense_snaps", "offense_pct", "defense_snaps", "defense_pct", "st_snaps", "st_pct"):
         data[col] = pd.to_numeric(data[col], errors="coerce").fillna(0.0)
 
-    # nflverse/PFR percentage fields may be encoded as fractions (0-1) rather
-    # than percentage points (0-100). Normalize each share column before
-    # applying role thresholds expressed on a 0-100 scale.
+    # nflverse/PFR percentage fields are percentage points (0-100) in the
+    # published feed. Retain a defensive fraction-scale check for alternate
+    # encodings, then quarantine impossible values rather than failing the
+    # entire audit. Invalid shares are set to NaN so they cannot inflate role
+    # averages; pandas means below ignore NaN values.
     pct_scale_factors = {}
+    pct_quality = {}
     for col in ("offense_pct", "defense_pct", "st_pct"):
-        observed_max = float(data[col].max()) if not data.empty else 0.0
+        observed = data[col].dropna()
+        observed_max = float(observed.max()) if not observed.empty else 0.0
         factor = 100.0 if 0.0 < observed_max <= 1.5 else 1.0
         data[col] = data[col] * factor
         pct_scale_factors[col] = factor
-        if data[col].max() > 100.5:
-            raise ValueError(
-                f"{col} exceeds 100 after normalization; refusing invalid snap-share scale"
-            )
+        invalid = data[col].notna() & ((data[col] < 0.0) | (data[col] > 100.5))
+        invalid_count = int(invalid.sum())
+        invalid_max = (
+            float(data.loc[invalid, col].max()) if invalid_count else None
+        )
+        pct_quality[col] = {
+            "invalid_value_count": invalid_count,
+            "invalid_max": invalid_max,
+        }
+        data.loc[invalid, col] = float("nan")
+    data = data.dropna(subset=["season", "week", "team", "player_key"]).copy()
     data.attrs["pct_scale_factors"] = pct_scale_factors
-    return data.dropna(subset=["season", "week", "team", "player_key"]).copy()
+    data.attrs["pct_quality"] = pct_quality
+    return data
 
 
 def load_reports() -> pd.DataFrame:
@@ -236,6 +248,7 @@ def main() -> None:
         "seasons": list(SEASONS),
         "snap_count_rows": int(len(snaps)),
         "snap_percentage_scale_factors_applied": snaps.attrs.get("pct_scale_factors", {}),
+        "snap_percentage_quality": snaps.attrs.get("pct_quality", {}),
         "injury_player_rows_audited": int(len(result)),
         "role_class_counts": result["role_class"].value_counts(dropna=False).to_dict()
             if not result.empty else {},
