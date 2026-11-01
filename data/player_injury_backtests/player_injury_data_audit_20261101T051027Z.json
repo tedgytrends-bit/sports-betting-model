@@ -1,0 +1,26 @@
+{
+  "captured_at_utc": "2026-11-01T05:10:27Z",
+  "seasons": [
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "status": "DATA_AUDIT_ONLY_NO_MODEL_CHANGES",
+  "source_rows": {
+    "schedule_games": 7548,
+    "pbp_rows": 266210,
+    "player_event_rows": 410543,
+    "injury_report_rows": 31610,
+    "injury_rows_with_gsis_id": 31610,
+    "player_week_detail_rows_audited": 31591
+  },
+  "interpretation": [
+    "PBP event counts are participation proxies, not true snap counts or player quality.",
+    "Prior-season carryover improves early-season history coverage but does not by itself estimate player value.",
+    "OL players are expected to have limited individual attribution in the currently loaded PBP columns.",
+    "Official NFL report publication timing and data-provider capture timing are distinct provenance concepts."
+  ]
+}

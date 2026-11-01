@@ -1,0 +1,23 @@
+{
+  "captured_at_utc": "2026-11-01T05:19:50Z",
+  "status": "RESEARCH_ONLY_QB_REPLACEMENT_VALUE_AUDIT_NO_MODEL_CHANGES",
+  "source_depth_chart_file": "qb_depth_chart_replacement_audit_20261101T051937Z.csv",
+  "rows": 1149,
+  "timestamped_2025_plus_rows": 321,
+  "legacy_2021_2024_rows": 828,
+  "injured_qb_prior_history_rows": 1084,
+  "replacement_candidate_rows": 913,
+  "replacement_prior_history_rows": 831,
+  "replacement_same_team_latest_prior_history_rows": 755,
+  "rows_with_comparable_value_gap": 824,
+  "median_injured_qb_historical_games": 24.0,
+  "median_replacement_historical_games": 10.0,
+  "limitations": [
+    "QB value is a shrunk historical passing EPA per attempt/sack plus CPOE proxy, not calibrated points or win probability.",
+    "Only player statistics from seasons/weeks strictly before the target game week are used.",
+    "Replacement is the listed depth-chart candidate, not confirmed active or actual game participant.",
+    "Historical player performance can include prior teams; latest prior team is reported as a provenance check.",
+    "This is a coverage and valuation audit, not evidence that the score gap improves game predictions.",
+    "No official model, projection, or prospective record is changed."
+  ]
+}

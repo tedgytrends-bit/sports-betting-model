@@ -1,0 +1,74 @@
+{
+  "generated_at_utc": "2026-11-01T05:21:28.002641+00:00",
+  "status": "RESEARCH_ONLY_EMPIRICAL_VALIDATION_NOT_PRODUCTION",
+  "impact_source": "qb_point_impact_audit_20261101T052009Z.csv",
+  "paired_prediction_source": "player_injury_paired_predictions_20261101T052010Z.csv",
+  "filters": {
+    "injury_status": "OUT",
+    "injured_qb_depth_rank": 1,
+    "replacement_must_have_same_team_prior_history": true,
+    "minimum_replacement_prior_games": 3,
+    "minimum_prior_opportunities": "Not available in current point-impact output; prior-game threshold used instead.",
+    "duplicate_qb1_out_rows": "Collapsed to one team-game using the median eligible player estimate; row counts and IDs retained."
+  },
+  "eligible_cases": 78,
+  "eligible_player_rows_before_team_game_aggregation": 103,
+  "team_games_with_multiple_eligible_qb_rows": 2,
+  "unique_games": 78,
+  "control_team_games": 1938,
+  "correlation_results": {
+    "all_eligible_qb1_out_cases": {
+      "n": 78,
+      "pearson_r": -0.0805994188537403,
+      "spearman_r": -0.10681993503422826,
+      "ols_slope_points_per_impact_point": -0.19953331112191974
+    },
+    "development_2021_2023": {
+      "n": 27,
+      "pearson_r": 0.16815958273153758,
+      "spearman_r": 0.313989062861219,
+      "ols_slope_points_per_impact_point": 0.5626707948017068
+    },
+    "holdout_2024_2026": {
+      "n": 51,
+      "pearson_r": -0.12391538721905873,
+      "spearman_r": -0.20588235294117646,
+      "ols_slope_points_per_impact_point": -0.2972069326126115,
+      "pearson_bootstrap_95_ci": {
+        "lower_95": -0.4002907207877495,
+        "upper_95": 0.1506002982605876,
+        "valid_draws": 2000
+      }
+    }
+  },
+  "score_residuals": {
+    "eligible_qb1_out": {
+      "n": 78,
+      "mean_actual_minus_baseline_points": -2.506219837844814,
+      "median_actual_minus_baseline_points": -1.91636521358833,
+      "mae_of_baseline_team_score": 7.856419543420254
+    },
+    "control_team_games": {
+      "n": 1938,
+      "mean_actual_minus_baseline_points": 0.4144910419880152,
+      "median_actual_minus_baseline_points": -0.045003395667819746,
+      "mae_of_baseline_team_score": 7.541084204648422
+    }
+  },
+  "impact_distribution": {
+    "median": 1.998882752983947,
+    "p25": 0.0,
+    "p75": 5.087536642784189
+  },
+  "interpretation": {
+    "expected_relationship": "If the estimated absence impact is meaningful, larger positive impact should generally associate with more negative actual-minus-baseline team score residuals.",
+    "limitations": [
+      "The historical baseline prediction is not guaranteed to be fully injury-blind; inspect model feature construction before interpreting causality.",
+      "Depth-chart QB2 is not verified as the actual starter or active replacement.",
+      "OUT report status and historical depth chart may not prove the player missed the game.",
+      "Small eligible samples and nonrandom QB absences limit statistical power.",
+      "Controls are descriptive and not matched or randomized.",
+      "Correlation is association, not causal calibration; no point adjustment is approved."
+    ]
+  }
+}
