@@ -92,7 +92,7 @@ def main() -> None:
     # not prior opportunity totals. Use >=3 historical games and same-team flag
     # as the defensible minimum, then expose reliability in the output.
     impacts["same_team"] = impacts["replacement_history_same_team"].astype(str).str.lower().eq("true")
-    exposed = impacts[
+    exposed_player_rows = impacts[
         impacts["report_status"].astype(str).str.upper().eq("OUT")
         & impacts["depth_chart_rank"].eq(1)
         & impacts["same_team"]
@@ -100,6 +100,23 @@ def main() -> None:
         & impacts["replacement_prior_games"].ge(MIN_REPLACEMENT_GAMES)
         & impacts["impact"].notna()
     ].copy()
+
+    # Multiple quarterbacks can be marked OUT at QB1 depth rank in the same
+    # historical team-game (e.g. depth-chart changes across injury snapshots).
+    # They are not independent scoring observations. Collapse to one robust
+    # team-game exposure using the median estimate, while preserving counts.
+    exposed = (
+        exposed_player_rows.groupby(["game_id", "season", "week", "team"], as_index=False)
+        .agg(
+            impact=("impact", "median"),
+            eligible_qb_rows=("injured_qb_id", "nunique"),
+            injured_qb_ids=("injured_qb_id", lambda x: ";".join(sorted(set(x.dropna().astype(str))))),
+            replacement_qb_ids=("replacement_qb_id", lambda x: ";".join(sorted(set(x.dropna().astype(str))))),
+            median_replacement_prior_games=("replacement_prior_games", "median"),
+        )
+    )
+    if exposed.duplicated(["game_id", "season", "team"]).any():
+        raise ValueError("QB exposure aggregation did not produce unique team-game keys.")
 
     home = paired[["game_id", "season", "home_team", "home_score",
                    "pred_home_score_baseline"]].rename(columns={
@@ -112,6 +129,13 @@ def main() -> None:
     team_games = pd.concat([home, away], ignore_index=True)
     team_games["score_residual"] = team_games["actual_score"] - team_games["predicted_score"]
 
+    if team_games.duplicated(["game_id", "season", "team"]).any():
+        duplicates = team_games.loc[
+            team_games.duplicated(["game_id", "season", "team"], keep=False),
+            ["game_id", "season", "team"]
+        ].head(10)
+        raise ValueError("Team-game score table has duplicate keys: "
+                         + duplicates.to_dict("records").__repr__())
     exposed = exposed.merge(team_games, on=["game_id", "season", "team"],
                             how="inner", validate="one_to_one")
     exposed["impact_abs"] = exposed["impact"].abs()
@@ -150,9 +174,12 @@ def main() -> None:
             "injured_qb_depth_rank": 1,
             "replacement_must_have_same_team_prior_history": True,
             "minimum_replacement_prior_games": MIN_REPLACEMENT_GAMES,
-            "minimum_prior_opportunities": "Not available in current point-impact output; prior-game threshold used instead."
+            "minimum_prior_opportunities": "Not available in current point-impact output; prior-game threshold used instead.",
+            "duplicate_qb1_out_rows": "Collapsed to one team-game using the median eligible player estimate; row counts and IDs retained."
         },
         "eligible_cases": int(len(exposed)),
+        "eligible_player_rows_before_team_game_aggregation": int(len(exposed_player_rows)),
+        "team_games_with_multiple_eligible_qb_rows": int(exposed["eligible_qb_rows"].gt(1).sum()),
         "unique_games": int(exposed["game_id"].nunique()),
         "control_team_games": int(len(controls)),
         "correlation_results": summaries,
