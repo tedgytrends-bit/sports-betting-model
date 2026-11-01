@@ -42,14 +42,14 @@ def main() -> None:
         try:
             depth=load_depth(season)
             if season <= 2024:
-                required={"season","week","club_code","gsis_id","position","depth_position"}
+                required={"season","week","club_code","gsis_id","position","depth_team"}
                 missing=required-set(depth.columns)
                 if missing: raise ValueError(f"Legacy depth chart missing {sorted(missing)}")
                 d=depth[(depth["position"].astype(str).str.upper()=="QB")].copy()
                 d["team"]=d["club_code"].astype("string").str.upper().str.strip()
                 d["player_id"]=d["gsis_id"].astype("string").str.strip()
                 # depth_position is typically QB1/QB2/QB3; preserve raw rank text.
-                d["depth_rank"]=pd.to_numeric(d["depth_position"].astype(str).str.extract(r"(\\d+)")[0],errors="coerce")
+                d["depth_rank"]=pd.to_numeric(d["depth_team"],errors="coerce")
                 d["season"]=pd.to_numeric(d["season"],errors="coerce")
                 d["week"]=pd.to_numeric(d["week"],errors="coerce")
                 d=d[["season","week","team","player_id","depth_rank","full_name"]].drop_duplicates()
