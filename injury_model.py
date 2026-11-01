@@ -157,9 +157,9 @@ def _counts_for_team(rows: pd.DataFrame) -> dict:
     features = {}
     if rows.empty:
         return {"injury_report_available": 0.0, **{k: np.nan for k in _feature_names()}}
-    status = rows["report_status"]
-    practice = rows["practice_status"]
-    pos = rows["position"]
+    status = rows["report_status"].fillna("").astype(str).str.strip().str.upper()
+    practice = rows["practice_status"].fillna("").astype(str).str.strip().str.upper()
+    pos = rows["position"].fillna("").astype(str).str.strip().str.upper()
     out = status.eq("OUT")
     doubtful = status.str.contains("DOUBTFUL", regex=False)
     questionable = status.str.contains("QUESTIONABLE", regex=False)
