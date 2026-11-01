@@ -145,13 +145,19 @@ def main() -> None:
         prior["recency_weight"] = np.exp(-np.log(2) * prior["age"] / DECAY_GAMES)
         prior["weighted_opportunity"] = prior["opportunity"] * prior["recency_weight"]
         prior["weighted_rate"] = prior["raw_rate"].fillna(0) * prior["recency_weight"]
+        latest_team = prior.sort_values("sort_key").drop_duplicates(
+            ["player_id", "position_group"], keep="last"
+        )[["player_id", "position_group", "team"]]
         player_hist = prior.groupby(
-            ["player_id", "team", "position_group"], as_index=False
+            ["player_id", "position_group"], as_index=False
         ).agg(
             historical_games=("sort_key", "nunique"),
             historical_opportunities=("weighted_opportunity", "sum"),
             weighted_rate_sum=("weighted_rate", "sum"),
             weight_sum=("recency_weight", "sum"),
+        )
+        player_hist = player_hist.merge(
+            latest_team, on=["player_id", "position_group"], how="left", validate="one_to_one"
         )
         player_hist["weighted_raw_rate"] = (
             player_hist["weighted_rate_sum"] / player_hist["weight_sum"].clip(lower=1e-9)
