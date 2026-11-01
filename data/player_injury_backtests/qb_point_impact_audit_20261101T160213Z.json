@@ -1,0 +1,26 @@
+{
+  "captured_at_utc": "2026-11-01T16:02:13Z",
+  "status": "RESEARCH_ONLY_QB_EPA_POINT_IMPACT_SCENARIO_NO_MODEL_CHANGES",
+  "rows": 1149,
+  "rows_with_comparable_point_impact": 824,
+  "out_rows_with_comparable_point_impact": 132,
+  "median_conditional_impact_all_statuses": 2.2511131045564117,
+  "median_conditional_impact_out_only": 1.5671491811818925,
+  "out_only_impact_quantiles": {
+    "0.1": -2.7534484232752936,
+    "0.25": -0.5216140182085018,
+    "0.5": 1.5671491811818925,
+    "0.75": 4.480133351085468,
+    "0.9": 7.158847690084215
+  },
+  "out_rows_same_team_replacement_history": 124,
+  "method": "Prior-only, opportunity-weighted, recency-decayed passing EPA per dropback; shrink player rates toward prior QB population mean; multiply injured-minus-listed-replacement EPA/dropback by trailing average team dropbacks over up to 10 prior games.",
+  "limitations": [
+    "EPA/dropback is an expected-points rate proxy; multiplying by expected dropbacks is a conditional scenario, not a causal estimate.",
+    "Listed depth-chart replacement is not verified active or actual starter.",
+    "OUT is the primary cohort; QUESTIONABLE and DOUBTFUL are conditional absence scenarios, not probabilities.",
+    "Team dropback volume is estimated from up to 10 prior team games and may change with opponent, game script, or coaching.",
+    "Historical stats are strictly prior to the target season/week; same-week player outcomes are excluded.",
+    "No official model, projection, or prospective record is changed."
+  ]
+}
