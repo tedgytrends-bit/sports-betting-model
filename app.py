@@ -20,6 +20,7 @@ projection_page = st.Page(
 public_projection_page = st.Page(
     "pages/Public_Projection_Board.py",
     title="Week 8 Public Projections",
+    url_path="week-8-public-projections",
     icon="🌐",
 )
 totals_page = st.Page("research/totals_backtest.py", title="Totals Backtest", icon="📊")
