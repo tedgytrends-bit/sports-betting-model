@@ -52,7 +52,13 @@ def load_schedules() -> pd.DataFrame:
             raw_clock = str(row["gametime"]).strip()
             clock = None
             for fmt in ("%I:%M%p", "%I:%M %p", "%H:%M", "%H:%M:%S"):
-                try:\n                    clock = datetime.strptime(raw_clock, fmt).time()\n                    break\n                except ValueError:\n                    continue\n            if clock is None:\n                raise ValueError(f"Unrecognized gametime: {raw_clock}")
+                try:
+                    clock = datetime.strptime(raw_clock, fmt).time()
+                    break
+                except ValueError:
+                    continue
+            if clock is None:
+                raise ValueError(f"Unrecognized gametime: {raw_clock}")
             local = datetime.combine(day, clock).replace(tzinfo=EASTERN)
             games.at[idx, "kickoff_utc"] = pd.Timestamp(local.astimezone(timezone.utc)).tz_localize(None)
         except Exception:
