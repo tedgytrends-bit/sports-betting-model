@@ -7,7 +7,7 @@ team snapshot strictly before kickoff is eligible. Research only; no model
 features, projections, or prospective grading are changed.
 """
 from __future__ import annotations
-from datetime import datetime, timezone\nfrom time import strptime
+from datetime import datetime, timezone
 from io import BytesIO
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -49,7 +49,10 @@ def load_schedules() -> pd.DataFrame:
     for idx, row in games.iterrows():
         try:
             day = pd.Timestamp(row["gameday"]).date()
-            raw_clock = str(row["gametime"]).strip()\n            clock = None\n            for fmt in ("%I:%M%p", "%I:%M %p", "%H:%M", "%H:%M:%S"):\n                try:\n                    clock = datetime.strptime(raw_clock, fmt).time()\n                    break\n                except ValueError:\n                    continue\n            if clock is None:\n                raise ValueError(f"Unrecognized gametime: {raw_clock}")
+            raw_clock = str(row["gametime"]).strip()
+            clock = None
+            for fmt in ("%I:%M%p", "%I:%M %p", "%H:%M", "%H:%M:%S"):
+                try:\n                    clock = datetime.strptime(raw_clock, fmt).time()\n                    break\n                except ValueError:\n                    continue\n            if clock is None:\n                raise ValueError(f"Unrecognized gametime: {raw_clock}")
             local = datetime.combine(day, clock).replace(tzinfo=EASTERN)
             games.at[idx, "kickoff_utc"] = pd.Timestamp(local.astimezone(timezone.utc)).tz_localize(None)
         except Exception:
