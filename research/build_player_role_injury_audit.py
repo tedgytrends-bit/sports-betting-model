@@ -83,6 +83,21 @@ def load_snaps() -> pd.DataFrame:
     data["position_group"] = data["position"].map(position_group)
     for col in ("offense_snaps", "offense_pct", "defense_snaps", "defense_pct", "st_snaps", "st_pct"):
         data[col] = pd.to_numeric(data[col], errors="coerce").fillna(0.0)
+
+    # nflverse/PFR percentage fields may be encoded as fractions (0-1) rather
+    # than percentage points (0-100). Normalize each share column before
+    # applying role thresholds expressed on a 0-100 scale.
+    pct_scale_factors = {}
+    for col in ("offense_pct", "defense_pct", "st_pct"):
+        observed_max = float(data[col].max()) if not data.empty else 0.0
+        factor = 100.0 if 0.0 < observed_max <= 1.5 else 1.0
+        data[col] = data[col] * factor
+        pct_scale_factors[col] = factor
+        if data[col].max() > 100.5:
+            raise ValueError(
+                f"{col} exceeds 100 after normalization; refusing invalid snap-share scale"
+            )
+    data.attrs["pct_scale_factors"] = pct_scale_factors
     return data.dropna(subset=["season", "week", "team", "player_key"]).copy()
 
 
@@ -220,6 +235,7 @@ def main() -> None:
         "status": "RESEARCH_ONLY_NO_MODEL_CHANGES",
         "seasons": list(SEASONS),
         "snap_count_rows": int(len(snaps)),
+        "snap_percentage_scale_factors_applied": snaps.attrs.get("pct_scale_factors", {}),
         "injury_player_rows_audited": int(len(result)),
         "role_class_counts": result["role_class"].value_counts(dropna=False).to_dict()
             if not result.empty else {},
