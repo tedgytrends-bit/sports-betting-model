@@ -39,8 +39,23 @@ def load_stats(season: int) -> pd.DataFrame:
     frame["player_id"] = frame["player_id"].astype("string").str.strip()
     frame["team"] = frame["team"].astype("string").str.upper().str.strip()
     frame["season_type"] = frame["season_type"].fillna("REG").astype("string").str.upper().str.strip()
-    frame["season_type"] = frame["season_type"].replace({"REGULAR": "REG", "POSTSEASON": "POST", "PRESEASON": "PRE"})
+    frame["season_type"] = frame["season_type"].replace({
+        "REGULAR": "REG", "POSTSEASON": "POST", "PRESEASON": "PRE",
+        "WC": "POST", "DIV": "POST", "CON": "POST", "SB": "POST",
+    })
     return frame
+
+
+def normalize_position(value: object) -> str:
+    """Map source-specific position labels into comparable broad NFL groups."""
+    raw = str(value or "").strip().upper()
+    aliases = {
+        "SAF": "S", "FS": "S", "SS": "S",
+        "OT": "T", "OLB": "LB", "ILB": "LB", "MLB": "LB",
+        "NT": "DT", "DL": "DT",
+        "DB": "DB",
+    }
+    return aliases.get(raw, raw)
 
 
 def main() -> None:
@@ -55,7 +70,10 @@ def main() -> None:
     reports["team"] = reports["team"].astype("string").str.upper().str.strip()
     reports["position"] = reports["position"].astype("string").str.upper().str.strip()
     reports["season_type"] = reports["season_type"].fillna("REG").astype("string").str.upper().str.strip()
-    reports["season_type"] = reports["season_type"].replace({"REGULAR": "REG", "POSTSEASON": "POST", "PRESEASON": "PRE"})
+    reports["season_type"] = reports["season_type"].replace({
+        "REGULAR": "REG", "POSTSEASON": "POST", "PRESEASON": "PRE",
+        "WC": "POST", "DIV": "POST", "CON": "POST", "SB": "POST",
+    })
 
     keys = ["season", "week", "season_type", "team", "player_id"]
     stats_keys = stats[keys + ["position", "player_name"]].drop_duplicates(keys)
@@ -67,8 +85,8 @@ def main() -> None:
         indicator=True,
     )
     joined["position_match"] = (
-        joined["position_injury"].astype("string").str.upper()
-        == joined["position_stats"].astype("string").str.upper()
+        joined["position_injury"].map(normalize_position)
+        == joined["position_stats"].map(normalize_position)
     )
     joined = joined.merge(player_week_keys.assign(player_week_seen=True), on=["season", "week", "season_type", "player_id"], how="left")
     joined = joined.merge(team_keys.assign(player_week_team_seen=True), on=["season", "week", "season_type", "player_id", "team"], how="left")
@@ -94,6 +112,7 @@ def main() -> None:
         "position_coverage": [],
         "status_coverage": [],
         "position_disagreement_pairs": [],
+        "position_normalization_note": "Common aliases SAF/FS/SS->S, OT->T, OLB/ILB/MLB->LB, NT/DL->DT are normalized for comparison.",
         "season_type_coverage": [],
         "interpretation": [
             "A strict match requires player ID, season, week, season type, and team.",
