@@ -43,11 +43,6 @@ def score_player(stats: pd.DataFrame, player_id: str, cutoff: int, population_me
     rates = prior["raw_rate"].fillna(0.0).to_numpy()
     weighted_rate = float(np.sum(rates * weights) / max(float(weights.sum()), 1e-9))
 
-    # Population prior is restricted to QB observations available before this cutoff.
-    population = stats[
-        stats["sort_key"].lt(cutoff) & stats["position_group"].eq("QB")
-    ]["raw_rate"].dropna()
-    prior_mean = float(population.mean()) if not population.empty else 0.0
     reliability = weighted_opp / (weighted_opp + MIN_OPPORTUNITY * 3.0)
     value = reliability * weighted_rate + (1.0 - reliability) * prior_mean
 
@@ -81,7 +76,8 @@ def main() -> None:
     stats["player_id"] = stats["player_id"].astype("string").str.strip()
     records = []
     # Deduplicate repeated injury updates for the same QB/game before valuation.
-    work = depth.dropna(subset=["season", "week", "gsis_id", "game_id"]).copy()\n    work = work.drop_duplicates(["game_id", "team", "gsis_id"], keep="last")
+    work = depth.dropna(subset=["season", "week", "gsis_id", "game_id"]).copy()
+    work = work.drop_duplicates(["game_id", "team", "gsis_id"], keep="last")
     work["season"] = pd.to_numeric(work["season"], errors="coerce")
     work["week"] = pd.to_numeric(work["week"], errors="coerce")
     work = work.dropna(subset=["season", "week"])
