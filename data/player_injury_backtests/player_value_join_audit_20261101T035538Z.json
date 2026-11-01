@@ -1,0 +1,458 @@
+{
+  "captured_at_utc": "2026-11-01T03:55:38Z",
+  "status": "JOIN_AUDIT_ONLY_NO_MODEL_CHANGES",
+  "injury_rows": 31610,
+  "injury_rows_with_player_id": 31610,
+  "rows_matching_stats_by_player_season_week_type_team": 16119,
+  "rows_with_player_stats_same_season_week_type_any_team": 16124,
+  "rows_with_player_stats_same_season_week_type_and_team": 16119,
+  "match_rate_pct": 50.99335653274281,
+  "matched_rows_with_position_agreement": 14381,
+  "matched_rows_with_position_disagreement": 1738,
+  "unmatched_rows": 15491,
+  "unique_injury_players": 3177,
+  "unique_stats_players": 3959,
+  "season_coverage": [
+    {
+      "season": 2021,
+      "injury_rows": 5587,
+      "matched_rows": 2953,
+      "match_rate_pct": 52.85484159656345,
+      "position_disagreements": 376,
+      "same_player_week_any_team": 2955,
+      "team_mismatch_rows": 2,
+      "no_weekly_stats_rows": 2632
+    },
+    {
+      "season": 2022,
+      "injury_rows": 5682,
+      "matched_rows": 2852,
+      "match_rate_pct": 50.19359380499824,
+      "position_disagreements": 333,
+      "same_player_week_any_team": 2853,
+      "team_mismatch_rows": 1,
+      "no_weekly_stats_rows": 2829
+    },
+    {
+      "season": 2023,
+      "injury_rows": 5599,
+      "matched_rows": 2856,
+      "match_rate_pct": 51.00910876942311,
+      "position_disagreements": 291,
+      "same_player_week_any_team": 2856,
+      "team_mismatch_rows": 0,
+      "no_weekly_stats_rows": 2743
+    },
+    {
+      "season": 2024,
+      "injury_rows": 6215,
+      "matched_rows": 3245,
+      "match_rate_pct": 52.21238938053098,
+      "position_disagreements": 362,
+      "same_player_week_any_team": 3247,
+      "team_mismatch_rows": 2,
+      "no_weekly_stats_rows": 2968
+    },
+    {
+      "season": 2025,
+      "injury_rows": 6068,
+      "matched_rows": 3050,
+      "match_rate_pct": 50.2636783124588,
+      "position_disagreements": 279,
+      "same_player_week_any_team": 3050,
+      "team_mismatch_rows": 0,
+      "no_weekly_stats_rows": 3018
+    },
+    {
+      "season": 2026,
+      "injury_rows": 2459,
+      "matched_rows": 1163,
+      "match_rate_pct": 47.295648637657585,
+      "position_disagreements": 97,
+      "same_player_week_any_team": 1163,
+      "team_mismatch_rows": 0,
+      "no_weekly_stats_rows": 1296
+    }
+  ],
+  "team_mismatch_rows": 5,
+  "no_weekly_stats_rows": 15486,
+  "position_coverage": [
+    {
+      "category": "",
+      "injury_rows": 12,
+      "strict_matches": 8,
+      "same_player_week": 8,
+      "team_mismatches": 0
+    },
+    {
+      "category": "C",
+      "injury_rows": 869,
+      "strict_matches": 135,
+      "same_player_week": 135,
+      "team_mismatches": 0
+    },
+    {
+      "category": "CB",
+      "injury_rows": 3844,
+      "strict_matches": 1977,
+      "same_player_week": 1977,
+      "team_mismatches": 0
+    },
+    {
+      "category": "DE",
+      "injury_rows": 2373,
+      "strict_matches": 1491,
+      "same_player_week": 1491,
+      "team_mismatches": 0
+    },
+    {
+      "category": "DT",
+      "injury_rows": 2781,
+      "strict_matches": 1771,
+      "same_player_week": 1771,
+      "team_mismatches": 0
+    },
+    {
+      "category": "FB",
+      "injury_rows": 194,
+      "strict_matches": 69,
+      "same_player_week": 69,
+      "team_mismatches": 0
+    },
+    {
+      "category": "G",
+      "injury_rows": 2003,
+      "strict_matches": 334,
+      "same_player_week": 334,
+      "team_mismatches": 0
+    },
+    {
+      "category": "K",
+      "injury_rows": 214,
+      "strict_matches": 138,
+      "same_player_week": 138,
+      "team_mismatches": 0
+    },
+    {
+      "category": "LB",
+      "injury_rows": 4196,
+      "strict_matches": 2484,
+      "same_player_week": 2485,
+      "team_mismatches": 1
+    },
+    {
+      "category": "LS",
+      "injury_rows": 111,
+      "strict_matches": 13,
+      "same_player_week": 13,
+      "team_mismatches": 0
+    },
+    {
+      "category": "P",
+      "injury_rows": 121,
+      "strict_matches": 94,
+      "same_player_week": 94,
+      "team_mismatches": 0
+    },
+    {
+      "category": "QB",
+      "injury_rows": 1150,
+      "strict_matches": 638,
+      "same_player_week": 638,
+      "team_mismatches": 0
+    },
+    {
+      "category": "RB",
+      "injury_rows": 2245,
+      "strict_matches": 1392,
+      "same_player_week": 1394,
+      "team_mismatches": 2
+    },
+    {
+      "category": "S",
+      "injury_rows": 2531,
+      "strict_matches": 1429,
+      "same_player_week": 1429,
+      "team_mismatches": 0
+    },
+    {
+      "category": "T",
+      "injury_rows": 2791,
+      "strict_matches": 535,
+      "same_player_week": 535,
+      "team_mismatches": 0
+    },
+    {
+      "category": "TE",
+      "injury_rows": 1997,
+      "strict_matches": 1047,
+      "same_player_week": 1048,
+      "team_mismatches": 1
+    },
+    {
+      "category": "WR",
+      "injury_rows": 4178,
+      "strict_matches": 2564,
+      "same_player_week": 2565,
+      "team_mismatches": 1
+    }
+  ],
+  "status_coverage": [
+    {
+      "category": "",
+      "injury_rows": 16907,
+      "strict_matches": 12126,
+      "same_player_week": 12130,
+      "team_mismatches": 4
+    },
+    {
+      "category": "DOUBTFUL",
+      "injury_rows": 814,
+      "strict_matches": 3,
+      "same_player_week": 3,
+      "team_mismatches": 0
+    },
+    {
+      "category": "NOTE",
+      "injury_rows": 6,
+      "strict_matches": 4,
+      "same_player_week": 4,
+      "team_mismatches": 0
+    },
+    {
+      "category": "OUT",
+      "injury_rows": 5969,
+      "strict_matches": 1,
+      "same_player_week": 2,
+      "team_mismatches": 1
+    },
+    {
+      "category": "QUESTIONABLE",
+      "injury_rows": 7914,
+      "strict_matches": 3985,
+      "same_player_week": 3985,
+      "team_mismatches": 0
+    }
+  ],
+  "position_disagreement_pairs": [
+    {
+      "position_injury": "DT",
+      "position_stats": "DE",
+      "rows": 359
+    },
+    {
+      "position_injury": "DE",
+      "position_stats": "LB",
+      "rows": 246
+    },
+    {
+      "position_injury": "CB",
+      "position_stats": "DB",
+      "rows": 205
+    },
+    {
+      "position_injury": "DE",
+      "position_stats": "DT",
+      "rows": 171
+    },
+    {
+      "position_injury": "S",
+      "position_stats": "DB",
+      "rows": 167
+    },
+    {
+      "position_injury": "LB",
+      "position_stats": "DE",
+      "rows": 164
+    },
+    {
+      "position_injury": "DE",
+      "position_stats": "OLB",
+      "rows": 51
+    },
+    {
+      "position_injury": "S",
+      "position_stats": "CB",
+      "rows": 50
+    },
+    {
+      "position_injury": "T",
+      "position_stats": "G",
+      "rows": 43
+    },
+    {
+      "position_injury": "G",
+      "position_stats": "C",
+      "rows": 40
+    },
+    {
+      "position_injury": "G",
+      "position_stats": "OT",
+      "rows": 35
+    },
+    {
+      "position_injury": "C",
+      "position_stats": "G",
+      "rows": 27
+    },
+    {
+      "position_injury": "FB",
+      "position_stats": "RB",
+      "rows": 25
+    },
+    {
+      "position_injury": "S",
+      "position_stats": "LB",
+      "rows": 25
+    },
+    {
+      "position_injury": "DE",
+      "position_stats": "DL",
+      "rows": 16
+    },
+    {
+      "position_injury": "QB",
+      "position_stats": "TE",
+      "rows": 13
+    },
+    {
+      "position_injury": "CB",
+      "position_stats": "FS",
+      "rows": 11
+    },
+    {
+      "position_injury": "CB",
+      "position_stats": "SAF",
+      "rows": 10
+    },
+    {
+      "position_injury": "LB",
+      "position_stats": "SAF",
+      "rows": 9
+    },
+    {
+      "position_injury": "DE",
+      "position_stats": "NT",
+      "rows": 7
+    },
+    {
+      "position_injury": "RB",
+      "position_stats": "FB",
+      "rows": 7
+    },
+    {
+      "position_injury": "LB",
+      "position_stats": "DB",
+      "rows": 6
+    },
+    {
+      "position_injury": "C",
+      "position_stats": "OT",
+      "rows": 6
+    },
+    {
+      "position_injury": "CB",
+      "position_stats": "S",
+      "rows": 5
+    },
+    {
+      "position_injury": "",
+      "position_stats": "LB",
+      "rows": 5
+    },
+    {
+      "position_injury": "TE",
+      "position_stats": "RB",
+      "rows": 5
+    },
+    {
+      "position_injury": "TE",
+      "position_stats": "FB",
+      "rows": 5
+    },
+    {
+      "position_injury": "WR",
+      "position_stats": "TE",
+      "rows": 4
+    },
+    {
+      "position_injury": "T",
+      "position_stats": "DT",
+      "rows": 3
+    },
+    {
+      "position_injury": "DT",
+      "position_stats": "LB",
+      "rows": 2
+    },
+    {
+      "position_injury": "CB",
+      "position_stats": "RB",
+      "rows": 2
+    },
+    {
+      "position_injury": "",
+      "position_stats": "FS",
+      "rows": 2
+    },
+    {
+      "position_injury": "CB",
+      "position_stats": "WR",
+      "rows": 2
+    },
+    {
+      "position_injury": "DT",
+      "position_stats": "OLB",
+      "rows": 2
+    },
+    {
+      "position_injury": "FB",
+      "position_stats": "TE",
+      "rows": 2
+    },
+    {
+      "position_injury": "",
+      "position_stats": "CB",
+      "rows": 1
+    },
+    {
+      "position_injury": "DT",
+      "position_stats": "MLB",
+      "rows": 1
+    },
+    {
+      "position_injury": "G",
+      "position_stats": "OL",
+      "rows": 1
+    },
+    {
+      "position_injury": "LB",
+      "position_stats": "DT",
+      "rows": 1
+    },
+    {
+      "position_injury": "RB",
+      "position_stats": "WR",
+      "rows": 1
+    }
+  ],
+  "position_normalization_note": "Common aliases SAF/FS/SS->S, OT->T, OLB/ILB/MLB->LB, NT/DL->DT are normalized for comparison.",
+  "season_type_coverage": [
+    {
+      "season_type": "POST",
+      "injury_rows": 1165,
+      "strict_matches": 702
+    },
+    {
+      "season_type": "REG",
+      "injury_rows": 30445,
+      "strict_matches": 15417
+    }
+  ],
+  "interpretation": [
+    "A strict match requires player ID, season, week, season type, and team.",
+    "A successful join establishes identity and weekly-stat availability, not player value or causal injury impact.",
+    "Players absent from weekly statistical output are not assumed to have zero value; they remain unvalued.",
+    "Same-player-week records with a different team are flagged separately."
+  ]
+}
