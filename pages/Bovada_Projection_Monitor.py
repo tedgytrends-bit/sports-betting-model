@@ -142,6 +142,8 @@ for col in ["home_favorite_spread", "total_line", "away_spread_price", "home_spr
 lines["away_team"] = lines["away_team"].map(norm_team)
 lines["home_team"] = lines["home_team"].map(norm_team)
 lines = lines.dropna(subset=["captured_at_utc"]).sort_values("captured_at_utc")
+# Reject malformed rows instead of allowing a blank team pair to become "None" or "nan".
+lines = lines[lines["away_team"].ne("") & lines["home_team"].ne("")].copy()
 lines["game_key"] = lines["away_team"].map(key_team) + "@" + lines["home_team"].map(key_team)
 latest_lines = lines.drop_duplicates("game_key", keep="last").copy()
 original_lines = lines.drop_duplicates("game_key", keep="first").copy()
