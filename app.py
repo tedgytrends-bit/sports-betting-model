@@ -17,6 +17,11 @@ projection_page = st.Page(
     title="Projection Board (Schedule Feed)",
     icon="🏈",
 )
+public_projection_page = st.Page(
+    "pages/Public_Projection_Board.py",
+    title="Week 8 Public Projections",
+    icon="🌐",
+)
 totals_page = st.Page("research/totals_backtest.py", title="Totals Backtest", icon="📊")
 ats_page = st.Page("research/ats_backtest.py", title="ATS Backtest", icon="🏈")
 schedule_page = st.Page("research/schedule_audit.py", title="Schedule Data Audit", icon="🧾")
@@ -27,7 +32,7 @@ prospective_ats_page = st.Page("research/prospective_ats_tracker.py", title="Pro
 results_audit_page = st.Page("research/prospective_results_audit.py", title="Prospective Results Audit", icon="✅")
 
 navigation = st.navigation({
-    "Model": [bovada_monitor_page, projection_page],
+    "Model": [bovada_monitor_page, projection_page, public_projection_page],
     "Research & Diagnostics": [
         totals_page, ats_page, prospective_ats_page, results_audit_page,
         schedule_page, connection_page, endzone_injury_test_page, injury_snapshot_audit_page,
