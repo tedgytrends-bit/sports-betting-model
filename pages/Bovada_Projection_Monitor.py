@@ -21,16 +21,51 @@ def get_schedule():
 def get_injury_reports():
     return load_injury_reports((2021, 2022, 2023, 2024, 2025, 2026))
 
-@st.cache_data(ttl=3600, show_spinner="Loading play-by-play, injury history, and calculating injury-aware projections...")
-def get_latest_efficiency_projections():
+@st.cache_data(ttl=900, show_spinner="Building paired baseline and injury-aware projections...")
+def get_live_paired_efficiency_projections():
     schedule = load_schedule_data()
     pbp = load_pbp((2021, 2022, 2023, 2024, 2025, 2026))
-    features = build_efficiency_model_dataset(schedule, pbp, lookback_games=10)
+    baseline_features = build_efficiency_model_dataset(schedule, pbp, lookback_games=10)
     injury_reports = get_injury_reports()
-    features = add_injury_features(features, schedule, injury_reports)
-    projections = project_upcoming_efficiency(features, min_train_games=500)
-    if projections.empty:
+    injury_features = add_injury_features(
+        baseline_features, schedule, injury_reports
+    )
+
+    # Both models use the same schedule, historical PBP, Ridge estimator,
+    # training window, and upcoming games. The only intended difference is
+    # the pregame injury-report feature set.
+    baseline = project_upcoming_efficiency(
+        baseline_features, min_train_games=500
+    )
+    injury = project_upcoming_efficiency(
+        injury_features, min_train_games=500
+    )
+    if baseline.empty or injury.empty:
         return pd.DataFrame()
+
+    base_cols = ["game_id", "projected_home", "projected_away", "projected_total"]
+    injury_cols = [
+        "game_id", "projected_home", "projected_away", "projected_total",
+        "home_injury_report_available", "away_injury_report_available",
+        "home_inj_out", "away_inj_out",
+        "home_qb_out", "away_qb_out", "home_ol_out", "away_ol_out",
+        "home_skill_out", "away_skill_out", "home_defense_out", "away_defense_out",
+        "home_inj_questionable", "away_inj_questionable",
+    ]
+    base = baseline[base_cols].rename(columns={
+        "projected_home": "baseline_projected_home",
+        "projected_away": "baseline_projected_away",
+        "projected_total": "baseline_projected_total",
+    })
+    inj = injury[[c for c in injury_cols if c in injury.columns]].rename(columns={
+        "projected_home": "injury_projected_home",
+        "projected_away": "injury_projected_away",
+        "projected_total": "injury_projected_total",
+    })
+    projections = inj.merge(base, on="game_id", how="inner", validate="one_to_one")
+    meta = injury[["game_id", "gameday", "season", "week", "away_team", "home_team"]]
+    projections = meta.merge(projections, on="game_id", how="inner", validate="one_to_one")
+
     projections["gameday"] = pd.to_datetime(projections["gameday"], errors="coerce", utc=True)
     now = pd.Timestamp.now(tz="UTC")
     projections = projections[
@@ -39,26 +74,43 @@ def get_latest_efficiency_projections():
         & projections["home_team"].notna()
         & projections["away_team"].notna()
     ].copy()
-    projections["projected_home"] = pd.to_numeric(projections["projected_home"], errors="coerce")
-    projections["projected_away"] = pd.to_numeric(projections["projected_away"], errors="coerce")
-    projections["model_projected_total"] = pd.to_numeric(projections["projected_total"], errors="coerce")
-    projections["model_predicted_home_margin"] = projections["projected_home"] - projections["projected_away"]
-    projections["model_version"] = f"{MODEL_VERSION}+injury-features"
+
+    for prefix in ("baseline", "injury"):
+        projections[f"{prefix}_predicted_home_margin"] = (
+            projections[f"{prefix}_projected_home"] - projections[f"{prefix}_projected_away"]
+        )
+    projections["baseline_model_total"] = projections["baseline_projected_total"]
+    projections["injury_model_total"] = projections["injury_projected_total"]
+    projections["baseline_home_margin"] = projections["baseline_predicted_home_margin"]
+    projections["injury_home_margin"] = projections["injury_predicted_home_margin"]
+    projections["injury_home_margin_delta"] = (
+        projections["injury_home_margin"] - projections["baseline_home_margin"]
+    )
+    projections["injury_total_delta"] = (
+        projections["injury_model_total"] - projections["baseline_model_total"]
+    )
+    projections["model_version"] = f"{MODEL_VERSION}+paired-live"
     projections["projection_captured_at_utc"] = now.isoformat()
     projections["injury_features_included"] = True
+
     home_available = pd.to_numeric(projections.get("home_injury_report_available"), errors="coerce")
     away_available = pd.to_numeric(projections.get("away_injury_report_available"), errors="coerce")
-    if home_available is not None and away_available is not None:
-        projections["injury_data_coverage"] = np.select(
-            [
-                home_available.eq(1) & away_available.eq(1),
-                home_available.eq(1) & away_available.eq(0),
-                home_available.eq(0) & away_available.eq(1),
-                home_available.eq(0) & away_available.eq(0),
-            ],
-            ["Both teams", "Home only", "Away only", "No report data"],
-            default="Unknown",
-        )
+    projections["injury_data_coverage"] = np.select(
+        [
+            home_available.eq(1) & away_available.eq(1),
+            home_available.eq(1) & away_available.eq(0),
+            home_available.eq(0) & away_available.eq(1),
+            home_available.eq(0) & away_available.eq(0),
+        ],
+        ["Both teams", "Home only", "Away only", "No report data"],
+        default="Unknown",
+    )
+    # Preserve the existing monitor's latest-projection field names as aliases
+    # for the injury-aware output, while exposing the paired baseline separately.
+    projections["projected_home"] = projections["injury_projected_home"]
+    projections["projected_away"] = projections["injury_projected_away"]
+    projections["model_projected_total"] = projections["injury_model_total"]
+    projections["model_predicted_home_margin"] = projections["injury_home_margin"]
     return projections
 
 def norm_team(value):
@@ -120,7 +172,7 @@ try:
         except Exception as exc:
             st.warning(f"Could not read frozen projection file {file.name}: {exc}")
     frozen = pd.concat(frozen_parts, ignore_index=True, sort=False) if frozen_parts else pd.DataFrame()
-    latest = get_latest_efficiency_projections()
+    latest = get_live_paired_efficiency_projections()
     injury_reports = get_injury_reports()
     injury_diagnostics = injury_coverage_diagnostics(
         schedule[schedule["season"].eq(schedule["season"].max())], injury_reports
@@ -175,6 +227,29 @@ else:
     latest = pd.DataFrame(columns=["game_key", "latest_projection_time_utc", "latest_home_margin", "latest_model_total", "latest_projected_home", "latest_projected_away", "latest_model_version"])
 
 board = latest_lines.merge(original_lines, on="game_key", how="left").merge(frozen, on="game_key", how="left").merge(latest, on="game_key", how="left")
+# Same-run live comparison: identical historical training data and market,
+# with only the injury-report feature block differing.
+for col in [
+    "baseline_projected_home", "baseline_projected_away",
+    "baseline_model_total", "baseline_home_margin",
+    "injury_projected_home", "injury_projected_away",
+    "injury_model_total", "injury_home_margin",
+    "injury_home_margin_delta", "injury_total_delta",
+]:
+    if col not in board.columns:
+        board[col] = np.nan
+board["live_baseline_spread_edge"] = board["baseline_home_margin"] - board["latest_home_favorite_spread"]
+board["live_injury_spread_edge"] = board["injury_home_margin"] - board["latest_home_favorite_spread"]
+board["live_baseline_total_edge"] = board["baseline_model_total"] - board["latest_total_line"]
+board["live_injury_total_edge"] = board["injury_model_total"] - board["latest_total_line"]
+board["live_baseline_ats_lean"] = board.apply(
+    lambda r: ats_lean(r["live_baseline_spread_edge"], r["latest_home_favorite_spread"], r["home_team"], r["away_team"]), axis=1
+)
+board["live_injury_ats_lean"] = board.apply(
+    lambda r: ats_lean(r["live_injury_spread_edge"], r["latest_home_favorite_spread"], r["home_team"], r["away_team"]), axis=1
+)
+board["live_baseline_total_lean"] = board["live_baseline_total_edge"].map(total_lean)
+board["live_injury_total_lean"] = board["live_injury_total_edge"].map(total_lean)
 board["spread_edge_frozen"] = board["frozen_home_margin"] - board["latest_home_favorite_spread"]
 board["total_edge_frozen"] = board["frozen_model_total"] - board["latest_total_line"]
 board["spread_edge_latest"] = board["latest_home_margin"] - board["latest_home_favorite_spread"]
@@ -210,7 +285,7 @@ board["latest_total_lean"] = board["total_edge_latest"].map(total_lean)
 
 st.subheader("How to use this board")
 st.info("Official evaluation uses the earliest saved efficiency projection per game (frozen). The latest efficiency projection is shown separately as the current outlook. All upcoming-game edges use the latest Bovada line archived below; schedule-feed lines are not used as the market reference.")
-st.caption("The frozen projection is the original baseline. The latest projection now trains with timestamp-filtered historical injury features and uses the latest saved injury snapshot for upcoming games when available. Injury-feed coverage can be incomplete, and this experimental adjustment is not yet proven to improve out-of-sample accuracy. Weather is not automatically adjusted. Projections are cached for up to 60 minutes.")
+st.caption("Frozen = earliest archived weekly projection. Live baseline and live injury-aware projections below are rebuilt together from the same historical training data and current schedule; the only intended difference is the injury-report feature block. Injury-feed coverage can be incomplete, and the injury adjustment has not demonstrated reliable out-of-sample improvement. Weather is not automatically adjusted. Paired live projections are cached for up to 15 minutes.")
 
 if frozen.empty:
     st.warning("No saved frozen efficiency projection files were found. Latest projections can be monitored, but the official frozen baseline is unavailable until the capture workflow saves a projection. Do not substitute the schedule-feed baseline for the official record.")
@@ -239,6 +314,22 @@ visible["Frozen ATS lean"] = visible["frozen_ats_lean"]
 visible["Latest ATS lean"] = visible["latest_ats_lean"]
 visible["Frozen O/U lean"] = visible["frozen_total_lean"]
 visible["Latest O/U lean"] = visible["latest_total_lean"]
+visible["Live baseline score"] = visible.apply(
+    lambda r: f"{r['away_team']} {r['baseline_projected_away']:.1f} — {r['home_team']} {r['baseline_projected_home']:.1f}"
+    if pd.notna(r["baseline_projected_away"]) and pd.notna(r["baseline_projected_home"]) else "Unavailable", axis=1
+)
+visible["Live injury-aware score"] = visible.apply(
+    lambda r: f"{r['away_team']} {r['injury_projected_away']:.1f} — {r['home_team']} {r['injury_projected_home']:.1f}"
+    if pd.notna(r["injury_projected_away"]) and pd.notna(r["injury_projected_home"]) else "Unavailable", axis=1
+)
+visible["Live baseline total"] = visible["baseline_model_total"].map(lambda x: f"{x:.1f}" if pd.notna(x) else "—")
+visible["Live injury-aware total"] = visible["injury_model_total"].map(lambda x: f"{x:.1f}" if pd.notna(x) else "—")
+visible["Injury change: home margin"] = visible["injury_home_margin_delta"].map(lambda x: f"{x:+.1f}" if pd.notna(x) else "—")
+visible["Injury change: total"] = visible["injury_total_delta"].map(lambda x: f"{x:+.1f}" if pd.notna(x) else "—")
+visible["Live baseline ATS lean"] = visible["live_baseline_ats_lean"]
+visible["Live injury ATS lean"] = visible["live_injury_ats_lean"]
+visible["Live baseline O/U lean"] = visible["live_baseline_total_lean"]
+visible["Live injury O/U lean"] = visible["live_injury_total_lean"]
 if "injury_data_coverage" in visible.columns:
     visible["Injury data coverage"] = visible["injury_data_coverage"]
 for team_side in ("home", "away"):
@@ -263,6 +354,9 @@ columns = [
     "Matchup", "Original Bovada spread", "Latest Bovada spread", "Original total", "Latest total",
     "Frozen projected score", "Frozen projected total points", "Frozen ATS lean", "Frozen O/U lean",
     "Frozen ATS edge vs latest line", "Frozen total edge vs latest line",
+    "Live baseline score", "Live baseline total", "Live baseline ATS lean", "Live baseline O/U lean",
+    "Live injury-aware score", "Live injury-aware total", "Live injury ATS lean", "Live injury O/U lean",
+    "Injury change: home margin", "Injury change: total",
     "Latest projected score", "Latest projected total points", "Latest ATS lean", "Latest O/U lean", "Injury data coverage",
     "Latest Home QB out", "Latest Away QB out", "Latest Home OL out", "Latest Away OL out",
     "Latest Home Skill out", "Latest Away Skill out", "Latest Home Defense out", "Latest Away Defense out",
