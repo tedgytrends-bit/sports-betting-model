@@ -1,0 +1,24 @@
+{
+  "captured_at_utc": "2026-11-01T04:55:43Z",
+  "status": "POINT_IN_TIME_QB_DEPTH_CHART_AUDIT_ONLY_NO_MODEL_CHANGES",
+  "qb_injury_report_rows": 1150,
+  "legacy_rows_joined_to_game": 828,
+  "legacy_injured_qb_charted": 762,
+  "legacy_injured_qb_qb1": 585,
+  "legacy_injured_qb_qb2": 123,
+  "timestamped_rows_joined_to_game": 321,
+  "timestamped_injured_qb_charted_pre_kickoff": 321,
+  "timestamped_injured_qb_qb1": 207,
+  "timestamped_injured_qb_qb2": 72,
+  "timestamped_rows_with_pre_kickoff_snapshot": 321,
+  "timestamped_median_snapshot_age_hours": 10.76,
+  "timestamped_rows_with_listed_replacement": 269,
+  "errors": [],
+  "limitations": [
+    "ESPN-era depth charts are assigned using the latest team snapshot strictly before scheduled kickoff in America/New_York.",
+    "A depth-chart listing is not proof that a player was active or actually entered the game.",
+    "A listed replacement is a depth-chart candidate, not a confirmed game-day replacement.",
+    "Legacy weekly depth charts are week-level and do not provide a precise publication timestamp.",
+    "No point impact is inferred and no official model or prospective record is changed."
+  ]
+}
