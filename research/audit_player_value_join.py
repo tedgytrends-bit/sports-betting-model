@@ -119,7 +119,7 @@ def main() -> None:
                 injury_rows=("player_id", "size"),
                 strict_matches=("_merge", lambda x: int(x.eq("both").sum())),
                 same_player_week=("player_week_seen", "sum"),
-                team_mismatches=("player_week_seen", lambda x: int((~x).sum())),
+                team_mismatches=("player_week_team_seen", lambda x: int((~x).sum())),
             ).reset_index()
             summary[target] = grouped.rename(columns={col: "category"}).to_dict(orient="records")
 
