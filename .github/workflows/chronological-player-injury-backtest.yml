@@ -67,6 +67,9 @@ jobs:
       - name: Validate QB point-impact estimates against held-out scoring outcomes
         run: python research/validate_qb_point_impact.py
 
+      - name: Validate QB impact using actual primary passer and prior player value
+        run: python research/validate_qb_actual_replacement.py
+
       - name: Grade baseline vs player-injury betting results
         run: python research/grade_player_injury_backtest.py
 
