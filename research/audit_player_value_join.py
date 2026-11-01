@@ -93,6 +93,8 @@ def main() -> None:
         "no_weekly_stats_rows": int((~joined["player_week_seen"]).sum()),
         "position_coverage": [],
         "status_coverage": [],
+        "position_disagreement_pairs": [],
+        "season_type_coverage": [],
         "interpretation": [
             "A strict match requires player ID, season, week, season type, and team.",
             "A successful join establishes identity and weekly-stat availability, not player value or causal injury impact.",
@@ -119,9 +121,20 @@ def main() -> None:
                 injury_rows=("player_id", "size"),
                 strict_matches=("_merge", lambda x: int(x.eq("both").sum())),
                 same_player_week=("player_week_seen", "sum"),
-                team_mismatches=("player_week_team_seen", lambda x: int((~x).sum())),
+                team_mismatches=("player_week_team_seen", lambda x: int((joined.loc[x.index, "player_week_seen"] & ~x).sum())),
             ).reset_index()
             summary[target] = grouped.rename(columns={col: "category"}).to_dict(orient="records")
+
+    disagreements = joined[joined["_merge"].eq("both") & ~joined["position_match"]]
+    if len(disagreements):
+        pairs = disagreements.groupby(["position_injury", "position_stats"], dropna=False).size().reset_index(name="rows")
+        summary["position_disagreement_pairs"] = pairs.sort_values("rows", ascending=False).head(40).to_dict(orient="records")
+
+    season_types = joined.groupby(["season_type"], dropna=False).agg(
+        injury_rows=("player_id", "size"),
+        strict_matches=("_merge", lambda x: int(x.eq("both").sum())),
+    ).reset_index()
+    summary["season_type_coverage"] = season_types.to_dict(orient="records")
 
     OUT.mkdir(parents=True, exist_ok=True)
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
