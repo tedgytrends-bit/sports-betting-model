@@ -268,6 +268,23 @@ for col in [
 ]:
     if col not in board.columns:
         board[col] = np.nan
+def ats_lean(edge, signed_home_line, home_team, away_team):
+    if pd.isna(edge) or pd.isna(signed_home_line):
+        return "Unavailable"
+    if abs(edge) < 0.05:
+        return "No clear lean"
+    if edge > 0:
+        # Positive signed line means home favorite; invert it to show the home's actual spread.
+        return f"Lean {home_team} {-signed_home_line:+.1f}"
+    return f"Lean {away_team} {signed_home_line:+.1f}"
+
+def total_lean(edge):
+    if pd.isna(edge):
+        return "Unavailable"
+    if abs(edge) < 0.05:
+        return "No clear lean"
+    return "Lean Over" if edge > 0 else "Lean Under"
+
 board["live_baseline_spread_edge"] = board["baseline_home_margin"] - board["latest_home_favorite_spread"]
 board["live_injury_spread_edge"] = board["injury_home_margin"] - board["latest_home_favorite_spread"]
 board["live_baseline_total_edge"] = board["baseline_model_total"] - board["latest_total_line"]
@@ -286,23 +303,6 @@ board["spread_edge_latest"] = board["latest_home_margin"] - board["latest_home_f
 board["total_edge_latest"] = board["latest_model_total"] - board["latest_total_line"]
 board["original_spread_edge_frozen"] = board["frozen_home_margin"] - board["original_home_favorite_spread"]
 board["original_total_edge_frozen"] = board["frozen_model_total"] - board["original_total_line"]
-
-def ats_lean(edge, signed_home_line, home_team, away_team):
-    if pd.isna(edge) or pd.isna(signed_home_line):
-        return "Unavailable"
-    if abs(edge) < 0.05:
-        return "No clear lean"
-    if edge > 0:
-        # Positive signed line means home favorite; invert it to show the home's actual spread.
-        return f"Lean {home_team} {-signed_home_line:+.1f}"
-    return f"Lean {away_team} {signed_home_line:+.1f}"
-
-def total_lean(edge):
-    if pd.isna(edge):
-        return "Unavailable"
-    if abs(edge) < 0.05:
-        return "No clear lean"
-    return "Lean Over" if edge > 0 else "Lean Under"
 
 board["frozen_ats_lean"] = board.apply(
     lambda r: ats_lean(r["spread_edge_frozen"], r["latest_home_favorite_spread"], r["home_team"], r["away_team"]), axis=1
