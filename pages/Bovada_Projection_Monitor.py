@@ -304,14 +304,27 @@ c3.metric("Latest projections available", f"{int(board['latest_home_margin'].not
 c4.metric("Line updates archived", f"{len(lines) - len(original_lines):,}")
 
 visible = board.copy()
-visible["Matchup"] = visible["away_team"] + " @ " + visible["home_team"]
+# game_key is created from the original Bovada team codes and survives completed
+# games even when the schedule/projection feed stops returning those games.
+_key_parts = visible["game_key"].fillna("").astype(str).str.split("@", n=1, expand=True)
+visible["Matchup"] = (
+    _key_parts[0].fillna("").str.strip() + " @ " +
+    _key_parts[1].fillna("").str.strip()
+).str.strip()
+visible.loc[visible["Matchup"].isin(["@", " @"]), "Matchup"] = "Matchup unavailable"
+visible["away_team"] = _key_parts[0].fillna("").str.strip()
+visible["home_team"] = _key_parts[1].fillna("").str.strip()
 for side, away_col, home_col in [
     ("Frozen", "frozen_projected_away", "frozen_projected_home"),
     ("Latest", "latest_projected_away", "latest_projected_home"),
 ]:
     visible[f"{side} projected score"] = visible.apply(
-        lambda r: f"{r['away_team']} {r[away_col]:.1f} — {r['home_team']} {r[home_col]:.1f}"
-        if pd.notna(r[away_col]) and pd.notna(r[home_col]) else "Not captured" if side == "Frozen" else "Unavailable",
+        lambda r: (
+            f"{r['away_team']} {float(r[away_col]):.1f} — {r['home_team']} {float(r[home_col]):.1f}"
+            if pd.notna(r[away_col]) and pd.notna(r[home_col])
+            else f"{r['away_team']} @ {r['home_team']} — Not captured" if side == "Frozen"
+            else f"{r['away_team']} @ {r['home_team']} — Unavailable"
+        ),
         axis=1,
     )
 visible["Frozen projected total points"] = visible["frozen_model_total"].map(lambda x: f"{x:.1f}" if pd.notna(x) else "—")
@@ -322,11 +335,13 @@ visible["Frozen O/U lean"] = visible["frozen_total_lean"]
 visible["Latest O/U lean"] = visible["latest_total_lean"]
 visible["Live baseline score"] = visible.apply(
     lambda r: f"{r['away_team']} {r['baseline_projected_away']:.1f} — {r['home_team']} {r['baseline_projected_home']:.1f}"
-    if pd.notna(r["baseline_projected_away"]) and pd.notna(r["baseline_projected_home"]) else "Unavailable", axis=1
+    if pd.notna(r["baseline_projected_away"]) and pd.notna(r["baseline_projected_home"])
+    else f"{r['away_team']} @ {r['home_team']} — Unavailable", axis=1
 )
 visible["Live injury-aware score"] = visible.apply(
     lambda r: f"{r['away_team']} {r['injury_projected_away']:.1f} — {r['home_team']} {r['injury_projected_home']:.1f}"
-    if pd.notna(r["injury_projected_away"]) and pd.notna(r["injury_projected_home"]) else "Unavailable", axis=1
+    if pd.notna(r["injury_projected_away"]) and pd.notna(r["injury_projected_home"])
+    else f"{r['away_team']} @ {r['home_team']} — Unavailable", axis=1
 )
 visible["Live baseline total"] = visible["baseline_model_total"].map(lambda x: f"{x:.1f}" if pd.notna(x) else "—")
 visible["Live injury-aware total"] = visible["injury_model_total"].map(lambda x: f"{x:.1f}" if pd.notna(x) else "—")
