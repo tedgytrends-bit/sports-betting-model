@@ -1,0 +1,12 @@
+season,source,rows,unique_player_ids,player_id_column,team_column,game_or_week_keys_present,has_position,has_offensive_production,status,unique_games,has_play_key,players_on_play_column,offense_players_column,defense_players_column
+2021,weekly_player_stats,18969,2087.0,player_id,team,True,True,True,loaded,,,,,
+2022,weekly_player_stats,18831,2010.0,player_id,team,True,True,True,loaded,,,,,
+2023,weekly_player_stats,18643,1947.0,player_id,team,True,True,True,loaded,,,,,
+2024,weekly_player_stats,18983,2001.0,player_id,team,True,True,True,loaded,,,,,
+2025,weekly_player_stats,19422,2024.0,player_id,team,True,True,True,loaded,,,,,
+2026,weekly_player_stats,7521,1694.0,player_id,team,True,True,True,loaded,,,,,
+2021,play_participation,50714,,,,,,,loaded,285.0,True,players_on_play,offense_players,defense_players
+2022,play_participation,50150,,,,,,,loaded,284.0,True,players_on_play,offense_players,defense_players
+2023,play_participation,46168,,,,,,,loaded,285.0,True,players_on_play,offense_players,defense_players
+2024,play_participation,45919,,,,,,,loaded,285.0,True,players_on_play,offense_players,defense_players
+2025,play_participation,45184,,,,,,,loaded,285.0,True,players_on_play,offense_players,defense_players
