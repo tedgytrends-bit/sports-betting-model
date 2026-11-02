@@ -35,6 +35,17 @@ MIN_TRAIN_GAMES = 500
 SNAPSHOT = ROOT / "data/public_snapshots/nfl_week_08_public_2026-11-01.csv"
 OUT = ROOT / "data/four_model_week08"
 
+# User-verified Week 8 Bovada lines override the older snapshot values.
+MARKETS = {
+    "NE @ MIA": ("NE", 7.0, 42.0), "KC @ DEN": ("KC", 1.0, 41.0),
+    "LAC @ LA": ("LA", 6.5, 46.0), "TEN @ CIN": ("CIN", 13.0, 45.5),
+    "MIN @ DET": ("DET", 3.5, 45.5), "CLE @ PIT": ("PIT", 3.5, 39.0),
+    "IND @ JAX": ("JAX", 10.5, 46.0), "BAL @ BUF": ("BUF", 3.0, 55.0),
+    "ATL @ TB": ("TB", 2.0, 43.0), "ARI @ DAL": ("DAL", 7.0, 54.5),
+    "PHI @ WAS": ("WAS", 6.0, 40.5), "LV @ NYJ": ("NYJ", 2.0, 46.5),
+    "CAR @ GB": ("GB", 3.5, 47.0), "CHI @ SEA": ("SEA", 3.0, 46.5),
+}
+
 # Frozen late-add forecast from the Nov. 2 pregame four-model run.
 # It is intentionally kept separate from the Nov. 1 public snapshot.
 LATE_ADD = {
