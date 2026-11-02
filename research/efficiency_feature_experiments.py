@@ -9,10 +9,9 @@ from __future__ import annotations
 import json
 from datetime import datetime, timezone
 from pathlib import Path
-from math import comb
-
 import numpy as np
 import pandas as pd
+from scipy.stats import binomtest
 from sklearn.linear_model import Ridge
 
 import sys
@@ -274,8 +273,7 @@ def _exact_binomial_two_sided(k: int, n: int) -> float:
     """Exact two-sided binomial tail probability under p=0.5."""
     if n <= 0:
         return 1.0
-    tail = sum(comb(n, i) for i in range(0, min(k, n-k)+1)) / (2 ** n)
-    return min(1.0, 2.0 * tail)
+    return float(binomtest(k, n, p=0.5, alternative="two-sided").pvalue)
 
 
 def _mcnemar_p_value(baseline_only_correct: int, passing_only_correct: int) -> dict:
