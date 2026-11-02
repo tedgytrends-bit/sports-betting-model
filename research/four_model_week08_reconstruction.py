@@ -174,6 +174,9 @@ def main() -> None:
             favorite, spread, total_line = late["market_favorite"], late["market_spread"], late["market_total"]
             row["publication_status"] = "Late-added Nov. 2 research forecast — not on original public board"
             row["market_source"] = "Bovada line recorded Nov. 2 pregame"
+            row["market_favorite"] = favorite
+            row["market_spread_points"] = spread
+            row["market_total"] = total_line
             for name in ("baseline", "injury", "efficiency", "combined"):
                 scores = late[name]
                 add_model_fields(row, name, scores["away"], scores["home"],
@@ -193,6 +196,9 @@ def main() -> None:
             favorite, spread = parse_market_spread(s["Official Bovada Spread"])
             total_line = float(s["Official Bovada Total"])
             row["market_source"] = "Frozen Bovada line in Nov. 1 public snapshot"
+            row["market_favorite"] = favorite
+            row["market_spread_points"] = spread
+            row["market_total"] = total_line
             for name, score_col, total_col, ats_col in (
                 ("baseline", "Baseline Score Projection", "Baseline Total Projection", "Baseline ATS Projection"),
                 ("injury", "Injury Score Projection", "Injury Total Projection", "Injury ATS Projection"),
@@ -219,18 +225,27 @@ def main() -> None:
             actual_away, actual_home = row["actual_away_score"], row["actual_home_score"]
             if pd.notna(actual_away) and pd.notna(actual_home):
                 actual_margin = float(actual_home) - float(actual_away)
-                home_market_line = -spread if norm_team(favorite) == norm_team(home) else spread
-                actual_ats_margin = actual_margin - home_market_line
-                edge = row[f"{name}_ats_edge"]
-                row[f"{name}_ats_result"] = (
-                    "Push" if abs(actual_ats_margin) < 1e-9
-                    else ("Win" if edge * actual_ats_margin > 0 else "Loss")
-                )
-                actual_total_margin = float(actual_away) + float(actual_home) - total_line
-                total_edge = row[f"{name}_total_edge"]
+                pick_text = str(row[f"{name}_ats_pick"])
+                pick_match = re.search(r"Lean\\s+([A-Z]{2,3})", pick_text.upper())
+                picked_team = norm_team(pick_match.group(1)) if pick_match else ""
+                if picked_team not in (home, away):
+                    row[f"{name}_ats_result"] = "No pick"
+                else:
+                    picked_line = -spread if picked_team == norm_team(favorite) else spread
+                    picked_margin = (
+                        actual_margin if picked_team == home else -actual_margin
+                    ) + picked_line
+                    row[f"{name}_ats_result"] = (
+                        "Push" if abs(picked_margin) < 1e-9
+                        else ("Win" if picked_margin > 0 else "Loss")
+                    )
+                actual_total = float(actual_away) + float(actual_home)
+                total_pick = str(row[f"{name}_total_pick"]).lower()
+                total_margin = actual_total - total_line
                 row[f"{name}_total_result"] = (
-                    "Push" if abs(actual_total_margin) < 1e-9
-                    else ("Win" if total_edge * actual_total_margin > 0 else "Loss")
+                    "Push" if abs(total_margin) < 1e-9
+                    else ("Win" if ((total_pick == "over" and total_margin > 0)
+                                    or (total_pick == "under" and total_margin < 0)) else "Loss")
                 )
             else:
                 row[f"{name}_ats_result"] = "Pending"
