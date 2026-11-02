@@ -294,43 +294,46 @@ def _matched_directional_comparison(
     baseline_name: str = PRIMARY_BASELINE,
     passing_name: str = PRIMARY_PASSING,
 ) -> dict:
-    """Paired same-game directional comparison, excluding outcome pushes and zero leans."""
+    """Paired same-game directional comparison, excluding pushes and zero-edge no-leans."""
     pair = predictions[predictions["variant"].isin([baseline_name, passing_name])].copy()
     if pair.empty:
         raise RuntimeError("Primary baseline/passing variants are absent from predictions.")
     if pair.duplicated(["game_id", "variant"]).any():
         raise RuntimeError("Duplicate game_id/variant rows detected; matched test is ambiguous.")
+
+    # Validate game-level actual outcomes independently before pivoting predictions.
+    truth_cols = ["game_id", "season", "week", "gameday", "actual_ats_margin", "actual_total_margin"]
+    truth = pair[truth_cols].drop_duplicates()
+    if truth["game_id"].duplicated().any():
+        raise RuntimeError("Actual ATS/total outcomes differ within a game across variants.")
+
     results = {}
     for market, edge_col, actual_col in (
         ("ats", "ats_edge", "actual_ats_margin"),
         ("totals", "total_edge", "actual_total_margin"),
     ):
-        market_pair = pair.pivot(
-            index=["game_id", "season", "week", "gameday"],
-            columns="variant",
-            values=edge_col,
-        )
+        edges = pair.pivot(index="game_id", columns="variant", values=edge_col)
         required = [baseline_name, passing_name]
-        missing = [name for name in required if name not in market_pair.columns]
-        if missing or actual_col not in pair.columns:
+        missing = [name for name in required if name not in edges.columns]
+        if missing:
             raise RuntimeError(f"Missing paired columns for {market}: {missing}")
-        actual_by_game = pair.drop_duplicates("game_id").set_index("game_id")[actual_col]
-        market_pair = market_pair.join(actual_by_game.rename("actual_margin"), how="inner")
+        outcomes = truth.set_index("game_id")[actual_col]
+        matched = edges.join(outcomes.rename("actual_margin"), how="inner")
 
-        b_edge = market_pair[baseline_name].to_numpy(dtype=float)
-        p_edge = market_pair[passing_name].to_numpy(dtype=float)
-        actual = market_pair["actual_margin"].to_numpy(dtype=float)
+        b_edge = matched[baseline_name].to_numpy(dtype=float)
+        p_edge = matched[passing_name].to_numpy(dtype=float)
+        actual = matched["actual_margin"].to_numpy(dtype=float)
         complete = np.isfinite(b_edge) & np.isfinite(p_edge) & np.isfinite(actual)
         pushes = complete & (actual == 0)
         no_lean = complete & (actual != 0) & ((b_edge == 0) | (p_edge == 0))
         eligible = complete & (actual != 0) & (b_edge != 0) & (p_edge != 0)
 
-        b_correct = np.sign(b_edge[eligible]) == np.sign(actual[eligible])
-        p_correct = np.sign(p_edge[eligible]) == np.sign(actual[eligible])
-        both_correct = int(np.count_nonzero(b_correct & p_correct))
-        both_wrong = int(np.count_nonzero(~b_correct & ~p_correct))
-        baseline_only = int(np.count_nonzero(b_correct & ~p_correct))
-        passing_only = int(np.count_nonzero(~b_correct & p_correct))
+        baseline_right = np.sign(b_edge[eligible]) == np.sign(actual[eligible])
+        passing_right = np.sign(p_edge[eligible]) == np.sign(actual[eligible])
+        both_correct = int(np.count_nonzero(baseline_right & passing_right))
+        both_wrong = int(np.count_nonzero(~baseline_right & ~passing_right))
+        baseline_only = int(np.count_nonzero(baseline_right & ~passing_right))
+        passing_only = int(np.count_nonzero(~baseline_right & passing_right))
         n = int(eligible.sum())
         pval = _mcnemar_p_value(baseline_only, passing_only)
 
@@ -353,13 +356,13 @@ def _matched_directional_comparison(
                 "A small p-value is evidence of a difference, not proof of profitability."
             ),
         }
+
     return {
         "comparison": f"{baseline_name} vs {passing_name}",
         "grading": "Directional ATS side / over-under relative to the same nflverse spread_line and total_line; actual margin zero is a push.",
         "eligible_rule": "Both models must have a non-zero directional lean and a non-push actual result; no-lean cases are counted separately and omitted from McNemar.",
         "markets": results,
     }
-
 
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
