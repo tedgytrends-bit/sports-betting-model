@@ -9,7 +9,6 @@ on:
       - "research/four_model_comparison.py"
       - "research/four_model_upcoming_projection.py"
       - "research/four_model_week08_reconstruction.py"
-      - "research/four_model_week08_reconstruction.py"
       - "pages/Four_Model_Week8_Comparison.py"
       - "app.py"
       - "research/injury_coverage_audit.py"
@@ -18,6 +17,9 @@ on:
   pull_request:
     paths:
       - "research/four_model_comparison.py"
+      - "research/four_model_week08_reconstruction.py"
+      - "pages/Four_Model_Week8_Comparison.py"
+      - "app.py"
       - "research/injury_coverage_audit.py"
       - "research/efficiency_feature_experiments.py"
       - "injury_model.py"
