@@ -75,7 +75,7 @@ def lean_ats(home: str, away: str, pred_home: float, pred_away: float,
              favorite: str, spread: float) -> tuple[str, float]:
     # favorite is quoted at -spread; the other side is +spread.
     home_market_line = -spread if norm_team(favorite) == norm_team(home) else spread
-    edge = (pred_home - pred_away) - home_market_line
+    edge = (pred_home - pred_away) + home_market_line
     if abs(edge) < 1e-9:
         return "No edge", edge
     if edge > 0:
