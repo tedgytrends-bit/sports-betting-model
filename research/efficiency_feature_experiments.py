@@ -320,6 +320,9 @@ def _matched_directional_comparison(
         p_edge = market_pair[passing_name]
         actual = market_pair["actual_margin"]
         complete = b_edge.notna() & p_edge.notna() & actual.notna()
+        # No-lean predictions are not incorrect picks. Keep separate counts,
+        # and only compare paired directions when both models actually lean.
+        one_or_both_no_lean = complete & actual.ne(0) & (b_edge.eq(0) | p_edge.eq(0))
         # A push is not a correct or incorrect directional result.
         no_push = actual.ne(0)
         both_nonzero = b_edge.ne(0) & p_edge.ne(0)
@@ -336,7 +339,7 @@ def _matched_directional_comparison(
         results[market] = {
             "matched_games_with_both_predictions": int(complete.sum()),
             "actual_market_pushes_excluded": int((complete & ~no_push).sum()),
-            "either_model_no_lean_excluded": int((complete & no_push & ~both_nonzero).sum()),
+            "either_model_no_lean_excluded": int(one_or_both_no_lean.sum()),
             "evaluated_paired_games": int(n),
             "both_correct": both_correct,
             "both_wrong": both_wrong,
