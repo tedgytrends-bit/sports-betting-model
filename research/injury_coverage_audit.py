@@ -86,7 +86,7 @@ def main() -> None:
         "scheduled_games_diagnosed": int(len(detail)),
         "season_summary": seasonal.to_dict(orient="records"),
         "timing_assumptions": {
-            "2025-2026": "Treat matching weekly official injury-report feed rows dated before the scheduled game date as pregame, consistent with the user-stated NFL submission deadlines (Friday 3 p.m. for Sunday games; Saturday 3 p.m. for Monday games). Same-day rows are excluded; original timestamps are retained.",
+            "2025-2026": "Treat matching weekly official injury-report feed rows with a UTC calendar date before the scheduled game date as pregame, consistent with the user-stated NFL submission deadlines (Friday 3 p.m. for Sunday games; Saturday 3 p.m. for Monday games). Same-day rows are excluded; original timestamps are retained.",
             "2021-2024": "Require source date_modified to precede scheduled kickoff (or prior calendar date when kickoff is unavailable).",
         },
         "diagnostic_definitions": {
