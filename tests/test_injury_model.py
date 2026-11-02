@@ -47,6 +47,37 @@ class InjuryModelTests(unittest.TestCase):
         self.assertEqual(result["home_inj_out"], 1)
 
 
+    def test_2025_undated_weekly_reports_use_approved_deadline_assumption(self):
+        schedule = pd.DataFrame([{
+            "game_id": "UNDATED", "season": 2025, "week": 4, "gameday": "2025-09-25",
+            "gametime": "20:15", "game_type": "REG", "home_team": "BUF", "away_team": "MIA",
+        }])
+        dataset = pd.DataFrame([{"game_id": "UNDATED", "sample_feature": 1.0}])
+        reports = pd.DataFrame([
+            {"season": 2025, "week": 4, "game_type": "REG", "team": "BUF",
+             "position": "QB", "player_name": "Undated QB", "report_status": "OUT",
+             "practice_status": "DID NOT PARTICIPATE", "date_modified": None},
+            {"season": 2025, "week": 4, "game_type": "REG", "team": "BUF",
+             "position": "QB", "player_name": "Same Day QB", "report_status": "OUT",
+             "practice_status": "DID NOT PARTICIPATE", "date_modified": "2025-09-25T19:00:00Z"},
+        ])
+        result = add_injury_features(dataset, schedule, reports).iloc[0]
+        self.assertEqual(result["home_injury_report_available"], 1)
+        self.assertEqual(result["home_qb_out"], 1)
+        self.assertEqual(result["away_injury_report_available"], 0)
+
+    def test_mixed_timestamp_formats_are_parsed_individually(self):
+        reports = pd.DataFrame([
+            {"season": 2025, "week": 4, "team": "BUF", "position": "QB",
+             "report_status": "OUT", "practice_status": "DNP",
+             "date_modified": "2025-09-17T15:00:00Z"},
+            {"season": 2025, "week": 4, "team": "MIA", "position": "OT",
+             "report_status": "OUT", "practice_status": "DNP",
+             "date_modified": "09/17/2025 11:00:00 AM"},
+        ])
+        normalized = _normalize_reports(reports)
+        self.assertTrue(normalized["date_modified"].notna().all())
+
     def test_game_type_is_used_when_season_type_is_absent(self):
         reports = pd.DataFrame([
             {"season": 2025, "week": 19, "game_type": "POST", "team": "BUF",
