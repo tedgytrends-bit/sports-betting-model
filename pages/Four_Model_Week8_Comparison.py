@@ -28,23 +28,23 @@ MODEL_LABELS = [
     ("combined", "Combined"),
 ]
 
-def record(part: pd.DataFrame, model: str, market: str) -> str:
+def record(part: pd.DataFrame, model: str, market: str) -> tuple[str, str]:
     col = f"{model}_{market}_result"
     if col not in part:
-        return "—"
+        return "—", ""
     wins = int((part[col] == "Win").sum())
     losses = int((part[col] == "Loss").sum())
     pushes = int((part[col] == "Push").sum())
     pending = int((part[col] == "Pending").sum())
     decided = wins + losses
-    result = f"{wins}-{losses}"
-    if pushes:
-        result += f" · {pushes} push"
-    if pending:
-        result += f" · {pending} pending"
+    details = []
     if decided:
-        result += f" · {wins / decided:.1%}"
-    return result
+        details.append(f"{wins / decided:.1%} win rate")
+    if pushes:
+        details.append(f"{pushes} push" if pushes == 1 else f"{pushes} pushes")
+    if pending:
+        details.append(f"{pending} pending" if pending == 1 else f"{pending} pending")
+    return f"{wins}-{losses}", " · ".join(details) or "No graded games"
 
 def display_table(part: pd.DataFrame) -> pd.DataFrame:
     rows = []
@@ -85,8 +85,12 @@ summary_cols = st.columns(4)
 for col, (model, label) in zip(summary_cols, MODEL_LABELS):
     with col:
         st.markdown(f"**{label}**")
-        st.metric("ATS", record(df, model, "ats"))
-        st.metric("Totals", record(df, model, "total"))
+        ats_record, ats_detail = record(df, model, "ats")
+        st.metric("ATS", ats_record)
+        st.caption(ats_detail)
+        total_record, total_detail = record(df, model, "total")
+        st.metric("Totals", total_record)
+        st.caption(total_detail)
 
 st.subheader("All 14 games")
 st.caption("Each model cell shows projected score, ATS lean and result, then projected total direction and points with result. Bovada lines are the same user-verified lines for every model.")
