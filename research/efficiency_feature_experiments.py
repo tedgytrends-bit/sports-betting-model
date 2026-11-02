@@ -156,13 +156,11 @@ def _feature_sets(
     baseline_columns: list[str],
     experimental_columns: list[str],
 ) -> dict[str, list[str]]:
-    """Keep the frozen feature set separate from features added by this experiment."""
+    """Build controlled passing-feature ablations from the frozen baseline."""
     excluded = {
         "game_id", "gameday", "season", "week", "home_team", "away_team",
         "home_score", "away_score", "spread_line", "total_line",
     }
-    # Derive baseline features from the pre-merge model dataset only.
-    # Selecting all numeric columns after merging contaminated every variant.
     base = [
         c for c in baseline_columns
         if c in data.columns and c not in excluded
@@ -174,22 +172,29 @@ def _feature_sets(
         and "_shrunk_" not in c and c != "expected_game_plays"
     ]
     passing = [c for c in split if "_pass" in c or "pass_" in c]
-    rushing = [c for c in split if "_rush" in c or "rush_" in c]
-    shrink = [c for c in experimental_columns if c in data.columns and "_shrunk_" in c]
-    pace = [c for c in experimental_columns if c == "expected_game_plays" and c in data.columns]
+    # Explicitly separate efficiency, success-rate and volume information.
+    pass_efficiency = [
+        c for c in passing
+        if ("_epa_" in c or "_epa_matchup" in c)
+    ]
+    pass_success = [
+        c for c in passing
+        if "_success_" in c or "_success_matchup" in c
+    ]
+    pass_volume = [
+        c for c in passing
+        if "_plays_" in c or "plays_faced_pass" in c
+    ]
     if not base:
         raise RuntimeError("Frozen baseline feature list is empty.")
     return {
         "baseline_frozen_features": base,
-        "baseline_plus_passing_only": list(dict.fromkeys(base + passing)),
-        "baseline_plus_rushing_only": list(dict.fromkeys(base + rushing)),
-        "baseline_plus_pass_rush": list(dict.fromkeys(base + passing + rushing)),
-        "pass_rush_plus_prior_season_shrinkage": list(dict.fromkeys(base + passing + rushing + shrink)),
-        "pass_rush_shrinkage_plus_pace": list(dict.fromkeys(base + passing + rushing + shrink + pace)),
+        "baseline_plus_pass_efficiency_only": list(dict.fromkeys(base + pass_efficiency)),
+        "baseline_plus_pass_success_only": list(dict.fromkeys(base + pass_success)),
+        "baseline_plus_pass_volume_only": list(dict.fromkeys(base + pass_volume)),
+        "baseline_plus_all_passing": list(dict.fromkeys(base + passing)),
     }
-
-
-def _fit_weekly(data: pd.DataFrame, features: list[str]) -> pd.DataFrame:
+def _fit_weekly(data: pd.DataFrame, features: list[str], alpha: float = ALPHA) -> pd.DataFrame:
     data = data.dropna(subset=["gameday", "home_score", "away_score"]).sort_values("gameday").copy()
     data["test_week"] = data["gameday"].dt.to_period("W").astype(str)
     predictions = []
@@ -205,7 +210,7 @@ def _fit_weekly(data: pd.DataFrame, features: list[str]) -> pd.DataFrame:
         x_train = train[active].fillna(medians).fillna(0)
         x_test = test[active].fillna(medians).fillna(0)
         for target, output in (("home_score", "pred_home"), ("away_score", "pred_away")):
-            model = Ridge(alpha=ALPHA)
+            model = Ridge(alpha=alpha)
             model.fit(x_train, train[target])
             test[output] = model.predict(x_test)
         predictions.append(test)
@@ -249,12 +254,24 @@ def main() -> None:
 
     summaries = []
     prediction_frames = []
-    for name, features in variants.items():
-        print(f"Running {name} ({len(features)} candidate features)...")
-        pred = _fit_weekly(data, features)
+    # Feature ablations use the default alpha. Regularization sensitivity is
+    # assessed separately on baseline and all-passing sets; alpha is not
+    # selected on the test set and no tuned value is promoted automatically.
+    alpha_variants = {
+        "baseline_frozen_features": variants["baseline_frozen_features"],
+        "baseline_plus_all_passing": variants["baseline_plus_all_passing"],
+    }
+    runs = [(name, features, ALPHA) for name, features in variants.items()]
+    for base_name, features in alpha_variants.items():
+        for alpha in (3.0, 10.0, 30.0, 100.0):
+            runs.append((f"{base_name}_alpha_{int(alpha)}", features, alpha))
+    for name, features, alpha in runs:
+        print(f"Running {name} ({len(features)} candidate features, alpha={alpha})...")
+        pred = _fit_weekly(data, features, alpha=alpha)
         if pred.empty:
             raise RuntimeError(f"No chronological predictions generated for {name}")
         pred["variant"] = name
+        pred["ridge_alpha"] = alpha
         pred["actual_total"] = pred["home_score"] + pred["away_score"]
         pred["pred_total"] = pred["pred_home"] + pred["pred_away"]
         pred["actual_home_margin"] = pred["home_score"] - pred["away_score"]
@@ -303,10 +320,13 @@ def main() -> None:
         "baseline_model_version": "0.8.0",
         "minimum_training_games": MIN_TRAIN_GAMES,
         "ridge_alpha": ALPHA,
+        "regularization_sensitivity_alphas": [3.0, 10.0, 30.0, 100.0],
+        "regularization_warning": "Alpha sensitivity is descriptive on the same chronological test period; do not choose alpha from these results without a separate nested or later holdout.",
         "comparison_rule": "Same intersection of weekly chronological out-of-sample game IDs across every variant.",
         "market_line_warning": "spread_line and total_line come from nflverse schedule data; they are not verified executable sportsbook quotes.",
         "thresholds": list(THRESHOLDS),
         "feature_counts": {name: len(cols) for name, cols in variants.items()},
+        "run_feature_counts": {name: len(cols) for name, cols, _alpha in runs},
         "feature_names": variants,
         "variants": summaries,
         "season_results": season_summaries,
