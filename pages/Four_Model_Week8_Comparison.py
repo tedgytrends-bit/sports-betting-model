@@ -14,7 +14,7 @@ st.caption("A transparent comparison of four research model variants. Not bettin
 st.info(
     "The original Baseline and Injury projections below are preserved from the November 1 public snapshot. "
     "Efficiency and Combined are chronological reconstructions using only pregame information. "
-    "Bears–Seahawks was not on the original public board and is shown separately as a late-added forecast."
+    "Bears–Seahawks is included in this same Week 8 comparison and clearly labeled as a late-added forecast."
 )
 
 if not DATA.exists():
@@ -68,7 +68,12 @@ def display_table(part: pd.DataFrame) -> pd.DataFrame:
                 f'{r["away_team"]} {r["actual_away_score"]:g} — '
                 f'{r["home_team"]} {r["actual_home_score"]:g}'
             )
-        item = {"Date": r.get("date", ""), "Matchup": r["matchup"], "Final": actual}
+        item = {
+            "Date": r.get("date", ""),
+            "Matchup": r["matchup"],
+            "Publication": "Late-added" if str(r.get("publication_status", "")).startswith("Late-added") else "Original board",
+            "Final": actual,
+        }
         for model, label in MODEL_LABELS:
             away_score = float(r[f"{model}_away_score"])
             home_score = float(r[f"{model}_home_score"])
@@ -96,18 +101,22 @@ def summary_block(part: pd.DataFrame, heading: str) -> None:
             st.metric("Totals", record(part, model, "total"))
 
 
-summary_block(original, "Original public games · 12 matchups")
+all_week8 = pd.concat([original, late], ignore_index=True)
+summary_block(all_week8, "Week 8 results · All 13 included matchups")
 st.caption(
+    "All Week 8 matchups appear together below. The Publication column distinguishes the 12 games "
+    "on the original November 1 board from Bears–Seahawks, which was added November 2 before kickoff. "
     "Each model cell shows projected score, ATS pick/result, then total direction and projected points/result. "
-    "ATS grading uses the displayed pick; totals are graded against the frozen Bovada total."
+    "ATS grading uses the displayed pick; totals are graded against the recorded Bovada total."
 )
 st.dataframe(
-    display_table(original),
+    display_table(all_week8),
     hide_index=True,
     use_container_width=True,
     column_config={
         "Date": st.column_config.TextColumn("Date", width="small"),
         "Matchup": st.column_config.TextColumn("Matchup", width="small"),
+        "Publication": st.column_config.TextColumn("Publication", width="small"),
         "Final": st.column_config.TextColumn("Final score", width="medium"),
         "Baseline": st.column_config.TextColumn("Baseline", width="large"),
         "Injury": st.column_config.TextColumn("Injury", width="large"),
@@ -116,20 +125,6 @@ st.dataframe(
     },
 )
 
-if not late.empty:
-    st.divider()
-    st.subheader("Late-added forecast · Not on the original public board")
-    st.caption(
-        "Bears–Seahawks was generated and recorded separately on November 2 before kickoff. "
-        "It is not counted in the 12-game original-public summary above."
-    )
-    summary_block(late, "Late-added game results")
-    st.dataframe(
-        display_table(late),
-        hide_index=True,
-        use_container_width=True,
-    )
-
 with st.expander("Methodology and publication history"):
     st.markdown(
         """
@@ -137,7 +132,7 @@ with st.expander("Methodology and publication history"):
         - **Injury:** the exact injury-aware score, ATS, and total projections published in that same snapshot.
         - **Efficiency:** reconstructed chronologically for the Week 8 test week, using training games strictly before that week's first game.
         - **Combined:** the same chronological process with the passing/rushing efficiency and injury feature blocks.
-        - **Late-added:** Bears–Seahawks uses the saved November 2 pregame four-model forecast and is deliberately separated from the original public record.
+        - **Bears–Seahawks:** included in the Week 8 comparison as a late-added November 2 pregame forecast; the Publication label distinguishes it from the original November 1 board. It is not retroactively represented as part of that original publication.
         - The comparison is research transparency, not proof of profitability. No official prospective record or production model is changed.
         """
     )
