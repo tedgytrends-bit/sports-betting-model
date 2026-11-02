@@ -226,7 +226,7 @@ def main() -> None:
             if pd.notna(actual_away) and pd.notna(actual_home):
                 actual_margin = float(actual_home) - float(actual_away)
                 pick_text = str(row[f"{name}_ats_pick"])
-                pick_match = re.search(r"Lean\\s+([A-Z]{2,3})", pick_text.upper())
+                pick_match = re.search(r"Lean\s+([A-Z]{2,3})", pick_text.upper())
                 picked_team = norm_team(pick_match.group(1)) if pick_match else ""
                 if picked_team not in (home, away):
                     row[f"{name}_ats_result"] = "No pick"
