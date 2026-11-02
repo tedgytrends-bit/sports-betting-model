@@ -51,7 +51,7 @@ def main() -> None:
             no_team_covered=("either_team_covered", lambda s: int((~s).sum())),
             games_with_pregame_feed_rows=("Rows available pre-kickoff", lambda s: int(s.gt(0).sum())),
             games_with_snapshot=("Snapshot file found", "sum"),
-            games_using_deadline_assumption=("Timing policy", lambda x: int(x.eq("Assumed pregame by NFL reporting deadline").sum())),
+            games_using_deadline_assumption=("Timing policy", lambda x: int(x.eq("Prior-date rows under NFL reporting deadline").sum())),
         )
     )
     seasonal["both_team_coverage_pct"] = (
@@ -86,11 +86,11 @@ def main() -> None:
         "scheduled_games_diagnosed": int(len(detail)),
         "season_summary": seasonal.to_dict(orient="records"),
         "timing_assumptions": {
-            "2025-2026": "Treat matching weekly official injury-report feed rows as pregame based on the user's stated NFL submission deadlines: Friday 3 p.m. for Sunday games and Saturday 3 p.m. for Monday games. Source timestamps are retained for traceability but are not used to reject these seasons.",
+            "2025-2026": "Treat matching weekly official injury-report feed rows dated before the scheduled game date as pregame, consistent with the user-stated NFL submission deadlines (Friday 3 p.m. for Sunday games; Saturday 3 p.m. for Monday games). Same-day rows are excluded; original timestamps are retained.",
             "2021-2024": "Require source date_modified to precede scheduled kickoff (or prior calendar date when kickoff is unavailable).",
         },
         "diagnostic_definitions": {
-            "both_teams_covered": "At least one eligible report row for both teams under the season-specific timing policy.",
+            "both_teams_covered": "At least one eligible report row for both teams under the season-specific timing policy; for 2025-2026, rows must be dated before game day.",
             "games_with_pregame_feed_rows": "At least one live-feed row retained under the season-specific timing policy and game-type filter.",
             "snapshot": "Saved snapshot metadata is evaluated separately from the live feed.",
         },
