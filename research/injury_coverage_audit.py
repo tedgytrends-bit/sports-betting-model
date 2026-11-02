@@ -26,6 +26,7 @@ OUT = ROOT / "data" / "injury_coverage_audit"
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     schedule = load_schedule_data()
+    schedule = schedule[pd.to_numeric(schedule["season"], errors="coerce").isin(SEASONS)].copy()
     reports = load_injury_reports(SEASONS)
     detail = injury_coverage_diagnostics(schedule, reports)
 
