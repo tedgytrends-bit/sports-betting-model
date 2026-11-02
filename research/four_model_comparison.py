@@ -172,7 +172,7 @@ def main() -> None:
             "minimum_training_games": MIN_TRAIN_GAMES,
             "ridge_alpha": ALPHA,
             "folds": "chronological weekly; training games strictly before each test week's first game",
-            "injury_timing": "injury_model.add_injury_features filters timestamped reports before kickoff; saved snapshots are used only when captured before kickoff",
+            "injury_timing": "2021-2024 feed rows must precede kickoff; 2025-2026 feed rows must have a UTC calendar date before game day under the user-stated reporting-deadline assumption; saved snapshots are used only when captured before kickoff",
             "market_lines": "nflverse schedule spread_line and total_line; not verified executable sportsbook quotes",
             "roi_assumption": "flat one-unit stakes at -110; simulation only",
         },
