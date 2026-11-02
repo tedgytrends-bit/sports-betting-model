@@ -1,0 +1,65 @@
+{
+  "captured_at_utc": "2026-11-02T20:40:35Z",
+  "model_version": "player-injury-shadow-0.1",
+  "status": "RESEARCH_ONLY_NOT_OFFICIAL",
+  "historical_seasons": [
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "training_minimum_games": 500,
+  "baseline": {
+    "games": 1020,
+    "home_score_mae": 7.592194125048727,
+    "away_score_mae": 7.54838450800896,
+    "total_mae": 10.580077136557914,
+    "total_rmse": 13.467251805862567,
+    "home_margin_mae": 10.39578660977912,
+    "home_margin_rmse": 13.486355740596617,
+    "games_with_total_line": 1020,
+    "total_market_mae": 10.187254901960785,
+    "total_model_vs_market_mae_delta": 0.39282223459712995,
+    "games_with_spread_line": 1020,
+    "market_home_margin_mae": 9.756372549019607,
+    "model_home_margin_mae_on_market_games": 10.39578660977912,
+    "home_margin_mae_vs_market_delta": 0.6394140607595133,
+    "ats_directional_accuracy": 0.49748237663645517
+  },
+  "player_injury": {
+    "games": 1020,
+    "home_score_mae": 7.558711329478808,
+    "away_score_mae": 7.541857180278638,
+    "total_mae": 10.578611561208215,
+    "total_rmse": 13.461726496351522,
+    "home_margin_mae": 10.411170498958342,
+    "home_margin_rmse": 13.461368040716797,
+    "games_with_total_line": 1020,
+    "total_market_mae": 10.187254901960785,
+    "total_model_vs_market_mae_delta": 0.39135665924743,
+    "games_with_spread_line": 1020,
+    "market_home_margin_mae": 9.756372549019607,
+    "model_home_margin_mae_on_market_games": 10.411170498958342,
+    "home_margin_mae_vs_market_delta": 0.6547979499387342,
+    "ats_directional_accuracy": 0.486404833836858
+  },
+  "paired_comparison": {
+    "common_test_games": 1020,
+    "same_test_game_sets": true,
+    "total_mae_delta_injury_minus_baseline": -0.0014655753496999324,
+    "home_margin_mae_delta_injury_minus_baseline": 0.015383889179220844
+  },
+  "injury_coverage": {
+    "home_team_game_report_rows": 1130,
+    "away_team_game_report_rows": 1131,
+    "games_with_any_player_detail": 1133,
+    "player_detail_rows": 13958,
+    "player_rows_with_prior_usage_value": 9622,
+    "player_rows_without_prior_usage": 1866,
+    "offensive_line_rows_not_individually_valued": 2470
+  },
+  "timing_caveat": "Historical features use feed date_modified strictly before kickoff. This is a source-timestamp backtest, not proof that the information was publicly available at that exact time.",
+  "methodology": "Same weekly chronological folds, same Ridge estimator and minimum training size. No random split. Injury features use prior-week player PBP usage and historical injury updates filtered before each game's kickoff."
+}
