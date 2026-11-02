@@ -151,18 +151,32 @@ def _pregame_split_features(schedule: pd.DataFrame, team_games: pd.DataFrame) ->
     return pd.DataFrame(rows)
 
 
-def _feature_sets(data: pd.DataFrame) -> dict[str, list[str]]:
+def _feature_sets(
+    data: pd.DataFrame,
+    baseline_columns: list[str],
+    experimental_columns: list[str],
+) -> dict[str, list[str]]:
+    """Keep the frozen feature set separate from features added by this experiment."""
     excluded = {
         "game_id", "gameday", "season", "week", "home_team", "away_team",
         "home_score", "away_score", "spread_line", "total_line",
     }
-    base = [c for c in data if c not in excluded and pd.api.types.is_numeric_dtype(data[c])]
-    split = [c for c in data if (
-        c.startswith(("home_off_", "away_off_", "home_def_", "away_def_"))
-        or "_epa_matchup" in c or "_success_matchup" in c
-    )]
-    shrink = [c for c in data if "_shrunk_" in c]
-    pace = [c for c in data if c == "expected_game_plays"]
+    # Derive baseline features from the pre-merge model dataset only.
+    # Selecting all numeric columns after merging contaminated every variant.
+    base = [
+        c for c in baseline_columns
+        if c in data.columns and c not in excluded
+        and pd.api.types.is_numeric_dtype(data[c])
+    ]
+    split = [
+        c for c in experimental_columns
+        if c in data.columns and c not in excluded
+        and "_shrunk_" not in c and c != "expected_game_plays"
+    ]
+    shrink = [c for c in experimental_columns if c in data.columns and "_shrunk_" in c]
+    pace = [c for c in experimental_columns if c == "expected_game_plays" and c in data.columns]
+    if not base:
+        raise RuntimeError("Frozen baseline feature list is empty.")
     return {
         "baseline_frozen_features": base,
         "baseline_plus_pass_rush_matchups": list(dict.fromkeys(base + split)),
@@ -221,11 +235,13 @@ def main() -> None:
     baseline = build_efficiency_model_dataset(schedule, pbp, lookback_games=10)
     split_history = _team_split_history(pbp, schedule)
     split_features = _pregame_split_features(schedule, split_history)
+    baseline_columns = list(baseline.columns)
+    experimental_columns = [c for c in split_features.columns if c != "game_id"]
     data = baseline.merge(split_features, on="game_id", how="left", validate="one_to_one")
     lines = schedule[["game_id", "spread_line", "total_line"]].copy()
     data = data.merge(lines, on="game_id", how="left", validate="one_to_one")
     data["gameday"] = pd.to_datetime(data["gameday"], errors="coerce")
-    variants = _feature_sets(data)
+    variants = _feature_sets(data, baseline_columns, experimental_columns)
 
     summaries = []
     prediction_frames = []
@@ -275,6 +291,8 @@ def main() -> None:
         "comparison_rule": "Same intersection of weekly chronological out-of-sample game IDs across every variant.",
         "market_line_warning": "spread_line and total_line come from nflverse schedule data; they are not verified executable sportsbook quotes.",
         "thresholds": list(THRESHOLDS),
+        "feature_counts": {name: len(cols) for name, cols in variants.items()},
+        "feature_names": variants,
         "variants": summaries,
         "prediction_csv": str(csv_path),
     }
