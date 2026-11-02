@@ -7,6 +7,7 @@ on:
       - "research/four-model-injury-efficiency"
     paths:
       - "research/four_model_comparison.py"
+      - "research/four_model_upcoming_projection.py"
       - "research/injury_coverage_audit.py"
       - "injury_model.py"
       - ".github/workflows/four-model-comparison.yml"
@@ -40,6 +41,8 @@ jobs:
       - name: Compile research modules
         run: |
           python -m py_compile model.py injury_model.py research/efficiency_feature_experiments.py research/four_model_comparison.py research/injury_coverage_audit.py
+      - name: Run four-model upcoming-game projection
+        run: python research/four_model_upcoming_projection.py
       - name: Run four-model chronological comparison
         run: python research/four_model_comparison.py
       - name: Run historical injury coverage audit
