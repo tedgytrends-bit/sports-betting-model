@@ -20,7 +20,8 @@ class TestMatchedEfficiencyComparison(unittest.TestCase):
             ("g3", 7, 1, -1, 5, 1, -1),    # baseline only
             ("g4", -7, -1, 1, -5, -1, 1),  # passing only
             ("g5", 0, 1, 1, 0, 1, 1),      # push excluded
-            ("g6", -7, 0, 1, -5, 0, 1),    # no-lean excluded
+            ("g6", -7, 0, 1, -5, 0, 1),    # baseline no-lean excluded
+            ("g7", -7, 1, 0, -5, 1, 0),    # passing no-lean excluded
         ]
         for gid, aa, be, pe, at, bte, pte in samples:
             base = dict(game_id=gid, season=2024, week=1, gameday="2024-09-01",
