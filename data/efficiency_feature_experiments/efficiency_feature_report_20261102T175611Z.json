@@ -1,0 +1,273 @@
+{
+  "status": "RESEARCH_ONLY_NOT_OFFICIAL",
+  "created_at_utc": "2026-11-02T17:56:12.220631+00:00",
+  "baseline_model_version": "0.8.0",
+  "minimum_training_games": 500,
+  "ridge_alpha": 10.0,
+  "comparison_rule": "Same intersection of weekly chronological out-of-sample game IDs across every variant.",
+  "market_line_warning": "spread_line and total_line come from nflverse schedule data; they are not verified executable sportsbook quotes.",
+  "thresholds": [
+    1.5,
+    2.5,
+    3.5
+  ],
+  "variants": [
+    {
+      "variant": "baseline_frozen_features",
+      "common_games": 1020,
+      "ats_margin_mae": 10.3459,
+      "total_mae": 10.6103,
+      "ats_directional_accuracy_pct": 50.755,
+      "totals_directional_accuracy_pct": 51.629,
+      "ats_fixed_thresholds": {
+        "variant": "baseline_frozen_features",
+        "n_games": 1020,
+        "threshold_1.5": {
+          "bets": 728,
+          "wins": 362,
+          "losses": 350,
+          "pushes": 16,
+          "units": -20.9091,
+          "roi_pct": -2.872
+        },
+        "threshold_2.5": {
+          "bets": 559,
+          "wins": 279,
+          "losses": 266,
+          "pushes": 14,
+          "units": -12.3636,
+          "roi_pct": -2.212
+        },
+        "threshold_3.5": {
+          "bets": 395,
+          "wins": 197,
+          "losses": 190,
+          "pushes": 8,
+          "units": -10.9091,
+          "roi_pct": -2.762
+        }
+      },
+      "totals_fixed_thresholds": {
+        "variant": "baseline_frozen_features",
+        "n_games": 1020,
+        "threshold_1.5": {
+          "bets": 735,
+          "wins": 382,
+          "losses": 348,
+          "pushes": 5,
+          "units": -0.7273,
+          "roi_pct": -0.099
+        },
+        "threshold_2.5": {
+          "bets": 566,
+          "wins": 280,
+          "losses": 281,
+          "pushes": 5,
+          "units": -26.4545,
+          "roi_pct": -4.674
+        },
+        "threshold_3.5": {
+          "bets": 404,
+          "wins": 203,
+          "losses": 197,
+          "pushes": 4,
+          "units": -12.4545,
+          "roi_pct": -3.083
+        }
+      }
+    },
+    {
+      "variant": "baseline_plus_pass_rush_matchups",
+      "common_games": 1020,
+      "ats_margin_mae": 10.3459,
+      "total_mae": 10.6103,
+      "ats_directional_accuracy_pct": 50.755,
+      "totals_directional_accuracy_pct": 51.629,
+      "ats_fixed_thresholds": {
+        "variant": "baseline_plus_pass_rush_matchups",
+        "n_games": 1020,
+        "threshold_1.5": {
+          "bets": 728,
+          "wins": 362,
+          "losses": 350,
+          "pushes": 16,
+          "units": -20.9091,
+          "roi_pct": -2.872
+        },
+        "threshold_2.5": {
+          "bets": 559,
+          "wins": 279,
+          "losses": 266,
+          "pushes": 14,
+          "units": -12.3636,
+          "roi_pct": -2.212
+        },
+        "threshold_3.5": {
+          "bets": 395,
+          "wins": 197,
+          "losses": 190,
+          "pushes": 8,
+          "units": -10.9091,
+          "roi_pct": -2.762
+        }
+      },
+      "totals_fixed_thresholds": {
+        "variant": "baseline_plus_pass_rush_matchups",
+        "n_games": 1020,
+        "threshold_1.5": {
+          "bets": 735,
+          "wins": 382,
+          "losses": 348,
+          "pushes": 5,
+          "units": -0.7273,
+          "roi_pct": -0.099
+        },
+        "threshold_2.5": {
+          "bets": 566,
+          "wins": 280,
+          "losses": 281,
+          "pushes": 5,
+          "units": -26.4545,
+          "roi_pct": -4.674
+        },
+        "threshold_3.5": {
+          "bets": 404,
+          "wins": 203,
+          "losses": 197,
+          "pushes": 4,
+          "units": -12.4545,
+          "roi_pct": -3.083
+        }
+      }
+    },
+    {
+      "variant": "pass_rush_plus_prior_season_shrinkage",
+      "common_games": 1020,
+      "ats_margin_mae": 10.3459,
+      "total_mae": 10.6103,
+      "ats_directional_accuracy_pct": 50.755,
+      "totals_directional_accuracy_pct": 51.629,
+      "ats_fixed_thresholds": {
+        "variant": "pass_rush_plus_prior_season_shrinkage",
+        "n_games": 1020,
+        "threshold_1.5": {
+          "bets": 728,
+          "wins": 362,
+          "losses": 350,
+          "pushes": 16,
+          "units": -20.9091,
+          "roi_pct": -2.872
+        },
+        "threshold_2.5": {
+          "bets": 559,
+          "wins": 279,
+          "losses": 266,
+          "pushes": 14,
+          "units": -12.3636,
+          "roi_pct": -2.212
+        },
+        "threshold_3.5": {
+          "bets": 395,
+          "wins": 197,
+          "losses": 190,
+          "pushes": 8,
+          "units": -10.9091,
+          "roi_pct": -2.762
+        }
+      },
+      "totals_fixed_thresholds": {
+        "variant": "pass_rush_plus_prior_season_shrinkage",
+        "n_games": 1020,
+        "threshold_1.5": {
+          "bets": 735,
+          "wins": 382,
+          "losses": 348,
+          "pushes": 5,
+          "units": -0.7273,
+          "roi_pct": -0.099
+        },
+        "threshold_2.5": {
+          "bets": 566,
+          "wins": 280,
+          "losses": 281,
+          "pushes": 5,
+          "units": -26.4545,
+          "roi_pct": -4.674
+        },
+        "threshold_3.5": {
+          "bets": 404,
+          "wins": 203,
+          "losses": 197,
+          "pushes": 4,
+          "units": -12.4545,
+          "roi_pct": -3.083
+        }
+      }
+    },
+    {
+      "variant": "pass_rush_shrinkage_plus_pace",
+      "common_games": 1020,
+      "ats_margin_mae": 10.3459,
+      "total_mae": 10.6103,
+      "ats_directional_accuracy_pct": 50.755,
+      "totals_directional_accuracy_pct": 51.629,
+      "ats_fixed_thresholds": {
+        "variant": "pass_rush_shrinkage_plus_pace",
+        "n_games": 1020,
+        "threshold_1.5": {
+          "bets": 728,
+          "wins": 362,
+          "losses": 350,
+          "pushes": 16,
+          "units": -20.9091,
+          "roi_pct": -2.872
+        },
+        "threshold_2.5": {
+          "bets": 559,
+          "wins": 279,
+          "losses": 266,
+          "pushes": 14,
+          "units": -12.3636,
+          "roi_pct": -2.212
+        },
+        "threshold_3.5": {
+          "bets": 395,
+          "wins": 197,
+          "losses": 190,
+          "pushes": 8,
+          "units": -10.9091,
+          "roi_pct": -2.762
+        }
+      },
+      "totals_fixed_thresholds": {
+        "variant": "pass_rush_shrinkage_plus_pace",
+        "n_games": 1020,
+        "threshold_1.5": {
+          "bets": 735,
+          "wins": 382,
+          "losses": 348,
+          "pushes": 5,
+          "units": -0.7273,
+          "roi_pct": -0.099
+        },
+        "threshold_2.5": {
+          "bets": 566,
+          "wins": 280,
+          "losses": 281,
+          "pushes": 5,
+          "units": -26.4545,
+          "roi_pct": -4.674
+        },
+        "threshold_3.5": {
+          "bets": 404,
+          "wins": 203,
+          "losses": 197,
+          "pushes": 4,
+          "units": -12.4545,
+          "roi_pct": -3.083
+        }
+      }
+    }
+  ],
+  "prediction_csv": "data/efficiency_feature_experiments/efficiency_feature_predictions_20261102T175611Z.csv"
+}
