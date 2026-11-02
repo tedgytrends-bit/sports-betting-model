@@ -1,0 +1,44 @@
+name: Research Four-Model Upcoming Game Projection
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "research/four-model-injury-efficiency"
+    paths:
+      - "research/four_model_upcoming_projection.py"
+      - "injury_model.py"
+      - "model.py"
+      - "research/four_model_comparison.py"
+      - ".github/workflows/four-model-upcoming-projection.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  upcoming-projection:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Compile research modules
+        run: python -m py_compile model.py injury_model.py research/four_model_comparison.py research/four_model_upcoming_projection.py
+      - name: Build four-model projection for Bears at Seahawks
+        run: python research/four_model_upcoming_projection.py
+      - name: Upload research projection
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: four-model-upcoming-projection
+          path: data/four_model_upcoming/
+          if-no-files-found: warn
+          retention-days: 7
