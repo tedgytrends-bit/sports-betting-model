@@ -27,7 +27,7 @@ on:
       - ".github/workflows/four-model-comparison.yml"
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   four-model-comparison:
@@ -55,6 +55,16 @@ jobs:
         run: python research/four_model_week08_reconstruction.py
       - name: Run historical injury coverage audit
         run: python research/injury_coverage_audit.py
+      - name: Commit Week 8 comparison data for Streamlit
+        if: success()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/four_model_week08/week08_four_model_comparison.csv data/four_model_week08/week08_four_model_summary.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Publish validated Week 8 four-model comparison data"
+            git push
+          fi
       - name: Upload research-only results
         if: always()
         uses: actions/upload-artifact@v4
