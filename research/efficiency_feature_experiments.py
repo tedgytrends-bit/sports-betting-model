@@ -145,7 +145,7 @@ def _pregame_split_features(schedule: pd.DataFrame, team_games: pd.DataFrame) ->
 def _feature_sets(data: pd.DataFrame) -> dict[str, list[str]]:
     excluded = {
         "game_id", "gameday", "season", "week", "home_team", "away_team",
-        "home_score", "away_score",
+        "home_score", "away_score", "spread_line", "total_line",
     }
     base = [c for c in data if c not in excluded and pd.api.types.is_numeric_dtype(data[c])]
     split = [c for c in data if (
