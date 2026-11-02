@@ -324,6 +324,7 @@ def _matched_directional_comparison(
         no_push = actual.ne(0)
         both_nonzero = b_edge.ne(0) & p_edge.ne(0)
         eligible = complete & no_push & both_nonzero
+        # Grade directions only where both models make an actual lean.
         b_correct = np.sign(b_edge[eligible]) == np.sign(actual[eligible])
         p_correct = np.sign(p_edge[eligible]) == np.sign(actual[eligible])
         both_correct = int((b_correct & p_correct).sum())
