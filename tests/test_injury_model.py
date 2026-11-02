@@ -24,12 +24,12 @@ class InjuryModelTests(unittest.TestCase):
         reports = pd.DataFrame([
             {"season": 2025, "week": 3, "season_type": "REG", "team": "BUF", "position": "QB",
              "player_name": "QB One", "report_status": "QUESTIONABLE", "practice_status": "LIMITED",
-             "date_modified": "2025-09-18T15:00:00Z"},
-            # Latest pregame update for the same player replaces the earlier row.
+             "date_modified": "2025-09-17T15:00:00Z"},
+            # Latest prior-day official report for the same player replaces the earlier row.
             {"season": 2025, "week": 3, "season_type": "REG", "team": "BUF", "position": "QB",
              "player_name": "QB One", "report_status": "OUT", "practice_status": "DID NOT PARTICIPATE",
-             "date_modified": "2025-09-18T18:00:00Z"},
-            # This update happened after kickoff and must not leak into the features.
+             "date_modified": "2025-09-17T18:00:00Z"},
+            # Same-day updates are not eligible under the official-report deadline policy.
             {"season": 2025, "week": 3, "season_type": "REG", "team": "BUF", "position": "QB",
              "player_name": "QB Two", "report_status": "OUT", "practice_status": "DID NOT PARTICIPATE",
              "date_modified": "2025-09-19T02:00:00Z"},
