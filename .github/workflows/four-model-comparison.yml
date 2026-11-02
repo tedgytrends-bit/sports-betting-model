@@ -46,7 +46,7 @@ jobs:
           pip install -r requirements.txt
       - name: Compile research modules
         run: |
-          python -m py_compile model.py injury_model.py research/efficiency_feature_experiments.py research/four_model_comparison.py research/injury_coverage_audit.py research/four_model_week08_reconstruction.py
+          python -m py_compile model.py injury_model.py research/efficiency_feature_experiments.py research/four_model_comparison.py research/injury_coverage_audit.py research/four_model_week08_reconstruction.py pages/Four_Model_Week8_Comparison.py app.py
       - name: Run four-model upcoming-game projection
         run: python research/four_model_upcoming_projection.py
       - name: Run four-model chronological comparison
