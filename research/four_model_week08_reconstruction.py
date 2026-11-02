@@ -151,111 +151,119 @@ def main() -> None:
     week_schedule = week_schedule.drop_duplicates("game_id")
     rows = []
     matched_snapshot_games = set()
+    schedule_rows = week_schedule.to_dict("records")
 
-    for _, game in week_schedule.iterrows():
-        away, home = norm_team(game["away_team"]), norm_team(game["home_team"])
-        matchup = f"{away} @ {home}"
-        game_id = game["game_id"]
-        row = {
-            "season": SEASON, "week": WEEK, "game_id": str(game_id),
-            "date": str(pd.Timestamp(game["gameday"]).date()) if pd.notna(game["gameday"]) else "",
-            "matchup": matchup, "away_team": away, "home_team": home,
-            "actual_away_score": game.get("away_score"),
-            "actual_home_score": game.get("home_score"),
-            "actual_total": (
-                float(game["away_score"]) + float(game["home_score"])
-                if pd.notna(game.get("away_score")) and pd.notna(game.get("home_score")) else np.nan
-            ),
-            "publication_status": "Original Nov. 1 public snapshot",
+    def find_schedule_game(away: str, home: str, label: str) -> dict:
+        matches = [
+            g for g in schedule_rows
+            if norm_team(g["away_team"]) == norm_team(away)
+            and norm_team(g["home_team"]) == norm_team(home)
+        ]
+        if len(matches) != 1:
+            raise RuntimeError(
+                f"Expected exactly one Week {WEEK} schedule row for snapshot matchup "
+                f"{label}; found {len(matches)}."
+            )
+        return matches[0]
+
+    def actual_fields(game: dict) -> dict:
+        away_score, home_score = game.get("away_score"), game.get("home_score")
+        complete = pd.notna(away_score) and pd.notna(home_score)
+        return {
+            "actual_away_score": away_score if complete else np.nan,
+            "actual_home_score": home_score if complete else np.nan,
+            "actual_total": float(away_score) + float(home_score) if complete else np.nan,
         }
 
-        if matchup in LATE_ADD:
-            late = LATE_ADD[matchup]
-            favorite, spread, total_line = late["market_favorite"], late["market_spread"], late["market_total"]
-            row["publication_status"] = "Late-added Nov. 2 research forecast — not on original public board"
-            row["market_source"] = "Bovada line recorded Nov. 2 pregame"
-            row["market_favorite"] = favorite
-            row["market_spread_points"] = spread
-            row["market_total"] = total_line
-            for name in ("baseline", "injury", "efficiency", "combined"):
-                scores = late[name]
-                add_model_fields(row, name, scores["away"], scores["home"],
-                                 favorite, spread, total_line, away, home)
-        else:
-            parsed_matchups = public["Game"].astype(str).apply(
-                lambda value: tuple(norm_team(part) for part in value.upper().split("@"))
-                if "@" in value else ("", "")
-            )
-            snap = public.loc[
-                parsed_matchups.apply(lambda pair: pair == (away, home))
-            ]
-            if len(snap) != 1:
-                raise RuntimeError(f"Expected exactly one frozen public row for {matchup}; found {len(snap)}.")
-            s = snap.iloc[0]
-            matched_snapshot_games.add(str(s["Game"]))
-            favorite, spread = parse_market_spread(s["Official Bovada Spread"])
-            total_line = float(s["Official Bovada Total"])
-            row["market_source"] = "Frozen Bovada line in Nov. 1 public snapshot"
-            row["market_favorite"] = favorite
-            row["market_spread_points"] = spread
-            row["market_total"] = total_line
-            for name, score_col, total_col, ats_col in (
-                ("baseline", "Baseline Score Projection", "Baseline Total Projection", "Baseline ATS Projection"),
-                ("injury", "Injury Score Projection", "Injury Total Projection", "Injury ATS Projection"),
-            ):
-                away_score, home_score = parse_score_pair(s[score_col], away, home)
-                add_model_fields(row, name, away_score, home_score,
-                                 favorite, spread, total_line, away, home)
-                # Preserve original public values exactly for the two published variants.
-                row[f"{name}_ats_pick"] = str(s[ats_col])
-                published_total = float(s[total_col])
-                published_total_pick, published_total_edge = lean_total(published_total, total_line)
-                row[f"{name}_projected_total"] = published_total
-                row[f"{name}_total_pick"] = published_total_pick
-                row[f"{name}_total_edge"] = round(published_total_edge, 2)
-                row[f"{name}_published_total"] = published_total
+    # Build the original-public section from the immutable snapshot itself.
+    # Schedule-only games are intentionally not fabricated into the public board.
+    for _, s in public.iterrows():
+        parts = str(s["Game"]).upper().split("@")
+        if len(parts) != 2:
+            raise RuntimeError(f"Invalid matchup label in frozen snapshot: {s['Game']!r}")
+        away, home = norm_team(parts[0]), norm_team(parts[1])
+        matchup = f"{away} @ {home}"
+        game = find_schedule_game(away, home, str(s["Game"]))
+        game_id = game["game_id"]
+        matched_snapshot_games.add(str(s["Game"]))
+        favorite, spread = parse_market_spread(s["Official Bovada Spread"])
+        total_line = float(s["Official Bovada Total"])
+        row = {
+            "season": SEASON, "week": WEEK, "game_id": str(game_id),
+            "date": str(pd.Timestamp(game["gameday"]).date()) if pd.notna(game.get("gameday")) else "",
+            "matchup": matchup, "away_team": away, "home_team": home,
+            **actual_fields(game),
+            "publication_status": "Original Nov. 1 public snapshot",
+            "market_source": "Frozen Bovada line in Nov. 1 public snapshot",
+            "market_favorite": favorite, "market_spread_points": spread,
+            "market_total": total_line,
+        }
 
-            for variant, name in (
-                ("efficiency_only_added", "efficiency"),
-                ("combined_efficiency_plus_injury", "combined"),
-            ):
-                if game_id not in predictions[variant].index:
-                    raise RuntimeError(f"Missing chronological prediction for {matchup} / {variant}.")
-                p = predictions[variant].loc[game_id]
-                add_model_fields(row, name, float(p["pred_away"]), float(p["pred_home"]),
-                                 favorite, spread, total_line, away, home)
+        for name, score_col, total_col, ats_col in (
+            ("baseline", "Baseline Score Projection", "Baseline Total Projection", "Baseline ATS Projection"),
+            ("injury", "Injury Score Projection", "Injury Total Projection", "Injury ATS Projection"),
+        ):
+            away_score, home_score = parse_score_pair(s[score_col], away, home)
+            add_model_fields(row, name, away_score, home_score,
+                             favorite, spread, total_line, away, home)
+            # Keep the originally published ATS and total calls verbatim.
+            row[f"{name}_ats_pick"] = str(s[ats_col])
+            published_total = float(s[total_col])
+            published_total_pick, published_total_edge = lean_total(published_total, total_line)
+            row[f"{name}_projected_total"] = published_total
+            row[f"{name}_total_pick"] = published_total_pick
+            row[f"{name}_total_edge"] = round(published_total_edge, 2)
+            row[f"{name}_published_total"] = published_total
 
-        for name in ("baseline", "injury", "efficiency", "combined"):
-            actual_away, actual_home = row["actual_away_score"], row["actual_home_score"]
-            if pd.notna(actual_away) and pd.notna(actual_home):
-                actual_margin = float(actual_home) - float(actual_away)
-                pick_text = str(row[f"{name}_ats_pick"])
-                pick_match = re.search(r"Lean\s+([A-Z]{2,3})", pick_text.upper())
-                picked_team = norm_team(pick_match.group(1)) if pick_match else ""
-                if picked_team not in (home, away):
-                    row[f"{name}_ats_result"] = "No pick"
-                else:
-                    picked_line = -spread if picked_team == norm_team(favorite) else spread
-                    picked_margin = (
-                        actual_margin if picked_team == home else -actual_margin
-                    ) + picked_line
-                    row[f"{name}_ats_result"] = (
-                        "Push" if abs(picked_margin) < 1e-9
-                        else ("Win" if picked_margin > 0 else "Loss")
-                    )
-                actual_total = float(actual_away) + float(actual_home)
-                total_pick = str(row[f"{name}_total_pick"]).lower()
-                total_margin = actual_total - total_line
-                row[f"{name}_total_result"] = (
-                    "Push" if abs(total_margin) < 1e-9
-                    else ("Win" if ((total_pick == "over" and total_margin > 0)
-                                    or (total_pick == "under" and total_margin < 0)) else "Loss")
-                )
-            else:
-                row[f"{name}_ats_result"] = "Pending"
-                row[f"{name}_total_result"] = "Pending"
+        for variant, name in (
+            ("efficiency_only_added", "efficiency"),
+            ("combined_efficiency_plus_injury", "combined"),
+        ):
+            if game_id not in predictions[variant].index:
+                raise RuntimeError(f"Missing chronological prediction for {matchup} / {variant}.")
+            p = predictions[variant].loc[game_id]
+            add_model_fields(row, name, float(p["pred_away"]), float(p["pred_home"]),
+                             favorite, spread, total_line, away, home)
         rows.append(row)
 
+    if len(matched_snapshot_games) != len(public):
+        raise RuntimeError(
+            f"Snapshot-to-schedule matching incomplete: matched {len(matched_snapshot_games)} "
+            f"of {len(public)} original public games."
+        )
+
+    # Add Bears-Seahawks as a separate late addition, without requiring it to exist
+    # in the original public snapshot.
+    for matchup, late in LATE_ADD.items():
+        away, home = [norm_team(x) for x in matchup.split("@")]
+        game = find_schedule_game(away, home, matchup)
+        game_id = game["game_id"]
+        favorite, spread, total_line = late["market_favorite"], late["market_spread"], late["market_total"]
+        row = {
+            "season": SEASON, "week": WEEK, "game_id": str(game_id),
+            "date": str(pd.Timestamp(game["gameday"]).date()) if pd.notna(game.get("gameday")) else "",
+            "matchup": matchup, "away_team": away, "home_team": home,
+            **actual_fields(game),
+            "publication_status": "Late-added Nov. 2 research forecast — not on original public board",
+            "market_source": "Bovada line recorded Nov. 2 pregame",
+            "market_favorite": favorite, "market_spread_points": spread,
+            "market_total": total_line,
+        }
+        for name in ("baseline", "injury", "efficiency", "combined"):
+            scores = late[name]
+            add_model_fields(row, name, scores["away"], scores["home"],
+                             favorite, spread, total_line, away, home)
+        rows.append(row)
+
+    # Report schedule games that were not part of the frozen public board.
+    represented_ids = {str(r["game_id"]) for r in rows}
+    schedule_only_games = []
+    for game in schedule_rows:
+        if str(game["game_id"]) not in represented_ids:
+            schedule_only_games.append(
+                f'{norm_team(game["away_team"])} @ {norm_team(game["home_team"])}'
+            )
+    schedule_only_games = sorted(set(schedule_only_games))
     result = pd.DataFrame(rows).sort_values(["date", "matchup"])
     # Snapshot completeness check: every originally published game remains represented.
     if len(matched_snapshot_games) != len(public):
@@ -288,7 +296,9 @@ def main() -> None:
         "created_at_utc": datetime.now(timezone.utc).isoformat(),
         "original_snapshot": str(SNAPSHOT.relative_to(ROOT)),
         "original_snapshot_rows": int(len(public)),
-        "schedule_week_rows": int(len(result)),
+        "schedule_week_rows": int(len(week_schedule)),
+        "comparison_rows": int(len(result)),
+        "schedule_games_not_on_original_board": schedule_only_games,
         "late_added_games": result.loc[
             result["publication_status"].str.startswith("Late-added"), "matchup"
         ].tolist(),
@@ -304,6 +314,7 @@ def main() -> None:
             "This comparison does not retroactively make the late-added Bears-Seahawks forecast public before kickoff.",
             "The Efficiency and Combined columns are reconstructed research forecasts, not original Nov. 1 public posts.",
             "The original Baseline and Injury values are preserved from the immutable snapshot.",
+            "Schedule-only games absent from the frozen public snapshot are listed in schedule_games_not_on_original_board and are not assigned invented projections.",
             "No official prospective record or production model is changed.",
         ],
     }
