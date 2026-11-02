@@ -179,16 +179,13 @@ def main() -> None:
                 add_model_fields(row, name, scores["away"], scores["home"],
                                  favorite, spread, total_line, away, home)
         else:
-            snap = public[
-                public["Game"].astype(str).str.upper().str.replace(" ", "", regex=False)
-                .eq(f"{away}@{home}")
+            parsed_matchups = public["Game"].astype(str).apply(
+                lambda value: tuple(norm_team(part) for part in value.upper().split("@"))
+                if "@" in value else ("", "")
+            )
+            snap = public.loc[
+                parsed_matchups.apply(lambda pair: pair == (away, home))
             ]
-            if len(snap) != 1:
-                # Retry with original abbreviations after aliases such as LA/LAR.
-                snap = public[
-                    public["Game"].astype(str).str.upper().str.replace(" ", "", regex=False)
-                    .eq(f"{str(game['away_team']).upper()}@{str(game['home_team']).upper()}")
-                ]
             if len(snap) != 1:
                 raise RuntimeError(f"Expected exactly one frozen public row for {matchup}; found {len(snap)}.")
             s = snap.iloc[0]
@@ -203,9 +200,9 @@ def main() -> None:
                 away_score, home_score = parse_score_pair(s[score_col], away, home)
                 add_model_fields(row, name, away_score, home_score,
                                  favorite, spread, total_line, away, home)
-                # Preserve the original published pick and total exactly; parsed
-                # projections are retained for display and independent grading.
-                row[f"{name}_published_ats_pick"] = s[ats_col]
+                # Preserve original public values exactly for the two published variants.
+                row[f"{name}_ats_pick"] = str(s[ats_col])
+                row[f"{name}_projected_total"] = float(s[total_col])
                 row[f"{name}_published_total"] = float(s[total_col])
 
             for variant, name in (
