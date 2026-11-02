@@ -237,8 +237,19 @@ def _directional_summary(frame: pd.DataFrame, edge_col: str, actual_col: str) ->
     }
 
 
+def _wilson_interval(wins: int, trials: int, z: float = 1.959963984540054) -> tuple[float | None, float | None]:
+    """95% Wilson score interval for a binomial accuracy estimate."""
+    if trials <= 0:
+        return None, None
+    p = wins / trials
+    denom = 1.0 + z * z / trials
+    center = (p + z * z / (2.0 * trials)) / denom
+    radius = z * np.sqrt((p * (1.0 - p) / trials) + (z * z / (4.0 * trials * trials))) / denom
+    return round(100.0 * max(0.0, center - radius), 3), round(100.0 * min(1.0, center + radius), 3)
+
+
 def _edge_band_summary(frame: pd.DataFrame, edge_col: str, actual_col: str) -> list[dict]:
-    """Report directional grading by absolute projected edge, with no bet threshold."""
+    """Report directional grading by absolute projected edge and 95% intervals."""
     bands = [
         ("0_to_1", 0.0, 1.0),
         ("1_to_2", 1.0, 2.0),
@@ -259,22 +270,46 @@ def _edge_band_summary(frame: pd.DataFrame, edge_col: str, actual_col: str) -> l
         pushes = int((band[actual_col] == 0).sum())
         losses = int(len(band) - wins - pushes)
         graded = wins + losses
+        ci_low, ci_high = _wilson_interval(wins, graded)
         results.append({
             "edge_band_points": label,
             "games": int(len(band)),
             "wins": wins,
             "losses": losses,
             "pushes": pushes,
+            "graded_games_ex_pushes": graded,
             "accuracy_pct_ex_pushes": round(100 * wins / graded, 3) if graded else None,
+            "accuracy_95pct_wilson_ci": [ci_low, ci_high],
         })
     zero_edge = eligible[eligible[edge_col] == 0]
     results.append({
         "edge_band_points": "zero_edge_no_lean",
         "games": int(len(zero_edge)),
         "wins": 0, "losses": 0, "pushes": 0,
+        "graded_games_ex_pushes": 0,
         "accuracy_pct_ex_pushes": None,
+        "accuracy_95pct_wilson_ci": [None, None],
     })
     return results
+
+
+def _combined_band_summary(frame: pd.DataFrame, edge_col: str, actual_col: str) -> dict:
+    """Summarize the combined 2-4 point edge range, without selecting games by result."""
+    eligible = frame.dropna(subset=[edge_col, actual_col]).copy()
+    abs_edge = eligible[edge_col].abs()
+    band = eligible[(abs_edge >= 2.0) & (abs_edge < 4.0) & (eligible[edge_col] != 0)]
+    wins = int(((band[edge_col] * band[actual_col]) > 0).sum())
+    pushes = int((band[actual_col] == 0).sum())
+    losses = int(len(band) - wins - pushes)
+    graded = wins + losses
+    ci_low, ci_high = _wilson_interval(wins, graded)
+    return {
+        "edge_band_points": "2_to_4_combined",
+        "games": int(len(band)), "wins": wins, "losses": losses, "pushes": pushes,
+        "graded_games_ex_pushes": graded,
+        "accuracy_pct_ex_pushes": round(100 * wins / graded, 3) if graded else None,
+        "accuracy_95pct_wilson_ci": [ci_low, ci_high],
+    }
 
 
 def _roi_summary(frame: pd.DataFrame, edge_col: str, actual_col: str, label: str) -> dict:
@@ -358,6 +393,8 @@ def main() -> None:
             "totals_all_game_directional": _directional_summary(totals, "total_edge", "actual_total_margin"),
             "ats_edge_bands": _edge_band_summary(ats, "ats_edge", "actual_ats_margin"),
             "totals_edge_bands": _edge_band_summary(totals, "total_edge", "actual_total_margin"),
+            "ats_combined_2_to_4": _combined_band_summary(ats, "ats_edge", "actual_ats_margin"),
+            "totals_combined_2_to_4": _combined_band_summary(totals, "total_edge", "actual_total_margin"),
             "ats_fixed_thresholds": _roi_summary(ats, "ats_edge", "actual_ats_margin", name),
             "totals_fixed_thresholds": _roi_summary(totals, "total_edge", "actual_total_margin", name),
         }
