@@ -8,6 +8,10 @@ on:
     paths:
       - "research/four_model_comparison.py"
       - "research/four_model_upcoming_projection.py"
+      - "research/four_model_week08_reconstruction.py"
+      - "research/four_model_week08_reconstruction.py"
+      - "pages/Four_Model_Week8_Comparison.py"
+      - "app.py"
       - "research/injury_coverage_audit.py"
       - "injury_model.py"
       - ".github/workflows/four-model-comparison.yml"
@@ -40,11 +44,13 @@ jobs:
           pip install -r requirements.txt
       - name: Compile research modules
         run: |
-          python -m py_compile model.py injury_model.py research/efficiency_feature_experiments.py research/four_model_comparison.py research/injury_coverage_audit.py
+          python -m py_compile model.py injury_model.py research/efficiency_feature_experiments.py research/four_model_comparison.py research/injury_coverage_audit.py research/four_model_week08_reconstruction.py
       - name: Run four-model upcoming-game projection
         run: python research/four_model_upcoming_projection.py
       - name: Run four-model chronological comparison
         run: python research/four_model_comparison.py
+      - name: Reconstruct Week 8 four-model public comparison
+        run: python research/four_model_week08_reconstruction.py
       - name: Run historical injury coverage audit
         run: python research/injury_coverage_audit.py
       - name: Upload research-only results
@@ -54,6 +60,7 @@ jobs:
           name: four-model-injury-efficiency-comparison
           path: |
             data/four_model_comparison/
+            data/four_model_week08/
             data/injury_coverage_audit/
           if-no-files-found: warn
           retention-days: 30
