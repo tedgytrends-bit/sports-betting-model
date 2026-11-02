@@ -173,15 +173,19 @@ def _feature_sets(
         if c in data.columns and c not in excluded
         and "_shrunk_" not in c and c != "expected_game_plays"
     ]
+    passing = [c for c in split if "_pass" in c or "pass_" in c]
+    rushing = [c for c in split if "_rush" in c or "rush_" in c]
     shrink = [c for c in experimental_columns if c in data.columns and "_shrunk_" in c]
     pace = [c for c in experimental_columns if c == "expected_game_plays" and c in data.columns]
     if not base:
         raise RuntimeError("Frozen baseline feature list is empty.")
     return {
         "baseline_frozen_features": base,
-        "baseline_plus_pass_rush_matchups": list(dict.fromkeys(base + split)),
-        "pass_rush_plus_prior_season_shrinkage": list(dict.fromkeys(base + split + shrink)),
-        "pass_rush_shrinkage_plus_pace": list(dict.fromkeys(base + split + shrink + pace)),
+        "baseline_plus_passing_only": list(dict.fromkeys(base + passing)),
+        "baseline_plus_rushing_only": list(dict.fromkeys(base + rushing)),
+        "baseline_plus_pass_rush": list(dict.fromkeys(base + passing + rushing)),
+        "pass_rush_plus_prior_season_shrinkage": list(dict.fromkeys(base + passing + rushing + shrink)),
+        "pass_rush_shrinkage_plus_pace": list(dict.fromkeys(base + passing + rushing + shrink + pace)),
     }
 
 
@@ -266,18 +270,29 @@ def main() -> None:
         set(g["game_id"]) for _, g in all_preds.groupby("variant")
     ])
     all_preds = all_preds[all_preds["game_id"].isin(common)].copy()
-    for name, group in all_preds.groupby("variant"):
+    def metric_summary(group: pd.DataFrame, name: str) -> dict:
         ats = group.dropna(subset=["ats_edge", "actual_ats_margin"])
         totals = group.dropna(subset=["total_edge", "actual_total_margin"])
-        summaries.append({
-            "variant": name, "common_games": int(len(group)),
+        return {
+            "variant": name, "games": int(len(group)),
             "ats_margin_mae": round(float((ats["pred_home_margin"] - ats["actual_home_margin"]).abs().mean()), 4),
             "total_mae": round(float((totals["pred_total"] - totals["actual_total"]).abs().mean()), 4),
             "ats_directional_accuracy_pct": round(float(((ats["ats_edge"] > 0) == (ats["actual_ats_margin"] > 0))[ats["actual_ats_margin"] != 0].mean() * 100), 3),
             "totals_directional_accuracy_pct": round(float(((totals["total_edge"] > 0) == (totals["actual_total_margin"] > 0))[totals["actual_total_margin"] != 0].mean() * 100), 3),
             "ats_fixed_thresholds": _roi_summary(ats, "ats_edge", "actual_ats_margin", name),
             "totals_fixed_thresholds": _roi_summary(totals, "total_edge", "actual_total_margin", name),
-        })
+        }
+
+    for name, group in all_preds.groupby("variant"):
+        summary = metric_summary(group, name)
+        summary["common_games"] = summary.pop("games")
+        summaries.append(summary)
+
+    season_summaries = []
+    for (name, season), group in all_preds.groupby(["variant", "season"]):
+        summary = metric_summary(group, name)
+        summary["season"] = int(season)
+        season_summaries.append(summary)
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     csv_path = OUT / f"efficiency_feature_predictions_{stamp}.csv"
     json_path = OUT / f"efficiency_feature_report_{stamp}.json"
@@ -294,6 +309,8 @@ def main() -> None:
         "feature_counts": {name: len(cols) for name, cols in variants.items()},
         "feature_names": variants,
         "variants": summaries,
+        "season_results": season_summaries,
+        "season_comparison_warning": "Season-level samples are smaller and descriptive; do not select a feature set based on the best season or treat threshold ROI as independently validated.",
         "prediction_csv": str(csv_path),
     }
     json_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
