@@ -46,6 +46,7 @@ jobs:
       - name: Run research-only feature experiments
         run: python research/efficiency_feature_experiments.py
       - name: Commit research outputs only
+        if: github.event_name == 'push'
         run: |
           if [ -n "$(git status --porcelain data/efficiency_feature_experiments)" ]; then
             git config user.name "github-actions[bot]"
