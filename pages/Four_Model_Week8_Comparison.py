@@ -1,9 +1,11 @@
 from pathlib import Path
+import json
 import pandas as pd
 import streamlit as st
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data" / "four_model_week08" / "week08_four_model_comparison.csv"
+SUMMARY = ROOT / "data" / "four_model_week08" / "week08_four_model_summary.json"
 
 st.set_page_config(page_title="NFL Four-Model Comparison", page_icon="🏈", layout="wide")
 st.title("NFL Week 8 — Four-Model Comparison")
@@ -20,6 +22,15 @@ if not DATA.exists():
     st.stop()
 
 df = pd.read_csv(DATA)
+if SUMMARY.exists():
+    with SUMMARY.open(encoding="utf-8") as f:
+        report = json.load(f)
+    omitted = report.get("schedule_games_not_on_original_board", [])
+    if omitted:
+        st.caption(
+            "Week 8 schedule games not included in the frozen November 1 public board "
+            f"(not projected or counted here): {', '.join(omitted)}."
+        )
 original = df[df["publication_status"].eq("Original Nov. 1 public snapshot")].copy()
 late = df[df["publication_status"].str.startswith("Late-added", na=False)].copy()
 
