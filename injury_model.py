@@ -254,10 +254,12 @@ def add_injury_features(dataset: pd.DataFrame, schedule: pd.DataFrame, reports: 
         # This avoids relying on potentially unreliable schedule kickoff times.
         deadline_policy = int(game["season"]) >= 2025
         if deadline_policy:
-            game_date = pd.Timestamp(game["gameday"]).date()
+            # Compare normalized UTC timestamps rather than .dt.date. This is
+            # compatible with pandas 2.x/3.x and preserves the source's UTC date.
+            game_date_utc = pd.Timestamp(game["gameday"]).normalize().tz_localize("UTC")
             base = base[
                 base["date_modified"].notna()
-                & (base["date_modified"].dt.date < game_date)
+                & base["date_modified"].dt.normalize().lt(game_date_utc)
             ]
         elif pd.notna(kickoff):
             base = base[base["date_modified"].notna() & (base["date_modified"] < kickoff)]
@@ -312,10 +314,10 @@ def injury_coverage_diagnostics(schedule: pd.DataFrame, reports: pd.DataFrame) -
         # schedule kickoff timestamps are not used to establish their timing.
         deadline_policy = int(game["season"]) >= 2025
         if deadline_policy:
-            game_date = pd.Timestamp(game["gameday"]).date()
+            game_date_utc = pd.Timestamp(game["gameday"]).normalize().tz_localize("UTC")
             pregame = typed[
                 typed["date_modified"].notna()
-                & typed["date_modified"].dt.date.lt(game_date)
+                & typed["date_modified"].dt.normalize().lt(game_date_utc)
             ]
         elif pd.notna(kickoff):
             pregame = typed[typed["date_modified"].notna() & typed["date_modified"].lt(kickoff)]
