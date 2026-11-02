@@ -1,0 +1,50 @@
+name: Run Research-Only Efficiency Feature Experiments
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/efficiency-feature-experiments.yml"
+      - "research/efficiency_feature_experiments.py"
+
+concurrency:
+  group: efficiency-feature-experiments-main
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  efficiency-feature-experiments:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Run research-only feature experiments
+        run: python research/efficiency_feature_experiments.py
+      - name: Commit research outputs only
+        run: |
+          if [ -n "$(git status --porcelain data/efficiency_feature_experiments)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add data/efficiency_feature_experiments
+            git commit -m "Record research-only efficiency feature experiments"
+            git fetch origin main
+            git rebase origin/main
+            git push origin HEAD:main
+          else
+            echo "No new experiment outputs to commit."
+          fi
