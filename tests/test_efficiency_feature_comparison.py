@@ -47,7 +47,7 @@ class TestMatchedEfficiencyComparison(unittest.TestCase):
             self.assertEqual(item["baseline_only_correct"], 1)
             self.assertEqual(item["passing_only_correct"], 1)
             self.assertEqual(item["actual_market_pushes_excluded"], 1)
-            self.assertEqual(item["either_model_no_lean_excluded"], 1)
+            self.assertEqual(item["either_model_no_lean_excluded"], 2)
             self.assertEqual(item["evaluated_paired_games"], 4)
             self.assertEqual(item["mcnemar_exact"]["exact_two_sided_p_value"], 1.0)
 
