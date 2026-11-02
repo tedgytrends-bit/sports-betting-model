@@ -5,6 +5,7 @@ on:
   pull_request:
     paths:
       - "research/four_model_comparison.py"
+      - "research/injury_coverage_audit.py"
       - "research/efficiency_feature_experiments.py"
       - "injury_model.py"
       - "model.py"
@@ -30,14 +31,18 @@ jobs:
           pip install -r requirements.txt
       - name: Compile research modules
         run: |
-          python -m py_compile model.py injury_model.py research/efficiency_feature_experiments.py research/four_model_comparison.py
+          python -m py_compile model.py injury_model.py research/efficiency_feature_experiments.py research/four_model_comparison.py research/injury_coverage_audit.py
       - name: Run four-model chronological comparison
         run: python research/four_model_comparison.py
+      - name: Run historical injury coverage audit
+        run: python research/injury_coverage_audit.py
       - name: Upload research-only results
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: four-model-injury-efficiency-comparison
-          path: data/four_model_comparison/
+          path: |
+            data/four_model_comparison/
+            data/injury_coverage_audit/
           if-no-files-found: warn
           retention-days: 30
