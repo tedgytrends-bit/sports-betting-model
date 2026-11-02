@@ -1,0 +1,84 @@
+{
+  "status": "RESEARCH_ONLY_TRANSPARENT_RECONSTRUCTION",
+  "created_at_utc": "2026-11-02T23:47:15.920026+00:00",
+  "original_snapshot": "data/public_snapshots/nfl_week_08_public_2026-11-01.csv",
+  "original_snapshot_rows": 12,
+  "schedule_week_rows": 14,
+  "comparison_rows": 14,
+  "schedule_games_not_on_original_board": [],
+  "late_added_games": [],
+  "method": "All 14 Week 8 games are included and use the user-verified Bovada market board. For the 12 games in the immutable Nov. 1 public snapshot, original Baseline and Injury projections are preserved. Panthers-Packers uses chronological reconstruction for all four variants. Bears-Seahawks uses its saved pregame four-model research forecast. Efficiency and Combined projections are chronological weekly-fold forecasts with training strictly before Week 8.",
+  "summaries": {
+    "baseline": {
+      "ats": {
+        "wins": 8,
+        "losses": 5,
+        "pushes": 0,
+        "pending": 1,
+        "accuracy_pct_ex_pushes": 61.54
+      },
+      "total": {
+        "wins": 7,
+        "losses": 6,
+        "pushes": 0,
+        "pending": 1,
+        "accuracy_pct_ex_pushes": 53.85
+      }
+    },
+    "injury": {
+      "ats": {
+        "wins": 6,
+        "losses": 7,
+        "pushes": 0,
+        "pending": 1,
+        "accuracy_pct_ex_pushes": 46.15
+      },
+      "total": {
+        "wins": 5,
+        "losses": 7,
+        "pushes": 0,
+        "pending": 1,
+        "accuracy_pct_ex_pushes": 41.67
+      }
+    },
+    "efficiency": {
+      "ats": {
+        "wins": 8,
+        "losses": 5,
+        "pushes": 0,
+        "pending": 1,
+        "accuracy_pct_ex_pushes": 61.54
+      },
+      "total": {
+        "wins": 5,
+        "losses": 8,
+        "pushes": 0,
+        "pending": 1,
+        "accuracy_pct_ex_pushes": 38.46
+      }
+    },
+    "combined": {
+      "ats": {
+        "wins": 7,
+        "losses": 6,
+        "pushes": 0,
+        "pending": 1,
+        "accuracy_pct_ex_pushes": 53.85
+      },
+      "total": {
+        "wins": 5,
+        "losses": 8,
+        "pushes": 0,
+        "pending": 1,
+        "accuracy_pct_ex_pushes": 38.46
+      }
+    }
+  },
+  "cautions": [
+    "The comparison presents all 14 games uniformly; research reconstructions are not retroactive public projections.",
+    "The Efficiency and Combined columns are reconstructed research forecasts, not original Nov. 1 public posts.",
+    "The original Baseline and Injury values are preserved from the immutable snapshot.",
+    "Missing original snapshot projections are reconstructed chronologically or use the saved pregame research forecast; they are not represented as original public posts.",
+    "No official prospective record or production model is changed."
+  ]
+}
