@@ -269,7 +269,7 @@ def main() -> None:
     def grade_ats_pick(row: pd.Series, pick: str) -> str:
         if pd.isna(row.get("actual_away_score")) or pd.isna(row.get("actual_home_score")):
             return "Pending"
-        match = re.search(r"([A-Z]{2,3})\\s+([+-]\\d+(?:\\.\\d+)?)", str(pick).upper())
+        match = re.search(r"([A-Z]{2,3})\s+([+-]\d+(?:\.\d+)?)", str(pick).upper())
         if not match:
             return "No bet"
         team, points = norm_team(match.group(1)), float(match.group(2))
