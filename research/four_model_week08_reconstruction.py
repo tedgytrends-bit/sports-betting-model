@@ -391,22 +391,21 @@ def main() -> None:
         "schedule_week_rows": int(len(week_schedule)),
         "comparison_rows": int(len(result)),
         "schedule_games_not_on_original_board": schedule_only_games,
-        "late_added_games": result.loc[
-            result["publication_status"].str.startswith("Late-added"), "matchup"
-        ].tolist(),
+        "late_added_games": [],
         "method": (
-            "Baseline and injury score projections for the 12 originally published games "
-            "are parsed from the immutable Nov. 1 public snapshot. Efficiency and combined "
-            "predictions are chronological weekly-fold projections with training strictly "
-            "before the Week 8 test week. Bears-Seahawks uses the frozen Nov. 2 pregame "
-            "four-model forecast and is explicitly labeled late-added."
+            "All 14 Week 8 games are included and use the user-verified Bovada market board. "
+            "For the 12 games in the immutable Nov. 1 public snapshot, original Baseline and "
+            "Injury projections are preserved. Panthers-Packers uses chronological "
+            "reconstruction for all four variants. Bears-Seahawks uses its saved pregame "
+            "four-model research forecast. Efficiency and Combined projections are "
+            "chronological weekly-fold forecasts with training strictly before Week 8."
         ),
         "summaries": summaries,
         "cautions": [
-            "This comparison does not retroactively make the late-added Bears-Seahawks forecast public before kickoff.",
+            "The comparison presents all 14 games uniformly; research reconstructions are not retroactive public projections.",
             "The Efficiency and Combined columns are reconstructed research forecasts, not original Nov. 1 public posts.",
             "The original Baseline and Injury values are preserved from the immutable snapshot.",
-            "Schedule-only games absent from the frozen public snapshot are listed in schedule_games_not_on_original_board and are not assigned invented projections.",
+            "Missing original snapshot projections are reconstructed chronologically or use the saved pregame research forecast; they are not represented as original public posts.",
             "No official prospective record or production model is changed.",
         ],
     }
