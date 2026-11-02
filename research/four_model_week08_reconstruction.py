@@ -38,7 +38,7 @@ OUT = ROOT / "data/four_model_week08"
 # User-verified Week 8 Bovada lines override the older snapshot values.
 MARKETS = {
     "NE @ MIA": ("NE", 7.0, 42.0), "KC @ DEN": ("KC", 1.0, 41.0),
-    "LAC @ LA": ("LA", 6.5, 46.0), "TEN @ CIN": ("CIN", 13.0, 45.5),
+    "LAC @ LAR": ("LAR", 6.5, 46.0), "TEN @ CIN": ("CIN", 13.0, 45.5),
     "MIN @ DET": ("DET", 3.5, 45.5), "CLE @ PIT": ("PIT", 3.5, 39.0),
     "IND @ JAX": ("JAX", 10.5, 46.0), "BAL @ BUF": ("BUF", 3.0, 55.0),
     "ATL @ TB": ("TB", 2.0, 43.0), "ARI @ DAL": ("DAL", 7.0, 54.5),
@@ -312,6 +312,14 @@ def main() -> None:
             )
     schedule_only_games = sorted(set(schedule_only_games))
     result = pd.DataFrame(rows).sort_values(["date", "matchup"])
+    expected_matchups = set(MARKETS)
+    actual_matchups = set(result["matchup"].astype(str))
+    if len(result) != 14 or actual_matchups != expected_matchups:
+        raise RuntimeError(
+            f"Week 8 slate mismatch: {len(result)} rows; "
+            f"missing={sorted(expected_matchups - actual_matchups)}; "
+            f"unexpected={sorted(actual_matchups - expected_matchups)}"
+        )
 
     def grade_ats_pick(row: pd.Series, pick: str) -> str:
         if pd.isna(row.get("actual_away_score")) or pd.isna(row.get("actual_home_score")):
