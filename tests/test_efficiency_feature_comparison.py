@@ -18,7 +18,7 @@ class TestMatchedEfficiencyComparison(unittest.TestCase):
             ("g1", 7, 1, 1, 5, 1, 1),      # both correct
             ("g2", -7, 1, 1, -5, 1, 1),    # both wrong
             ("g3", 7, 1, -1, 5, 1, -1),    # baseline only
-            ("g4", 7, -1, 1, 5, -1, 1),   # passing only
+            ("g4", -7, -1, 1, -5, -1, 1),  # passing only
             ("g5", 0, 1, 1, 0, 1, 1),      # push excluded
             ("g6", -7, 0, 1, -5, 0, 1),    # baseline no-lean excluded
             ("g7", -7, 1, 0, -5, 1, 0),    # passing no-lean excluded
