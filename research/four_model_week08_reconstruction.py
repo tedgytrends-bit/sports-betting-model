@@ -265,6 +265,43 @@ def main() -> None:
             )
     schedule_only_games = sorted(set(schedule_only_games))
     result = pd.DataFrame(rows).sort_values(["date", "matchup"])
+
+    def grade_ats_pick(row: pd.Series, pick: str) -> str:
+        if pd.isna(row.get("actual_away_score")) or pd.isna(row.get("actual_home_score")):
+            return "Pending"
+        match = re.search(r"([A-Z]{2,3})\\s+([+-]\\d+(?:\\.\\d+)?)", str(pick).upper())
+        if not match:
+            return "No bet"
+        team, points = norm_team(match.group(1)), float(match.group(2))
+        away_score, home_score = float(row["actual_away_score"]), float(row["actual_home_score"])
+        if team == norm_team(row["away_team"]):
+            margin = away_score + points - home_score
+        elif team == norm_team(row["home_team"]):
+            margin = home_score + points - away_score
+        else:
+            return "Invalid pick"
+        if abs(margin) < 1e-9:
+            return "Push"
+        return "Win" if margin > 0 else "Loss"
+
+    def grade_total_pick(row: pd.Series, pick: str) -> str:
+        if pd.isna(row.get("actual_total")):
+            return "Pending"
+        side = str(pick).strip().lower()
+        if side not in ("over", "under"):
+            return "No bet"
+        diff = float(row["actual_total"]) - float(row["market_total"])
+        if abs(diff) < 1e-9:
+            return "Push"
+        return "Win" if ((side == "over" and diff > 0) or (side == "under" and diff < 0)) else "Loss"
+
+    for model in ("baseline", "injury", "efficiency", "combined"):
+        result[f"{model}_ats_result"] = result.apply(
+            lambda r: grade_ats_pick(r, r[f"{model}_ats_pick"]), axis=1
+        )
+        result[f"{model}_total_result"] = result.apply(
+            lambda r: grade_total_pick(r, r[f"{model}_total_pick"]), axis=1
+        )
     # Snapshot completeness check: every originally published game remains represented.
     if len(matched_snapshot_games) != len(public):
         missing = sorted(set(public["Game"].astype(str)) - matched_snapshot_games)
