@@ -219,6 +219,24 @@ def _fit_weekly(data: pd.DataFrame, features: list[str], alpha: float = ALPHA) -
     return pd.concat(predictions, ignore_index=True).drop_duplicates("game_id")
 
 
+def _directional_summary(frame: pd.DataFrame, edge_col: str, actual_col: str) -> dict:
+    """Grade every game directionally, with no minimum edge threshold."""
+    eligible = frame.dropna(subset=[edge_col, actual_col]).copy()
+    eligible = eligible[eligible[edge_col] != 0].copy()
+    wins = int(((eligible[edge_col] * eligible[actual_col]) > 0).sum())
+    pushes = int((eligible[actual_col] == 0).sum())
+    losses = int(len(eligible) - wins - pushes)
+    no_lean = int((frame[edge_col] == 0).sum())
+    return {
+        "games_evaluated": int(len(frame)),
+        "directional_picks": int(len(eligible)),
+        "wins": wins, "losses": losses, "pushes": pushes,
+        "no_lean": no_lean,
+        "accuracy_pct_ex_pushes": round(100 * wins / (wins + losses), 3)
+            if wins + losses else None,
+    }
+
+
 def _roi_summary(frame: pd.DataFrame, edge_col: str, actual_col: str, label: str) -> dict:
     result = {"variant": label, "n_games": int(len(frame))}
     for threshold in THRESHOLDS:
@@ -296,6 +314,8 @@ def main() -> None:
             "total_mae": round(float((totals["pred_total"] - totals["actual_total"]).abs().mean()), 4),
             "ats_directional_accuracy_pct": round(float(((ats["ats_edge"] > 0) == (ats["actual_ats_margin"] > 0))[ats["actual_ats_margin"] != 0].mean() * 100), 3),
             "totals_directional_accuracy_pct": round(float(((totals["total_edge"] > 0) == (totals["actual_total_margin"] > 0))[totals["actual_total_margin"] != 0].mean() * 100), 3),
+            "ats_all_game_directional": _directional_summary(ats, "ats_edge", "actual_ats_margin"),
+            "totals_all_game_directional": _directional_summary(totals, "total_edge", "actual_total_margin"),
             "ats_fixed_thresholds": _roi_summary(ats, "ats_edge", "actual_ats_margin", name),
             "totals_fixed_thresholds": _roi_summary(totals, "total_edge", "actual_total_margin", name),
         }
