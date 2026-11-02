@@ -302,22 +302,25 @@ def _matched_directional_comparison(
         raise RuntimeError("Primary baseline/passing variants are absent from predictions.")
     if pair.duplicated(["game_id", "variant"]).any():
         raise RuntimeError("Duplicate game_id/variant rows detected; matched test is ambiguous.")
-    index = ["game_id", "season", "week", "gameday", "spread_line", "total_line",
-             "actual_ats_margin", "actual_total_margin"]
-    wide = pair.pivot(index=index, columns="variant", values=["ats_edge", "total_edge"])
-    required = [(metric, variant) for metric in ("ats_edge", "total_edge")
-                for variant in (baseline_name, passing_name)]
-    missing = [col for col in required if col not in wide.columns]
-    if missing:
-        raise RuntimeError(f"Missing paired prediction columns: {missing}")
     results = {}
     for market, edge_col, actual_col in (
         ("ats", "ats_edge", "actual_ats_margin"),
         ("totals", "total_edge", "actual_total_margin"),
     ):
-        b_edge = wide[(edge_col, baseline_name)]
-        p_edge = wide[(edge_col, passing_name)]
-        actual = wide[(actual_col, "")]
+        market_pair = pair.pivot(
+            index=["game_id", "season", "week", "gameday"],
+            columns="variant",
+            values=edge_col,
+        )
+        required = [baseline_name, passing_name]
+        missing = [name for name in required if name not in market_pair.columns]
+        if missing or actual_col not in pair.columns:
+            raise RuntimeError(f"Missing paired columns for {market}: {missing}")
+        actual_by_game = pair.drop_duplicates("game_id").set_index("game_id")[actual_col]
+        market_pair = market_pair.join(actual_by_game.rename("actual_margin"), how="inner")
+        b_edge = market_pair[baseline_name]
+        p_edge = market_pair[passing_name]
+        actual = market_pair["actual_margin"]
         complete = b_edge.notna() & p_edge.notna() & actual.notna()
         # A push is not a correct or incorrect directional result.
         no_push = actual.ne(0)
