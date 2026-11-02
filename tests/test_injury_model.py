@@ -35,7 +35,7 @@ class InjuryModelTests(unittest.TestCase):
              "date_modified": "2025-09-19T02:00:00Z"},
             {"season": 2025, "week": 3, "season_type": "REG", "team": "MIA", "position": "OT",
              "player_name": "Tackle One", "report_status": "OUT", "practice_status": "DID NOT PARTICIPATE",
-             "date_modified": "2025-09-18T18:00:00Z"},
+             "date_modified": "2025-09-17T19:00:00Z"},
         ])
 
         result = add_injury_features(dataset, schedule, reports).iloc[0]
