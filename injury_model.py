@@ -247,10 +247,16 @@ def add_injury_features(dataset: pd.DataFrame, schedule: pd.DataFrame, reports: 
             except Exception:
                 # Fall back to the timestamped feed; never admit an unverified snapshot.
                 pass
-        if pd.notna(kickoff):
-            base = base[base["date_modified"].notna() & (base["date_modified"] < kickoff)]
-        else:
-            base = base[base["date_modified"].dt.date < pd.Timestamp(game["gameday"]).date()]
+        # User-approved research assumption: 2025-2026 official weekly reports
+        # are treated as pregame based on NFL submission deadlines (Friday 3pm
+        # for Sunday games; Saturday 3pm for Monday games). Preserve source
+        # timestamps, but do not let schedule kickoff metadata discard them.
+        assumed_pregame = int(game["season"]) >= 2025
+        if not assumed_pregame:
+            if pd.notna(kickoff):
+                base = base[base["date_modified"].notna() & (base["date_modified"] < kickoff)]
+            else:
+                base = base[base["date_modified"].dt.date < pd.Timestamp(game["gameday"]).date()]
         if not base.empty:
             base = base.sort_values("date_modified").drop_duplicates(["team", "_player_key"], keep="last")
         row = {"game_id": game["game_id"]}
@@ -295,8 +301,13 @@ def injury_coverage_diagnostics(schedule: pd.DataFrame, reports: pd.DataFrame) -
             & normalized["week"].eq(game["week"])
         ]
         typed = raw[raw["season_type"].eq(game["season_type"])]
-        pregame = typed
-        if pd.notna(kickoff):
+        # 2025-2026 are treated as pregame under the user's stated NFL
+        # reporting-deadline assumption. Keep timestamps for audit, but do not
+        # use potentially unreliable kickoff metadata to exclude these rows.
+        assumed_pregame = int(game["season"]) >= 2025
+        if assumed_pregame:
+            pregame = typed.copy()
+        elif pd.notna(kickoff):
             pregame = typed[typed["date_modified"].notna() & typed["date_modified"].lt(kickoff)]
         else:
             pregame = typed[typed["date_modified"].dt.date < pd.Timestamp(game["gameday"]).date()]
@@ -343,6 +354,7 @@ def injury_coverage_diagnostics(schedule: pd.DataFrame, reports: pd.DataFrame) -
             "Rows after game-type match": len(typed),
             "Rows with valid timestamps": int(typed["date_modified"].notna().sum()),
             "Rows available pre-kickoff": len(pregame),
+            "Timing policy": "Assumed pregame by NFL reporting deadline" if assumed_pregame else "Timestamp before kickoff",
             "Feed teams": ", ".join(sorted(typed["team"].dropna().astype(str).unique())),
             "Snapshot file found": snapshot is not None,
             "Snapshot rows": len(snapshot) if snapshot is not None else 0,
