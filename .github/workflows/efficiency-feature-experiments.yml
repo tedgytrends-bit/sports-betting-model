@@ -45,6 +45,16 @@ jobs:
         run: python -m unittest tests.test_efficiency_feature_comparison -v
       - name: Run research-only feature experiments
         run: python research/efficiency_feature_experiments.py
+      - name: Upload research outputs for pull request review
+        if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: matched-efficiency-mcnemar-report
+          path: |
+            data/efficiency_feature_experiments/efficiency_feature_report_*.json
+            data/efficiency_feature_experiments/efficiency_feature_predictions_*.csv
+          if-no-files-found: error
+          retention-days: 30
       - name: Commit research outputs only
         if: github.event_name == 'push'
         run: |
