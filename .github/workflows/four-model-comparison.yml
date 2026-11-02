@@ -2,6 +2,14 @@ name: Research Four-Model Injury and Efficiency Comparison
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - "research/four-model-injury-efficiency"
+    paths:
+      - "research/four_model_comparison.py"
+      - "research/injury_coverage_audit.py"
+      - "injury_model.py"
+      - ".github/workflows/four-model-comparison.yml"
   pull_request:
     paths:
       - "research/four_model_comparison.py"
