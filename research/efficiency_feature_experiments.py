@@ -316,31 +316,29 @@ def _matched_directional_comparison(
             raise RuntimeError(f"Missing paired columns for {market}: {missing}")
         actual_by_game = pair.drop_duplicates("game_id").set_index("game_id")[actual_col]
         market_pair = market_pair.join(actual_by_game.rename("actual_margin"), how="inner")
-        b_edge = market_pair[baseline_name]
-        p_edge = market_pair[passing_name]
-        actual = market_pair["actual_margin"]
-        complete = b_edge.notna() & p_edge.notna() & actual.notna()
-        # No-lean predictions are not incorrect picks. Keep separate counts,
-        # and only compare paired directions when both models actually lean.
-        one_or_both_no_lean = complete & actual.ne(0) & (b_edge.eq(0) | p_edge.eq(0))
-        # A push is not a correct or incorrect directional result.
-        no_push = actual.ne(0)
-        both_nonzero = b_edge.ne(0) & p_edge.ne(0)
-        eligible = complete & no_push & both_nonzero
-        # Grade directions only where both models make an actual lean.
+
+        b_edge = market_pair[baseline_name].to_numpy(dtype=float)
+        p_edge = market_pair[passing_name].to_numpy(dtype=float)
+        actual = market_pair["actual_margin"].to_numpy(dtype=float)
+        complete = np.isfinite(b_edge) & np.isfinite(p_edge) & np.isfinite(actual)
+        pushes = complete & (actual == 0)
+        no_lean = complete & (actual != 0) & ((b_edge == 0) | (p_edge == 0))
+        eligible = complete & (actual != 0) & (b_edge != 0) & (p_edge != 0)
+
         b_correct = np.sign(b_edge[eligible]) == np.sign(actual[eligible])
         p_correct = np.sign(p_edge[eligible]) == np.sign(actual[eligible])
-        both_correct = int((b_correct & p_correct).sum())
-        both_wrong = int((~b_correct & ~p_correct).sum())
-        baseline_only = int((b_correct & ~p_correct).sum())
-        passing_only = int((~b_correct & p_correct).sum())
-        n = len(b_correct)
+        both_correct = int(np.count_nonzero(b_correct & p_correct))
+        both_wrong = int(np.count_nonzero(~b_correct & ~p_correct))
+        baseline_only = int(np.count_nonzero(b_correct & ~p_correct))
+        passing_only = int(np.count_nonzero(~b_correct & p_correct))
+        n = int(eligible.sum())
         pval = _mcnemar_p_value(baseline_only, passing_only)
+
         results[market] = {
             "matched_games_with_both_predictions": int(complete.sum()),
-            "actual_market_pushes_excluded": int((complete & ~no_push).sum()),
-            "either_model_no_lean_excluded": int(one_or_both_no_lean.sum()),
-            "evaluated_paired_games": int(n),
+            "actual_market_pushes_excluded": int(pushes.sum()),
+            "either_model_no_lean_excluded": int(no_lean.sum()),
+            "evaluated_paired_games": n,
             "both_correct": both_correct,
             "both_wrong": both_wrong,
             "baseline_only_correct": baseline_only,
