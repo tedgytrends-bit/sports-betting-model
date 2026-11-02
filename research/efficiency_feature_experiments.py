@@ -14,6 +14,15 @@ import numpy as np
 import pandas as pd
 from sklearn.linear_model import Ridge
 
+# When a script is executed as `python research/script.py`, Python places
+# the research/ directory (not the repository root) at sys.path[0].
+# Add the repository root so top-level modules such as model.py resolve.
+import sys
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
 from model import (
     build_efficiency_model_dataset,
     load_pbp,
