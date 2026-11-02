@@ -208,8 +208,12 @@ def main() -> None:
                                  favorite, spread, total_line, away, home)
                 # Preserve original public values exactly for the two published variants.
                 row[f"{name}_ats_pick"] = str(s[ats_col])
-                row[f"{name}_projected_total"] = float(s[total_col])
-                row[f"{name}_published_total"] = float(s[total_col])
+                published_total = float(s[total_col])
+                published_total_pick, published_total_edge = lean_total(published_total, total_line)
+                row[f"{name}_projected_total"] = published_total
+                row[f"{name}_total_pick"] = published_total_pick
+                row[f"{name}_total_edge"] = round(published_total_edge, 2)
+                row[f"{name}_published_total"] = published_total
 
             for variant, name in (
                 ("efficiency_only_added", "efficiency"),
