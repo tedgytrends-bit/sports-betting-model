@@ -133,7 +133,7 @@ def main() -> None:
     variants = _feature_columns(data, list(baseline.columns), passing_cols, injury_cols)
 
     predictions = {}
-    for variant in ("efficiency_only_added", "combined_efficiency_plus_injury"):
+    for variant in ("baseline_only", "injury_only_added", "efficiency_only_added", "combined_efficiency_plus_injury"):
         print(f"Generating chronological Week 8 predictions: {variant}")
         pred = _fit_weekly(data, variants[variant], alpha=ALPHA)
         pred = pred[
@@ -186,8 +186,9 @@ def main() -> None:
         game = find_schedule_game(away, home, str(s["Game"]))
         game_id = game["game_id"]
         matched_snapshot_games.add(str(s["Game"]))
-        favorite, spread = parse_market_spread(s["Official Bovada Spread"])
-        total_line = float(s["Official Bovada Total"])
+        if matchup not in MARKETS:
+            raise RuntimeError(f"Missing user-verified Bovada line for {matchup}.")
+        favorite, spread, total_line = MARKETS[matchup]
         row = {
             "season": SEASON, "week": WEEK, "game_id": str(game_id),
             "date": str(pd.Timestamp(game["gameday"]).date()) if pd.notna(game.get("gameday")) else "",
@@ -238,7 +239,7 @@ def main() -> None:
         away, home = [norm_team(x) for x in matchup.split("@")]
         game = find_schedule_game(away, home, matchup)
         game_id = game["game_id"]
-        favorite, spread, total_line = late["market_favorite"], late["market_spread"], late["market_total"]
+        favorite, spread, total_line = MARKETS[matchup]
         row = {
             "season": SEASON, "week": WEEK, "game_id": str(game_id),
             "date": str(pd.Timestamp(game["gameday"]).date()) if pd.notna(game.get("gameday")) else "",
@@ -252,6 +253,41 @@ def main() -> None:
         for name in ("baseline", "injury", "efficiency", "combined"):
             scores = late[name]
             add_model_fields(row, name, scores["away"], scores["home"],
+                             favorite, spread, total_line, away, home)
+        rows.append(row)
+
+    # Add every remaining Week 8 matchup absent from the original public snapshot.
+    # Panthers-Packers is reconstructed chronologically for all four variants.
+    represented_ids = {str(r["game_id"]) for r in rows}
+    variant_names = {
+        "baseline_only": "baseline", "injury_only_added": "injury",
+        "efficiency_only_added": "efficiency",
+        "combined_efficiency_plus_injury": "combined",
+    }
+    for game in schedule_rows:
+        game_id = str(game["game_id"])
+        if game_id in represented_ids:
+            continue
+        away, home = norm_team(game["away_team"]), norm_team(game["home_team"])
+        matchup = f"{away} @ {home}"
+        if matchup not in MARKETS:
+            raise RuntimeError(f"Missing user-verified Bovada line for scheduled game {matchup}.")
+        favorite, spread, total_line = MARKETS[matchup]
+        row = {
+            "season": SEASON, "week": WEEK, "game_id": game_id,
+            "date": str(pd.Timestamp(game["gameday"]).date()) if pd.notna(game.get("gameday")) else "",
+            "matchup": matchup, "away_team": away, "home_team": home,
+            **actual_fields(game),
+            "publication_status": "Chronological reconstruction",
+            "market_source": "User-verified Bovada Week 8 slate",
+            "market_favorite": favorite, "market_spread_points": spread,
+            "market_total": total_line,
+        }
+        for variant, name in variant_names.items():
+            if game_id not in predictions[variant].index:
+                raise RuntimeError(f"Missing chronological prediction for {matchup} / {variant}.")
+            pred = predictions[variant].loc[game_id]
+            add_model_fields(row, name, float(pred["pred_away"]), float(pred["pred_home"]),
                              favorite, spread, total_line, away, home)
         rows.append(row)
 
