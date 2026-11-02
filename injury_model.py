@@ -108,7 +108,18 @@ def _normalize_reports(reports: pd.DataFrame) -> pd.DataFrame:
             data["date_modified"] = data["_snapshot_captured_at_utc"]
         else:
             data["date_modified"] = pd.NaT
-    data["date_modified"] = pd.to_datetime(data["date_modified"], errors="coerce", utc=True)
+    # nflverse's 2025+ injury feed can contain mixed timestamp string formats.
+    # pandas' default format inference is strict; format="mixed" parses each
+    # value independently. Preserve the original value for coverage diagnostics.
+    data["date_modified_raw"] = data["date_modified"].astype("string")
+    try:
+        data["date_modified"] = pd.to_datetime(
+            data["date_modified"], format="mixed", errors="coerce", utc=True
+        )
+    except (TypeError, ValueError):
+        data["date_modified"] = pd.to_datetime(
+            data["date_modified"], errors="coerce", utc=True
+        )
     if "_snapshot_captured_at_utc" not in data.columns and "snapshot_captured_at_utc" in data.columns:
         data["_snapshot_captured_at_utc"] = pd.to_datetime(data["snapshot_captured_at_utc"], errors="coerce", utc=True)
     # nflverse injury feeds use game_type; older/local snapshots may use season_type.
@@ -257,16 +268,25 @@ def add_injury_features(dataset: pd.DataFrame, schedule: pd.DataFrame, reports: 
             # Compare normalized UTC timestamps rather than .dt.date. This is
             # compatible with pandas 2.x/3.x and preserves the source's UTC date.
             game_date_utc = pd.Timestamp(game["gameday"]).normalize().tz_localize("UTC")
-            base = base[
+            # Rows with a valid source timestamp must be dated before game day.
+            # When the 2025+ weekly official-report feed omits date_modified
+            # entirely, retain those week/team rows under the user's approved
+            # NFL reporting-deadline assumption. Do NOT admit timestamped
+            # same-day or later updates.
+            prior_dated = (
                 base["date_modified"].notna()
                 & base["date_modified"].dt.normalize().lt(game_date_utc)
-            ]
+            )
+            undated_weekly_report = base["date_modified"].isna()
+            base = base[prior_dated | undated_weekly_report]
         elif pd.notna(kickoff):
             base = base[base["date_modified"].notna() & (base["date_modified"] < kickoff)]
         else:
             base = base[base["date_modified"].dt.date < pd.Timestamp(game["gameday"]).date()]
         if not base.empty:
-            base = base.sort_values("date_modified").drop_duplicates(["team", "_player_key"], keep="last")
+            base = base.sort_values(
+            "date_modified", na_position="first", kind="stable"
+        ).drop_duplicates(["team", "_player_key"], keep="last")
         row = {"game_id": game["game_id"]}
         for side, team_col in (("home", "home_team"), ("away", "away_team")):
             team_rows = base[base["team"] == str(game[team_col]).upper().strip()]
@@ -315,10 +335,12 @@ def injury_coverage_diagnostics(schedule: pd.DataFrame, reports: pd.DataFrame) -
         deadline_policy = int(game["season"]) >= 2025
         if deadline_policy:
             game_date_utc = pd.Timestamp(game["gameday"]).normalize().tz_localize("UTC")
-            pregame = typed[
+            prior_dated = (
                 typed["date_modified"].notna()
                 & typed["date_modified"].dt.normalize().lt(game_date_utc)
-            ]
+            )
+            undated_weekly_report = typed["date_modified"].isna()
+            pregame = typed[prior_dated | undated_weekly_report]
         elif pd.notna(kickoff):
             pregame = typed[typed["date_modified"].notna() & typed["date_modified"].lt(kickoff)]
         else:
@@ -365,6 +387,13 @@ def injury_coverage_diagnostics(schedule: pd.DataFrame, reports: pd.DataFrame) -
             "Feed rows season/week": len(raw),
             "Rows after game-type match": len(typed),
             "Rows with valid timestamps": int(typed["date_modified"].notna().sum()),
+            "Rows missing timestamps": int(typed["date_modified"].isna().sum()),
+            "Undated rows admitted under deadline assumption": (
+                int(pregame["date_modified"].isna().sum()) if deadline_policy else 0
+            ),
+            "Raw date_modified examples": " | ".join(
+                typed["date_modified_raw"].dropna().astype(str).drop_duplicates().head(5)
+            ) if "date_modified_raw" in typed.columns else "",
             "Rows available pre-kickoff": len(pregame),
             "Timing policy": "Prior-date rows under NFL reporting deadline" if deadline_policy else "Timestamp before kickoff",
             "Feed teams": ", ".join(sorted(typed["team"].dropna().astype(str).unique())),
