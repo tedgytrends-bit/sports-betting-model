@@ -19,7 +19,7 @@ if str(ROOT) not in sys.path:
 from model import load_schedule_data
 from injury_model import load_injury_reports, injury_coverage_diagnostics
 
-SEASONS = (2021, 2022, 2023, 2024, 2025, 2026)
+SEASONS = (2021, 2022, 2023, 2024, 2025, 2026)  # Match the four-model experiment window.
 OUT = ROOT / "data" / "injury_coverage_audit"
 
 
