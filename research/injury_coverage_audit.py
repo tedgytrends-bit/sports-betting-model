@@ -65,6 +65,8 @@ def main() -> None:
             total_raw_feed_rows=("Feed rows season/week", "sum"),
             rows_after_game_type_match=("Rows after game-type match", "sum"),
             rows_with_valid_timestamps=("Rows with valid timestamps", "sum"),
+            rows_missing_timestamps=("Rows missing timestamps", "sum"),
+            undated_rows_admitted=("Undated rows admitted under deadline assumption", "sum"),
             rows_available_pregame=("Rows available pre-kickoff", "sum"),
             games_snapshot_after_kickoff=("Snapshot timing", lambda s: int(s.eq("After kickoff").sum())),
             games_snapshot_timestamp_unavailable=("Snapshot timing", lambda s: int(s.eq("Timestamp unavailable").sum())),
@@ -86,7 +88,7 @@ def main() -> None:
         "scheduled_games_diagnosed": int(len(detail)),
         "season_summary": seasonal.to_dict(orient="records"),
         "timing_assumptions": {
-            "2025-2026": "Treat matching weekly official injury-report feed rows with a UTC calendar date before the scheduled game date as pregame, consistent with the user-stated NFL submission deadlines (Friday 3 p.m. for Sunday games; Saturday 3 p.m. for Monday games). Same-day rows are excluded; original timestamps are retained.",
+            "2025-2026": "Timestamped rows must have a UTC calendar date before game day. If the nflverse weekly official-report feed omits date_modified, undated season/week/type/team rows are retained under the user's explicit reporting-deadline assumption (Friday 3 p.m. for Sunday games; Saturday 3 p.m. for Monday games). Timestamped same-day and later rows are excluded. This is an assumption-based pregame classification, not independently timestamp-verified.",
             "2021-2024": "Require source date_modified to precede scheduled kickoff (or prior calendar date when kickoff is unavailable).",
         },
         "diagnostic_definitions": {
