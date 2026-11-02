@@ -237,6 +237,46 @@ def _directional_summary(frame: pd.DataFrame, edge_col: str, actual_col: str) ->
     }
 
 
+def _edge_band_summary(frame: pd.DataFrame, edge_col: str, actual_col: str) -> list[dict]:
+    """Report directional grading by absolute projected edge, with no bet threshold."""
+    bands = [
+        ("0_to_1", 0.0, 1.0),
+        ("1_to_2", 1.0, 2.0),
+        ("2_to_3", 2.0, 3.0),
+        ("3_to_4", 3.0, 4.0),
+        ("4_plus", 4.0, float("inf")),
+    ]
+    eligible = frame.dropna(subset=[edge_col, actual_col]).copy()
+    eligible["abs_edge"] = eligible[edge_col].abs()
+    results = []
+    for label, lower, upper in bands:
+        band = eligible[
+            (eligible["abs_edge"] >= lower)
+            & (eligible["abs_edge"] < upper)
+            & (eligible[edge_col] != 0)
+        ].copy()
+        wins = int(((band[edge_col] * band[actual_col]) > 0).sum())
+        pushes = int((band[actual_col] == 0).sum())
+        losses = int(len(band) - wins - pushes)
+        graded = wins + losses
+        results.append({
+            "edge_band_points": label,
+            "games": int(len(band)),
+            "wins": wins,
+            "losses": losses,
+            "pushes": pushes,
+            "accuracy_pct_ex_pushes": round(100 * wins / graded, 3) if graded else None,
+        })
+    zero_edge = eligible[eligible[edge_col] == 0]
+    results.append({
+        "edge_band_points": "zero_edge_no_lean",
+        "games": int(len(zero_edge)),
+        "wins": 0, "losses": 0, "pushes": 0,
+        "accuracy_pct_ex_pushes": None,
+    })
+    return results
+
+
 def _roi_summary(frame: pd.DataFrame, edge_col: str, actual_col: str, label: str) -> dict:
     result = {"variant": label, "n_games": int(len(frame))}
     for threshold in THRESHOLDS:
@@ -316,6 +356,8 @@ def main() -> None:
             "totals_directional_accuracy_pct": round(float(((totals["total_edge"] > 0) == (totals["actual_total_margin"] > 0))[totals["actual_total_margin"] != 0].mean() * 100), 3),
             "ats_all_game_directional": _directional_summary(ats, "ats_edge", "actual_ats_margin"),
             "totals_all_game_directional": _directional_summary(totals, "total_edge", "actual_total_margin"),
+            "ats_edge_bands": _edge_band_summary(ats, "ats_edge", "actual_ats_margin"),
+            "totals_edge_bands": _edge_band_summary(totals, "total_edge", "actual_total_margin"),
             "ats_fixed_thresholds": _roi_summary(ats, "ats_edge", "actual_ats_margin", name),
             "totals_fixed_thresholds": _roi_summary(totals, "total_edge", "actual_total_margin", name),
         }
