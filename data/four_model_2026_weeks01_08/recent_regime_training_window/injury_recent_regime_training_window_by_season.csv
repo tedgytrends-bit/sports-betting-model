@@ -17,9 +17,9 @@ season,training_window,model,games,wins,losses,pushes,graded_ex_pushes,accuracy_
 2025,rolling_4_seasons,injury,285,146,138,1,284,51.408,-5.2727,-1.85,10.4289
 2025,rolling_3_seasons,baseline,285,142,142,1,284,50.0,-12.9091,-4.53,10.469
 2025,rolling_3_seasons,injury,285,144,140,1,284,50.704,-9.0909,-3.19,10.5981
-2026,expanding_full_history,baseline,121,60,55,6,115,52.174,-0.4545,-0.376,9.6795
+2026,expanding_full_history,baseline,121,63,52,6,115,54.783,5.2727,4.358,9.6795
 2026,expanding_full_history,injury,121,63,52,6,115,54.783,5.2727,4.358,9.7807
-2026,rolling_4_seasons,baseline,121,63,52,6,115,54.783,5.2727,4.358,9.6594
-2026,rolling_4_seasons,injury,121,62,53,6,115,53.913,3.3636,2.78,9.8694
-2026,rolling_3_seasons,baseline,121,63,52,6,115,54.783,5.2727,4.358,9.705
-2026,rolling_3_seasons,injury,121,59,56,6,115,51.304,-2.3636,-1.953,10.3391
+2026,rolling_4_seasons,baseline,121,65,50,6,115,56.522,9.0909,7.513,9.6594
+2026,rolling_4_seasons,injury,121,64,51,6,115,55.652,7.1818,5.935,9.8694
+2026,rolling_3_seasons,baseline,121,64,51,6,115,55.652,7.1818,5.935,9.705
+2026,rolling_3_seasons,injury,121,60,55,6,115,52.174,-0.4545,-0.376,10.3391
