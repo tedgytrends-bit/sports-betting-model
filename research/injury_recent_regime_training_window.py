@@ -1,7 +1,7 @@
 """Research-only recent-regime/training-window analysis for Baseline vs Injury ATS.
 
 Tests whether newer training data improves out-of-sample ATS performance and whether
-Injury's incremental value changes in the 2025-2026 higher-coverage regime.
+Injury's incremental value changes in the newer regime.
 
 Primary windows preserve the existing 500-game minimum training history:
 - expanding_full_history
@@ -10,6 +10,10 @@ Primary windows preserve the existing 500-game minimum training history:
 
 A 2-season window is intentionally excluded because it cannot provide 500 prior
 training games for early/midseason folds such as 2026 Week 8.
+
+Market policy matches the validated 2026 Weeks 1-8 research dataset:
+- Historical seasons and 2026 Weeks 1-7: nflverse schedule spread_line.
+- 2026 Week 8: user-verified Bovada board.
 
 No production files or official prospective records are modified.
 """
@@ -31,6 +35,7 @@ if str(ROOT) not in sys.path:
 
 from model import build_efficiency_model_dataset, load_pbp, load_schedule_data
 from injury_model import add_injury_features, load_injury_reports
+from research.four_model_2026_weeks01_08 import WEEK8_BOVADA, norm_team
 
 OUT = ROOT / "data" / "four_model_2026_weeks01_08" / "recent_regime_training_window"
 SEASONS = (2021, 2022, 2023, 2024, 2025, 2026)
@@ -45,6 +50,7 @@ WINDOWS = {
 EXCLUDED = {
     "game_id", "gameday", "season", "week", "home_team", "away_team",
     "home_score", "away_score", "spread_line", "total_line",
+    "market_spread_line", "market_source",
 }
 
 
@@ -53,6 +59,23 @@ def _numeric_feature_columns(frame: pd.DataFrame, columns: list[str]) -> list[st
         c for c in columns
         if c in frame.columns and c not in EXCLUDED and pd.api.types.is_numeric_dtype(frame[c])
     ]
+
+
+def _apply_market_policy(data: pd.DataFrame) -> pd.DataFrame:
+    out = data.copy()
+    out["market_spread_line"] = pd.to_numeric(out["spread_line"], errors="coerce")
+    out["market_source"] = "nflverse schedule line (sportsbook not verified)"
+    mask = pd.to_numeric(out["season"], errors="coerce").eq(2026) & pd.to_numeric(out["week"], errors="coerce").eq(8)
+    for idx, row in out[mask].iterrows():
+        away, home = norm_team(row["away_team"]), norm_team(row["home_team"])
+        matchup = f"{away} @ {home}"
+        if matchup not in WEEK8_BOVADA:
+            raise RuntimeError(f"Missing user-verified Week 8 Bovada line for {matchup}.")
+        favorite, points, _total = WEEK8_BOVADA[matchup]
+        spread_line = float(points) if norm_team(favorite) == home else -float(points)
+        out.at[idx, "market_spread_line"] = spread_line
+        out.at[idx, "market_source"] = "User-verified Bovada Week 8 board"
+    return out
 
 
 def _fit_weekly_window(
@@ -108,8 +131,8 @@ def _grade(pred: pd.DataFrame) -> pd.DataFrame:
     out = pred.copy()
     out["actual_home_margin"] = out["home_score"] - out["away_score"]
     out["pred_home_margin"] = out["pred_home"] - out["pred_away"]
-    out["ats_edge"] = out["pred_home_margin"] - out["spread_line"]
-    out["actual_ats_margin"] = out["actual_home_margin"] - out["spread_line"]
+    out["ats_edge"] = out["pred_home_margin"] - out["market_spread_line"]
+    out["actual_ats_margin"] = out["actual_home_margin"] - out["market_spread_line"]
     out["ats_direction"] = np.sign(out["ats_edge"])
     out["ats_outcome"] = np.where(
         out["actual_ats_margin"].eq(0), "Push",
@@ -202,6 +225,7 @@ def main() -> None:
         on="game_id", how="left", validate="one_to_one",
     )
     data["gameday"] = pd.to_datetime(data["gameday"], errors="coerce")
+    data = _apply_market_policy(data)
 
     baseline_features = _numeric_feature_columns(data, list(baseline.columns))
     injury_features = list(dict.fromkeys(baseline_features + _numeric_feature_columns(data, injury_cols)))
@@ -222,7 +246,6 @@ def main() -> None:
     preds = preds[pd.to_numeric(preds["season"], errors="coerce").isin(EVAL_SEASONS)].copy()
     preds = preds[(preds["season"] != 2026) | pd.to_numeric(preds["week"], errors="coerce").between(1, 8)].copy()
 
-    # Exact common-game set by season across all six model/window combinations.
     common_ids_by_season = {}
     for season in EVAL_SEASONS:
         s = preds[pd.to_numeric(preds["season"], errors="coerce").eq(season)]
@@ -236,7 +259,6 @@ def main() -> None:
     common_all = set().union(*common_ids_by_season.values())
     eval_preds = preds[preds["game_id"].isin(common_all)].copy()
 
-    # Long-form summary table.
     summary_rows = []
     season_report = {}
     for season in EVAL_SEASONS:
@@ -252,10 +274,8 @@ def main() -> None:
                 pair[model_name] = f
                 season_report[str(season)][window_name][model_name] = rec
                 summary_rows.append({"season": season, "training_window": window_name, "model": model_name, **rec})
-            delta = _paired_injury_delta(pair["baseline"], pair["injury"])
-            season_report[str(season)][window_name]["injury_incremental_vs_baseline"] = delta
+            season_report[str(season)][window_name]["injury_incremental_vs_baseline"] = _paired_injury_delta(pair["baseline"], pair["injury"])
 
-    # Aggregate regimes: older full seasons vs recent higher-coverage regime and 2026 separately.
     regime_defs = {
         "2023_2024": (2023, 2024),
         "2025_only": (2025,),
@@ -280,7 +300,6 @@ def main() -> None:
                 regime_report[regime_name][window_name][model_name] = rec
             regime_report[regime_name][window_name]["injury_incremental_vs_baseline"] = _paired_injury_delta(pair["baseline"], pair["injury"])
 
-    # Window comparison on exact common games for each model, full evaluated period.
     window_comparison = {}
     for model_name in ("baseline", "injury"):
         window_comparison[model_name] = {}
@@ -302,7 +321,7 @@ def main() -> None:
                 "rolling_3_seasons": "test season plus prior 2 seasons, still strictly before the fold",
             },
             "two_season_exclusion": "Not tested in the primary comparison because it cannot satisfy the established 500-game minimum by early/midseason; lowering the minimum would confound recency with sample-size methodology.",
-            "market_lines": "nflverse schedule spread_line; sportsbook execution not verified",
+            "market_lines": "nflverse schedule spread_line for historical seasons and 2026 Weeks 1-7; user-verified Bovada board for 2026 Week 8",
             "2026_scope": "Weeks 1-8 only",
             "common_game_policy": "Each season is restricted to games predicted by both models under all three primary windows.",
         },
@@ -316,7 +335,7 @@ def main() -> None:
             "This remains retrospective research and not a pristine untouched holdout.",
             "Training-window changes can capture roster/coaching/rule recency effects, not only injury-data quality.",
             "Injury coverage/publishing conventions differ across historical seasons, so regime attribution is suggestive rather than causal.",
-            "nflverse schedule lines are not verified executable sportsbook quotes.",
+            "Historical nflverse schedule lines are not verified executable sportsbook quotes.",
             "No production model or official prospective record is modified.",
         ],
     }
@@ -324,7 +343,7 @@ def main() -> None:
     (OUT / "injury_recent_regime_training_window_report.json").write_text(json.dumps(report, indent=2), encoding="utf-8")
     pd.DataFrame(summary_rows).to_csv(OUT / "injury_recent_regime_training_window_by_season.csv", index=False)
     eval_preds[[
-        "game_id", "season", "week", "gameday", "away_team", "home_team", "spread_line",
+        "game_id", "season", "week", "gameday", "away_team", "home_team", "market_spread_line", "market_source",
         "home_score", "away_score", "model", "training_window", "training_games",
         "training_first_season", "training_last_season", "pred_home", "pred_away",
         "pred_home_margin", "ats_edge", "actual_ats_margin", "ats_direction", "ats_outcome",
