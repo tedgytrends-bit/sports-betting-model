@@ -1,0 +1,286 @@
+{
+  "status": "RESEARCH_ONLY_RETROSPECTIVE_RECONSTRUCTION",
+  "created_at_utc": "2026-11-03T15:19:32.202606+00:00",
+  "scope": {
+    "season": 2026,
+    "weeks": [
+      1,
+      8
+    ],
+    "completed_schedule_games": 121,
+    "common_games_all_four_models": 121,
+    "missing_from_common_set": []
+  },
+  "method": {
+    "variants": [
+      "baseline_only",
+      "injury_only_added",
+      "efficiency_only_added",
+      "combined_efficiency_plus_injury"
+    ],
+    "variant_labels": {
+      "baseline_only": "baseline",
+      "injury_only_added": "injury",
+      "efficiency_only_added": "efficiency",
+      "combined_efficiency_plus_injury": "combined"
+    },
+    "ridge_alpha": 10.0,
+    "chronology": "Same _fit_weekly procedure for all four models; training data precedes each calendar-week test fold.",
+    "injury_timing": "Uses injury_model point-in-time rules already validated for the four-model research branch.",
+    "weeks_1_7_market": "nflverse schedule spread_line and total_line; exact executable sportsbook not verified.",
+    "week_8_market": "User-verified Bovada board supplied pregame.",
+    "roi": "Every non-zero directional lean; flat 1-unit risk per game at -110. Win = +0.9091u, loss = -1u, push = 0u.",
+    "official_status": "Retrospective research reconstruction only; not an official prospective forecast record."
+  },
+  "feature_counts": {
+    "baseline_only": 24,
+    "injury_only_added": 56,
+    "efficiency_only_added": 81,
+    "combined_efficiency_plus_injury": 113
+  },
+  "overall": {
+    "baseline": {
+      "games": 121,
+      "ats": {
+        "wins": 63,
+        "losses": 52,
+        "pushes": 6,
+        "no_lean": 0,
+        "pending": 0,
+        "graded_ex_pushes": 115,
+        "accuracy_pct_ex_pushes": 54.783,
+        "flat_profit_units_at_minus110": 5.2727,
+        "flat_roi_pct_at_minus110": 4.358
+      },
+      "totals": {
+        "wins": 55,
+        "losses": 66,
+        "pushes": 0,
+        "no_lean": 0,
+        "pending": 0,
+        "graded_ex_pushes": 121,
+        "accuracy_pct_ex_pushes": 45.455,
+        "flat_profit_units_at_minus110": -16.0,
+        "flat_roi_pct_at_minus110": -13.223
+      },
+      "ats_margin_mae": 9.6795,
+      "total_mae": 11.5288
+    },
+    "injury": {
+      "games": 121,
+      "ats": {
+        "wins": 63,
+        "losses": 52,
+        "pushes": 6,
+        "no_lean": 0,
+        "pending": 0,
+        "graded_ex_pushes": 115,
+        "accuracy_pct_ex_pushes": 54.783,
+        "flat_profit_units_at_minus110": 5.2727,
+        "flat_roi_pct_at_minus110": 4.358
+      },
+      "totals": {
+        "wins": 52,
+        "losses": 69,
+        "pushes": 0,
+        "no_lean": 0,
+        "pending": 0,
+        "graded_ex_pushes": 121,
+        "accuracy_pct_ex_pushes": 42.975,
+        "flat_profit_units_at_minus110": -21.7273,
+        "flat_roi_pct_at_minus110": -17.956
+      },
+      "ats_margin_mae": 9.7807,
+      "total_mae": 11.448
+    },
+    "efficiency": {
+      "games": 121,
+      "ats": {
+        "wins": 61,
+        "losses": 54,
+        "pushes": 6,
+        "no_lean": 0,
+        "pending": 0,
+        "graded_ex_pushes": 115,
+        "accuracy_pct_ex_pushes": 53.043,
+        "flat_profit_units_at_minus110": 1.4545,
+        "flat_roi_pct_at_minus110": 1.202
+      },
+      "totals": {
+        "wins": 48,
+        "losses": 73,
+        "pushes": 0,
+        "no_lean": 0,
+        "pending": 0,
+        "graded_ex_pushes": 121,
+        "accuracy_pct_ex_pushes": 39.669,
+        "flat_profit_units_at_minus110": -29.3636,
+        "flat_roi_pct_at_minus110": -24.267
+      },
+      "ats_margin_mae": 9.76,
+      "total_mae": 11.8069
+    },
+    "combined": {
+      "games": 121,
+      "ats": {
+        "wins": 58,
+        "losses": 57,
+        "pushes": 6,
+        "no_lean": 0,
+        "pending": 0,
+        "graded_ex_pushes": 115,
+        "accuracy_pct_ex_pushes": 50.435,
+        "flat_profit_units_at_minus110": -4.2727,
+        "flat_roi_pct_at_minus110": -3.531
+      },
+      "totals": {
+        "wins": 51,
+        "losses": 70,
+        "pushes": 0,
+        "no_lean": 0,
+        "pending": 0,
+        "graded_ex_pushes": 121,
+        "accuracy_pct_ex_pushes": 42.149,
+        "flat_profit_units_at_minus110": -23.6364,
+        "flat_roi_pct_at_minus110": -19.534
+      },
+      "ats_margin_mae": 9.9242,
+      "total_mae": 11.7709
+    }
+  },
+  "agreement": {
+    "ats_all_four_agree_games": 81,
+    "ats_disagreement_games": 40,
+    "totals_all_four_agree_games": 92,
+    "totals_disagreement_games": 29
+  },
+  "pairwise_mcnemar": [
+    {
+      "market": "ats",
+      "model_a": "baseline",
+      "model_b": "injury",
+      "common_graded_games": 115,
+      "model_a_only_correct": 12,
+      "model_b_only_correct": 12,
+      "discordant_games": 24,
+      "mcnemar_exact_two_sided_p": 1.0
+    },
+    {
+      "market": "ats",
+      "model_a": "baseline",
+      "model_b": "efficiency",
+      "common_graded_games": 115,
+      "model_a_only_correct": 11,
+      "model_b_only_correct": 9,
+      "discordant_games": 20,
+      "mcnemar_exact_two_sided_p": 0.823803
+    },
+    {
+      "market": "ats",
+      "model_a": "baseline",
+      "model_b": "combined",
+      "common_graded_games": 115,
+      "model_a_only_correct": 16,
+      "model_b_only_correct": 11,
+      "discordant_games": 27,
+      "mcnemar_exact_two_sided_p": 0.442068
+    },
+    {
+      "market": "ats",
+      "model_a": "injury",
+      "model_b": "efficiency",
+      "common_graded_games": 115,
+      "model_a_only_correct": 14,
+      "model_b_only_correct": 12,
+      "discordant_games": 26,
+      "mcnemar_exact_two_sided_p": 0.845019
+    },
+    {
+      "market": "ats",
+      "model_a": "injury",
+      "model_b": "combined",
+      "common_graded_games": 115,
+      "model_a_only_correct": 11,
+      "model_b_only_correct": 6,
+      "discordant_games": 17,
+      "mcnemar_exact_two_sided_p": 0.332306
+    },
+    {
+      "market": "ats",
+      "model_a": "efficiency",
+      "model_b": "combined",
+      "common_graded_games": 115,
+      "model_a_only_correct": 9,
+      "model_b_only_correct": 6,
+      "discordant_games": 15,
+      "mcnemar_exact_two_sided_p": 0.607239
+    },
+    {
+      "market": "total",
+      "model_a": "baseline",
+      "model_b": "injury",
+      "common_graded_games": 121,
+      "model_a_only_correct": 8,
+      "model_b_only_correct": 5,
+      "discordant_games": 13,
+      "mcnemar_exact_two_sided_p": 0.581055
+    },
+    {
+      "market": "total",
+      "model_a": "baseline",
+      "model_b": "efficiency",
+      "common_graded_games": 121,
+      "model_a_only_correct": 12,
+      "model_b_only_correct": 5,
+      "discordant_games": 17,
+      "mcnemar_exact_two_sided_p": 0.143463
+    },
+    {
+      "market": "total",
+      "model_a": "baseline",
+      "model_b": "combined",
+      "common_graded_games": 121,
+      "model_a_only_correct": 11,
+      "model_b_only_correct": 7,
+      "discordant_games": 18,
+      "mcnemar_exact_two_sided_p": 0.480682
+    },
+    {
+      "market": "total",
+      "model_a": "injury",
+      "model_b": "efficiency",
+      "common_graded_games": 121,
+      "model_a_only_correct": 12,
+      "model_b_only_correct": 8,
+      "discordant_games": 20,
+      "mcnemar_exact_two_sided_p": 0.503445
+    },
+    {
+      "market": "total",
+      "model_a": "injury",
+      "model_b": "combined",
+      "common_graded_games": 121,
+      "model_a_only_correct": 9,
+      "model_b_only_correct": 8,
+      "discordant_games": 17,
+      "mcnemar_exact_two_sided_p": 1.0
+    },
+    {
+      "market": "total",
+      "model_a": "efficiency",
+      "model_b": "combined",
+      "common_graded_games": 121,
+      "model_a_only_correct": 4,
+      "model_b_only_correct": 7,
+      "discordant_games": 11,
+      "mcnemar_exact_two_sided_p": 0.548828
+    }
+  ],
+  "cautions": [
+    "Weeks 1-7 use nflverse archived schedule lines rather than verified Bovada quotes.",
+    "Historical seasons used for training have already informed prior research and are not a pristine untouched holdout.",
+    "These are retrospective chronological reconstructions, not necessarily the exact forecasts that were published at the time.",
+    "Directional accuracy and simulated -110 ROI do not establish future profitability.",
+    "No production model or official prospective record is changed by this analysis."
+  ]
+}
