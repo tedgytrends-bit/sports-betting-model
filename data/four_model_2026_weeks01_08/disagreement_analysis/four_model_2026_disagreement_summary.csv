@@ -1,0 +1,7 @@
+market,challenger,games,agree_games,flip_games,flip_rate_pct,added_helped,added_hurt,net_help_minus_hurt,p_value,baseline_flip_accuracy_pct,challenger_flip_accuracy_pct,mean_baseline_abs_edge_on_flips,mean_edge_shift_points
+ats,injury,121,96,25,20.661,12,12,0,1.0,50.0,50.0,1.826,3.148
+total,injury,121,108,13,10.744,5,8,-3,0.581055,61.538,38.462,0.872,1.508
+ats,efficiency,121,100,21,17.355,9,11,-2,0.823803,55.0,45.0,0.826,2.095
+total,efficiency,121,104,17,14.05,5,12,-7,0.143463,70.588,29.412,1.09,2.509
+ats,combined,121,93,28,23.14,11,16,-5,0.442068,59.259,40.741,1.589,3.756
+total,combined,121,103,18,14.876,7,11,-4,0.480682,61.111,38.889,1.461,3.06

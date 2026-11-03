@@ -1,0 +1,925 @@
+{
+  "status": "RESEARCH_ONLY_DISAGREEMENT_ATTRIBUTION",
+  "scope": "2026 Weeks 1-8 validated 121-game four-model reconstruction",
+  "question": "When an added feature block changes Baseline's directional pick, does that change help or hurt?",
+  "definitions": {
+    "added_helped": "Baseline lost and challenger won on a game where the picks differed.",
+    "added_hurt": "Baseline won and challenger lost on a game where the picks differed.",
+    "net_help_minus_hurt": "Positive means the added model improved more flips than it damaged; negative means it damaged more.",
+    "p_value": "Exact two-sided binomial test of helped vs hurt among decisive flips; exploratory, not a model-selection threshold by itself."
+  },
+  "comparisons": [
+    {
+      "challenger": "injury",
+      "market": "ats",
+      "games": 121,
+      "agree_games": 96,
+      "flip_games": 25,
+      "flip_rate_pct": 20.661,
+      "baseline_record_when_agree": {
+        "wins": 51,
+        "losses": 40,
+        "pushes": 5,
+        "graded_ex_pushes": 91,
+        "accuracy_pct_ex_pushes": 56.044
+      },
+      "baseline_record_on_flips": {
+        "wins": 12,
+        "losses": 12,
+        "pushes": 1,
+        "graded_ex_pushes": 24,
+        "accuracy_pct_ex_pushes": 50.0
+      },
+      "challenger_record_on_flips": {
+        "wins": 12,
+        "losses": 12,
+        "pushes": 1,
+        "graded_ex_pushes": 24,
+        "accuracy_pct_ex_pushes": 50.0
+      },
+      "added_helped": 12,
+      "added_hurt": 12,
+      "net_help_minus_hurt": 0,
+      "decisive_flips": 24,
+      "exact_binomial_two_sided_p": 1.0,
+      "mean_baseline_abs_edge_on_flips": 1.826,
+      "mean_challenger_abs_edge_on_flips": 1.321,
+      "mean_edge_shift_points": 3.148,
+      "by_week": [
+        {
+          "week": 1,
+          "flips": 4,
+          "added_helped": 2,
+          "added_hurt": 2,
+          "push_or_other": 0
+        },
+        {
+          "week": 2,
+          "flips": 1,
+          "added_helped": 1,
+          "added_hurt": 0,
+          "push_or_other": 0
+        },
+        {
+          "week": 3,
+          "flips": 2,
+          "added_helped": 2,
+          "added_hurt": 0,
+          "push_or_other": 0
+        },
+        {
+          "week": 4,
+          "flips": 3,
+          "added_helped": 1,
+          "added_hurt": 1,
+          "push_or_other": 1
+        },
+        {
+          "week": 5,
+          "flips": 5,
+          "added_helped": 2,
+          "added_hurt": 3,
+          "push_or_other": 0
+        },
+        {
+          "week": 6,
+          "flips": 5,
+          "added_helped": 2,
+          "added_hurt": 3,
+          "push_or_other": 0
+        },
+        {
+          "week": 7,
+          "flips": 3,
+          "added_helped": 2,
+          "added_hurt": 1,
+          "push_or_other": 0
+        },
+        {
+          "week": 8,
+          "flips": 2,
+          "added_helped": 0,
+          "added_hurt": 2,
+          "push_or_other": 0
+        }
+      ],
+      "by_baseline_abs_edge": [
+        {
+          "baseline_abs_edge_band": "0_to_1",
+          "flips": 10,
+          "added_helped": 4,
+          "added_hurt": 6
+        },
+        {
+          "baseline_abs_edge_band": "1_to_2",
+          "flips": 6,
+          "added_helped": 3,
+          "added_hurt": 3
+        },
+        {
+          "baseline_abs_edge_band": "2_to_3",
+          "flips": 4,
+          "added_helped": 0,
+          "added_hurt": 3
+        },
+        {
+          "baseline_abs_edge_band": "3_to_4",
+          "flips": 2,
+          "added_helped": 2,
+          "added_hurt": 0
+        },
+        {
+          "baseline_abs_edge_band": "4_plus",
+          "flips": 3,
+          "added_helped": 3,
+          "added_hurt": 0
+        }
+      ],
+      "by_direction_change": [
+        {
+          "baseline_direction": "favorite",
+          "challenger_direction": "underdog",
+          "flips": 9,
+          "added_helped": 4,
+          "added_hurt": 5
+        },
+        {
+          "baseline_direction": "underdog",
+          "challenger_direction": "favorite",
+          "flips": 16,
+          "added_helped": 8,
+          "added_hurt": 7
+        }
+      ]
+    },
+    {
+      "challenger": "injury",
+      "market": "total",
+      "games": 121,
+      "agree_games": 108,
+      "flip_games": 13,
+      "flip_rate_pct": 10.744,
+      "baseline_record_when_agree": {
+        "wins": 47,
+        "losses": 61,
+        "pushes": 0,
+        "graded_ex_pushes": 108,
+        "accuracy_pct_ex_pushes": 43.519
+      },
+      "baseline_record_on_flips": {
+        "wins": 8,
+        "losses": 5,
+        "pushes": 0,
+        "graded_ex_pushes": 13,
+        "accuracy_pct_ex_pushes": 61.538
+      },
+      "challenger_record_on_flips": {
+        "wins": 5,
+        "losses": 8,
+        "pushes": 0,
+        "graded_ex_pushes": 13,
+        "accuracy_pct_ex_pushes": 38.462
+      },
+      "added_helped": 5,
+      "added_hurt": 8,
+      "net_help_minus_hurt": -3,
+      "decisive_flips": 13,
+      "exact_binomial_two_sided_p": 0.581055,
+      "mean_baseline_abs_edge_on_flips": 0.872,
+      "mean_challenger_abs_edge_on_flips": 0.637,
+      "mean_edge_shift_points": 1.508,
+      "by_week": [
+        {
+          "week": 1,
+          "flips": 3,
+          "added_helped": 1,
+          "added_hurt": 2,
+          "push_or_other": 0
+        },
+        {
+          "week": 2,
+          "flips": 2,
+          "added_helped": 0,
+          "added_hurt": 2,
+          "push_or_other": 0
+        },
+        {
+          "week": 5,
+          "flips": 4,
+          "added_helped": 2,
+          "added_hurt": 2,
+          "push_or_other": 0
+        },
+        {
+          "week": 6,
+          "flips": 1,
+          "added_helped": 1,
+          "added_hurt": 0,
+          "push_or_other": 0
+        },
+        {
+          "week": 7,
+          "flips": 1,
+          "added_helped": 1,
+          "added_hurt": 0,
+          "push_or_other": 0
+        },
+        {
+          "week": 8,
+          "flips": 2,
+          "added_helped": 0,
+          "added_hurt": 2,
+          "push_or_other": 0
+        }
+      ],
+      "by_baseline_abs_edge": [
+        {
+          "baseline_abs_edge_band": "0_to_1",
+          "flips": 9,
+          "added_helped": 4,
+          "added_hurt": 5
+        },
+        {
+          "baseline_abs_edge_band": "1_to_2",
+          "flips": 4,
+          "added_helped": 1,
+          "added_hurt": 3
+        },
+        {
+          "baseline_abs_edge_band": "2_to_3",
+          "flips": 0,
+          "added_helped": 0,
+          "added_hurt": 0
+        },
+        {
+          "baseline_abs_edge_band": "3_to_4",
+          "flips": 0,
+          "added_helped": 0,
+          "added_hurt": 0
+        },
+        {
+          "baseline_abs_edge_band": "4_plus",
+          "flips": 0,
+          "added_helped": 0,
+          "added_hurt": 0
+        }
+      ],
+      "by_direction_change": [
+        {
+          "baseline_direction": "Over",
+          "challenger_direction": "Under",
+          "flips": 8,
+          "added_helped": 4,
+          "added_hurt": 4
+        },
+        {
+          "baseline_direction": "Under",
+          "challenger_direction": "Over",
+          "flips": 5,
+          "added_helped": 1,
+          "added_hurt": 4
+        }
+      ]
+    },
+    {
+      "challenger": "efficiency",
+      "market": "ats",
+      "games": 121,
+      "agree_games": 100,
+      "flip_games": 21,
+      "flip_rate_pct": 17.355,
+      "baseline_record_when_agree": {
+        "wins": 52,
+        "losses": 43,
+        "pushes": 5,
+        "graded_ex_pushes": 95,
+        "accuracy_pct_ex_pushes": 54.737
+      },
+      "baseline_record_on_flips": {
+        "wins": 11,
+        "losses": 9,
+        "pushes": 1,
+        "graded_ex_pushes": 20,
+        "accuracy_pct_ex_pushes": 55.0
+      },
+      "challenger_record_on_flips": {
+        "wins": 9,
+        "losses": 11,
+        "pushes": 1,
+        "graded_ex_pushes": 20,
+        "accuracy_pct_ex_pushes": 45.0
+      },
+      "added_helped": 9,
+      "added_hurt": 11,
+      "net_help_minus_hurt": -2,
+      "decisive_flips": 20,
+      "exact_binomial_two_sided_p": 0.823803,
+      "mean_baseline_abs_edge_on_flips": 0.826,
+      "mean_challenger_abs_edge_on_flips": 1.27,
+      "mean_edge_shift_points": 2.095,
+      "by_week": [
+        {
+          "week": 1,
+          "flips": 4,
+          "added_helped": 2,
+          "added_hurt": 2,
+          "push_or_other": 0
+        },
+        {
+          "week": 2,
+          "flips": 4,
+          "added_helped": 2,
+          "added_hurt": 2,
+          "push_or_other": 0
+        },
+        {
+          "week": 3,
+          "flips": 1,
+          "added_helped": 1,
+          "added_hurt": 0,
+          "push_or_other": 0
+        },
+        {
+          "week": 4,
+          "flips": 1,
+          "added_helped": 0,
+          "added_hurt": 0,
+          "push_or_other": 1
+        },
+        {
+          "week": 5,
+          "flips": 2,
+          "added_helped": 0,
+          "added_hurt": 2,
+          "push_or_other": 0
+        },
+        {
+          "week": 6,
+          "flips": 3,
+          "added_helped": 0,
+          "added_hurt": 3,
+          "push_or_other": 0
+        },
+        {
+          "week": 7,
+          "flips": 2,
+          "added_helped": 2,
+          "added_hurt": 0,
+          "push_or_other": 0
+        },
+        {
+          "week": 8,
+          "flips": 4,
+          "added_helped": 2,
+          "added_hurt": 2,
+          "push_or_other": 0
+        }
+      ],
+      "by_baseline_abs_edge": [
+        {
+          "baseline_abs_edge_band": "0_to_1",
+          "flips": 13,
+          "added_helped": 5,
+          "added_hurt": 7
+        },
+        {
+          "baseline_abs_edge_band": "1_to_2",
+          "flips": 7,
+          "added_helped": 4,
+          "added_hurt": 3
+        },
+        {
+          "baseline_abs_edge_band": "2_to_3",
+          "flips": 1,
+          "added_helped": 0,
+          "added_hurt": 1
+        },
+        {
+          "baseline_abs_edge_band": "3_to_4",
+          "flips": 0,
+          "added_helped": 0,
+          "added_hurt": 0
+        },
+        {
+          "baseline_abs_edge_band": "4_plus",
+          "flips": 0,
+          "added_helped": 0,
+          "added_hurt": 0
+        }
+      ],
+      "by_direction_change": [
+        {
+          "baseline_direction": "favorite",
+          "challenger_direction": "underdog",
+          "flips": 5,
+          "added_helped": 1,
+          "added_hurt": 3
+        },
+        {
+          "baseline_direction": "underdog",
+          "challenger_direction": "favorite",
+          "flips": 16,
+          "added_helped": 8,
+          "added_hurt": 8
+        }
+      ]
+    },
+    {
+      "challenger": "efficiency",
+      "market": "total",
+      "games": 121,
+      "agree_games": 104,
+      "flip_games": 17,
+      "flip_rate_pct": 14.05,
+      "baseline_record_when_agree": {
+        "wins": 43,
+        "losses": 61,
+        "pushes": 0,
+        "graded_ex_pushes": 104,
+        "accuracy_pct_ex_pushes": 41.346
+      },
+      "baseline_record_on_flips": {
+        "wins": 12,
+        "losses": 5,
+        "pushes": 0,
+        "graded_ex_pushes": 17,
+        "accuracy_pct_ex_pushes": 70.588
+      },
+      "challenger_record_on_flips": {
+        "wins": 5,
+        "losses": 12,
+        "pushes": 0,
+        "graded_ex_pushes": 17,
+        "accuracy_pct_ex_pushes": 29.412
+      },
+      "added_helped": 5,
+      "added_hurt": 12,
+      "net_help_minus_hurt": -7,
+      "decisive_flips": 17,
+      "exact_binomial_two_sided_p": 0.143463,
+      "mean_baseline_abs_edge_on_flips": 1.09,
+      "mean_challenger_abs_edge_on_flips": 1.419,
+      "mean_edge_shift_points": 2.509,
+      "by_week": [
+        {
+          "week": 1,
+          "flips": 1,
+          "added_helped": 1,
+          "added_hurt": 0,
+          "push_or_other": 0
+        },
+        {
+          "week": 2,
+          "flips": 5,
+          "added_helped": 1,
+          "added_hurt": 4,
+          "push_or_other": 0
+        },
+        {
+          "week": 3,
+          "flips": 2,
+          "added_helped": 1,
+          "added_hurt": 1,
+          "push_or_other": 0
+        },
+        {
+          "week": 4,
+          "flips": 1,
+          "added_helped": 0,
+          "added_hurt": 1,
+          "push_or_other": 0
+        },
+        {
+          "week": 5,
+          "flips": 2,
+          "added_helped": 0,
+          "added_hurt": 2,
+          "push_or_other": 0
+        },
+        {
+          "week": 6,
+          "flips": 1,
+          "added_helped": 1,
+          "added_hurt": 0,
+          "push_or_other": 0
+        },
+        {
+          "week": 7,
+          "flips": 1,
+          "added_helped": 0,
+          "added_hurt": 1,
+          "push_or_other": 0
+        },
+        {
+          "week": 8,
+          "flips": 4,
+          "added_helped": 1,
+          "added_hurt": 3,
+          "push_or_other": 0
+        }
+      ],
+      "by_baseline_abs_edge": [
+        {
+          "baseline_abs_edge_band": "0_to_1",
+          "flips": 9,
+          "added_helped": 3,
+          "added_hurt": 6
+        },
+        {
+          "baseline_abs_edge_band": "1_to_2",
+          "flips": 6,
+          "added_helped": 1,
+          "added_hurt": 5
+        },
+        {
+          "baseline_abs_edge_band": "2_to_3",
+          "flips": 1,
+          "added_helped": 0,
+          "added_hurt": 1
+        },
+        {
+          "baseline_abs_edge_band": "3_to_4",
+          "flips": 1,
+          "added_helped": 1,
+          "added_hurt": 0
+        },
+        {
+          "baseline_abs_edge_band": "4_plus",
+          "flips": 0,
+          "added_helped": 0,
+          "added_hurt": 0
+        }
+      ],
+      "by_direction_change": [
+        {
+          "baseline_direction": "Over",
+          "challenger_direction": "Under",
+          "flips": 13,
+          "added_helped": 5,
+          "added_hurt": 8
+        },
+        {
+          "baseline_direction": "Under",
+          "challenger_direction": "Over",
+          "flips": 4,
+          "added_helped": 0,
+          "added_hurt": 4
+        }
+      ]
+    },
+    {
+      "challenger": "combined",
+      "market": "ats",
+      "games": 121,
+      "agree_games": 93,
+      "flip_games": 28,
+      "flip_rate_pct": 23.14,
+      "baseline_record_when_agree": {
+        "wins": 47,
+        "losses": 41,
+        "pushes": 5,
+        "graded_ex_pushes": 88,
+        "accuracy_pct_ex_pushes": 53.409
+      },
+      "baseline_record_on_flips": {
+        "wins": 16,
+        "losses": 11,
+        "pushes": 1,
+        "graded_ex_pushes": 27,
+        "accuracy_pct_ex_pushes": 59.259
+      },
+      "challenger_record_on_flips": {
+        "wins": 11,
+        "losses": 16,
+        "pushes": 1,
+        "graded_ex_pushes": 27,
+        "accuracy_pct_ex_pushes": 40.741
+      },
+      "added_helped": 11,
+      "added_hurt": 16,
+      "net_help_minus_hurt": -5,
+      "decisive_flips": 27,
+      "exact_binomial_two_sided_p": 0.442068,
+      "mean_baseline_abs_edge_on_flips": 1.589,
+      "mean_challenger_abs_edge_on_flips": 2.167,
+      "mean_edge_shift_points": 3.756,
+      "by_week": [
+        {
+          "week": 1,
+          "flips": 5,
+          "added_helped": 3,
+          "added_hurt": 2,
+          "push_or_other": 0
+        },
+        {
+          "week": 2,
+          "flips": 2,
+          "added_helped": 1,
+          "added_hurt": 1,
+          "push_or_other": 0
+        },
+        {
+          "week": 3,
+          "flips": 1,
+          "added_helped": 1,
+          "added_hurt": 0,
+          "push_or_other": 0
+        },
+        {
+          "week": 4,
+          "flips": 4,
+          "added_helped": 1,
+          "added_hurt": 2,
+          "push_or_other": 1
+        },
+        {
+          "week": 5,
+          "flips": 3,
+          "added_helped": 1,
+          "added_hurt": 2,
+          "push_or_other": 0
+        },
+        {
+          "week": 6,
+          "flips": 5,
+          "added_helped": 1,
+          "added_hurt": 4,
+          "push_or_other": 0
+        },
+        {
+          "week": 7,
+          "flips": 5,
+          "added_helped": 2,
+          "added_hurt": 3,
+          "push_or_other": 0
+        },
+        {
+          "week": 8,
+          "flips": 3,
+          "added_helped": 1,
+          "added_hurt": 2,
+          "push_or_other": 0
+        }
+      ],
+      "by_baseline_abs_edge": [
+        {
+          "baseline_abs_edge_band": "0_to_1",
+          "flips": 10,
+          "added_helped": 4,
+          "added_hurt": 6
+        },
+        {
+          "baseline_abs_edge_band": "1_to_2",
+          "flips": 10,
+          "added_helped": 5,
+          "added_hurt": 5
+        },
+        {
+          "baseline_abs_edge_band": "2_to_3",
+          "flips": 5,
+          "added_helped": 0,
+          "added_hurt": 4
+        },
+        {
+          "baseline_abs_edge_band": "3_to_4",
+          "flips": 1,
+          "added_helped": 0,
+          "added_hurt": 1
+        },
+        {
+          "baseline_abs_edge_band": "4_plus",
+          "flips": 2,
+          "added_helped": 2,
+          "added_hurt": 0
+        }
+      ],
+      "by_direction_change": [
+        {
+          "baseline_direction": "favorite",
+          "challenger_direction": "underdog",
+          "flips": 9,
+          "added_helped": 3,
+          "added_hurt": 6
+        },
+        {
+          "baseline_direction": "underdog",
+          "challenger_direction": "favorite",
+          "flips": 19,
+          "added_helped": 8,
+          "added_hurt": 10
+        }
+      ]
+    },
+    {
+      "challenger": "combined",
+      "market": "total",
+      "games": 121,
+      "agree_games": 103,
+      "flip_games": 18,
+      "flip_rate_pct": 14.876,
+      "baseline_record_when_agree": {
+        "wins": 44,
+        "losses": 59,
+        "pushes": 0,
+        "graded_ex_pushes": 103,
+        "accuracy_pct_ex_pushes": 42.718
+      },
+      "baseline_record_on_flips": {
+        "wins": 11,
+        "losses": 7,
+        "pushes": 0,
+        "graded_ex_pushes": 18,
+        "accuracy_pct_ex_pushes": 61.111
+      },
+      "challenger_record_on_flips": {
+        "wins": 7,
+        "losses": 11,
+        "pushes": 0,
+        "graded_ex_pushes": 18,
+        "accuracy_pct_ex_pushes": 38.889
+      },
+      "added_helped": 7,
+      "added_hurt": 11,
+      "net_help_minus_hurt": -4,
+      "decisive_flips": 18,
+      "exact_binomial_two_sided_p": 0.480682,
+      "mean_baseline_abs_edge_on_flips": 1.461,
+      "mean_challenger_abs_edge_on_flips": 1.599,
+      "mean_edge_shift_points": 3.06,
+      "by_week": [
+        {
+          "week": 1,
+          "flips": 2,
+          "added_helped": 2,
+          "added_hurt": 0,
+          "push_or_other": 0
+        },
+        {
+          "week": 2,
+          "flips": 4,
+          "added_helped": 1,
+          "added_hurt": 3,
+          "push_or_other": 0
+        },
+        {
+          "week": 3,
+          "flips": 2,
+          "added_helped": 1,
+          "added_hurt": 1,
+          "push_or_other": 0
+        },
+        {
+          "week": 4,
+          "flips": 1,
+          "added_helped": 0,
+          "added_hurt": 1,
+          "push_or_other": 0
+        },
+        {
+          "week": 5,
+          "flips": 2,
+          "added_helped": 0,
+          "added_hurt": 2,
+          "push_or_other": 0
+        },
+        {
+          "week": 6,
+          "flips": 1,
+          "added_helped": 1,
+          "added_hurt": 0,
+          "push_or_other": 0
+        },
+        {
+          "week": 7,
+          "flips": 2,
+          "added_helped": 1,
+          "added_hurt": 1,
+          "push_or_other": 0
+        },
+        {
+          "week": 8,
+          "flips": 4,
+          "added_helped": 1,
+          "added_hurt": 3,
+          "push_or_other": 0
+        }
+      ],
+      "by_baseline_abs_edge": [
+        {
+          "baseline_abs_edge_band": "0_to_1",
+          "flips": 8,
+          "added_helped": 4,
+          "added_hurt": 4
+        },
+        {
+          "baseline_abs_edge_band": "1_to_2",
+          "flips": 7,
+          "added_helped": 2,
+          "added_hurt": 5
+        },
+        {
+          "baseline_abs_edge_band": "2_to_3",
+          "flips": 1,
+          "added_helped": 0,
+          "added_hurt": 1
+        },
+        {
+          "baseline_abs_edge_band": "3_to_4",
+          "flips": 1,
+          "added_helped": 0,
+          "added_hurt": 1
+        },
+        {
+          "baseline_abs_edge_band": "4_plus",
+          "flips": 1,
+          "added_helped": 1,
+          "added_hurt": 0
+        }
+      ],
+      "by_direction_change": [
+        {
+          "baseline_direction": "Over",
+          "challenger_direction": "Under",
+          "flips": 12,
+          "added_helped": 5,
+          "added_hurt": 7
+        },
+        {
+          "baseline_direction": "Under",
+          "challenger_direction": "Over",
+          "flips": 6,
+          "added_helped": 2,
+          "added_hurt": 4
+        }
+      ]
+    }
+  ],
+  "combined_flip_attribution": {
+    "ats": [
+      {
+        "source": "both_injury_and_efficiency_support_flip",
+        "games": 9,
+        "added_helped": 2,
+        "added_hurt": 7,
+        "push_or_other": 0
+      },
+      {
+        "source": "combined_unique_flip",
+        "games": 3,
+        "added_helped": 0,
+        "added_hurt": 3,
+        "push_or_other": 0
+      },
+      {
+        "source": "efficiency_only_supports_flip",
+        "games": 7,
+        "added_helped": 4,
+        "added_hurt": 3,
+        "push_or_other": 0
+      },
+      {
+        "source": "injury_only_supports_flip",
+        "games": 9,
+        "added_helped": 5,
+        "added_hurt": 3,
+        "push_or_other": 1
+      }
+    ],
+    "total": [
+      {
+        "source": "both_injury_and_efficiency_support_flip",
+        "games": 5,
+        "added_helped": 1,
+        "added_hurt": 4,
+        "push_or_other": 0
+      },
+      {
+        "source": "combined_unique_flip",
+        "games": 4,
+        "added_helped": 3,
+        "added_hurt": 1,
+        "push_or_other": 0
+      },
+      {
+        "source": "efficiency_only_supports_flip",
+        "games": 7,
+        "added_helped": 2,
+        "added_hurt": 5,
+        "push_or_other": 0
+      },
+      {
+        "source": "injury_only_supports_flip",
+        "games": 2,
+        "added_helped": 1,
+        "added_hurt": 1,
+        "push_or_other": 0
+      }
+    ]
+  },
+  "cautions": [
+    "Weeks 1-7 still use archived nflverse schedule lines; Week 8 uses the user-verified Bovada board.",
+    "This is retrospective feature attribution on the same 121-game sample, not a new independent holdout.",
+    "Small disagreement subsets can produce unstable percentages.",
+    "No production model or official prospective record is changed."
+  ]
+}
