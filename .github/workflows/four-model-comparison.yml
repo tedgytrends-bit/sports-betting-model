@@ -7,6 +7,7 @@ on:
       - "research/four-model-injury-efficiency"
     paths:
       - "research/four_model_comparison.py"
+      - "research/four_model_2026_weeks01_08.py"
       - "research/four_model_upcoming_projection.py"
       - "research/four_model_week08_reconstruction.py"
       - "pages/Four_Model_Week8_Comparison.py"
@@ -17,6 +18,7 @@ on:
   pull_request:
     paths:
       - "research/four_model_comparison.py"
+      - "research/four_model_2026_weeks01_08.py"
       - "research/four_model_week08_reconstruction.py"
       - "pages/Four_Model_Week8_Comparison.py"
       - "app.py"
@@ -46,23 +48,29 @@ jobs:
           pip install -r requirements.txt
       - name: Compile research modules
         run: |
-          python -m py_compile model.py injury_model.py research/efficiency_feature_experiments.py research/four_model_comparison.py research/injury_coverage_audit.py research/four_model_week08_reconstruction.py pages/Four_Model_Week8_Comparison.py app.py
+          python -m py_compile model.py injury_model.py research/efficiency_feature_experiments.py research/four_model_comparison.py research/four_model_2026_weeks01_08.py research/injury_coverage_audit.py research/four_model_week08_reconstruction.py pages/Four_Model_Week8_Comparison.py app.py
       - name: Run four-model upcoming-game projection
         run: python research/four_model_upcoming_projection.py
       - name: Run four-model chronological comparison
         run: python research/four_model_comparison.py
+      - name: Run 2026 Weeks 1-8 four-model reconstruction
+        run: python research/four_model_2026_weeks01_08.py
       - name: Reconstruct Week 8 four-model public comparison
         run: python research/four_model_week08_reconstruction.py
       - name: Run historical injury coverage audit
         run: python research/injury_coverage_audit.py
-      - name: Commit Week 8 comparison data for Streamlit
+      - name: Commit validated comparison data for research review
         if: success()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/four_model_week08/week08_four_model_comparison.csv data/four_model_week08/week08_four_model_summary.json
+          git add data/four_model_2026_weeks01_08/four_model_2026_weeks01_08_long.csv
+          git add data/four_model_2026_weeks01_08/four_model_2026_weeks01_08_games.csv
+          git add data/four_model_2026_weeks01_08/four_model_2026_weeks01_08_weekly.csv
+          git add data/four_model_2026_weeks01_08/four_model_2026_weeks01_08_summary.json
           if ! git diff --cached --quiet; then
-            git commit -m "Publish validated Week 8 four-model comparison data"
+            git commit -m "Publish validated four-model research comparison data"
             git push
           fi
       - name: Upload research-only results
@@ -72,6 +80,7 @@ jobs:
           name: four-model-injury-efficiency-comparison
           path: |
             data/four_model_comparison/
+            data/four_model_2026_weeks01_08/
             data/four_model_week08/
             data/injury_coverage_audit/
           if-no-files-found: warn
