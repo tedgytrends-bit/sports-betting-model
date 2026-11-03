@@ -1,0 +1,1312 @@
+{
+  "status": "RESEARCH_ONLY_RECENCY_WEIGHTING",
+  "created_at_utc": "2026-11-03T16:13:53.532648+00:00",
+  "question": "Can recency weighting retain older information while improving chronological ATS performance for Baseline and/or Injury?",
+  "method": {
+    "models": [
+      "baseline",
+      "injury"
+    ],
+    "ridge_alpha": 10.0,
+    "minimum_training_games": 500,
+    "decay_schemes_frozen_before_results": {
+      "equal_weight": "all training games weight 1",
+      "half_life_4_seasons": "game weight halves every 4 seasons of age",
+      "half_life_2_seasons": "game weight halves every 2 seasons of age",
+      "half_life_1_season": "game weight halves every 1 season of age"
+    },
+    "weight_normalization": "weights normalized to mean 1 in each fold so Ridge alpha remains comparable",
+    "market_lines": "nflverse schedule spread_line for historical seasons and 2026 Weeks 1-7; user-verified Bovada board for 2026 Week 8",
+    "2026_scope": "Weeks 1-8 only",
+    "common_game_policy": "Each season restricted to games predicted by both models under all four decay schemes."
+  },
+  "feature_counts": {
+    "baseline": 24,
+    "injury": 56
+  },
+  "common_game_counts": {
+    "2023": 285,
+    "2024": 285,
+    "2025": 285,
+    "2026": 121
+  },
+  "fold_weight_summary": {
+    "equal_weight": {
+      "median_training_games": 1032.0,
+      "median_effective_training_games": 1032.0,
+      "median_oldest_game_weight": 1.0,
+      "median_newest_game_weight": 1.0
+    },
+    "half_life_4_seasons": {
+      "median_training_games": 1032.0,
+      "median_effective_training_games": 998.976,
+      "median_oldest_game_weight": 0.75349,
+      "median_newest_game_weight": 1.325802
+    },
+    "half_life_2_seasons": {
+      "median_training_games": 1032.0,
+      "median_effective_training_games": 912.49,
+      "median_oldest_game_weight": 0.549579,
+      "median_newest_game_weight": 1.709332
+    },
+    "half_life_1_season": {
+      "median_training_games": 1032.0,
+      "median_effective_training_games": 690.752,
+      "median_oldest_game_weight": 0.26706,
+      "median_newest_game_weight": 2.62243
+    }
+  },
+  "season_results": {
+    "2023": {
+      "equal_weight": {
+        "baseline": {
+          "games": 285,
+          "wins": 133,
+          "losses": 138,
+          "pushes": 14,
+          "graded_ex_pushes": 271,
+          "accuracy_pct_ex_pushes": 49.077,
+          "profit_units_at_minus110": -17.0909,
+          "roi_pct_at_minus110": -5.997,
+          "ats_margin_mae": 10.5522
+        },
+        "injury": {
+          "games": 285,
+          "wins": 130,
+          "losses": 141,
+          "pushes": 14,
+          "graded_ex_pushes": 271,
+          "accuracy_pct_ex_pushes": 47.97,
+          "profit_units_at_minus110": -22.8182,
+          "roi_pct_at_minus110": -8.006,
+          "ats_margin_mae": 10.762
+        },
+        "injury_incremental_vs_baseline": {
+          "common_games": 285,
+          "flip_games": 34,
+          "flip_rate_pct": 11.93,
+          "injury_helped": 14,
+          "injury_hurt": 17,
+          "net_help_minus_hurt": -3,
+          "decisive_flips": 31,
+          "exact_binomial_two_sided_p": 0.7201
+        }
+      },
+      "half_life_4_seasons": {
+        "baseline": {
+          "games": 285,
+          "wins": 135,
+          "losses": 136,
+          "pushes": 14,
+          "graded_ex_pushes": 271,
+          "accuracy_pct_ex_pushes": 49.815,
+          "profit_units_at_minus110": -13.2727,
+          "roi_pct_at_minus110": -4.657,
+          "ats_margin_mae": 10.5522
+        },
+        "injury": {
+          "games": 285,
+          "wins": 129,
+          "losses": 142,
+          "pushes": 14,
+          "graded_ex_pushes": 271,
+          "accuracy_pct_ex_pushes": 47.601,
+          "profit_units_at_minus110": -24.7273,
+          "roi_pct_at_minus110": -8.676,
+          "ats_margin_mae": 10.7473
+        },
+        "injury_incremental_vs_baseline": {
+          "common_games": 285,
+          "flip_games": 36,
+          "flip_rate_pct": 12.632,
+          "injury_helped": 14,
+          "injury_hurt": 20,
+          "net_help_minus_hurt": -6,
+          "decisive_flips": 34,
+          "exact_binomial_two_sided_p": 0.391528
+        }
+      },
+      "half_life_2_seasons": {
+        "baseline": {
+          "games": 285,
+          "wins": 136,
+          "losses": 135,
+          "pushes": 14,
+          "graded_ex_pushes": 271,
+          "accuracy_pct_ex_pushes": 50.185,
+          "profit_units_at_minus110": -11.3636,
+          "roi_pct_at_minus110": -3.987,
+          "ats_margin_mae": 10.5551
+        },
+        "injury": {
+          "games": 285,
+          "wins": 131,
+          "losses": 140,
+          "pushes": 14,
+          "graded_ex_pushes": 271,
+          "accuracy_pct_ex_pushes": 48.339,
+          "profit_units_at_minus110": -20.9091,
+          "roi_pct_at_minus110": -7.337,
+          "ats_margin_mae": 10.7508
+        },
+        "injury_incremental_vs_baseline": {
+          "common_games": 285,
+          "flip_games": 38,
+          "flip_rate_pct": 13.333,
+          "injury_helped": 15,
+          "injury_hurt": 20,
+          "net_help_minus_hurt": -5,
+          "decisive_flips": 35,
+          "exact_binomial_two_sided_p": 0.49956
+        }
+      },
+      "half_life_1_season": {
+        "baseline": {
+          "games": 285,
+          "wins": 136,
+          "losses": 135,
+          "pushes": 14,
+          "graded_ex_pushes": 271,
+          "accuracy_pct_ex_pushes": 50.185,
+          "profit_units_at_minus110": -11.3636,
+          "roi_pct_at_minus110": -3.987,
+          "ats_margin_mae": 10.5655
+        },
+        "injury": {
+          "games": 285,
+          "wins": 137,
+          "losses": 134,
+          "pushes": 14,
+          "graded_ex_pushes": 271,
+          "accuracy_pct_ex_pushes": 50.554,
+          "profit_units_at_minus110": -9.4545,
+          "roi_pct_at_minus110": -3.317,
+          "ats_margin_mae": 10.7938
+        },
+        "injury_incremental_vs_baseline": {
+          "common_games": 285,
+          "flip_games": 40,
+          "flip_rate_pct": 14.035,
+          "injury_helped": 19,
+          "injury_hurt": 18,
+          "net_help_minus_hurt": 1,
+          "decisive_flips": 37,
+          "exact_binomial_two_sided_p": 1.0
+        }
+      }
+    },
+    "2024": {
+      "equal_weight": {
+        "baseline": {
+          "games": 285,
+          "wins": 133,
+          "losses": 148,
+          "pushes": 4,
+          "graded_ex_pushes": 281,
+          "accuracy_pct_ex_pushes": 47.331,
+          "profit_units_at_minus110": -27.0909,
+          "roi_pct_at_minus110": -9.506,
+          "ats_margin_mae": 10.584
+        },
+        "injury": {
+          "games": 285,
+          "wins": 139,
+          "losses": 142,
+          "pushes": 4,
+          "graded_ex_pushes": 281,
+          "accuracy_pct_ex_pushes": 49.466,
+          "profit_units_at_minus110": -15.6364,
+          "roi_pct_at_minus110": -5.486,
+          "ats_margin_mae": 10.4745
+        },
+        "injury_incremental_vs_baseline": {
+          "common_games": 285,
+          "flip_games": 37,
+          "flip_rate_pct": 12.982,
+          "injury_helped": 21,
+          "injury_hurt": 15,
+          "net_help_minus_hurt": 6,
+          "decisive_flips": 36,
+          "exact_binomial_two_sided_p": 0.405032
+        }
+      },
+      "half_life_4_seasons": {
+        "baseline": {
+          "games": 285,
+          "wins": 133,
+          "losses": 148,
+          "pushes": 4,
+          "graded_ex_pushes": 281,
+          "accuracy_pct_ex_pushes": 47.331,
+          "profit_units_at_minus110": -27.0909,
+          "roi_pct_at_minus110": -9.506,
+          "ats_margin_mae": 10.5911
+        },
+        "injury": {
+          "games": 285,
+          "wins": 141,
+          "losses": 140,
+          "pushes": 4,
+          "graded_ex_pushes": 281,
+          "accuracy_pct_ex_pushes": 50.178,
+          "profit_units_at_minus110": -11.8182,
+          "roi_pct_at_minus110": -4.147,
+          "ats_margin_mae": 10.4641
+        },
+        "injury_incremental_vs_baseline": {
+          "common_games": 285,
+          "flip_games": 37,
+          "flip_rate_pct": 12.982,
+          "injury_helped": 22,
+          "injury_hurt": 14,
+          "net_help_minus_hurt": 8,
+          "decisive_flips": 36,
+          "exact_binomial_two_sided_p": 0.242985
+        }
+      },
+      "half_life_2_seasons": {
+        "baseline": {
+          "games": 285,
+          "wins": 134,
+          "losses": 147,
+          "pushes": 4,
+          "graded_ex_pushes": 281,
+          "accuracy_pct_ex_pushes": 47.687,
+          "profit_units_at_minus110": -25.1818,
+          "roi_pct_at_minus110": -8.836,
+          "ats_margin_mae": 10.6018
+        },
+        "injury": {
+          "games": 285,
+          "wins": 138,
+          "losses": 143,
+          "pushes": 4,
+          "graded_ex_pushes": 281,
+          "accuracy_pct_ex_pushes": 49.11,
+          "profit_units_at_minus110": -17.5455,
+          "roi_pct_at_minus110": -6.156,
+          "ats_margin_mae": 10.4689
+        },
+        "injury_incremental_vs_baseline": {
+          "common_games": 285,
+          "flip_games": 37,
+          "flip_rate_pct": 12.982,
+          "injury_helped": 20,
+          "injury_hurt": 16,
+          "net_help_minus_hurt": 4,
+          "decisive_flips": 36,
+          "exact_binomial_two_sided_p": 0.617719
+        }
+      },
+      "half_life_1_season": {
+        "baseline": {
+          "games": 285,
+          "wins": 133,
+          "losses": 148,
+          "pushes": 4,
+          "graded_ex_pushes": 281,
+          "accuracy_pct_ex_pushes": 47.331,
+          "profit_units_at_minus110": -27.0909,
+          "roi_pct_at_minus110": -9.506,
+          "ats_margin_mae": 10.6305
+        },
+        "injury": {
+          "games": 285,
+          "wins": 140,
+          "losses": 141,
+          "pushes": 4,
+          "graded_ex_pushes": 281,
+          "accuracy_pct_ex_pushes": 49.822,
+          "profit_units_at_minus110": -13.7273,
+          "roi_pct_at_minus110": -4.817,
+          "ats_margin_mae": 10.4979
+        },
+        "injury_incremental_vs_baseline": {
+          "common_games": 285,
+          "flip_games": 43,
+          "flip_rate_pct": 15.088,
+          "injury_helped": 25,
+          "injury_hurt": 18,
+          "net_help_minus_hurt": 7,
+          "decisive_flips": 43,
+          "exact_binomial_two_sided_p": 0.360378
+        }
+      }
+    },
+    "2025": {
+      "equal_weight": {
+        "baseline": {
+          "games": 285,
+          "wins": 146,
+          "losses": 138,
+          "pushes": 1,
+          "graded_ex_pushes": 284,
+          "accuracy_pct_ex_pushes": 51.408,
+          "profit_units_at_minus110": -5.2727,
+          "roi_pct_at_minus110": -1.85,
+          "ats_margin_mae": 10.3975
+        },
+        "injury": {
+          "games": 285,
+          "wins": 143,
+          "losses": 141,
+          "pushes": 1,
+          "graded_ex_pushes": 284,
+          "accuracy_pct_ex_pushes": 50.352,
+          "profit_units_at_minus110": -11.0,
+          "roi_pct_at_minus110": -3.86,
+          "ats_margin_mae": 10.3021
+        },
+        "injury_incremental_vs_baseline": {
+          "common_games": 285,
+          "flip_games": 50,
+          "flip_rate_pct": 17.544,
+          "injury_helped": 23,
+          "injury_hurt": 26,
+          "net_help_minus_hurt": -3,
+          "decisive_flips": 49,
+          "exact_binomial_two_sided_p": 0.77545
+        }
+      },
+      "half_life_4_seasons": {
+        "baseline": {
+          "games": 285,
+          "wins": 147,
+          "losses": 137,
+          "pushes": 1,
+          "graded_ex_pushes": 284,
+          "accuracy_pct_ex_pushes": 51.761,
+          "profit_units_at_minus110": -3.3636,
+          "roi_pct_at_minus110": -1.18,
+          "ats_margin_mae": 10.3827
+        },
+        "injury": {
+          "games": 285,
+          "wins": 146,
+          "losses": 138,
+          "pushes": 1,
+          "graded_ex_pushes": 284,
+          "accuracy_pct_ex_pushes": 51.408,
+          "profit_units_at_minus110": -5.2727,
+          "roi_pct_at_minus110": -1.85,
+          "ats_margin_mae": 10.3231
+        },
+        "injury_incremental_vs_baseline": {
+          "common_games": 285,
+          "flip_games": 50,
+          "flip_rate_pct": 17.544,
+          "injury_helped": 24,
+          "injury_hurt": 25,
+          "net_help_minus_hurt": -1,
+          "decisive_flips": 49,
+          "exact_binomial_two_sided_p": 1.0
+        }
+      },
+      "half_life_2_seasons": {
+        "baseline": {
+          "games": 285,
+          "wins": 143,
+          "losses": 141,
+          "pushes": 1,
+          "graded_ex_pushes": 284,
+          "accuracy_pct_ex_pushes": 50.352,
+          "profit_units_at_minus110": -11.0,
+          "roi_pct_at_minus110": -3.86,
+          "ats_margin_mae": 10.3755
+        },
+        "injury": {
+          "games": 285,
+          "wins": 146,
+          "losses": 138,
+          "pushes": 1,
+          "graded_ex_pushes": 284,
+          "accuracy_pct_ex_pushes": 51.408,
+          "profit_units_at_minus110": -5.2727,
+          "roi_pct_at_minus110": -1.85,
+          "ats_margin_mae": 10.3561
+        },
+        "injury_incremental_vs_baseline": {
+          "common_games": 285,
+          "flip_games": 53,
+          "flip_rate_pct": 18.596,
+          "injury_helped": 28,
+          "injury_hurt": 25,
+          "net_help_minus_hurt": 3,
+          "decisive_flips": 53,
+          "exact_binomial_two_sided_p": 0.783846
+        }
+      },
+      "half_life_1_season": {
+        "baseline": {
+          "games": 285,
+          "wins": 144,
+          "losses": 140,
+          "pushes": 1,
+          "graded_ex_pushes": 284,
+          "accuracy_pct_ex_pushes": 50.704,
+          "profit_units_at_minus110": -9.0909,
+          "roi_pct_at_minus110": -3.19,
+          "ats_margin_mae": 10.3868
+        },
+        "injury": {
+          "games": 285,
+          "wins": 143,
+          "losses": 141,
+          "pushes": 1,
+          "graded_ex_pushes": 284,
+          "accuracy_pct_ex_pushes": 50.352,
+          "profit_units_at_minus110": -11.0,
+          "roi_pct_at_minus110": -3.86,
+          "ats_margin_mae": 10.4432
+        },
+        "injury_incremental_vs_baseline": {
+          "common_games": 285,
+          "flip_games": 55,
+          "flip_rate_pct": 19.298,
+          "injury_helped": 27,
+          "injury_hurt": 28,
+          "net_help_minus_hurt": -1,
+          "decisive_flips": 55,
+          "exact_binomial_two_sided_p": 1.0
+        }
+      }
+    },
+    "2026": {
+      "equal_weight": {
+        "baseline": {
+          "games": 121,
+          "wins": 63,
+          "losses": 52,
+          "pushes": 6,
+          "graded_ex_pushes": 115,
+          "accuracy_pct_ex_pushes": 54.783,
+          "profit_units_at_minus110": 5.2727,
+          "roi_pct_at_minus110": 4.358,
+          "ats_margin_mae": 9.6795
+        },
+        "injury": {
+          "games": 121,
+          "wins": 63,
+          "losses": 52,
+          "pushes": 6,
+          "graded_ex_pushes": 115,
+          "accuracy_pct_ex_pushes": 54.783,
+          "profit_units_at_minus110": 5.2727,
+          "roi_pct_at_minus110": 4.358,
+          "ats_margin_mae": 9.7807
+        },
+        "injury_incremental_vs_baseline": {
+          "common_games": 121,
+          "flip_games": 25,
+          "flip_rate_pct": 20.661,
+          "injury_helped": 12,
+          "injury_hurt": 12,
+          "net_help_minus_hurt": 0,
+          "decisive_flips": 24,
+          "exact_binomial_two_sided_p": 1.0
+        }
+      },
+      "half_life_4_seasons": {
+        "baseline": {
+          "games": 121,
+          "wins": 62,
+          "losses": 53,
+          "pushes": 6,
+          "graded_ex_pushes": 115,
+          "accuracy_pct_ex_pushes": 53.913,
+          "profit_units_at_minus110": 3.3636,
+          "roi_pct_at_minus110": 2.78,
+          "ats_margin_mae": 9.6425
+        },
+        "injury": {
+          "games": 121,
+          "wins": 64,
+          "losses": 51,
+          "pushes": 6,
+          "graded_ex_pushes": 115,
+          "accuracy_pct_ex_pushes": 55.652,
+          "profit_units_at_minus110": 7.1818,
+          "roi_pct_at_minus110": 5.935,
+          "ats_margin_mae": 9.8152
+        },
+        "injury_incremental_vs_baseline": {
+          "common_games": 121,
+          "flip_games": 27,
+          "flip_rate_pct": 22.314,
+          "injury_helped": 14,
+          "injury_hurt": 12,
+          "net_help_minus_hurt": 2,
+          "decisive_flips": 26,
+          "exact_binomial_two_sided_p": 0.845019
+        }
+      },
+      "half_life_2_seasons": {
+        "baseline": {
+          "games": 121,
+          "wins": 64,
+          "losses": 51,
+          "pushes": 6,
+          "graded_ex_pushes": 115,
+          "accuracy_pct_ex_pushes": 55.652,
+          "profit_units_at_minus110": 7.1818,
+          "roi_pct_at_minus110": 5.935,
+          "ats_margin_mae": 9.6105
+        },
+        "injury": {
+          "games": 121,
+          "wins": 60,
+          "losses": 55,
+          "pushes": 6,
+          "graded_ex_pushes": 115,
+          "accuracy_pct_ex_pushes": 52.174,
+          "profit_units_at_minus110": -0.4545,
+          "roi_pct_at_minus110": -0.376,
+          "ats_margin_mae": 9.8604
+        },
+        "injury_incremental_vs_baseline": {
+          "common_games": 121,
+          "flip_games": 28,
+          "flip_rate_pct": 23.14,
+          "injury_helped": 11,
+          "injury_hurt": 15,
+          "net_help_minus_hurt": -4,
+          "decisive_flips": 26,
+          "exact_binomial_two_sided_p": 0.557197
+        }
+      },
+      "half_life_1_season": {
+        "baseline": {
+          "games": 121,
+          "wins": 67,
+          "losses": 48,
+          "pushes": 6,
+          "graded_ex_pushes": 115,
+          "accuracy_pct_ex_pushes": 58.261,
+          "profit_units_at_minus110": 12.9091,
+          "roi_pct_at_minus110": 10.669,
+          "ats_margin_mae": 9.5837
+        },
+        "injury": {
+          "games": 121,
+          "wins": 60,
+          "losses": 55,
+          "pushes": 6,
+          "graded_ex_pushes": 115,
+          "accuracy_pct_ex_pushes": 52.174,
+          "profit_units_at_minus110": -0.4545,
+          "roi_pct_at_minus110": -0.376,
+          "ats_margin_mae": 9.9979
+        },
+        "injury_incremental_vs_baseline": {
+          "common_games": 121,
+          "flip_games": 33,
+          "flip_rate_pct": 27.273,
+          "injury_helped": 11,
+          "injury_hurt": 18,
+          "net_help_minus_hurt": -7,
+          "decisive_flips": 29,
+          "exact_binomial_two_sided_p": 0.264931
+        }
+      }
+    }
+  },
+  "regime_results": {
+    "2023_2024": {
+      "equal_weight": {
+        "baseline": {
+          "games": 570,
+          "wins": 266,
+          "losses": 286,
+          "pushes": 18,
+          "graded_ex_pushes": 552,
+          "accuracy_pct_ex_pushes": 48.188,
+          "profit_units_at_minus110": -44.1818,
+          "roi_pct_at_minus110": -7.751,
+          "ats_margin_mae": 10.5681
+        },
+        "injury": {
+          "games": 570,
+          "wins": 269,
+          "losses": 283,
+          "pushes": 18,
+          "graded_ex_pushes": 552,
+          "accuracy_pct_ex_pushes": 48.732,
+          "profit_units_at_minus110": -38.4545,
+          "roi_pct_at_minus110": -6.746,
+          "ats_margin_mae": 10.6183
+        },
+        "injury_incremental_vs_baseline": {
+          "common_games": 570,
+          "flip_games": 71,
+          "flip_rate_pct": 12.456,
+          "injury_helped": 35,
+          "injury_hurt": 32,
+          "net_help_minus_hurt": 3,
+          "decisive_flips": 67,
+          "exact_binomial_two_sided_p": 0.807195
+        }
+      },
+      "half_life_4_seasons": {
+        "baseline": {
+          "games": 570,
+          "wins": 268,
+          "losses": 284,
+          "pushes": 18,
+          "graded_ex_pushes": 552,
+          "accuracy_pct_ex_pushes": 48.551,
+          "profit_units_at_minus110": -40.3636,
+          "roi_pct_at_minus110": -7.081,
+          "ats_margin_mae": 10.5717
+        },
+        "injury": {
+          "games": 570,
+          "wins": 270,
+          "losses": 282,
+          "pushes": 18,
+          "graded_ex_pushes": 552,
+          "accuracy_pct_ex_pushes": 48.913,
+          "profit_units_at_minus110": -36.5455,
+          "roi_pct_at_minus110": -6.411,
+          "ats_margin_mae": 10.6057
+        },
+        "injury_incremental_vs_baseline": {
+          "common_games": 570,
+          "flip_games": 73,
+          "flip_rate_pct": 12.807,
+          "injury_helped": 36,
+          "injury_hurt": 34,
+          "net_help_minus_hurt": 2,
+          "decisive_flips": 70,
+          "exact_binomial_two_sided_p": 0.904975
+        }
+      },
+      "half_life_2_seasons": {
+        "baseline": {
+          "games": 570,
+          "wins": 270,
+          "losses": 282,
+          "pushes": 18,
+          "graded_ex_pushes": 552,
+          "accuracy_pct_ex_pushes": 48.913,
+          "profit_units_at_minus110": -36.5455,
+          "roi_pct_at_minus110": -6.411,
+          "ats_margin_mae": 10.5784
+        },
+        "injury": {
+          "games": 570,
+          "wins": 269,
+          "losses": 283,
+          "pushes": 18,
+          "graded_ex_pushes": 552,
+          "accuracy_pct_ex_pushes": 48.732,
+          "profit_units_at_minus110": -38.4545,
+          "roi_pct_at_minus110": -6.746,
+          "ats_margin_mae": 10.6099
+        },
+        "injury_incremental_vs_baseline": {
+          "common_games": 570,
+          "flip_games": 75,
+          "flip_rate_pct": 13.158,
+          "injury_helped": 35,
+          "injury_hurt": 36,
+          "net_help_minus_hurt": -1,
+          "decisive_flips": 71,
+          "exact_binomial_two_sided_p": 1.0
+        }
+      },
+      "half_life_1_season": {
+        "baseline": {
+          "games": 570,
+          "wins": 269,
+          "losses": 283,
+          "pushes": 18,
+          "graded_ex_pushes": 552,
+          "accuracy_pct_ex_pushes": 48.732,
+          "profit_units_at_minus110": -38.4545,
+          "roi_pct_at_minus110": -6.746,
+          "ats_margin_mae": 10.598
+        },
+        "injury": {
+          "games": 570,
+          "wins": 277,
+          "losses": 275,
+          "pushes": 18,
+          "graded_ex_pushes": 552,
+          "accuracy_pct_ex_pushes": 50.181,
+          "profit_units_at_minus110": -23.1818,
+          "roi_pct_at_minus110": -4.067,
+          "ats_margin_mae": 10.6458
+        },
+        "injury_incremental_vs_baseline": {
+          "common_games": 570,
+          "flip_games": 83,
+          "flip_rate_pct": 14.561,
+          "injury_helped": 44,
+          "injury_hurt": 36,
+          "net_help_minus_hurt": 8,
+          "decisive_flips": 80,
+          "exact_binomial_two_sided_p": 0.434042
+        }
+      }
+    },
+    "2025_only": {
+      "equal_weight": {
+        "baseline": {
+          "games": 285,
+          "wins": 146,
+          "losses": 138,
+          "pushes": 1,
+          "graded_ex_pushes": 284,
+          "accuracy_pct_ex_pushes": 51.408,
+          "profit_units_at_minus110": -5.2727,
+          "roi_pct_at_minus110": -1.85,
+          "ats_margin_mae": 10.3975
+        },
+        "injury": {
+          "games": 285,
+          "wins": 143,
+          "losses": 141,
+          "pushes": 1,
+          "graded_ex_pushes": 284,
+          "accuracy_pct_ex_pushes": 50.352,
+          "profit_units_at_minus110": -11.0,
+          "roi_pct_at_minus110": -3.86,
+          "ats_margin_mae": 10.3021
+        },
+        "injury_incremental_vs_baseline": {
+          "common_games": 285,
+          "flip_games": 50,
+          "flip_rate_pct": 17.544,
+          "injury_helped": 23,
+          "injury_hurt": 26,
+          "net_help_minus_hurt": -3,
+          "decisive_flips": 49,
+          "exact_binomial_two_sided_p": 0.77545
+        }
+      },
+      "half_life_4_seasons": {
+        "baseline": {
+          "games": 285,
+          "wins": 147,
+          "losses": 137,
+          "pushes": 1,
+          "graded_ex_pushes": 284,
+          "accuracy_pct_ex_pushes": 51.761,
+          "profit_units_at_minus110": -3.3636,
+          "roi_pct_at_minus110": -1.18,
+          "ats_margin_mae": 10.3827
+        },
+        "injury": {
+          "games": 285,
+          "wins": 146,
+          "losses": 138,
+          "pushes": 1,
+          "graded_ex_pushes": 284,
+          "accuracy_pct_ex_pushes": 51.408,
+          "profit_units_at_minus110": -5.2727,
+          "roi_pct_at_minus110": -1.85,
+          "ats_margin_mae": 10.3231
+        },
+        "injury_incremental_vs_baseline": {
+          "common_games": 285,
+          "flip_games": 50,
+          "flip_rate_pct": 17.544,
+          "injury_helped": 24,
+          "injury_hurt": 25,
+          "net_help_minus_hurt": -1,
+          "decisive_flips": 49,
+          "exact_binomial_two_sided_p": 1.0
+        }
+      },
+      "half_life_2_seasons": {
+        "baseline": {
+          "games": 285,
+          "wins": 143,
+          "losses": 141,
+          "pushes": 1,
+          "graded_ex_pushes": 284,
+          "accuracy_pct_ex_pushes": 50.352,
+          "profit_units_at_minus110": -11.0,
+          "roi_pct_at_minus110": -3.86,
+          "ats_margin_mae": 10.3755
+        },
+        "injury": {
+          "games": 285,
+          "wins": 146,
+          "losses": 138,
+          "pushes": 1,
+          "graded_ex_pushes": 284,
+          "accuracy_pct_ex_pushes": 51.408,
+          "profit_units_at_minus110": -5.2727,
+          "roi_pct_at_minus110": -1.85,
+          "ats_margin_mae": 10.3561
+        },
+        "injury_incremental_vs_baseline": {
+          "common_games": 285,
+          "flip_games": 53,
+          "flip_rate_pct": 18.596,
+          "injury_helped": 28,
+          "injury_hurt": 25,
+          "net_help_minus_hurt": 3,
+          "decisive_flips": 53,
+          "exact_binomial_two_sided_p": 0.783846
+        }
+      },
+      "half_life_1_season": {
+        "baseline": {
+          "games": 285,
+          "wins": 144,
+          "losses": 140,
+          "pushes": 1,
+          "graded_ex_pushes": 284,
+          "accuracy_pct_ex_pushes": 50.704,
+          "profit_units_at_minus110": -9.0909,
+          "roi_pct_at_minus110": -3.19,
+          "ats_margin_mae": 10.3868
+        },
+        "injury": {
+          "games": 285,
+          "wins": 143,
+          "losses": 141,
+          "pushes": 1,
+          "graded_ex_pushes": 284,
+          "accuracy_pct_ex_pushes": 50.352,
+          "profit_units_at_minus110": -11.0,
+          "roi_pct_at_minus110": -3.86,
+          "ats_margin_mae": 10.4432
+        },
+        "injury_incremental_vs_baseline": {
+          "common_games": 285,
+          "flip_games": 55,
+          "flip_rate_pct": 19.298,
+          "injury_helped": 27,
+          "injury_hurt": 28,
+          "net_help_minus_hurt": -1,
+          "decisive_flips": 55,
+          "exact_binomial_two_sided_p": 1.0
+        }
+      }
+    },
+    "2026_weeks_1_8": {
+      "equal_weight": {
+        "baseline": {
+          "games": 121,
+          "wins": 63,
+          "losses": 52,
+          "pushes": 6,
+          "graded_ex_pushes": 115,
+          "accuracy_pct_ex_pushes": 54.783,
+          "profit_units_at_minus110": 5.2727,
+          "roi_pct_at_minus110": 4.358,
+          "ats_margin_mae": 9.6795
+        },
+        "injury": {
+          "games": 121,
+          "wins": 63,
+          "losses": 52,
+          "pushes": 6,
+          "graded_ex_pushes": 115,
+          "accuracy_pct_ex_pushes": 54.783,
+          "profit_units_at_minus110": 5.2727,
+          "roi_pct_at_minus110": 4.358,
+          "ats_margin_mae": 9.7807
+        },
+        "injury_incremental_vs_baseline": {
+          "common_games": 121,
+          "flip_games": 25,
+          "flip_rate_pct": 20.661,
+          "injury_helped": 12,
+          "injury_hurt": 12,
+          "net_help_minus_hurt": 0,
+          "decisive_flips": 24,
+          "exact_binomial_two_sided_p": 1.0
+        }
+      },
+      "half_life_4_seasons": {
+        "baseline": {
+          "games": 121,
+          "wins": 62,
+          "losses": 53,
+          "pushes": 6,
+          "graded_ex_pushes": 115,
+          "accuracy_pct_ex_pushes": 53.913,
+          "profit_units_at_minus110": 3.3636,
+          "roi_pct_at_minus110": 2.78,
+          "ats_margin_mae": 9.6425
+        },
+        "injury": {
+          "games": 121,
+          "wins": 64,
+          "losses": 51,
+          "pushes": 6,
+          "graded_ex_pushes": 115,
+          "accuracy_pct_ex_pushes": 55.652,
+          "profit_units_at_minus110": 7.1818,
+          "roi_pct_at_minus110": 5.935,
+          "ats_margin_mae": 9.8152
+        },
+        "injury_incremental_vs_baseline": {
+          "common_games": 121,
+          "flip_games": 27,
+          "flip_rate_pct": 22.314,
+          "injury_helped": 14,
+          "injury_hurt": 12,
+          "net_help_minus_hurt": 2,
+          "decisive_flips": 26,
+          "exact_binomial_two_sided_p": 0.845019
+        }
+      },
+      "half_life_2_seasons": {
+        "baseline": {
+          "games": 121,
+          "wins": 64,
+          "losses": 51,
+          "pushes": 6,
+          "graded_ex_pushes": 115,
+          "accuracy_pct_ex_pushes": 55.652,
+          "profit_units_at_minus110": 7.1818,
+          "roi_pct_at_minus110": 5.935,
+          "ats_margin_mae": 9.6105
+        },
+        "injury": {
+          "games": 121,
+          "wins": 60,
+          "losses": 55,
+          "pushes": 6,
+          "graded_ex_pushes": 115,
+          "accuracy_pct_ex_pushes": 52.174,
+          "profit_units_at_minus110": -0.4545,
+          "roi_pct_at_minus110": -0.376,
+          "ats_margin_mae": 9.8604
+        },
+        "injury_incremental_vs_baseline": {
+          "common_games": 121,
+          "flip_games": 28,
+          "flip_rate_pct": 23.14,
+          "injury_helped": 11,
+          "injury_hurt": 15,
+          "net_help_minus_hurt": -4,
+          "decisive_flips": 26,
+          "exact_binomial_two_sided_p": 0.557197
+        }
+      },
+      "half_life_1_season": {
+        "baseline": {
+          "games": 121,
+          "wins": 67,
+          "losses": 48,
+          "pushes": 6,
+          "graded_ex_pushes": 115,
+          "accuracy_pct_ex_pushes": 58.261,
+          "profit_units_at_minus110": 12.9091,
+          "roi_pct_at_minus110": 10.669,
+          "ats_margin_mae": 9.5837
+        },
+        "injury": {
+          "games": 121,
+          "wins": 60,
+          "losses": 55,
+          "pushes": 6,
+          "graded_ex_pushes": 115,
+          "accuracy_pct_ex_pushes": 52.174,
+          "profit_units_at_minus110": -0.4545,
+          "roi_pct_at_minus110": -0.376,
+          "ats_margin_mae": 9.9979
+        },
+        "injury_incremental_vs_baseline": {
+          "common_games": 121,
+          "flip_games": 33,
+          "flip_rate_pct": 27.273,
+          "injury_helped": 11,
+          "injury_hurt": 18,
+          "net_help_minus_hurt": -7,
+          "decisive_flips": 29,
+          "exact_binomial_two_sided_p": 0.264931
+        }
+      }
+    },
+    "2025_2026_combined": {
+      "equal_weight": {
+        "baseline": {
+          "games": 406,
+          "wins": 209,
+          "losses": 190,
+          "pushes": 7,
+          "graded_ex_pushes": 399,
+          "accuracy_pct_ex_pushes": 52.381,
+          "profit_units_at_minus110": 0.0,
+          "roi_pct_at_minus110": 0.0,
+          "ats_margin_mae": 10.1835
+        },
+        "injury": {
+          "games": 406,
+          "wins": 206,
+          "losses": 193,
+          "pushes": 7,
+          "graded_ex_pushes": 399,
+          "accuracy_pct_ex_pushes": 51.629,
+          "profit_units_at_minus110": -5.7273,
+          "roi_pct_at_minus110": -1.411,
+          "ats_margin_mae": 10.1467
+        },
+        "injury_incremental_vs_baseline": {
+          "common_games": 406,
+          "flip_games": 75,
+          "flip_rate_pct": 18.473,
+          "injury_helped": 35,
+          "injury_hurt": 38,
+          "net_help_minus_hurt": -3,
+          "decisive_flips": 73,
+          "exact_binomial_two_sided_p": 0.815121
+        }
+      },
+      "half_life_4_seasons": {
+        "baseline": {
+          "games": 406,
+          "wins": 209,
+          "losses": 190,
+          "pushes": 7,
+          "graded_ex_pushes": 399,
+          "accuracy_pct_ex_pushes": 52.381,
+          "profit_units_at_minus110": 0.0,
+          "roi_pct_at_minus110": 0.0,
+          "ats_margin_mae": 10.1621
+        },
+        "injury": {
+          "games": 406,
+          "wins": 210,
+          "losses": 189,
+          "pushes": 7,
+          "graded_ex_pushes": 399,
+          "accuracy_pct_ex_pushes": 52.632,
+          "profit_units_at_minus110": 1.9091,
+          "roi_pct_at_minus110": 0.47,
+          "ats_margin_mae": 10.1718
+        },
+        "injury_incremental_vs_baseline": {
+          "common_games": 406,
+          "flip_games": 77,
+          "flip_rate_pct": 18.966,
+          "injury_helped": 38,
+          "injury_hurt": 37,
+          "net_help_minus_hurt": 1,
+          "decisive_flips": 75,
+          "exact_binomial_two_sided_p": 1.0
+        }
+      },
+      "half_life_2_seasons": {
+        "baseline": {
+          "games": 406,
+          "wins": 207,
+          "losses": 192,
+          "pushes": 7,
+          "graded_ex_pushes": 399,
+          "accuracy_pct_ex_pushes": 51.88,
+          "profit_units_at_minus110": -3.8182,
+          "roi_pct_at_minus110": -0.94,
+          "ats_margin_mae": 10.1475
+        },
+        "injury": {
+          "games": 406,
+          "wins": 206,
+          "losses": 193,
+          "pushes": 7,
+          "graded_ex_pushes": 399,
+          "accuracy_pct_ex_pushes": 51.629,
+          "profit_units_at_minus110": -5.7273,
+          "roi_pct_at_minus110": -1.411,
+          "ats_margin_mae": 10.2084
+        },
+        "injury_incremental_vs_baseline": {
+          "common_games": 406,
+          "flip_games": 81,
+          "flip_rate_pct": 19.951,
+          "injury_helped": 39,
+          "injury_hurt": 40,
+          "net_help_minus_hurt": -1,
+          "decisive_flips": 79,
+          "exact_binomial_two_sided_p": 1.0
+        }
+      },
+      "half_life_1_season": {
+        "baseline": {
+          "games": 406,
+          "wins": 211,
+          "losses": 188,
+          "pushes": 7,
+          "graded_ex_pushes": 399,
+          "accuracy_pct_ex_pushes": 52.882,
+          "profit_units_at_minus110": 3.8182,
+          "roi_pct_at_minus110": 0.94,
+          "ats_margin_mae": 10.1474
+        },
+        "injury": {
+          "games": 406,
+          "wins": 203,
+          "losses": 196,
+          "pushes": 7,
+          "graded_ex_pushes": 399,
+          "accuracy_pct_ex_pushes": 50.877,
+          "profit_units_at_minus110": -11.4545,
+          "roi_pct_at_minus110": -2.821,
+          "ats_margin_mae": 10.3105
+        },
+        "injury_incremental_vs_baseline": {
+          "common_games": 406,
+          "flip_games": 88,
+          "flip_rate_pct": 21.675,
+          "injury_helped": 38,
+          "injury_hurt": 46,
+          "net_help_minus_hurt": -8,
+          "decisive_flips": 84,
+          "exact_binomial_two_sided_p": 0.445205
+        }
+      }
+    }
+  },
+  "all_2023_to_2026_scope": {
+    "equal_weight": {
+      "baseline": {
+        "games": 976,
+        "wins": 475,
+        "losses": 476,
+        "pushes": 25,
+        "graded_ex_pushes": 951,
+        "accuracy_pct_ex_pushes": 49.947,
+        "profit_units_at_minus110": -44.1818,
+        "roi_pct_at_minus110": -4.527,
+        "ats_margin_mae": 10.4081
+      },
+      "injury": {
+        "games": 976,
+        "wins": 475,
+        "losses": 476,
+        "pushes": 25,
+        "graded_ex_pushes": 951,
+        "accuracy_pct_ex_pushes": 49.947,
+        "profit_units_at_minus110": -44.1818,
+        "roi_pct_at_minus110": -4.527,
+        "ats_margin_mae": 10.4221
+      },
+      "injury_incremental_vs_baseline": {
+        "common_games": 976,
+        "flip_games": 146,
+        "flip_rate_pct": 14.959,
+        "injury_helped": 70,
+        "injury_hurt": 70,
+        "net_help_minus_hurt": 0,
+        "decisive_flips": 140,
+        "exact_binomial_two_sided_p": 1.0
+      }
+    },
+    "half_life_4_seasons": {
+      "baseline": {
+        "games": 976,
+        "wins": 477,
+        "losses": 474,
+        "pushes": 25,
+        "graded_ex_pushes": 951,
+        "accuracy_pct_ex_pushes": 50.158,
+        "profit_units_at_minus110": -40.3636,
+        "roi_pct_at_minus110": -4.136,
+        "ats_margin_mae": 10.4013
+      },
+      "injury": {
+        "games": 976,
+        "wins": 480,
+        "losses": 471,
+        "pushes": 25,
+        "graded_ex_pushes": 951,
+        "accuracy_pct_ex_pushes": 50.473,
+        "profit_units_at_minus110": -34.6364,
+        "roi_pct_at_minus110": -3.549,
+        "ats_margin_mae": 10.4252
+      },
+      "injury_incremental_vs_baseline": {
+        "common_games": 976,
+        "flip_games": 150,
+        "flip_rate_pct": 15.369,
+        "injury_helped": 74,
+        "injury_hurt": 71,
+        "net_help_minus_hurt": 3,
+        "decisive_flips": 145,
+        "exact_binomial_two_sided_p": 0.868159
+      }
+    },
+    "half_life_2_seasons": {
+      "baseline": {
+        "games": 976,
+        "wins": 477,
+        "losses": 474,
+        "pushes": 25,
+        "graded_ex_pushes": 951,
+        "accuracy_pct_ex_pushes": 50.158,
+        "profit_units_at_minus110": -40.3636,
+        "roi_pct_at_minus110": -4.136,
+        "ats_margin_mae": 10.3992
+      },
+      "injury": {
+        "games": 976,
+        "wins": 475,
+        "losses": 476,
+        "pushes": 25,
+        "graded_ex_pushes": 951,
+        "accuracy_pct_ex_pushes": 49.947,
+        "profit_units_at_minus110": -44.1818,
+        "roi_pct_at_minus110": -4.527,
+        "ats_margin_mae": 10.4429
+      },
+      "injury_incremental_vs_baseline": {
+        "common_games": 976,
+        "flip_games": 156,
+        "flip_rate_pct": 15.984,
+        "injury_helped": 74,
+        "injury_hurt": 76,
+        "net_help_minus_hurt": -2,
+        "decisive_flips": 150,
+        "exact_binomial_two_sided_p": 0.934961
+      }
+    },
+    "half_life_1_season": {
+      "baseline": {
+        "games": 976,
+        "wins": 480,
+        "losses": 471,
+        "pushes": 25,
+        "graded_ex_pushes": 951,
+        "accuracy_pct_ex_pushes": 50.473,
+        "profit_units_at_minus110": -34.6364,
+        "roi_pct_at_minus110": -3.549,
+        "ats_margin_mae": 10.4106
+      },
+      "injury": {
+        "games": 976,
+        "wins": 480,
+        "losses": 471,
+        "pushes": 25,
+        "graded_ex_pushes": 951,
+        "accuracy_pct_ex_pushes": 50.473,
+        "profit_units_at_minus110": -34.6364,
+        "roi_pct_at_minus110": -3.549,
+        "ats_margin_mae": 10.5063
+      },
+      "injury_incremental_vs_baseline": {
+        "common_games": 976,
+        "flip_games": 171,
+        "flip_rate_pct": 17.52,
+        "injury_helped": 82,
+        "injury_hurt": 82,
+        "net_help_minus_hurt": 0,
+        "decisive_flips": 164,
+        "exact_binomial_two_sided_p": 1.0
+      }
+    }
+  },
+  "cautions": [
+    "Decay schemes were frozen before results, but this remains retrospective research rather than a pristine untouched holdout.",
+    "Multiple decay schemes are compared, so the best observed result should not be treated as a production winner without prospective confirmation.",
+    "Recency weighting can capture roster, coaching, rules, and league-environment change; it is not specific to injury-data quality.",
+    "Historical nflverse schedule lines are not verified executable sportsbook quotes.",
+    "No production model or official prospective record is modified."
+  ]
+}
