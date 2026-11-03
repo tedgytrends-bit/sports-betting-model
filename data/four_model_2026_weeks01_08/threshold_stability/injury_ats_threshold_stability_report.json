@@ -1,0 +1,380 @@
+{
+  "status": "RESEARCH_ONLY_FIXED_THRESHOLD_STABILITY",
+  "created_at_utc": "2026-11-03T15:45:43.754971+00:00",
+  "question": "Do the exact Injury ATS thresholds identified in 2026 Weeks 1-8 remain useful across prior chronological seasons?",
+  "fixed_thresholds_points": [
+    2.0,
+    3.0,
+    4.0
+  ],
+  "method": {
+    "model": "injury_only_added",
+    "ridge_alpha": 10.0,
+    "chronology": "Same weekly chronological fitting procedure; training games strictly precede each test fold.",
+    "market_lines": "nflverse schedule spread_line for historical seasons; sportsbook execution not verified.",
+    "threshold_selection": "Thresholds >=2, >=3, >=4 were frozen before this historical stability evaluation; no threshold re-tuning was performed.",
+    "roi": "Flat 1-unit risk at -110; pushes return stake."
+  },
+  "available_prediction_coverage": {
+    "first_season": 2022,
+    "last_season": 2026,
+    "games": 1021
+  },
+  "season_results": {
+    "2022": {
+      "prediction_games": 45,
+      "week_min": 16,
+      "week_max": 22,
+      "thresholds": {
+        ">=2": {
+          "games": 31,
+          "wins": 17,
+          "losses": 12,
+          "pushes": 2,
+          "graded_ex_pushes": 29,
+          "accuracy_pct_ex_pushes": 58.621,
+          "profit_units_at_minus110": 3.4545,
+          "roi_pct_at_minus110": 11.144,
+          "one_sided_p_vs_minus110_break_even": 0.314386,
+          "mean_abs_edge": 5.752
+        },
+        ">=3": {
+          "games": 26,
+          "wins": 13,
+          "losses": 11,
+          "pushes": 2,
+          "graded_ex_pushes": 24,
+          "accuracy_pct_ex_pushes": 54.167,
+          "profit_units_at_minus110": 0.8182,
+          "roi_pct_at_minus110": 3.147,
+          "one_sided_p_vs_minus110_break_even": 0.512918,
+          "mean_abs_edge": 6.403
+        },
+        ">=4": {
+          "games": 19,
+          "wins": 9,
+          "losses": 8,
+          "pushes": 2,
+          "graded_ex_pushes": 17,
+          "accuracy_pct_ex_pushes": 52.941,
+          "profit_units_at_minus110": 0.1818,
+          "roi_pct_at_minus110": 0.957,
+          "one_sided_p_vs_minus110_break_even": 0.579009,
+          "mean_abs_edge": 7.436
+        }
+      }
+    },
+    "2023": {
+      "prediction_games": 285,
+      "week_min": 1,
+      "week_max": 22,
+      "thresholds": {
+        ">=2": {
+          "games": 186,
+          "wins": 87,
+          "losses": 92,
+          "pushes": 7,
+          "graded_ex_pushes": 179,
+          "accuracy_pct_ex_pushes": 48.603,
+          "profit_units_at_minus110": -12.9091,
+          "roi_pct_at_minus110": -6.94,
+          "one_sided_p_vs_minus110_break_even": 0.861409,
+          "mean_abs_edge": 5.123
+        },
+        ">=3": {
+          "games": 145,
+          "wins": 71,
+          "losses": 69,
+          "pushes": 5,
+          "graded_ex_pushes": 140,
+          "accuracy_pct_ex_pushes": 50.714,
+          "profit_units_at_minus110": -4.4545,
+          "roi_pct_at_minus110": -3.072,
+          "one_sided_p_vs_minus110_break_even": 0.684486,
+          "mean_abs_edge": 5.862
+        },
+        ">=4": {
+          "games": 105,
+          "wins": 48,
+          "losses": 53,
+          "pushes": 4,
+          "graded_ex_pushes": 101,
+          "accuracy_pct_ex_pushes": 47.525,
+          "profit_units_at_minus110": -9.3636,
+          "roi_pct_at_minus110": -8.918,
+          "one_sided_p_vs_minus110_break_even": 0.859192,
+          "mean_abs_edge": 6.77
+        }
+      }
+    },
+    "2024": {
+      "prediction_games": 285,
+      "week_min": 1,
+      "week_max": 22,
+      "thresholds": {
+        ">=2": {
+          "games": 195,
+          "wins": 93,
+          "losses": 98,
+          "pushes": 4,
+          "graded_ex_pushes": 191,
+          "accuracy_pct_ex_pushes": 48.691,
+          "profit_units_at_minus110": -13.4545,
+          "roi_pct_at_minus110": -6.9,
+          "one_sided_p_vs_minus110_break_even": 0.862883,
+          "mean_abs_edge": 4.654
+        },
+        ">=3": {
+          "games": 155,
+          "wins": 76,
+          "losses": 77,
+          "pushes": 2,
+          "graded_ex_pushes": 153,
+          "accuracy_pct_ex_pushes": 49.673,
+          "profit_units_at_minus110": -7.9091,
+          "roi_pct_at_minus110": -5.103,
+          "one_sided_p_vs_minus110_break_even": 0.773956,
+          "mean_abs_edge": 5.207
+        },
+        ">=4": {
+          "games": 108,
+          "wins": 51,
+          "losses": 55,
+          "pushes": 2,
+          "graded_ex_pushes": 106,
+          "accuracy_pct_ex_pushes": 48.113,
+          "profit_units_at_minus110": -8.6364,
+          "roi_pct_at_minus110": -7.997,
+          "one_sided_p_vs_minus110_break_even": 0.835728,
+          "mean_abs_edge": 5.936
+        }
+      }
+    },
+    "2025": {
+      "prediction_games": 285,
+      "week_min": 1,
+      "week_max": 22,
+      "thresholds": {
+        ">=2": {
+          "games": 201,
+          "wins": 106,
+          "losses": 94,
+          "pushes": 1,
+          "graded_ex_pushes": 200,
+          "accuracy_pct_ex_pushes": 53.0,
+          "profit_units_at_minus110": 2.3636,
+          "roi_pct_at_minus110": 1.176,
+          "one_sided_p_vs_minus110_break_even": 0.458845,
+          "mean_abs_edge": 4.952
+        },
+        ">=3": {
+          "games": 154,
+          "wins": 83,
+          "losses": 70,
+          "pushes": 1,
+          "graded_ex_pushes": 153,
+          "accuracy_pct_ex_pushes": 54.248,
+          "profit_units_at_minus110": 5.4545,
+          "roi_pct_at_minus110": 3.542,
+          "one_sided_p_vs_minus110_break_even": 0.351869,
+          "mean_abs_edge": 5.7
+        },
+        ">=4": {
+          "games": 115,
+          "wins": 61,
+          "losses": 54,
+          "pushes": 0,
+          "graded_ex_pushes": 115,
+          "accuracy_pct_ex_pushes": 53.043,
+          "profit_units_at_minus110": 1.4545,
+          "roi_pct_at_minus110": 1.265,
+          "one_sided_p_vs_minus110_break_even": 0.481105,
+          "mean_abs_edge": 6.459
+        }
+      }
+    },
+    "2026": {
+      "prediction_games": 121,
+      "week_min": 1,
+      "week_max": 8,
+      "thresholds": {
+        ">=2": {
+          "games": 70,
+          "wins": 39,
+          "losses": 29,
+          "pushes": 2,
+          "graded_ex_pushes": 68,
+          "accuracy_pct_ex_pushes": 57.353,
+          "profit_units_at_minus110": 6.4545,
+          "roi_pct_at_minus110": 9.221,
+          "one_sided_p_vs_minus110_break_even": 0.242565,
+          "mean_abs_edge": 4.467
+        },
+        ">=3": {
+          "games": 50,
+          "wins": 30,
+          "losses": 20,
+          "pushes": 0,
+          "graded_ex_pushes": 50,
+          "accuracy_pct_ex_pushes": 60.0,
+          "profit_units_at_minus110": 7.2727,
+          "roi_pct_at_minus110": 14.545,
+          "one_sided_p_vs_minus110_break_even": 0.174476,
+          "mean_abs_edge": 5.255
+        },
+        ">=4": {
+          "games": 35,
+          "wins": 22,
+          "losses": 13,
+          "pushes": 0,
+          "graded_ex_pushes": 35,
+          "accuracy_pct_ex_pushes": 62.857,
+          "profit_units_at_minus110": 7.0,
+          "roi_pct_at_minus110": 20.0,
+          "one_sided_p_vs_minus110_break_even": 0.141762,
+          "mean_abs_edge": 5.986
+        }
+      }
+    }
+  },
+  "historical_2025_and_earlier_combined": {
+    ">=2": {
+      "games": 613,
+      "wins": 303,
+      "losses": 296,
+      "pushes": 14,
+      "graded_ex_pushes": 599,
+      "accuracy_pct_ex_pushes": 50.584,
+      "profit_units_at_minus110": -20.5455,
+      "roi_pct_at_minus110": -3.352,
+      "one_sided_p_vs_minus110_break_even": 0.821585,
+      "mean_abs_edge": 4.95
+    },
+    ">=3": {
+      "games": 480,
+      "wins": 243,
+      "losses": 227,
+      "pushes": 10,
+      "graded_ex_pushes": 470,
+      "accuracy_pct_ex_pushes": 51.702,
+      "profit_units_at_minus110": -6.0909,
+      "roi_pct_at_minus110": -1.269,
+      "one_sided_p_vs_minus110_break_even": 0.633614,
+      "mean_abs_edge": 5.628
+    },
+    ">=4": {
+      "games": 347,
+      "wins": 169,
+      "losses": 170,
+      "pushes": 8,
+      "graded_ex_pushes": 339,
+      "accuracy_pct_ex_pushes": 49.853,
+      "profit_units_at_minus110": -16.3636,
+      "roi_pct_at_minus110": -4.716,
+      "one_sided_p_vs_minus110_break_even": 0.838061,
+      "mean_abs_edge": 6.444
+    }
+  },
+  "stability": {
+    ">=2": {
+      "seasons_with_games": 4,
+      "seasons_above_minus110_break_even": 2,
+      "profitable_seasons": 2,
+      "season_details": [
+        {
+          "season": 2022,
+          "graded_games": 29,
+          "accuracy_pct_ex_pushes": 58.621,
+          "roi_pct_at_minus110": 11.144
+        },
+        {
+          "season": 2023,
+          "graded_games": 179,
+          "accuracy_pct_ex_pushes": 48.603,
+          "roi_pct_at_minus110": -6.94
+        },
+        {
+          "season": 2024,
+          "graded_games": 191,
+          "accuracy_pct_ex_pushes": 48.691,
+          "roi_pct_at_minus110": -6.9
+        },
+        {
+          "season": 2025,
+          "graded_games": 200,
+          "accuracy_pct_ex_pushes": 53.0,
+          "roi_pct_at_minus110": 1.176
+        }
+      ]
+    },
+    ">=3": {
+      "seasons_with_games": 4,
+      "seasons_above_minus110_break_even": 2,
+      "profitable_seasons": 2,
+      "season_details": [
+        {
+          "season": 2022,
+          "graded_games": 24,
+          "accuracy_pct_ex_pushes": 54.167,
+          "roi_pct_at_minus110": 3.147
+        },
+        {
+          "season": 2023,
+          "graded_games": 140,
+          "accuracy_pct_ex_pushes": 50.714,
+          "roi_pct_at_minus110": -3.072
+        },
+        {
+          "season": 2024,
+          "graded_games": 153,
+          "accuracy_pct_ex_pushes": 49.673,
+          "roi_pct_at_minus110": -5.103
+        },
+        {
+          "season": 2025,
+          "graded_games": 153,
+          "accuracy_pct_ex_pushes": 54.248,
+          "roi_pct_at_minus110": 3.542
+        }
+      ]
+    },
+    ">=4": {
+      "seasons_with_games": 4,
+      "seasons_above_minus110_break_even": 2,
+      "profitable_seasons": 2,
+      "season_details": [
+        {
+          "season": 2022,
+          "graded_games": 17,
+          "accuracy_pct_ex_pushes": 52.941,
+          "roi_pct_at_minus110": 0.957
+        },
+        {
+          "season": 2023,
+          "graded_games": 101,
+          "accuracy_pct_ex_pushes": 47.525,
+          "roi_pct_at_minus110": -8.918
+        },
+        {
+          "season": 2024,
+          "graded_games": 106,
+          "accuracy_pct_ex_pushes": 48.113,
+          "roi_pct_at_minus110": -7.997
+        },
+        {
+          "season": 2025,
+          "graded_games": 115,
+          "accuracy_pct_ex_pushes": 53.043,
+          "roi_pct_at_minus110": 1.265
+        }
+      ]
+    }
+  },
+  "cautions": [
+    "The earliest season can be partial because the chronological model requires a minimum training history before predictions begin.",
+    "Historical seasons have informed prior research and are not a pristine untouched holdout.",
+    "nflverse schedule lines are not verified executable Bovada prices.",
+    "The 2026 Weeks 1-8 threshold results remain the prospective-ish comparison sample and are not overwritten by this test.",
+    "No production model or official prospective record is changed."
+  ]
+}
