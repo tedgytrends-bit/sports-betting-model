@@ -1,0 +1,59 @@
+name: Research 2026 Baseline Injury ATS Edge Calibration
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "research/four-model-injury-efficiency"
+    paths:
+      - "research/baseline_injury_edge_calibration_2026.py"
+      - ".github/workflows/baseline-injury-edge-calibration-2026.yml"
+      - "data/four_model_2026_weeks01_08/four_model_2026_weeks01_08_games.csv"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: baseline-injury-edge-calibration-2026
+  cancel-in-progress: true
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out research branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Compile edge calibration analysis
+        run: python -m py_compile research/baseline_injury_edge_calibration_2026.py
+      - name: Run edge calibration analysis
+        run: python research/baseline_injury_edge_calibration_2026.py
+      - name: Commit validated research outputs
+        if: success()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/four_model_2026_weeks01_08/edge_calibration/
+          if ! git diff --cached --quiet; then
+            git commit -m "Publish 2026 baseline injury ATS edge calibration"
+            git pull --rebase origin research/four-model-injury-efficiency
+            git push origin HEAD:research/four-model-injury-efficiency
+          fi
+      - name: Upload edge calibration outputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: baseline-injury-edge-calibration-2026
+          path: data/four_model_2026_weeks01_08/edge_calibration/
+          if-no-files-found: warn
+          retention-days: 30
