@@ -11,66 +11,66 @@
   "summaries": {
     "baseline": {
       "ats": {
-        "wins": 8,
+        "wins": 9,
         "losses": 5,
         "pushes": 0,
-        "pending": 1,
-        "accuracy_pct_ex_pushes": 61.54
+        "pending": 0,
+        "accuracy_pct_ex_pushes": 64.29
       },
       "total": {
         "wins": 7,
-        "losses": 6,
+        "losses": 7,
         "pushes": 0,
-        "pending": 1,
-        "accuracy_pct_ex_pushes": 53.85
+        "pending": 0,
+        "accuracy_pct_ex_pushes": 50
       }
     },
     "injury": {
       "ats": {
-        "wins": 6,
+        "wins": 7,
         "losses": 7,
         "pushes": 0,
-        "pending": 1,
-        "accuracy_pct_ex_pushes": 46.15
+        "pending": 0,
+        "accuracy_pct_ex_pushes": 50
       },
       "total": {
         "wins": 5,
-        "losses": 7,
+        "losses": 8,
         "pushes": 0,
-        "pending": 1,
-        "accuracy_pct_ex_pushes": 41.67
+        "pending": 0,
+        "accuracy_pct_ex_pushes": 38.46
       }
     },
     "efficiency": {
       "ats": {
-        "wins": 8,
+        "wins": 9,
         "losses": 5,
         "pushes": 0,
-        "pending": 1,
-        "accuracy_pct_ex_pushes": 61.54
+        "pending": 0,
+        "accuracy_pct_ex_pushes": 64.29
       },
       "total": {
         "wins": 5,
-        "losses": 8,
+        "losses": 9,
         "pushes": 0,
-        "pending": 1,
-        "accuracy_pct_ex_pushes": 38.46
+        "pending": 0,
+        "accuracy_pct_ex_pushes": 35.71
       }
     },
     "combined": {
       "ats": {
-        "wins": 7,
+        "wins": 8,
         "losses": 6,
         "pushes": 0,
-        "pending": 1,
-        "accuracy_pct_ex_pushes": 53.85
+        "pending": 0,
+        "accuracy_pct_ex_pushes": 57.14
       },
       "total": {
         "wins": 5,
-        "losses": 8,
+        "losses": 9,
         "pushes": 0,
-        "pending": 1,
-        "accuracy_pct_ex_pushes": 38.46
+        "pending": 0,
+        "accuracy_pct_ex_pushes": 35.71
       }
     }
   },
@@ -80,5 +80,12 @@
     "The original Baseline and Injury values are preserved from the immutable snapshot.",
     "Missing original snapshot projections are reconstructed chronologically or use the saved pregame research forecast; they are not represented as original public posts.",
     "No official prospective record or production model is changed."
-  ]
+  ],
+  "updated_at_utc": "2026-11-03T14:53:01.359Z",
+  "last_result_update": {
+    "game": "CHI @ SEA",
+    "final": "Chicago Bears 34 — Seattle Seahawks 17",
+    "market": "SEA -3 / 46.5",
+    "grading": "All four ATS leans Win; all four total leans Loss"
+  }
 }
