@@ -1,0 +1,476 @@
+{
+  "status": "RESEARCH_ONLY_RECENCY_WEIGHTING_PAIRED_AUDIT",
+  "created_at_utc": "2026-11-03T16:16:16.942721+00:00",
+  "comparison": "Each weighted scheme versus equal weighting on the same games.",
+  "by_season": {
+    "2023": {
+      "baseline": {
+        "half_life_4_seasons": {
+          "common_games": 285,
+          "direction_flip_games": 5,
+          "weighted_helped": 3,
+          "weighted_hurt": 1,
+          "push_or_other": 1,
+          "net_help_minus_hurt": 2,
+          "decisive_flips": 4,
+          "exact_binomial_two_sided_p": 0.625
+        },
+        "half_life_2_seasons": {
+          "common_games": 285,
+          "direction_flip_games": 9,
+          "weighted_helped": 5,
+          "weighted_hurt": 2,
+          "push_or_other": 2,
+          "net_help_minus_hurt": 3,
+          "decisive_flips": 7,
+          "exact_binomial_two_sided_p": 0.453125
+        },
+        "half_life_1_season": {
+          "common_games": 285,
+          "direction_flip_games": 13,
+          "weighted_helped": 7,
+          "weighted_hurt": 4,
+          "push_or_other": 2,
+          "net_help_minus_hurt": 3,
+          "decisive_flips": 11,
+          "exact_binomial_two_sided_p": 0.548828
+        }
+      },
+      "injury": {
+        "half_life_4_seasons": {
+          "common_games": 285,
+          "direction_flip_games": 13,
+          "weighted_helped": 6,
+          "weighted_hurt": 7,
+          "push_or_other": 0,
+          "net_help_minus_hurt": -1,
+          "decisive_flips": 13,
+          "exact_binomial_two_sided_p": 1.0
+        },
+        "half_life_2_seasons": {
+          "common_games": 285,
+          "direction_flip_games": 17,
+          "weighted_helped": 9,
+          "weighted_hurt": 8,
+          "push_or_other": 0,
+          "net_help_minus_hurt": 1,
+          "decisive_flips": 17,
+          "exact_binomial_two_sided_p": 1.0
+        },
+        "half_life_1_season": {
+          "common_games": 285,
+          "direction_flip_games": 33,
+          "weighted_helped": 20,
+          "weighted_hurt": 13,
+          "push_or_other": 0,
+          "net_help_minus_hurt": 7,
+          "decisive_flips": 33,
+          "exact_binomial_two_sided_p": 0.296206
+        }
+      }
+    },
+    "2024": {
+      "baseline": {
+        "half_life_4_seasons": {
+          "common_games": 285,
+          "direction_flip_games": 2,
+          "weighted_helped": 1,
+          "weighted_hurt": 1,
+          "push_or_other": 0,
+          "net_help_minus_hurt": 0,
+          "decisive_flips": 2,
+          "exact_binomial_two_sided_p": 1.0
+        },
+        "half_life_2_seasons": {
+          "common_games": 285,
+          "direction_flip_games": 5,
+          "weighted_helped": 3,
+          "weighted_hurt": 2,
+          "push_or_other": 0,
+          "net_help_minus_hurt": 1,
+          "decisive_flips": 5,
+          "exact_binomial_two_sided_p": 1.0
+        },
+        "half_life_1_season": {
+          "common_games": 285,
+          "direction_flip_games": 11,
+          "weighted_helped": 5,
+          "weighted_hurt": 5,
+          "push_or_other": 1,
+          "net_help_minus_hurt": 0,
+          "decisive_flips": 10,
+          "exact_binomial_two_sided_p": 1.0
+        }
+      },
+      "injury": {
+        "half_life_4_seasons": {
+          "common_games": 285,
+          "direction_flip_games": 4,
+          "weighted_helped": 3,
+          "weighted_hurt": 1,
+          "push_or_other": 0,
+          "net_help_minus_hurt": 2,
+          "decisive_flips": 4,
+          "exact_binomial_two_sided_p": 0.625
+        },
+        "half_life_2_seasons": {
+          "common_games": 285,
+          "direction_flip_games": 7,
+          "weighted_helped": 3,
+          "weighted_hurt": 4,
+          "push_or_other": 0,
+          "net_help_minus_hurt": -1,
+          "decisive_flips": 7,
+          "exact_binomial_two_sided_p": 1.0
+        },
+        "half_life_1_season": {
+          "common_games": 285,
+          "direction_flip_games": 21,
+          "weighted_helped": 11,
+          "weighted_hurt": 10,
+          "push_or_other": 0,
+          "net_help_minus_hurt": 1,
+          "decisive_flips": 21,
+          "exact_binomial_two_sided_p": 1.0
+        }
+      }
+    },
+    "2025": {
+      "baseline": {
+        "half_life_4_seasons": {
+          "common_games": 285,
+          "direction_flip_games": 1,
+          "weighted_helped": 1,
+          "weighted_hurt": 0,
+          "push_or_other": 0,
+          "net_help_minus_hurt": 1,
+          "decisive_flips": 1,
+          "exact_binomial_two_sided_p": 1.0
+        },
+        "half_life_2_seasons": {
+          "common_games": 285,
+          "direction_flip_games": 10,
+          "weighted_helped": 3,
+          "weighted_hurt": 6,
+          "push_or_other": 1,
+          "net_help_minus_hurt": -3,
+          "decisive_flips": 9,
+          "exact_binomial_two_sided_p": 0.507812
+        },
+        "half_life_1_season": {
+          "common_games": 285,
+          "direction_flip_games": 17,
+          "weighted_helped": 7,
+          "weighted_hurt": 9,
+          "push_or_other": 1,
+          "net_help_minus_hurt": -2,
+          "decisive_flips": 16,
+          "exact_binomial_two_sided_p": 0.803619
+        }
+      },
+      "injury": {
+        "half_life_4_seasons": {
+          "common_games": 285,
+          "direction_flip_games": 7,
+          "weighted_helped": 5,
+          "weighted_hurt": 2,
+          "push_or_other": 0,
+          "net_help_minus_hurt": 3,
+          "decisive_flips": 7,
+          "exact_binomial_two_sided_p": 0.453125
+        },
+        "half_life_2_seasons": {
+          "common_games": 285,
+          "direction_flip_games": 11,
+          "weighted_helped": 7,
+          "weighted_hurt": 4,
+          "push_or_other": 0,
+          "net_help_minus_hurt": 3,
+          "decisive_flips": 11,
+          "exact_binomial_two_sided_p": 0.548828
+        },
+        "half_life_1_season": {
+          "common_games": 285,
+          "direction_flip_games": 22,
+          "weighted_helped": 11,
+          "weighted_hurt": 11,
+          "push_or_other": 0,
+          "net_help_minus_hurt": 0,
+          "decisive_flips": 22,
+          "exact_binomial_two_sided_p": 1.0
+        }
+      }
+    },
+    "2026": {
+      "baseline": {
+        "half_life_4_seasons": {
+          "common_games": 121,
+          "direction_flip_games": 5,
+          "weighted_helped": 2,
+          "weighted_hurt": 3,
+          "push_or_other": 0,
+          "net_help_minus_hurt": -1,
+          "decisive_flips": 5,
+          "exact_binomial_two_sided_p": 1.0
+        },
+        "half_life_2_seasons": {
+          "common_games": 121,
+          "direction_flip_games": 8,
+          "weighted_helped": 4,
+          "weighted_hurt": 3,
+          "push_or_other": 1,
+          "net_help_minus_hurt": 1,
+          "decisive_flips": 7,
+          "exact_binomial_two_sided_p": 1.0
+        },
+        "half_life_1_season": {
+          "common_games": 121,
+          "direction_flip_games": 19,
+          "weighted_helped": 10,
+          "weighted_hurt": 6,
+          "push_or_other": 3,
+          "net_help_minus_hurt": 4,
+          "decisive_flips": 16,
+          "exact_binomial_two_sided_p": 0.454498
+        }
+      },
+      "injury": {
+        "half_life_4_seasons": {
+          "common_games": 121,
+          "direction_flip_games": 5,
+          "weighted_helped": 3,
+          "weighted_hurt": 2,
+          "push_or_other": 0,
+          "net_help_minus_hurt": 1,
+          "decisive_flips": 5,
+          "exact_binomial_two_sided_p": 1.0
+        },
+        "half_life_2_seasons": {
+          "common_games": 121,
+          "direction_flip_games": 13,
+          "weighted_helped": 5,
+          "weighted_hurt": 8,
+          "push_or_other": 0,
+          "net_help_minus_hurt": -3,
+          "decisive_flips": 13,
+          "exact_binomial_two_sided_p": 0.581055
+        },
+        "half_life_1_season": {
+          "common_games": 121,
+          "direction_flip_games": 25,
+          "weighted_helped": 10,
+          "weighted_hurt": 13,
+          "push_or_other": 2,
+          "net_help_minus_hurt": -3,
+          "decisive_flips": 23,
+          "exact_binomial_two_sided_p": 0.677639
+        }
+      }
+    }
+  },
+  "regimes": {
+    "2023_2025": {
+      "baseline": {
+        "half_life_4_seasons": {
+          "common_games": 855,
+          "direction_flip_games": 8,
+          "weighted_helped": 5,
+          "weighted_hurt": 2,
+          "push_or_other": 1,
+          "net_help_minus_hurt": 3,
+          "decisive_flips": 7,
+          "exact_binomial_two_sided_p": 0.453125
+        },
+        "half_life_2_seasons": {
+          "common_games": 855,
+          "direction_flip_games": 24,
+          "weighted_helped": 11,
+          "weighted_hurt": 10,
+          "push_or_other": 3,
+          "net_help_minus_hurt": 1,
+          "decisive_flips": 21,
+          "exact_binomial_two_sided_p": 1.0
+        },
+        "half_life_1_season": {
+          "common_games": 855,
+          "direction_flip_games": 41,
+          "weighted_helped": 19,
+          "weighted_hurt": 18,
+          "push_or_other": 4,
+          "net_help_minus_hurt": 1,
+          "decisive_flips": 37,
+          "exact_binomial_two_sided_p": 1.0
+        }
+      },
+      "injury": {
+        "half_life_4_seasons": {
+          "common_games": 855,
+          "direction_flip_games": 24,
+          "weighted_helped": 14,
+          "weighted_hurt": 10,
+          "push_or_other": 0,
+          "net_help_minus_hurt": 4,
+          "decisive_flips": 24,
+          "exact_binomial_two_sided_p": 0.541256
+        },
+        "half_life_2_seasons": {
+          "common_games": 855,
+          "direction_flip_games": 35,
+          "weighted_helped": 19,
+          "weighted_hurt": 16,
+          "push_or_other": 0,
+          "net_help_minus_hurt": 3,
+          "decisive_flips": 35,
+          "exact_binomial_two_sided_p": 0.735879
+        },
+        "half_life_1_season": {
+          "common_games": 855,
+          "direction_flip_games": 76,
+          "weighted_helped": 42,
+          "weighted_hurt": 34,
+          "push_or_other": 0,
+          "net_help_minus_hurt": 8,
+          "decisive_flips": 76,
+          "exact_binomial_two_sided_p": 0.422191
+        }
+      }
+    },
+    "2025_2026": {
+      "baseline": {
+        "half_life_4_seasons": {
+          "common_games": 406,
+          "direction_flip_games": 6,
+          "weighted_helped": 3,
+          "weighted_hurt": 3,
+          "push_or_other": 0,
+          "net_help_minus_hurt": 0,
+          "decisive_flips": 6,
+          "exact_binomial_two_sided_p": 1.0
+        },
+        "half_life_2_seasons": {
+          "common_games": 406,
+          "direction_flip_games": 18,
+          "weighted_helped": 7,
+          "weighted_hurt": 9,
+          "push_or_other": 2,
+          "net_help_minus_hurt": -2,
+          "decisive_flips": 16,
+          "exact_binomial_two_sided_p": 0.803619
+        },
+        "half_life_1_season": {
+          "common_games": 406,
+          "direction_flip_games": 36,
+          "weighted_helped": 17,
+          "weighted_hurt": 15,
+          "push_or_other": 4,
+          "net_help_minus_hurt": 2,
+          "decisive_flips": 32,
+          "exact_binomial_two_sided_p": 0.86005
+        }
+      },
+      "injury": {
+        "half_life_4_seasons": {
+          "common_games": 406,
+          "direction_flip_games": 12,
+          "weighted_helped": 8,
+          "weighted_hurt": 4,
+          "push_or_other": 0,
+          "net_help_minus_hurt": 4,
+          "decisive_flips": 12,
+          "exact_binomial_two_sided_p": 0.387695
+        },
+        "half_life_2_seasons": {
+          "common_games": 406,
+          "direction_flip_games": 24,
+          "weighted_helped": 12,
+          "weighted_hurt": 12,
+          "push_or_other": 0,
+          "net_help_minus_hurt": 0,
+          "decisive_flips": 24,
+          "exact_binomial_two_sided_p": 1.0
+        },
+        "half_life_1_season": {
+          "common_games": 406,
+          "direction_flip_games": 47,
+          "weighted_helped": 21,
+          "weighted_hurt": 24,
+          "push_or_other": 2,
+          "net_help_minus_hurt": -3,
+          "decisive_flips": 45,
+          "exact_binomial_two_sided_p": 0.765992
+        }
+      }
+    },
+    "2023_2026": {
+      "baseline": {
+        "half_life_4_seasons": {
+          "common_games": 976,
+          "direction_flip_games": 13,
+          "weighted_helped": 7,
+          "weighted_hurt": 5,
+          "push_or_other": 1,
+          "net_help_minus_hurt": 2,
+          "decisive_flips": 12,
+          "exact_binomial_two_sided_p": 0.774414
+        },
+        "half_life_2_seasons": {
+          "common_games": 976,
+          "direction_flip_games": 32,
+          "weighted_helped": 15,
+          "weighted_hurt": 13,
+          "push_or_other": 4,
+          "net_help_minus_hurt": 2,
+          "decisive_flips": 28,
+          "exact_binomial_two_sided_p": 0.850554
+        },
+        "half_life_1_season": {
+          "common_games": 976,
+          "direction_flip_games": 60,
+          "weighted_helped": 29,
+          "weighted_hurt": 24,
+          "push_or_other": 7,
+          "net_help_minus_hurt": 5,
+          "decisive_flips": 53,
+          "exact_binomial_two_sided_p": 0.583132
+        }
+      },
+      "injury": {
+        "half_life_4_seasons": {
+          "common_games": 976,
+          "direction_flip_games": 29,
+          "weighted_helped": 17,
+          "weighted_hurt": 12,
+          "push_or_other": 0,
+          "net_help_minus_hurt": 5,
+          "decisive_flips": 29,
+          "exact_binomial_two_sided_p": 0.458258
+        },
+        "half_life_2_seasons": {
+          "common_games": 976,
+          "direction_flip_games": 48,
+          "weighted_helped": 24,
+          "weighted_hurt": 24,
+          "push_or_other": 0,
+          "net_help_minus_hurt": 0,
+          "decisive_flips": 48,
+          "exact_binomial_two_sided_p": 1.0
+        },
+        "half_life_1_season": {
+          "common_games": 976,
+          "direction_flip_games": 101,
+          "weighted_helped": 52,
+          "weighted_hurt": 47,
+          "push_or_other": 2,
+          "net_help_minus_hurt": 5,
+          "decisive_flips": 99,
+          "exact_binomial_two_sided_p": 0.687885
+        }
+      }
+    }
+  },
+  "cautions": [
+    "This is paired retrospective attribution, not a fresh holdout.",
+    "Multiple weighting schemes are evaluated; p-values are descriptive and not corrected for multiple comparisons.",
+    "No production model or official prospective record is modified."
+  ]
+}
