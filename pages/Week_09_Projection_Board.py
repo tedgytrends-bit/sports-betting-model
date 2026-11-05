@@ -210,3 +210,59 @@ st.caption(
     "but are not presented as competing public projections. "
     "These frozen Week 9 scores are research projections, not betting advice."
 )
+
+
+# Optional research transparency: explain each team's current projected starter
+# and relative EPA without substituting unvalidated numbers into official scores.
+QB_RESEARCH_DIR = ROOT / "data" / "qb_epa_shadow"
+with st.expander("Quarterback EPA context (advanced research — not official projections)"):
+    qb_exports = sorted(QB_RESEARCH_DIR.glob("week09_qb_epa_*.csv")) if QB_RESEARCH_DIR.exists() else []
+    if not qb_exports:
+        st.info("QB EPA research snapshot has not been generated yet.")
+    else:
+        qb = pd.read_csv(qb_exports[-1], low_memory=False)
+        required_qb = {
+            "game_id", "team", "qb_name", "starter_source", "confidence",
+            "qb_prior_dropbacks", "qb_shrunk_epa_per_dropback",
+            "team_recent_qb_epa_per_dropback", "qb_delta_epa_per_dropback",
+        }
+        if not required_qb.issubset(qb.columns):
+            st.error("Incomplete QB research export; not displaying misleading partial data.")
+        else:
+            research = qb.copy()
+            research["Starter source"] = research["starter_source"].map({
+                "verified_pregame": "Confirmed (source-linked)",
+                "inferred_previous_primary_passer": "Provisional — inferred from last game",
+                "unknown_no_pregame_evidence": "Unknown",
+            }).fillna("Unverified")
+            for field in ("qb_shrunk_epa_per_dropback",
+                          "team_recent_qb_epa_per_dropback",
+                          "qb_delta_epa_per_dropback"):
+                research[field] = pd.to_numeric(research[field], errors="coerce").round(3)
+            st.dataframe(
+                research[[
+                    "game_id", "team", "qb_name", "Starter source",
+                    "qb_shrunk_epa_per_dropback",
+                    "team_recent_qb_epa_per_dropback",
+                    "qb_delta_epa_per_dropback", "qb_prior_dropbacks",
+                    "confidence",
+                ]].rename(columns={
+                    "game_id": "Game",
+                    "team": "Team",
+                    "qb_name": "Expected QB",
+                    "qb_shrunk_epa_per_dropback": "QB EPA / dropback (shrunk)",
+                    "team_recent_qb_epa_per_dropback": "Recent team QB EPA / dropback",
+                    "qb_delta_epa_per_dropback": "Incremental QB EPA / dropback",
+                    "qb_prior_dropbacks": "Prior QB dropbacks",
+                    "confidence": "Sample quality",
+                }).sort_values(["Game", "Team"]),
+                hide_index=True, width="stretch",
+            )
+            st.caption(
+                "Only source-linked starters are verified. Other QBs are inferred "
+                "from the previous game's primary passer and may be wrong after "
+                "a lineup change. EPA adjustments account for the share of recent "
+                "team QB play already attributable to that player. These metrics "
+                "and the experimental score adjustments are NOT incorporated into "
+                "the frozen public Injury score or official graded record."
+            )
