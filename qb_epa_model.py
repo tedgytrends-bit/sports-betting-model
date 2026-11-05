@@ -330,3 +330,58 @@ def starters_from_game_schedule(schedule: pd.DataFrame, *, completed_only: bool 
     if out.duplicated(["game_id", "team"]).any():
         raise ValueError("Duplicate starting QB metadata in schedule")
     return out.reset_index(drop=True)
+
+
+def attach_qb_margin_adjustment(
+    nonqb_projections: pd.DataFrame,
+    qb_board: pd.DataFrame,
+) -> pd.DataFrame:
+    """The single forward Injury candidate: preserve the direct total projection.
+
+    The previous team performance already reflects its recent QB mix. For
+    each offense, apply only the *incremental* EPA-based QB replacement value,
+    removing all QB rows from the general injury features before training.
+
+    A change in expected team QB value shifts the home winning margin by
+    (home_qb_shift - away_qb_shift). Its scoring allocation is symmetric: half
+    to home and half away, maintaining the independent total estimate. The
+    method was chosen after seeing retrospective 2026 performance and hence
+    needs prospectively frozen, unmodified evaluation. Unknown QB status stays
+    missing; never silently replace with zero.
+    """
+    required = {"game_id", "projected_home", "projected_away"}
+    if not required.issubset(nonqb_projections.columns):
+        raise ValueError(f"Non-QB injury projections lack {sorted(required - set(nonqb_projections.columns))}")
+    if nonqb_projections["game_id"].duplicated().any():
+        raise ValueError("Duplicate game IDs in Injury score base")
+    out = nonqb_projections.copy()
+    for side in ("home", "away"):
+        frame = qb_board[qb_board["side"].eq(side)][
+            ["game_id", "qb_point_shift_experimental"]
+        ].rename(columns={"qb_point_shift_experimental": f"{side}_qb_point_shift"})
+        if frame["game_id"].duplicated().any():
+            raise ValueError(f"Duplicate {side} QB estimate")
+        out = out.merge(frame, how="left", on="game_id", validate="one_to_one")
+    out["qb_margin_adjustment"] = (
+        pd.to_numeric(out["home_qb_point_shift"], errors="coerce")
+        - pd.to_numeric(out["away_qb_point_shift"], errors="coerce")
+    )
+    out["projected_home_qb_injury"] = (
+        pd.to_numeric(out["projected_home"], errors="coerce")
+        + out["qb_margin_adjustment"] / 2
+    )
+    out["projected_away_qb_injury"] = (
+        pd.to_numeric(out["projected_away"], errors="coerce")
+        - out["qb_margin_adjustment"] / 2
+    )
+    out["projected_total_qb_injury"] = (
+        out["projected_home_qb_injury"] + out["projected_away_qb_injury"]
+    )
+    # Strong invariant, including rounding tolerance; critical to keep the
+    # original total-model quality rather than changing it accidentally.
+    known = out["qb_margin_adjustment"].notna()
+    if known.any():
+        original_total = out.loc[known, "projected_home"] + out.loc[known, "projected_away"]
+        if not np.allclose(out.loc[known, "projected_total_qb_injury"], original_total, atol=1e-8):
+            raise AssertionError("QB margin adjustment unexpectedly altered total")
+    return out
