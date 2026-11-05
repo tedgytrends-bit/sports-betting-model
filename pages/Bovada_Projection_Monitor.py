@@ -167,6 +167,30 @@ lines["home_team"] = lines["home_team"].map(norm_team)
 lines = lines.dropna(subset=["captured_at_utc"]).sort_values("captured_at_utc")
 # Reject malformed rows instead of allowing a blank team pair to become "None" or "nan".
 lines = lines[lines["away_team"].ne("") & lines["home_team"].ne("")].copy()
+# Keep each board scoped to one named season/week, including archived views.
+# A game may be repeated in different weeks, so week filtering must happen
+# BEFORE we collapse individual market snapshots to one row per matchup.
+lines["season"] = pd.to_numeric(lines["season"], errors="coerce")
+lines["week"] = pd.to_numeric(lines["week"], errors="coerce")
+available_weeks = sorted({
+    (int(season), int(week))
+    for season, week in zip(lines["season"], lines["week"])
+    if pd.notna(season) and pd.notna(week)
+}, reverse=True)
+if not available_weeks:
+    st.error("No dated Bovada market rows are available.")
+    st.stop()
+selected_week = st.selectbox(
+    "Select archived season / week",
+    options=available_weeks,
+    index=0,
+    format_func=lambda selected: f"{selected[0]} · Week {selected[1]}",
+    key="bovada_monitor_selected_week",
+)
+selected_season, selected_week_number = selected_week
+lines = lines[
+    lines["season"].eq(selected_season) & lines["week"].eq(selected_week_number)
+].copy()
 lines["game_key"] = lines["away_team"].map(key_team) + "@" + lines["home_team"].map(key_team)
 latest_lines = lines.drop_duplicates("game_key", keep="last").copy()
 original_lines = lines.drop_duplicates("game_key", keep="first").copy()
@@ -200,10 +224,27 @@ try:
         except Exception as exc:
             st.warning(f"Could not read frozen projection file {file.name}: {exc}")
     frozen = pd.concat(frozen_parts, ignore_index=True, sort=False) if frozen_parts else pd.DataFrame()
+    if not frozen.empty:
+        # Frozen projections must use the SAME archived week as the market board.
+        # Do not allow a prior week's game-key match to silently cross-contaminate.
+        frozen["season"] = pd.to_numeric(frozen["season"], errors="coerce")
+        frozen["week"] = pd.to_numeric(frozen["week"], errors="coerce")
+        frozen = frozen[
+            frozen["season"].eq(selected_season)
+            & frozen["week"].eq(selected_week_number)
+        ].copy()
     latest = get_live_paired_efficiency_projections()
+    if not latest.empty:
+        latest = latest[
+            pd.to_numeric(latest["season"], errors="coerce").eq(selected_season)
+            & pd.to_numeric(latest["week"], errors="coerce").eq(selected_week_number)
+        ].copy()
     injury_reports = get_injury_reports()
     injury_diagnostics = injury_coverage_diagnostics(
-        schedule[schedule["season"].eq(schedule["season"].max())], injury_reports
+        schedule[
+            pd.to_numeric(schedule["season"], errors="coerce").eq(selected_season)
+            & pd.to_numeric(schedule["week"], errors="coerce").eq(selected_week_number)
+        ], injury_reports
     )
 except Exception as exc:
     st.error(f"Could not build the efficiency-model view: {type(exc).__name__}: {exc}")
@@ -328,7 +369,13 @@ st.caption("Frozen = earliest archived weekly projection. Live baseline and live
 if frozen.empty:
     st.warning("No saved frozen efficiency projection files were found. Latest projections can be monitored, but the official frozen baseline is unavailable until the capture workflow saves a projection. Do not substitute the schedule-feed baseline for the official record.")
 
-st.subheader("Week 8: original Bovada lines vs latest supplied lines")
+st.subheader(f"{selected_season} Week {selected_week_number}: original vs latest Bovada lines")
+st.caption(
+    "This advanced monitor recalculates its own legacy live projections. "
+    "They are not interchangeable with the frozen four-model research numbers "
+    "on the Current Week page. Completed games retain their original/frozen "
+    "rows, while live projections may be unavailable."
+)
 c1, c2, c3, c4 = st.columns(4)
 c1.metric("Games with Bovada lines", f"{len(board):,}")
 c2.metric("Frozen projections available", f"{int(board['frozen_home_margin'].notna().sum()):,}")
@@ -426,8 +473,12 @@ with st.expander("Injury feed coverage diagnostics", expanded=False):
     st.caption("These counts isolate whether coverage is missing in the source feed, game-type matching, timestamp filtering, or the saved weekly snapshot. They are diagnostic only.")
     st.dataframe(injury_diagnostics, hide_index=True, use_container_width=True)
 
-st.subheader("Archived Bovada lines")
+st.subheader(f"Archived Bovada lines — {selected_season} Week {selected_week_number}")
 archive_view = lines.sort_values(["game_key", "captured_at_utc"], ascending=[True, False]).copy()
 archive_view["Matchup"] = archive_view["away_team"] + " @ " + archive_view["home_team"]
 st.dataframe(archive_view[["captured_at_utc", "Matchup", "home_favorite_spread", "total_line", "away_spread_price", "home_spread_price", "over_price", "under_price", "source", "note"]], hide_index=True, use_container_width=True)
-st.caption("Initial lines are transcribed from screenshots supplied in chat; prices were not visible/provided and are intentionally blank. For each update, append a new row with a new UTC timestamp; do not overwrite the initial row.")
+st.caption(
+    "Only the selected week's saved quotes are displayed. Some initial Week 8 "
+    "prices were not provided and remain blank. New screenshots must be appended "
+    "with a new archive-ingestion timestamp, not overwrite prior rows."
+)
