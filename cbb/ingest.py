@@ -33,7 +33,12 @@ def request(session, endpoint, params, key):
             data=r.json()
             if not isinstance(data,list):
                 raise ValueError("Expected list from "+endpoint)
-            if len(data)>=3000:
+            # CBBD caps at 3,000 *games*, not 3,000 rows.
+            # /games/teams has two records per game and may legitimately
+            # return 3,000+ records for a single monthly time window.
+            games_in_response=(len({str(x.get("gameId")) for x in data})
+                               if endpoint=="/games/teams" else len(data))
+            if games_in_response>=3000:
                 raise ValueError("Potential 3,000-game response truncation; shorten request window")
             return data
         except requests.RequestException:
