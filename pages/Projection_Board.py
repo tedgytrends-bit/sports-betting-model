@@ -18,6 +18,14 @@ from model import (
 )
 
 with st.sidebar:
+
+st.warning(
+    "**Legacy scoring / schedule board — not the tracked 24-feature Baseline.** "
+    "Its default projection is a simple six-game scoring-average formula. "
+    "The Week 9 Projections page is the frozen research comparison aligned with "
+    "the four-model backtest and user-supplied Bovada lines."
+)
+
     st.header("Model settings")
     season = st.selectbox("Projection season", [2026, 2025, 2024, 2023, 2022], index=0)
     lookback = st.slider("Recent team games for efficiency", 4, 16, 10)
