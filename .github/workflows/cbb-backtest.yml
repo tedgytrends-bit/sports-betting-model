@@ -2,6 +2,10 @@ name: CBB Research Backtest
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'cbb/backtest-trigger.txt'
 
 jobs:
   historical:
