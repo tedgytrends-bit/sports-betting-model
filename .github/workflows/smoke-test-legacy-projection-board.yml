@@ -29,10 +29,18 @@ jobs:
           from streamlit.testing.v1 import AppTest
           app = AppTest.from_file("pages/Projection_Board.py", default_timeout=120).run()
           errors = list(app.exception)
-          print("Default legacy page error count:", len(errors))
+          ui_errors = list(app.error)
+          tables = list(app.dataframe)
+          print("Default legacy page exception count:", len(errors))
+          print("Default legacy page error-banner count:", len(ui_errors))
+          print("Dataframe count:", len(tables))
           for e in errors:
-              print("STREAMLIT ERROR:", e.message)
+              print("STREAMLIT EXCEPTION:", e.message)
               print("TRACE:", e.stack_trace)
+          for e in ui_errors:
+              print("STREAMLIT ERROR BANNER:", e.message)
           assert not errors, "Legacy page raised an exception during real Streamlit runtime"
-          print("PASS: legacy board rendered without runtime exceptions")
+          assert not ui_errors, "Legacy page showed an error banner"
+          assert tables, "Legacy page rendered no projection table"
+          print("PASS: legacy board rendered forecast table without errors")
           PY
