@@ -18,7 +18,7 @@ from cbb.prospective_publish import GitHubStore
 
 FIRST_CAPTURE_UTC = utc_date("2026-11-05T21:29:14.641689Z")
 THRESHOLDS = (0, 2.5, 3.5, 4.5, 5.5)
-MODELS = ("baseline", "player_v2")
+MODELS = ("baseline", "player_v2", "player_opp_v3")
 
 
 def iso_week(value: str) -> str:
@@ -56,6 +56,9 @@ def grade_frozen(frozen: dict, final: dict) -> dict:
     total_line = number(line.get("total"))
     models = {}
     for name in MODELS:
+        if name == "player_opp_v3" and name not in recorded:
+            # Existing frozen snapshots are IMMUTABLE: do not backfill v3.
+            continue
         p = recorded[name]
         am = p.get("ats_lean")
         tm = p.get("total_lean")
@@ -95,7 +98,10 @@ def summarize(entries: list[dict], untracked: int) -> dict:
                 decisions = []
                 errors = []
                 for g in entries:
-                    model = g["models"][name]
+                    model = g["models"].get(name)
+                    if model is None:
+                        # v3 intentionally absent from pre-deployment freezes.
+                        continue
                     errors.append(model["margin_mae"] if kind == "ats" else model["total_mae"])
                     decision = model[kind]
                     edge = model["ats_edge"] if kind == "ats" else model["total_edge"]
@@ -106,6 +112,9 @@ def summarize(entries: list[dict], untracked: int) -> dict:
                 n = len(decisions)
                 summary.append({
                     "model": name, "market": kind, "threshold": cutoff,
+                    "graded_games_with_model": sum(
+                        name in g["models"] for g in entries
+                    ),
                     "wins": w, "losses": l, "pushes": p, "tracked_leans": n,
                     "decided_win_pct": round(w / (w + l) * 100, 2) if w + l else None,
                     "roi_if_minus_110_pct": round((w * 100 / 110 - l) / n * 100, 2) if n else None,
