@@ -1,0 +1,129 @@
+{
+  "created_at_utc": "2026-11-05T16:10:43+00:00",
+  "status": "RESEARCH_ONLY_2026_WEEK01_TO_08",
+  "test_games": 121,
+  "models": {
+    "injury_old": {
+      "n": 121,
+      "margin_mae": 9.6243,
+      "total_mae": 11.5392,
+      "score_mae": 7.6826,
+      "ats": {
+        "wins": 61,
+        "losses": 54,
+        "pushes": 6,
+        "no_lean": 0,
+        "graded": 115,
+        "win_pct": 0.5304,
+        "roi_-110": 0.0126
+      },
+      "totals": {
+        "wins": 56,
+        "losses": 65,
+        "pushes": 0,
+        "no_lean": 0,
+        "graded": 121,
+        "win_pct": 0.4628,
+        "roi_-110": -0.1165
+      }
+    },
+    "injury_nonqb": {
+      "n": 121,
+      "margin_mae": 9.6331,
+      "total_mae": 11.5091,
+      "score_mae": 7.6897,
+      "ats": {
+        "wins": 62,
+        "losses": 53,
+        "pushes": 6,
+        "no_lean": 0,
+        "graded": 115,
+        "win_pct": 0.5391,
+        "roi_-110": 0.0292
+      },
+      "totals": {
+        "wins": 56,
+        "losses": 65,
+        "pushes": 0,
+        "no_lean": 0,
+        "graded": 121,
+        "win_pct": 0.4628,
+        "roi_-110": -0.1165
+      }
+    },
+    "injury_qb_fitted": {
+      "n": 121,
+      "margin_mae": 9.6556,
+      "total_mae": 11.5015,
+      "score_mae": 7.7047,
+      "ats": {
+        "wins": 61,
+        "losses": 54,
+        "pushes": 6,
+        "no_lean": 0,
+        "graded": 115,
+        "win_pct": 0.5304,
+        "roi_-110": 0.0126
+      },
+      "totals": {
+        "wins": 56,
+        "losses": 65,
+        "pushes": 0,
+        "no_lean": 0,
+        "graded": 121,
+        "win_pct": 0.4628,
+        "roi_-110": -0.1165
+      }
+    },
+    "injury_qb_overlay": {
+      "n": 121,
+      "margin_mae": 9.5125,
+      "total_mae": 11.6764,
+      "score_mae": 7.7389,
+      "ats": {
+        "wins": 63,
+        "losses": 52,
+        "pushes": 6,
+        "no_lean": 0,
+        "graded": 115,
+        "win_pct": 0.5478,
+        "roi_-110": 0.0458
+      },
+      "totals": {
+        "wins": 53,
+        "losses": 68,
+        "pushes": 0,
+        "no_lean": 0,
+        "graded": 121,
+        "win_pct": 0.438,
+        "roi_-110": -0.1638
+      }
+    }
+  },
+  "starter_audit": {
+    "complete_qb_team_games": 242,
+    "schedule_recorded_starters": 242,
+    "recorded_vs_first_pass_mismatch": 8,
+    "first_vs_primary_disagreement": 5,
+    "observed_changes_team_weeks": 20,
+    "fallback_to_previous_game_qb": 0,
+    "warning": "The target game's first passer is known RETROSPECTIVELY; it is not a verified pregame starter. EPA features are strictly from preceding games."
+  },
+  "training": "Every test-week regression fits only on games before that week; same folds, schedule market, and league history for old/new.",
+  "non_qb_rule": "All QB rows removed from QB count AND general injury/practice counts before QB EPA feature is added.",
+  "clinical_limitations": [
+    "2026 holdout comparison uses postgame starter identity and cannot establish prospective performance.",
+    "PBP first passer provides a QA cross-check, while NFLverse per-game QB metadata supplies starter identity.",
+    "QB EPA prior shrinkage and conversion were selected before evaluation but have not undergone extensive external validation.",
+    "Injury report source does not guarantee complete point-in-time unavailable-player coverage.",
+    "Do not overwrite published 2026 Week 8-9 official frozen projections."
+  ],
+  "outputs": {
+    "predictions": "data/qb_epa_shadow/qb_epa_2026_week01_08_paired_20261105T161043Z.csv",
+    "summary": "data/qb_epa_shadow/qb_epa_2026_week01_08_summary_20261105T161043Z.csv",
+    "weekly": "data/qb_epa_shadow/qb_epa_2026_week01_08_weekly_20261105T161043Z.csv",
+    "starters": "data/qb_epa_shadow/qb_epa_2026_week01_08_starters_20261105T161043Z.csv",
+    "qb_detail": "data/qb_epa_shadow/qb_epa_2026_week01_08_qb_detail_20261105T161043Z.csv",
+    "report": "data/qb_epa_shadow/qb_epa_2026_week01_08_report_20261105T161043Z.json"
+  }
+}

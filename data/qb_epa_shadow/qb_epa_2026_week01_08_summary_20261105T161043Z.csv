@@ -1,0 +1,5 @@
+model,n,margin_mae,total_mae,score_mae,ats_w,ats_l,ats_p,ats_roi,totals_w,totals_l,totals_p,totals_roi
+injury_old,121,9.6243,11.5392,7.6826,61,54,6,0.0126,56,65,0,-0.1165
+injury_nonqb,121,9.6331,11.5091,7.6897,62,53,6,0.0292,56,65,0,-0.1165
+injury_qb_fitted,121,9.6556,11.5015,7.7047,61,54,6,0.0126,56,65,0,-0.1165
+injury_qb_overlay,121,9.5125,11.6764,7.7389,63,52,6,0.0458,53,68,0,-0.1638
