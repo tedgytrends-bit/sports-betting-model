@@ -9,7 +9,7 @@ on:
       - "research/backtest_2026_actual_qb_epa.py"
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: backtest-2026-qb-epa-injury
@@ -32,13 +32,10 @@ jobs:
           python -m pytest -q tests/test_qb_epa_model.py
       - name: Grade 2026 Weeks 1-8
         run: python -u research/backtest_2026_actual_qb_epa.py
-      - name: Commit audit only
-        run: |
-          if [ -n "$(git status --porcelain data/qb_epa_shadow)" ]; then
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add data/qb_epa_shadow
-            git commit -m "Record 2026 Week 1-8 QB EPA injury holdout audit"
-            git pull --rebase origin main
-            git push
-          fi
+      - name: Upload paired 2026 backtest and starter audit
+        uses: actions/upload-artifact@v4
+        with:
+          name: qb-epa-2026-comparison
+          path: data/qb_epa_shadow/qb_epa_2026_week01_08_*
+          retention-days: 30
+          if-no-files-found: error
