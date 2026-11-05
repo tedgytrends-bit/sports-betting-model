@@ -126,9 +126,21 @@ def _one_team(game_id: str, side: str, team: str, cutoff: pd.Timestamp,
         (weighted_dropbacks + PRIOR_DROPBACKS)
         if pd.notna(league_rate) and qb_id is not None else np.nan
     )
+    # The team baseline ALREADY includes this QB's recent plays. For an
+    # incumbent responsible for nearly all recent dropbacks, a further
+    # player-level change double-corrects the offense. Blend the incremental
+    # adjustment by the fraction of team QB snaps NOT represented by him.
+    current_qb_recent_dropbacks = float(
+        recent.loc[recent["qb_id"].eq(qb_id), "dropbacks"].sum()
+    ) if qb_id is not None else 0.0
+    starter_recent_share = (
+        current_qb_recent_dropbacks / reference_dropbacks
+        if reference_dropbacks else np.nan
+    )
     delta_epa = (
-        player_shrunk - reference_epa
-        if pd.notna(player_shrunk) and pd.notna(reference_epa) else np.nan
+        (player_shrunk - reference_epa) * (1.0 - starter_recent_share)
+        if pd.notna(player_shrunk) and pd.notna(reference_epa)
+        and pd.notna(starter_recent_share) else np.nan
     )
     point_shift = (
         delta_epa * expected_dropbacks
@@ -144,6 +156,7 @@ def _one_team(game_id: str, side: str, team: str, cutoff: pd.Timestamp,
         "qb_shrunk_epa_per_dropback": player_shrunk,
         "team_recent_qb_epa_per_dropback": reference_epa,
         "team_recent_dropbacks_per_game": expected_dropbacks,
+        "starter_recent_team_dropback_share": starter_recent_share,
         "qb_delta_epa_per_dropback": delta_epa,
         "qb_point_shift_experimental": point_shift,
         "confidence": (
