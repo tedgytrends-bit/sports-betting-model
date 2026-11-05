@@ -1,6 +1,6 @@
 {
   "capture_type": "research_shadow",
-  "capture_utc": "2026-11-05T21:29:14.641689Z",
+  "capture_utc": "2026-11-05T21:42:20.366074Z",
   "capture_version": 1,
   "counts": {
     "freeze_candidates": 43,
@@ -21,7 +21,7 @@
         "projected_home_points": 82.49,
         "projected_margin_home": 15.726,
         "projected_total": 149.25,
-        "total_edge": 10.25,
+        "total_edge": 10.75,
         "total_lean": "over",
         "training_games": 31259
       },
@@ -42,10 +42,10 @@
       "home_team_id": "204",
       "id": "374639",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": 2.5,
         "provider": "Bovada",
-        "total": 139.0
+        "total": 138.5
       },
       "neutral_site": false,
       "player_v2": {
@@ -55,7 +55,7 @@
         "projected_home_points": 77.03,
         "projected_margin_home": 6.356,
         "projected_total": 147.699,
-        "total_edge": 8.699,
+        "total_edge": 9.199,
         "total_lean": "over",
         "training_games": 31259
       },
@@ -94,7 +94,7 @@
       "home_team_id": "181",
       "id": "374647",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -146,7 +146,7 @@
       "home_team_id": "121",
       "id": "372676",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": -29.5,
         "provider": "Bovada",
         "total": 153.5
@@ -198,7 +198,7 @@
       "home_team_id": "336",
       "id": "372683",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": -18.5,
         "provider": "Bovada",
         "total": 156.0
@@ -250,7 +250,7 @@
       "home_team_id": "15",
       "id": "372692",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -302,7 +302,7 @@
       "home_team_id": "138",
       "id": "374640",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -354,7 +354,7 @@
       "home_team_id": "226",
       "id": "374655",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": -12.0,
         "provider": "Bovada",
         "total": 159.5
@@ -406,7 +406,7 @@
       "home_team_id": "263",
       "id": "374651",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": -17.5,
         "provider": "Bovada",
         "total": 136.0
@@ -458,7 +458,7 @@
       "home_team_id": "254",
       "id": "372679",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": -7.5,
         "provider": "Bovada",
         "total": 136.5
@@ -510,7 +510,7 @@
       "home_team_id": "286",
       "id": "372684",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": -23.5,
         "provider": "Bovada",
         "total": 135.5
@@ -562,7 +562,7 @@
       "home_team_id": "229",
       "id": "372685",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": -17.5,
         "provider": "Bovada",
         "total": 150.5
@@ -614,7 +614,7 @@
       "home_team_id": "47",
       "id": "372693",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -666,7 +666,7 @@
       "home_team_id": "48",
       "id": "374636",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": -11.0,
         "provider": "Bovada",
         "total": 143.5
@@ -718,7 +718,7 @@
       "home_team_id": "7",
       "id": "374638",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": 9.0,
         "provider": "Bovada",
         "total": 149.5
@@ -770,7 +770,7 @@
       "home_team_id": "51",
       "id": "374641",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": -24.5,
         "provider": "Bovada",
         "total": 153.0
@@ -822,7 +822,7 @@
       "home_team_id": "238",
       "id": "374643",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": -6.5,
         "provider": "Bovada",
         "total": 148.5
@@ -853,7 +853,7 @@
         "projected_home_points": 71.67,
         "projected_margin_home": 2.966,
         "projected_total": 140.368,
-        "total_edge": 0.368,
+        "total_edge": 0.868,
         "total_lean": "over",
         "training_games": 31259
       },
@@ -874,10 +874,10 @@
       "home_team_id": "166",
       "id": "374644",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": -9.5,
         "provider": "Bovada",
-        "total": 140.0
+        "total": 139.5
       },
       "neutral_site": false,
       "player_v2": {
@@ -887,7 +887,7 @@
         "projected_home_points": 73.37,
         "projected_margin_home": 4.178,
         "projected_total": 142.553,
-        "total_edge": 2.553,
+        "total_edge": 3.053,
         "total_lean": "over",
         "training_games": 31259
       },
@@ -926,7 +926,7 @@
       "home_team_id": "155",
       "id": "374645",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": -3.5,
         "provider": "Draft Kings",
         "total": 146.5
@@ -978,7 +978,7 @@
       "home_team_id": "340",
       "id": "374649",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": -20.5,
         "provider": "Bovada",
         "total": 154.0
@@ -1009,7 +1009,7 @@
         "projected_home_points": 78.31,
         "projected_margin_home": 17.373,
         "projected_total": 139.257,
-        "total_edge": 0.757,
+        "total_edge": 2.257,
         "total_lean": "over",
         "training_games": 31259
       },
@@ -1030,10 +1030,10 @@
       "home_team_id": "213",
       "id": "374650",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": -21.5,
         "provider": "Bovada",
-        "total": 138.5
+        "total": 137.0
       },
       "neutral_site": false,
       "player_v2": {
@@ -1043,7 +1043,7 @@
         "projected_home_points": 83.79,
         "projected_margin_home": 21.418,
         "projected_total": 146.168,
-        "total_edge": 7.668,
+        "total_edge": 9.168,
         "total_lean": "over",
         "training_games": 31259
       },
@@ -1082,7 +1082,7 @@
       "home_team_id": "120",
       "id": "374652",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": -8.5,
         "provider": "Bovada",
         "total": 143.5
@@ -1134,7 +1134,7 @@
       "home_team_id": "232",
       "id": "374656",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -1165,7 +1165,7 @@
         "projected_home_points": 76.04,
         "projected_margin_home": 12.126,
         "projected_total": 139.956,
-        "total_edge": 0.956,
+        "total_edge": 1.956,
         "total_lean": "over",
         "training_games": 31259
       },
@@ -1186,10 +1186,10 @@
       "home_team_id": "234",
       "id": "374658",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": -3.0,
         "provider": "Bovada",
-        "total": 139.0
+        "total": 138.0
       },
       "neutral_site": false,
       "player_v2": {
@@ -1199,7 +1199,7 @@
         "projected_home_points": 82.29,
         "projected_margin_home": 16.863,
         "projected_total": 147.713,
-        "total_edge": 8.713,
+        "total_edge": 9.713,
         "total_lean": "over",
         "training_games": 31259
       },
@@ -1238,7 +1238,7 @@
       "home_team_id": "141",
       "id": "374659",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": -1.0,
         "provider": "Bovada",
         "total": 160.0
@@ -1290,7 +1290,7 @@
       "home_team_id": "58",
       "id": "374660",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -1342,7 +1342,7 @@
       "home_team_id": "250",
       "id": "374661",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": -5.5,
         "provider": "Bovada",
         "total": 143.0
@@ -1394,7 +1394,7 @@
       "home_team_id": "243",
       "id": "374662",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": 1.5,
         "provider": "Bovada",
         "total": 141.5
@@ -1446,7 +1446,7 @@
       "home_team_id": "187",
       "id": "374663",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": -8.5,
         "provider": "Bovada",
         "total": 134.5
@@ -1477,7 +1477,7 @@
         "projected_home_points": 77.84,
         "projected_margin_home": 15.735,
         "projected_total": 139.948,
-        "total_edge": 1.448,
+        "total_edge": 2.448,
         "total_lean": "over",
         "training_games": 31259
       },
@@ -1498,10 +1498,10 @@
       "home_team_id": "156",
       "id": "374664",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": -4.5,
         "provider": "Draft Kings",
-        "total": 138.5
+        "total": 137.5
       },
       "neutral_site": false,
       "player_v2": {
@@ -1511,7 +1511,7 @@
         "projected_home_points": 80.1,
         "projected_margin_home": 18.125,
         "projected_total": 142.085,
-        "total_edge": 3.585,
+        "total_edge": 4.585,
         "total_lean": "over",
         "training_games": 31259
       },
@@ -1550,7 +1550,7 @@
       "home_team_id": "123",
       "id": "374665",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": -9.5,
         "provider": "Bovada",
         "total": 146.0
@@ -1602,7 +1602,7 @@
       "home_team_id": "83",
       "id": "374666",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": 1.5,
         "provider": "Bovada",
         "total": 141.0
@@ -1654,7 +1654,7 @@
       "home_team_id": "297",
       "id": "377949",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -1706,7 +1706,7 @@
       "home_team_id": "85",
       "id": "377952",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -1758,7 +1758,7 @@
       "home_team_id": "366",
       "id": "377953",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -1810,7 +1810,7 @@
       "home_team_id": "351",
       "id": "377954",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -1862,7 +1862,7 @@
       "home_team_id": "242",
       "id": "377955",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -1914,7 +1914,7 @@
       "home_team_id": "91",
       "id": "372681",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": -20.0,
         "provider": "Bovada",
         "total": 141.5
@@ -1966,7 +1966,7 @@
       "home_team_id": "174",
       "id": "372690",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": -21.5,
         "provider": "Bovada",
         "total": 151.0
@@ -2018,7 +2018,7 @@
       "home_team_id": "303",
       "id": "374653",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": -12.0,
         "provider": "Bovada",
         "total": 152.5
@@ -2070,7 +2070,7 @@
       "home_team_id": "22",
       "id": "374667",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -2122,7 +2122,7 @@
       "home_team_id": "350",
       "id": "377950",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -2174,7 +2174,7 @@
       "home_team_id": "197",
       "id": "377956",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -2226,7 +2226,7 @@
       "home_team_id": "149",
       "id": "377957",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -2278,7 +2278,7 @@
       "home_team_id": "151",
       "id": "372680",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": -18.0,
         "provider": "Bovada",
         "total": 145.0
@@ -2330,7 +2330,7 @@
       "home_team_id": "72",
       "id": "372686",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": -41.0,
         "provider": "Bovada",
         "total": 150.0
@@ -2382,7 +2382,7 @@
       "home_team_id": "61",
       "id": "372688",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": -29.0,
         "provider": "Bovada",
         "total": 156.0
@@ -2434,7 +2434,7 @@
       "home_team_id": "295",
       "id": "372689",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": -41.5,
         "provider": "Bovada",
         "total": 155.5
@@ -2486,7 +2486,7 @@
       "home_team_id": "87",
       "id": "372691",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": -36.5,
         "provider": "Bovada",
         "total": 156.0
@@ -2538,7 +2538,7 @@
       "home_team_id": "169",
       "id": "374637",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": -26.5,
         "provider": "Bovada",
         "total": 154.5
@@ -2590,7 +2590,7 @@
       "home_team_id": "304",
       "id": "374648",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": -14.0,
         "provider": "Bovada",
         "total": 154.5
@@ -2642,7 +2642,7 @@
       "home_team_id": "248",
       "id": "374654",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": -24.5,
         "provider": "Bovada",
         "total": 160.5
@@ -2694,7 +2694,7 @@
       "home_team_id": "241",
       "id": "374668",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": -3.5,
         "provider": "Bovada",
         "total": 146.0
@@ -2746,7 +2746,7 @@
       "home_team_id": "290",
       "id": "374669",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -2798,7 +2798,7 @@
       "home_team_id": "265",
       "id": "377899",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": -5.0,
         "provider": "Bovada",
         "total": 141.0
@@ -2850,7 +2850,7 @@
       "home_team_id": "119",
       "id": "377958",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -2902,7 +2902,7 @@
       "home_team_id": "118",
       "id": "372677",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": -30.5,
         "provider": "Bovada",
         "total": 173.5
@@ -2954,7 +2954,7 @@
       "home_team_id": "65",
       "id": "372687",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": -6.0,
         "provider": "Bovada",
         "total": 149.5
@@ -3006,7 +3006,7 @@
       "home_team_id": "2",
       "id": "372694",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -3058,7 +3058,7 @@
       "home_team_id": "276",
       "id": "377900",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -3110,7 +3110,7 @@
       "home_team_id": "307",
       "id": "372678",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -3162,7 +3162,7 @@
       "home_team_id": "331",
       "id": "374642",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": -8.0,
         "provider": "Bovada",
         "total": 137.5
@@ -3214,7 +3214,7 @@
       "home_team_id": "298",
       "id": "374646",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": -29.0,
         "provider": "Bovada",
         "total": 149.5
@@ -3266,7 +3266,7 @@
       "home_team_id": "36",
       "id": "374670",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -3291,7 +3291,7 @@
       "away": "Cal Poly",
       "away_team_id": "35",
       "baseline": {
-        "ats_edge": -20.811,
+        "ats_edge": -21.311,
         "ats_lean": "away",
         "projected_away_points": 67.46,
         "projected_home_points": 77.15,
@@ -3318,14 +3318,14 @@
       "home_team_id": "11",
       "id": "372682",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
-        "home_spread": -30.5,
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
+        "home_spread": -31.0,
         "provider": "Bovada",
         "total": 174.0
       },
       "neutral_site": false,
       "player_v2": {
-        "ats_edge": -19.844,
+        "ats_edge": -20.344,
         "ats_lean": "away",
         "projected_away_points": 72.47,
         "projected_home_points": 83.13,
@@ -3370,7 +3370,7 @@
       "home_team_id": "228",
       "id": "377948",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -3422,7 +3422,7 @@
       "home_team_id": "26",
       "id": "372706",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -3474,7 +3474,7 @@
       "home_team_id": "20",
       "id": "372712",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -3526,7 +3526,7 @@
       "home_team_id": "89",
       "id": "374675",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -3578,7 +3578,7 @@
       "home_team_id": "339",
       "id": "374697",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -3630,7 +3630,7 @@
       "home_team_id": "223",
       "id": "374695",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -3682,7 +3682,7 @@
       "home_team_id": "216",
       "id": "372695",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -3734,7 +3734,7 @@
       "home_team_id": "236",
       "id": "374673",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -3786,7 +3786,7 @@
       "home_team_id": "268",
       "id": "374709",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -3838,7 +3838,7 @@
       "home_team_id": "200",
       "id": "372697",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -3890,7 +3890,7 @@
       "home_team_id": "52",
       "id": "372698",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -3942,7 +3942,7 @@
       "home_team_id": "252",
       "id": "372699",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -3994,7 +3994,7 @@
       "home_team_id": "45",
       "id": "372700",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -4046,7 +4046,7 @@
       "home_team_id": "19",
       "id": "372701",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -4098,7 +4098,7 @@
       "home_team_id": "90",
       "id": "372705",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -4150,7 +4150,7 @@
       "home_team_id": "359",
       "id": "372707",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -4202,7 +4202,7 @@
       "home_team_id": "98",
       "id": "372710",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -4254,7 +4254,7 @@
       "home_team_id": "30",
       "id": "372713",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -4306,7 +4306,7 @@
       "home_team_id": "299",
       "id": "374671",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -4358,7 +4358,7 @@
       "home_team_id": "245",
       "id": "374672",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -4410,7 +4410,7 @@
       "home_team_id": "88",
       "id": "374677",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -4462,7 +4462,7 @@
       "home_team_id": "135",
       "id": "374680",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -4514,7 +4514,7 @@
       "home_team_id": "347",
       "id": "374681",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -4566,7 +4566,7 @@
       "home_team_id": "312",
       "id": "374682",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -4618,7 +4618,7 @@
       "home_team_id": "338",
       "id": "374687",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -4670,7 +4670,7 @@
       "home_team_id": "81",
       "id": "374688",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -4722,7 +4722,7 @@
       "home_team_id": "101",
       "id": "374699",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -4774,7 +4774,7 @@
       "home_team_id": "95",
       "id": "374700",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -4826,7 +4826,7 @@
       "home_team_id": "185",
       "id": "374704",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -4878,7 +4878,7 @@
       "home_team_id": "133",
       "id": "374705",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -4930,7 +4930,7 @@
       "home_team_id": "53",
       "id": "374711",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -4982,7 +4982,7 @@
       "home_team_id": "183",
       "id": "374712",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -5034,7 +5034,7 @@
       "home_team_id": "46",
       "id": "377959",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -5086,7 +5086,7 @@
       "home_team_id": "78",
       "id": "377961",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -5138,7 +5138,7 @@
       "home_team_id": "134",
       "id": "377962",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -5190,7 +5190,7 @@
       "home_team_id": "5",
       "id": "372711",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -5242,7 +5242,7 @@
       "home_team_id": "355",
       "id": "374691",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -5294,7 +5294,7 @@
       "home_team_id": "305",
       "id": "374703",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -5346,7 +5346,7 @@
       "home_team_id": "357",
       "id": "374708",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -5398,7 +5398,7 @@
       "home_team_id": "282",
       "id": "374713",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -5450,7 +5450,7 @@
       "home_team_id": "173",
       "id": "372696",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -5502,7 +5502,7 @@
       "home_team_id": "125",
       "id": "372704",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -5554,7 +5554,7 @@
       "home_team_id": "157",
       "id": "372708",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -5606,7 +5606,7 @@
       "home_team_id": "217",
       "id": "372709",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -5658,7 +5658,7 @@
       "home_team_id": "136",
       "id": "374679",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -5710,7 +5710,7 @@
       "home_team_id": "293",
       "id": "374692",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -5762,7 +5762,7 @@
       "home_team_id": "212",
       "id": "374693",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -5814,7 +5814,7 @@
       "home_team_id": "314",
       "id": "374696",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": -5.5,
         "provider": "Draft Kings",
         "total": 146.5
@@ -5866,7 +5866,7 @@
       "home_team_id": "287",
       "id": "374701",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -5918,7 +5918,7 @@
       "home_team_id": "4",
       "id": "374710",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -5970,7 +5970,7 @@
       "home_team_id": "148",
       "id": "374714",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -6022,7 +6022,7 @@
       "home_team_id": "315",
       "id": "377963",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -6074,7 +6074,7 @@
       "home_team_id": "176",
       "id": "377964",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -6126,7 +6126,7 @@
       "home_team_id": "358",
       "id": "374678",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -6178,7 +6178,7 @@
       "home_team_id": "130",
       "id": "374690",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -6230,7 +6230,7 @@
       "home_team_id": "124",
       "id": "374694",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -6282,7 +6282,7 @@
       "home_team_id": "220",
       "id": "374706",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -6334,7 +6334,7 @@
       "home_team_id": "132",
       "id": "372702",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -6386,7 +6386,7 @@
       "home_team_id": "131",
       "id": "372703",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -6438,7 +6438,7 @@
       "home_team_id": "57",
       "id": "374674",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -6490,7 +6490,7 @@
       "home_team_id": "18",
       "id": "374683",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -6542,7 +6542,7 @@
       "home_team_id": "10",
       "id": "374684",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -6594,7 +6594,7 @@
       "home_team_id": "168",
       "id": "374686",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -6646,7 +6646,7 @@
       "home_team_id": "218",
       "id": "374702",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -6698,7 +6698,7 @@
       "home_team_id": "224",
       "id": "374698",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -6750,7 +6750,7 @@
       "home_team_id": "258",
       "id": "374707",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -6802,7 +6802,7 @@
       "home_team_id": "270",
       "id": "377965",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -6854,7 +6854,7 @@
       "home_team_id": "281",
       "id": "374685",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -6906,7 +6906,7 @@
       "home_team_id": "259",
       "id": "374689",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -6958,7 +6958,7 @@
       "home_team_id": "153",
       "id": "374715",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -7010,7 +7010,7 @@
       "home_team_id": "313",
       "id": "374676",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -7062,7 +7062,7 @@
       "home_team_id": "324",
       "id": "377966",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -7114,7 +7114,7 @@
       "home_team_id": "108",
       "id": "377967",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -7166,7 +7166,7 @@
       "home_team_id": "84",
       "id": "374732",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -7218,7 +7218,7 @@
       "home_team_id": "150",
       "id": "374734",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -7270,7 +7270,7 @@
       "home_team_id": "354",
       "id": "374739",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -7322,7 +7322,7 @@
       "home_team_id": "215",
       "id": "374726",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -7374,7 +7374,7 @@
       "home_team_id": "100",
       "id": "377969",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -7426,7 +7426,7 @@
       "home_team_id": "193",
       "id": "374721",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -7478,7 +7478,7 @@
       "home_team_id": "158",
       "id": "374727",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -7530,7 +7530,7 @@
       "home_team_id": "71",
       "id": "374729",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -7582,7 +7582,7 @@
       "home_team_id": "1",
       "id": "374735",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -7634,7 +7634,7 @@
       "home_team_id": "74",
       "id": "374740",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -7686,7 +7686,7 @@
       "home_team_id": "269",
       "id": "374745",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -7738,7 +7738,7 @@
       "home_team_id": "142",
       "id": "377960",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -7790,7 +7790,7 @@
       "home_team_id": "163",
       "id": "374733",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -7842,7 +7842,7 @@
       "home_team_id": "180",
       "id": "374742",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -7894,7 +7894,7 @@
       "home_team_id": "147",
       "id": "374743",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -7946,7 +7946,7 @@
       "home_team_id": "257",
       "id": "372718",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -7998,7 +7998,7 @@
       "home_team_id": "137",
       "id": "374731",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -8050,7 +8050,7 @@
       "home_team_id": "255",
       "id": "377970",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -8102,7 +8102,7 @@
       "home_team_id": "322",
       "id": "374724",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -8154,7 +8154,7 @@
       "home_team_id": "240",
       "id": "374730",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -8206,7 +8206,7 @@
       "home_team_id": "251",
       "id": "374744",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -8258,7 +8258,7 @@
       "home_team_id": "165",
       "id": "374746",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -8310,7 +8310,7 @@
       "home_team_id": "329",
       "id": "377971",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -8362,7 +8362,7 @@
       "home_team_id": "311",
       "id": "377972",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -8414,7 +8414,7 @@
       "home_team_id": "159",
       "id": "374747",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -8466,7 +8466,7 @@
       "home_team_id": "366",
       "id": "377973",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -8518,7 +8518,7 @@
       "home_team_id": "167",
       "id": "372717",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -8570,7 +8570,7 @@
       "home_team_id": "328",
       "id": "374716",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -8622,7 +8622,7 @@
       "home_team_id": "93",
       "id": "374717",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -8674,7 +8674,7 @@
       "home_team_id": "32",
       "id": "374723",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -8726,7 +8726,7 @@
       "home_team_id": "115",
       "id": "374748",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -8778,7 +8778,7 @@
       "home_team_id": "143",
       "id": "374749",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -8830,7 +8830,7 @@
       "home_team_id": "109",
       "id": "374750",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -8882,7 +8882,7 @@
       "home_team_id": "102",
       "id": "377968",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -8934,7 +8934,7 @@
       "home_team_id": "326",
       "id": "374751",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -8986,7 +8986,7 @@
       "home_team_id": "319",
       "id": "374752",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -9038,7 +9038,7 @@
       "home_team_id": "191",
       "id": "374725",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -9090,7 +9090,7 @@
       "home_team_id": "96",
       "id": "377974",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -9142,7 +9142,7 @@
       "home_team_id": "194",
       "id": "374753",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -9194,7 +9194,7 @@
       "home_team_id": "42",
       "id": "372715",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -9246,7 +9246,7 @@
       "home_team_id": "64",
       "id": "372716",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -9298,7 +9298,7 @@
       "home_team_id": "235",
       "id": "372719",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -9350,7 +9350,7 @@
       "home_team_id": "112",
       "id": "374722",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -9402,7 +9402,7 @@
       "home_team_id": "63",
       "id": "374754",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -9454,7 +9454,7 @@
       "home_team_id": "237",
       "id": "377975",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -9506,7 +9506,7 @@
       "home_team_id": "97",
       "id": "372720",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -9558,7 +9558,7 @@
       "home_team_id": "73",
       "id": "374719",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -9610,7 +9610,7 @@
       "home_team_id": "309",
       "id": "374756",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -9662,7 +9662,7 @@
       "home_team_id": "104",
       "id": "372721",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -9714,7 +9714,7 @@
       "home_team_id": "184",
       "id": "374720",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -9766,7 +9766,7 @@
       "home_team_id": "144",
       "id": "374728",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -9818,7 +9818,7 @@
       "home_team_id": "29",
       "id": "374737",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -9870,7 +9870,7 @@
       "home_team_id": "82",
       "id": "374755",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -9922,7 +9922,7 @@
       "home_team_id": "222",
       "id": "377976",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -9974,7 +9974,7 @@
       "home_team_id": "276",
       "id": "378671",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -10026,7 +10026,7 @@
       "home_team_id": "345",
       "id": "374757",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -10078,7 +10078,7 @@
       "home_team_id": "228",
       "id": "378672",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -10130,7 +10130,7 @@
       "home_team_id": "308",
       "id": "372714",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -10182,7 +10182,7 @@
       "home_team_id": "261",
       "id": "374736",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -10234,7 +10234,7 @@
       "home_team_id": "262",
       "id": "374738",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -10286,7 +10286,7 @@
       "home_team_id": "310",
       "id": "374758",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -10338,7 +10338,7 @@
       "home_team_id": "279",
       "id": "374760",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -10390,7 +10390,7 @@
       "home_team_id": "266",
       "id": "374762",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -10442,7 +10442,7 @@
       "home_team_id": "190",
       "id": "374764",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -10494,7 +10494,7 @@
       "home_team_id": "31",
       "id": "374765",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -10546,7 +10546,7 @@
       "home_team_id": "264",
       "id": "374770",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -10598,7 +10598,7 @@
       "home_team_id": "318",
       "id": "374771",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -10650,7 +10650,7 @@
       "home_team_id": "187",
       "id": "374772",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -10702,7 +10702,7 @@
       "home_team_id": "339",
       "id": "374773",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -10754,7 +10754,7 @@
       "home_team_id": "1187",
       "id": "374774",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -10806,7 +10806,7 @@
       "home_team_id": "154",
       "id": "374777",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -10858,7 +10858,7 @@
       "home_team_id": "172",
       "id": "377978",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -10910,7 +10910,7 @@
       "home_team_id": "141",
       "id": "372723",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -10962,7 +10962,7 @@
       "home_team_id": "25",
       "id": "372726",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -11014,7 +11014,7 @@
       "home_team_id": "306",
       "id": "374763",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -11066,7 +11066,7 @@
       "home_team_id": "351",
       "id": "374767",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -11118,7 +11118,7 @@
       "home_team_id": "356",
       "id": "374775",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -11170,7 +11170,7 @@
       "home_team_id": "60",
       "id": "374776",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -11222,7 +11222,7 @@
       "home_team_id": "280",
       "id": "374778",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -11274,7 +11274,7 @@
       "home_team_id": "337",
       "id": "374779",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -11326,7 +11326,7 @@
       "home_team_id": "62",
       "id": "374780",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -11378,7 +11378,7 @@
       "home_team_id": "2",
       "id": "372727",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -11430,7 +11430,7 @@
       "home_team_id": "291",
       "id": "374781",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -11482,7 +11482,7 @@
       "home_team_id": "70",
       "id": "377977",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -11534,7 +11534,7 @@
       "home_team_id": "24",
       "id": "372728",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -11586,7 +11586,7 @@
       "home_team_id": "186",
       "id": "374766",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -11638,7 +11638,7 @@
       "home_team_id": "189",
       "id": "372722",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -11690,7 +11690,7 @@
       "home_team_id": "289",
       "id": "372724",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -11742,7 +11742,7 @@
       "home_team_id": "117",
       "id": "374761",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -11794,7 +11794,7 @@
       "home_team_id": "353",
       "id": "374759",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -11846,7 +11846,7 @@
       "home_team_id": "36",
       "id": "374782",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -11898,7 +11898,7 @@
       "home_team_id": "327",
       "id": "377979",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -11950,7 +11950,7 @@
       "home_team_id": "230",
       "id": "377980",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -12002,7 +12002,7 @@
       "home_team_id": "229",
       "id": "372725",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -12054,7 +12054,7 @@
       "home_team_id": "40",
       "id": "374769",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -12106,7 +12106,7 @@
       "home_team_id": "352",
       "id": "374768",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -12158,7 +12158,7 @@
       "home_team_id": "108",
       "id": "377981",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -12210,7 +12210,7 @@
       "home_team_id": "50",
       "id": "374801",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -12262,7 +12262,7 @@
       "home_team_id": "59",
       "id": "374806",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -12314,7 +12314,7 @@
       "home_team_id": "216",
       "id": "372729",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -12366,7 +12366,7 @@
       "home_team_id": "6",
       "id": "374807",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -12418,7 +12418,7 @@
       "home_team_id": "1073",
       "id": "374808",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -12470,7 +12470,7 @@
       "home_team_id": "317",
       "id": "374810",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -12522,7 +12522,7 @@
       "home_team_id": "42",
       "id": "374811",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -12574,7 +12574,7 @@
       "home_team_id": "33",
       "id": "372732",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -12626,7 +12626,7 @@
       "home_team_id": "121",
       "id": "372734",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -12678,7 +12678,7 @@
       "home_team_id": "227",
       "id": "374809",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -12730,7 +12730,7 @@
       "home_team_id": "51",
       "id": "372730",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -12782,7 +12782,7 @@
       "home_team_id": "28",
       "id": "372731",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -12834,7 +12834,7 @@
       "home_team_id": "19",
       "id": "372733",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -12886,7 +12886,7 @@
       "home_team_id": "295",
       "id": "372736",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -12938,7 +12938,7 @@
       "home_team_id": "292",
       "id": "372737",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -12990,7 +12990,7 @@
       "home_team_id": "98",
       "id": "372740",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -13042,7 +13042,7 @@
       "home_team_id": "315",
       "id": "374783",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -13094,7 +13094,7 @@
       "home_team_id": "213",
       "id": "374786",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -13146,7 +13146,7 @@
       "home_team_id": "54",
       "id": "374787",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -13198,7 +13198,7 @@
       "home_team_id": "168",
       "id": "374790",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -13250,7 +13250,7 @@
       "home_team_id": "152",
       "id": "374791",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -13302,7 +13302,7 @@
       "home_team_id": "127",
       "id": "374794",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -13354,7 +13354,7 @@
       "home_team_id": "314",
       "id": "374798",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -13406,7 +13406,7 @@
       "home_team_id": "58",
       "id": "374799",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -13458,7 +13458,7 @@
       "home_team_id": "301",
       "id": "374800",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -13510,7 +13510,7 @@
       "home_team_id": "52",
       "id": "374804",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -13562,7 +13562,7 @@
       "home_team_id": "49",
       "id": "374812",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -13614,7 +13614,7 @@
       "home_team_id": "140",
       "id": "374813",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -13666,7 +13666,7 @@
       "home_team_id": "349",
       "id": "377982",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -13718,7 +13718,7 @@
       "home_team_id": "3",
       "id": "377983",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -13770,7 +13770,7 @@
       "home_team_id": "174",
       "id": "372739",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -13822,7 +13822,7 @@
       "home_team_id": "5",
       "id": "372741",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -13874,7 +13874,7 @@
       "home_team_id": "305",
       "id": "374802",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -13926,7 +13926,7 @@
       "home_team_id": "162",
       "id": "374814",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -13978,7 +13978,7 @@
       "home_team_id": "217",
       "id": "372738",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -14030,7 +14030,7 @@
       "home_team_id": "177",
       "id": "374788",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -14082,7 +14082,7 @@
       "home_team_id": "136",
       "id": "374789",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -14134,7 +14134,7 @@
       "home_team_id": "212",
       "id": "374796",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -14186,7 +14186,7 @@
       "home_team_id": "293",
       "id": "374805",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -14238,7 +14238,7 @@
       "home_team_id": "290",
       "id": "374815",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -14290,7 +14290,7 @@
       "home_team_id": "148",
       "id": "377984",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -14342,7 +14342,7 @@
       "home_team_id": "236",
       "id": "374784",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -14394,7 +14394,7 @@
       "home_team_id": "65",
       "id": "372735",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -14446,7 +14446,7 @@
       "home_team_id": "16",
       "id": "374795",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -14498,7 +14498,7 @@
       "home_team_id": "263",
       "id": "374793",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -14550,7 +14550,7 @@
       "home_team_id": "224",
       "id": "374797",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -14602,7 +14602,7 @@
       "home_team_id": "343",
       "id": "374785",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -14654,7 +14654,7 @@
       "home_team_id": "281",
       "id": "374792",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -14706,7 +14706,7 @@
       "home_team_id": "324",
       "id": "377985",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -14758,7 +14758,7 @@
       "home_team_id": "108",
       "id": "377986",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -14810,7 +14810,7 @@
       "home_team_id": "138",
       "id": "374823",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -14862,7 +14862,7 @@
       "home_team_id": "296",
       "id": "377987",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -14914,7 +14914,7 @@
       "home_team_id": "106",
       "id": "377991",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -14966,7 +14966,7 @@
       "home_team_id": "90",
       "id": "372762",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -15018,7 +15018,7 @@
       "home_team_id": "97",
       "id": "372760",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -15070,7 +15070,7 @@
       "home_team_id": "245",
       "id": "374832",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -15122,7 +15122,7 @@
       "home_team_id": "200",
       "id": "372743",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -15174,7 +15174,7 @@
       "home_team_id": "1507",
       "id": "372744",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -15226,7 +15226,7 @@
       "home_team_id": "96",
       "id": "372746",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -15278,7 +15278,7 @@
       "home_team_id": "91",
       "id": "372747",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -15330,7 +15330,7 @@
       "home_team_id": "64",
       "id": "372748",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -15382,7 +15382,7 @@
       "home_team_id": "45",
       "id": "372749",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -15434,7 +15434,7 @@
       "home_team_id": "342",
       "id": "372755",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -15486,7 +15486,7 @@
       "home_team_id": "72",
       "id": "372756",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -15538,7 +15538,7 @@
       "home_team_id": "26",
       "id": "372757",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -15590,7 +15590,7 @@
       "home_team_id": "359",
       "id": "372758",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -15642,7 +15642,7 @@
       "home_team_id": "235",
       "id": "372759",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -15694,7 +15694,7 @@
       "home_team_id": "299",
       "id": "374816",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -15746,7 +15746,7 @@
       "home_team_id": "73",
       "id": "374819",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -15798,7 +15798,7 @@
       "home_team_id": "133",
       "id": "374820",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -15850,7 +15850,7 @@
       "home_team_id": "338",
       "id": "374825",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -15902,7 +15902,7 @@
       "home_team_id": "312",
       "id": "374826",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -15954,7 +15954,7 @@
       "home_team_id": "124",
       "id": "374835",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -16006,7 +16006,7 @@
       "home_team_id": "205",
       "id": "374836",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -16058,7 +16058,7 @@
       "home_team_id": "101",
       "id": "374837",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -16110,7 +16110,7 @@
       "home_team_id": "185",
       "id": "374841",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -16162,7 +16162,7 @@
       "home_team_id": "302",
       "id": "374844",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -16214,7 +16214,7 @@
       "home_team_id": "63",
       "id": "374845",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -16266,7 +16266,7 @@
       "home_team_id": "147",
       "id": "374846",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -16318,7 +16318,7 @@
       "home_team_id": "99",
       "id": "374847",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -16370,7 +16370,7 @@
       "home_team_id": "240",
       "id": "374848",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -16422,7 +16422,7 @@
       "home_team_id": "300",
       "id": "377993",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -16474,7 +16474,7 @@
       "home_team_id": "336",
       "id": "374839",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -16526,7 +16526,7 @@
       "home_team_id": "303",
       "id": "374838",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -16578,7 +16578,7 @@
       "home_team_id": "326",
       "id": "374849",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -16630,7 +16630,7 @@
       "home_team_id": "211",
       "id": "374850",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -16682,7 +16682,7 @@
       "home_team_id": "43",
       "id": "374851",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -16734,7 +16734,7 @@
       "home_team_id": "171",
       "id": "377990",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -16786,7 +16786,7 @@
       "home_team_id": "298",
       "id": "372742",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -16838,7 +16838,7 @@
       "home_team_id": "252",
       "id": "372745",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -16890,7 +16890,7 @@
       "home_team_id": "125",
       "id": "372751",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -16942,7 +16942,7 @@
       "home_team_id": "20",
       "id": "372753",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -16994,7 +16994,7 @@
       "home_team_id": "207",
       "id": "374818",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -17046,7 +17046,7 @@
       "home_team_id": "184",
       "id": "374821",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -17098,7 +17098,7 @@
       "home_team_id": "269",
       "id": "374822",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -17150,7 +17150,7 @@
       "home_team_id": "248",
       "id": "374840",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -17202,7 +17202,7 @@
       "home_team_id": "17",
       "id": "374843",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -17254,7 +17254,7 @@
       "home_team_id": "294",
       "id": "374852",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -17306,7 +17306,7 @@
       "home_team_id": "143",
       "id": "374853",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -17358,7 +17358,7 @@
       "home_team_id": "209",
       "id": "377989",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -17410,7 +17410,7 @@
       "home_team_id": "13",
       "id": "377992",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -17462,7 +17462,7 @@
       "home_team_id": "221",
       "id": "377994",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -17514,7 +17514,7 @@
       "home_team_id": "288",
       "id": "377995",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -17566,7 +17566,7 @@
       "home_team_id": "176",
       "id": "377996",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -17618,7 +17618,7 @@
       "home_team_id": "355",
       "id": "374831",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -17670,7 +17670,7 @@
       "home_team_id": "220",
       "id": "374833",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -17722,7 +17722,7 @@
       "home_team_id": "56",
       "id": "372752",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -17774,7 +17774,7 @@
       "home_team_id": "11",
       "id": "372754",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -17826,7 +17826,7 @@
       "home_team_id": "132",
       "id": "372761",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -17878,7 +17878,7 @@
       "home_team_id": "329",
       "id": "374817",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -17930,7 +17930,7 @@
       "home_team_id": "191",
       "id": "374824",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -17982,7 +17982,7 @@
       "home_team_id": "18",
       "id": "374827",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -18034,7 +18034,7 @@
       "home_team_id": "10",
       "id": "374828",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -18086,7 +18086,7 @@
       "home_team_id": "331",
       "id": "374829",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -18138,7 +18138,7 @@
       "home_team_id": "339",
       "id": "374834",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -18190,7 +18190,7 @@
       "home_team_id": "287",
       "id": "374842",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -18242,7 +18242,7 @@
       "home_team_id": "92",
       "id": "377988",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -18294,7 +18294,7 @@
       "home_team_id": "131",
       "id": "372750",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -18346,7 +18346,7 @@
       "home_team_id": "259",
       "id": "374830",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -18398,7 +18398,7 @@
       "home_team_id": "1551",
       "id": "372765",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -18450,7 +18450,7 @@
       "home_team_id": "313",
       "id": "377998",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -18502,7 +18502,7 @@
       "home_team_id": "76",
       "id": "374876",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -18554,7 +18554,7 @@
       "home_team_id": "130",
       "id": "374870",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -18606,7 +18606,7 @@
       "home_team_id": "306",
       "id": "374875",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -18658,7 +18658,7 @@
       "home_team_id": "307",
       "id": "372764",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -18710,7 +18710,7 @@
       "home_team_id": "2",
       "id": "372771",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -18762,7 +18762,7 @@
       "home_team_id": "271",
       "id": "374882",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -18814,7 +18814,7 @@
       "home_team_id": "74",
       "id": "374883",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -18866,7 +18866,7 @@
       "home_team_id": "257",
       "id": "374861",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -18918,7 +18918,7 @@
       "home_team_id": "187",
       "id": "374884",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -18970,7 +18970,7 @@
       "home_team_id": "348",
       "id": "374854",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -19022,7 +19022,7 @@
       "home_team_id": "190",
       "id": "374864",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -19074,7 +19074,7 @@
       "home_team_id": "356",
       "id": "374885",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -19126,7 +19126,7 @@
       "home_team_id": "334",
       "id": "374886",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -19178,7 +19178,7 @@
       "home_team_id": "6",
       "id": "374887",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -19230,7 +19230,7 @@
       "home_team_id": "289",
       "id": "374859",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -19282,7 +19282,7 @@
       "home_team_id": "268",
       "id": "374865",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -19334,7 +19334,7 @@
       "home_team_id": "79",
       "id": "374871",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -19386,7 +19386,7 @@
       "home_team_id": "115",
       "id": "374888",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -19438,7 +19438,7 @@
       "home_team_id": "71",
       "id": "372763",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -19490,7 +19490,7 @@
       "home_team_id": "277",
       "id": "372768",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -19542,7 +19542,7 @@
       "home_team_id": "161",
       "id": "372769",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -19594,7 +19594,7 @@
       "home_team_id": "170",
       "id": "372770",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -19646,7 +19646,7 @@
       "home_team_id": "320",
       "id": "374855",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -19698,7 +19698,7 @@
       "home_team_id": "213",
       "id": "374863",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -19750,7 +19750,7 @@
       "home_team_id": "266",
       "id": "374866",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -19802,7 +19802,7 @@
       "home_team_id": "111",
       "id": "374867",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -19854,7 +19854,7 @@
       "home_team_id": "21",
       "id": "374868",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -19906,7 +19906,7 @@
       "home_team_id": "208",
       "id": "374872",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -19958,7 +19958,7 @@
       "home_team_id": "75",
       "id": "374873",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -20010,7 +20010,7 @@
       "home_team_id": "279",
       "id": "374874",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -20062,7 +20062,7 @@
       "home_team_id": "341",
       "id": "374889",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -20114,7 +20114,7 @@
       "home_team_id": "196",
       "id": "374890",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -20166,7 +20166,7 @@
       "home_team_id": "139",
       "id": "374891",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -20218,7 +20218,7 @@
       "home_team_id": "243",
       "id": "374892",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -20270,7 +20270,7 @@
       "home_team_id": "234",
       "id": "374893",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -20322,7 +20322,7 @@
       "home_team_id": "66",
       "id": "374894",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -20374,7 +20374,7 @@
       "home_team_id": "333",
       "id": "374895",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -20426,7 +20426,7 @@
       "home_team_id": "86",
       "id": "374896",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -20478,7 +20478,7 @@
       "home_team_id": "346",
       "id": "374897",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -20530,7 +20530,7 @@
       "home_team_id": "122",
       "id": "378001",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -20582,7 +20582,7 @@
       "home_team_id": "321",
       "id": "378002",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -20634,7 +20634,7 @@
       "home_team_id": "675",
       "id": "372767",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -20686,7 +20686,7 @@
       "home_team_id": "352",
       "id": "374877",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -20738,7 +20738,7 @@
       "home_team_id": "350",
       "id": "378000",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -20790,7 +20790,7 @@
       "home_team_id": "255",
       "id": "378003",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -20842,7 +20842,7 @@
       "home_team_id": "94",
       "id": "372766",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -20894,7 +20894,7 @@
       "home_team_id": "304",
       "id": "374858",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -20946,7 +20946,7 @@
       "home_team_id": "113",
       "id": "374862",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -20998,7 +20998,7 @@
       "home_team_id": "275",
       "id": "374869",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -21050,7 +21050,7 @@
       "home_team_id": "204",
       "id": "374880",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -21102,7 +21102,7 @@
       "home_team_id": "77",
       "id": "374898",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -21154,7 +21154,7 @@
       "home_team_id": "280",
       "id": "374899",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -21206,7 +21206,7 @@
       "home_team_id": "12",
       "id": "377997",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -21258,7 +21258,7 @@
       "home_team_id": "270",
       "id": "378004",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -21310,7 +21310,7 @@
       "home_team_id": "104",
       "id": "372772",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -21362,7 +21362,7 @@
       "home_team_id": "188",
       "id": "374856",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -21414,7 +21414,7 @@
       "home_team_id": "57",
       "id": "374857",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -21466,7 +21466,7 @@
       "home_team_id": "1",
       "id": "374879",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -21518,7 +21518,7 @@
       "home_team_id": "25",
       "id": "377999",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -21570,7 +21570,7 @@
       "home_team_id": "223",
       "id": "374860",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -21622,7 +21622,7 @@
       "home_team_id": "262",
       "id": "374881",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -21674,7 +21674,7 @@
       "home_team_id": "39",
       "id": "374900",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -21726,7 +21726,7 @@
       "home_team_id": "145",
       "id": "374901",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -21778,7 +21778,7 @@
       "home_team_id": "308",
       "id": "378005",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -21830,7 +21830,7 @@
       "home_team_id": "40",
       "id": "374878",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -21882,7 +21882,7 @@
       "home_team_id": "114",
       "id": "374904",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -21934,7 +21934,7 @@
       "home_team_id": "495",
       "id": "377901",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -21986,7 +21986,7 @@
       "home_team_id": "95",
       "id": "374907",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -22038,7 +22038,7 @@
       "home_team_id": "27",
       "id": "374902",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -22090,7 +22090,7 @@
       "home_team_id": "59",
       "id": "374911",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -22142,7 +22142,7 @@
       "home_team_id": "317",
       "id": "374912",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -22194,7 +22194,7 @@
       "home_team_id": "121",
       "id": "372774",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -22246,7 +22246,7 @@
       "home_team_id": "226",
       "id": "374910",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -22298,7 +22298,7 @@
       "home_team_id": "28",
       "id": "372777",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -22350,7 +22350,7 @@
       "home_team_id": "30",
       "id": "372778",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -22402,7 +22402,7 @@
       "home_team_id": "4",
       "id": "374903",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -22454,7 +22454,7 @@
       "home_team_id": "347",
       "id": "374905",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -22506,7 +22506,7 @@
       "home_team_id": "349",
       "id": "374913",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -22558,7 +22558,7 @@
       "home_team_id": "250",
       "id": "374914",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -22610,7 +22610,7 @@
       "home_team_id": "238",
       "id": "374915",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -22662,7 +22662,7 @@
       "home_team_id": "301",
       "id": "374916",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -22714,7 +22714,7 @@
       "home_team_id": "109",
       "id": "374917",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -22766,7 +22766,7 @@
       "home_team_id": "240",
       "id": "374918",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -22818,7 +22818,7 @@
       "home_team_id": "54",
       "id": "378006",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -22870,7 +22870,7 @@
       "home_team_id": "237",
       "id": "378007",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -22922,7 +22922,7 @@
       "home_team_id": "173",
       "id": "372773",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -22974,7 +22974,7 @@
       "home_team_id": "273",
       "id": "372776",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -23026,7 +23026,7 @@
       "home_team_id": "293",
       "id": "374908",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -23078,7 +23078,7 @@
       "home_team_id": "265",
       "id": "374909",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -23130,7 +23130,7 @@
       "home_team_id": "327",
       "id": "372775",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -23182,7 +23182,7 @@
       "home_team_id": "18",
       "id": "374906",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -23234,7 +23234,7 @@
       "home_team_id": "37",
       "id": "374919",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -23286,7 +23286,7 @@
       "home_team_id": "260",
       "id": "372779",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -23338,7 +23338,7 @@
       "home_team_id": "38",
       "id": "377902",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -23390,7 +23390,7 @@
       "home_team_id": "314",
       "id": "372780",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -23442,7 +23442,7 @@
       "home_team_id": "212",
       "id": "372790",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -23494,7 +23494,7 @@
       "home_team_id": "112",
       "id": "374928",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -23546,7 +23546,7 @@
       "home_team_id": "329",
       "id": "374943",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -23598,7 +23598,7 @@
       "home_team_id": "334",
       "id": "374921",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -23650,7 +23650,7 @@
       "home_team_id": "105",
       "id": "378011",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -23702,7 +23702,7 @@
       "home_team_id": "53",
       "id": "374937",
       "market": {
-        "as_of_utc": "2026-11-05T21:29:14.641689Z",
+        "as_of_utc": "2026-11-05T21:42:20.366074Z",
         "home_spread": null,
         "provider": null,
         "total": null
@@ -23725,14 +23725,14 @@
     }
   ],
   "latest_rule": "Most recent timestamped projection; do not grade as pre-tip frozen",
-  "model_commit": "e6de2caa000fff21eb9cc63744033863bba40ce0",
+  "model_commit": "db1784f1d1f499bf555d9f34e5a8ce95dbc2dfa7",
   "season": 2027,
-  "snapshot_path": "cbb/prospective/2027/snapshots/20261105T212914641689_42112788239.json",
+  "snapshot_path": "cbb/prospective/2027/snapshots/20261105T214220366074_42114875227.json",
   "source": "CollegeBasketballData API as received at capture time",
   "source_sha256": {
     "boxes.json": "b1e423b7ed7b1d488b5781c82ba01ed70a60fdad7dc519f398f6d6b282b07f50",
-    "games.json": "55d563e9be398f411e4d6d72eda1269ef76682b723cfd2da11c1c18db897137b",
-    "lines.json": "308d12151d8e4b39f9ce1c0fe035723e44eb8b4e450d79ebe0c207b481932d84",
+    "games.json": "ef7c886b0d1d16d15a32457bed3a61f3770650f8d9b0c716a5e54c5a26cee190",
+    "lines.json": "329305a2816b51ed63eb015b9565c42e3c91e3173b40f84c9d7bedf87f66a046",
     "portal.json": "1120680b643a03192b5f9361ae57e37e6a535c5a40b4622761ab597962101951",
     "prior_players.json": "b0ef0a21b4e64a811eb29fd569f711257f4088ebd2abbfad89921542d577638e",
     "recruits.json": "e6d4bbefdadeb90fa70b094eca3aa2cbd19b76397daaab1b1e9c847059ec2bff",
