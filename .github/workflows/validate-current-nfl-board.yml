@@ -8,6 +8,7 @@ on:
     paths:
       - "app.py"
       - "pages/Week_09_Projection_Board.py"
+      - "pages/Results.py"
       - "pages/Projection_Board.py"
       - "pages/Bovada_Projection_Monitor.py"
       - "data/bovada_lines.csv"
@@ -27,7 +28,7 @@ jobs:
         with:
           python-version: "3.11"
       - name: Compile Streamlit pages
-        run: python -m py_compile app.py pages/Week_09_Projection_Board.py pages/Projection_Board.py pages/Bovada_Projection_Monitor.py
+        run: python -m py_compile app.py pages/Week_09_Projection_Board.py pages/Projection_Board.py pages/Bovada_Projection_Monitor.py pages/Results.py
       - name: Verify frozen model and Bovada matchup integrity
         run: |
           python - <<'PY'
