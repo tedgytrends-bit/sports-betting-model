@@ -27,6 +27,17 @@ class GitHubStore:
             "X-GitHub-Api-Version": "2022-11-28",
         })
 
+    def read_json(self, path):
+        """Read JSON from the isolated data branch or return None on 404."""
+        r = self.session.get(self.api + path, params={"ref": self.branch}, timeout=45)
+        if r.status_code == 404:
+            return None
+        r.raise_for_status()
+        payload = r.json()
+        if payload.get("encoding") != "base64":
+            raise ValueError("Expected base64 GitHub Contents JSON for " + path)
+        return json.loads(base64.b64decode(payload["content"]))
+
     def existing_sha(self, path):
         r = self.session.get(self.api + path, params={"ref": self.branch}, timeout=40)
         if r.status_code == 404:
