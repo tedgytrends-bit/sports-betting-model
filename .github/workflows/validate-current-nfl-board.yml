@@ -1,0 +1,62 @@
+name: Validate Published NFL Projection Board
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "app.py"
+      - "pages/Week_09_Projection_Board.py"
+      - "data/bovada_lines.csv"
+      - "data/public_snapshots/nfl_week_09_six_model_research_2026-11-04.csv"
+      - ".github/workflows/validate-current-nfl-board.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile Streamlit pages
+        run: python -m py_compile app.py pages/Week_09_Projection_Board.py pages/Projection_Board.py pages/Bovada_Projection_Monitor.py
+      - name: Verify frozen model and Bovada matchup integrity
+        run: |
+          python - <<'PY'
+          import csv
+          from pathlib import Path
+          from collections import Counter
+
+          model_file = Path("data/public_snapshots/nfl_week_09_six_model_research_2026-11-04.csv")
+          line_file = Path("data/bovada_lines.csv")
+          with model_file.open(newline="", encoding="utf-8") as f:
+              rows = list(csv.DictReader(f))
+          with line_file.open(newline="", encoding="utf-8") as f:
+              quotes = [r for r in csv.DictReader(f) if r["season"] == "2026" and r["week"] == "9"]
+          assert len(rows) == 93, f"Expected 93 rows (90 primary + 3 QB scenarios); got {len(rows)}"
+          model_names = {"baseline", "injury", "efficiency", "combined", "baseline_hl1", "injury_hl4"}
+          main_rows = [r for r in rows if r["model"] in model_names]
+          assert len(main_rows) == 90
+          counts = Counter(r["game_id"] for r in main_rows)
+          assert len(counts) == 15 and set(counts.values()) == {6}, counts
+          assert len({(r["game_id"], r["model"]) for r in main_rows}) == 90
+          def team(t):
+              return "LAR" if t == "LA" else t
+          market = {(team(r["away_team"]), team(r["home_team"])): r for r in quotes}
+          assert len(quotes) == 15 and len(market) == 15, "Missing/duplicate Bovada games"
+          projected = {(team(r["away_team"]), team(r["home_team"])) for r in main_rows}
+          assert projected == set(market), (projected - set(market), set(market) - projected)
+          tnf = next(r for r in main_rows if r["game_id"] == "2026_09_JAX_BAL" and r["model"] == "baseline")
+          assert round(float(tnf["projected_away"]), 3) == 23.697
+          assert round(float(tnf["projected_home"]), 3) == 23.372
+          assert float(market["JAX", "BAL"]["home_favorite_spread"]) == -10.0
+          assert float(market["JAX", "BAL"]["total_line"]) == 39.0
+          assert len({r["captured_at_utc"] for r in rows}) == 1
+          print("PASS: Week 9 has 15 aligned Bovada matchups, six frozen models per game and three separately marked TNF QB scenarios.")
+          PY
