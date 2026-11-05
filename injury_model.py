@@ -153,9 +153,15 @@ def _kickoff_utc(game: pd.Series) -> pd.Timestamp | pd.NaT:
     return local.tz_localize("America/New_York", ambiguous="NaT", nonexistent="shift_forward").tz_convert("UTC")
 
 
-def _counts_for_team(rows: pd.DataFrame) -> dict:
+def _counts_for_team(rows: pd.DataFrame, exclude_qb: bool = False) -> dict:
     features = {}
-    if rows.empty:
+    had_report = not rows.empty
+    # In QB-EPA research mode, strip QB rows from ALL aggregate and position
+    # counts. Merely dropping qb_out would double-count unavailable QBs via
+    # inj_out and practice_dnp. Keep a separate report-availability flag.
+    if exclude_qb and had_report:
+        rows = rows[rows["position"].astype(str).str.upper().ne("QB")]
+    if rows.empty and not had_report:
         return {"injury_report_available": 0.0, **{k: np.nan for k in _feature_names()}}
     status = rows["report_status"].fillna("").astype(str).str.strip().str.upper()
     practice = rows["practice_status"].fillna("").astype(str).str.strip().str.upper()
@@ -186,7 +192,7 @@ def _feature_names() -> list[str]:
     return names
 
 
-def add_injury_features(dataset: pd.DataFrame, schedule: pd.DataFrame, reports: pd.DataFrame) -> pd.DataFrame:
+def add_injury_features(dataset: pd.DataFrame, schedule: pd.DataFrame, reports: pd.DataFrame, *, exclude_qb: bool = False) -> pd.DataFrame:
     """Attach report features to each game using only data available before kickoff.
 
     For future games, the latest committed snapshot for that exact season/week is
@@ -256,7 +262,7 @@ def add_injury_features(dataset: pd.DataFrame, schedule: pd.DataFrame, reports: 
         row = {"game_id": game["game_id"]}
         for side, team_col in (("home", "home_team"), ("away", "away_team")):
             team_rows = base[base["team"] == str(game[team_col]).upper().strip()]
-            values = _counts_for_team(team_rows)
+            values = _counts_for_team(team_rows, exclude_qb=exclude_qb)
             for key, value in values.items():
                 row[f"{side}_{key}"] = value
         results.append(row)
