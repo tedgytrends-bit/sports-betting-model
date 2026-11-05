@@ -21,7 +21,7 @@ from model import (load_schedule_data,load_pbp,
                    build_efficiency_model_dataset,chronological_backtest)
 from injury_model import load_injury_reports,add_injury_features
 from qb_epa_model import (qb_game_stats,build_qb_epa_board,
-                          attach_qb_shifts,observed_first_passer)
+                          attach_qb_shifts,observed_first_passer,starters_from_game_schedule)
 
 OUT=ROOT/"data"/"qb_epa_shadow"
 SEASONS=(2021,2022,2023,2024,2025,2026)
@@ -90,7 +90,7 @@ def main()->None:
 
     print("Identify historical passers from completed-game participation",flush=True)
     observations=observed_first_passer(pbp,schedule)
-    obs=observations.dropna(subset=["qb_id"]).copy()
+    obs=starters_from_game_schedule(schedule,completed_only=True)
     required_complete=game_base[
         game_base["home_score"].notna()&game_base["away_score"].notna()
     ].copy()
@@ -111,7 +111,7 @@ def main()->None:
     stats=qb_game_stats(pbp,schedule)
     board=build_qb_epa_board(stats,schedule,required_complete,observed=obs)
     if not board["starter_source"].isin(
-        ["observed_first_passer_postgame","inferred_previous_primary_passer",
+        ["schedule_recorded_starter_postgame","inferred_previous_primary_passer",
          "unknown_no_pregame_evidence"]
     ).all(): raise AssertionError("Illegal pregame source label")
 
@@ -212,7 +212,7 @@ def main()->None:
     )
     inferred_only=board[
         board.game_id.isin(paired.game_id)&
-        board.starter_source.ne("observed_first_passer_postgame")
+        board.starter_source.ne("schedule_recorded_starter_postgame")
     ][["game_id","team","starter_source","qb_name"]]
     report={
         "created_at_utc":now.isoformat(),
@@ -221,7 +221,7 @@ def main()->None:
         "models":all_scores,
         "starter_audit":{
             "complete_qb_team_games":int(len(target_teams)),
-            "first_passer_observed":int(len(matched)-len(missing)),
+            "schedule_recorded_starters":int(len(matched)-len(missing)),
             "first_vs_primary_disagreement":int(
                 starters["first_matches_primary"].eq(False).sum()
             ),
