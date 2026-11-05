@@ -1,0 +1,1 @@
+2026-11-05 first historical v4 backtest using chronological player game minutes and starter roles
