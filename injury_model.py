@@ -373,3 +373,84 @@ def injury_coverage_diagnostics(schedule: pd.DataFrame, reports: pd.DataFrame) -
             ),
         })
     return pd.DataFrame(rows)
+
+
+def project_qb_aware_injury(
+    schedule: pd.DataFrame,
+    pbp: pd.DataFrame,
+    reports: pd.DataFrame,
+    *,
+    season: int,
+    week: int,
+    verified_starters: pd.DataFrame | None = None,
+    lookback_games: int = 10,
+    min_train_games: int = 500,
+) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Run the one forward Injury model with player-specific starting-QB EPA.
+
+    Train the regular Injury Ridge scorer with QB rows removed from *all*
+    injury/practice counts. Identify the expected starter using source-verified
+    pregame overrides or, with explicit warning labels, NFLverse's current
+    per-game QB listing. Add one capped incremental QB EPA margin shift to the
+    non-QB score predictions, preserving their original total. Do not silently
+    treat an unknown QB or missing history as zero impact.
+
+    Retrospective 2026 selection of the margin-only/cap-five approach is NOT
+    untouched evidence of performance; freeze outputs prior to future kickoffs.
+    This returns scored research/pregame data; it never rewrites an archive.
+    """
+    from model import build_efficiency_model_dataset, project_upcoming_efficiency
+    from qb_epa_model import (
+        qb_game_stats, starters_from_game_schedule, build_qb_epa_board,
+        attach_qb_margin_adjustment,
+    )
+    model_base = build_efficiency_model_dataset(
+        schedule, pbp, lookback_games=lookback_games
+    )
+    non_qb = add_injury_features(model_base, schedule, reports, exclude_qb=True)
+    future = project_upcoming_efficiency(non_qb, min_train_games=min_train_games)
+    mask = (
+        pd.to_numeric(future["season"], errors="coerce").eq(int(season))
+        & pd.to_numeric(future["week"], errors="coerce").eq(int(week))
+    )
+    slate = future.loc[mask].copy()
+    if slate.empty or slate["game_id"].duplicated().any():
+        raise ValueError(f"No unique upcoming games for season {season} week {week}")
+    # NFLverse's upcoming schedule QB fields are provisional; independently
+    # source-verified overrides take precedence over those fields.
+    scheduled_qbs = starters_from_game_schedule(schedule, completed_only=False)
+    scheduled_qbs = scheduled_qbs[
+        scheduled_qbs["game_id"].isin(slate["game_id"])
+    ].copy()
+    qb_board = build_qb_epa_board(
+        qb_game_stats(pbp, schedule),
+        schedule,
+        slate,
+        overrides=verified_starters,
+        observed=scheduled_qbs,
+    )
+    adjusted = attach_qb_margin_adjustment(slate, qb_board)
+    adjusted["original_non_qb_home"] = adjusted["projected_home"]
+    adjusted["original_non_qb_away"] = adjusted["projected_away"]
+    adjusted["projected_home"] = adjusted["projected_home_qb_injury"]
+    adjusted["projected_away"] = adjusted["projected_away_qb_injury"]
+    adjusted["projected_total"] = adjusted["projected_total_qb_injury"]
+    adjusted["model_home_spread"] = adjusted["projected_away"] - adjusted["projected_home"]
+    adjusted["model"] = "injury"
+    adjusted["model_version"] = "qb_epa_margin_cap5_v1"
+    adjusted["qb_starter_verification"] = "mixed; inspect paired QB evidence"
+    # Explicitly keep QB evidence next to corresponding scored game.
+    for side in ("home", "away"):
+        cols = [
+            "game_id", "qb_id", "qb_name", "starter_source", "confidence",
+            "qb_prior_dropbacks", "qb_shrunk_epa_per_dropback",
+            "qb_delta_epa_per_dropback", "starter_recent_team_dropback_share",
+        ]
+        subset = qb_board[qb_board["side"].eq(side)][cols].copy()
+        subset = subset.rename(columns={
+            col: f"{side}_{col}" for col in cols if col != "game_id"
+        })
+        adjusted = adjusted.merge(
+            subset, on="game_id", how="left", validate="one_to_one"
+        )
+    return adjusted, qb_board
