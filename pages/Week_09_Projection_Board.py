@@ -62,9 +62,10 @@ def total_lean(prediction: pd.Series, market_total: float) -> str:
 st.title("NFL Week 9 — Projections")
 st.caption("Frozen model snapshot · User-verified Bovada market board · 2026 regular season")
 st.info(
-    "This is the Week 9 **research projection board**, not an official graded betting record. "
-    "Baseline here means the evaluated 24-feature efficiency model, **not** the legacy "
-    "six-game scoring formula on the old Projection Board."
+    "**Baseline** is the evaluated 24-feature efficiency model. **Injury** uses "
+    "that same foundation with an added injury feature block. These are the "
+    "only two public models. Projections were frozen before the games; updated "
+    "Bovada prices change the displayed leans, not the frozen scores."
 )
 
 if not SNAPSHOT.exists() or not BOVADA.exists():
@@ -181,51 +182,6 @@ st.warning(
     "score is **not** a validated Fagnano-adjusted forecast."
 )
 
-with st.expander("TNF quarterback-absence sensitivity (experimental — not official)"):
-    scenario = pd.read_csv(SNAPSHOT)
-    scenario = scenario[
-        scenario["game_id"].eq("2026_09_JAX_BAL")
-        & scenario["model"].str.endswith("_qbcount_scenario", na=False)
-    ].copy()
-    st.caption(
-        "Changes only the QB-out count features to represent Jackson and Huntley. "
-        "Not a calibrated player-level downgrade and not suitable for official model grading."
-    )
-    if not scenario.empty:
-        scenario["Score"] = (
-            "JAX " + scenario["projected_away"].round(1).astype(str)
-            + " — BAL " + scenario["projected_home"].round(1).astype(str)
-        )
-        st.dataframe(
-            scenario[["model", "Score", "projected_total"]].rename(
-                columns={"model": "Research scenario", "projected_total": "Total"}
-            ),
-            hide_index=True, width="stretch",
-        )
-
-with st.expander("Other model variants (advanced research)"):
-    research = predictions[
-        predictions["model"].isin(("efficiency", "combined", "baseline_hl1", "injury_hl4"))
-    ].copy()
-    research["Game"] = research["away_team"].map(team) + " @ " + research["home_team"].map(team)
-    research["Score"] = (
-        research["away_team"].map(team) + " "
-        + research["projected_away"].round(1).astype(str)
-        + " — " + research["home_team"].map(team) + " "
-        + research["projected_home"].round(1).astype(str)
-    )
-    st.dataframe(
-        research[["Game", "model", "Score", "projected_total"]].rename(
-            columns={"model": "Variant", "projected_total": "Projected total"}
-        ).sort_values(["Game", "Variant"]),
-        hide_index=True, width="stretch",
-    )
-    st.caption(
-        "Efficiency and Combined are historical four-model candidates. "
-        "Baseline HL1 and Injury HL4 are recency-weighted shadow candidates. "
-        "None should be confused with production-promoted replacements."
-    )
-
 with st.expander("Archived Bovada prices and source details"):
     book = latest_quotes.reset_index().copy()
     for col in ("home_favorite_spread", "total_line", "away_spread_price",
@@ -250,6 +206,7 @@ with st.expander("Archived Bovada prices and source details"):
 
 st.markdown(f"[View the frozen research CSV]({ARCHIVE_URL})")
 st.caption(
-    "Historical ATS/Totals records, official prospective tracking and live odds are "
-    "separate. This page does not change those records or retrain models."
+    "The other four experimental variants remain archived for private research "
+    "but are not presented as competing public projections. "
+    "These frozen Week 9 scores are research projections, not betting advice."
 )
