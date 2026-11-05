@@ -11,6 +11,8 @@ on:
       - "pages/Public_Projection_Board.py"
       - "data/four_model_week08/week08_four_model_comparison.csv"
       - "data/public_snapshots/nfl_week_09_six_model_research_2026-11-04.csv"
+      - "data/public_snapshots/nfl_week09_injury_qb_epa_margin_2026-11-05.csv"
+      - "docs/index.html"
       - "data/bovada_lines.csv"
       - ".github/workflows/smoke-test-public-site.yml"
 
@@ -28,6 +30,27 @@ jobs:
           python-version: "3.11"
       - name: Install runtime
         run: pip install -r requirements.txt
+      - name: Validate Tedgy Trends website JS syntax and the QB-aware snapshot
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re,csv,math
+          html=Path("docs/index.html").read_text(encoding="utf-8")
+          js=re.search(r"<script>([\\s\\S]*?)</script>",html)
+          assert js, "Missing website app script"
+          Path("/tmp/tedgy-site.js").write_text(js.group(1),encoding="utf-8")
+          assert "nfl_week09_injury_qb_epa_margin_2026-11-05.csv" in html
+          assert "data.games=buildWeek9(data.rows9,data.market,data.injuryV2)" in html
+          with Path("data/public_snapshots/nfl_week09_injury_qb_epa_margin_2026-11-05.csv").open() as f:
+              rows=list(csv.DictReader(f))
+          assert len(rows)==15 and len({r["game_id"] for r in rows})==15
+          for r in rows:
+              assert r["model"]=="injury"
+              a,h,t=(float(r[k]) for k in ("projected_away","projected_home","projected_total"))
+              assert all(map(math.isfinite,(a,h,t))) and abs(a+h-t)<.02
+          print("Verified Week 9 QB-aware Injury scores for 15 unique games")
+          PY
+          node --check /tmp/tedgy-site.js
       - name: Test actual routed app and historical links
         run: |
           python - <<'PY'
