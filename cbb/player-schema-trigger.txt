@@ -1,1 +1,2 @@
 2026-11-05 check actual CBBD roster, player, recruiting, transfer response schemas
+2026-11-05 roster date range versus 2025/26 player stats audit
