@@ -58,7 +58,8 @@ def qb_game_stats(pbp: pd.DataFrame, schedule: pd.DataFrame) -> pd.DataFrame:
 
 
 def _starter_for(team: str, game_id: str, history: pd.DataFrame,
-                 overrides: pd.DataFrame | None) -> tuple[str | None, str, str, str]:
+                 overrides: pd.DataFrame | None,
+                 observed: pd.DataFrame | None = None) -> tuple[str | None, str, str, str]:
     """Select a verified starter or provisionally infer last game's primary QB."""
     if overrides is not None and not overrides.empty:
         match = overrides[
@@ -75,6 +76,19 @@ def _starter_for(team: str, game_id: str, history: pd.DataFrame,
             if not qb_id:
                 raise ValueError(f"Blank QB ID: {game_id} {team}")
             return qb_id, str(r.get("qb_name", qb_id)), "verified_pregame", str(r["source_url"])
+    # Retrospective only: identify who first passed in the target game.
+    # Identity from target PBP is postgame evidence, not a legitimate
+    # point-in-time starter prediction; target-game EPA is never used.
+    if observed is not None and not observed.empty:
+        match = observed[
+            observed["game_id"].astype(str).eq(str(game_id))
+            & observed["team"].astype(str).str.upper().eq(str(team).upper())
+        ]
+        if len(match) > 1:
+            raise ValueError(f"Multiple observed starter rows: {game_id} {team}")
+        if not match.empty:
+            item = match.iloc[0]
+            return str(item["qb_id"]), str(item["qb_name"]), "observed_first_passer_postgame", ""
     prior = history[history["team"].eq(team)]
     if prior.empty:
         return None, "", "unknown_no_pregame_evidence", ""
@@ -86,9 +100,10 @@ def _starter_for(team: str, game_id: str, history: pd.DataFrame,
 
 
 def _one_team(game_id: str, side: str, team: str, cutoff: pd.Timestamp,
-              stats: pd.DataFrame, overrides: pd.DataFrame | None) -> dict:
+              stats: pd.DataFrame, overrides: pd.DataFrame | None,
+              observed: pd.DataFrame | None = None) -> dict:
     history = stats[stats["gameday"].lt(cutoff)].copy()
-    qb_id, qb_name, starter_source, source_url = _starter_for(team, game_id, history, overrides)
+    qb_id, qb_name, starter_source, source_url = _starter_for(team, game_id, history, overrides, observed=observed)
     team_hist = history[history["team"].eq(team)]
     recent_game_ids = (
         team_hist[["game_id", "gameday"]].drop_duplicates()
@@ -172,6 +187,7 @@ def build_qb_epa_board(
     schedule: pd.DataFrame,
     targets: pd.DataFrame,
     overrides: pd.DataFrame | None = None,
+    observed: pd.DataFrame | None = None,
 ) -> pd.DataFrame:
     """Compute two QB comparisons per game using only completed prior games.
 
@@ -193,7 +209,7 @@ def build_qb_epa_board(
         for side in ("home", "away"):
             team = str(getattr(game, f"{side}_team")).upper().strip()
             out.append(_one_team(
-                str(game.game_id), side, team, game.gameday, stats, overrides
+                str(game.game_id), side, team, game.gameday, stats, overrides, observed
             ))
     result = pd.DataFrame(out)
     if len(result) != 2 * len(games):
@@ -218,4 +234,65 @@ def attach_qb_shifts(projections: pd.DataFrame, qb_board: pd.DataFrame) -> pd.Da
     out["projected_total_qb_adjusted"] = (
         out["home_qb_adjusted"] + out["away_qb_adjusted"]
     )
+    return out
+
+
+def observed_first_passer(pbp: pd.DataFrame, schedule: pd.DataFrame) -> pd.DataFrame:
+    """Postgame identity audit, not a prospective starter feed.
+
+    The first passer with an observed dropback approximates the real starter.
+    Compare with the most active passer to flag early injuries/substitutions.
+    All EPA ratings in build_qb_epa_board remain pregame-only.
+    """
+    required = {"game_id", "posteam", "passer_player_id"}
+    missing = required - set(pbp.columns)
+    if missing:
+        raise ValueError(f"PBP cannot determine passers: {sorted(missing)}")
+    complete = schedule.dropna(subset=["home_score", "away_score"])[
+        ["game_id", "season", "week", "gameday", "home_team", "away_team"]
+    ].drop_duplicates("game_id")
+    p = pbp.loc[
+        pbp["game_id"].isin(complete["game_id"])
+        & pbp["posteam"].notna()
+        & pbp["passer_player_id"].notna()
+        & pbp["play_type"].eq("pass")
+    ].copy()
+    p["qb_id"] = p["passer_player_id"].astype(str).str.strip()
+    p["team"] = p["posteam"].astype(str).str.upper().str.strip()
+    p["qb_name"] = (p["passer_player_name"].fillna("").astype(str)
+                    if "passer_player_name" in p else p["qb_id"])
+    p["original_row_order"] = np.arange(len(p))
+    if "game_seconds_remaining" in p:
+        p["game_seconds_remaining"] = pd.to_numeric(
+            p["game_seconds_remaining"], errors="coerce"
+        )
+        p = p.sort_values(
+            ["game_id", "team", "game_seconds_remaining", "original_row_order"],
+            ascending=[True, True, False, True], kind="stable"
+        )
+    else:
+        p = p.sort_values(["game_id", "team", "original_row_order"], kind="stable")
+    first = p.drop_duplicates(["game_id", "team"]).copy()
+    appearances = (p.groupby(["game_id", "team", "qb_id"], as_index=False)
+                   .size().rename(columns={"size": "passer_plays"}))
+    primary = (appearances.sort_values(
+        ["game_id", "team", "passer_plays", "qb_id"],
+        ascending=[True, True, False, True]
+    ).drop_duplicates(["game_id", "team"])
+     .rename(columns={"qb_id": "primary_qb_id", "passer_plays": "primary_passer_plays"}))
+    first = first[["game_id", "team", "qb_id", "qb_name"]]
+    out = first.merge(
+        primary[["game_id", "team", "primary_qb_id", "primary_passer_plays"]],
+        on=["game_id", "team"], how="left", validate="one_to_one"
+    )
+    out["first_matches_primary"] = out["qb_id"].eq(out["primary_qb_id"])
+    out["starter_evidence"] = "retrospective_first_pass_attempt"
+    games = pd.concat([
+        complete[["game_id", "season", "week", "home_team"]]
+            .rename(columns={"home_team": "team"}),
+        complete[["game_id", "season", "week", "away_team"]]
+            .rename(columns={"away_team": "team"}),
+    ], ignore_index=True)
+    out = games.merge(out, on=["game_id", "team"], how="left", validate="one_to_one")
+    out["first_matches_primary"] = out["first_matches_primary"].fillna(False)
     return out
