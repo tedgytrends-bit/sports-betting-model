@@ -1,0 +1,43 @@
+{
+  "status": "POST_HOC_RETROSPECTIVE_RESEARCH_NOT_PROSPECTIVE",
+  "as_of_utc": "2026-11-05",
+  "source": "data/qb_epa_shadow/qb_epa_2026_week01_08_paired_20261105T161043Z.csv",
+  "season": 2026,
+  "weeks": "1-8",
+  "games": 121,
+  "method": "Original chronological scoring compared against non-QB injury Ridge + one team starter EPA margin shift, clipped +/-5 points per team; adjust home and away by +/- half relative margin effect; preserve non-QB total.",
+  "uncapped_candidate": {
+    "ats": "63-52-6",
+    "margin_mae": 9.512525402975221
+  },
+  "published_candidate_cap5": {
+    "ats_wins": 63,
+    "ats_losses": 52,
+    "ats_pushes": 6,
+    "ats_win_pct": 0.5478260869565217,
+    "ats_roi_assumed_minus110": 0.04584980237154151,
+    "margin_mae": 9.58351779353432,
+    "totals_wins": 56,
+    "totals_losses": 65,
+    "totals_pushes": 0,
+    "total_mae": 11.50905002631127
+  },
+  "old_injury_this_paired_run": {
+    "ats_wins": 61,
+    "ats_losses": 54,
+    "ats_pushes": 6,
+    "ats_roi_assumed_minus110": 0.012648221343873507,
+    "margin_mae": 9.624311534511298,
+    "totals_wins": 56,
+    "totals_losses": 65,
+    "total_mae": 11.539174865670688
+  },
+  "limits": [
+    "QB identities are obtained retrospectively from completed-game metadata; cannot claim they were all known before kickoff.",
+    "The cap and margin-only method were selected after reviewing 2026 performance, so this is an in-sample model-choice assessment, not an untouched 2026 holdout.",
+    "Historical schedule lines are not verified bookmaker transaction prices.",
+    "The official 2026 Week 8 forward record and frozen Week 9 original predictions must not be overwritten.",
+    "This particular paired backtest old-Injury record is 61-54-6; do not mix it with other 63-52-6 reconstructions that used different model snapshots or market datasets."
+  ],
+  "promotion": "Single forward Injury candidate already published as qb_epa_margin_cap5_v1 in Week 9; prospective grading must remain distinct."
+}
