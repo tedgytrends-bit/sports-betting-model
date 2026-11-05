@@ -109,7 +109,7 @@ def main() -> None:
         "game_id", "qb_name", "qb_id", "starter_source", "source_url",
         "confidence", "qb_prior_dropbacks", "qb_shrunk_epa_per_dropback",
         "team_recent_qb_epa_per_dropback", "qb_delta_epa_per_dropback",
-        "qb_point_shift_experimental",
+        "qb_point_shift_experimental", "starter_recent_team_dropback_share",
     ]
     for side in ("home", "away"):
         part = board[board["side"].eq(side)][cols].copy()
@@ -126,7 +126,7 @@ def main() -> None:
         "status": "RESEARCH_ONLY_NOT_OFFICIAL",
         "timestamp_utc": captured.isoformat(),
         "model": "injury_qb_epa_v2_research",
-        "point_shift": "shrunken starter EPA/dropback minus trailing-10-team-game QB-mix EPA/dropback, times trailing QB dropbacks/game",
+        "point_shift": "(shrunken starter EPA - recent team QB-mix EPA) times the non-starter share of team dropbacks times expected dropbacks/game",
         "starter_sources": "Manual source-verified override; otherwise automatically inferred last-game primary passer, expressly unverified",
         "non_qb_injury_features": "All QB rows excluded from QB count AND general injury/practice counts before refit",
         "training": "Chronological historical schedule/PBP and injury reports. Today's game EPA excluded.",
