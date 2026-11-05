@@ -24,13 +24,16 @@ PLAYER_FEATURES = FEATURES + tuple(side + "_" + col for side in ("home","away") 
 
 
 def eligible(player, season):
-    """For season=2026 (2025-26), require fall-2025 through spring-2026.
+    """CBBD affiliations use ENDING-year season IDs (e.g. 2026=2025-26).
 
-    CBBD returns players whose affiliations extend outside the requested
-    season. Do not silently include the 2026-27 arrivals in 2025-26.
+    Cross-checked 2025 and 2026 roster cohorts against actual same-season
+    individual box scores: startSeason==season players are genuine current-
+    season participants, including transfers and freshmen. Exclude only
+    those starting AFTER target season or ending BEFORE target season.
+    Historical membership is retrospective and not a pregame timestamp.
     """
     first, last = number(player.get("startSeason")), number(player.get("endSeason"))
-    return first is not None and last is not None and first <= season - 1 and last >= season
+    return first is not None and last is not None and first <= season <= last
 
 
 def normalized(s):
@@ -210,7 +213,7 @@ def player_predictions(rows, season, odds):
         spread,market_total=line.get("home_spread"),line.get("market_total")
         edge=float(margin)+spread if spread is not None else None
         tedge=float(total)-market_total if market_total is not None else None
-        rows_out.append({**r,**line,"model":"player_v1",
+        rows_out.append({**r,**line,"model":"player_v2",
             "training_games":len(training),
             "projected_margin_home":round(float(margin),3),
             "projected_total":round(float(total),3),
