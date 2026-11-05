@@ -8,6 +8,8 @@ on:
     paths:
       - "app.py"
       - "pages/Week_09_Projection_Board.py"
+      - "pages/Projection_Board.py"
+      - "pages/Bovada_Projection_Monitor.py"
       - "data/bovada_lines.csv"
       - "data/public_snapshots/nfl_week_09_six_model_research_2026-11-04.csv"
       - ".github/workflows/validate-current-nfl-board.yml"
