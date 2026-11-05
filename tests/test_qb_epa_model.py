@@ -162,3 +162,16 @@ def test_qb_margin_only_requires_both_qb_shifts():
     board = pd.DataFrame([{"game_id":"g1","side":"away","qb_point_shift_experimental":0.0}])
     result=attach_qb_margin_adjustment(base,board)
     assert pd.isna(result.loc[0,"projected_total_qb_injury"])
+
+
+def test_per_team_qb_epa_cap_limits_tiny_sample_optimism():
+    base = pd.DataFrame([{"game_id":"g1", "projected_home":17., "projected_away":23.}])
+    board = pd.DataFrame([
+        {"game_id":"g1", "side":"home", "qb_point_shift_experimental":8.5},
+        {"game_id":"g1", "side":"away", "qb_point_shift_experimental":-2.0},
+    ])
+    got=attach_qb_margin_adjustment(base,board).iloc[0]
+    assert got.home_qb_point_shift_capped == pytest.approx(5.0)
+    assert got.away_qb_point_shift_capped == pytest.approx(-2.0)
+    assert got.qb_margin_adjustment == pytest.approx(7.0)
+    assert got.projected_total_qb_injury == pytest.approx(40.0)
