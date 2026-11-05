@@ -1,0 +1,52 @@
+name: Smoke test simple Tedgy Trends public site
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "app.py"
+      - "pages/Results.py"
+      - "pages/Week_09_Projection_Board.py"
+      - "pages/Public_Projection_Board.py"
+      - "data/four_model_week08/week08_four_model_comparison.csv"
+      - "data/public_snapshots/nfl_week_09_six_model_research_2026-11-04.csv"
+      - "data/bovada_lines.csv"
+      - ".github/workflows/smoke-test-public-site.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  public-pages:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install runtime
+        run: pip install -r requirements.txt
+      - name: Test actual routed app and historical links
+        run: |
+          python - <<'PY'
+          from streamlit.testing.v1 import AppTest
+
+          app = AppTest.from_file("app.py", default_timeout=90).run()
+
+          def verify(label):
+              exceptions = [str(x.message) for x in app.exception]
+              errors = [str(x.message) for x in app.error]
+              assert not exceptions, f"{label}: exceptions {exceptions}"
+              assert not errors, f"{label}: error banners {errors}"
+              assert len(app.dataframe) >= 1, f"{label}: expected rendered data table"
+              print("PASS:", label, "tables:", len(app.dataframe))
+
+          verify("Week 9 public landing")
+          app.switch_page("pages/Results.py").run()
+          verify("Public results record from Week 8")
+          assert any("Week 8" in str(x.body) for x in app.subheader), "Results Week 8 heading missing"
+          app.switch_page("pages/Public_Projection_Board.py").run()
+          verify("Original Week 8 permalink preserved")
+          PY
