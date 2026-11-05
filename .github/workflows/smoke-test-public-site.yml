@@ -41,6 +41,18 @@ jobs:
           Path("/tmp/tedgy-site.js").write_text(js.group(1),encoding="utf-8")
           assert "nfl_week09_injury_qb_epa_margin_2026-11-05.csv" in html
           assert "data.games=buildWeek9(data.rows9,data.market,data.injuryV2)" in html
+          # X/social crawlers cannot execute the site's JS. Social tags and
+          # the referenced 1200x630 PNG must exist in static HTML and docs.
+          head=html.split("</head>",1)[0]
+          social="https://tedgytrends-bit.github.io/sports-betting-model/social-preview.png"
+          assert 'name="twitter:card" content="summary_large_image"' in head
+          assert f'name="twitter:image" content="{social}"' in head
+          assert f'property="og:image" content="{social}"' in head
+          image=Path("docs/social-preview.png").read_bytes()
+          assert image.startswith(b"\\x89PNG\\r\\n\\x1a\\n"), "Invalid social PNG"
+          import struct
+          assert struct.unpack(">II",image[16:24])==(1200,630), "Wrong social image dimensions"
+          assert len(image)<5_000_000, "Social image exceeds safe X card size"
           with Path("data/public_snapshots/nfl_week09_injury_qb_epa_margin_2026-11-05.csv").open() as f:
               rows=list(csv.DictReader(f))
           assert len(rows)==15 and len({r["game_id"] for r in rows})==15
