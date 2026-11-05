@@ -6,43 +6,55 @@ st.set_page_config(
     layout="wide",
 )
 
-bovada_monitor_page = st.Page(
-    "pages/Bovada_Projection_Monitor.py",
-    title="Bovada Projection Monitor",
-    icon="🎯",
+# One front-door board that displays committed model predictions and
+# user-supplied Bovada prices. Legacy recalculation tools remain accessible
+# below but are not the authoritative 24-feature Baseline comparison.
+week09_page = st.Page(
+    "pages/Week_09_Projection_Board.py",
+    title="Week 9 Projections",
+    url_path="week-9-projections",
+    icon="🏈",
     default=True,
 )
-projection_page = st.Page(
-    "pages/Projection_Board.py",
-    title="Projection Board (Schedule Feed)",
-    icon="🏈",
-)
-public_projection_page = st.Page(
+week08_public = st.Page(
     "pages/Public_Projection_Board.py",
-    title="Week 8 Public Projections",
+    title="Week 8 Published Snapshot",
     url_path="week-8-public-projections",
     icon="🌐",
 )
-four_model_week8_page = st.Page(
+week08_comparison = st.Page(
     "pages/Four_Model_Week8_Comparison.py",
-    title="Week 8 Four-Model Comparison",
+    title="Week 8 Results (Four Models)",
     url_path="week-8-four-model-comparison",
     icon="📊",
 )
-totals_page = st.Page("research/totals_backtest.py", title="Totals Backtest", icon="📊")
-ats_page = st.Page("research/ats_backtest.py", title="ATS Backtest", icon="🏈")
-schedule_page = st.Page("research/schedule_audit.py", title="Schedule Data Audit", icon="🧾")
-connection_page = st.Page("research/connection_diagnostics.py", title="Data Connection Diagnostics", icon="🔌")
-endzone_injury_test_page = st.Page("pages/Endzone_Injury_Sample_Test.py", title="EndzoneAPI Injury Sample Test", icon="🩹")
-injury_snapshot_audit_page = st.Page("research/injury_snapshot_audit.py", title="Injury Snapshot Audit", icon="🕒")
-prospective_ats_page = st.Page("research/prospective_ats_tracker.py", title="Prospective ATS Tracker", icon="📈")
-results_audit_page = st.Page("research/prospective_results_audit.py", title="Prospective Results Audit", icon="✅")
+bovada_monitor = st.Page(
+    "pages/Bovada_Projection_Monitor.py",
+    title="Legacy Live Bovada Monitor",
+    icon="🎯",
+)
+legacy_scoring_board = st.Page(
+    "pages/Projection_Board.py",
+    title="Legacy Scoring / Schedule Board",
+    icon="🏈",
+)
+totals_backtest = st.Page("research/totals_backtest.py", title="Totals Backtest", icon="📊")
+ats_backtest = st.Page("research/ats_backtest.py", title="ATS Backtest", icon="🏈")
+schedule_audit = st.Page("research/schedule_audit.py", title="Schedule Data Audit", icon="🧾")
+connection_audit = st.Page("research/connection_diagnostics.py", title="Data Connection Diagnostics", icon="🔌")
+endzone_sample = st.Page("pages/Endzone_Injury_Sample_Test.py", title="EndzoneAPI Injury Sample Test", icon="🩹")
+injury_audit = st.Page("research/injury_snapshot_audit.py", title="Injury Snapshot Audit", icon="🕒")
+prospective_tracker = st.Page("research/prospective_ats_tracker.py", title="Prospective ATS Tracker", icon="📈")
+prospective_results = st.Page("research/prospective_results_audit.py", title="Prospective Results Audit", icon="✅")
 
 navigation = st.navigation({
-    "Model": [bovada_monitor_page, projection_page, public_projection_page, four_model_week8_page],
-    "Research & Diagnostics": [
-        totals_page, ats_page, prospective_ats_page, results_audit_page,
-        schedule_page, connection_page, endzone_injury_test_page, injury_snapshot_audit_page,
+    "Current Week": [week09_page],
+    "Week 8 Archive": [week08_public, week08_comparison],
+    "Research & Diagnostics (Advanced)": [
+        bovada_monitor, legacy_scoring_board,
+        prospective_tracker, prospective_results,
+        ats_backtest, totals_backtest, schedule_audit,
+        connection_audit, injury_audit, endzone_sample,
     ],
 })
 navigation.run()
