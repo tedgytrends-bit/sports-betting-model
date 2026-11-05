@@ -1,0 +1,65 @@
+{
+  "status": "RESEARCH_ONLY_NOT_OFFICIAL",
+  "captured_at_utc": "2026-11-05T04:18:38.734303+00:00",
+  "season": 2026,
+  "week": 9,
+  "games": 15,
+  "rows": 93,
+  "model_names": [
+    "baseline",
+    "injury",
+    "efficiency",
+    "combined",
+    "baseline_hl1",
+    "injury_hl4"
+  ],
+  "training": "Ridge alpha=10; median imputation from pregame completed training only; same research feature sets.",
+  "market_policy": "nflverse schedule line reference only; no user-verified Week 9 Bovada lines supplied.",
+  "tnf_qb_starter_audit": {
+    "starter": "Joe Fagnano",
+    "starter_source": "Baltimore Ravens official news, 2026-11-03; user confirmed 2026-11-04",
+    "known_unavailable": [
+      "Lamar Jackson - thumb",
+      "Tyler Huntley - toe"
+    ],
+    "fagnano_injury": "ankle; latest saved Week 9 practice row says full participant",
+    "snapshot": "injuries_2026_week_09_20261105T012126Z.csv",
+    "raw_home_qb_out_feature": null,
+    "scenario_home_qb_out_feature": 2.0,
+    "feature_warning": "The original Injury estimator uses position-level injury counts, not named QB starter or player replacement valuation. Undated blank official game-status fields can yield qb_out=0 even when Jackson/Huntley are confirmed unavailable. A count override is uncalibrated and cannot be interpreted as Fagnano's true point impact.",
+    "feed_diagnostics": [
+      {
+        "Matchup": "JAX @ BAL",
+        "Season/week/type": "2026/9/REG",
+        "Feed rows season/week": 28,
+        "Rows after game-type match": 28,
+        "Rows with valid timestamps": 0,
+        "Rows missing timestamps": 28,
+        "Undated rows admitted under deadline assumption": 28,
+        "Raw date_modified examples": "",
+        "Rows available pre-kickoff": 28,
+        "Timing policy": "Prior-date rows under NFL reporting deadline",
+        "Feed teams": "BAL, JAX",
+        "Snapshot file found": true,
+        "Snapshot rows": 28,
+        "Snapshot captured UTC": "2026-11-05T01:21:26+00:00",
+        "Snapshot timing": "Pregame eligible",
+        "Diagnostic source used": "Saved snapshot",
+        "Pregame position counts": "RB=4, DT=3, LB=3, QB=3, S=3, G=3, T=2, TE=2",
+        "Home report rows": 18,
+        "Away report rows": 10,
+        "Home QB out": 0.0,
+        "Away QB out": 0.0,
+        "Home OL out": 0.0,
+        "Away OL out": 0.0,
+        "Home players out": 0.0,
+        "Away players out": 0.0,
+        "Home questionable": 0.0,
+        "Away questionable": 0.0,
+        "Latest report timestamp UTC": "None"
+      }
+    ]
+  },
+  "comparison_warning": "This is a research snapshot. It does not freeze the official production record. The confirmed-out scenario changes QB injury counts, not the starter's individual expected value; it is exploratory and should not be reported as an official injury-corrected projection.",
+  "snapshot_file": "data/research_week09_2026_six_model/week09_six_model_pregame_20261105T041838Z.csv"
+}
