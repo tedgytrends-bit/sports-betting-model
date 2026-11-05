@@ -2,7 +2,7 @@
 
 Workflow: **CBB 2026-27 Pregame Shadow Snapshots**
 
-Captures at 13:05 and 21:05 UTC daily and on manual GitHub workflow dispatch. It only writes its prospectively observed game records to the isolated `cbb-prospective` branch. NFL production pages and the main branch are untouched by daily data writes.
+Captures at 13:05 UTC daily in November–April, with manual GitHub workflow dispatch. It only writes its prospectively observed game records to the isolated `cbb-prospective` branch. NFL production pages and the main branch are untouched by daily data writes.
 
 ## What is recorded
 
