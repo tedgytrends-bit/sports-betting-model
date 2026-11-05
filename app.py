@@ -57,4 +57,7 @@ navigation = st.navigation({
         connection_audit, injury_audit, endzone_sample,
     ],
 })
+# Visible, lightweight deployment marker for diagnosing stale Cloud instances.
+# This identifies the UI release, not a model version or changed projection.
+st.sidebar.caption("UI build: 2026-11-05 · Week 9 board + legacy fixes")
 navigation.run()
