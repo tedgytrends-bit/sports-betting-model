@@ -117,3 +117,11 @@ season,week,team,change_type,change_count
 2026,8,WAS,practice_status,5
 2026,8,WAS,report_primary_injury,4
 2026,8,WAS,report_status,4
+2026,9,BAL,practice_secondary_injury,1
+2026,9,BAL,practice_status,5
+2026,9,BAL,report_primary_injury,5
+2026,9,BAL,report_secondary_injury,1
+2026,9,BAL,report_status,5
+2026,9,JAX,report_primary_injury,2
+2026,9,JAX,report_secondary_injury,1
+2026,9,JAX,report_status,2
