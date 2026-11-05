@@ -47,6 +47,7 @@ def test_verified_starter_and_prior_data_only():
     assert bal.starter_source == "verified_pregame"
     assert bal.qb_prior_dropbacks == 3
     assert bal.qb_delta_epa_per_dropback < 0
+    assert 0 < bal.starter_recent_team_dropback_share < 1
     assert bal.qb_point_shift_experimental < 0
     assert bal.qb_prior_dropbacks != 18  # excludes future-game plays
 
@@ -109,3 +110,15 @@ def test_attachment_preserves_unknowns():
     assert result.loc[0, "home_qb_adjusted"] == 17.
     assert result.loc[0, "away_qb_adjusted"] == 16.
     assert pd.isna(result.loc[1, "projected_total_qb_adjusted"])
+
+
+def test_established_qb_is_already_in_team_baseline():
+    schedule, plays = sample()
+    stats = qb_game_stats(plays, schedule)
+    board = build_qb_epa_board(stats, schedule, schedule.iloc[[2]])
+    bal = board[board.team.eq("BAL")].iloc[0]
+    # 24 of 27 previous BAL QB dropbacks belong to the same quarterback;
+    # direct long-term vs recent EPA comparison would penalize the incumbent.
+    assert bal.starter_recent_team_dropback_share == pytest.approx(24 / 27)
+    raw_gap = bal.qb_shrunk_epa_per_dropback - bal.team_recent_qb_epa_per_dropback
+    assert bal.qb_delta_epa_per_dropback == pytest.approx(raw_gap * 3 / 27)
