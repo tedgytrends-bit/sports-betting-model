@@ -1,0 +1,52 @@
+name: Capture QB EPA injury shadow (research only)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/capture-qb-epa-injury-shadow.yml"
+      - "qb_epa_model.py"
+      - "tests/test_qb_epa_model.py"
+      - "scripts/capture_week09_qb_epa_shadow.py"
+      - "data/qb_starters/2026_week09_confirmed.csv"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: qb-epa-injury-shadow-main
+  cancel-in-progress: false
+
+jobs:
+  qb-epa-shadow:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt pytest
+      - name: Compile and unit-test quarterback adjustments
+        run: |
+          python -m py_compile qb_epa_model.py injury_model.py scripts/capture_week09_qb_epa_shadow.py
+          python -m pytest -q tests/test_qb_epa_model.py
+      - name: Generate Week 9 QB-adjusted research slate
+        run: python scripts/capture_week09_qb_epa_shadow.py
+      - name: Commit only research snapshots
+        run: |
+          if [ -n "$(git status --porcelain data/qb_epa_shadow)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add data/qb_epa_shadow
+            git commit -m "Record Week 9 QB EPA injury research shadow (not official)"
+            git pull --rebase origin main
+            git push
+          else
+            echo "No research output changes"
+          fi
