@@ -6,10 +6,10 @@ This directory contains the static, mobile-responsive Tedgy Trends NFL model das
 
 - `data/public_snapshots/nfl_week_09_six_model_research_2026-11-04.csv`: the saved Week 9 model predictions. Only Baseline and Injury appear as default public views; Efficiency and Combined are available as clearly labeled research comparisons in each matchup.
 - `data/bovada_lines.csv`: the latest archived user-supplied Week 9 Bovada quotes. Archive ingestion timestamps should **not** be represented as screenshot capture timestamps.
-- `data/public_snapshots/nfl_week_08_public_2026-11-01.csv`: the original twelve-row Week 8 published projection record.
-- `data/four_model_week08/week08_four_model_comparison.csv`: final scores and a distinct all-four-model fourteen-game **research** comparison, which contains reconstructed projections.
+- `data/public_snapshots/nfl_week_08_public_2026-11-01.csv`: the standalone Nov. 1 archive, containing twelve Sunday games. Kept as a source link, not used to limit the displayed Week 8 slate.
+- `data/four_model_week08/week08_four_model_comparison.csv`: all fourteen Week 8 games including Thursday and Monday; this is the single source for the site's Week 8 scoreboard (Baseline and Injury ATS/totals grades and results). The user confirms that all fourteen matchups were public.
 
-The site recalculates Week 8 grades from the original documented picks and lines plus the final scores, then displays a standardized flat -110 ROI estimate separately from any actual or price-verified ROI. Two games present in the fourteen-game research comparison are not automatically added to the original twelve-game public snapshot.
+The site shows one unified **fourteen-game Week 8 results page**, with no twelve-game filter or research-only matchup tags. A standardized flat -110 ROI estimate is explicitly labeled; no actual or price-verified betting return is implied. The fourteen-game comparison file contains historical provenance and reconstruction notes for some rows. Retain that metadata in GitHub; **do not assert that all fourteen rows are in the Nov. 1 CSV**. For external historical audits, distinguish pregame publication evidence from later model reconstruction when discussing the origin of any individual forecast.
 
 **Week 9 research status:** The saved model data currently carries `RESEARCH_ONLY_NOT_OFFICIAL`. The site preserves that label rather than calling these official tracked picks.
 
