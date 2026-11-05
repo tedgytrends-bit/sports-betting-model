@@ -88,7 +88,7 @@ def _starter_for(team: str, game_id: str, history: pd.DataFrame,
             raise ValueError(f"Multiple observed starter rows: {game_id} {team}")
         if not match.empty:
             item = match.iloc[0]
-            return str(item["qb_id"]), str(item["qb_name"]), "observed_first_passer_postgame", ""
+            return str(item["qb_id"]), str(item["qb_name"]), str(item.get("starter_evidence", "observed_first_passer_postgame")), ""
     prior = history[history["team"].eq(team)]
     if prior.empty:
         return None, "", "unknown_no_pregame_evidence", ""
@@ -296,3 +296,37 @@ def observed_first_passer(pbp: pd.DataFrame, schedule: pd.DataFrame) -> pd.DataF
     out = games.merge(out, on=["game_id", "team"], how="left", validate="one_to_one")
     out["first_matches_primary"] = out["first_matches_primary"].fillna(False)
     return out
+
+
+def starters_from_game_schedule(schedule: pd.DataFrame, *, completed_only: bool = True) -> pd.DataFrame:
+    """Read NFLverse per-game starting QB IDs/names, including in-season changes.
+
+    When completed_only=True use *retrospective* actual starter metadata from
+    final-score games. This cannot substitute for archived pregame confirmations.
+    """
+    need = {"game_id", "season", "week", "gameday",
+            "home_team", "away_team", "home_qb_id", "away_qb_id",
+            "home_qb_name", "away_qb_name"}
+    if not need.issubset(schedule.columns):
+        raise ValueError(f"Game schedule lacks starting-QB metadata: {sorted(need-set(schedule.columns))}")
+    source = schedule.copy()
+    if completed_only:
+        source = source.dropna(subset=["home_score", "away_score"])
+    rows = []
+    for side in ("home", "away"):
+        temp = source[["game_id", "season", "week", "gameday",
+                       f"{side}_team", f"{side}_qb_id", f"{side}_qb_name"]].rename(columns={
+            f"{side}_team": "team", f"{side}_qb_id": "qb_id",
+            f"{side}_qb_name": "qb_name"
+        })
+        rows.append(temp)
+    out = pd.concat(rows, ignore_index=True)
+    out["qb_id"] = out["qb_id"].astype("string").str.strip()
+    out["qb_name"] = out["qb_name"].astype("string").str.strip()
+    out = out[out["qb_id"].notna() & out["qb_id"].ne("")
+              & out["qb_name"].notna() & out["qb_name"].ne("")]
+    out["starter_evidence"] = ("schedule_recorded_starter_postgame" if completed_only
+                               else "schedule_provisional_qb_unverified")
+    if out.duplicated(["game_id", "team"]).any():
+        raise ValueError("Duplicate starting QB metadata in schedule")
+    return out.reset_index(drop=True)
