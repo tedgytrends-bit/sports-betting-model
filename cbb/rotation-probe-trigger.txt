@@ -1,0 +1,1 @@
+2026-11-05 check chronological player game box schema for CBB model rotation features
