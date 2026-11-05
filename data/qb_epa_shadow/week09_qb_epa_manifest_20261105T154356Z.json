@@ -1,0 +1,18 @@
+{
+  "status": "RESEARCH_ONLY_NOT_OFFICIAL",
+  "timestamp_utc": "2026-11-05T15:43:56+00:00",
+  "model": "injury_qb_epa_v2_research",
+  "point_shift": "(shrunken starter EPA - recent team QB-mix EPA) times the non-starter share of team dropbacks times expected dropbacks/game",
+  "starter_sources": "Manual source-verified override; otherwise automatically inferred last-game primary passer, expressly unverified",
+  "non_qb_injury_features": "All QB rows excluded from QB count AND general injury/practice counts before refit",
+  "training": "Chronological historical schedule/PBP and injury reports. Today's game EPA excluded.",
+  "conservative_prior": "120 equivalent league QB dropbacks; 12-QB-game half-life for up to 24 previous QB appearances",
+  "warning": "EPA point conversion is unvalidated. Shadow outputs must not update official Week 9 frozen projections or records.",
+  "games": 15,
+  "qb_rows": 30,
+  "confirmed_qb_rows": 1,
+  "unverified_qb_rows": 29,
+  "unknown_qb_rows": 0,
+  "output_qb": "data/qb_epa_shadow/week09_qb_epa_20261105T154356Z.csv",
+  "output_projections": "data/qb_epa_shadow/week09_injury_qb_epa_shadow_20261105T154356Z.csv"
+}
