@@ -44,3 +44,25 @@ Threshold sample sizes differ. Do not select a profitable threshold based on hin
 **Retain original two models as fixed prospective benchmarks.** Allow opponent-adjusted v3 as a **separate experimental prospectively tracked candidate**, not a replacement. ATS prediction errors improved in all three past seasons, but direction ROI did not improve overall. Totals direction was modestly better overall and total MAE improved in two of three seasons.
 
 No results are betting recommendations or proof of an edge. Previous-year player performance is pregame information, but archived target-season roster membership and transfers may be retrospectively revised; source historical lines are not timestamp-verified and ROI uses assumed -110 prices. All future records must be frozen before actual tip-off and neither the older v2 nor market lines may be retrospectively changed.
+
+## Diagnostic: when opponent-adjustments help
+
+From the exact game-level v3 backtest artifact, dividing by **pregame**
+number of games played (diagnostic only, not a tuned betting rule):
+
+| Season | Either team under 5 games: v2 → v3 ATS MAE | Both teams 5+ games: v2 → v3 ATS MAE |
+|---|---|---|
+| 2024 | 11.787 → 11.741 | 9.251 → 9.078 |
+| 2025 | 11.933 → 11.800 | 9.239 → 9.047 |
+| 2026 | 15.136 → 15.124 | 9.441 → 9.235 |
+
+The added information helps most once teams have accrued several current-
+season games. In 2026 season openers (both teams at zero games), player-v3
+was actually **worse** than player-v2: 15.474 versus 15.209 ATS MAE on 211
+games. Do not automatically promote v3 for early-season games. Next priority
+is verified current-season player rotation and availability (starter, actual
+minutes, athlete ID from timestamped /games/players records), while preserving
+a clean prospective comparison.
+
+This split is descriptive and was inspected after the results; it is **not**
+a prespecified or untouched holdout-based betting filter.
