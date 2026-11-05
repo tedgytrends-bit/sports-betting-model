@@ -154,6 +154,10 @@ def main():
             raise RuntimeError("Snapshot report availability flag missing.")
         for key, value in counts.items():
             col = f"{side}_{key}"
+            # Preserve the exact historical four-model feature family:
+            # practice-status counts were not part of its selected 56 features.
+            if col not in data.columns and key.startswith("practice_"):
+                continue
             if col not in data.columns:
                 raise RuntimeError(f"Missing model feature for supplied snapshot: {col}")
             data.loc[target_mask, col] = value
