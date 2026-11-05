@@ -6,7 +6,7 @@ Captures at 13:05 UTC daily in November–April, with manual GitHub workflow dis
 
 ## What is recorded
 
-- `cbb/prospective/2027/snapshots/TIMESTAMP_RUNID.json`: append-only 8-day forward board, both baseline and player-v2 spread/total/score projections, market as observed, roster coverage per team, model commit, capture time, and SHA-256 digests of current data sources.
+- `cbb/prospective/2027/snapshots/TIMESTAMP_RUNID.json`: append-only 8-day forward board, baseline, player-v2 and opponent-adjusted player-v3 spread/total/score projections (v3 only after its deployment), market as observed, roster coverage per team, model commit, capture time, and SHA-256 digests of current data sources.
 - `cbb/prospective/2027/latest.json`: current projection board; UPDATED every run; not suitable for retrospective grading.
 - `cbb/prospective/2027/frozen/GAME_ID.json`: earliest pretip capture **within 24 hours before tip** when at least one market line is present. Immutable, including original market prices or missing prices. Never regrade using updated lines.
 - GitHub Actions artifact: the generated capture before publication, retained for independent audit.
@@ -42,3 +42,21 @@ completed game's current line into a missing frozen record.
 These are **research shadow model leans**, not records of personal wagers.
 Sources are imperfect; grading is only as sound as the archived pretip line
 and final score source. Public website integration remains a separate step.
+
+## Opponent-adjusted v3 prospective experiment
+
+On and after deployment of the opponent-adjusted v3 code, new capture snapshots
+contain three independent score, spread and total forecasts: **baseline**,
+**player_v2**, and **player_opp_v3**. The v3 features use *only previous
+calendar dates'* team scores and opponent strengths, with season resets.
+
+Already frozen files remain untouched, including the initial 43 records
+captured on 2026-11-05 before v3 was deployed. The grading code only
+counts player_opp_v3 when that name appears in the original immutable
+frozen record. Therefore v3 will initially have fewer genuinely tracked
+prospective games; no synthetic historical v3 picks are credited.
+
+Do not promote the v3 historical 3.5+ ATS performance to the public
+record: the all-direction historical ROI was still negative and archival
+rosters and odds are not proven point-in-time. This is a monitored,
+research-only experiment.
