@@ -1,4 +1,4 @@
-"""Run v1 player-vs-team baseline on matched test games and lines."""
+"""Run corrected player v2 versus fixed team-only baseline on matched games and lines."""
 import argparse
 from collections import defaultdict
 from statistics import mean, median
@@ -19,7 +19,7 @@ def main():
     ap.add_argument("--season",type=int,default=2027)
     ap.add_argument("--date",default=None)
     ap.add_argument("--raw-dir",default="cbb/data/raw")
-    ap.add_argument("--out-dir",default="cbb/outputs/player_v1")
+    ap.add_argument("--out-dir",default="cbb/outputs/player_v2")
     ap.add_argument("--refresh",action="store_true")
     args=ap.parse_args()
     if args.command=="fetch":
@@ -56,7 +56,7 @@ def main():
         player=player_predictions(extended,year,odds)
         if {r["id"] for r in baseline}!={r["id"] for r in player}:
             raise RuntimeError("Baseline/player game ID mismatch")
-        for model,forecast in (("baseline",baseline),("player_v1",player)):
+        for model,forecast in (("baseline",baseline),("player_v2",player)):
             completed=[r for r in forecast if r["status"]=="final"]
             save(folder/f"{model}_games_{year}.csv",completed)
             for kind in ("ats","total"):
@@ -64,7 +64,7 @@ def main():
                     row={"season":year,"model":model,**grade(completed,threshold,kind)}
                     summary.append(row)
                     print("RESULT",row)
-    save(folder/"player_vs_baseline_summary.csv",summary)
+    save(folder/"player_v2_vs_baseline_summary.csv",summary)
 
 
 if __name__=="__main__":

@@ -11,9 +11,9 @@ def fixtures():
     return {2026: {
         "rosters": [dict(teamId=1,season=2026,team="Alpha",players=[
             athlete(10,2024,2026,"Veteran A"),
-            athlete(11,2025,2026,"Transfer B"),
-            athlete(12,2025,2026,"Freshman C"),
-            athlete(13,2026,2027,"FUTURE PLAYER"),  # must never leak
+            athlete(11,2026,2026,"Transfer B"),
+            athlete(12,2026,2026,"Freshman C"),
+            athlete(13,2027,2027,"FUTURE PLAYER"),  # must never leak
         ])],
         "prior_players": [
             dict(athleteId=10,athleteSourceId="10",teamId=1,games=30,minutes=800,
@@ -31,7 +31,9 @@ def fixtures():
 
 def test_future_membership_rejected():
     assert eligible(athlete(10,2025,2026,"Active"),2026)
-    assert not eligible(athlete(13,2026,2027,"Future"),2026)
+    assert eligible(athlete(12,2026,2026,"Current freshman"),2026)
+    assert eligible(athlete(13,2026,2027,"Current entrant"),2026)
+    assert not eligible(athlete(14,2027,2027,"Future"),2026)
     assert not eligible(athlete(9,2023,2025,"Departed"),2026)
     assert not eligible(dict(id=15),2026)  # unknown dates are not assumed
 
