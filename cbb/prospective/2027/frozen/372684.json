@@ -1,0 +1,70 @@
+{
+  "capture_type": "research_shadow",
+  "capture_utc": "2026-11-05T21:29:14.641689Z",
+  "capture_version": 1,
+  "frozen_rule": "First snapshot within 24 hours before tip with at least one market line",
+  "game": {
+    "away": "Central Connecticut",
+    "away_team_id": "44",
+    "baseline": {
+      "ats_edge": -6.191,
+      "ats_lean": "away",
+      "projected_away_points": 60.41,
+      "projected_home_points": 77.72,
+      "projected_margin_home": 17.309,
+      "projected_total": 138.136,
+      "total_edge": 2.636,
+      "total_lean": "over",
+      "training_games": 31259
+    },
+    "coverage": {
+      "away_elite_recruits": 0,
+      "away_games_played": 1,
+      "away_prior_matched": 7,
+      "away_roster_eligible": 16,
+      "away_verified_portal": 0,
+      "home_elite_recruits": 0,
+      "home_games_played": 1,
+      "home_prior_matched": 8,
+      "home_roster_eligible": 15,
+      "home_verified_portal": 6
+    },
+    "freeze_candidate": true,
+    "home": "Syracuse",
+    "home_team_id": "286",
+    "id": "372684",
+    "market": {
+      "as_of_utc": "2026-11-05T21:29:14.641689Z",
+      "home_spread": -23.5,
+      "provider": "Bovada",
+      "total": 135.5
+    },
+    "neutral_site": false,
+    "player_v2": {
+      "ats_edge": 4.671,
+      "ats_lean": "home",
+      "projected_away_points": 57.54,
+      "projected_home_points": 85.71,
+      "projected_margin_home": 28.171,
+      "projected_total": 143.257,
+      "total_edge": 7.757,
+      "total_lean": "over",
+      "training_games": 31259
+    },
+    "research_quality": "adequate",
+    "season": 2027,
+    "tip_utc": "2026-11-06T00:00:00Z"
+  },
+  "model_commit": "e6de2caa000fff21eb9cc63744033863bba40ce0",
+  "snapshot_path": "cbb/prospective/2027/snapshots/20261105T212914641689_42112788239.json",
+  "source": "CollegeBasketballData API as received at capture time",
+  "source_sha256": {
+    "boxes.json": "b1e423b7ed7b1d488b5781c82ba01ed70a60fdad7dc519f398f6d6b282b07f50",
+    "games.json": "55d563e9be398f411e4d6d72eda1269ef76682b723cfd2da11c1c18db897137b",
+    "lines.json": "308d12151d8e4b39f9ce1c0fe035723e44eb8b4e450d79ebe0c207b481932d84",
+    "portal.json": "1120680b643a03192b5f9361ae57e37e6a535c5a40b4622761ab597962101951",
+    "prior_players.json": "b0ef0a21b4e64a811eb29fd569f711257f4088ebd2abbfad89921542d577638e",
+    "recruits.json": "e6d4bbefdadeb90fa70b094eca3aa2cbd19b76397daaab1b1e9c847059ec2bff",
+    "rosters.json": "9f606d513ee88f2306fd1d580db33db1e0e2832175674f324cafda8b569add65"
+  }
+}
