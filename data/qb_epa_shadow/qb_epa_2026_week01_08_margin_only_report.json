@@ -1,0 +1,22 @@
+{
+  "source": "data/qb_epa_shadow/qb_epa_2026_week01_08_paired_20261105T161043Z.csv",
+  "status": "POST_HOC_RETROSPECTIVE_RESEARCH_NOT_PROSPECTIVE",
+  "candidate": "injury_qb_epa_margin_only",
+  "games": 121,
+  "old": {
+    "ats_wins": 61,
+    "margin_mae": 9.624311534511298,
+    "total_mae": 11.539174865670688,
+    "total_wins": 56
+  },
+  "updated": {
+    "ats_wins": 63,
+    "ats_losses": 52,
+    "ats_pushes": 6,
+    "total_wins": 56,
+    "total_losses": 65,
+    "margin_mae": 9.512525402975221,
+    "total_mae": 11.50905002631127
+  },
+  "notes": "QB identity from completed-game NFLverse schedule; EPA prior to each game. The margin-only adjustment was chosen after examining 2026 results and is not an untouched holdout. Do not rewrite previous frozen projections."
+}
