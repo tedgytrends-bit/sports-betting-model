@@ -4,7 +4,7 @@ import pandas as pd
 import pytest
 
 from injury_model import _counts_for_team
-from qb_epa_model import qb_game_stats, build_qb_epa_board, attach_qb_shifts
+from qb_epa_model import qb_game_stats, build_qb_epa_board, attach_qb_shifts, starters_from_game_schedule
 
 
 def sample():
@@ -122,3 +122,23 @@ def test_established_qb_is_already_in_team_baseline():
     assert bal.starter_recent_team_dropback_share == pytest.approx(24 / 27)
     raw_gap = bal.qb_shrunk_epa_per_dropback - bal.team_recent_qb_epa_per_dropback
     assert bal.qb_delta_epa_per_dropback == pytest.approx(raw_gap * 3 / 27)
+
+
+def test_nflverse_schedule_recognizes_completed_game_starters():
+    schedule, plays = sample()
+    schedule["home_qb_id"] = ["lamar", "lamar", "fagnano", "fagnano"]
+    schedule["home_qb_name"] = ["Lamar Jackson", "Lamar Jackson", "Joe Fagnano", "Joe Fagnano"]
+    schedule["away_qb_id"] = ["trevor"]*4
+    schedule["away_qb_name"] = ["Trevor Lawrence"]*4
+    observed = starters_from_game_schedule(schedule, completed_only=True)
+    assert set(observed.game_id) == {"g1","g2","future"}
+    # Future has scores in this synthetic set; "target" must stay excluded.
+    assert "target" not in set(observed.game_id)
+    current = starters_from_game_schedule(schedule, completed_only=False)
+    assert current[current.game_id.eq("target")].iloc[0].starter_evidence == "schedule_provisional_qb_unverified"
+    assert set(observed.starter_evidence) == {"schedule_recorded_starter_postgame"}
+    stats = qb_game_stats(plays, schedule)
+    board = build_qb_epa_board(stats, schedule, schedule.iloc[[2]], observed=current)
+    bal = board[board.team.eq("BAL")].iloc[0]
+    assert bal.qb_id == "fagnano"
+    assert bal.starter_source == "schedule_provisional_qb_unverified"
