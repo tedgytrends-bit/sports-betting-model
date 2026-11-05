@@ -21,10 +21,11 @@ def main():
     ap.add_argument("--raw-dir",default="cbb/data/raw")
     ap.add_argument("--out-dir",default="cbb/outputs/player_v2")
     ap.add_argument("--refresh",action="store_true")
+    ap.add_argument("--refresh-roster-only",action="store_true")
     args=ap.parse_args()
     if args.command=="fetch":
         for year in args.seasons:
-            player_inputs(year,args.raw_dir,args.refresh)
+            player_inputs(year,args.raw_dir,args.refresh,refresh_roster_only=args.refresh_roster_only)
         return
     data=load_seasons(args.seasons,args.raw_dir)
     rows=pregame_rows(data["games"],data["boxes"])
