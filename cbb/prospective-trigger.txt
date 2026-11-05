@@ -1,2 +1,3 @@
 2026-11-05 initiate pretip CBB 2026–27 shadow capture after verified roster correction.
 2026-11-05 validate quota-efficient second capture and automatic frozen-record grading.
+2026-11-05 verify optional player_opp_v3 in new 2026-27 shadow snapshots and historical freezes unchanged.
