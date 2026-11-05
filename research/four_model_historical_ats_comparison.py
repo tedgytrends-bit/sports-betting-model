@@ -3,9 +3,9 @@
 
 This reproduces the four ORIGINAL model configurations:
   baseline   = frozen 24-feature efficiency scoring model
-  injury     = baseline + 32 historical injury features (legacy, pre QB EPA)
+  injury     = baseline + 36 historical injury features (current legacy, pre QB EPA)
   efficiency = baseline + 57 passing/rushing split, matchup and pace features
-  combined   = both extra feature groups
+  combined   = both extra feature groups (current legacy feature count)
 
 IMPORTANT: The current QB-EPA Injury v1 is NOT the 'injury' column here.
 Historical pregame identities for QB replacements are not verified for this
@@ -94,7 +94,7 @@ def main():
         "combined_legacy": (combined, original + inj_extra + eff_extra),
     }
     counts = {name: len(cols) for name, (_df, cols) in chosen.items()}
-    if counts != {"baseline":24,"injury_legacy":56,"efficiency":81,"combined_legacy":113}:
+    if counts != {"baseline":24,"injury_legacy":60,"efficiency":81,"combined_legacy":117}:
         raise RuntimeError(f"Feature sets don't match Week 9: {counts}")
     common_cols = ["game_id", "gameday", "season", "week", "home_team", "away_team",
                    "home_score", "away_score"]
@@ -145,7 +145,7 @@ def main():
         "generated_at_utc":datetime.now(timezone.utc).isoformat(),
         "season_2021":"TRAINING ONLY; no evaluated games at 500-game min train",
         "models":counts,
-        "injury_warning":"Legacy Injury used in the historical 4-way comparison. This is not the QB-EPA Injury v1 developed during 2026.",
+        "injury_warning":"Legacy Injury current builder uses 60 inputs vs archived Week 9 Injury 56. This is NOT the QB-EPA Injury v1 developed during 2026 and NOT a byte-for-byte replay of the original Week 9 injury model.",
         "market_warning":"Uses nflverse schedule spread_line as the one common historical market reference, not verified live Bovada executable prices.",
         "train_scheme":"Chronological calendar-week blocks. Train only on prior dates with >=500 completed games. Ridge alpha 10; identical weekly folds.",
         "training_seasons":list(SEASONS),
