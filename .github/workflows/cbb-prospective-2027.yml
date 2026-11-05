@@ -44,10 +44,24 @@ jobs:
         run: python -m cbb.cli fetch --seasons 2022 2023 2024 2025 2026
       - name: Historical player-input cache
         run: python -m cbb.player_cli fetch --seasons 2022 2023 2024 2025 2026
+      - uses: actions/cache@v4
+        with:
+          path: cbb/data/rotation
+          key: cbb-rotation-game-boxes-2022-to-2026-v1
+      - name: Load historical player game boxes (cached once)
+        run: python -m cbb.rotation_ingest --seasons 2022 2023 2024 2025 2026
       - name: Fetch fresh 2026-27 games and lines
         run: python -m cbb.cli fetch --seasons 2027 --refresh --through-days 9
       - name: Fetch current roster and previous-season player talent
         run: python -m cbb.player_cli fetch --seasons 2027 --refresh-roster-only
+      - uses: actions/cache@v4
+        with:
+          path: cbb/data/rotation_live
+          key: cbb-rotation-live-2027-${{ github.run_id }}
+          restore-keys: |
+            cbb-rotation-live-2027-
+      - name: Incrementally update observed prior-game player rotation boxes
+        run: python -m cbb.live_rotation --season 2027
       - name: Build future-only model snapshot
         run: python -m cbb.prospective --season 2027 --horizon-days 8 --freeze-hours 24
       - name: Publish immutable pretip frozen records to isolated branch

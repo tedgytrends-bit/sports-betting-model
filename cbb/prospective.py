@@ -18,6 +18,9 @@ from cbb.player_adjusted import PLAYER_FEATURES, roster_priors, extend_rows, pla
 from cbb.opponent_adjusted import ADJ_FEATURES, attach_adjustments, pregame_opponent_adjustments
 from cbb.opponent_experiment import fitted_predictions
 from cbb.player_ingest import load_player_inputs
+from cbb.rotation_features import ROTATION_FEATURES, pregame_rotation_features, attach_rotations
+from cbb.rotation_ingest import load_player_boxes
+from cbb.live_rotation import load_live_player_boxes
 
 
 def utc_date(value: str) -> datetime:
@@ -61,6 +64,8 @@ def build_capture(
     fingerprints: dict | None = None,
     model_commit: str = "",
     opponent_player: list[dict] | None = None,
+    rotation_player: list[dict] | None = None,
+    combined_player: list[dict] | None = None,
 ) -> dict:
     """Pure function: future-only, timestamped, one immutable candidate/game."""
     if captured_utc.tzinfo is None:
@@ -69,6 +74,18 @@ def build_capture(
     by_baseline = {r["id"]: r for r in baseline}
     by_player = {r["id"]: r for r in player}
     by_opponent = None if opponent_player is None else {r["id"]: r for r in opponent_player}
+    optional = {
+        "player_rot_v4": rotation_player,
+        "player_all_v4": combined_player,
+    }
+    by_new_models = {}
+    for label, forecasts in optional.items():
+        if forecasts is None:
+            continue
+        indexed = {r["id"]: r for r in forecasts}
+        if len(indexed) != len(forecasts) or set(indexed) != set(by_baseline):
+            raise ValueError(f"{label} must cover exactly the same unique game IDs")
+        by_new_models[label] = indexed
     if len(by_baseline) != len(baseline) or len(by_player) != len(player):
         raise ValueError("Duplicate game IDs in model outputs")
     if set(by_baseline) != set(by_player):
@@ -130,6 +147,20 @@ def build_capture(
         # NEVER add it retroactively to existing immutable frozen games.
         if by_opponent is not None:
             record["player_opp_v3"] = model_fields(by_opponent[ident])
+        for label, indexed in by_new_models.items():
+            record[label] = model_fields(indexed[ident])
+        if "player_rot_v4" in by_new_models:
+            from_row = by_new_models["player_rot_v4"][ident]
+            record["rotation_coverage"] = {
+                side: {
+                    "past_game_boxes": int(from_row.get(side + "_rotation_source_games", 0)),
+                    "box_coverage": from_row.get(side + "_rotation_box_coverage"),
+                    "last_box_present": bool(from_row.get(side + "_rotation_last_box_present")),
+                    "prior_key_minutes_missing":
+                        from_row.get(side + "_rotation_key_minutes_missing"),
+                }
+                for side in ("home", "away")
+            }
         cov = record["coverage"]
         record["research_quality"] = (
             "adequate"
@@ -177,16 +208,44 @@ def run(args):
         v3_rows, args.season, lines, PLAYER_FEATURES + ADJ_FEATURES, 250,
         "player_opp_v3",
     )
+    # The historical player boxes are only training data. The current season
+    # archive is built and timestamped by the preceding live capture step.
+    rotation_boxes = (
+        load_player_boxes(seasons[:-1], root=args.rotation_history_dir)
+        + load_live_player_boxes(args.season, root=args.rotation_live_dir)
+    )
+    rotation_map = pregame_rotation_features(data["games"], rotation_boxes)
+    rotation_rows = attach_rotations(enriched, rotation_map)
+    rotation_plus_opp = attach_adjustments(rotation_rows, opponent_features)
+    v4_rotation = fitted_predictions(
+        rotation_rows, args.season, lines, PLAYER_FEATURES + ROTATION_FEATURES,
+        250, "player_rot_v4",
+    )
+    v4_all = fitted_predictions(
+        rotation_plus_opp, args.season, lines,
+        PLAYER_FEATURES + ADJ_FEATURES + ROTATION_FEATURES,
+        250, "player_all_v4",
+    )
     captured = datetime.now(timezone.utc)
+    fingerprints = source_digests(args.raw_dir, args.season)
+    live_archive = Path(args.rotation_live_dir) / f"{args.season}_game_players.json.gz"
+    fingerprints["live_game_players_gzip"] = hashlib.sha256(live_archive.read_bytes()).hexdigest()
+    for history_season in seasons[:-1]:
+        history_archive = Path(args.rotation_history_dir) / f"{history_season}_game_players.json.gz"
+        fingerprints[f"historical_game_players_{history_season}_gzip"] = (
+            hashlib.sha256(history_archive.read_bytes()).hexdigest()
+        )
     board = build_capture(
         baseline=predict(rows, args.season, lines),
         player=player_predictions(enriched, args.season, lines),
         games=data["games"], priors=priors,
         captured_utc=captured, season=args.season,
         horizon_days=args.horizon_days, freeze_hours=args.freeze_hours,
-        fingerprints=source_digests(args.raw_dir, args.season),
+        fingerprints=fingerprints,
         model_commit=os.getenv("GITHUB_SHA", ""),
         opponent_player=v3_predictions,
+        rotation_player=v4_rotation,
+        combined_player=v4_all,
     )
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
@@ -203,6 +262,8 @@ def main():
     ap.add_argument("--horizon-days", type=int, default=8)
     ap.add_argument("--freeze-hours", type=int, default=24)
     ap.add_argument("--raw-dir", default="cbb/data/raw")
+    ap.add_argument("--rotation-history-dir", default="cbb/data/rotation")
+    ap.add_argument("--rotation-live-dir", default="cbb/data/rotation_live")
     ap.add_argument("--out", default="cbb/outputs/prospective/latest_capture.json")
     args = ap.parse_args()
     if args.horizon_days < 1 or not 1 <= args.freeze_hours <= 72:

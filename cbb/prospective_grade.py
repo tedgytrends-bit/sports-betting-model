@@ -18,7 +18,7 @@ from cbb.prospective_publish import GitHubStore
 
 FIRST_CAPTURE_UTC = utc_date("2026-11-05T21:29:14.641689Z")
 THRESHOLDS = (0, 2.5, 3.5, 4.5, 5.5)
-MODELS = ("baseline", "player_v2", "player_opp_v3")
+MODELS = ("baseline", "player_v2", "player_opp_v3", "player_rot_v4", "player_all_v4")
 
 
 def iso_week(value: str) -> str:
@@ -56,8 +56,8 @@ def grade_frozen(frozen: dict, final: dict) -> dict:
     total_line = number(line.get("total"))
     models = {}
     for name in MODELS:
-        if name == "player_opp_v3" and name not in recorded:
-            # Existing frozen snapshots are IMMUTABLE: do not backfill v3.
+        if name not in recorded and name not in ("baseline", "player_v2"):
+            # Older frozen snapshots cannot be backfilled with newer models.
             continue
         p = recorded[name]
         am = p.get("ats_lean")
