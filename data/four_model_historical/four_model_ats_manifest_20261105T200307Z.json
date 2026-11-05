@@ -1,0 +1,27 @@
+{
+  "status": "RESEARCH_ONLY_CHRONOLOGICAL_RECONSTRUCTION",
+  "generated_at_utc": "2026-11-05T20:03:07.347884+00:00",
+  "season_2021": "TRAINING ONLY; no evaluated games at 500-game min train",
+  "models": {
+    "baseline": 24,
+    "injury_legacy": 60,
+    "efficiency": 81,
+    "combined_legacy": 117
+  },
+  "injury_warning": "Legacy Injury current builder uses 60 inputs vs archived Week 9 Injury 56. This is NOT the QB-EPA Injury v1 developed during 2026 and NOT a byte-for-byte replay of the original Week 9 injury model.",
+  "market_warning": "Uses nflverse schedule spread_line as the one common historical market reference, not verified live Bovada executable prices.",
+  "train_scheme": "Chronological calendar-week blocks. Train only on prior dates with >=500 completed games. Ridge alpha 10; identical weekly folds.",
+  "training_seasons": [
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "record_rule": "Grade each game's directional ATS lean, no edge minimum; pushes excluded from win pct; projection exactly on spread has no lean.",
+  "comparison_games": 1021,
+  "csv_predictions": "data/four_model_historical/four_model_all_game_predictions_20261105T200307Z.csv",
+  "csv_summary": "data/four_model_historical/four_model_ats_by_season_20261105T200307Z.csv",
+  "public_record": "Untouched (starts Week 8, 2026)."
+}
