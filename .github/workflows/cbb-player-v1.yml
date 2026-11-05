@@ -1,0 +1,36 @@
+name: CBB Player V1 Historical Comparison
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'cbb/player-v1-trigger.txt'
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      CBBD_API_KEY: ${{ secrets.CBBD_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install -r requirements.txt pytest
+      - run: python -m pytest -q cbb/tests
+      - name: Verify key
+        run: test -n "$CBBD_API_KEY"
+      - name: Fetch 2022-2026 games, boxes, betting lines
+        run: python -m cbb.cli fetch --seasons 2022 2023 2024 2025 2026
+      - name: Fetch prior-year player stats, target rosters, transfers and recruiting
+        run: python -m cbb.player_cli fetch --seasons 2022 2023 2024 2025 2026
+      - name: Run identical-game comparison for 2024-2026
+        run: python -m cbb.player_cli backtest --seasons 2022 2023 2024 2025 2026 --test-seasons 2024 2025 2026
+      - name: Upload audit CSV files
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cbb-player-v1-comparison
+          path: cbb/outputs/player_v1/
+          if-no-files-found: ignore
