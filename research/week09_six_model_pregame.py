@@ -22,7 +22,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from model import load_schedule_data, load_pbp, build_efficiency_model_dataset
-from injury_model import load_injury_reports, add_injury_features, injury_coverage_diagnostics
+from injury_model import load_injury_reports, add_injury_features, injury_coverage_diagnostics, _normalize_reports, _counts_for_team
 from research.efficiency_feature_experiments import _team_split_history, _pregame_split_features
 from research.four_model_comparison import _feature_columns
 from research.baseline_injury_recency_weighting import _weights_for_fold, _effective_sample_size
@@ -120,6 +120,50 @@ def main():
     data = base.merge(split, on="game_id", how="left", validate="one_to_one")
     data = data.merge(injury[["game_id"] + injury_columns], on="game_id", how="left", validate="one_to_one")
     data["gameday"] = pd.to_datetime(data["gameday"], errors="coerce")
+
+    # Explicitly reconcile the known pre-TNF saved report, which the generic
+    # upcoming-game feature feed can otherwise classify as unavailable even when
+    # its independent timing diagnostic finds the snapshot pregame-eligible.
+    # This fixes a research INPUT, not a model prediction or production code.
+    saved_path = ROOT / "data/injury_snapshots/injuries_2026_week_09_20261105T012126Z.csv"
+    if not saved_path.exists():
+        raise RuntimeError("The fixed pre-TNF injury snapshot is missing.")
+    snapshot = pd.read_csv(saved_path, low_memory=False)
+    captured_snapshot_utc = pd.to_datetime(snapshot["snapshot_captured_at_utc"], errors="coerce", utc=True)
+    if captured_snapshot_utc.isna().any() or not captured_snapshot_utc.eq(captured_snapshot_utc.iloc[0]).all():
+        raise RuntimeError("Pregame injury snapshot has missing/inconsistent capture timestamps.")
+    if not captured_snapshot_utc.iloc[0] < TNF_KICKOFF_UTC:
+        raise RuntimeError("TNF injury snapshot was not captured before kickoff.")
+    if snapshot["gsis_id"].astype(str).duplicated().any():
+        raise RuntimeError("Week 9 snapshot has duplicate player IDs.")
+    typed_snapshot = _normalize_reports(snapshot)
+    typed_snapshot = typed_snapshot[
+        typed_snapshot["season"].eq(2026) & typed_snapshot["week"].eq(9)
+        & typed_snapshot["season_type"].eq("REG")
+    ]
+    target_mask = data["game_id"].eq(EXPECTED_TNF_ID)
+    if int(target_mask.sum()) != 1:
+        raise RuntimeError("Could not apply TNF injury snapshot to one game.")
+    audit_snapshot_counts = {}
+    for side, team in (("home", "BAL"), ("away", "JAX")):
+        report_rows = typed_snapshot[typed_snapshot["team"].eq(team)]
+        if report_rows.empty:
+            raise RuntimeError(f"Pregame snapshot has no {team} rows.")
+        counts = _counts_for_team(report_rows)
+        if counts["injury_report_available"] != 1.0:
+            raise RuntimeError("Snapshot report availability flag missing.")
+        for key, value in counts.items():
+            col = f"{side}_{key}"
+            if col not in data.columns:
+                raise RuntimeError(f"Missing model feature for supplied snapshot: {col}")
+            data.loc[target_mask, col] = value
+        audit_snapshot_counts[team] = int(len(report_rows))
+    if not (data.loc[target_mask, "home_injury_report_available"].iloc[0] == 1.0
+            and data.loc[target_mask, "away_injury_report_available"].iloc[0] == 1.0):
+        raise RuntimeError("Snapshot reconciliation failed input coverage assertion.")
+    print("TNF snapshot reconciled:", audit_snapshot_counts,
+          "BAL qb_out=", data.loc[target_mask, "home_qb_out"].iloc[0], flush=True)
+
     variants = _feature_columns(data, list(base.columns), passing_columns, injury_columns)
     if sorted(variants) != sorted((
         "baseline_only", "injury_only_added", "efficiency_only_added",
@@ -140,6 +184,7 @@ def main():
         "known_unavailable": ["Lamar Jackson - thumb", "Tyler Huntley - toe"],
         "fagnano_injury": "ankle; latest saved Week 9 practice row says full participant",
         "snapshot": "injuries_2026_week_09_20261105T012126Z.csv",
+        "snapshot_feature_reconciliation": "Explicit pre-TNF saved snapshot counts injected into research feature row after validating capture timestamp and both teams.",
         "raw_home_qb_out_feature": normal_qb_out,
         "scenario_home_qb_out_feature": 2.0,
         "feature_warning": (
@@ -176,7 +221,7 @@ def main():
                 "game_id": str(game["game_id"]), "season": TARGET_SEASON, "week": TARGET_WEEK,
                 "gameday": str(pd.Timestamp(game["gameday"]).date()),
                 "away_team": norm_team(game["away_team"]), "home_team": norm_team(game["home_team"]),
-                "model": name, "model_status": model_status, "qb_scenario": "raw_injury_feed",
+                "model": name, "model_status": model_status, "qb_scenario": ("pre_tnf_saved_snapshot" if str(game["game_id"]) == EXPECTED_TNF_ID and name in ("injury", "combined", "injury_hl4") else "raw_injury_feed"),
                 "projected_away": round(raw["away"], 3), "projected_home": round(raw["home"], 3),
                 "projected_total": round(raw["total"], 3),
                 "projected_home_margin": round(raw["margin_home"], 3),
