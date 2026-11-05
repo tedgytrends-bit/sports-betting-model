@@ -23,7 +23,7 @@ if str(ROOT) not in sys.path:
 
 from model import load_schedule_data, load_pbp, build_efficiency_model_dataset, project_upcoming_efficiency
 from injury_model import load_injury_reports, add_injury_features
-from qb_epa_model import qb_game_stats, build_qb_epa_board, attach_qb_shifts
+from qb_epa_model import qb_game_stats, build_qb_epa_board, attach_qb_shifts, starters_from_game_schedule
 
 OUT = ROOT / "data" / "qb_epa_shadow"
 STARTERS = ROOT / "data" / "qb_starters" / "2026_week09_confirmed.csv"
@@ -70,7 +70,15 @@ def main() -> None:
 
     print("Building pregame QB EPA rates and team baseline comparisons...")
     summary = qb_game_stats(pbp, schedule)
-    board = build_qb_epa_board(summary, schedule, selected, overrides=overrides)
+    # NFLverse schedule supplies per-game projected QB identities. They are
+    # useful for roster moves but NOT independently verified starters.
+    provisional = starters_from_game_schedule(
+        schedule, completed_only=False
+    )
+    provisional = provisional[provisional["game_id"].isin(selected["game_id"])].copy()
+    board = build_qb_epa_board(
+        summary, schedule, selected, overrides=overrides, observed=provisional
+    )
     if len(board) != 30 or board.duplicated(["game_id", "team"]).any():
         raise ValueError("Expected exactly 30 unique team-QB rows in Week 9")
     baltimore = board[
@@ -127,7 +135,7 @@ def main() -> None:
         "timestamp_utc": captured.isoformat(),
         "model": "injury_qb_epa_v2_research",
         "point_shift": "(shrunken starter EPA - recent team QB-mix EPA) times the non-starter share of team dropbacks times expected dropbacks/game",
-        "starter_sources": "Manual source-verified override; otherwise automatically inferred last-game primary passer, expressly unverified",
+        "starter_sources": "Source-confirmed pregame overrides first, otherwise NFLverse upcoming per-game QB names (provisional, not verified); previous-game fallback only if schedule missing",
         "non_qb_injury_features": "All QB rows excluded from QB count AND general injury/practice counts before refit",
         "training": "Chronological historical schedule/PBP and injury reports. Today's game EPA excluded.",
         "conservative_prior": "120 equivalent league QB dropbacks; 12-QB-game half-life for up to 24 previous QB appearances",
@@ -135,6 +143,7 @@ def main() -> None:
         "games": int(len(adjusted)),
         "qb_rows": int(len(board)),
         "confirmed_qb_rows": int(board.starter_source.eq("verified_pregame").sum()),
+        "schedule_provisional_qb_rows": int(board.starter_source.eq("schedule_provisional_qb_unverified").sum()),
         "unverified_qb_rows": int(board.starter_source.eq("inferred_previous_primary_passer").sum()),
         "unknown_qb_rows": int(board.starter_source.eq("unknown_no_pregame_evidence").sum()),
         "output_qb": str(qbf.relative_to(ROOT)),
