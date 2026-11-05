@@ -60,3 +60,34 @@ Do not promote the v3 historical 3.5+ ATS performance to the public
 record: the all-direction historical ROI was still negative and archival
 rosters and odds are not proven point-in-time. This is a monitored,
 research-only experiment.
+
+
+## Player rotation v4 experimental shadow
+
+Beginning **only with snapshots taken after the v4 deployment**, two more
+optional models are captured:
+
+- `player_rot_v4`: corrected player prior plus pregame rotation and
+  recent key-player minute-change features.
+- `player_all_v4`: corrected player prior plus opponent-adjusted team
+  efficiency plus the same rotation features.
+
+Earlier `frozen/GAME_ID.json` records stay completely unchanged. v4 is
+graded ONLY where the model is present in an original pretip frozen
+record. Report each model's prospective coverage separately; never generate
+v4 projections retrospectively for already completed games.
+
+The `cbb/live_rotation.py` command saves authenticated current-season
+`/games/players` data in compressed Actions cache. New runs reuse older
+observed games and re-query a seven-day overlap and any missed dates
+since the last capture. The current-season cache is separate from
+historical backtest data. If the cache vanishes it fetches observed
+games from October to the current capture, not future results.
+
+The snapshot includes SHA-256 provenance for the live and historical
+player-box archives and pregame source coverage per team. Prior game
+box scores are *observations*, not verified pregame injury notices;
+availability indicators are approximate. This new experimental model
+has negative 3-year historical ROI on all directional bets and is NOT
+a verified profitable model. See
+[rotation v4 audit](ROTATION_V4_RESULTS_2024_2026.md).
