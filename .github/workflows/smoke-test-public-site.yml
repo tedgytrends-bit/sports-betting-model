@@ -36,7 +36,7 @@ jobs:
           from pathlib import Path
           import re,csv,math
           html=Path("docs/index.html").read_text(encoding="utf-8")
-          js=re.search(r"<script>([\\s\\S]*?)</script>",html)
+          js=re.search(r"<script>(.*?)</script>",html,re.S)
           assert js, "Missing website app script"
           Path("/tmp/tedgy-site.js").write_text(js.group(1),encoding="utf-8")
           assert "nfl_week09_injury_qb_epa_margin_2026-11-05.csv" in html
