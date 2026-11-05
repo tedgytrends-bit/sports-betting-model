@@ -1,0 +1,1 @@
+2026-11-05: first chronological opponent-adjustment experiment using cached games, lines, rosters and player priors.
