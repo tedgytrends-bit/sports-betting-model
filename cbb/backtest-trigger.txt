@@ -1,0 +1,1 @@
+2026-11-05 initial historical backtest: 2022-2026, test seasons 2024-2026
