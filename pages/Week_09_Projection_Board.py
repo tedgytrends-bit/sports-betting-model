@@ -13,6 +13,8 @@ import streamlit as st
 ROOT = Path(__file__).resolve().parents[1]
 SNAPSHOT = ROOT / "data" / "public_snapshots" / "nfl_week_09_six_model_research_2026-11-04.csv"
 BOVADA = ROOT / "data" / "bovada_lines.csv"
+QB_INJURY = ROOT / "data" / "public_snapshots" / "nfl_week09_injury_qb_epa_margin_2026-11-05.csv"
+QB_INJURY_ARCHIVE = "https://github.com/tedgytrends-bit/sports-betting-model/blob/main/data/public_snapshots/nfl_week09_injury_qb_epa_margin_2026-11-05.csv"
 ARCHIVE_URL = (
     "https://github.com/tedgytrends-bit/sports-betting-model/blob/main/"
     "data/public_snapshots/nfl_week_09_six_model_research_2026-11-04.csv"
@@ -62,18 +64,40 @@ def total_lean(prediction: pd.Series, market_total: float) -> str:
 st.title("NFL Week 9 — Projections")
 st.caption("Frozen model snapshot · User-verified Bovada market board · 2026 regular season")
 st.info(
-    "**Baseline** is the evaluated 24-feature efficiency model. **Injury** uses "
-    "that same foundation with an added injury feature block. These are the "
-    "only two public models. Projections were frozen before the games; updated "
-    "Bovada prices change the displayed leans, not the frozen scores."
+    "**Baseline** is the unchanged evaluated 24-feature model. **Injury** is "
+    "our single QB-aware version: it fits non-QB injuries, measures each expected "
+    "starter's prior EPA relative to the recent team QB mix, and applies a "
+    "conservative margin adjustment without changing the modeled total. "
+    "The previously published Injury snapshot remains archived. "
+    "Unverified starting QBs and missing injury reports are provisional."
 )
 
-if not SNAPSHOT.exists() or not BOVADA.exists():
+if not SNAPSHOT.exists() or not BOVADA.exists() or not QB_INJURY.exists():
     st.error("The frozen Week 9 projections or saved Bovada archive are missing.")
     st.stop()
 
 predictions = pd.read_csv(SNAPSHOT, low_memory=False)
+injury_v2 = pd.read_csv(QB_INJURY, low_memory=False)
 lines = pd.read_csv(BOVADA, low_memory=False)
+required_v2 = {
+    "game_id", "season", "week", "model", "model_version",
+    "projected_away", "projected_home", "projected_total",
+    "published_at_utc", "home_injury_report_available",
+    "away_injury_report_available", "home_qb_name", "away_qb_name",
+    "home_qb_starter_source", "away_qb_starter_source",
+}
+if not required_v2.issubset(injury_v2.columns):
+    st.error("QB-aware Injury snapshot lacks required fields; refusing to silently use old scores.")
+    st.stop()
+injury_v2 = injury_v2[
+    pd.to_numeric(injury_v2["season"], errors="coerce").eq(2026)
+    & pd.to_numeric(injury_v2["week"], errors="coerce").eq(9)
+].copy()
+if len(injury_v2) != 15 or injury_v2["game_id"].nunique() != 15 or not injury_v2["model"].eq("injury").all():
+    st.error("Incomplete or duplicate QB-aware Injury snapshot. Expected 15 games.")
+    st.stop()
+injury_v2 = injury_v2.set_index("game_id")
+
 required_preds = {
     "captured_at_utc", "game_id", "season", "week", "gameday",
     "away_team", "home_team", "model", "projected_away", "projected_home",
@@ -131,7 +155,11 @@ market_keys = set()
 for game_id, group in predictions.groupby("game_id", sort=False):
     variants = group.set_index("model")
     baseline = variants.loc["baseline"]
-    injury = variants.loc["injury"]
+    injury_original = variants.loc["injury"]
+    if game_id not in injury_v2.index:
+        st.error(f"Missing new Injury snapshot for {game_id}.")
+        st.stop()
+    injury = injury_v2.loc[game_id]
     away, home = team(baseline["away_team"]), team(baseline["home_team"])
     game_key = f"{away}@{home}"
     if game_key not in latest_quotes.index:
@@ -165,21 +193,21 @@ if market_keys != set(latest_quotes.index):
     st.stop()
 
 display = pd.DataFrame(rows).sort_values(["_date", "Game"]).drop(columns="_date")
-st.subheader("Baseline and Injury — frozen pregame comparison")
+st.subheader("Baseline and QB-aware Injury — pregame comparison")
 st.dataframe(display, hide_index=True, width="stretch")
 st.caption(
-    "Score columns are model estimates, away team first. ATS leans and Over/Under "
-    "directions are computed using the latest archived Bovada quotes. "
-    "Missing injury reports make the Injury projection provisional; zero report rows "
-    "must not be interpreted as zero injured players."
+    "Baseline was frozen Nov 4. QB-aware Injury v1 was published Nov 5 before kickoff, "
+    "with a five-point-per-team cap and margin-only QB adjustment. "
+    "ATS/total leans use the most recent archived Bovada market quotes. "
+    "A provisional starter or missing injury report is not the same as a confirmed player status."
 )
 
 st.warning(
-    "**TNF quarterback limitation — JAX @ BAL:** Joe Fagnano is starting for Baltimore. "
-    "The original Injury model uses position-level injury status counts and does not estimate "
-    "his individual replacement value. Saved report game-status fields for Lamar Jackson and "
-    "Tyler Huntley were blank, despite both being unavailable. Therefore the default Injury "
-    "score is **not** a validated Fagnano-adjusted forecast."
+    "**QB EPA availability caveat:** Joe Fagnano is verified as Baltimore's Week 9 starter, "
+    "but his prior EPA comes from a small sample. Other projected starters are sourced from "
+    "the upcoming schedule unless separately verified. The QB-aware Injury forecast uses "
+    "a conservative prior and capped margin adjustment, not a validated precise player-point value. "
+    "The original Nov 4 Injury prediction is retained in its historical source file."
 )
 
 with st.expander("Archived Bovada prices and source details"):
@@ -204,11 +232,12 @@ with st.expander("Archived Bovada prices and source details"):
         "negative when the away team is favored. This is an internal data convention."
     )
 
-st.markdown(f"[View the frozen research CSV]({ARCHIVE_URL})")
+st.markdown(f"[Original frozen research snapshot]({ARCHIVE_URL}) · "
+            f"[New QB-aware Injury snapshot]({QB_INJURY_ARCHIVE})")
 st.caption(
     "The other four experimental variants remain archived for private research "
     "but are not presented as competing public projections. "
-    "These frozen Week 9 scores are research projections, not betting advice."
+    "Week 9 scores are pregame research projections, not betting advice."
 )
 
 
@@ -234,6 +263,7 @@ with st.expander("Quarterback EPA context (advanced research — not official pr
                 "verified_pregame": "Confirmed (source-linked)",
                 "inferred_previous_primary_passer": "Provisional — inferred from last game",
                 "unknown_no_pregame_evidence": "Unknown",
+                "schedule_provisional_qb_unverified": "Provisional — schedule-listed",
             }).fillna("Unverified")
             for field in ("qb_shrunk_epa_per_dropback",
                           "team_recent_qb_epa_per_dropback",
@@ -263,6 +293,6 @@ with st.expander("Quarterback EPA context (advanced research — not official pr
                 "from the previous game's primary passer and may be wrong after "
                 "a lineup change. EPA adjustments account for the share of recent "
                 "team QB play already attributable to that player. These metrics "
-                "and the experimental score adjustments are NOT incorporated into "
-                "the frozen public Injury score or official graded record."
+                "and the conservative QB margin adjustment ARE incorporated into "
+                "the new Week 9 Injury score. Earlier public snapshots are never overwritten."
             )
