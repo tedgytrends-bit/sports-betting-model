@@ -335,6 +335,8 @@ def starters_from_game_schedule(schedule: pd.DataFrame, *, completed_only: bool 
 def attach_qb_margin_adjustment(
     nonqb_projections: pd.DataFrame,
     qb_board: pd.DataFrame,
+    *,
+    max_abs_team_qb_impact: float = 5.0,
 ) -> pd.DataFrame:
     """The single forward Injury candidate: preserve the direct total projection.
 
@@ -362,9 +364,19 @@ def attach_qb_margin_adjustment(
         if frame["game_id"].duplicated().any():
             raise ValueError(f"Duplicate {side} QB estimate")
         out = out.merge(frame, how="left", on="game_id", validate="one_to_one")
+    # Guard against thin-sample QB EPA tails. Five points is near the 95th
+    # percentile of the magnitude of single-team shifts in the 2026 review
+    # (4.65 points). Chosen after that review; prospective testing is needed.
+    if not np.isfinite(max_abs_team_qb_impact) or max_abs_team_qb_impact <= 0:
+        raise ValueError("max_abs_team_qb_impact must be finite and positive")
+    out["home_qb_point_shift_capped"] = pd.to_numeric(
+        out["home_qb_point_shift"], errors="coerce"
+    ).clip(-max_abs_team_qb_impact, max_abs_team_qb_impact)
+    out["away_qb_point_shift_capped"] = pd.to_numeric(
+        out["away_qb_point_shift"], errors="coerce"
+    ).clip(-max_abs_team_qb_impact, max_abs_team_qb_impact)
     out["qb_margin_adjustment"] = (
-        pd.to_numeric(out["home_qb_point_shift"], errors="coerce")
-        - pd.to_numeric(out["away_qb_point_shift"], errors="coerce")
+        out["home_qb_point_shift_capped"] - out["away_qb_point_shift_capped"]
     )
     out["projected_home_qb_injury"] = (
         pd.to_numeric(out["projected_home"], errors="coerce")
