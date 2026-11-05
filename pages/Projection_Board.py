@@ -271,12 +271,15 @@ else:
 
     with st.expander("How the current projection works", expanded=True):
         st.write(
-            "The primary board fits the historical efficiency model on completed games and projects scheduled games "
-            "using pregame team features. It is experimental and has not demonstrated a durable betting edge."
+            "By default, this **legacy board** projects scores from the last six games' "
+            "points scored and allowed. If you explicitly enable the efficiency-model "
+            "checkbox in the sidebar, it instead fits a historical play-by-play Ridge model. "
+            "Neither view is the frozen 24-feature Baseline on the main Week 9 page."
         )
         st.write(
-            "The model does not automatically ingest current injury reports, weather, or verified live sportsbook prices. "
-            "or sportsbook odds. Use the manual QB adjustment preview below when the starting-quarterback situation is known."
+            "This legacy preview does not automatically adjust for current injuries, "
+            "weather, or verified live sportsbook prices. The manual controls below "
+            "are illustrative heuristics and do not affect the tracked model record."
         )
 
     st.markdown("**Manual injury and severe-weather adjustment preview**")
