@@ -9,6 +9,14 @@ from injury_model import load_injury_reports, add_injury_features, injury_covera
 st.title("Bovada Projection Monitor")
 st.caption("Upcoming-game market source: user-supplied Bovada lines. Historical backtests retain their established research data sources.")
 
+st.warning(
+    "**Advanced legacy live monitor.** This page independently rebuilds forecasts "
+    "and can show different values from the frozen Week 9 research snapshot. "
+    "Use **Week 9 Projections** for the current published comparison. "
+    "This monitor does not replace the frozen official prospective record."
+)
+
+
 ROOT = Path(__file__).resolve().parents[1]
 LINE_FILE = ROOT / "data" / "bovada_lines.csv"
 PROJECTION_DIR = ROOT / "data" / "prospective_ats_tracking"
