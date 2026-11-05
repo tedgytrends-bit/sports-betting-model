@@ -14,7 +14,9 @@ from pathlib import Path
 
 from cbb.engine import choose_lines, pregame_rows, predict
 from cbb.ingest import load_seasons
-from cbb.player_adjusted import roster_priors, extend_rows, player_predictions
+from cbb.player_adjusted import PLAYER_FEATURES, roster_priors, extend_rows, player_predictions
+from cbb.opponent_adjusted import ADJ_FEATURES, attach_adjustments, pregame_opponent_adjustments
+from cbb.opponent_experiment import fitted_predictions
 from cbb.player_ingest import load_player_inputs
 
 
@@ -58,6 +60,7 @@ def build_capture(
     freeze_hours: int = 24,
     fingerprints: dict | None = None,
     model_commit: str = "",
+    opponent_player: list[dict] | None = None,
 ) -> dict:
     """Pure function: future-only, timestamped, one immutable candidate/game."""
     if captured_utc.tzinfo is None:
@@ -65,10 +68,15 @@ def build_capture(
     now = captured_utc.astimezone(timezone.utc)
     by_baseline = {r["id"]: r for r in baseline}
     by_player = {r["id"]: r for r in player}
+    by_opponent = None if opponent_player is None else {r["id"]: r for r in opponent_player}
     if len(by_baseline) != len(baseline) or len(by_player) != len(player):
         raise ValueError("Duplicate game IDs in model outputs")
     if set(by_baseline) != set(by_player):
         raise ValueError("Player and baseline projections must cover the same games")
+    if by_opponent is not None and (
+        len(by_opponent) != len(opponent_player) or set(by_opponent) != set(by_baseline)
+    ):
+        raise ValueError("Opponent-adjusted player model must cover exactly the same game IDs")
     by_game = {str(g["id"]): g for g in games if int(g.get("season") or 0) == season}
     records = []
     for ident, b in by_baseline.items():
@@ -118,6 +126,10 @@ def build_capture(
                 "away_games_played": int(b.get("away_games", 0)),
             },
         }
+        # v3 is an optional *new-capture-only* research shadow.
+        # NEVER add it retroactively to existing immutable frozen games.
+        if by_opponent is not None:
+            record["player_opp_v3"] = model_fields(by_opponent[ident])
         cov = record["coverage"]
         record["research_quality"] = (
             "adequate"
@@ -159,6 +171,12 @@ def run(args):
     lines = choose_lines(data["lines"])
     priors, _ = roster_priors(load_player_inputs(seasons, args.raw_dir))
     enriched = extend_rows(rows, data["games"], priors)
+    opponent_features = pregame_opponent_adjustments(data["games"], data["boxes"])
+    v3_rows = attach_adjustments(enriched, opponent_features)
+    v3_predictions = fitted_predictions(
+        v3_rows, args.season, lines, PLAYER_FEATURES + ADJ_FEATURES, 250,
+        "player_opp_v3",
+    )
     captured = datetime.now(timezone.utc)
     board = build_capture(
         baseline=predict(rows, args.season, lines),
@@ -168,6 +186,7 @@ def run(args):
         horizon_days=args.horizon_days, freeze_hours=args.freeze_hours,
         fingerprints=source_digests(args.raw_dir, args.season),
         model_commit=os.getenv("GITHUB_SHA", ""),
+        opponent_player=v3_predictions,
     )
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
