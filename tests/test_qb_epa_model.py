@@ -4,7 +4,7 @@ import pandas as pd
 import pytest
 
 from injury_model import _counts_for_team
-from qb_epa_model import qb_game_stats, build_qb_epa_board, attach_qb_shifts, starters_from_game_schedule
+from qb_epa_model import qb_game_stats, build_qb_epa_board, attach_qb_shifts, attach_qb_margin_adjustment, starters_from_game_schedule
 
 
 def sample():
@@ -142,3 +142,23 @@ def test_nflverse_schedule_recognizes_completed_game_starters():
     bal = board[board.team.eq("BAL")].iloc[0]
     assert bal.qb_id == "fagnano"
     assert bal.starter_source == "schedule_provisional_qb_unverified"
+
+
+def test_qb_margin_only_preserves_total_and_moves_spread():
+    base = pd.DataFrame([{"game_id":"g1","projected_home":24., "projected_away":23.}])
+    board = pd.DataFrame([
+        {"game_id":"g1","side":"home","qb_point_shift_experimental":-5.0},
+        {"game_id":"g1","side":"away","qb_point_shift_experimental":-0.2},
+    ])
+    projected=attach_qb_margin_adjustment(base,board).iloc[0]
+    assert projected.qb_margin_adjustment == pytest.approx(-4.8)
+    assert projected.projected_home_qb_injury == pytest.approx(21.6)
+    assert projected.projected_away_qb_injury == pytest.approx(25.4)
+    assert projected.projected_total_qb_injury == pytest.approx(47.0)
+
+
+def test_qb_margin_only_requires_both_qb_shifts():
+    base = pd.DataFrame([{"game_id":"g1","projected_home":24., "projected_away":23.}])
+    board = pd.DataFrame([{"game_id":"g1","side":"away","qb_point_shift_experimental":0.0}])
+    result=attach_qb_margin_adjustment(base,board)
+    assert pd.isna(result.loc[0,"projected_total_qb_injury"])
