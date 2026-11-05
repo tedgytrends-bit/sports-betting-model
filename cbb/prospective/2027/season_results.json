@@ -3,6 +3,7 @@
   "grades": [
     {
       "decided_win_pct": null,
+      "graded_games_with_model": 0,
       "losses": 0,
       "market": "ats",
       "model": "baseline",
@@ -15,6 +16,7 @@
     },
     {
       "decided_win_pct": null,
+      "graded_games_with_model": 0,
       "losses": 0,
       "market": "ats",
       "model": "baseline",
@@ -27,6 +29,7 @@
     },
     {
       "decided_win_pct": null,
+      "graded_games_with_model": 0,
       "losses": 0,
       "market": "ats",
       "model": "baseline",
@@ -39,6 +42,7 @@
     },
     {
       "decided_win_pct": null,
+      "graded_games_with_model": 0,
       "losses": 0,
       "market": "ats",
       "model": "baseline",
@@ -51,6 +55,7 @@
     },
     {
       "decided_win_pct": null,
+      "graded_games_with_model": 0,
       "losses": 0,
       "market": "ats",
       "model": "baseline",
@@ -63,6 +68,7 @@
     },
     {
       "decided_win_pct": null,
+      "graded_games_with_model": 0,
       "losses": 0,
       "market": "total",
       "model": "baseline",
@@ -75,6 +81,7 @@
     },
     {
       "decided_win_pct": null,
+      "graded_games_with_model": 0,
       "losses": 0,
       "market": "total",
       "model": "baseline",
@@ -87,6 +94,7 @@
     },
     {
       "decided_win_pct": null,
+      "graded_games_with_model": 0,
       "losses": 0,
       "market": "total",
       "model": "baseline",
@@ -99,6 +107,7 @@
     },
     {
       "decided_win_pct": null,
+      "graded_games_with_model": 0,
       "losses": 0,
       "market": "total",
       "model": "baseline",
@@ -111,6 +120,7 @@
     },
     {
       "decided_win_pct": null,
+      "graded_games_with_model": 0,
       "losses": 0,
       "market": "total",
       "model": "baseline",
@@ -123,6 +133,7 @@
     },
     {
       "decided_win_pct": null,
+      "graded_games_with_model": 0,
       "losses": 0,
       "market": "ats",
       "model": "player_v2",
@@ -135,6 +146,7 @@
     },
     {
       "decided_win_pct": null,
+      "graded_games_with_model": 0,
       "losses": 0,
       "market": "ats",
       "model": "player_v2",
@@ -147,6 +159,7 @@
     },
     {
       "decided_win_pct": null,
+      "graded_games_with_model": 0,
       "losses": 0,
       "market": "ats",
       "model": "player_v2",
@@ -159,6 +172,7 @@
     },
     {
       "decided_win_pct": null,
+      "graded_games_with_model": 0,
       "losses": 0,
       "market": "ats",
       "model": "player_v2",
@@ -171,6 +185,7 @@
     },
     {
       "decided_win_pct": null,
+      "graded_games_with_model": 0,
       "losses": 0,
       "market": "ats",
       "model": "player_v2",
@@ -183,6 +198,7 @@
     },
     {
       "decided_win_pct": null,
+      "graded_games_with_model": 0,
       "losses": 0,
       "market": "total",
       "model": "player_v2",
@@ -195,6 +211,7 @@
     },
     {
       "decided_win_pct": null,
+      "graded_games_with_model": 0,
       "losses": 0,
       "market": "total",
       "model": "player_v2",
@@ -207,6 +224,7 @@
     },
     {
       "decided_win_pct": null,
+      "graded_games_with_model": 0,
       "losses": 0,
       "market": "total",
       "model": "player_v2",
@@ -219,6 +237,7 @@
     },
     {
       "decided_win_pct": null,
+      "graded_games_with_model": 0,
       "losses": 0,
       "market": "total",
       "model": "player_v2",
@@ -231,9 +250,140 @@
     },
     {
       "decided_win_pct": null,
+      "graded_games_with_model": 0,
       "losses": 0,
       "market": "total",
       "model": "player_v2",
+      "projection_mae": null,
+      "pushes": 0,
+      "roi_if_minus_110_pct": null,
+      "threshold": 5.5,
+      "tracked_leans": 0,
+      "wins": 0
+    },
+    {
+      "decided_win_pct": null,
+      "graded_games_with_model": 0,
+      "losses": 0,
+      "market": "ats",
+      "model": "player_opp_v3",
+      "projection_mae": null,
+      "pushes": 0,
+      "roi_if_minus_110_pct": null,
+      "threshold": 0,
+      "tracked_leans": 0,
+      "wins": 0
+    },
+    {
+      "decided_win_pct": null,
+      "graded_games_with_model": 0,
+      "losses": 0,
+      "market": "ats",
+      "model": "player_opp_v3",
+      "projection_mae": null,
+      "pushes": 0,
+      "roi_if_minus_110_pct": null,
+      "threshold": 2.5,
+      "tracked_leans": 0,
+      "wins": 0
+    },
+    {
+      "decided_win_pct": null,
+      "graded_games_with_model": 0,
+      "losses": 0,
+      "market": "ats",
+      "model": "player_opp_v3",
+      "projection_mae": null,
+      "pushes": 0,
+      "roi_if_minus_110_pct": null,
+      "threshold": 3.5,
+      "tracked_leans": 0,
+      "wins": 0
+    },
+    {
+      "decided_win_pct": null,
+      "graded_games_with_model": 0,
+      "losses": 0,
+      "market": "ats",
+      "model": "player_opp_v3",
+      "projection_mae": null,
+      "pushes": 0,
+      "roi_if_minus_110_pct": null,
+      "threshold": 4.5,
+      "tracked_leans": 0,
+      "wins": 0
+    },
+    {
+      "decided_win_pct": null,
+      "graded_games_with_model": 0,
+      "losses": 0,
+      "market": "ats",
+      "model": "player_opp_v3",
+      "projection_mae": null,
+      "pushes": 0,
+      "roi_if_minus_110_pct": null,
+      "threshold": 5.5,
+      "tracked_leans": 0,
+      "wins": 0
+    },
+    {
+      "decided_win_pct": null,
+      "graded_games_with_model": 0,
+      "losses": 0,
+      "market": "total",
+      "model": "player_opp_v3",
+      "projection_mae": null,
+      "pushes": 0,
+      "roi_if_minus_110_pct": null,
+      "threshold": 0,
+      "tracked_leans": 0,
+      "wins": 0
+    },
+    {
+      "decided_win_pct": null,
+      "graded_games_with_model": 0,
+      "losses": 0,
+      "market": "total",
+      "model": "player_opp_v3",
+      "projection_mae": null,
+      "pushes": 0,
+      "roi_if_minus_110_pct": null,
+      "threshold": 2.5,
+      "tracked_leans": 0,
+      "wins": 0
+    },
+    {
+      "decided_win_pct": null,
+      "graded_games_with_model": 0,
+      "losses": 0,
+      "market": "total",
+      "model": "player_opp_v3",
+      "projection_mae": null,
+      "pushes": 0,
+      "roi_if_minus_110_pct": null,
+      "threshold": 3.5,
+      "tracked_leans": 0,
+      "wins": 0
+    },
+    {
+      "decided_win_pct": null,
+      "graded_games_with_model": 0,
+      "losses": 0,
+      "market": "total",
+      "model": "player_opp_v3",
+      "projection_mae": null,
+      "pushes": 0,
+      "roi_if_minus_110_pct": null,
+      "threshold": 4.5,
+      "tracked_leans": 0,
+      "wins": 0
+    },
+    {
+      "decided_win_pct": null,
+      "graded_games_with_model": 0,
+      "losses": 0,
+      "market": "total",
+      "model": "player_opp_v3",
       "projection_mae": null,
       "pushes": 0,
       "roi_if_minus_110_pct": null,
@@ -250,5 +400,5 @@
   "season": 2027,
   "tracked_games": 0,
   "untracked_completed_games_since_first_capture": 0,
-  "updated_utc": "2026-11-05T21:42:34.066881Z"
+  "updated_utc": "2026-11-05T22:01:12.884612Z"
 }
