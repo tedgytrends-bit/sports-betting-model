@@ -105,7 +105,8 @@ def main()->None:
     matched=target_teams.merge(obs,on=["game_id","team"],how="left",validate="one_to_one")
     missing=matched[matched["qb_id"].isna()]
     print(f"2026 test games {len(target_26)}; team QB observations: {len(matched)-len(missing)} of {len(matched)}",flush=True)
-    if not missing.empty: print("Unknown actual QB first passer:\n"+missing.to_string(index=False),flush=True)
+    if not missing.empty:
+        raise RuntimeError("2026 completed game missing starter QB: "+missing.to_string(index=False))
 
     print("Build point-in-time QB EPA for all completed historical games",flush=True)
     stats=qb_game_stats(pbp,schedule)
@@ -198,6 +199,15 @@ def main()->None:
     starters=obs[
         obs["season"].eq(2026)&obs["week"].isin(COMPARE_WEEKS)
     ].copy()
+    first_pass=observations[
+        observations["season"].eq(2026)&observations["week"].isin(COMPARE_WEEKS)
+    ][["game_id","team","qb_id","qb_name",
+       "first_matches_primary","primary_qb_id"]].rename(columns={
+           "qb_id":"first_pass_qb_id","qb_name":"first_pass_qb_name"
+       })
+    starters=starters.merge(first_pass,on=["game_id","team"],
+                           how="left",validate="one_to_one")
+    starters["starter_matches_first_pass"]=starters["qb_id"].eq(starters["first_pass_qb_id"])
     week1=ROOT/"data"/"qb_starters"/"2026_week01_user_reference.csv"
     if week1.exists():
         seed=pd.read_csv(week1)[["team","opening_day_qb_name"]]
@@ -222,6 +232,7 @@ def main()->None:
         "starter_audit":{
             "complete_qb_team_games":int(len(target_teams)),
             "schedule_recorded_starters":int(len(matched)-len(missing)),
+            "recorded_vs_first_pass_mismatch":int(starters["starter_matches_first_pass"].eq(False).sum()),
             "first_vs_primary_disagreement":int(
                 starters["first_matches_primary"].eq(False).sum()
             ),
@@ -235,7 +246,7 @@ def main()->None:
         "non_qb_rule":"All QB rows removed from QB count AND general injury/practice counts before QB EPA feature is added.",
         "clinical_limitations":[
             "2026 holdout comparison uses postgame starter identity and cannot establish prospective performance.",
-            "PBP first passer is a proxy for the opening QB and may be wrong where first pass was after early substitution or trick play.",
+            "PBP first passer provides a QA cross-check, while NFLverse per-game QB metadata supplies starter identity.",
             "QB EPA prior shrinkage and conversion were selected before evaluation but have not undergone extensive external validation.",
             "Injury report source does not guarantee complete point-in-time unavailable-player coverage.",
             "Do not overwrite published 2026 Week 8-9 official frozen projections."
