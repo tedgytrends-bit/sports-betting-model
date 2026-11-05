@@ -1,0 +1,38 @@
+name: Smoke test legacy projection Streamlit page
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "pages/Projection_Board.py"
+      - "model.py"
+      - ".github/workflows/smoke-test-legacy-projection-board.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  legacy-default-view:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install Streamlit runtime and model dependencies
+        run: pip install -r requirements.txt
+      - name: Execute default legacy board with Streamlit AppTest
+        run: |
+          python - <<'PY'
+          from streamlit.testing.v1 import AppTest
+          app = AppTest.from_file("pages/Projection_Board.py", default_timeout=120).run()
+          errors = list(app.exception)
+          print("Default legacy page error count:", len(errors))
+          for e in errors:
+              print("STREAMLIT ERROR:", e.message)
+              print("TRACE:", e.stack_trace)
+          assert not errors, "Legacy page raised an exception during real Streamlit runtime"
+          print("PASS: legacy board rendered without runtime exceptions")
+          PY
