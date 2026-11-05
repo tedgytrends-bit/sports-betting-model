@@ -1,0 +1,47 @@
+name: Validate QB EPA injury shadow historically
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/backtest-qb-epa-injury-shadow.yml"
+      - "research/backtest_qb_epa_injury_shadow.py"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: qb-epa-injury-backtest-main
+  cancel-in-progress: false
+
+jobs:
+  backtest-qb-epa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt pytest
+      - name: Check data-leakage and duplicate-penalty tests
+        run: |
+          python -m py_compile qb_epa_model.py injury_model.py research/backtest_qb_epa_injury_shadow.py
+          python -m pytest -q tests/test_qb_epa_model.py
+      - name: Run 2025–26 chronological test
+        run: python research/backtest_qb_epa_injury_shadow.py
+      - name: Commit research outputs only
+        run: |
+          if [ -n "$(git status --porcelain data/qb_epa_shadow)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add data/qb_epa_shadow
+            git commit -m "Record QB EPA injury 2025-26 chronological research audit"
+            git pull --rebase origin main
+            git push
+          fi
