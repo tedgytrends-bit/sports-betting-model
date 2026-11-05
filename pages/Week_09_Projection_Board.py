@@ -241,58 +241,49 @@ st.caption(
 )
 
 
-# Optional research transparency: explain each team's current projected starter
-# and relative EPA without substituting unvalidated numbers into official scores.
-QB_RESEARCH_DIR = ROOT / "data" / "qb_epa_shadow"
-with st.expander("Quarterback EPA context (advanced research — not official projections)"):
-    qb_exports = sorted(QB_RESEARCH_DIR.glob("week09_qb_epa_*.csv")) if QB_RESEARCH_DIR.exists() else []
-    if not qb_exports:
-        st.info("QB EPA research snapshot has not been generated yet.")
+# One Injury model, one QB source: use the SAME frozen published QB-aware
+# Injury rows as the main board, never a different experimental snapshot.
+with st.expander("Starting QB EPA — inputs to the published Injury model"):
+    verified = injury_v2.reset_index().copy()
+    qb_cols = [
+        "game_id", "away_team", "home_team", "away_qb_name", "home_qb_name",
+        "away_qb_starter_source", "home_qb_starter_source",
+        "away_qb_prior_dropbacks", "home_qb_prior_dropbacks",
+        "away_qb_epa_delta", "home_qb_epa_delta",
+        "away_qb_shift_capped", "home_qb_shift_capped",
+    ]
+    if not set(qb_cols).issubset(verified.columns):
+        st.error("Published Injury QB metadata is incomplete.")
     else:
-        qb = pd.read_csv(qb_exports[-1], low_memory=False)
-        required_qb = {
-            "game_id", "team", "qb_name", "starter_source", "confidence",
-            "qb_prior_dropbacks", "qb_shrunk_epa_per_dropback",
-            "team_recent_qb_epa_per_dropback", "qb_delta_epa_per_dropback",
-        }
-        if not required_qb.issubset(qb.columns):
-            st.error("Incomplete QB research export; not displaying misleading partial data.")
-        else:
-            research = qb.copy()
-            research["Starter source"] = research["starter_source"].map({
-                "verified_pregame": "Confirmed (source-linked)",
-                "inferred_previous_primary_passer": "Provisional — inferred from last game",
-                "unknown_no_pregame_evidence": "Unknown",
-                "schedule_provisional_qb_unverified": "Provisional — schedule-listed",
-            }).fillna("Unverified")
-            for field in ("qb_shrunk_epa_per_dropback",
-                          "team_recent_qb_epa_per_dropback",
-                          "qb_delta_epa_per_dropback"):
-                research[field] = pd.to_numeric(research[field], errors="coerce").round(3)
-            st.dataframe(
-                research[[
-                    "game_id", "team", "qb_name", "Starter source",
-                    "qb_shrunk_epa_per_dropback",
-                    "team_recent_qb_epa_per_dropback",
-                    "qb_delta_epa_per_dropback", "qb_prior_dropbacks",
-                    "confidence",
-                ]].rename(columns={
-                    "game_id": "Game",
-                    "team": "Team",
-                    "qb_name": "Expected QB",
-                    "qb_shrunk_epa_per_dropback": "QB EPA / dropback (shrunk)",
-                    "team_recent_qb_epa_per_dropback": "Recent team QB EPA / dropback",
-                    "qb_delta_epa_per_dropback": "Incremental QB EPA / dropback",
-                    "qb_prior_dropbacks": "Prior QB dropbacks",
-                    "confidence": "Sample quality",
-                }).sort_values(["Game", "Team"]),
-                hide_index=True, width="stretch",
-            )
-            st.caption(
-                "Only source-linked starters are verified. Other QBs are inferred "
-                "from the previous game's primary passer and may be wrong after "
-                "a lineup change. EPA adjustments account for the share of recent "
-                "team QB play already attributable to that player. These metrics "
-                "and the conservative QB margin adjustment ARE incorporated into "
-                "the new Week 9 Injury score. Earlier public snapshots are never overwritten."
-            )
+        pieces = []
+        for side in ("away", "home"):
+            q = verified[[
+                "game_id", f"{side}_team", f"{side}_qb_name",
+                f"{side}_qb_starter_source", f"{side}_qb_prior_dropbacks",
+                f"{side}_qb_epa_delta", f"{side}_qb_shift_capped",
+            ]].rename(columns={
+                f"{side}_team": "Team",
+                f"{side}_qb_name": "Expected QB",
+                f"{side}_qb_starter_source": "Starter evidence",
+                f"{side}_qb_prior_dropbacks": "Career sample (prior dropbacks)",
+                f"{side}_qb_epa_delta": "Incremental EPA/dropback",
+                f"{side}_qb_shift_capped": "Estimated QB effect (points)",
+                "game_id": "Game",
+            })
+            pieces.append(q)
+        detail = pd.concat(pieces, ignore_index=True)
+        detail["Starter evidence"] = detail["Starter evidence"].map({
+            "verified_pregame": "Verified before kickoff",
+            "schedule_provisional_qb_unverified": "Provisional schedule listing",
+        }).fillna("Unverified")
+        for name in ("Incremental EPA/dropback", "Estimated QB effect (points)"):
+            detail[name] = pd.to_numeric(detail[name], errors="coerce").round(3)
+        st.dataframe(detail.sort_values(["Game", "Team"]), hide_index=True, width="stretch")
+        st.caption(
+            "These are the QB inputs used by the single published Injury v1. "
+            "The published score adjusts the margin while keeping the non-QB "
+            "total projection fixed. Only source-confirmed starters are verified. "
+            "QB effects use a conservative sample-size adjustment and a maximum "
+            "five-point per-team impact. The 2026 retrospective test used "
+            "postgame starter identities; its improvement is not prospective proof."
+        )
