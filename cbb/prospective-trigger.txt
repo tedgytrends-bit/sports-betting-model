@@ -2,3 +2,4 @@
 2026-11-05 validate quota-efficient second capture and automatic frozen-record grading.
 2026-11-05 verify optional player_opp_v3 in new 2026-27 shadow snapshots and historical freezes unchanged.
 2026-11-05 first live v4 rotation snapshot and shadow-grading integration verification.
+2026-11-06 validate rolling daily 48h/7d performance report and ISO-week rollover fix.
