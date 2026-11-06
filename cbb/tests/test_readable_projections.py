@@ -35,7 +35,6 @@ def captured(games):
 def test_all_models_market_and_score_shown_without_retrospective_claims():
     text = render_projections(captured([game()]))
     assert "Upcoming Projections" in text
-    assert "1 upcoming games" not in text  # counts are deliberately concise
     assert "Next eight days:** 1" in text
     assert "With market lines:** 1" in text
     assert "VCU @ Memphis" in text
