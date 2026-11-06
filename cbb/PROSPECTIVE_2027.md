@@ -140,3 +140,25 @@ GitHub view. It contains season-to-date, last 48 hours, last seven
 days, Central Time daily summaries and recent completed game grades
 for the frozen five-model research board. Never infer retrospective
 picks for v3/v4 before their original recorded deployment.
+
+
+## Readable upcoming projections and market leans
+
+The same scheduled workflow publishes a `PROJECTIONS.md` page to
+the isolated `cbb-prospective` branch alongside the results README.
+
+Each future game with an observed spread or total has all available
+model versions side by side, with tipoff in Central Time, observed
+sportsbook spread and total, projected score, projected total,
+actual ATS side/quoted spread, corresponding total Over/Under lean,
+and each model's edge in points. There are no fabricated book lines.
+
+The board is generated from the **latest timestamped current capture**.
+It is intentionally different from frozen model pick records. The former
+can evolve after new information arrives; the latter can never be edited
+or backfilled. The full eight-day game slate, including games with no
+market line, is retained in the machine-readable latest JSON.
+
+Both the results README and the latest PROJECTIONS page cross-link.
+The same daily workflow updates both pages in the November–April
+schedule; GitHub Actions can run later than its target 13:05 UTC start.
