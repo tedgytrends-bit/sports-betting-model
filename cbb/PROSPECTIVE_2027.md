@@ -91,3 +91,40 @@ availability indicators are approximate. This new experimental model
 has negative 3-year historical ROI on all directional bets and is NOT
 a verified profitable model. See
 [rotation v4 audit](ROTATION_V4_RESULTS_2024_2026.md).
+
+
+## Daily results and last-48-hour performance review
+
+The automated final-score grading step now also publishes
+`cbb/prospective/2027/performance_report.json` on the isolated
+`cbb-prospective` data branch. This is a **derived**, refreshable
+summary of the already-frozen, already-graded prospective record, not a
+new backtest.
+
+For each model (baseline, player v2, player+opponent v3, and both v4
+rotation variants), it shows:
+
+- Full-season and exact rolling **48-hour** and **seven-day** ATS/totals
+  win-loss-push, number of eligible leans, hypothetical -110 ROI and
+  margin/total point projection MAE.
+- Separate **all directional leans (0 threshold)** and **3.5+ point
+  edges**. Other pre-specified thresholds remain in `season_results.json`.
+- Daily game scorecards labeled by **America/Chicago** date. The source
+  journals remain grouped by ISO week in UTC.
+- A last-60-games audit table with scores, original frozen book lines,
+  each model's **actual captured** directional grade, original edge,
+  and error.
+- Paired error differences versus baseline **on identical pretip
+  frozen games**. Newer models with no original frozen forecast report
+  zero games rather than retrospective synthetic performance.
+- Missing-frozen and invalid-record totals, and market provider mix.
+
+A previously identified weekly rollover defect was fixed: journals for
+a new Monday now enter the season results immediately, even when the
+first-ever frozen observation happened on a Thursday. Regression tests
+cover week boundaries, 2026/2027 year rollover, Central Time game dates,
+paired samples, and excluding posttip or future observations.
+
+This remains a **research shadow** report. A short-term winning sample
+is not demonstrated profitability. All odds returns use a hypothetical
+uniform -110 and may differ from accessible sportsbook prices.
