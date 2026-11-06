@@ -150,6 +150,19 @@ def publish(board, store, run_id):
         "latest_rule": "Most recent timestamped projection; do not grade as pre-tip frozen",
     }
     updated = store.put_json(f"{root}/latest.json", latest, immutable=False)
+    from cbb.readable_projections import render_projections
+
+    projections_published = store.put_text(
+        f"{root}/PROJECTIONS.md", render_projections(board), immutable=False
+    )
+    print("CBB_PROJECTION_BOARD", json.dumps({
+        "published": projections_published,
+        "path": f"{root}/PROJECTIONS.md",
+        "games_with_market_lines": sum(
+            g.get("market", {}).get("home_spread") is not None or
+            g.get("market", {}).get("total") is not None for g in board["games"]
+        ),
+    }))
     print("CBB_PUBLISHED", json.dumps({
         "snapshot": snapshot_path, "snapshot_result": saved,
         "frozen_created": frozen_new, "frozen_already_exists": frozen_existing,
