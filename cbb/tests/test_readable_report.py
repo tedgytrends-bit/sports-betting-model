@@ -69,7 +69,7 @@ def test_readable_scorecard_has_explicit_directional_and_filtered_and_recent():
     assert "at least 3.5 points" in content
     assert "0" in content and "3" in content
     assert "Away @ Home" in content
-    assert "later" in content.lower()
+    assert "were added after" in content.lower()
     assert "[Machine-readable review](performance_report.json)" in content
 
 
