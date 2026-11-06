@@ -1,0 +1,123 @@
+{
+  "capture_type": "research_shadow",
+  "capture_utc": "2026-11-06T14:13:22.439077Z",
+  "capture_version": 1,
+  "frozen_rule": "First snapshot within 24 hours before tip with at least one market line",
+  "game": {
+    "away": "Robert Morris",
+    "away_team_id": "244",
+    "baseline": {
+      "ats_edge": 14.456,
+      "ats_lean": "home",
+      "projected_away_points": 58.54,
+      "projected_home_points": 82.49,
+      "projected_margin_home": 23.956,
+      "projected_total": 141.031,
+      "total_edge": -2.469,
+      "total_lean": "under",
+      "training_games": 31259
+    },
+    "coverage": {
+      "away_elite_recruits": 0,
+      "away_games_played": 1,
+      "away_prior_matched": 8,
+      "away_roster_eligible": 15,
+      "away_verified_portal": 2,
+      "home_elite_recruits": 0,
+      "home_games_played": 1,
+      "home_prior_matched": 10,
+      "home_roster_eligible": 17,
+      "home_verified_portal": 0
+    },
+    "freeze_candidate": true,
+    "home": "UIC",
+    "home_team_id": "315",
+    "id": "377963",
+    "market": {
+      "as_of_utc": "2026-11-06T14:13:22.439077Z",
+      "home_spread": -9.5,
+      "provider": "Bovada",
+      "total": 143.5
+    },
+    "neutral_site": false,
+    "player_all_v4": {
+      "ats_edge": 9.364,
+      "ats_lean": "home",
+      "projected_away_points": 65.12,
+      "projected_home_points": 83.98,
+      "projected_margin_home": 18.864,
+      "projected_total": 149.1,
+      "total_edge": 5.6,
+      "total_lean": "over",
+      "training_games": 31259
+    },
+    "player_opp_v3": {
+      "ats_edge": 6.211,
+      "ats_lean": "home",
+      "projected_away_points": 66.93,
+      "projected_home_points": 82.64,
+      "projected_margin_home": 15.711,
+      "projected_total": 149.572,
+      "total_edge": 6.072,
+      "total_lean": "over",
+      "training_games": 31259
+    },
+    "player_rot_v4": {
+      "ats_edge": 10.918,
+      "ats_lean": "home",
+      "projected_away_points": 64.2,
+      "projected_home_points": 84.62,
+      "projected_margin_home": 20.418,
+      "projected_total": 148.822,
+      "total_edge": 5.322,
+      "total_lean": "over",
+      "training_games": 31259
+    },
+    "player_v2": {
+      "ats_edge": 7.933,
+      "ats_lean": "home",
+      "projected_away_points": 65.55,
+      "projected_home_points": 82.98,
+      "projected_margin_home": 17.433,
+      "projected_total": 148.536,
+      "total_edge": 5.036,
+      "total_lean": "over",
+      "training_games": 31259
+    },
+    "research_quality": "adequate",
+    "rotation_coverage": {
+      "away": {
+        "box_coverage": 1.0,
+        "last_box_present": true,
+        "past_game_boxes": 1,
+        "prior_key_minutes_missing": 0.0
+      },
+      "home": {
+        "box_coverage": 1.0,
+        "last_box_present": true,
+        "past_game_boxes": 1,
+        "prior_key_minutes_missing": 0.0
+      }
+    },
+    "season": 2027,
+    "tip_utc": "2026-11-07T01:00:00Z"
+  },
+  "model_commit": "256205b916481bd31baaba99e4949e30831d1f29",
+  "snapshot_path": "cbb/prospective/2027/snapshots/20261106T141322439077_42231786577.json",
+  "source": "CollegeBasketballData API as received at capture time",
+  "source_sha256": {
+    "boxes.json": "2689a678b11747caac3df84f8ac4f48ce9e357b1e8129047b5e9be96a2c8025c",
+    "games.json": "2686ee1507b7f50c005dfc1aafdf31b86413c41348d9a6b9af02cd690e3975b5",
+    "historical_game_players_2022_gzip": "3fc80e7d3b0963611757d7554e2ab25f8fa9b452db6b1c93ae4c8c911ec66d8d",
+    "historical_game_players_2023_gzip": "28ec46bff415aea0e871ec2c59c7d97326cbb1b72396e66fb3db3d5a91c73fa3",
+    "historical_game_players_2024_gzip": "da66322378204140f5bbd9a0500f20914cfa11d2ea789261bfb12840f9a68ff3",
+    "historical_game_players_2025_gzip": "c650c07c0ceeb6b25ff1877a04490eec5b5dfa2a73d4456157cdd618e17d0b2b",
+    "historical_game_players_2026_gzip": "f1d1f95b023e4e340a95f9eb9ee15546863fbbeed218ac01119ae8d20f345414",
+    "lines.json": "0f38f7c63ac1e27d435d4e7e0dfc97a9174c46b1d674bd9f348acc9a0ea1e953",
+    "live_game_players_gzip": "bbed3bc042c0abfca3e379173604760fbc9f33537262e4ac095758a1f6928343",
+    "portal.json": "1120680b643a03192b5f9361ae57e37e6a535c5a40b4622761ab597962101951",
+    "prior_players.json": "b0ef0a21b4e64a811eb29fd569f711257f4088ebd2abbfad89921542d577638e",
+    "recruits.json": "e6d4bbefdadeb90fa70b094eca3aa2cbd19b76397daaab1b1e9c847059ec2bff",
+    "rosters.json": "9f606d513ee88f2306fd1d580db33db1e0e2832175674f324cafda8b569add65"
+  }
+}
