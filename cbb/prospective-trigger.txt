@@ -4,3 +4,4 @@
 2026-11-05 first live v4 rotation snapshot and shadow-grading integration verification.
 2026-11-06 validate rolling daily 48h/7d performance report and ISO-week rollover fix.
 2026-11-06 verify readable rolling research scorecard publishing, no changes to frozen model history.
+2026-11-06 publish human-readable ATS and total leans for upcoming CBB games on daily results data branch.
