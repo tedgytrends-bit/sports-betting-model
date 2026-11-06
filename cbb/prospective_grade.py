@@ -215,6 +215,9 @@ def execute(store: GitHubStore, data: list[dict], season: int = 2027) -> dict:
         captured_utc=datetime.now(timezone.utc),
     )
     store.put_json(f"{root}/performance_report.json", review, immutable=False)
+    from cbb.readable_report import render_markdown
+
+    store.put_text(f"{root}/README.md", render_markdown(review), immutable=False)
     print("CBB_PERFORMANCE_REPORT", json.dumps({
         "tracked_total": review["tracked_games"],
         "last_48h": review["last_48_hours"]["tracked_games"],
