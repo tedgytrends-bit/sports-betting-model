@@ -130,14 +130,15 @@ def summarize(entries: list[dict], untracked: int) -> dict:
 
 
 def iso_weeks_between(start: date, end: date):
-    d = start
-    seen = set()
+    """Enumerate EVERY touched ISO week, including partial first/last weeks.
+
+    Previously anchored on the capture date's weekday (Thursday), which
+    omitted the new ISO week until Thursday of the following week.
+    """
+    d = start - timedelta(days=start.weekday())
     while d <= end:
         year, week, _ = d.isocalendar()
-        ident = f"{year}-W{week:02d}"
-        if ident not in seen:
-            seen.add(ident)
-            yield ident
+        yield f"{year}-W{week:02d}"
         d += timedelta(days=7)
 
 
@@ -205,6 +206,23 @@ def execute(store: GitHubStore, data: list[dict], season: int = 2027) -> dict:
     summary["newly_untracked"] = new_untracked
     summary["newly_invalid"] = new_invalid
     store.put_json(f"{root}/season_results.json", summary, immutable=False)
+    # Derived reports use ONLY the frozen-game grade journal above. They
+    # never inspect new live prices or retrain a prediction after tipoff.
+    from cbb.performance_report import generate_performance_report
+
+    review = generate_performance_report(
+        all_entries, untracked, invalid,
+        captured_utc=datetime.now(timezone.utc),
+    )
+    store.put_json(f"{root}/performance_report.json", review, immutable=False)
+    print("CBB_PERFORMANCE_REPORT", json.dumps({
+        "tracked_total": review["tracked_games"],
+        "last_48h": review["last_48_hours"]["tracked_games"],
+        "last_7d": review["last_7_days"]["tracked_games"],
+        "daily_dates": len(review["daily_by_central_date"]),
+        "as_of_utc": review["as_of_utc"],
+        "path": f"{root}/performance_report.json",
+    }))
     print("CBB_GRADE_RESULTS", json.dumps({
         "tracked_total": len(all_entries), "new_grades": new_grades,
         "untracked_total": untracked, "invalid": invalid,
