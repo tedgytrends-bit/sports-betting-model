@@ -128,3 +128,15 @@ paired samples, and excluding posttip or future observations.
 This remains a **research shadow** report. A short-term winning sample
 is not demonstrated profitability. All odds returns use a hypothetical
 uniform -110 and may differ from accessible sportsbook prices.
+
+
+## Readable GitHub results page
+
+In addition to the machine-readable `performance_report.json`, the
+daily workflow publishes a rendered Markdown
+`cbb/prospective/2027/README.md` directly to the separate
+`cbb-prospective` branch. This becomes the directory's default
+GitHub view. It contains season-to-date, last 48 hours, last seven
+days, Central Time daily summaries and recent completed game grades
+for the frozen five-model research board. Never infer retrospective
+picks for v3/v4 before their original recorded deployment.
