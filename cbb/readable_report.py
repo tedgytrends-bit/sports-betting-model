@@ -68,12 +68,6 @@ def render_markdown(report: dict) -> str:
         terr = total["model_mae_points"]
         lines.append(
             f"| {title} | {pick_record(ats)} | {roi(ats)} | "
-            f"{aerr:.2f}" if aerr is not None else ""
-        )
-        # Avoid conditional operator precedence in table construction.
-        lines.pop()
-        lines.append(
-            f"| {title} | {pick_record(ats)} | {roi(ats)} | "
             f"{f'{aerr:.2f}' if aerr is not None else '—'} | "
             f"{pick_record(total)} | {roi(total)} | "
             f"{f'{terr:.2f}' if terr is not None else '—'} |"
@@ -101,8 +95,6 @@ def render_markdown(report: dict) -> str:
     for key, title in (("last_48_hours", "Past 48 hours"),
                        ("last_7_days", "Past 7 days")):
         block = report[key]
-        ats, total = block["models"]["player_v2"].values()
-        # Explicit key retrieval avoids relying on mapping order.
         ats = block["models"]["player_v2"]["ats"]["0"]
         total = block["models"]["player_v2"]["total"]["0"]
         lines.append(
