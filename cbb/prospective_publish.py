@@ -71,6 +71,35 @@ class GitHubStore:
         raise RuntimeError(f"Failed publishing {path} after retries")
 
 
+    def put_text(self, path, content, immutable=False):
+        """Publish readable Markdown/text on the isolated data branch.
+
+        Immutable entries never overwrite an existing file. Mutable
+        scorecards can be rewritten daily; frozen picks still use put_json.
+        """
+        data = str(content).encode("utf-8")
+        for attempt in range(4):
+            sha = self.existing_sha(path)
+            if sha and immutable:
+                return "existing"
+            payload = {
+                "message": ("CBB: archive " if immutable else "CBB: update ")
+                           + path,
+                "content": base64.b64encode(data).decode("ascii"),
+                "branch": self.branch,
+            }
+            if sha:
+                payload["sha"] = sha
+            response = self.session.put(self.api + path, json=payload, timeout=50)
+            if response.ok:
+                return "created" if not sha else "updated"
+            if response.status_code in (409, 422) and attempt < 3:
+                time.sleep(1 + attempt)
+                continue
+            response.raise_for_status()
+        raise RuntimeError(f"Could not publish text {path} after retries")
+
+
 def validate(board):
     if board.get("capture_type") != "research_shadow" or board.get("capture_version") != 1:
         raise ValueError("Unexpected capture format")
