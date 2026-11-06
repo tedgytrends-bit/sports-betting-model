@@ -84,6 +84,13 @@ class MemoryStore:
         self.files[path]=body
         return action
 
+    def put_text(self,path,content,immutable=False):
+        if path in self.files and immutable:
+            return "existing"
+        action="created" if path not in self.files else "updated"
+        self.files[path]=content
+        return action
+
 
 def test_frozen_is_immutable_but_latest_updates():
     store=MemoryStore()
