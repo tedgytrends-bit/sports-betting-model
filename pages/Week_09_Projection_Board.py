@@ -192,7 +192,7 @@ with st.expander("Bovada screenshot archive and model methodology"):
         .reset_index().rename(columns={"key":"Game","captured_at_utc":"Source reference UTC"}),
         hide_index=True, width="stretch"
     )
-    st.markdown(f"[Final Injury source]({FINAL_LINK}) · [Original six-model research snapshot]({ORIGINAL}) · "
-                f"[Earlier Injury version]({ORIGINAL_INJURY})")
+    st.markdown(f"[Final Sunday/Monday Injury source]({FINAL_LINK}) · [Original Thursday Injury forecast]({ORIGINAL_INJURY}) · "
+                f"[Four-model historical research snapshot]({ORIGINAL})")
     st.caption("Baseline, Efficiency and Combined remain available for internal research, not as competing public predictions. "
-               "Thursday's completed game is excluded from the upcoming slate and remains historically archived.")
+               "Thursday's completed game remains visible on this Week 9 board with its original pregame Injury prediction.")
