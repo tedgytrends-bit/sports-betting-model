@@ -13,6 +13,7 @@ on:
       - "data/public_snapshots/nfl_week_09_six_model_research_2026-11-04.csv"
       - "data/public_snapshots/nfl_week09_injury_qb_epa_margin_2026-11-05.csv"
       - "data/public_snapshots/nfl_week09_final_injury_2026-11-08.csv"
+      - "data/public_snapshots/nfl_week09_kickoffs_2026.csv"
       - "docs/index.html"
       - "data/bovada_lines.csv"
       - ".github/workflows/smoke-test-public-site.yml"
@@ -42,7 +43,10 @@ jobs:
           Path("/tmp/tedgy-site.js").write_text(js.group(1),encoding="utf-8")
           assert "nfl_week09_injury_qb_epa_margin_2026-11-05.csv" in html
           assert "nfl_week09_final_injury_2026-11-08.csv" in html
-          assert "data.games=buildWeek9(data.rows9,data.market,data.injuryV2,data.finalInjury)" in html
+          assert "data.games=buildWeek9(data.rows9,data.market,data.injuryV2,data.finalInjury,data.kickoffs)" in html
+          assert "Date.parse(a.kickoffUtc)-Date.parse(b.kickoffUtc)" in html
+          assert "tnf.completed=true" in html
+          assert "COMPLETED · ORIGINAL TNF" in html
           assert 'id="model-select"' not in html, "Public board should not offer competing projections"
           assert "Final pregame" in html
           # X/social crawlers cannot execute the site's JS. Social tags and
@@ -78,7 +82,19 @@ jobs:
               assert float(r["away_injury_report_available"])==1.0
               a,h,t=(float(r[k]) for k in ("projected_away","projected_home","projected_total"))
               assert all(map(math.isfinite,(a,h,t))) and abs(a+h-t)<.02
-          print("PASS: 14 distinct, timestamped pregame Injury projections; Thursday preserved")
+          with Path("data/public_snapshots/nfl_week09_kickoffs_2026.csv").open() as f:
+              kickoffs=list(csv.DictReader(f))
+          assert len(kickoffs)==15 and len({r["game_id"] for r in kickoffs})==15
+          assert {r["game_id"] for r in kickoffs}=={r["game_id"] for r in rows}
+          assert sum(r["week9_status"]=="Completed" for r in kickoffs)==1
+          assert next(r for r in kickoffs if r["week9_status"]=="Completed")["game_id"]=="2026_09_JAX_BAL"
+          from datetime import datetime
+          ordered=sorted(kickoffs,key=lambda r: datetime.fromisoformat(r["kickoff_utc"].replace("Z","+00:00")))
+          assert ordered[0]["game_id"]=="2026_09_JAX_BAL", "Thursday must be first"
+          assert ordered[1]["game_id"]=="2026_09_CIN_ATL", "Sunday morning game must precede Seattle"
+          assert ordered[-1]["game_id"]=="2026_09_BUF_MIN", "Monday night must be last"
+          assert {r["game_id"] for r in final}=={r["game_id"] for r in ordered[1:]}
+          print("PASS: 15 Week 9 games in kickoff order, original TNF forecast preserved, 14 finals unchanged")
           PY
           node --check /tmp/tedgy-site.js
       - name: Test actual routed app and historical links
