@@ -51,8 +51,24 @@ jobs:
           assert len({(r["game_id"], r["model"]) for r in main_rows}) == 90
           def team(t):
               return "LAR" if t == "LA" else t
-          market = {(team(r["away_team"]), team(r["home_team"])): r for r in quotes}
-          assert len(quotes) == 15 and len(market) == 15, "Missing/duplicate Bovada games"
+          # The Bovada file is append-only. Older snapshots remain available for
+          # line movement and historical audit. Pick the newest quote per game,
+          # exactly as the website's latestMarket() function does.
+          from datetime import datetime
+          def parsed_time(row):
+              return datetime.fromisoformat(row["captured_at_utc"].replace("Z", "+00:00"))
+          quotes.sort(key=parsed_time)
+          market = {}
+          seen = set()
+          for r in quotes:
+              k = (team(r["away_team"]), team(r["home_team"]))
+              unique = (k, r["captured_at_utc"])
+              assert unique not in seen, f"Duplicate market snapshot: {unique}"
+              seen.add(unique)
+              assert float(r["home_favorite_spread"]) == float(r["home_favorite_spread"])
+              assert float(r["total_line"]) > 0, f"Invalid total for {k}"
+              market[k] = r
+          assert len(market) == 15, "Expected 15 unique Week 9 Bovada matchups"
           projected = {(team(r["away_team"]), team(r["home_team"])) for r in main_rows}
           assert projected == set(market), (projected - set(market), set(market) - projected)
           tnf = next(r for r in main_rows if r["game_id"] == "2026_09_JAX_BAL" and r["model"] == "baseline")
@@ -61,5 +77,5 @@ jobs:
           assert float(market["JAX", "BAL"]["home_favorite_spread"]) == -10.0
           assert float(market["JAX", "BAL"]["total_line"]) == 39.0
           assert len({r["captured_at_utc"] for r in rows}) == 1
-          print("PASS: Week 9 has 15 aligned Bovada matchups, six frozen models per game and three separately marked TNF QB scenarios.")
+          print(f"PASS: Week 9 has {len(market)} aligned Bovada matchups across {len(quotes)} archived price snapshots, six frozen models per game and three separately marked TNF QB scenarios.")
           PY
