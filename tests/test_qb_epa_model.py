@@ -126,6 +126,8 @@ def test_established_qb_is_already_in_team_baseline():
 
 def test_nflverse_schedule_recognizes_completed_game_starters():
     schedule, plays = sample()
+    schedule["season"] = [2026, 2026, 2026, 2026]
+    schedule["week"] = [1, 2, 9, 10]
     schedule["home_qb_id"] = ["lamar", "lamar", "fagnano", "fagnano"]
     schedule["home_qb_name"] = ["Lamar Jackson", "Lamar Jackson", "Joe Fagnano", "Joe Fagnano"]
     schedule["away_qb_id"] = ["trevor"]*4
