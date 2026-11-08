@@ -95,6 +95,12 @@ def main():
                          f"missing {expected-set(pred.game_id)}, excess {set(pred.game_id)-expected}")
     if qb.duplicated(["game_id","team"]).any() or len(qb)!=28:
         raise ValueError("Incomplete or duplicate QB identities")
+    # The reusable QB engine calls these home_starter_source/away_starter_source.
+    # Keep the public Injury archive schema consistent with the existing site.
+    pred = pred.rename(columns={
+        "home_starter_source": "home_qb_starter_source",
+        "away_starter_source": "away_qb_starter_source",
+    })
     if pred.game_id.duplicated().any():
         raise ValueError("Duplicate games")
     fields=["projected_home","projected_away","projected_total",
