@@ -1,8 +1,8 @@
 """Week 9: ONE official, timestamped QB-aware Injury forecast per upcoming game.
 
-Sunday/Monday predictions are immutable once published. No model is retrained
-on page load. The original Thursday projection, prior Injury v1 and four-model
-research datasets stay in source archives rather than competing on this board.
+One prediction per Week 9 matchup, sorted by kickoff. Thursday retains its
+original pregame forecast; the other 14 use their final Sunday/Monday release.
+Nothing is retrained on page load.
 """
 from pathlib import Path
 
@@ -11,6 +11,8 @@ import streamlit as st
 
 ROOT = Path(__file__).resolve().parents[1]
 FINAL = ROOT / "data/public_snapshots/nfl_week09_final_injury_2026-11-08.csv"
+TNF = ROOT / "data/public_snapshots/nfl_week09_injury_qb_epa_margin_2026-11-05.csv"
+KICKOFFS = ROOT / "data/public_snapshots/nfl_week09_kickoffs_2026.csv"
 MARKET = ROOT / "data/bovada_lines.csv"
 BASE = "https://github.com/tedgytrends-bit/sports-betting-model/blob/main/"
 ORIGINAL = BASE + "data/public_snapshots/nfl_week_09_six_model_research_2026-11-04.csv"
@@ -47,7 +49,9 @@ def lean(row, quote):
     total_side = "Over" if total > total_line else "Under" if total < total_line else "Even"
     fav = home if home_line > 0 else away if home_line < 0 else "Pick'em"
     return {
-        "_date": pd.to_datetime(row["gameday"], errors="coerce"),
+        "_kickoff": pd.to_datetime(row["kickoff_utc"], utc=True),
+        "Kickoff (CT)": pd.to_datetime(row["kickoff_utc"], utc=True).tz_convert("America/Chicago").strftime("%a %b %-d, %-I:%M %p %Z"),
+        "Status": "Completed · original TNF" if row["game_id"] == "2026_09_JAX_BAL" else "Final pregame",
         "Game": f"{away} @ {home}",
         "Bovada": f"{fav} -{abs(home_line):g} · O/U {total_line:g}" if home_line else f"Pick'em · O/U {total_line:g}",
         "Projected score": f"{away} {a:.1f} – {home} {h:.1f}",
@@ -60,14 +64,16 @@ def lean(row, quote):
     }
 
 
-st.title("NFL Week 9 — Final Projections")
-st.caption("One QB-aware Injury model · 14 Sunday/Monday games · Previous snapshots are retained separately.")
+st.title("NFL Week 9 — Projections")
+st.caption("One QB-aware Injury model · All 15 Week 9 games in kickoff order · Completed Thursday game remains visible.")
 
-if not FINAL.exists() or not MARKET.exists():
-    st.error("The final 14-game Injury release or Bovada archive is missing. No fallback projections will be shown.")
+if not all(p.exists() for p in (FINAL, TNF, MARKET, KICKOFFS)):
+    st.error("The final model, original TNF prediction, kickoff schedule or Bovada archive is missing.")
     st.stop()
 
 pred = pd.read_csv(FINAL, low_memory=False)
+tnf_archive = pd.read_csv(TNF, low_memory=False)
+kickoffs = pd.read_csv(KICKOFFS, low_memory=False)
 quotes = pd.read_csv(MARKET, low_memory=False)
 check_columns(pred, [
     "game_id", "gameday", "season", "week", "model", "model_version",
@@ -119,8 +125,34 @@ published_ct = dates.iloc[0].tz_convert("America/Chicago").strftime("%b %d, %I:%
 st.caption(
     f"Final pregame model released **{published_ct}**. Scores are frozen; Bovada prices "
     "come from the latest saved screenshots and may differ from today's live lines. "
-    "Questionable designations and unverified starter listings may change on game day."
+    "Thursday retains its original pregame projection. Questionable designations "
+    "and unverified starter listings may change on game day."
 )
+
+# Retain Thursday's QB-aware Injury projection as published BEFORE kickoff.
+# Do not replace it with the newer 14-game model release or use game results.
+tnf = tnf_archive.loc[tnf_archive.game_id.eq("2026_09_JAX_BAL") & tnf_archive.model.eq("injury")].copy()
+if len(tnf) != 1:
+    st.error("Exactly one original Thursday Injury forecast is required.")
+    st.stop()
+tnf["publication_status"] = "ORIGINAL_TNF_PREGAME_COMPLETED"
+tnf["home_qb_delta_epa_per_dropback"] = tnf["home_qb_epa_delta"]
+tnf["away_qb_delta_epa_per_dropback"] = tnf["away_qb_epa_delta"]
+pred = pd.concat([tnf, pred], ignore_index=True, sort=False)
+if len(pred) != 15 or pred.game_id.nunique() != 15:
+    st.error("Expected all 15 Week 9 games, including Thursday.")
+    st.stop()
+check_columns(kickoffs, ["game_id", "kickoff_utc", "week9_status"], "Kickoff schedule")
+if len(kickoffs) != 15 or kickoffs.game_id.nunique() != 15 or set(kickoffs.game_id) != set(pred.game_id):
+    st.error("Kickoff schedule doesn't match all 15 Week 9 predictions.")
+    st.stop()
+if not (kickoffs.loc[kickoffs.game_id.eq("2026_09_JAX_BAL"), "week9_status"] == "Completed").all():
+    st.error("Thursday completion status is inconsistent.")
+    st.stop()
+pred["kickoff_utc"] = pred.game_id.map(kickoffs.set_index("game_id").kickoff_utc)
+if pd.to_datetime(pred.kickoff_utc, utc=True, errors="coerce").isna().any():
+    st.error("Invalid or missing kickoff timestamp.")
+    st.stop()
 
 rows = []
 for _, game in pred.iterrows():
@@ -129,11 +161,11 @@ for _, game in pred.iterrows():
         st.error(f"No Bovada screenshot for {key}.")
         st.stop()
     rows.append(lean(game, market.loc[key]))
-board = pd.DataFrame(rows).sort_values(["_date", "Game"]).drop(columns=["_date"])
+board = pd.DataFrame(rows).sort_values(["_kickoff", "Game"]).drop(columns=["_kickoff"])
 
-st.subheader("Official Week 9 Injury forecast")
+st.subheader("Week 9 Injury projections — kickoff order")
 st.dataframe(board, hide_index=True, width="stretch")
-st.caption("One projected score, ATS lean and total lean per matchup. This is a pregame model release, not betting advice.")
+st.caption("15 games: Thursday retains its original pregame forecast and the other 14 use the final Sunday/Monday release. Not betting advice.")
 
 with st.expander("QB EPA inputs and starter confirmation"):
     details = []
