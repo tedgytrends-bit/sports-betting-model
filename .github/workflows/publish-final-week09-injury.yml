@@ -1,0 +1,48 @@
+name: Publish final pregame Week 9 Injury projections
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/publish-final-week09-injury.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: final-week09-injury-pregame
+  cancel-in-progress: false
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install model requirements
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt pytest
+      - name: Test QB calculation and pregame report handling
+        run: |
+          python -m py_compile scripts/publish_final_week09_injury.py injury_model.py qb_epa_model.py
+          python -m pytest -q tests/test_qb_epa_model.py tests/test_injury_model.py
+      - name: Calculate and validate ONE final pregame Injury snapshot
+        run: |
+          python -u scripts/publish_final_week09_injury.py
+      - name: Archive immutable final pregame projection before kickoff
+        run: |
+          test -f data/public_snapshots/nfl_week09_final_injury_2026-11-08.csv
+          test -f data/public_snapshots/nfl_week09_final_injury_2026-11-08_manifest.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/public_snapshots/nfl_week09_final_injury_2026-11-08.csv data/public_snapshots/nfl_week09_final_injury_2026-11-08_manifest.json
+          git commit -m "Freeze final Week 9 Sunday/Monday QB-aware Injury model predictions"
+          git pull --rebase origin main
+          git push origin HEAD:main
