@@ -7,6 +7,7 @@ on:
     paths:
       - ".github/workflows/publish-final-week09-injury.yml"
       - "tests/test_qb_epa_model.py"
+      - "scripts/publish_final_week09_injury.py"
 
 permissions:
   contents: write
