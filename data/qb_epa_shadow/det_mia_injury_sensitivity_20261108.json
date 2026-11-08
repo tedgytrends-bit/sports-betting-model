@@ -1,0 +1,84 @@
+{
+  "status": "RESEARCH_ONLY_DO_NOT_CHANGE_FROZEN",
+  "as_of_utc": "2026-11-08T13:36:56.523013+00:00",
+  "game_id": "2026_09_DET_MIA",
+  "published_final_away_det": 21.93775050687806,
+  "published_final_home_mia": 23.125292465015217,
+  "published_final_margin_mia": 1.1875419581371567,
+  "published_incremental_qb_shift_mia": 0.6492109377609481,
+  "reproduced_nonqb_mia": 22.800686996134743,
+  "reproduced_nonqb_det": 22.26235597575855,
+  "reproduced_nonqb_margin_mia": 0.5383310203761944,
+  "hypothetical_remove_det_out_flags_mia": 21.325115603114316,
+  "hypothetical_remove_det_out_flags_det": 23.07054976785348,
+  "hypothetical_remove_det_out_flags_margin_mia": -1.7454341647391622,
+  "effect_of_five_det_out_designations_on_mia_margin": 2.2837651851153566,
+  "baseline_no_injury_mia": 21.244681566580958,
+  "baseline_no_injury_det": 23.97001852902199,
+  "baseline_no_injury_margin_mia": -2.7253369624410304,
+  "det_out_players": [
+    {
+      "name": "D.J. Reed",
+      "position": "CB"
+    },
+    {
+      "name": "DJ Wonnum",
+      "position": "DE"
+    },
+    {
+      "name": "Cade Mays",
+      "position": "C"
+    },
+    {
+      "name": "Kerby Joseph",
+      "position": "S"
+    },
+    {
+      "name": "Jack Campbell",
+      "position": "LB"
+    }
+  ],
+  "latest_det_counts": {
+    "injury_report_available": 1.0,
+    "inj_out": 5.0,
+    "inj_doubtful": 0.0,
+    "inj_questionable": 3.0,
+    "practice_dnp": 5.0,
+    "practice_limited": 3.0,
+    "qb_out": 0.0,
+    "qb_doubtful": 0.0,
+    "qb_questionable": 0.0,
+    "ol_out": 1.0,
+    "ol_doubtful": 0.0,
+    "ol_questionable": 0.0,
+    "skill_out": 0.0,
+    "skill_doubtful": 0.0,
+    "skill_questionable": 3.0,
+    "defense_out": 4.0,
+    "defense_doubtful": 0.0,
+    "defense_questionable": 0.0
+  },
+  "det_counts_after_hypothetical": {
+    "injury_report_available": 1.0,
+    "inj_out": 0.0,
+    "inj_doubtful": 0.0,
+    "inj_questionable": 3.0,
+    "practice_dnp": 5.0,
+    "practice_limited": 3.0,
+    "qb_out": 0.0,
+    "qb_doubtful": 0.0,
+    "qb_questionable": 0.0,
+    "ol_out": 0.0,
+    "ol_doubtful": 0.0,
+    "ol_questionable": 0.0,
+    "skill_out": 0.0,
+    "skill_doubtful": 0.0,
+    "skill_questionable": 3.0,
+    "defense_out": 0.0,
+    "defense_doubtful": 0.0,
+    "defense_questionable": 0.0
+  },
+  "warning": "Removing real OUT flags is NOT a realistic game projection; it only isolates feature sensitivity. This is a post-hoc check.",
+  "note": "No score/record/file on public website was updated.",
+  "model_limit": "Ridge alpha 10 is fitted on unstandardized numeric features, so low-magnitude EPA and higher-magnitude count features are not on equal scales."
+}
