@@ -6,6 +6,7 @@ on:
     branches: [main]
     paths:
       - ".github/workflows/publish-final-week09-injury.yml"
+      - "tests/test_qb_epa_model.py"
 
 permissions:
   contents: write
