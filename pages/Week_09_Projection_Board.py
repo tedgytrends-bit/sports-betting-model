@@ -144,10 +144,11 @@ if frozen_time.isna().any() or frozen_time.nunique() != 1:
 stamp = frozen_time.iloc[0].tz_convert("America/Chicago").strftime("%b %d, %Y %I:%M %p CT")
 quote_stamp = lines["captured_at_utc"].max().tz_convert("America/Chicago").strftime("%b %d, %Y %I:%M %p CT")
 st.caption(
-    f"Model snapshot frozen: {stamp}. Latest **archive ingestion**: {quote_stamp}. "
-    "Bovada screenshots were provided Wednesday, November 4; their exact screenshot "
-    "capture times were not supplied. When new screenshots are archived, market lines "
-    "change without rewriting the frozen projections."
+    f"Model snapshot frozen: {stamp}. Newest **Bovada market reference**: {quote_stamp}. "
+    "Bovada screenshots were supplied Nov 4 and Nov 7. The Nov 7 screenshots "
+    "display approximately 10:40 PM CT, which is recorded as an estimated screenshot "
+    "time rather than a verified sportsbook quote or import time. Prices can move. "
+    "New market lines update ATS/total leans without changing the frozen model scores."
 )
 
 rows = []
