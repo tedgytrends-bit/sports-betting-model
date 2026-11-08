@@ -57,7 +57,7 @@ def load_sources():
     snapshot = latest_snapshots[-1]
     raw = pd.read_csv(snapshot)
     teams = set(raw.team.dropna().astype(str))
-    scheduled_teams = set(subset.away_team) | set(subset.home_team)
+    scheduled_teams = {"LA" if t == "LAR" else t for t in (set(subset.away_team) | set(subset.home_team))}
     if not scheduled_teams.issubset(teams):
         raise ValueError(f"Missing injury report teams: {scheduled_teams - teams}")
     capture = pd.to_datetime(snapshot.stem.rsplit("_", 1)[-1],
