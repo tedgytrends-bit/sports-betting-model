@@ -1,8 +1,8 @@
 {
   "model_version": "0.8.0",
-  "generated_at_utc": "2026-11-08T11:02:57.627892+00:00",
+  "generated_at_utc": "2026-11-09T11:17:45.067192+00:00",
   "status": "completed",
-  "games_in_score_model_backtest": 1022,
+  "games_in_score_model_backtest": 1035,
   "summary_rows": 5,
   "diagnostic_rows": 49,
   "direct_total_equivalence_max_abs_diff": 1.4210854715202004e-14,
