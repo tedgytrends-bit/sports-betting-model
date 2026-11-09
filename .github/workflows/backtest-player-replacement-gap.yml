@@ -1,0 +1,66 @@
+name: Backtest non-QB player-specific replacement gap (research only)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "research/backtest_player_replacement_gap_features.py"
+      - ".github/workflows/backtest-player-replacement-gap.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nfl-player-replacement-gap-shadow
+  cancel-in-progress: false
+
+jobs:
+  backtest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install modeling libraries
+        run: python -m pip install -r requirements.txt
+      - name: Validate and run historical player-value gap test
+        run: |
+          python -m py_compile research/backtest_player_replacement_gap_features.py
+          python -u research/backtest_player_replacement_gap_features.py
+      - name: Verify outputs and pregame historical cohort
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import pandas as pd
+          p=Path("data/week09_review")
+          r=json.loads((p/"player_replacement_gap_holdout_20261109.json").read_text())
+          assert r["status"]=="RESEARCH_ONLY_NONQB_PLAYER_GAP_HOLDOUT"
+          assert r["QB_excluded_from_nonQB_gap_features"] is True
+          assert r["no_2026_week09_results"] is True
+          assert r["baseline_reproduction_diff"]<1e-4
+          assert len(r["predictors"])==6
+          for model,seasons in r["season_results"].items():
+              assert seasons["2025"]["games"]==285
+              assert seasons["2026"]["games"]==121
+          df=pd.read_csv(p/"player_replacement_gap_holdout_20261109.csv")
+          assert len(df)==1021*6
+          assert df[df.season==2026].week.max()==8
+          assert not df.duplicated(["game_id","research_variant"]).any()
+          print("PASS: 6 common historical variants, no public model changes")
+          PY
+      - name: Save research artifacts only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/week09_review/player_replacement_gap_holdout_20261109.csv data/week09_review/player_replacement_gap_holdout_20261109.json data/week09_review/player_replacement_gap_holdout_20261109.md
+          if ! git diff --cached --quiet; then
+            git commit -m "Archive player-specific replacement-gap historical NFL research"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
