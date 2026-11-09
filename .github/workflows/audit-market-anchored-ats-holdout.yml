@@ -1,0 +1,64 @@
+name: Audit market-anchored NFL ATS holdouts (research only)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "research/audit_market_anchored_ats_holdout.py"
+      - ".github/workflows/audit-market-anchored-ats-holdout.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ats-market-anchored-holdout-research
+  cancel-in-progress: false
+
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install modeling libraries
+        run: pip install -r requirements.txt
+      - name: Validate and execute season-separated ATS comparison
+        run: |
+          python -m py_compile research/audit_market_anchored_ats_holdout.py
+          python -u research/audit_market_anchored_ats_holdout.py
+      - name: Guard against Week 9 leakage and record modifications
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          import csv
+          path=Path("data/week09_review/ats_market_anchored_holdout_20261109.json")
+          report=json.loads(path.read_text())
+          assert report["status"]=="RESEARCH_ONLY_HELDOUT_PRE_MNF_NO_PUBLIC_CHANGES"
+          assert report["2026_week09_used"] is False
+          first,second=report["holdouts"]
+          assert (first["train_games"],first["test_games"])==(615,285)
+          assert (second["train_games"],second["test_games"])==(900,121)
+          with Path("data/week09_review/ats_market_anchored_holdout_20261109.csv").open() as f:
+              rows=list(csv.DictReader(f))
+          assert len(rows)==406
+          assert len(set(r["game_id"] for r in rows))==406
+          assert max(int(r["week"]) for r in rows if int(r["season"])==2026)<=8
+          print("PASS: 406 heldout forecasts, no 2026 Week 9 outcomes")
+          PY
+      - name: Save research-only diagnostic
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/week09_review/ats_market_anchored_holdout_20261109.json data/week09_review/ats_market_anchored_holdout_20261109.csv data/week09_review/ats_market_anchored_holdout_20261109.md
+          if ! git diff --cached --quiet; then
+            git commit -m "Archive ATS market-anchored chronological holdout research"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
