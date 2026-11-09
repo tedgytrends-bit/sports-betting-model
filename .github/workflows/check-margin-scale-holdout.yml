@@ -1,0 +1,56 @@
+name: Check historical margin scaling on sealed holdouts (research only)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "research/check_margin_scale_holdout.py"
+      - ".github/workflows/check-margin-scale-holdout.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: historical-margin-calibration-research
+  cancel-in-progress: false
+
+jobs:
+  shadow:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Test 2022–24 selected margin scale on 2025 and 2026 holdouts
+        run: |
+          python -m py_compile research/check_margin_scale_holdout.py
+          python research/check_margin_scale_holdout.py
+      - name: Confirm no Week 9 leakage or live changes
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          j=json.loads(Path("data/week09_review/margin_scaling_holdout_20261109.json").read_text())
+          assert len(j["models"]) == 4
+          for m,x in j["models"].items():
+              assert x["training_2022_2024_no_scale"]["n"]==615
+              assert x["holdout_2025_no_scale"]["n"]==285
+              assert x["holdout_2026_w1_8_no_scale"]["n"]==121
+          assert Path("data/week09_review/margin_scaling_holdout_20261109.md").is_file()
+          print("PASS: 4 models, historical train and two holdouts only")
+          PY
+      - name: Commit research results only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/week09_review/margin_scaling_holdout_20261109.json data/week09_review/margin_scaling_holdout_20261109.md
+          if ! git diff --cached --quiet; then
+            git commit -m "Archive historical margin-scaling holdout validation (research only)"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
