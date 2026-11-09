@@ -1,0 +1,342 @@
+{
+  "status": "RESEARCH_ONLY_STARTER_INFORMATION_GAP",
+  "date_utc": "2026-11-09T17:53:28.686066+00:00",
+  "source_archived_paired_nonqb": "data/qb_epa_shadow/qb_epa_2026_week01_08_paired_20261105T161043Z.csv",
+  "season": 2026,
+  "weeks": "1\u20138",
+  "games_archived": 121,
+  "games_common": 121,
+  "qb_team_games": 242,
+  "inferred_correct_teams": 214,
+  "inferred_wrong_teams": 28,
+  "games_with_any_incorrect_inferred_starter": 25,
+  "missing_inferred_qb_margin": 0,
+  "missing_hindsight_qb_margin": 0,
+  "median_abs_qb_margin_information_gap": 0.0,
+  "p90_abs_qb_margin_information_gap": 2.5227,
+  "comparison": {
+    "all_common": {
+      "games": 121,
+      "nonqb": {
+        "games": 121,
+        "wins": 62,
+        "losses": 53,
+        "pushes": 6,
+        "no_lean": 0,
+        "margin_mae": 9.6331,
+        "win_rate_ex_push": 0.5391,
+        "roi_assumed_minus110": 0.0278,
+        "min_3_5_edge": {
+          "bets": 42,
+          "wins": 23,
+          "losses": 17,
+          "pushes": 2
+        }
+      },
+      "pregame_inferred_qb": {
+        "games": 121,
+        "wins": 63,
+        "losses": 52,
+        "pushes": 6,
+        "no_lean": 0,
+        "margin_mae": 9.5096,
+        "win_rate_ex_push": 0.5478,
+        "roi_assumed_minus110": 0.0436,
+        "min_3_5_edge": {
+          "bets": 48,
+          "wins": 31,
+          "losses": 15,
+          "pushes": 2
+        }
+      },
+      "retrospective_actual_qb": {
+        "games": 121,
+        "wins": 63,
+        "losses": 52,
+        "pushes": 6,
+        "no_lean": 0,
+        "margin_mae": 9.5835,
+        "win_rate_ex_push": 0.5478,
+        "roi_assumed_minus110": 0.0436,
+        "min_3_5_edge": {
+          "bets": 54,
+          "wins": 32,
+          "losses": 18,
+          "pushes": 4
+        }
+      }
+    },
+    "both_qbs_same_as_last_primary": {
+      "games": 96,
+      "nonqb": {
+        "games": 96,
+        "wins": 51,
+        "losses": 41,
+        "pushes": 4,
+        "no_lean": 0,
+        "margin_mae": 8.7898,
+        "win_rate_ex_push": 0.5543,
+        "roi_assumed_minus110": 0.0559,
+        "min_3_5_edge": {
+          "bets": 33,
+          "wins": 19,
+          "losses": 12,
+          "pushes": 2
+        }
+      },
+      "pregame_inferred_qb": {
+        "games": 96,
+        "wins": 51,
+        "losses": 41,
+        "pushes": 4,
+        "no_lean": 0,
+        "margin_mae": 8.6624,
+        "win_rate_ex_push": 0.5543,
+        "roi_assumed_minus110": 0.0559,
+        "min_3_5_edge": {
+          "bets": 40,
+          "wins": 26,
+          "losses": 12,
+          "pushes": 2
+        }
+      },
+      "retrospective_actual_qb": {
+        "games": 96,
+        "wins": 51,
+        "losses": 41,
+        "pushes": 4,
+        "no_lean": 0,
+        "margin_mae": 8.6624,
+        "win_rate_ex_push": 0.5543,
+        "roi_assumed_minus110": 0.0559,
+        "min_3_5_edge": {
+          "bets": 40,
+          "wins": 26,
+          "losses": 12,
+          "pushes": 2
+        }
+      }
+    },
+    "at_least_one_qb_differs_from_last_primary": {
+      "games": 25,
+      "nonqb": {
+        "games": 25,
+        "wins": 11,
+        "losses": 12,
+        "pushes": 2,
+        "no_lean": 0,
+        "margin_mae": 12.8714,
+        "win_rate_ex_push": 0.4783,
+        "roi_assumed_minus110": -0.08,
+        "min_3_5_edge": {
+          "bets": 9,
+          "wins": 4,
+          "losses": 5,
+          "pushes": 0
+        }
+      },
+      "pregame_inferred_qb": {
+        "games": 25,
+        "wins": 12,
+        "losses": 11,
+        "pushes": 2,
+        "no_lean": 0,
+        "margin_mae": 12.763,
+        "win_rate_ex_push": 0.5217,
+        "roi_assumed_minus110": -0.0036,
+        "min_3_5_edge": {
+          "bets": 8,
+          "wins": 5,
+          "losses": 3,
+          "pushes": 0
+        }
+      },
+      "retrospective_actual_qb": {
+        "games": 25,
+        "wins": 12,
+        "losses": 11,
+        "pushes": 2,
+        "no_lean": 0,
+        "margin_mae": 13.1208,
+        "win_rate_ex_push": 0.5217,
+        "roi_assumed_minus110": -0.0036,
+        "min_3_5_edge": {
+          "bets": 14,
+          "wins": 6,
+          "losses": 6,
+          "pushes": 2
+        }
+      }
+    }
+  },
+  "descriptive_unseen_qb_changes": [
+    {
+      "game_id": "2026_02_CAR_ATL",
+      "home_inferred_qb_name": "C.Rush",
+      "home_hindsight_qb_name": "Tua Tagovailoa",
+      "away_inferred_qb_name": "B.Young",
+      "away_hindsight_qb_name": "Bryce Young",
+      "qb_margin_knowledge_gap": 6.166511594729493
+    },
+    {
+      "game_id": "2026_03_ATL_GB",
+      "home_inferred_qb_name": "J.Love",
+      "home_hindsight_qb_name": "Jordan Love",
+      "away_inferred_qb_name": "C.Rush",
+      "away_hindsight_qb_name": "Michael Penix Jr.",
+      "qb_margin_knowledge_gap": -5.382539060041839
+    },
+    {
+      "game_id": "2026_03_PHI_CHI",
+      "home_inferred_qb_name": "C.Williams",
+      "home_hindsight_qb_name": "Case Keenum",
+      "away_inferred_qb_name": "J.Hurts",
+      "away_hindsight_qb_name": "Jalen Hurts",
+      "qb_margin_knowledge_gap": -4.970539793342336
+    },
+    {
+      "game_id": "2026_06_CHI_ATL",
+      "home_inferred_qb_name": "M.Penix",
+      "home_hindsight_qb_name": "Michael Penix Jr.",
+      "away_inferred_qb_name": "T.Bagent",
+      "away_hindsight_qb_name": "Caleb Williams",
+      "qb_margin_knowledge_gap": -4.762622316040849
+    },
+    {
+      "game_id": "2026_04_GB_TB",
+      "home_inferred_qb_name": "B.Mayfield",
+      "home_hindsight_qb_name": "Jalon Daniels",
+      "away_inferred_qb_name": "J.Love",
+      "away_hindsight_qb_name": "Jordan Love",
+      "qb_margin_knowledge_gap": 4.7492852429913
+    },
+    {
+      "game_id": "2026_01_ATL_PIT",
+      "home_inferred_qb_name": "A.Rodgers",
+      "home_hindsight_qb_name": "Aaron Rodgers",
+      "away_inferred_qb_name": "K.Cousins",
+      "away_hindsight_qb_name": "Cooper Rush",
+      "qb_margin_knowledge_gap": 4.347344828098198
+    },
+    {
+      "game_id": "2026_04_LAC_SEA",
+      "home_inferred_qb_name": "S.Darnold",
+      "home_hindsight_qb_name": "Drew Lock",
+      "away_inferred_qb_name": "J.Herbert",
+      "away_hindsight_qb_name": "Justin Herbert",
+      "qb_margin_knowledge_gap": -3.9053930573481157
+    },
+    {
+      "game_id": "2026_01_CLE_JAX",
+      "home_inferred_qb_name": "T.Lawrence",
+      "home_hindsight_qb_name": "Trevor Lawrence",
+      "away_inferred_qb_name": "S.Sanders",
+      "away_hindsight_qb_name": "Deshaun Watson",
+      "qb_margin_knowledge_gap": -3.7413491718468856
+    },
+    {
+      "game_id": "2026_01_GB_MIN",
+      "home_inferred_qb_name": "J.McCarthy",
+      "home_hindsight_qb_name": "Kyler Murray",
+      "away_inferred_qb_name": "J.Love",
+      "away_hindsight_qb_name": "Jordan Love",
+      "qb_margin_knowledge_gap": 3.6737977896638636
+    },
+    {
+      "game_id": "2026_05_BAL_ATL",
+      "home_inferred_qb_name": "M.Penix",
+      "home_hindsight_qb_name": "Michael Penix Jr.",
+      "away_inferred_qb_name": "L.Jackson",
+      "away_hindsight_qb_name": "Tyler Huntley",
+      "qb_margin_knowledge_gap": 3.34965108880744
+    },
+    {
+      "game_id": "2026_05_SF_SEA",
+      "home_inferred_qb_name": "S.Darnold",
+      "home_hindsight_qb_name": "Drew Lock",
+      "away_inferred_qb_name": "B.Purdy",
+      "away_hindsight_qb_name": "Brock Purdy",
+      "qb_margin_knowledge_gap": -3.167475073870672
+    },
+    {
+      "game_id": "2026_06_SEA_DEN",
+      "home_inferred_qb_name": "B.Nix",
+      "home_hindsight_qb_name": "Bo Nix",
+      "away_inferred_qb_name": "S.Darnold",
+      "away_hindsight_qb_name": "Drew Lock",
+      "qb_margin_knowledge_gap": 2.7499746082518115
+    },
+    {
+      "game_id": "2026_01_MIA_LV",
+      "home_inferred_qb_name": "A.O'Connell",
+      "home_hindsight_qb_name": "Kirk Cousins",
+      "away_inferred_qb_name": "Q.Ewers",
+      "away_hindsight_qb_name": "Malik Willis",
+      "qb_margin_knowledge_gap": -2.5226765711336165
+    },
+    {
+      "game_id": "2026_01_NYJ_TEN",
+      "home_inferred_qb_name": "B.Allen",
+      "home_hindsight_qb_name": "Cam Ward",
+      "away_inferred_qb_name": "B.Cook",
+      "away_hindsight_qb_name": "Geno Smith",
+      "qb_margin_knowledge_gap": -2.4050043692635565
+    },
+    {
+      "game_id": "2026_06_CAR_PHI",
+      "home_inferred_qb_name": "J.Hurts",
+      "home_hindsight_qb_name": "Tanner McKee",
+      "away_inferred_qb_name": "B.Young",
+      "away_hindsight_qb_name": "Bryce Young",
+      "qb_margin_knowledge_gap": 2.124274305704537
+    },
+    {
+      "game_id": "2026_05_NYG_WAS",
+      "home_inferred_qb_name": "A.Kaliakmanis",
+      "home_hindsight_qb_name": "Jayden Daniels",
+      "away_inferred_qb_name": "J.Winston",
+      "away_hindsight_qb_name": "Jameis Winston",
+      "qb_margin_knowledge_gap": 2.0099483906048192
+    },
+    {
+      "game_id": "2026_07_DAL_PHI",
+      "home_inferred_qb_name": "T.McKee",
+      "home_hindsight_qb_name": "Jalen Hurts",
+      "away_inferred_qb_name": "D.Prescott",
+      "away_hindsight_qb_name": "Dak Prescott",
+      "qb_margin_knowledge_gap": -1.7780032602334344
+    },
+    {
+      "game_id": "2026_08_BAL_BUF",
+      "home_inferred_qb_name": "J.Allen",
+      "home_hindsight_qb_name": "Josh Allen",
+      "away_inferred_qb_name": "T.Huntley",
+      "away_hindsight_qb_name": "Lamar Jackson",
+      "qb_margin_knowledge_gap": -1.649423777294988
+    },
+    {
+      "game_id": "2026_01_BAL_IND",
+      "home_inferred_qb_name": "R.Leonard",
+      "home_hindsight_qb_name": "Daniel Jones",
+      "away_inferred_qb_name": "L.Jackson",
+      "away_hindsight_qb_name": "Lamar Jackson",
+      "qb_margin_knowledge_gap": 1.6326642193537875
+    },
+    {
+      "game_id": "2026_07_NYG_HOU",
+      "home_inferred_qb_name": "C.Stroud",
+      "home_hindsight_qb_name": "C.J. Stroud",
+      "away_inferred_qb_name": "J.Winston",
+      "away_hindsight_qb_name": "J.J. McCarthy",
+      "qb_margin_knowledge_gap": 1.3996588315796235
+    }
+  ],
+  "limits": [
+    "Only 121 historical 2026 W1\u20138 games; no Week 9 outcomes in this research",
+    "The postgame-starter model is a retrospective oracle, NOT a true pregame model",
+    "Prior-game inferred QB misses late injuries, suspensions, rookie starters and trades",
+    "Market price from nflverse schedule, not verified executable Bovada quotes",
+    "Same +/-5 cap and margin-only overlay; other hyperparameters are unmodified",
+    "Do not tune or promote based on this analysis. Official published forecasts unchanged"
+  ]
+}
