@@ -1,0 +1,56 @@
+name: Review NFL Week 9 performance before MNF (research only)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "research/audit_week09_pre_mnf.py"
+      - ".github/workflows/audit-week09-pre-mnf.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: week09-research-audit
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Verify frozen Week 9 inputs and grade finalized games
+        run: |
+          python -m py_compile research/audit_week09_pre_mnf.py
+          python research/audit_week09_pre_mnf.py
+      - name: Assert research report keeps official record unchanged
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json,csv
+          report=json.loads(Path("data/week09_review/week09_premnf_summary.json").read_text())
+          records=report["results"]["official_injury"]
+          assert records["games"]==14
+          assert records["ats_all_games"]=={"wins":3,"losses":10,"pushes":1,"no_lean":0,"win_pct_ex_push":23.08}
+          assert records["totals_all_games"]=={"wins":9,"losses":5,"pushes":0,"no_lean":0,"win_pct_ex_push":64.29}
+          assert "2026_09_BUF_MIN" not in {r["game_id"] for r in csv.DictReader(Path("data/week09_review/week09_premnf_ats_totals_grade.csv").open())}
+          assert Path("data/week09_review/week09_premnf_findings.md").exists()
+          print("PASS: 14 final games; BUF@MIN remains pending; official live snapshots unmodified.")
+          PY
+      - name: Archive diagnostic only, not official game results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/week09_review/week09_premnf_ats_totals_grade.csv data/week09_review/week09_premnf_summary.json data/week09_review/week09_premnf_findings.md
+          if ! git diff --cached --quiet; then
+            git commit -m "Archive frozen-input Week 9 pre-MNF research audit"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
