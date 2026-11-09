@@ -1,0 +1,48 @@
+{
+  "captured_at_utc": "2026-11-09T16:47:13Z",
+  "status": "RESEARCH_AUDIT_ONLY_NO_MODEL_CHANGES",
+  "injury_player_week_rows": 25788,
+  "rows_with_prior_player_stats": 24538,
+  "rows_with_same_team_positional_benchmark": 24515,
+  "rows_with_value_gap": 24515,
+  "position_group_coverage": [
+    {
+      "position_group": "DEF",
+      "rows": 15907,
+      "prior_history": 15082,
+      "replacement_benchmark": 15082
+    },
+    {
+      "position_group": "QB",
+      "rows": 1166,
+      "prior_history": 1101,
+      "replacement_benchmark": 1080
+    },
+    {
+      "position_group": "RB",
+      "rows": 2468,
+      "prior_history": 2369,
+      "replacement_benchmark": 2369
+    },
+    {
+      "position_group": "TE",
+      "rows": 2020,
+      "prior_history": 1905,
+      "replacement_benchmark": 1903
+    },
+    {
+      "position_group": "WR",
+      "rows": 4227,
+      "prior_history": 4081,
+      "replacement_benchmark": 4081
+    }
+  ],
+  "limitations": [
+    "Metrics are position-group-specific historical production proxies, not calibrated points or win probability.",
+    "Historical observations are restricted to prior season/week; current target-week performance is excluded.",
+    "The same-team positional benchmark is not verified as the next active player or actual backup.",
+    "Defensive production is noisy and heavily requires validation before use.",
+    "Offensive-line players are not individually valued by this source and remain outside this audit.",
+    "This script does not create model features or alter official projections."
+  ]
+}

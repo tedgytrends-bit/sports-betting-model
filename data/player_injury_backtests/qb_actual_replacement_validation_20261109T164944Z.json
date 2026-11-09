@@ -1,0 +1,32 @@
+{
+  "generated_at_utc": "2026-11-09T16:49:44.654001+00:00",
+  "status": "RESEARCH_ONLY_ACTUAL_QB_REPLACEMENT_VALIDATION",
+  "impact_source": "qb_point_impact_audit_20261109T164758Z.csv",
+  "paired_prediction_source": "player_injury_paired_predictions_20261109T164759Z.csv",
+  "candidate_out_qb1_rows": 104,
+  "eligible_actual_qb_team_games": 67,
+  "development_2021_2023": {
+    "n": 21,
+    "pearson_r": 0.22009060013592036,
+    "spearman_r": 0.34155844155844156,
+    "slope": 0.5467612004776342
+  },
+  "untouched_holdout_2024_2026": {
+    "n": 46,
+    "pearson_r": -0.13662509647184987,
+    "spearman_r": -0.23256244218316371,
+    "slope": -0.347375492473382
+  },
+  "actual_primary_qb_matches_listed_replacement_rate": 0.8805970149253731,
+  "actual_primary_qb_median_prior_games": 19.0,
+  "holdout_mean_score_residual": -3.380557802808198,
+  "holdout_mean_absolute_score_residual": 8.555259007142535,
+  "limitations": [
+    "Actual primary QB is identified by target-game passer dropback counts; this is retrospective participation evidence, not a pregame depth-chart input.",
+    "All QB valuation statistics are strictly prior to the target season/week; target-game outcomes are not used in player ratings.",
+    "Only QB1 OUT cases with same-team prior history for the listed replacement are candidates; actual primary passer must have at least three prior games.",
+    "Passer IDs may not capture every QB snap, and the most frequent passer is not necessarily the only QB who played.",
+    "Small, nonrandom injury samples and correlation do not establish causal point value.",
+    "Research only; no production projections or prospective records are modified."
+  ]
+}
