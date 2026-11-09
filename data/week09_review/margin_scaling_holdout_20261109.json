@@ -1,0 +1,447 @@
+{
+  "status": "RESEARCH_ONLY_CALIBRATION_HOLDOUT",
+  "source": "data/four_model_historical/four_model_all_game_predictions_20261105T200307Z.csv",
+  "selection": "Multiplier grid optimized ONLY on 2022-2024 margin MAE; holdouts 2025 & 2026 W1-W8",
+  "candidate_factors": [
+    0.5,
+    0.75,
+    1.0,
+    1.1,
+    1.25,
+    1.5,
+    1.75,
+    2.0,
+    2.25,
+    2.5,
+    3.0
+  ],
+  "models": {
+    "baseline": {
+      "factor_chosen_on_2022_2024": 1.25,
+      "training_2022_2024_no_scale": {
+        "n": 615,
+        "margin_mae": 10.5499,
+        "market_margin_mae": 9.8496,
+        "margin_rmse": 13.7159,
+        "ats_w_l_p": [
+          289,
+          306,
+          20
+        ],
+        "ats_min3_w_l_p": [
+          152,
+          150,
+          10
+        ],
+        "ats_lean_count": 615
+      },
+      "training_2022_2024_scaled": {
+        "n": 615,
+        "margin_mae": 10.4953,
+        "market_margin_mae": 9.8496,
+        "margin_rmse": 13.6113,
+        "ats_w_l_p": [
+          296,
+          299,
+          20
+        ],
+        "ats_min3_w_l_p": [
+          140,
+          147,
+          10
+        ],
+        "ats_lean_count": 615
+      },
+      "holdout_2025_no_scale": {
+        "n": 285,
+        "margin_mae": 10.3975,
+        "market_margin_mae": 9.6702,
+        "margin_rmse": 13.4227,
+        "ats_w_l_p": [
+          146,
+          138,
+          1
+        ],
+        "ats_min3_w_l_p": [
+          70,
+          73,
+          0
+        ],
+        "ats_lean_count": 285
+      },
+      "holdout_2025_scaled": {
+        "n": 285,
+        "margin_mae": 10.369,
+        "market_margin_mae": 9.6702,
+        "margin_rmse": 13.3876,
+        "ats_w_l_p": [
+          138,
+          146,
+          1
+        ],
+        "ats_min3_w_l_p": [
+          73,
+          76,
+          0
+        ],
+        "ats_lean_count": 285
+      },
+      "holdout_2026_w1_8_no_scale": {
+        "n": 121,
+        "margin_mae": 9.6795,
+        "market_margin_mae": 9.5702,
+        "margin_rmse": 12.4768,
+        "ats_w_l_p": [
+          60,
+          55,
+          6
+        ],
+        "ats_min3_w_l_p": [
+          27,
+          25,
+          2
+        ],
+        "ats_lean_count": 121
+      },
+      "holdout_2026_w1_8_scaled": {
+        "n": 121,
+        "margin_mae": 9.7992,
+        "market_margin_mae": 9.5702,
+        "margin_rmse": 12.5383,
+        "ats_w_l_p": [
+          65,
+          50,
+          6
+        ],
+        "ats_min3_w_l_p": [
+          30,
+          29,
+          2
+        ],
+        "ats_lean_count": 121
+      }
+    },
+    "injury_legacy": {
+      "factor_chosen_on_2022_2024": 1.0,
+      "training_2022_2024_no_scale": {
+        "n": 615,
+        "margin_mae": 10.6352,
+        "market_margin_mae": 9.8496,
+        "margin_rmse": 13.7308,
+        "ats_w_l_p": [
+          291,
+          304,
+          20
+        ],
+        "ats_min3_w_l_p": [
+          158,
+          152,
+          10
+        ],
+        "ats_lean_count": 615
+      },
+      "training_2022_2024_scaled": {
+        "n": 615,
+        "margin_mae": 10.6352,
+        "market_margin_mae": 9.8496,
+        "margin_rmse": 13.7308,
+        "ats_w_l_p": [
+          291,
+          304,
+          20
+        ],
+        "ats_min3_w_l_p": [
+          158,
+          152,
+          10
+        ],
+        "ats_lean_count": 615
+      },
+      "holdout_2025_no_scale": {
+        "n": 285,
+        "margin_mae": 10.55,
+        "market_margin_mae": 9.6702,
+        "margin_rmse": 13.5169,
+        "ats_w_l_p": [
+          137,
+          147,
+          1
+        ],
+        "ats_min3_w_l_p": [
+          79,
+          77,
+          0
+        ],
+        "ats_lean_count": 285
+      },
+      "holdout_2025_scaled": {
+        "n": 285,
+        "margin_mae": 10.55,
+        "market_margin_mae": 9.6702,
+        "margin_rmse": 13.5169,
+        "ats_w_l_p": [
+          137,
+          147,
+          1
+        ],
+        "ats_min3_w_l_p": [
+          79,
+          77,
+          0
+        ],
+        "ats_lean_count": 285
+      },
+      "holdout_2026_w1_8_no_scale": {
+        "n": 121,
+        "margin_mae": 9.6243,
+        "market_margin_mae": 9.5702,
+        "margin_rmse": 12.4063,
+        "ats_w_l_p": [
+          61,
+          54,
+          6
+        ],
+        "ats_min3_w_l_p": [
+          28,
+          24,
+          2
+        ],
+        "ats_lean_count": 121
+      },
+      "holdout_2026_w1_8_scaled": {
+        "n": 121,
+        "margin_mae": 9.6243,
+        "market_margin_mae": 9.5702,
+        "margin_rmse": 12.4063,
+        "ats_w_l_p": [
+          61,
+          54,
+          6
+        ],
+        "ats_min3_w_l_p": [
+          28,
+          24,
+          2
+        ],
+        "ats_lean_count": 121
+      }
+    },
+    "efficiency": {
+      "factor_chosen_on_2022_2024": 1.1,
+      "training_2022_2024_no_scale": {
+        "n": 615,
+        "margin_mae": 10.4502,
+        "market_margin_mae": 9.8496,
+        "margin_rmse": 13.5479,
+        "ats_w_l_p": [
+          303,
+          292,
+          20
+        ],
+        "ats_min3_w_l_p": [
+          144,
+          136,
+          10
+        ],
+        "ats_lean_count": 615
+      },
+      "training_2022_2024_scaled": {
+        "n": 615,
+        "margin_mae": 10.4439,
+        "market_margin_mae": 9.8496,
+        "margin_rmse": 13.5214,
+        "ats_w_l_p": [
+          310,
+          285,
+          20
+        ],
+        "ats_min3_w_l_p": [
+          150,
+          134,
+          10
+        ],
+        "ats_lean_count": 615
+      },
+      "holdout_2025_no_scale": {
+        "n": 285,
+        "margin_mae": 10.4021,
+        "market_margin_mae": 9.6702,
+        "margin_rmse": 13.3259,
+        "ats_w_l_p": [
+          142,
+          142,
+          1
+        ],
+        "ats_min3_w_l_p": [
+          66,
+          70,
+          0
+        ],
+        "ats_lean_count": 285
+      },
+      "holdout_2025_scaled": {
+        "n": 285,
+        "margin_mae": 10.4215,
+        "market_margin_mae": 9.6702,
+        "margin_rmse": 13.3295,
+        "ats_w_l_p": [
+          141,
+          143,
+          1
+        ],
+        "ats_min3_w_l_p": [
+          67,
+          66,
+          1
+        ],
+        "ats_lean_count": 285
+      },
+      "holdout_2026_w1_8_no_scale": {
+        "n": 121,
+        "margin_mae": 9.76,
+        "market_margin_mae": 9.5702,
+        "margin_rmse": 12.522,
+        "ats_w_l_p": [
+          60,
+          55,
+          6
+        ],
+        "ats_min3_w_l_p": [
+          23,
+          27,
+          2
+        ],
+        "ats_lean_count": 121
+      },
+      "holdout_2026_w1_8_scaled": {
+        "n": 121,
+        "margin_mae": 9.8321,
+        "market_margin_mae": 9.5702,
+        "margin_rmse": 12.5666,
+        "ats_w_l_p": [
+          62,
+          53,
+          6
+        ],
+        "ats_min3_w_l_p": [
+          26,
+          29,
+          1
+        ],
+        "ats_lean_count": 121
+      }
+    },
+    "combined_legacy": {
+      "factor_chosen_on_2022_2024": 1.0,
+      "training_2022_2024_no_scale": {
+        "n": 615,
+        "margin_mae": 10.5155,
+        "market_margin_mae": 9.8496,
+        "margin_rmse": 13.5903,
+        "ats_w_l_p": [
+          310,
+          285,
+          20
+        ],
+        "ats_min3_w_l_p": [
+          146,
+          145,
+          9
+        ],
+        "ats_lean_count": 615
+      },
+      "training_2022_2024_scaled": {
+        "n": 615,
+        "margin_mae": 10.5155,
+        "market_margin_mae": 9.8496,
+        "margin_rmse": 13.5903,
+        "ats_w_l_p": [
+          310,
+          285,
+          20
+        ],
+        "ats_min3_w_l_p": [
+          146,
+          145,
+          9
+        ],
+        "ats_lean_count": 615
+      },
+      "holdout_2025_no_scale": {
+        "n": 285,
+        "margin_mae": 10.5227,
+        "market_margin_mae": 9.6702,
+        "margin_rmse": 13.4151,
+        "ats_w_l_p": [
+          131,
+          153,
+          1
+        ],
+        "ats_min3_w_l_p": [
+          73,
+          75,
+          1
+        ],
+        "ats_lean_count": 285
+      },
+      "holdout_2025_scaled": {
+        "n": 285,
+        "margin_mae": 10.5227,
+        "market_margin_mae": 9.6702,
+        "margin_rmse": 13.4151,
+        "ats_w_l_p": [
+          131,
+          153,
+          1
+        ],
+        "ats_min3_w_l_p": [
+          73,
+          75,
+          1
+        ],
+        "ats_lean_count": 285
+      },
+      "holdout_2026_w1_8_no_scale": {
+        "n": 121,
+        "margin_mae": 9.7075,
+        "market_margin_mae": 9.5702,
+        "margin_rmse": 12.4506,
+        "ats_w_l_p": [
+          60,
+          55,
+          6
+        ],
+        "ats_min3_w_l_p": [
+          26,
+          26,
+          1
+        ],
+        "ats_lean_count": 121
+      },
+      "holdout_2026_w1_8_scaled": {
+        "n": 121,
+        "margin_mae": 9.7075,
+        "market_margin_mae": 9.5702,
+        "margin_rmse": 12.4506,
+        "ats_w_l_p": [
+          60,
+          55,
+          6
+        ],
+        "ats_min3_w_l_p": [
+          26,
+          26,
+          1
+        ],
+        "ats_lean_count": 121
+      }
+    }
+  },
+  "conclusion": "Simple multiplier adjustments have weak or mixed holdout performance. Do not change live model based on Week 9.",
+  "caveats": [
+    "Reconstructed chronological predictions, not prospective wagers.",
+    "2022 historical training cohort begins at Week 16.",
+    "2026 historical fold includes Weeks 1-8 only, not official Week 9.",
+    "Selections and study design are exploratory, motivated by Week 9 errors; future models require fresh holdouts."
+  ]
+}
