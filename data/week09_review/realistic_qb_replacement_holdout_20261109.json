@@ -1,0 +1,246 @@
+{
+  "status": "RESEARCH_ONLY_REALISTIC_QB_2025_2026",
+  "created_utc": "2026-11-09T18:01:58.735396+00:00",
+  "season_cutoff": "2026 Week 8; absolutely no 2026 Week9 PBP/outcomes",
+  "2026_saved_nonqb_score_max_diff": 1.4210854715202004e-14,
+  "starter_method": "Prior primary passer from preceding completed game ONLY, no known target starter",
+  "historical_QB_id_accuracy": {
+    "2025": {
+      "correct_inferred_qb_team_games": 497,
+      "total_qb_team_games": 570,
+      "pct_correct": 87.19
+    },
+    "2026": {
+      "correct_inferred_qb_team_games": 214,
+      "total_qb_team_games": 242,
+      "pct_correct": 88.43
+    }
+  },
+  "model": "Legacy non-QB Injury Ridge + production margin-only QB EPA shift, capped 5 per team",
+  "comparison": {
+    "2025": {
+      "all": {
+        "n": 285,
+        "no_qb_overlay": {
+          "games": 285,
+          "wins": 135,
+          "losses": 149,
+          "pushes": 1,
+          "no_lean": 0,
+          "margin_mae": 10.5518,
+          "avg_absolute_projected_margin": 3.7241,
+          "ats_min3_5": {
+            "bets": 136,
+            "wins": 68,
+            "losses": 68,
+            "pushes": 0
+          },
+          "roi_assumed_flat_minus110": -0.0922
+        },
+        "pregame_qb_overlay": {
+          "games": 285,
+          "wins": 138,
+          "losses": 146,
+          "pushes": 1,
+          "no_lean": 0,
+          "margin_mae": 10.5887,
+          "avg_absolute_projected_margin": 3.5177,
+          "ats_min3_5": {
+            "bets": 141,
+            "wins": 70,
+            "losses": 71,
+            "pushes": 0
+          },
+          "roi_assumed_flat_minus110": -0.0721
+        }
+      },
+      "no_qb_change": {
+        "n": 217,
+        "no_qb_overlay": {
+          "games": 217,
+          "wins": 106,
+          "losses": 111,
+          "pushes": 0,
+          "no_lean": 0,
+          "margin_mae": 10.0505,
+          "avg_absolute_projected_margin": 3.6297,
+          "ats_min3_5": {
+            "bets": 100,
+            "wins": 49,
+            "losses": 51,
+            "pushes": 0
+          },
+          "roi_assumed_flat_minus110": -0.0674
+        },
+        "pregame_qb_overlay": {
+          "games": 217,
+          "wins": 104,
+          "losses": 113,
+          "pushes": 0,
+          "no_lean": 0,
+          "margin_mae": 10.1409,
+          "avg_absolute_projected_margin": 3.4209,
+          "ats_min3_5": {
+            "bets": 105,
+            "wins": 50,
+            "losses": 55,
+            "pushes": 0
+          },
+          "roi_assumed_flat_minus110": -0.085
+        }
+      },
+      "one_or_more_qb_changes": {
+        "n": 68,
+        "no_qb_overlay": {
+          "games": 68,
+          "wins": 29,
+          "losses": 38,
+          "pushes": 1,
+          "no_lean": 0,
+          "margin_mae": 12.1514,
+          "avg_absolute_projected_margin": 4.0252,
+          "ats_min3_5": {
+            "bets": 36,
+            "wins": 19,
+            "losses": 17,
+            "pushes": 0
+          },
+          "roi_assumed_flat_minus110": -0.1711
+        },
+        "pregame_qb_overlay": {
+          "games": 68,
+          "wins": 34,
+          "losses": 33,
+          "pushes": 1,
+          "no_lean": 0,
+          "margin_mae": 12.0176,
+          "avg_absolute_projected_margin": 3.8265,
+          "ats_min3_5": {
+            "bets": 36,
+            "wins": 20,
+            "losses": 16,
+            "pushes": 0
+          },
+          "roi_assumed_flat_minus110": -0.0307
+        }
+      }
+    },
+    "2026": {
+      "all": {
+        "n": 121,
+        "no_qb_overlay": {
+          "games": 121,
+          "wins": 62,
+          "losses": 53,
+          "pushes": 6,
+          "no_lean": 0,
+          "margin_mae": 9.6331,
+          "avg_absolute_projected_margin": 3.1202,
+          "ats_min3_5": {
+            "bets": 42,
+            "wins": 23,
+            "losses": 17,
+            "pushes": 2
+          },
+          "roi_assumed_flat_minus110": 0.0278
+        },
+        "pregame_qb_overlay": {
+          "games": 121,
+          "wins": 63,
+          "losses": 52,
+          "pushes": 6,
+          "no_lean": 0,
+          "margin_mae": 9.5096,
+          "avg_absolute_projected_margin": 2.6825,
+          "ats_min3_5": {
+            "bets": 48,
+            "wins": 31,
+            "losses": 15,
+            "pushes": 2
+          },
+          "roi_assumed_flat_minus110": 0.0436
+        }
+      },
+      "no_qb_change": {
+        "n": 96,
+        "no_qb_overlay": {
+          "games": 96,
+          "wins": 51,
+          "losses": 41,
+          "pushes": 4,
+          "no_lean": 0,
+          "margin_mae": 8.7898,
+          "avg_absolute_projected_margin": 3.302,
+          "ats_min3_5": {
+            "bets": 33,
+            "wins": 19,
+            "losses": 12,
+            "pushes": 2
+          },
+          "roi_assumed_flat_minus110": 0.0559
+        },
+        "pregame_qb_overlay": {
+          "games": 96,
+          "wins": 51,
+          "losses": 41,
+          "pushes": 4,
+          "no_lean": 0,
+          "margin_mae": 8.6624,
+          "avg_absolute_projected_margin": 2.7227,
+          "ats_min3_5": {
+            "bets": 40,
+            "wins": 26,
+            "losses": 12,
+            "pushes": 2
+          },
+          "roi_assumed_flat_minus110": 0.0559
+        }
+      },
+      "one_or_more_qb_changes": {
+        "n": 25,
+        "no_qb_overlay": {
+          "games": 25,
+          "wins": 11,
+          "losses": 12,
+          "pushes": 2,
+          "no_lean": 0,
+          "margin_mae": 12.8714,
+          "avg_absolute_projected_margin": 2.422,
+          "ats_min3_5": {
+            "bets": 9,
+            "wins": 4,
+            "losses": 5,
+            "pushes": 0
+          },
+          "roi_assumed_flat_minus110": -0.08
+        },
+        "pregame_qb_overlay": {
+          "games": 25,
+          "wins": 12,
+          "losses": 11,
+          "pushes": 2,
+          "no_lean": 0,
+          "margin_mae": 12.763,
+          "avg_absolute_projected_margin": 2.5283,
+          "ats_min3_5": {
+            "bets": 8,
+            "wins": 5,
+            "losses": 3,
+            "pushes": 0
+          },
+          "roi_assumed_flat_minus110": -0.0036
+        }
+      }
+    }
+  },
+  "common_games": 406,
+  "missing_pregame_qb_forecasts": 0,
+  "limits": [
+    "Actual QB identities are used only to audit inferred starter correctness after prediction",
+    "Not a source-verified, prospective team-sheet QB starter archive; cannot claim verified actual 2025 starters pregame",
+    "QB value parameters developed and assessed using 2026 retrospective analysis; this historical study is NOT independent prospective proof",
+    "2026 W9 and MNF outcomes are completely excluded",
+    "Schedule market spread is an nflverse archived number, not executable Bovada pricing",
+    "Public predictions, Week8\u20139 grading, and totals model remain unchanged"
+  ]
+}
