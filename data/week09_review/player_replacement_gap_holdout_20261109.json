@@ -1,0 +1,985 @@
+{
+  "status": "RESEARCH_ONLY_NONQB_PLAYER_GAP_HOLDOUT",
+  "date_utc": "2026-11-09T17:58:56.189998+00:00",
+  "scope": "2021 train; 2022 late-season through 2026 Week8 walk forward, 1021 common games",
+  "public_model_unchanged": true,
+  "no_2026_week09_results": true,
+  "QB_excluded_from_nonQB_gap_features": true,
+  "prior_value_file": "data/player_injury_backtests/longitudinal_player_value_audit_20261109T173724Z.csv",
+  "comparison_reference": "data/four_model_historical/four_model_all_game_predictions_20261105T200307Z.csv",
+  "baseline_reproduction_diff": 7.105427357601002e-15,
+  "features": {
+    "baseline": 24,
+    "nonqb_injury_counts": 36,
+    "replacement_gap_signed": 18,
+    "replacement_gap_positive": 18
+  },
+  "injury_coverage": {
+    "valued_absence_rows": 7992,
+    "unvalued_absence_rows": 2533,
+    "status_out_rows_nonqb": 3941,
+    "game_rows": 1545
+  },
+  "absent_status_weights": {
+    "OUT": 1.0,
+    "DOUBTFUL": 0.8,
+    "QUESTIONABLE": 0.4
+  },
+  "predictors": {
+    "baseline_unscaled": [
+      "base",
+      false,
+      10.0
+    ],
+    "nonqb_counts_unscaled": [
+      "counts",
+      false,
+      10.0
+    ],
+    "nonqb_counts_std": [
+      "counts",
+      true,
+      10.0
+    ],
+    "player_signed_gap_std": [
+      "signed",
+      true,
+      10.0
+    ],
+    "player_positive_gap_std": [
+      "positive",
+      true,
+      10.0
+    ],
+    "counts_plus_positive_gap_std": [
+      "combined",
+      true,
+      10.0
+    ]
+  },
+  "season_results": {
+    "baseline_unscaled": {
+      "2022": {
+        "games": 45,
+        "ATS_all_games": {
+          "bets": 45,
+          "wins": 23,
+          "losses": 20,
+          "pushes": 2,
+          "no_lean": 0,
+          "win_pct": 53.49,
+          "net_units_flat_minus110": 0.909,
+          "roi_pct_flat_minus110": 2.02
+        },
+        "ATS_min_edge_3_5": {
+          "bets": 22,
+          "wins": 13,
+          "losses": 7,
+          "pushes": 2,
+          "no_lean": 0,
+          "win_pct": 65.0,
+          "net_units_flat_minus110": 4.818,
+          "roi_pct_flat_minus110": 21.901
+        },
+        "margin_mae": 10.32,
+        "total_mae": 10.638,
+        "market_margin_mae": 9.922,
+        "avg_abs_predicted_margin": 2.72,
+        "avg_abs_market_spread": 6.033,
+        "count_ats_favorite_leans": 8,
+        "count_ats_underdog_leans": 37
+      },
+      "2023": {
+        "games": 285,
+        "ATS_all_games": {
+          "bets": 285,
+          "wins": 133,
+          "losses": 138,
+          "pushes": 14,
+          "no_lean": 0,
+          "win_pct": 49.08,
+          "net_units_flat_minus110": -17.091,
+          "roi_pct_flat_minus110": -5.997
+        },
+        "ATS_min_edge_3_5": {
+          "bets": 115,
+          "wins": 54,
+          "losses": 55,
+          "pushes": 6,
+          "no_lean": 0,
+          "win_pct": 49.54,
+          "net_units_flat_minus110": -5.909,
+          "roi_pct_flat_minus110": -5.138
+        },
+        "margin_mae": 10.552,
+        "total_mae": 10.563,
+        "market_margin_mae": 9.984,
+        "avg_abs_predicted_margin": 2.72,
+        "avg_abs_market_spread": 4.967,
+        "count_ats_favorite_leans": 49,
+        "count_ats_underdog_leans": 236
+      },
+      "2024": {
+        "games": 285,
+        "ATS_all_games": {
+          "bets": 285,
+          "wins": 133,
+          "losses": 148,
+          "pushes": 4,
+          "no_lean": 0,
+          "win_pct": 47.33,
+          "net_units_flat_minus110": -27.091,
+          "roi_pct_flat_minus110": -9.506
+        },
+        "ATS_min_edge_3_5": {
+          "bets": 128,
+          "wins": 60,
+          "losses": 66,
+          "pushes": 2,
+          "no_lean": 0,
+          "win_pct": 47.62,
+          "net_units_flat_minus110": -11.455,
+          "roi_pct_flat_minus110": -8.949
+        },
+        "margin_mae": 10.584,
+        "total_mae": 10.065,
+        "market_margin_mae": 9.704,
+        "avg_abs_predicted_margin": 2.974,
+        "avg_abs_market_spread": 4.925,
+        "count_ats_favorite_leans": 44,
+        "count_ats_underdog_leans": 241
+      },
+      "2025": {
+        "games": 285,
+        "ATS_all_games": {
+          "bets": 285,
+          "wins": 146,
+          "losses": 138,
+          "pushes": 1,
+          "no_lean": 0,
+          "win_pct": 51.41,
+          "net_units_flat_minus110": -5.273,
+          "roi_pct_flat_minus110": -1.85
+        },
+        "ATS_min_edge_3_5": {
+          "bets": 127,
+          "wins": 62,
+          "losses": 65,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct": 48.82,
+          "net_units_flat_minus110": -8.636,
+          "roi_pct_flat_minus110": -6.8
+        },
+        "margin_mae": 10.397,
+        "total_mae": 10.68,
+        "market_margin_mae": 9.67,
+        "avg_abs_predicted_margin": 3.22,
+        "avg_abs_market_spread": 5.316,
+        "count_ats_favorite_leans": 51,
+        "count_ats_underdog_leans": 234
+      },
+      "2026": {
+        "games": 121,
+        "ATS_all_games": {
+          "bets": 121,
+          "wins": 60,
+          "losses": 55,
+          "pushes": 6,
+          "no_lean": 0,
+          "win_pct": 52.17,
+          "net_units_flat_minus110": -0.455,
+          "roi_pct_flat_minus110": -0.376
+        },
+        "ATS_min_edge_3_5": {
+          "bets": 44,
+          "wins": 23,
+          "losses": 19,
+          "pushes": 2,
+          "no_lean": 0,
+          "win_pct": 54.76,
+          "net_units_flat_minus110": 1.909,
+          "roi_pct_flat_minus110": 4.339
+        },
+        "margin_mae": 9.68,
+        "total_mae": 11.529,
+        "market_margin_mae": 9.57,
+        "avg_abs_predicted_margin": 3.192,
+        "avg_abs_market_spread": 4.595,
+        "count_ats_favorite_leans": 25,
+        "count_ats_underdog_leans": 96
+      }
+    },
+    "nonqb_counts_unscaled": {
+      "2022": {
+        "games": 45,
+        "ATS_all_games": {
+          "bets": 45,
+          "wins": 23,
+          "losses": 20,
+          "pushes": 2,
+          "no_lean": 0,
+          "win_pct": 53.49,
+          "net_units_flat_minus110": 0.909,
+          "roi_pct_flat_minus110": 2.02
+        },
+        "ATS_min_edge_3_5": {
+          "bets": 27,
+          "wins": 15,
+          "losses": 10,
+          "pushes": 2,
+          "no_lean": 0,
+          "win_pct": 60.0,
+          "net_units_flat_minus110": 3.636,
+          "roi_pct_flat_minus110": 13.468
+        },
+        "margin_mae": 10.713,
+        "total_mae": 10.826,
+        "market_margin_mae": 9.922,
+        "avg_abs_predicted_margin": 3.192,
+        "avg_abs_market_spread": 6.033,
+        "count_ats_favorite_leans": 12,
+        "count_ats_underdog_leans": 33
+      },
+      "2023": {
+        "games": 285,
+        "ATS_all_games": {
+          "bets": 285,
+          "wins": 130,
+          "losses": 141,
+          "pushes": 14,
+          "no_lean": 0,
+          "win_pct": 47.97,
+          "net_units_flat_minus110": -22.818,
+          "roi_pct_flat_minus110": -8.006
+        },
+        "ATS_min_edge_3_5": {
+          "bets": 128,
+          "wins": 60,
+          "losses": 64,
+          "pushes": 4,
+          "no_lean": 0,
+          "win_pct": 48.39,
+          "net_units_flat_minus110": -9.455,
+          "roi_pct_flat_minus110": -7.386
+        },
+        "margin_mae": 10.851,
+        "total_mae": 10.702,
+        "market_margin_mae": 9.984,
+        "avg_abs_predicted_margin": 2.863,
+        "avg_abs_market_spread": 4.967,
+        "count_ats_favorite_leans": 49,
+        "count_ats_underdog_leans": 236
+      },
+      "2024": {
+        "games": 285,
+        "ATS_all_games": {
+          "bets": 285,
+          "wins": 140,
+          "losses": 141,
+          "pushes": 4,
+          "no_lean": 0,
+          "win_pct": 49.82,
+          "net_units_flat_minus110": -13.727,
+          "roi_pct_flat_minus110": -4.817
+        },
+        "ATS_min_edge_3_5": {
+          "bets": 134,
+          "wins": 63,
+          "losses": 69,
+          "pushes": 2,
+          "no_lean": 0,
+          "win_pct": 47.73,
+          "net_units_flat_minus110": -11.727,
+          "roi_pct_flat_minus110": -8.752
+        },
+        "margin_mae": 10.57,
+        "total_mae": 10.246,
+        "market_margin_mae": 9.704,
+        "avg_abs_predicted_margin": 3.29,
+        "avg_abs_market_spread": 4.925,
+        "count_ats_favorite_leans": 54,
+        "count_ats_underdog_leans": 231
+      },
+      "2025": {
+        "games": 285,
+        "ATS_all_games": {
+          "bets": 285,
+          "wins": 135,
+          "losses": 149,
+          "pushes": 1,
+          "no_lean": 0,
+          "win_pct": 47.54,
+          "net_units_flat_minus110": -26.273,
+          "roi_pct_flat_minus110": -9.219
+        },
+        "ATS_min_edge_3_5": {
+          "bets": 136,
+          "wins": 68,
+          "losses": 68,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct": 50.0,
+          "net_units_flat_minus110": -6.182,
+          "roi_pct_flat_minus110": -4.545
+        },
+        "margin_mae": 10.552,
+        "total_mae": 10.698,
+        "market_margin_mae": 9.67,
+        "avg_abs_predicted_margin": 3.724,
+        "avg_abs_market_spread": 5.316,
+        "count_ats_favorite_leans": 76,
+        "count_ats_underdog_leans": 209
+      },
+      "2026": {
+        "games": 121,
+        "ATS_all_games": {
+          "bets": 121,
+          "wins": 62,
+          "losses": 53,
+          "pushes": 6,
+          "no_lean": 0,
+          "win_pct": 53.91,
+          "net_units_flat_minus110": 3.364,
+          "roi_pct_flat_minus110": 2.78
+        },
+        "ATS_min_edge_3_5": {
+          "bets": 42,
+          "wins": 23,
+          "losses": 17,
+          "pushes": 2,
+          "no_lean": 0,
+          "win_pct": 57.5,
+          "net_units_flat_minus110": 3.909,
+          "roi_pct_flat_minus110": 9.307
+        },
+        "margin_mae": 9.633,
+        "total_mae": 11.509,
+        "market_margin_mae": 9.57,
+        "avg_abs_predicted_margin": 3.12,
+        "avg_abs_market_spread": 4.595,
+        "count_ats_favorite_leans": 23,
+        "count_ats_underdog_leans": 98
+      }
+    },
+    "nonqb_counts_std": {
+      "2022": {
+        "games": 45,
+        "ATS_all_games": {
+          "bets": 45,
+          "wins": 26,
+          "losses": 17,
+          "pushes": 2,
+          "no_lean": 0,
+          "win_pct": 60.47,
+          "net_units_flat_minus110": 6.636,
+          "roi_pct_flat_minus110": 14.747
+        },
+        "ATS_min_edge_3_5": {
+          "bets": 18,
+          "wins": 11,
+          "losses": 5,
+          "pushes": 2,
+          "no_lean": 0,
+          "win_pct": 68.75,
+          "net_units_flat_minus110": 5.0,
+          "roi_pct_flat_minus110": 27.778
+        },
+        "margin_mae": 10.099,
+        "total_mae": 10.948,
+        "market_margin_mae": 9.922,
+        "avg_abs_predicted_margin": 4.626,
+        "avg_abs_market_spread": 6.033,
+        "count_ats_favorite_leans": 13,
+        "count_ats_underdog_leans": 32
+      },
+      "2023": {
+        "games": 285,
+        "ATS_all_games": {
+          "bets": 285,
+          "wins": 131,
+          "losses": 140,
+          "pushes": 14,
+          "no_lean": 0,
+          "win_pct": 48.34,
+          "net_units_flat_minus110": -20.909,
+          "roi_pct_flat_minus110": -7.337
+        },
+        "ATS_min_edge_3_5": {
+          "bets": 103,
+          "wins": 47,
+          "losses": 51,
+          "pushes": 5,
+          "no_lean": 0,
+          "win_pct": 47.96,
+          "net_units_flat_minus110": -8.273,
+          "roi_pct_flat_minus110": -8.032
+        },
+        "margin_mae": 10.853,
+        "total_mae": 10.734,
+        "market_margin_mae": 9.984,
+        "avg_abs_predicted_margin": 4.555,
+        "avg_abs_market_spread": 4.967,
+        "count_ats_favorite_leans": 82,
+        "count_ats_underdog_leans": 203
+      },
+      "2024": {
+        "games": 285,
+        "ATS_all_games": {
+          "bets": 285,
+          "wins": 139,
+          "losses": 142,
+          "pushes": 4,
+          "no_lean": 0,
+          "win_pct": 49.47,
+          "net_units_flat_minus110": -15.636,
+          "roi_pct_flat_minus110": -5.486
+        },
+        "ATS_min_edge_3_5": {
+          "bets": 114,
+          "wins": 61,
+          "losses": 51,
+          "pushes": 2,
+          "no_lean": 0,
+          "win_pct": 54.46,
+          "net_units_flat_minus110": 4.455,
+          "roi_pct_flat_minus110": 3.907
+        },
+        "margin_mae": 10.322,
+        "total_mae": 10.333,
+        "market_margin_mae": 9.704,
+        "avg_abs_predicted_margin": 4.785,
+        "avg_abs_market_spread": 4.925,
+        "count_ats_favorite_leans": 102,
+        "count_ats_underdog_leans": 183
+      },
+      "2025": {
+        "games": 285,
+        "ATS_all_games": {
+          "bets": 285,
+          "wins": 144,
+          "losses": 140,
+          "pushes": 1,
+          "no_lean": 0,
+          "win_pct": 50.7,
+          "net_units_flat_minus110": -9.091,
+          "roi_pct_flat_minus110": -3.19
+        },
+        "ATS_min_edge_3_5": {
+          "bets": 120,
+          "wins": 61,
+          "losses": 59,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct": 50.83,
+          "net_units_flat_minus110": -3.545,
+          "roi_pct_flat_minus110": -2.955
+        },
+        "margin_mae": 10.347,
+        "total_mae": 10.684,
+        "market_margin_mae": 9.67,
+        "avg_abs_predicted_margin": 4.976,
+        "avg_abs_market_spread": 5.316,
+        "count_ats_favorite_leans": 109,
+        "count_ats_underdog_leans": 176
+      },
+      "2026": {
+        "games": 121,
+        "ATS_all_games": {
+          "bets": 121,
+          "wins": 58,
+          "losses": 57,
+          "pushes": 6,
+          "no_lean": 0,
+          "win_pct": 50.43,
+          "net_units_flat_minus110": -4.273,
+          "roi_pct_flat_minus110": -3.531
+        },
+        "ATS_min_edge_3_5": {
+          "bets": 46,
+          "wins": 25,
+          "losses": 21,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct": 54.35,
+          "net_units_flat_minus110": 1.727,
+          "roi_pct_flat_minus110": 3.755
+        },
+        "margin_mae": 9.783,
+        "total_mae": 11.46,
+        "market_margin_mae": 9.57,
+        "avg_abs_predicted_margin": 4.456,
+        "avg_abs_market_spread": 4.595,
+        "count_ats_favorite_leans": 44,
+        "count_ats_underdog_leans": 77
+      }
+    },
+    "player_signed_gap_std": {
+      "2022": {
+        "games": 45,
+        "ATS_all_games": {
+          "bets": 45,
+          "wins": 27,
+          "losses": 16,
+          "pushes": 2,
+          "no_lean": 0,
+          "win_pct": 62.79,
+          "net_units_flat_minus110": 8.545,
+          "roi_pct_flat_minus110": 18.99
+        },
+        "ATS_min_edge_3_5": {
+          "bets": 19,
+          "wins": 11,
+          "losses": 6,
+          "pushes": 2,
+          "no_lean": 0,
+          "win_pct": 64.71,
+          "net_units_flat_minus110": 4.0,
+          "roi_pct_flat_minus110": 21.053
+        },
+        "margin_mae": 10.051,
+        "total_mae": 10.823,
+        "market_margin_mae": 9.922,
+        "avg_abs_predicted_margin": 4.712,
+        "avg_abs_market_spread": 6.033,
+        "count_ats_favorite_leans": 14,
+        "count_ats_underdog_leans": 31
+      },
+      "2023": {
+        "games": 285,
+        "ATS_all_games": {
+          "bets": 285,
+          "wins": 124,
+          "losses": 147,
+          "pushes": 14,
+          "no_lean": 0,
+          "win_pct": 45.76,
+          "net_units_flat_minus110": -34.273,
+          "roi_pct_flat_minus110": -12.026
+        },
+        "ATS_min_edge_3_5": {
+          "bets": 111,
+          "wins": 51,
+          "losses": 54,
+          "pushes": 6,
+          "no_lean": 0,
+          "win_pct": 48.57,
+          "net_units_flat_minus110": -7.636,
+          "roi_pct_flat_minus110": -6.88
+        },
+        "margin_mae": 10.876,
+        "total_mae": 10.685,
+        "market_margin_mae": 9.984,
+        "avg_abs_predicted_margin": 4.681,
+        "avg_abs_market_spread": 4.967,
+        "count_ats_favorite_leans": 91,
+        "count_ats_underdog_leans": 194
+      },
+      "2024": {
+        "games": 285,
+        "ATS_all_games": {
+          "bets": 285,
+          "wins": 140,
+          "losses": 141,
+          "pushes": 4,
+          "no_lean": 0,
+          "win_pct": 49.82,
+          "net_units_flat_minus110": -13.727,
+          "roi_pct_flat_minus110": -4.817
+        },
+        "ATS_min_edge_3_5": {
+          "bets": 115,
+          "wins": 62,
+          "losses": 51,
+          "pushes": 2,
+          "no_lean": 0,
+          "win_pct": 54.87,
+          "net_units_flat_minus110": 5.364,
+          "roi_pct_flat_minus110": 4.664
+        },
+        "margin_mae": 10.473,
+        "total_mae": 10.555,
+        "market_margin_mae": 9.704,
+        "avg_abs_predicted_margin": 4.819,
+        "avg_abs_market_spread": 4.925,
+        "count_ats_favorite_leans": 97,
+        "count_ats_underdog_leans": 188
+      },
+      "2025": {
+        "games": 285,
+        "ATS_all_games": {
+          "bets": 285,
+          "wins": 142,
+          "losses": 142,
+          "pushes": 1,
+          "no_lean": 0,
+          "win_pct": 50.0,
+          "net_units_flat_minus110": -12.909,
+          "roi_pct_flat_minus110": -4.53
+        },
+        "ATS_min_edge_3_5": {
+          "bets": 115,
+          "wins": 59,
+          "losses": 56,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct": 51.3,
+          "net_units_flat_minus110": -2.364,
+          "roi_pct_flat_minus110": -2.055
+        },
+        "margin_mae": 10.313,
+        "total_mae": 10.704,
+        "market_margin_mae": 9.67,
+        "avg_abs_predicted_margin": 4.916,
+        "avg_abs_market_spread": 5.316,
+        "count_ats_favorite_leans": 109,
+        "count_ats_underdog_leans": 176
+      },
+      "2026": {
+        "games": 121,
+        "ATS_all_games": {
+          "bets": 121,
+          "wins": 61,
+          "losses": 54,
+          "pushes": 6,
+          "no_lean": 0,
+          "win_pct": 53.04,
+          "net_units_flat_minus110": 1.455,
+          "roi_pct_flat_minus110": 1.202
+        },
+        "ATS_min_edge_3_5": {
+          "bets": 45,
+          "wins": 24,
+          "losses": 21,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct": 53.33,
+          "net_units_flat_minus110": 0.818,
+          "roi_pct_flat_minus110": 1.818
+        },
+        "margin_mae": 9.802,
+        "total_mae": 11.486,
+        "market_margin_mae": 9.57,
+        "avg_abs_predicted_margin": 4.388,
+        "avg_abs_market_spread": 4.595,
+        "count_ats_favorite_leans": 44,
+        "count_ats_underdog_leans": 77
+      }
+    },
+    "player_positive_gap_std": {
+      "2022": {
+        "games": 45,
+        "ATS_all_games": {
+          "bets": 45,
+          "wins": 25,
+          "losses": 18,
+          "pushes": 2,
+          "no_lean": 0,
+          "win_pct": 58.14,
+          "net_units_flat_minus110": 4.727,
+          "roi_pct_flat_minus110": 10.505
+        },
+        "ATS_min_edge_3_5": {
+          "bets": 17,
+          "wins": 9,
+          "losses": 6,
+          "pushes": 2,
+          "no_lean": 0,
+          "win_pct": 60.0,
+          "net_units_flat_minus110": 2.182,
+          "roi_pct_flat_minus110": 12.834
+        },
+        "margin_mae": 10.188,
+        "total_mae": 11.051,
+        "market_margin_mae": 9.922,
+        "avg_abs_predicted_margin": 4.977,
+        "avg_abs_market_spread": 6.033,
+        "count_ats_favorite_leans": 16,
+        "count_ats_underdog_leans": 29
+      },
+      "2023": {
+        "games": 285,
+        "ATS_all_games": {
+          "bets": 285,
+          "wins": 128,
+          "losses": 143,
+          "pushes": 14,
+          "no_lean": 0,
+          "win_pct": 47.23,
+          "net_units_flat_minus110": -26.636,
+          "roi_pct_flat_minus110": -9.346
+        },
+        "ATS_min_edge_3_5": {
+          "bets": 101,
+          "wins": 46,
+          "losses": 49,
+          "pushes": 6,
+          "no_lean": 0,
+          "win_pct": 48.42,
+          "net_units_flat_minus110": -7.182,
+          "roi_pct_flat_minus110": -7.111
+        },
+        "margin_mae": 10.989,
+        "total_mae": 10.765,
+        "market_margin_mae": 9.984,
+        "avg_abs_predicted_margin": 4.841,
+        "avg_abs_market_spread": 4.967,
+        "count_ats_favorite_leans": 93,
+        "count_ats_underdog_leans": 192
+      },
+      "2024": {
+        "games": 285,
+        "ATS_all_games": {
+          "bets": 285,
+          "wins": 140,
+          "losses": 141,
+          "pushes": 4,
+          "no_lean": 0,
+          "win_pct": 49.82,
+          "net_units_flat_minus110": -13.727,
+          "roi_pct_flat_minus110": -4.817
+        },
+        "ATS_min_edge_3_5": {
+          "bets": 115,
+          "wins": 62,
+          "losses": 51,
+          "pushes": 2,
+          "no_lean": 0,
+          "win_pct": 54.87,
+          "net_units_flat_minus110": 5.364,
+          "roi_pct_flat_minus110": 4.664
+        },
+        "margin_mae": 10.466,
+        "total_mae": 10.475,
+        "market_margin_mae": 9.704,
+        "avg_abs_predicted_margin": 4.748,
+        "avg_abs_market_spread": 4.925,
+        "count_ats_favorite_leans": 96,
+        "count_ats_underdog_leans": 189
+      },
+      "2025": {
+        "games": 285,
+        "ATS_all_games": {
+          "bets": 285,
+          "wins": 143,
+          "losses": 141,
+          "pushes": 1,
+          "no_lean": 0,
+          "win_pct": 50.35,
+          "net_units_flat_minus110": -11.0,
+          "roi_pct_flat_minus110": -3.86
+        },
+        "ATS_min_edge_3_5": {
+          "bets": 118,
+          "wins": 60,
+          "losses": 58,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct": 50.85,
+          "net_units_flat_minus110": -3.455,
+          "roi_pct_flat_minus110": -2.928
+        },
+        "margin_mae": 10.321,
+        "total_mae": 10.701,
+        "market_margin_mae": 9.67,
+        "avg_abs_predicted_margin": 4.966,
+        "avg_abs_market_spread": 5.316,
+        "count_ats_favorite_leans": 108,
+        "count_ats_underdog_leans": 177
+      },
+      "2026": {
+        "games": 121,
+        "ATS_all_games": {
+          "bets": 121,
+          "wins": 61,
+          "losses": 54,
+          "pushes": 6,
+          "no_lean": 0,
+          "win_pct": 53.04,
+          "net_units_flat_minus110": 1.455,
+          "roi_pct_flat_minus110": 1.202
+        },
+        "ATS_min_edge_3_5": {
+          "bets": 45,
+          "wins": 24,
+          "losses": 21,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct": 53.33,
+          "net_units_flat_minus110": 0.818,
+          "roi_pct_flat_minus110": 1.818
+        },
+        "margin_mae": 9.806,
+        "total_mae": 11.5,
+        "market_margin_mae": 9.57,
+        "avg_abs_predicted_margin": 4.413,
+        "avg_abs_market_spread": 4.595,
+        "count_ats_favorite_leans": 44,
+        "count_ats_underdog_leans": 77
+      }
+    },
+    "counts_plus_positive_gap_std": {
+      "2022": {
+        "games": 45,
+        "ATS_all_games": {
+          "bets": 45,
+          "wins": 25,
+          "losses": 18,
+          "pushes": 2,
+          "no_lean": 0,
+          "win_pct": 58.14,
+          "net_units_flat_minus110": 4.727,
+          "roi_pct_flat_minus110": 10.505
+        },
+        "ATS_min_edge_3_5": {
+          "bets": 17,
+          "wins": 9,
+          "losses": 6,
+          "pushes": 2,
+          "no_lean": 0,
+          "win_pct": 60.0,
+          "net_units_flat_minus110": 2.182,
+          "roi_pct_flat_minus110": 12.834
+        },
+        "margin_mae": 10.061,
+        "total_mae": 11.253,
+        "market_margin_mae": 9.922,
+        "avg_abs_predicted_margin": 4.642,
+        "avg_abs_market_spread": 6.033,
+        "count_ats_favorite_leans": 16,
+        "count_ats_underdog_leans": 29
+      },
+      "2023": {
+        "games": 285,
+        "ATS_all_games": {
+          "bets": 285,
+          "wins": 128,
+          "losses": 143,
+          "pushes": 14,
+          "no_lean": 0,
+          "win_pct": 47.23,
+          "net_units_flat_minus110": -26.636,
+          "roi_pct_flat_minus110": -9.346
+        },
+        "ATS_min_edge_3_5": {
+          "bets": 120,
+          "wins": 54,
+          "losses": 60,
+          "pushes": 6,
+          "no_lean": 0,
+          "win_pct": 47.37,
+          "net_units_flat_minus110": -10.909,
+          "roi_pct_flat_minus110": -9.091
+        },
+        "margin_mae": 11.242,
+        "total_mae": 10.901,
+        "market_margin_mae": 9.984,
+        "avg_abs_predicted_margin": 4.821,
+        "avg_abs_market_spread": 4.967,
+        "count_ats_favorite_leans": 91,
+        "count_ats_underdog_leans": 194
+      },
+      "2024": {
+        "games": 285,
+        "ATS_all_games": {
+          "bets": 285,
+          "wins": 145,
+          "losses": 136,
+          "pushes": 4,
+          "no_lean": 0,
+          "win_pct": 51.6,
+          "net_units_flat_minus110": -4.182,
+          "roi_pct_flat_minus110": -1.467
+        },
+        "ATS_min_edge_3_5": {
+          "bets": 127,
+          "wins": 66,
+          "losses": 59,
+          "pushes": 2,
+          "no_lean": 0,
+          "win_pct": 52.8,
+          "net_units_flat_minus110": 1.0,
+          "roi_pct_flat_minus110": 0.787
+        },
+        "margin_mae": 10.418,
+        "total_mae": 10.555,
+        "market_margin_mae": 9.704,
+        "avg_abs_predicted_margin": 4.96,
+        "avg_abs_market_spread": 4.925,
+        "count_ats_favorite_leans": 102,
+        "count_ats_underdog_leans": 183
+      },
+      "2025": {
+        "games": 285,
+        "ATS_all_games": {
+          "bets": 285,
+          "wins": 143,
+          "losses": 141,
+          "pushes": 1,
+          "no_lean": 0,
+          "win_pct": 50.35,
+          "net_units_flat_minus110": -11.0,
+          "roi_pct_flat_minus110": -3.86
+        },
+        "ATS_min_edge_3_5": {
+          "bets": 120,
+          "wins": 61,
+          "losses": 59,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct": 50.83,
+          "net_units_flat_minus110": -3.545,
+          "roi_pct_flat_minus110": -2.955
+        },
+        "margin_mae": 10.339,
+        "total_mae": 10.682,
+        "market_margin_mae": 9.67,
+        "avg_abs_predicted_margin": 4.983,
+        "avg_abs_market_spread": 5.316,
+        "count_ats_favorite_leans": 108,
+        "count_ats_underdog_leans": 177
+      },
+      "2026": {
+        "games": 121,
+        "ATS_all_games": {
+          "bets": 121,
+          "wins": 59,
+          "losses": 56,
+          "pushes": 6,
+          "no_lean": 0,
+          "win_pct": 51.3,
+          "net_units_flat_minus110": -2.364,
+          "roi_pct_flat_minus110": -1.953
+        },
+        "ATS_min_edge_3_5": {
+          "bets": 47,
+          "wins": 25,
+          "losses": 22,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct": 53.19,
+          "net_units_flat_minus110": 0.727,
+          "roi_pct_flat_minus110": 1.547
+        },
+        "margin_mae": 9.817,
+        "total_mae": 11.452,
+        "market_margin_mae": 9.57,
+        "avg_abs_predicted_margin": 4.472,
+        "avg_abs_market_spread": 4.595,
+        "count_ats_favorite_leans": 44,
+        "count_ats_underdog_leans": 77
+      }
+    }
+  },
+  "known_limitations": [
+    "Longitudinal historical player value gap is NOT an independently measured WAR or point value.",
+    "Comparison peer is best other previously observed same-team positional player, NOT a verified available backup.",
+    "OL and QB value gaps are NOT included; OL counts are in nonQB count comparator, QB must be a separate model.",
+    "Injury source is latest known pre-kickoff designation; player value is strictly prior season/week.",
+    "Heterogeneous positions are separated and outlier gaps clipped at +/-2 feature units, not points.",
+    "League data feed misses long-term injured reserve players omitted from weekly reports.",
+    "Historical 2025 and 2026 folds have already been used in model-design discussions; not untouched blind validation.",
+    "No market opening/closing movement in model inputs; grades use nflverse archived spreads not Bovada transaction prices.",
+    "Only research files were added; public official projections and ledger remain unchanged."
+  ]
+}
