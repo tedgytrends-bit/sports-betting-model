@@ -1,0 +1,61 @@
+name: Backtest realistic inferred-QB replacement 2025–2026 (research only)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "research/backtest_realistic_qb_replacement_2025_2026.py"
+      - ".github/workflows/realistic-qb-replacement-historical.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: realistic-qb-replacement-nfl-2025-2026
+  cancel-in-progress: false
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install model dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Validate code and run original QB-EPA rule on 2025/2026 prior-only identity
+        run: |
+          python -m py_compile research/backtest_realistic_qb_replacement_2025_2026.py
+          python -u research/backtest_realistic_qb_replacement_2025_2026.py
+      - name: Verify 2026 Week 9 exclusion, 2025 cohort and saved 2026 baseline
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import pandas as pd,json
+          p=Path("data/week09_review")
+          j=json.loads((p/"realistic_qb_replacement_holdout_20261109.json").read_text())
+          assert j["status"]=="RESEARCH_ONLY_REALISTIC_QB_2025_2026"
+          assert j["2026_saved_nonqb_score_max_diff"]<.0001
+          assert j["common_games"]>=390
+          assert set(j["comparison"])=={"2025","2026"}
+          a=pd.read_csv(p/"realistic_qb_replacement_holdout_20261109.csv")
+          assert len(a)==406 and a.loc[a.season.eq(2026),"week"].max()==8
+          assert a.game_id.nunique()==406
+          assert (p/"realistic_qb_replacement_holdout_20261109.md").exists()
+          print("PASS: common 2025/26 games, no QB target identity in predictions, 2026 Week 9 excluded")
+          PY
+      - name: Archive only research findings
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/week09_review/realistic_qb_replacement_holdout_20261109.csv data/week09_review/realistic_qb_replacement_holdout_20261109.json data/week09_review/realistic_qb_replacement_holdout_20261109.md
+          if ! git diff --cached --quiet; then
+            git commit -m "Archive realistic pregame-inferred QB replacement 2025–2026 research"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
