@@ -1,0 +1,66 @@
+name: Evaluate opponent-adjusted NFL team strength (research only)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "research/opponent_adjusted_team_strength_holdout.py"
+      - ".github/workflows/opponent-adjusted-team-strength-holdout.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: opponent-strength-historical-shadow
+  cancel-in-progress: false
+
+jobs:
+  backtest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install model dependencies
+        run: |
+          python -m pip install -r requirements.txt
+      - name: Compile and run opponent-strength chronological backtest
+        run: |
+          python -m py_compile research/opponent_adjusted_team_strength_holdout.py
+          python -u research/opponent_adjusted_team_strength_holdout.py
+      - name: Validate exact historic cohort and no future-leakage
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import pandas as pd
+          p=Path("data/week09_review")
+          j=json.loads((p/"opponent_adjusted_team_strength_holdout_20261109.json").read_text())
+          assert j["status"]=="RESEARCH_ONLY_OPPONENT_ADJUSTED_TEAM_STRENGTH"
+          assert j["synthetic_time_guard"]=="PASSED"
+          assert j["baseline_saved_score_max_difference"] < 0.0001
+          assert len(j["variants"])==6
+          for name,years in j["by_year"].items():
+              assert years["2025"]["games"]==285 and years["2026"]["games"]==121
+          df=pd.read_csv(p/"opponent_adjusted_team_strength_holdout_20261109.csv")
+          assert len(df)==1021*6
+          assert not df.duplicated(["game_id","research_variant"]).any()
+          assert df.loc[df.season.eq(2026),"week"].max()<=8
+          assert (p/"opponent_adjusted_team_strength_holdout_20261109.md").is_file()
+          print("PASS: 6 reproducible variants, 1021 games each, Week 9 excluded")
+          PY
+      - name: Archive research only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/week09_review/opponent_adjusted_team_strength_holdout_20261109.csv data/week09_review/opponent_adjusted_team_strength_holdout_20261109.json data/week09_review/opponent_adjusted_team_strength_holdout_20261109.md
+          if ! git diff --cached --quiet; then
+            git commit -m "Archive opponent-adjusted NFL team strength shadow results"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
