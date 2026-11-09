@@ -1,0 +1,63 @@
+name: Audit NFL QB starter hindsight bias (research only)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "research/audit_qb_starter_information_gap_2026.py"
+      - ".github/workflows/audit-qb-starter-information-gap.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: qb-hindsight-gap-audit
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install NFL research dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Run chronological QB inference and retrospective-oracle comparison
+        run: |
+          python -m py_compile research/audit_qb_starter_information_gap_2026.py
+          python -u research/audit_qb_starter_information_gap_2026.py
+      - name: Verify QB information audit and unchanged official models
+        run: |
+          python - <<'PY'
+          import json
+          import pandas as pd
+          from pathlib import Path
+          dir=Path("data/week09_review")
+          r=json.loads((dir/"qb_starter_information_gap_20261109.json").read_text())
+          assert r["status"]=="RESEARCH_ONLY_STARTER_INFORMATION_GAP"
+          assert r["games_archived"]==121
+          assert r["games_common"]>=110
+          assert r["inferred_correct_teams"]+r["inferred_wrong_teams"]==242
+          assert len(r["comparison"])==3
+          rows=pd.read_csv(dir/"qb_starter_information_gap_20261109.csv")
+          assert len(rows)==121
+          assert rows.week.max()<=8
+          assert (dir/"qb_starter_information_gap_20261109.md").exists()
+          print("PASS: 121 pre-Week9 QB-team games, strictly prior inference and separately labeled hindsight comparator")
+          PY
+      - name: Save QB research-only outputs, never rewrite past projections
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/week09_review/qb_starter_information_gap_20261109.json data/week09_review/qb_starter_information_gap_20261109.csv data/week09_review/qb_starter_information_gap_20261109.md
+          if ! git diff --cached --quiet; then
+            git commit -m "Archive 2026 QB pregame starter information gap findings"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
