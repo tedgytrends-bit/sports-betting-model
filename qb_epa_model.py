@@ -59,7 +59,8 @@ def qb_game_stats(pbp: pd.DataFrame, schedule: pd.DataFrame) -> pd.DataFrame:
 
 def _starter_for(team: str, game_id: str, history: pd.DataFrame,
                  overrides: pd.DataFrame | None,
-                 observed: pd.DataFrame | None = None) -> tuple[str | None, str, str, str]:
+                 observed: pd.DataFrame | None = None,
+                 expected: pd.DataFrame | None = None) -> tuple[str | None, str, str, str]:
     """Select a verified starter or provisionally infer last game's primary QB."""
     if overrides is not None and not overrides.empty:
         match = overrides[
@@ -76,6 +77,26 @@ def _starter_for(team: str, game_id: str, history: pd.DataFrame,
             if not qb_id:
                 raise ValueError(f"Blank QB ID: {game_id} {team}")
             return qb_id, str(r.get("qb_name", qb_id)), "verified_pregame", str(r["source_url"])
+    # A coach can announce an *expected* starter before final game-day
+    # confirmation. Prefer that specific, reviewed expectation over an outdated
+    # generic schedule depth chart, but NEVER mark it as verified_pregame.
+    if expected is not None and not expected.empty:
+        match = expected[
+            expected["game_id"].astype(str).eq(str(game_id))
+            & expected["team"].astype(str).str.upper().eq(str(team).upper())
+        ]
+        if len(match) > 1:
+            raise ValueError(f"Multiple expected QB records: {game_id} {team}")
+        if not match.empty:
+            item=match.iloc[0]
+            if str(item.get("expectation_status","")).strip()!="COACH_EXPECTED_NOT_FINAL":
+                raise ValueError(f"Unexpected coach expectation status for {game_id} {team}")
+            if not str(item.get("source_url","")).startswith("https://"):
+                raise ValueError(f"Expected QB record lacks source: {game_id} {team}")
+            eid=str(item.get("qb_id","")).strip()
+            if not eid:
+                raise ValueError(f"Expected QB record lacks player ID: {game_id} {team}")
+            return eid,str(item.get("qb_name",eid)), "coach_expected_pregame_unverified",str(item["source_url"])
     # Retrospective only: identify who first passed in the target game.
     # Identity from target PBP is postgame evidence, not a legitimate
     # point-in-time starter prediction; target-game EPA is never used.
@@ -101,9 +122,10 @@ def _starter_for(team: str, game_id: str, history: pd.DataFrame,
 
 def _one_team(game_id: str, side: str, team: str, cutoff: pd.Timestamp,
               stats: pd.DataFrame, overrides: pd.DataFrame | None,
-              observed: pd.DataFrame | None = None) -> dict:
+              observed: pd.DataFrame | None = None,
+              expected: pd.DataFrame | None = None) -> dict:
     history = stats[stats["gameday"].lt(cutoff)].copy()
-    qb_id, qb_name, starter_source, source_url = _starter_for(team, game_id, history, overrides, observed=observed)
+    qb_id, qb_name, starter_source, source_url = _starter_for(team, game_id, history, overrides, observed=observed, expected=expected)
     team_hist = history[history["team"].eq(team)]
     recent_game_ids = (
         team_hist[["game_id", "gameday"]].drop_duplicates()
@@ -188,6 +210,7 @@ def build_qb_epa_board(
     targets: pd.DataFrame,
     overrides: pd.DataFrame | None = None,
     observed: pd.DataFrame | None = None,
+    expected: pd.DataFrame | None = None,
 ) -> pd.DataFrame:
     """Compute two QB comparisons per game using only completed prior games.
 
@@ -209,7 +232,7 @@ def build_qb_epa_board(
         for side in ("home", "away"):
             team = str(getattr(game, f"{side}_team")).upper().strip()
             out.append(_one_team(
-                str(game.game_id), side, team, game.gameday, stats, overrides, observed
+                str(game.game_id), side, team, game.gameday, stats, overrides, observed, expected
             ))
     result = pd.DataFrame(out)
     if len(result) != 2 * len(games):
