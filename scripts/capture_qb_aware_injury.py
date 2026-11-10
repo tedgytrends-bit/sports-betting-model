@@ -66,7 +66,7 @@ def run(season:int,week:int)->None:
     for side in ("home","away"):
         result[f"verified_only_projected_{side}"]=result[
             f"projected_{side}_qb_injury"
-        ].where(result["both_qbs_source_verified"],result[f"projected_{side}"])
+        ].where(result["both_qbs_source_verified"],result[f"original_non_qb_{side}"])
     result["verified_only_projected_total"]=(
         result["verified_only_projected_home"]+result["verified_only_projected_away"]
     )
