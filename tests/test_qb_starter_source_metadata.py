@@ -33,13 +33,13 @@ class QBSourceMetadataAuditTest(unittest.TestCase):
     def test_stale_article_flagged_not_confirmed(self):
         r=audit(self.schedule,self.row(source_published_at_utc="2026-09-21T20:29:00Z")).iloc[0]
         self.assertEqual(r.metadata_status,"stale_requires_manual_reconfirmation")
-        self.assertIn("stale_older_than_one_week",r.flags)
+        self.assertIn("stale_older_than_one_week",r["flags"])
         self.assertFalse(r.confirmed_matchup_starter)
 
     def test_after_kickoff_article_rejected(self):
         r=audit(self.schedule,self.row(source_published_at_utc="2026-11-08T18:01:00Z")).iloc[0]
         self.assertEqual(r.metadata_status,"invalid_metadata")
-        self.assertIn("source_published_at_or_after_kickoff",r.flags)
+        self.assertIn("source_published_at_or_after_kickoff",r["flags"])
 
     def test_wrong_team_and_game_rejected(self):
         for changes,expected in [
@@ -51,7 +51,7 @@ class QBSourceMetadataAuditTest(unittest.TestCase):
             with self.subTest(changes=changes):
                 r=audit(self.schedule,self.row(**changes)).iloc[0]
                 self.assertEqual(r.metadata_status,"invalid_metadata")
-                self.assertIn(expected,r.flags)
+                self.assertIn(expected,r["flags"])
 
     def test_duplicate_entry_rejected(self):
         frame=pd.concat([self.row(),self.row()],ignore_index=True)
