@@ -1,0 +1,64 @@
+name: Research NFL 6 vs 10 game lookback (shadow only)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/run_lookback_margin_shadow.py"
+      - ".github/workflows/lookback-margin-shadow.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nfl-lookback-shadow-research
+  cancel-in-progress: false
+
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install research requirements
+        run: python -m pip install -r requirements.txt
+      - name: Run 6 versus 10 game point-in-time historical experiment
+        run: |
+          python -m py_compile scripts/run_lookback_margin_shadow.py
+          python -u scripts/run_lookback_margin_shadow.py
+      - name: Validate common games, chronology, and outputs
+        run: |
+          python - <<'PY'
+          import json
+          import pandas as pd
+          from pathlib import Path
+          root=Path("data/week09_review")
+          j=json.loads((root/"lookback_margin_shadow_20261110.json").read_text())
+          df=pd.read_csv(root/"lookback_margin_shadow_20261110.csv")
+          assert j["status"]=="EXPLORATORY_RESEARCH_ONLY_NOT_OFFICIAL"
+          assert j["predicted_games"]>=1000
+          assert len(df)==j["predicted_games"]
+          assert not df.game_id.duplicated().any()
+          assert not ((df.season==2026)&(df.week>8)).any()
+          assert set(j["models"])=={"raw_6","raw_10","standardized_6","standardized_10"}
+          assert all(y in j["evaluation"] for y in ("2023","2024","2025","2026"))
+          print("PASS: paired chronological lookback research, no Week 9 outcomes")
+          PY
+      - name: Archive research artifacts only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/week09_review/lookback_margin_shadow_20261110.csv data/week09_review/lookback_margin_shadow_20261110.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Archive six vs ten game lookback shadow research"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
