@@ -136,7 +136,7 @@ def main():
         "input_file":str(saved.relative_to(ROOT)),
         "rows":len(result),
         "metadata_status_counts":result.metadata_status.value_counts().to_dict(),
-        "stale_rows":result.loc[result.flags.str.contains("stale_older_than_one_week"),[
+        "stale_rows":result.loc[result["flags"].str.contains("stale_older_than_one_week"),[
             "game_id","team","qb_name","source_age_hours_before_kickoff"
         ]].to_dict("records"),
         "timestamp_method":"nflverse gameday/gametime interpreted America/New_York -> UTC; exact kickoff, DST-aware",
