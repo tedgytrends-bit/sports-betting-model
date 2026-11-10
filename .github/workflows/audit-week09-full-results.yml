@@ -1,0 +1,61 @@
+name: Audit final 2026 Week 9 ATS and totals (research only)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "research/audit_week09_full_results.py"
+      - ".github/workflows/audit-week09-full-results.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: audit-week09-final-research
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Regrade only original frozen Week 9 predictions with 15 final scores
+        run: |
+          python -m py_compile research/audit_week09_full_results.py
+          python research/audit_week09_full_results.py
+      - name: Verify full Week 9 immutable audit
+        run: |
+          python - <<'PY'
+          import json,csv
+          from pathlib import Path
+          p=Path("data/week09_review")
+          r=json.loads((p/"week09_full_summary.json").read_text())
+          assert r["audit"]=="WEEK09_COMPLETED_FULL_RESEARCH"
+          assert r["only_unsettled_game"] is None
+          assert r["results"]["official_injury"]["games"]==15
+          assert r["results"]["official_injury"]["ats_all_games"]=={"wins":3,"losses":11,"pushes":1,"no_lean":0,"win_pct_ex_push":21.43}
+          assert r["results"]["official_injury"]["totals_all_games"]=={"wins":9,"losses":6,"pushes":0,"no_lean":0,"win_pct_ex_push":60.0}
+          rows=list(csv.DictReader((p/"week09_full_ats_totals_grade.csv").open()))
+          assert len(rows)==75
+          mon=[x for x in rows if x["game_id"]=="2026_09_BUF_MIN" and x["model"]=="official_injury"]
+          assert len(mon)==1 and mon[0]["ats_result"]=="L" and mon[0]["total_result"]=="L"
+          assert (p/"week09_full_findings.md").exists()
+          print("PASS: 15 unique official forecasts, correct final W-L-P, original public model untouched")
+          PY
+      - name: Save research-only grade and findings, without altering official ledger
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/week09_review/week09_full_ats_totals_grade.csv data/week09_review/week09_full_summary.json data/week09_review/week09_full_findings.md
+          if ! git diff --cached --quiet; then
+            git commit -m "Archive full Week 9 15-game ATS and totals model audit"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
