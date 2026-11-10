@@ -43,3 +43,15 @@ Baltimore's research model QB margin adjustment changed from approximately **-2.
 - Confirm exact starter identities as new authoritative reports arrive, with game-specific source notes and actual source-review timestamps. Do not infer availability from depth-chart rank or a generic profile.
 - Require current real sportsbook lines, timestamps, and identifiable prices before treating any edge as executable. Do not issue official recommendations when important QB statuses remain unresolved.
 - Freeze an immutable **Week 10** forecast before each kickoff and evaluate candidates prospectively; never overwrite Week 8–9 prospective records.
+
+## Completed end-to-end confirmation
+
+The final Week 10 workflow [#42884832007](https://github.com/tedgytrends-bit/sports-betting-model/actions/runs/42884832007) **succeeded on November 10**: all **33 targeted tests passed**, all **14 matchups were projected as a research-only candidate**, the watchlist check ran and did not select a known IR/OUT QB, and versioned forecast/QB-detail files were uploaded as a private-to-workflow downloadable GitHub Actions artifact (30-day retention).
+
+- Starter provenance: **27 schedule-provisional, 1 coach-expected-unverified (Jacoby Brissett), 0 confirmed**.
+- The source verification gate reports `release_ready=false` and `both_starters_verified_games=0`; none of these preliminary QB-adjusted projections are cleared for public publication.
+- Baltimore's starter is Brissett, not IR Tyler Huntley, in the latest research run.
+- Arizona still shows Minshew as an *unverified schedule provisional* while the actual starter remains unresolved. Treat its QB-adjusted projection as unfit for official freeze until team update.
+- The recorded `verified_only_*` sensitivity restores the original non-QB Injury scores when either QB is unverified. It does not overwrite the candidate or any frozen public forecast.
+
+**Result:** The automation now flags its own uncertainty instead of treating a passing job as proof of valid starting-QB inputs. This is an input-quality improvement, not evidence of ATS profitability.
