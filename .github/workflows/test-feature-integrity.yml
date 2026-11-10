@@ -31,8 +31,10 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install model dependencies
-        run: python -m pip install pandas numpy scikit-learn requests
+        run: python -m pip install pandas numpy scikit-learn requests pytest
       - name: Compile app, model, research audit, and tests
         run: python -m compileall -q app.py pages model.py research tests
       - name: Run synthetic feature integrity tests
         run: python -m unittest discover -s tests -v
+      - name: Run QB EPA pytest-specific regression tests
+        run: python -m pytest -q tests/test_qb_epa_model.py
