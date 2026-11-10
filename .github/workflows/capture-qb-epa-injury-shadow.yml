@@ -1,15 +1,7 @@
-name: Capture QB EPA injury shadow (research only)
+name: Reproduce Week 9 QB EPA injury shadow (archived research only)
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - ".github/workflows/capture-qb-epa-injury-shadow.yml"
-      - "qb_epa_model.py"
-      - "tests/test_qb_epa_model.py"
-      - "scripts/capture_week09_qb_epa_shadow.py"
-      - "data/qb_starters/2026_week09_confirmed.csv"
 
 permissions:
   contents: write
@@ -36,7 +28,7 @@ jobs:
         run: |
           python -m py_compile qb_epa_model.py injury_model.py scripts/capture_week09_qb_epa_shadow.py
           python -m pytest -q tests/test_qb_epa_model.py
-      - name: Generate Week 9 QB-adjusted research slate
+      - name: Reproduce archived Week 9 QB-adjusted research slate only (manual)
         run: python scripts/capture_week09_qb_epa_shadow.py
       - name: Commit only research snapshots
         run: |
