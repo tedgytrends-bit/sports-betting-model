@@ -27,6 +27,46 @@ OUT=ROOT/"data"/"qb_epa_shadow"
 SEASONS=(2021,2022,2023,2024,2025,2026)
 
 
+def load_coach_expected_starters(schedule:pd.DataFrame,season:int,week:int)->pd.DataFrame|None:
+    """Validate game-specific coach expectations without calling them verified."""
+    path=ROOT/"data"/"qb_starters"/f"{season}_week{week:02d}_expected.csv"
+    if not path.exists():
+        return None
+    rows=pd.read_csv(path,dtype=str,keep_default_na=False)
+    columns={
+        "game_id","team","qb_id","qb_name","source_url",
+        "source_report_date","expectation_status","review_note",
+    }
+    if not columns.issubset(rows.columns):
+        raise ValueError(f"Coach expected-starter file missing {sorted(columns-set(rows.columns))}")
+    if rows.duplicated(["game_id","team"]).any():
+        raise ValueError("Duplicate expected starter for game/team")
+    if rows.empty:
+        return None
+    from research.audit_qb_starter_source_metadata import kickoff_utc
+    by_game=schedule.set_index("game_id")
+    for row in rows.itertuples(index=False):
+        if row.game_id not in by_game.index:
+            raise ValueError(f"Expected-starter game not in schedule: {row.game_id}")
+        game=by_game.loc[row.game_id]
+        if str(row.team).upper() not in {str(game.home_team).upper(),str(game.away_team).upper()}:
+            raise ValueError(f"Expected-starter team not in game: {row.game_id}, {row.team}")
+        if str(row.expectation_status)!="COACH_EXPECTED_NOT_FINAL":
+            raise ValueError("Expected QB label is not COACH_EXPECTED_NOT_FINAL")
+        if not str(row.source_url).startswith("https://") or len(str(row.review_note))<15:
+            raise ValueError("Coach expectation needs a traceable game-specific source and review note")
+        if not str(row.qb_id).startswith("00-") or len(str(row.qb_id))!=10:
+            raise ValueError("Expected QB ID must be a canonical GSIS identifier")
+        kickoff=kickoff_utc(game.gameday,game.gametime)
+        published=pd.to_datetime(row.source_report_date,errors="coerce")
+        if pd.isna(kickoff) or pd.isna(published):
+            raise ValueError("Expected QB source date or kickoff invalid")
+        age=(kickoff.date()-published.date()).days
+        if age<0 or age>10:
+            raise ValueError(f"Coach expected QB source stale/future: {row.game_id}")
+    return rows
+
+
 def add_verified_only_sensitivity(projections:pd.DataFrame,board:pd.DataFrame)->pd.DataFrame:
     """Research-only policy; never conflates a provisional starter with verified.
 
@@ -84,10 +124,12 @@ def run(season:int,week:int)->None:
         )
         if verified.empty:
             verified=None
+    expected_starters=load_coach_expected_starters(schedule,season,week)
     pbp=load_pbp(SEASONS)
     injuries=load_injury_reports(SEASONS)
     result,board=project_qb_aware_injury(
-        schedule,pbp,injuries,season=season,week=week,verified_starters=verified
+        schedule,pbp,injuries,season=season,week=week,verified_starters=verified,
+        expected_starters=expected_starters
     )
     if result.game_id.duplicated().any() or len(board)!=2*len(result):
         raise ValueError("QB research output has duplicate/missing team games")
@@ -118,6 +160,8 @@ def run(season:int,week:int)->None:
         "verified_starter_count":int(board.starter_source.eq("verified_pregame").sum()),
         "both_starters_verified_games":int(result["both_qbs_source_verified"].sum()),
         "rejected_override_count":rejected_count,
+        "coach_expected_starter_count":len(expected_starters) if expected_starters is not None else 0,
+        "release_ready":bool(board.starter_source.eq("verified_pregame").all()),
         "starter_source_audit":source_audit_file,
         "verification_policy":"Only manually content-reviewed game-specific source statements with traceable timestamps are eligible. Provisional QB shifts remain research-only.",
         "week_games":int(len(result)),
@@ -126,6 +170,7 @@ def run(season:int,week:int)->None:
         "warnings":[
             "NFLverse upcoming starter listings are provisional unless a recent game-specific source is explicitly reviewed.",
             "A source URL and timestamp alone do not establish QB starter confirmation.",
+            "Coach-expected starters may override outdated schedule QBs but remain explicitly unverified.",
             "The verified-only sensitivity remains research-only and does not rewrite the original candidate.",
             "Selected after analyzing 2026 Weeks 1-8; not independently validated.",
             "This capture does not overwrite the public website or official history; publish a dated immutable snapshot before kickoff."
