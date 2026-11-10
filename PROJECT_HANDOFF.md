@@ -227,3 +227,12 @@ Latest detailed writeup: `docs/week10_margin_lookback_qb_evidence_20261110.md`.
 - 2026 W1–8 7+ point market favorites (28 games) had average realized favorite-relative margin **5.07**, versus market **8.66**, unscaled baseline **4.84**, and standardized baseline **7.07**. This explains why 2026 scaled margins worsened, but it does not prove a persistent underdog edge.
 - All new work is research-only; no published Week 8/9 scores, odds, records, model coefficients, Week 10 official forecasts, or totals projections were changed; no NFLMeta/EndzoneAPI credits were used.
 - **Next research focus:** pregame QB starter provenance and replacement calibration, not further lookback grid-searching. If testing new models, pre-register and preserve future prospective games as new truly unseen evidence.
+
+
+### QB source timing/provenance follow-up (Nov 10, 2026)
+
+- Added `research/audit_qb_starter_source_metadata.py` with unit tests and research-only GitHub Action. Report at `data/week09_review/qb_source_metadata_audit_2026_week09.json`, plus `docs/week10_margin_lookback_qb_evidence_20261110.md`.
+- Archived Week 9 starter confirmations had **8** entries; **one source** was 1,146 hours (47.75 days) old, for ATL Michael Penix Jr. against Cincinnati in Week 9, referencing an article dated Sept 21, 2026. This is *not* sufficient proof of a November starter. Seven entries have recent-looking metadata but still require article-content confirmation.
+- The metadata audit checks game/team membership, HTTPS link presence, exact DST-aware kickoff and publication timestamps. It **does not read article content** and never labels these entries source-verified on that basis alone.
+- The `capture_qb_aware_injury.py` dated-override check currently rejects same-day sources by comparing with midnight game date, rather than kickoff. The new research audit uses actual kickoff time, but **production capture and QB coefficient logic were not changed**.
+- Next task: verify Week 10 starters from contemporaneous primary sources and design a source-freshness gate for future QB captures without rewriting the published records. The verification source itself must be game-specific, not an old generic starting-QB article.
