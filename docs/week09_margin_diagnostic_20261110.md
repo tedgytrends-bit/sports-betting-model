@@ -1,6 +1,6 @@
 # Week 9 aftermath — historical margin-calibration diagnosis (2026-11-10)
 
-**Status:** Research diagnostic completed; feature-scaling experiment separately running. No published picks, frozen forecasts, official results, live coefficients, or totals were changed.
+**Status:** Research diagnostic and feature-scaling experiment completed successfully. Experimental candidate not promoted. No published picks, frozen forecasts, official results, live coefficients, or totals were changed.
 
 ## What has actually completed
 
@@ -58,7 +58,25 @@ Implemented in `scripts/run_margin_feature_scale_shadow.py`, via `.github/workfl
 4. Report 2023/24 development and separately 2025 and 2026 Weeks 1–8, using margin MAE/RMSE, favorite-size strata, raw directional ATS and fixed 3.5/5 point edge bins.
 5. Reject any promotion without stable improvements across years and a *new prospective validation* period. Because these years have already been reviewed in prior experiments, this study is **exploratory**, not independent proof of value.
 
-The workflow accesses only **public nflverse data**; no NFLMeta or EndzoneAPI credits are used.
+The workflow completed successfully at 2026-11-10T15:39:09Z, archived `data/week09_review/standardized_margin_shadow_20261110.json` and `.csv`, and accessed only **public nflverse data**; no NFLMeta or EndzoneAPI credits were used.
+
+## Completed feature-standardization experiment — promotion gate failed
+
+The unscaled direct-margin Ridge was numerically **identical** to the existing difference of two score regressions (maximum same-game absolute difference `1.4655e-14` across 1,021 games), confirming the algebraic result.
+
+| Season | Games | Raw margin MAE | Standardized margin MAE | Market margin MAE |
+|---|---:|---:|---:|---:|
+| 2023 | 285 | 10.5522 | **10.3881** | 9.9842 |
+| 2024 | 285 | 10.5840 | **10.3369** | 9.7035 |
+| 2025 | 285 | 10.3975 | **10.1637** | 9.6702 |
+| 2026 Weeks 1–8 | 121 | **9.6795** | 9.7912 | 9.5702 |
+
+At fixed 3.5-point ATS edge threshold:
+- **2025:** raw 62–65 (127 bets), scaled 58–43 (101 bets), using historical schedule-feed lines; *not* comparable bet counts and *not* executable Bovada prices.
+- **2026 Weeks 1–8:** raw 23–19–2 (44 bets), scaled 26–22 (48 bets). On 7+ spread games specifically, margin MAE worsened **6.77 → 7.84** (28 games) with standardization.
+
+**Decision (predeclared): Do NOT promote the scaled candidate.** MAE improvement did not persist into 2026, the recorded market remains more accurate in every reported year, and ATS improvements did not persist across holdouts. The feature-scale hypothesis remains plausible but not independently validated; preserve the research candidate for later prospective work.
+
 
 ## Continuing priorities after experiment
 
