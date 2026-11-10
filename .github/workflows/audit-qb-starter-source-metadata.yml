@@ -1,0 +1,58 @@
+name: Audit QB starter source provenance (research only)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "research/audit_qb_starter_source_metadata.py"
+      - ".github/workflows/audit-qb-starter-source-metadata.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: qb-starter-metadata-audit
+  cancel-in-progress: false
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install required packages
+        run: python -m pip install pandas numpy scikit-learn requests
+      - name: Audit archived Week 9 confirmations without applying shifts
+        run: |
+          python -m py_compile research/audit_qb_starter_source_metadata.py
+          python -m unittest tests/test_qb_starter_source_metadata.py -v
+          python research/audit_qb_starter_source_metadata.py --season 2026 --week 9
+      - name: Check outputs remain a metadata audit only
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path("data/week09_review")
+          j=json.loads((root/"qb_source_metadata_audit_2026_week09.json").read_text())
+          assert j["status"]=="RESEARCH_METADATA_AUDIT_NO_OFFICIAL_CHANGES"
+          assert j["rows"]>=1
+          assert "interpretation" in j
+          assert "stale_requires_manual_reconfirmation" in j["metadata_status_counts"]
+          print("PASS: source metadata audit without changing any QB model coefficients")
+          PY
+      - name: Save audit outputs only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/week09_review/qb_source_metadata_audit_2026_week09.csv data/week09_review/qb_source_metadata_audit_2026_week09.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Archive Week 9 QB starter provenance metadata audit"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
