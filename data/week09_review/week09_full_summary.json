@@ -1,0 +1,750 @@
+{
+  "audit": "WEEK09_COMPLETED_FULL_RESEARCH",
+  "scope": "All completed Week 9 games: TNF Nov 5, 13 on Sunday Nov 8, MNF Nov 9 (15 games).",
+  "official_source_rules": "Nov 5 original published Injury for TNF; Nov 7/8 frozen Injury for 13 Sunday games and Monday BUF@MIN.",
+  "score_source": "https://www.nfl.com/schedules/2026/by-week/week-9",
+  "market_policy": "Latest source-labeled Bovada quote archived before each game's kickoff; screenshot timestamp can be approximate.",
+  "official_result_status": "FULL_WEEK_RESEARCH_ONLY_NO_PUBLIC_LEDGER_CHANGE",
+  "only_unsettled_game": null,
+  "results": {
+    "official_injury": {
+      "games": 15,
+      "ats_all_games": {
+        "wins": 3,
+        "losses": 11,
+        "pushes": 1,
+        "no_lean": 0,
+        "win_pct_ex_push": 21.43
+      },
+      "totals_all_games": {
+        "wins": 9,
+        "losses": 6,
+        "pushes": 0,
+        "no_lean": 0,
+        "win_pct_ex_push": 60.0
+      },
+      "ats_edge_thresholds": {
+        "2": {
+          "wins": 2,
+          "losses": 9,
+          "pushes": 1,
+          "no_lean": 0,
+          "win_pct_ex_push": 18.18
+        },
+        "3": {
+          "wins": 0,
+          "losses": 8,
+          "pushes": 1,
+          "no_lean": 0,
+          "win_pct_ex_push": 0.0
+        },
+        "3.5": {
+          "wins": 0,
+          "losses": 6,
+          "pushes": 1,
+          "no_lean": 0,
+          "win_pct_ex_push": 0.0
+        },
+        "4": {
+          "wins": 0,
+          "losses": 5,
+          "pushes": 1,
+          "no_lean": 0,
+          "win_pct_ex_push": 0.0
+        },
+        "5": {
+          "wins": 0,
+          "losses": 4,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct_ex_push": 0.0
+        }
+      },
+      "totals_edge_thresholds": {
+        "2": {
+          "wins": 7,
+          "losses": 3,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct_ex_push": 70.0
+        },
+        "3": {
+          "wins": 6,
+          "losses": 3,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct_ex_push": 66.67
+        },
+        "3.5": {
+          "wins": 6,
+          "losses": 3,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct_ex_push": 66.67
+        },
+        "4": {
+          "wins": 5,
+          "losses": 3,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct_ex_push": 62.5
+        },
+        "5": {
+          "wins": 3,
+          "losses": 2,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct_ex_push": 60.0
+        }
+      },
+      "margin_mae": 11.49,
+      "margin_rmse": 12.948,
+      "total_mae": 11.007,
+      "total_rmse": 14.164,
+      "avg_abs_predicted_margin": 3.109,
+      "mean_model_home_margin": 0.542,
+      "mean_actual_home_margin": -4.6,
+      "favorite_picks": {
+        "wins": 2,
+        "losses": 2,
+        "pushes": 0,
+        "no_lean": 0,
+        "win_pct_ex_push": 50.0
+      },
+      "underdog_picks": {
+        "wins": 1,
+        "losses": 9,
+        "pushes": 1,
+        "no_lean": 0,
+        "win_pct_ex_push": 10.0
+      },
+      "highest_margin_errors": [
+        {
+          "game": "2026_09_GB_NE",
+          "mae": 21.0163,
+          "ATS": "L"
+        },
+        {
+          "game": "2026_09_JAX_BAL",
+          "mae": 18.7507,
+          "ATS": "L"
+        },
+        {
+          "game": "2026_09_NYJ_KC",
+          "mae": 18.4486,
+          "ATS": "L"
+        },
+        {
+          "game": "2026_09_LV_SF",
+          "mae": 17.1087,
+          "ATS": "L"
+        },
+        {
+          "game": "2026_09_BUF_MIN",
+          "mae": 16.6221,
+          "ATS": "L"
+        }
+      ]
+    },
+    "baseline_research": {
+      "games": 15,
+      "ats_all_games": {
+        "wins": 5,
+        "losses": 9,
+        "pushes": 1,
+        "no_lean": 0,
+        "win_pct_ex_push": 35.71
+      },
+      "totals_all_games": {
+        "wins": 8,
+        "losses": 7,
+        "pushes": 0,
+        "no_lean": 0,
+        "win_pct_ex_push": 53.33
+      },
+      "ats_edge_thresholds": {
+        "2": {
+          "wins": 0,
+          "losses": 7,
+          "pushes": 1,
+          "no_lean": 0,
+          "win_pct_ex_push": 0.0
+        },
+        "3": {
+          "wins": 0,
+          "losses": 6,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct_ex_push": 0.0
+        },
+        "3.5": {
+          "wins": 0,
+          "losses": 4,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct_ex_push": 0.0
+        },
+        "4": {
+          "wins": 0,
+          "losses": 4,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct_ex_push": 0.0
+        },
+        "5": {
+          "wins": 0,
+          "losses": 4,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct_ex_push": 0.0
+        }
+      },
+      "totals_edge_thresholds": {
+        "2": {
+          "wins": 6,
+          "losses": 5,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct_ex_push": 54.55
+        },
+        "3": {
+          "wins": 5,
+          "losses": 4,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct_ex_push": 55.56
+        },
+        "3.5": {
+          "wins": 5,
+          "losses": 3,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct_ex_push": 62.5
+        },
+        "4": {
+          "wins": 4,
+          "losses": 3,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct_ex_push": 57.14
+        },
+        "5": {
+          "wins": 3,
+          "losses": 2,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct_ex_push": 60.0
+        }
+      },
+      "margin_mae": 11.03,
+      "margin_rmse": 12.824,
+      "total_mae": 11.53,
+      "total_rmse": 14.495,
+      "avg_abs_predicted_margin": 3.396,
+      "mean_model_home_margin": 0.557,
+      "mean_actual_home_margin": -4.6,
+      "favorite_picks": {
+        "wins": 3,
+        "losses": 1,
+        "pushes": 0,
+        "no_lean": 0,
+        "win_pct_ex_push": 75.0
+      },
+      "underdog_picks": {
+        "wins": 2,
+        "losses": 8,
+        "pushes": 1,
+        "no_lean": 0,
+        "win_pct_ex_push": 20.0
+      },
+      "highest_margin_errors": [
+        {
+          "game": "2026_09_JAX_BAL",
+          "mae": 22.675,
+          "ATS": "L"
+        },
+        {
+          "game": "2026_09_NYJ_KC",
+          "mae": 19.951,
+          "ATS": "L"
+        },
+        {
+          "game": "2026_09_GB_NE",
+          "mae": 19.498,
+          "ATS": "W"
+        },
+        {
+          "game": "2026_09_HOU_LAC",
+          "mae": 15.998,
+          "ATS": "W"
+        },
+        {
+          "game": "2026_09_BUF_MIN",
+          "mae": 14.968,
+          "ATS": "L"
+        }
+      ]
+    },
+    "injury_legacy_research": {
+      "games": 15,
+      "ats_all_games": {
+        "wins": 5,
+        "losses": 9,
+        "pushes": 1,
+        "no_lean": 0,
+        "win_pct_ex_push": 35.71
+      },
+      "totals_all_games": {
+        "wins": 7,
+        "losses": 8,
+        "pushes": 0,
+        "no_lean": 0,
+        "win_pct_ex_push": 46.67
+      },
+      "ats_edge_thresholds": {
+        "2": {
+          "wins": 1,
+          "losses": 7,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct_ex_push": 12.5
+        },
+        "3": {
+          "wins": 0,
+          "losses": 5,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct_ex_push": 0.0
+        },
+        "3.5": {
+          "wins": 0,
+          "losses": 4,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct_ex_push": 0.0
+        },
+        "4": {
+          "wins": 0,
+          "losses": 4,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct_ex_push": 0.0
+        },
+        "5": {
+          "wins": 0,
+          "losses": 3,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct_ex_push": 0.0
+        }
+      },
+      "totals_edge_thresholds": {
+        "2": {
+          "wins": 6,
+          "losses": 4,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct_ex_push": 60.0
+        },
+        "3": {
+          "wins": 6,
+          "losses": 4,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct_ex_push": 60.0
+        },
+        "3.5": {
+          "wins": 5,
+          "losses": 3,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct_ex_push": 62.5
+        },
+        "4": {
+          "wins": 5,
+          "losses": 2,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct_ex_push": 71.43
+        },
+        "5": {
+          "wins": 4,
+          "losses": 1,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct_ex_push": 80.0
+        }
+      },
+      "margin_mae": 10.856,
+      "margin_rmse": 12.793,
+      "total_mae": 11.898,
+      "total_rmse": 14.566,
+      "avg_abs_predicted_margin": 3.201,
+      "mean_model_home_margin": 0.039,
+      "mean_actual_home_margin": -4.6,
+      "favorite_picks": {
+        "wins": 3,
+        "losses": 1,
+        "pushes": 0,
+        "no_lean": 0,
+        "win_pct_ex_push": 75.0
+      },
+      "underdog_picks": {
+        "wins": 2,
+        "losses": 8,
+        "pushes": 1,
+        "no_lean": 0,
+        "win_pct_ex_push": 20.0
+      },
+      "highest_margin_errors": [
+        {
+          "game": "2026_09_JAX_BAL",
+          "mae": 22.43,
+          "ATS": "L"
+        },
+        {
+          "game": "2026_09_NYJ_KC",
+          "mae": 20.763,
+          "ATS": "L"
+        },
+        {
+          "game": "2026_09_GB_NE",
+          "mae": 18.917,
+          "ATS": "W"
+        },
+        {
+          "game": "2026_09_HOU_LAC",
+          "mae": 15.965,
+          "ATS": "W"
+        },
+        {
+          "game": "2026_09_LV_SF",
+          "mae": 14.745,
+          "ATS": "L"
+        }
+      ]
+    },
+    "efficiency_research": {
+      "games": 15,
+      "ats_all_games": {
+        "wins": 4,
+        "losses": 10,
+        "pushes": 1,
+        "no_lean": 0,
+        "win_pct_ex_push": 28.57
+      },
+      "totals_all_games": {
+        "wins": 7,
+        "losses": 8,
+        "pushes": 0,
+        "no_lean": 0,
+        "win_pct_ex_push": 46.67
+      },
+      "ats_edge_thresholds": {
+        "2": {
+          "wins": 1,
+          "losses": 3,
+          "pushes": 1,
+          "no_lean": 0,
+          "win_pct_ex_push": 25.0
+        },
+        "3": {
+          "wins": 0,
+          "losses": 3,
+          "pushes": 1,
+          "no_lean": 0,
+          "win_pct_ex_push": 0.0
+        },
+        "3.5": {
+          "wins": 0,
+          "losses": 3,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct_ex_push": 0.0
+        },
+        "4": {
+          "wins": 0,
+          "losses": 3,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct_ex_push": 0.0
+        },
+        "5": {
+          "wins": 0,
+          "losses": 2,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct_ex_push": 0.0
+        }
+      },
+      "totals_edge_thresholds": {
+        "2": {
+          "wins": 5,
+          "losses": 6,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct_ex_push": 45.45
+        },
+        "3": {
+          "wins": 4,
+          "losses": 4,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct_ex_push": 50.0
+        },
+        "3.5": {
+          "wins": 4,
+          "losses": 4,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct_ex_push": 50.0
+        },
+        "4": {
+          "wins": 3,
+          "losses": 3,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct_ex_push": 50.0
+        },
+        "5": {
+          "wins": 3,
+          "losses": 3,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct_ex_push": 50.0
+        }
+      },
+      "margin_mae": 10.226,
+      "margin_rmse": 12.23,
+      "total_mae": 11.463,
+      "total_rmse": 14.763,
+      "avg_abs_predicted_margin": 3.824,
+      "mean_model_home_margin": -0.077,
+      "mean_actual_home_margin": -4.6,
+      "favorite_picks": {
+        "wins": 2,
+        "losses": 1,
+        "pushes": 0,
+        "no_lean": 0,
+        "win_pct_ex_push": 66.67
+      },
+      "underdog_picks": {
+        "wins": 2,
+        "losses": 9,
+        "pushes": 1,
+        "no_lean": 0,
+        "win_pct_ex_push": 18.18
+      },
+      "highest_margin_errors": [
+        {
+          "game": "2026_09_JAX_BAL",
+          "mae": 20.863,
+          "ATS": "L"
+        },
+        {
+          "game": "2026_09_GB_NE",
+          "mae": 20.676,
+          "ATS": "W"
+        },
+        {
+          "game": "2026_09_NYJ_KC",
+          "mae": 19.199,
+          "ATS": "L"
+        },
+        {
+          "game": "2026_09_HOU_LAC",
+          "mae": 14.9,
+          "ATS": "W"
+        },
+        {
+          "game": "2026_09_BUF_MIN",
+          "mae": 14.686,
+          "ATS": "L"
+        }
+      ]
+    },
+    "combined_research": {
+      "games": 15,
+      "ats_all_games": {
+        "wins": 5,
+        "losses": 9,
+        "pushes": 1,
+        "no_lean": 0,
+        "win_pct_ex_push": 35.71
+      },
+      "totals_all_games": {
+        "wins": 7,
+        "losses": 8,
+        "pushes": 0,
+        "no_lean": 0,
+        "win_pct_ex_push": 46.67
+      },
+      "ats_edge_thresholds": {
+        "2": {
+          "wins": 1,
+          "losses": 3,
+          "pushes": 1,
+          "no_lean": 0,
+          "win_pct_ex_push": 25.0
+        },
+        "3": {
+          "wins": 0,
+          "losses": 3,
+          "pushes": 1,
+          "no_lean": 0,
+          "win_pct_ex_push": 0.0
+        },
+        "3.5": {
+          "wins": 0,
+          "losses": 3,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct_ex_push": 0.0
+        },
+        "4": {
+          "wins": 0,
+          "losses": 3,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct_ex_push": 0.0
+        },
+        "5": {
+          "wins": 0,
+          "losses": 3,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct_ex_push": 0.0
+        }
+      },
+      "totals_edge_thresholds": {
+        "2": {
+          "wins": 6,
+          "losses": 5,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct_ex_push": 54.55
+        },
+        "3": {
+          "wins": 4,
+          "losses": 4,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct_ex_push": 50.0
+        },
+        "3.5": {
+          "wins": 4,
+          "losses": 4,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct_ex_push": 50.0
+        },
+        "4": {
+          "wins": 4,
+          "losses": 3,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct_ex_push": 57.14
+        },
+        "5": {
+          "wins": 4,
+          "losses": 2,
+          "pushes": 0,
+          "no_lean": 0,
+          "win_pct_ex_push": 66.67
+        }
+      },
+      "margin_mae": 10.185,
+      "margin_rmse": 12.345,
+      "total_mae": 11.91,
+      "total_rmse": 14.853,
+      "avg_abs_predicted_margin": 3.676,
+      "mean_model_home_margin": -0.341,
+      "mean_actual_home_margin": -4.6,
+      "favorite_picks": {
+        "wins": 3,
+        "losses": 1,
+        "pushes": 0,
+        "no_lean": 0,
+        "win_pct_ex_push": 75.0
+      },
+      "underdog_picks": {
+        "wins": 2,
+        "losses": 8,
+        "pushes": 1,
+        "no_lean": 0,
+        "win_pct_ex_push": 20.0
+      },
+      "highest_margin_errors": [
+        {
+          "game": "2026_09_JAX_BAL",
+          "mae": 20.897,
+          "ATS": "L"
+        },
+        {
+          "game": "2026_09_GB_NE",
+          "mae": 20.745,
+          "ATS": "W"
+        },
+        {
+          "game": "2026_09_NYJ_KC",
+          "mae": 20.09,
+          "ATS": "L"
+        },
+        {
+          "game": "2026_09_HOU_LAC",
+          "mae": 15.16,
+          "ATS": "W"
+        },
+        {
+          "game": "2026_09_BUF_MIN",
+          "mae": 14.432,
+          "ATS": "L"
+        }
+      ]
+    }
+  },
+  "market_benchmark": {
+    "favorite_ats_cover_record": {
+      "wins": 11,
+      "losses": 3,
+      "pushes": 1
+    },
+    "market_margin_mae": 8.633,
+    "avg_abs_market_spread": 5.367,
+    "avg_abs_actual_margin": 12.867
+  },
+  "official_vs_original_baseline_direction_flips": [
+    {
+      "game_id": "2026_09_NYG_PHI",
+      "baseline_ats_pick": "NYG",
+      "baseline_ats_result": "W",
+      "official_ats_pick": "PHI",
+      "official_ats_result": "L",
+      "margin_change_home": 4.771
+    },
+    {
+      "game_id": "2026_09_GB_NE",
+      "baseline_ats_pick": "GB",
+      "baseline_ats_result": "W",
+      "official_ats_pick": "NE",
+      "official_ats_result": "L",
+      "margin_change_home": 1.518
+    }
+  ],
+  "interpretation_caveats": [
+    "Single Week 9 sample: 15 games is not enough to optimize weights or infer systematic bias.",
+    "Research-model vintages are Nov 4; Sunday/Monday official forecasts are Nov 7/8 after final reported injuries. Same game/odds/result set but different forecast vintages.",
+    "A market favorite-heavy week may make aggressive underdog models look particularly bad even without stable long-run dog bias.",
+    "The published model scores and public official results are untouched; this is diagnostic only.",
+    "Directional totals results do not establish calibrated point totals: report total MAE separately.",
+    "Testing 2/3/4/5 edge buckets post-hoc is exploratory, not an independently validated wagering rule."
+  ],
+  "next_week_10_research": [
+    "Backtest season-by-season 2022-2025, then hold out 2026 pre-Week9, to test prediction-margin shrinkage and benchmark against market MAE.",
+    "Audit injury coefficient sensitivity, player-value/role weighting and replacement value; prevent double-counting with QB adjustment.",
+    "Compare Baseline vs Injury ATS sign flips and require pregame evidence before making injury-driven side changes.",
+    "Test standardized numeric inputs and conditional market-residual models in chronological walk-forward folds; do not make post-hoc Week9 tuning official.",
+    "Preserve totals independently and compare directional accuracy together with total MAE and edge calibration.",
+    "Week 9 is complete; keep all 15 official forecasts immutable during Week 10 research."
+  ]
+}
