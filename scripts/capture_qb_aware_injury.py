@@ -67,6 +67,36 @@ def load_coach_expected_starters(schedule:pd.DataFrame,season:int,week:int)->pd.
     return rows
 
 
+def reject_known_inactive_qb(board:pd.DataFrame,watchlist:pd.DataFrame)->None:
+    """Do not generate a QB-adjusted candidate from a known unavailable QB.
+
+    Only explicit game-specific IR / OUT statuses are blocking. A QB merely
+    questionable or conditional is flagged separately, not presumed absent.
+    """
+    keys={"game_id","team","qb_name"}
+    if not keys.issubset(board.columns):
+        raise ValueError(f"QB board missing {sorted(keys-set(board.columns))}")
+    watch_keys={"game_id","team","player_name","starter_confirmation_status"}
+    if not watch_keys.issubset(watchlist.columns):
+        raise ValueError(f"QB watchlist missing {sorted(watch_keys-set(watchlist.columns))}")
+    unavailable=watchlist.loc[watchlist["starter_confirmation_status"].isin(
+        ["IR_REPORTED","OUT_REPORTED","INACTIVE_CONFIRMED"]
+    )]
+    selected=board[["game_id","team","qb_name"]].copy()
+    selected["_name"]=selected.qb_name.astype(str).str.casefold().str.strip()
+    selected["_team"]=selected.team.astype(str).str.upper().str.strip()
+    excluded=unavailable[["game_id","team","player_name","starter_confirmation_status"]].copy()
+    excluded["_name"]=excluded.player_name.astype(str).str.casefold().str.strip()
+    excluded["_team"]=excluded.team.astype(str).str.upper().str.strip()
+    conflicts=selected.merge(
+        excluded[["game_id","_team","_name","starter_confirmation_status"]],
+        on=["game_id","_team","_name"],how="inner",validate="many_to_many"
+    )
+    if not conflicts.empty:
+        pairs=", ".join(f"{x.game_id} {x.qb_name}" for x in conflicts.itertuples())
+        raise ValueError(f"Known unavailable QB selected by provisional schedule: {pairs}")
+
+
 def add_verified_only_sensitivity(projections:pd.DataFrame,board:pd.DataFrame)->pd.DataFrame:
     """Research-only policy; never conflates a provisional starter with verified.
 
@@ -133,6 +163,10 @@ def run(season:int,week:int)->None:
     )
     if result.game_id.duplicated().any() or len(board)!=2*len(result):
         raise ValueError("QB research output has duplicate/missing team games")
+    watchlist_file=ROOT/"data"/"qb_starters"/f"{season}_week{week:02d}_watchlist.csv"
+    watchlist=pd.read_csv(watchlist_file,dtype=str,keep_default_na=False) if watchlist_file.exists() else None
+    if watchlist is not None:
+        reject_known_inactive_qb(board,watchlist)
     result["captured_at_utc"]=now.isoformat()
     result["source_type"]="PREGAME_RESEARCH_PENDING_RELEASE"
     qb_counts=board.starter_source.value_counts().to_dict()
@@ -162,6 +196,7 @@ def run(season:int,week:int)->None:
         "rejected_override_count":rejected_count,
         "coach_expected_starter_count":len(expected_starters) if expected_starters is not None else 0,
         "release_ready":bool(board.starter_source.eq("verified_pregame").all()),
+        "known_unavailable_qb_watchlist_checked":watchlist is not None,
         "starter_source_audit":source_audit_file,
         "verification_policy":"Only manually content-reviewed game-specific source statements with traceable timestamps are eligible. Provisional QB shifts remain research-only.",
         "week_games":int(len(result)),
@@ -172,6 +207,7 @@ def run(season:int,week:int)->None:
             "A source URL and timestamp alone do not establish QB starter confirmation.",
             "Coach-expected starters may override outdated schedule QBs but remain explicitly unverified.",
             "The verified-only sensitivity remains research-only and does not rewrite the original candidate.",
+            "Known IR/OUT starters in the timestamped watchlist block the research candidate if erroneously selected.",
             "Selected after analyzing 2026 Weeks 1-8; not independently validated.",
             "This capture does not overwrite the public website or official history; publish a dated immutable snapshot before kickoff."
         ]
