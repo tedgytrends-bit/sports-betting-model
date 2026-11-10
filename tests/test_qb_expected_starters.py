@@ -110,6 +110,30 @@ class CoachExpectedStarterTests(unittest.TestCase):
         finally:
             temp.cleanup()
 
+    def test_ir_starter_from_old_depth_chart_is_blocked(self):
+        board=pd.DataFrame([
+            {"game_id":"2026_10_LAC_BAL","team":"BAL","qb_name":"Tyler Huntley"}
+        ])
+        watch=pd.DataFrame([
+            {"game_id":"2026_10_LAC_BAL","team":"BAL","player_name":"Tyler Huntley",
+             "starter_confirmation_status":"IR_REPORTED"}
+        ])
+        with self.assertRaisesRegex(ValueError,"Known unavailable QB"):
+            capture.reject_known_inactive_qb(board,watch)
+        replacement=board.copy()
+        replacement["qb_name"]="Jacoby Brissett"
+        capture.reject_known_inactive_qb(replacement,watch)
+
+    def test_questionable_injury_not_equivalent_to_confirmed_out(self):
+        board=pd.DataFrame([
+            {"game_id":"2026_10_LA_ARI","team":"ARI","qb_name":"Gardner Minshew"}
+        ])
+        watch=pd.DataFrame([
+            {"game_id":"2026_10_LA_ARI","team":"ARI","player_name":"Gardner Minshew",
+             "starter_confirmation_status":"STARTER_STATUS_UNRESOLVED"}
+        ])
+        capture.reject_known_inactive_qb(board,watch)
+
 
 if __name__=="__main__":
     unittest.main()
