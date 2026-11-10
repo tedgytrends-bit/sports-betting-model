@@ -6,7 +6,7 @@ score methodology for *future publications*. The committed, frozen model
 archives are never silently rewritten. Output is for inspection and deliberate
 publication before kickoff; the public website reads immutable releases.
 
-Usage: python scripts/capture_qb_aware_injury.py --season 2026 --week 9
+Usage: python scripts/capture_qb_aware_injury.py --season 2026 --week 10
 """
 from __future__ import annotations
 import argparse
@@ -25,6 +25,44 @@ from research.validate_qb_starter_confirmations import validate_starter_confirma
 
 OUT=ROOT/"data"/"qb_epa_shadow"
 SEASONS=(2021,2022,2023,2024,2025,2026)
+
+
+def add_verified_only_sensitivity(projections:pd.DataFrame,board:pd.DataFrame)->pd.DataFrame:
+    """Research-only policy; never conflates a provisional starter with verified.
+
+    When either QB starter lacks explicit game-specific proof, use the
+    non-QB Injury score in the diagnostic columns, not the candidate's
+    already QB-adjusted public-eligible score. Does not alter core outputs.
+    """
+    required={
+        "game_id","original_non_qb_home","original_non_qb_away",
+        "projected_home_qb_injury","projected_away_qb_injury",
+    }
+    if not required.issubset(projections.columns):
+        raise ValueError(f"Missing projection columns: {sorted(required-set(projections.columns))}")
+    needed={"game_id","side","starter_source"}
+    if not needed.issubset(board.columns):
+        raise ValueError(f"Missing QB board columns: {sorted(needed-set(board.columns))}")
+    if projections.game_id.duplicated().any() or board.duplicated(["game_id","side"]).any():
+        raise ValueError("Duplicate forecast or QB board keys")
+    if len(board)!=2*len(projections):
+        raise ValueError("Expected exactly two QB entries per forecast game")
+    by_game=board.assign(
+        verified=board.starter_source.eq("verified_pregame")
+    ).groupby("game_id")["verified"].agg(["sum","count"])
+    both=(by_game["sum"].eq(2) & by_game["count"].eq(2))
+    if set(by_game.index)!=set(projections.game_id):
+        raise ValueError("QB board games do not match projections")
+    out=projections.copy()
+    out["both_qbs_source_verified"]=out.game_id.map(both).fillna(False).astype(bool)
+    for side in ("home","away"):
+        out[f"verified_only_projected_{side}"]=out[
+            f"projected_{side}_qb_injury"
+        ].where(out["both_qbs_source_verified"],out[f"original_non_qb_{side}"])
+    out["verified_only_projected_total"]=(
+        out["verified_only_projected_home"]+out["verified_only_projected_away"]
+    )
+    return out
 
 
 def run(season:int,week:int)->None:
@@ -56,20 +94,7 @@ def run(season:int,week:int)->None:
     result["captured_at_utc"]=now.isoformat()
     result["source_type"]="PREGAME_RESEARCH_PENDING_RELEASE"
     qb_counts=board.starter_source.value_counts().to_dict()
-    by_game=board.assign(
-        verified=board.starter_source.eq("verified_pregame")
-    ).groupby("game_id")["verified"].agg(["sum","count"])
-    both=(by_game["sum"].eq(2) & by_game["count"].eq(2))
-    result["both_qbs_source_verified"]=result.game_id.map(both).fillna(False).astype(bool)
-    # Research-only sensitivity: suppress provisional QB shifts here, never
-    # overwrite the original current Injury candidate projection.
-    for side in ("home","away"):
-        result[f"verified_only_projected_{side}"]=result[
-            f"projected_{side}_qb_injury"
-        ].where(result["both_qbs_source_verified"],result[f"original_non_qb_{side}"])
-    result["verified_only_projected_total"]=(
-        result["verified_only_projected_home"]+result["verified_only_projected_away"]
-    )
+    result=add_verified_only_sensitivity(result,board)
     OUT.mkdir(parents=True,exist_ok=True)
     stamp=now.strftime("%Y%m%dT%H%M%SZ")
     stem=f"injury_qb_epa_{season}_week{week:02d}_{stamp}"
