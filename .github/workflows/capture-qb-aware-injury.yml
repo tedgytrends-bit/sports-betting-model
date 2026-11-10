@@ -10,7 +10,7 @@ on:
       week:
         description: Week to forecast
         required: true
-        default: "9"
+        default: "10"
   push:
     branches: [main]
     paths:
@@ -39,12 +39,12 @@ jobs:
           pip install -r requirements.txt pytest
       - name: Validate QB and Injury engine
         run: |
-          python -m py_compile qb_epa_model.py injury_model.py scripts/capture_qb_aware_injury.py
-          python -m pytest -q tests/test_qb_epa_model.py
+          python -m py_compile qb_epa_model.py injury_model.py scripts/capture_qb_aware_injury.py research/validate_qb_starter_confirmations.py
+          python -m pytest -q tests/test_qb_epa_model.py tests/test_qb_confirmation_gate.py
       - name: Generate versioned pregame research snapshot
         env:
           SEASON: ${{ github.event.inputs.season || '2026' }}
-          WEEK: ${{ github.event.inputs.week || '9' }}
+          WEEK: ${{ github.event.inputs.week || '10' }}
         run: python -u scripts/capture_qb_aware_injury.py --season "$SEASON" --week "$WEEK"
       - name: Store research artifact for deliberate pregame release
         uses: actions/upload-artifact@v4
