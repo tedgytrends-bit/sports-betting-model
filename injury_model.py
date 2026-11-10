@@ -383,6 +383,7 @@ def project_qb_aware_injury(
     season: int,
     week: int,
     verified_starters: pd.DataFrame | None = None,
+    expected_starters: pd.DataFrame | None = None,
     lookback_games: int = 10,
     min_train_games: int = 500,
 ) -> tuple[pd.DataFrame, pd.DataFrame]:
@@ -428,6 +429,7 @@ def project_qb_aware_injury(
         slate,
         overrides=verified_starters,
         observed=scheduled_qbs,
+        expected=expected_starters,
     )
     adjusted = attach_qb_margin_adjustment(slate, qb_board)
     adjusted["original_non_qb_home"] = adjusted["projected_home"]
