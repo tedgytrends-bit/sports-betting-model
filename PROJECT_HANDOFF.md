@@ -214,3 +214,16 @@ The independent per-game audit was rebuilt from the uploaded NFLMeta ZIP and the
 - **Next priority:** Validate Week 10 starter names / QB replacements against timestamped pregame sources, then compare verified-replacement-only shadow outputs and historical margin/ATS error **without rewriting Week 8–9 official records**. Make changes only after consistent chronological and prospective evidence. Preserve the two public views (Baseline and Injury), keep Combined and Efficiency for separate research, and keep totals separate.
 
 **Canonical research links:** `docs/week09_margin_diagnostic_20261110.md`, `data/week09_review/week09_full_findings.md`, `data/week09_review/standardized_margin_shadow_20261110.json`. The published site code and production model coefficients were not modified by this research.
+
+
+## 12. November 10, 2026 — subsequent six-versus-ten lookback test and QB provenance audit
+
+Latest detailed writeup: `docs/week10_margin_lookback_qb_evidence_20261110.md`.
+
+- **Workflow integrity repaired:** the prior `Test efficiency feature integrity` run #42847190835 failed only because pytest was absent; updated `.github/workflows/test-feature-integrity.yml` to install pytest and run the QB suite. Run **#42851029681 passed**.
+- **Lookback experiment succeeded:** `scripts/run_lookback_margin_shadow.py` and `.github/workflows/lookback-margin-shadow.yml` run **#42851364512 passed**, producing `data/week09_review/lookback_margin_shadow_20261110.csv` and `.json`. All 1,021 game predictions were matched across both horizon configurations, with every 2026 outcome after W8 excluded.
+- Raw 6-game vs raw 10-game margin MAE: **2023 10.6444 vs 10.5522; 2024 10.6325 vs 10.5840; 2025 10.2710 vs 10.3975; 2026 W1-8 9.8166 vs 9.6795.** Standardized 6-game vs standardized 10-game also favored 10 in three of four periods. Early 2026 W1–4 weakly favored 6, later W5–8 favored 10. **Neither six-game candidate is promoted**. The existing ten-game lookback remains unchanged.
+- Week 9 QB source sensitivity on same 14 Sunday/Monday games: **2/14 fully verified**, **12/14 with at least one unverified starter**. Non-QB injury model ATS **5–8–1**; published QB-overlay model **3–10–1**; retrospective only-apply-overlay-if-both-starters-verified policy **4–9–1**. Of the two QB-induced losing flips, NYG–PHI had both verified starters, BUF–MIN had one provisional. **Starter verification alone does not solve QB point-impact calibration.** No source gate was implemented in production.
+- 2026 W1–8 7+ point market favorites (28 games) had average realized favorite-relative margin **5.07**, versus market **8.66**, unscaled baseline **4.84**, and standardized baseline **7.07**. This explains why 2026 scaled margins worsened, but it does not prove a persistent underdog edge.
+- All new work is research-only; no published Week 8/9 scores, odds, records, model coefficients, Week 10 official forecasts, or totals projections were changed; no NFLMeta/EndzoneAPI credits were used.
+- **Next research focus:** pregame QB starter provenance and replacement calibration, not further lookback grid-searching. If testing new models, pre-register and preserve future prospective games as new truly unseen evidence.
