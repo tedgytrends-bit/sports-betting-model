@@ -1,0 +1,1349 @@
+{
+  "status": "RESEARCH_ONLY_NO_LIVE_CHANGES",
+  "generated_utc": "2026-11-10T15:39:02.332579+00:00",
+  "hypothesis": "The existing unscaled Ridge penalizes small-scale EPA/success features unevenly, compressing margins.",
+  "null": "StandardScaler does not improve margin MAE consistently over raw-score Ridge on chronological holdouts.",
+  "design": "Identical historical pregame feature frame and date-only weekly walk-forward folds; train-only median imputation and scaling; alpha=10 fixed. Archived nflverse spread used only for evaluation.",
+  "holdout_warning": "2025 and 2026 Weeks 1-8 have been examined in prior research. This is exploratory reproducibility, NOT newly sealed validation.",
+  "dataset": {
+    "games": 1021,
+    "by_season": {
+      "2022": 45,
+      "2023": 285,
+      "2024": 285,
+      "2025": 285,
+      "2026": 121
+    }
+  },
+  "direct_margin_identity_max_error": 1.4654943925052066e-14,
+  "thresholds": [
+    0.0,
+    3.5,
+    5.0
+  ],
+  "evaluation": {
+    "2023": {
+      "raw_margin": {
+        "0.0": {
+          "games": 285,
+          "margin_mae": 10.5522,
+          "margin_rmse": 13.8944,
+          "mean_signed_margin_error": -0.6969,
+          "mean_abs_predicted_margin": 2.7199,
+          "bets": 285,
+          "wins": 133,
+          "losses": 138,
+          "pushes": 14,
+          "win_rate_ex_push": 0.4908,
+          "hypothetical_roi_at_flat_minus110": -0.06
+        },
+        "3.5": {
+          "games": 285,
+          "margin_mae": 10.5522,
+          "margin_rmse": 13.8944,
+          "mean_signed_margin_error": -0.6969,
+          "mean_abs_predicted_margin": 2.7199,
+          "bets": 115,
+          "wins": 54,
+          "losses": 55,
+          "pushes": 6,
+          "win_rate_ex_push": 0.4954,
+          "hypothetical_roi_at_flat_minus110": -0.0514
+        },
+        "5.0": {
+          "games": 285,
+          "margin_mae": 10.5522,
+          "margin_rmse": 13.8944,
+          "mean_signed_margin_error": -0.6969,
+          "mean_abs_predicted_margin": 2.7199,
+          "bets": 64,
+          "wins": 30,
+          "losses": 30,
+          "pushes": 4,
+          "win_rate_ex_push": 0.5,
+          "hypothetical_roi_at_flat_minus110": -0.0426
+        }
+      },
+      "direct_unscaled_margin": {
+        "0.0": {
+          "games": 285,
+          "margin_mae": 10.5522,
+          "margin_rmse": 13.8944,
+          "mean_signed_margin_error": -0.6969,
+          "mean_abs_predicted_margin": 2.7199,
+          "bets": 285,
+          "wins": 133,
+          "losses": 138,
+          "pushes": 14,
+          "win_rate_ex_push": 0.4908,
+          "hypothetical_roi_at_flat_minus110": -0.06
+        },
+        "3.5": {
+          "games": 285,
+          "margin_mae": 10.5522,
+          "margin_rmse": 13.8944,
+          "mean_signed_margin_error": -0.6969,
+          "mean_abs_predicted_margin": 2.7199,
+          "bets": 115,
+          "wins": 54,
+          "losses": 55,
+          "pushes": 6,
+          "win_rate_ex_push": 0.4954,
+          "hypothetical_roi_at_flat_minus110": -0.0514
+        },
+        "5.0": {
+          "games": 285,
+          "margin_mae": 10.5522,
+          "margin_rmse": 13.8944,
+          "mean_signed_margin_error": -0.6969,
+          "mean_abs_predicted_margin": 2.7199,
+          "bets": 64,
+          "wins": 30,
+          "losses": 30,
+          "pushes": 4,
+          "win_rate_ex_push": 0.5,
+          "hypothetical_roi_at_flat_minus110": -0.0426
+        }
+      },
+      "direct_scaled_margin": {
+        "0.0": {
+          "games": 285,
+          "margin_mae": 10.3881,
+          "margin_rmse": 13.5277,
+          "mean_signed_margin_error": -0.6244,
+          "mean_abs_predicted_margin": 4.439,
+          "bets": 285,
+          "wins": 137,
+          "losses": 134,
+          "pushes": 14,
+          "win_rate_ex_push": 0.5055,
+          "hypothetical_roi_at_flat_minus110": -0.0332
+        },
+        "3.5": {
+          "games": 285,
+          "margin_mae": 10.3881,
+          "margin_rmse": 13.5277,
+          "mean_signed_margin_error": -0.6244,
+          "mean_abs_predicted_margin": 4.439,
+          "bets": 92,
+          "wins": 42,
+          "losses": 46,
+          "pushes": 4,
+          "win_rate_ex_push": 0.4773,
+          "hypothetical_roi_at_flat_minus110": -0.085
+        },
+        "5.0": {
+          "games": 285,
+          "margin_mae": 10.3881,
+          "margin_rmse": 13.5277,
+          "mean_signed_margin_error": -0.6244,
+          "mean_abs_predicted_margin": 4.439,
+          "bets": 43,
+          "wins": 24,
+          "losses": 18,
+          "pushes": 1,
+          "win_rate_ex_push": 0.5714,
+          "hypothetical_roi_at_flat_minus110": 0.0888
+        }
+      },
+      "market_margin": {
+        "0.0": {
+          "games": 285,
+          "margin_mae": 9.9842,
+          "margin_rmse": 13.174,
+          "mean_signed_margin_error": -1.1316,
+          "mean_abs_predicted_margin": 4.9667,
+          "bets": 0,
+          "wins": 0,
+          "losses": 0,
+          "pushes": 0,
+          "win_rate_ex_push": null,
+          "hypothetical_roi_at_flat_minus110": null
+        },
+        "3.5": {
+          "games": 285,
+          "margin_mae": 9.9842,
+          "margin_rmse": 13.174,
+          "mean_signed_margin_error": -1.1316,
+          "mean_abs_predicted_margin": 4.9667,
+          "bets": 0,
+          "wins": 0,
+          "losses": 0,
+          "pushes": 0,
+          "win_rate_ex_push": null,
+          "hypothetical_roi_at_flat_minus110": null
+        },
+        "5.0": {
+          "games": 285,
+          "margin_mae": 9.9842,
+          "margin_rmse": 13.174,
+          "mean_signed_margin_error": -1.1316,
+          "mean_abs_predicted_margin": 4.9667,
+          "bets": 0,
+          "wins": 0,
+          "losses": 0,
+          "pushes": 0,
+          "win_rate_ex_push": null,
+          "hypothetical_roi_at_flat_minus110": null
+        }
+      },
+      "market_spread_strata": {
+        "spread_0_to_2_5": {
+          "raw_margin": {
+            "games": 75,
+            "margin_mae": 9.8067,
+            "margin_rmse": 12.7965,
+            "mean_signed_margin_error": 1.3981,
+            "mean_abs_predicted_margin": 2.0863,
+            "bets": 75,
+            "wins": 32,
+            "losses": 43,
+            "pushes": 0,
+            "win_rate_ex_push": 0.4267,
+            "hypothetical_roi_at_flat_minus110": -0.1855
+          },
+          "direct_unscaled_margin": {
+            "games": 75,
+            "margin_mae": 9.8067,
+            "margin_rmse": 12.7965,
+            "mean_signed_margin_error": 1.3981,
+            "mean_abs_predicted_margin": 2.0863,
+            "bets": 75,
+            "wins": 32,
+            "losses": 43,
+            "pushes": 0,
+            "win_rate_ex_push": 0.4267,
+            "hypothetical_roi_at_flat_minus110": -0.1855
+          },
+          "direct_scaled_margin": {
+            "games": 75,
+            "margin_mae": 10.056,
+            "margin_rmse": 12.9817,
+            "mean_signed_margin_error": 0.8546,
+            "mean_abs_predicted_margin": 2.8078,
+            "bets": 75,
+            "wins": 37,
+            "losses": 38,
+            "pushes": 0,
+            "win_rate_ex_push": 0.4933,
+            "hypothetical_roi_at_flat_minus110": -0.0582
+          },
+          "market_margin": {
+            "games": 75,
+            "margin_mae": 9.46,
+            "margin_rmse": 12.68,
+            "mean_signed_margin_error": -0.34,
+            "mean_abs_predicted_margin": 1.98,
+            "bets": 0,
+            "wins": 0,
+            "losses": 0,
+            "pushes": 0,
+            "win_rate_ex_push": null,
+            "hypothetical_roi_at_flat_minus110": null
+          }
+        },
+        "spread_3_to_6_5": {
+          "raw_margin": {
+            "games": 140,
+            "margin_mae": 10.9083,
+            "margin_rmse": 14.6494,
+            "mean_signed_margin_error": -1.3062,
+            "mean_abs_predicted_margin": 2.4538,
+            "bets": 140,
+            "wins": 65,
+            "losses": 64,
+            "pushes": 11,
+            "win_rate_ex_push": 0.5039,
+            "hypothetical_roi_at_flat_minus110": -0.0351
+          },
+          "direct_unscaled_margin": {
+            "games": 140,
+            "margin_mae": 10.9083,
+            "margin_rmse": 14.6494,
+            "mean_signed_margin_error": -1.3062,
+            "mean_abs_predicted_margin": 2.4538,
+            "bets": 140,
+            "wins": 65,
+            "losses": 64,
+            "pushes": 11,
+            "win_rate_ex_push": 0.5039,
+            "hypothetical_roi_at_flat_minus110": -0.0351
+          },
+          "direct_scaled_margin": {
+            "games": 140,
+            "margin_mae": 10.8774,
+            "margin_rmse": 14.4106,
+            "mean_signed_margin_error": -1.2328,
+            "mean_abs_predicted_margin": 3.7809,
+            "bets": 140,
+            "wins": 65,
+            "losses": 64,
+            "pushes": 11,
+            "win_rate_ex_push": 0.5039,
+            "hypothetical_roi_at_flat_minus110": -0.0351
+          },
+          "market_margin": {
+            "games": 140,
+            "margin_mae": 10.5,
+            "margin_rmse": 14.0646,
+            "mean_signed_margin_error": -2.0786,
+            "mean_abs_predicted_margin": 4.05,
+            "bets": 0,
+            "wins": 0,
+            "losses": 0,
+            "pushes": 0,
+            "win_rate_ex_push": null,
+            "hypothetical_roi_at_flat_minus110": null
+          }
+        },
+        "spread_7_plus": {
+          "raw_margin": {
+            "games": 70,
+            "margin_mae": 10.6388,
+            "margin_rmse": 13.4665,
+            "mean_signed_margin_error": -1.7229,
+            "mean_abs_predicted_margin": 3.9307,
+            "bets": 70,
+            "wins": 36,
+            "losses": 31,
+            "pushes": 3,
+            "win_rate_ex_push": 0.5373,
+            "hypothetical_roi_at_flat_minus110": 0.0247
+          },
+          "direct_unscaled_margin": {
+            "games": 70,
+            "margin_mae": 10.6388,
+            "margin_rmse": 13.4665,
+            "mean_signed_margin_error": -1.7229,
+            "mean_abs_predicted_margin": 3.9307,
+            "bets": 70,
+            "wins": 36,
+            "losses": 31,
+            "pushes": 3,
+            "win_rate_ex_push": 0.5373,
+            "hypothetical_roi_at_flat_minus110": 0.0247
+          },
+          "direct_scaled_margin": {
+            "games": 70,
+            "margin_mae": 9.7653,
+            "margin_rmse": 12.2137,
+            "mean_signed_margin_error": -0.9924,
+            "mean_abs_predicted_margin": 7.5029,
+            "bets": 70,
+            "wins": 35,
+            "losses": 32,
+            "pushes": 3,
+            "win_rate_ex_push": 0.5224,
+            "hypothetical_roi_at_flat_minus110": -0.0026
+          },
+          "market_margin": {
+            "games": 70,
+            "margin_mae": 9.5143,
+            "margin_rmse": 11.7777,
+            "mean_signed_margin_error": -0.0857,
+            "mean_abs_predicted_margin": 10.0,
+            "bets": 0,
+            "wins": 0,
+            "losses": 0,
+            "pushes": 0,
+            "win_rate_ex_push": null,
+            "hypothetical_roi_at_flat_minus110": null
+          }
+        }
+      }
+    },
+    "2024": {
+      "raw_margin": {
+        "0.0": {
+          "games": 285,
+          "margin_mae": 10.584,
+          "margin_rmse": 13.5889,
+          "mean_signed_margin_error": -0.1853,
+          "mean_abs_predicted_margin": 2.9736,
+          "bets": 285,
+          "wins": 133,
+          "losses": 148,
+          "pushes": 4,
+          "win_rate_ex_push": 0.4733,
+          "hypothetical_roi_at_flat_minus110": -0.0951
+        },
+        "3.5": {
+          "games": 285,
+          "margin_mae": 10.584,
+          "margin_rmse": 13.5889,
+          "mean_signed_margin_error": -0.1853,
+          "mean_abs_predicted_margin": 2.9736,
+          "bets": 128,
+          "wins": 60,
+          "losses": 66,
+          "pushes": 2,
+          "win_rate_ex_push": 0.4762,
+          "hypothetical_roi_at_flat_minus110": -0.0895
+        },
+        "5.0": {
+          "games": 285,
+          "margin_mae": 10.584,
+          "margin_rmse": 13.5889,
+          "mean_signed_margin_error": -0.1853,
+          "mean_abs_predicted_margin": 2.9736,
+          "bets": 62,
+          "wins": 31,
+          "losses": 31,
+          "pushes": 0,
+          "win_rate_ex_push": 0.5,
+          "hypothetical_roi_at_flat_minus110": -0.0455
+        }
+      },
+      "direct_unscaled_margin": {
+        "0.0": {
+          "games": 285,
+          "margin_mae": 10.584,
+          "margin_rmse": 13.5889,
+          "mean_signed_margin_error": -0.1853,
+          "mean_abs_predicted_margin": 2.9736,
+          "bets": 285,
+          "wins": 133,
+          "losses": 148,
+          "pushes": 4,
+          "win_rate_ex_push": 0.4733,
+          "hypothetical_roi_at_flat_minus110": -0.0951
+        },
+        "3.5": {
+          "games": 285,
+          "margin_mae": 10.584,
+          "margin_rmse": 13.5889,
+          "mean_signed_margin_error": -0.1853,
+          "mean_abs_predicted_margin": 2.9736,
+          "bets": 128,
+          "wins": 60,
+          "losses": 66,
+          "pushes": 2,
+          "win_rate_ex_push": 0.4762,
+          "hypothetical_roi_at_flat_minus110": -0.0895
+        },
+        "5.0": {
+          "games": 285,
+          "margin_mae": 10.584,
+          "margin_rmse": 13.5889,
+          "mean_signed_margin_error": -0.1853,
+          "mean_abs_predicted_margin": 2.9736,
+          "bets": 62,
+          "wins": 31,
+          "losses": 31,
+          "pushes": 0,
+          "win_rate_ex_push": 0.5,
+          "hypothetical_roi_at_flat_minus110": -0.0455
+        }
+      },
+      "direct_scaled_margin": {
+        "0.0": {
+          "games": 285,
+          "margin_mae": 10.3369,
+          "margin_rmse": 13.2282,
+          "mean_signed_margin_error": 0.1076,
+          "mean_abs_predicted_margin": 4.5097,
+          "bets": 285,
+          "wins": 141,
+          "losses": 140,
+          "pushes": 4,
+          "win_rate_ex_push": 0.5018,
+          "hypothetical_roi_at_flat_minus110": -0.0415
+        },
+        "3.5": {
+          "games": 285,
+          "margin_mae": 10.3369,
+          "margin_rmse": 13.2282,
+          "mean_signed_margin_error": 0.1076,
+          "mean_abs_predicted_margin": 4.5097,
+          "bets": 102,
+          "wins": 52,
+          "losses": 48,
+          "pushes": 2,
+          "win_rate_ex_push": 0.52,
+          "hypothetical_roi_at_flat_minus110": -0.0071
+        },
+        "5.0": {
+          "games": 285,
+          "margin_mae": 10.3369,
+          "margin_rmse": 13.2282,
+          "mean_signed_margin_error": 0.1076,
+          "mean_abs_predicted_margin": 4.5097,
+          "bets": 59,
+          "wins": 28,
+          "losses": 30,
+          "pushes": 1,
+          "win_rate_ex_push": 0.4828,
+          "hypothetical_roi_at_flat_minus110": -0.077
+        }
+      },
+      "market_margin": {
+        "0.0": {
+          "games": 285,
+          "margin_mae": 9.7035,
+          "margin_rmse": 12.7205,
+          "mean_signed_margin_error": -0.6789,
+          "mean_abs_predicted_margin": 4.9246,
+          "bets": 0,
+          "wins": 0,
+          "losses": 0,
+          "pushes": 0,
+          "win_rate_ex_push": null,
+          "hypothetical_roi_at_flat_minus110": null
+        },
+        "3.5": {
+          "games": 285,
+          "margin_mae": 9.7035,
+          "margin_rmse": 12.7205,
+          "mean_signed_margin_error": -0.6789,
+          "mean_abs_predicted_margin": 4.9246,
+          "bets": 0,
+          "wins": 0,
+          "losses": 0,
+          "pushes": 0,
+          "win_rate_ex_push": null,
+          "hypothetical_roi_at_flat_minus110": null
+        },
+        "5.0": {
+          "games": 285,
+          "margin_mae": 9.7035,
+          "margin_rmse": 12.7205,
+          "mean_signed_margin_error": -0.6789,
+          "mean_abs_predicted_margin": 4.9246,
+          "bets": 0,
+          "wins": 0,
+          "losses": 0,
+          "pushes": 0,
+          "win_rate_ex_push": null,
+          "hypothetical_roi_at_flat_minus110": null
+        }
+      },
+      "market_spread_strata": {
+        "spread_0_to_2_5": {
+          "raw_margin": {
+            "games": 66,
+            "margin_mae": 10.0739,
+            "margin_rmse": 12.8628,
+            "mean_signed_margin_error": -0.1153,
+            "mean_abs_predicted_margin": 2.2326,
+            "bets": 66,
+            "wins": 33,
+            "losses": 33,
+            "pushes": 0,
+            "win_rate_ex_push": 0.5,
+            "hypothetical_roi_at_flat_minus110": -0.0455
+          },
+          "direct_unscaled_margin": {
+            "games": 66,
+            "margin_mae": 10.0739,
+            "margin_rmse": 12.8628,
+            "mean_signed_margin_error": -0.1153,
+            "mean_abs_predicted_margin": 2.2326,
+            "bets": 66,
+            "wins": 33,
+            "losses": 33,
+            "pushes": 0,
+            "win_rate_ex_push": 0.5,
+            "hypothetical_roi_at_flat_minus110": -0.0455
+          },
+          "direct_scaled_margin": {
+            "games": 66,
+            "margin_mae": 9.8685,
+            "margin_rmse": 12.9616,
+            "mean_signed_margin_error": -0.4501,
+            "mean_abs_predicted_margin": 3.248,
+            "bets": 66,
+            "wins": 38,
+            "losses": 28,
+            "pushes": 0,
+            "win_rate_ex_push": 0.5758,
+            "hypothetical_roi_at_flat_minus110": 0.0992
+          },
+          "market_margin": {
+            "games": 66,
+            "margin_mae": 9.8939,
+            "margin_rmse": 13.1408,
+            "mean_signed_margin_error": -1.3939,
+            "mean_abs_predicted_margin": 1.9242,
+            "bets": 0,
+            "wins": 0,
+            "losses": 0,
+            "pushes": 0,
+            "win_rate_ex_push": null,
+            "hypothetical_roi_at_flat_minus110": null
+          }
+        },
+        "spread_3_to_6_5": {
+          "raw_margin": {
+            "games": 153,
+            "margin_mae": 10.1803,
+            "margin_rmse": 13.1351,
+            "mean_signed_margin_error": 1.1464,
+            "mean_abs_predicted_margin": 2.5551,
+            "bets": 153,
+            "wins": 64,
+            "losses": 85,
+            "pushes": 4,
+            "win_rate_ex_push": 0.4295,
+            "hypothetical_roi_at_flat_minus110": -0.1753
+          },
+          "direct_unscaled_margin": {
+            "games": 153,
+            "margin_mae": 10.1803,
+            "margin_rmse": 13.1351,
+            "mean_signed_margin_error": 1.1464,
+            "mean_abs_predicted_margin": 2.5551,
+            "bets": 153,
+            "wins": 64,
+            "losses": 85,
+            "pushes": 4,
+            "win_rate_ex_push": 0.4295,
+            "hypothetical_roi_at_flat_minus110": -0.1753
+          },
+          "direct_scaled_margin": {
+            "games": 153,
+            "margin_mae": 9.8281,
+            "margin_rmse": 12.7107,
+            "mean_signed_margin_error": 1.4285,
+            "mean_abs_predicted_margin": 3.986,
+            "bets": 153,
+            "wins": 69,
+            "losses": 80,
+            "pushes": 4,
+            "win_rate_ex_push": 0.4631,
+            "hypothetical_roi_at_flat_minus110": -0.1129
+          },
+          "market_margin": {
+            "games": 153,
+            "margin_mae": 9.0458,
+            "margin_rmse": 12.2748,
+            "mean_signed_margin_error": 0.2614,
+            "mean_abs_predicted_margin": 4.4052,
+            "bets": 0,
+            "wins": 0,
+            "losses": 0,
+            "pushes": 0,
+            "win_rate_ex_push": null,
+            "hypothetical_roi_at_flat_minus110": null
+          }
+        },
+        "spread_7_plus": {
+          "raw_margin": {
+            "games": 66,
+            "margin_mae": 12.0302,
+            "margin_rmse": 15.2307,
+            "mean_signed_margin_error": -3.3425,
+            "mean_abs_predicted_margin": 4.6848,
+            "bets": 66,
+            "wins": 36,
+            "losses": 30,
+            "pushes": 0,
+            "win_rate_ex_push": 0.5455,
+            "hypothetical_roi_at_flat_minus110": 0.0413
+          },
+          "direct_unscaled_margin": {
+            "games": 66,
+            "margin_mae": 12.0302,
+            "margin_rmse": 15.2307,
+            "mean_signed_margin_error": -3.3425,
+            "mean_abs_predicted_margin": 4.6848,
+            "bets": 66,
+            "wins": 36,
+            "losses": 30,
+            "pushes": 0,
+            "win_rate_ex_push": 0.5455,
+            "hypothetical_roi_at_flat_minus110": 0.0413
+          },
+          "direct_scaled_margin": {
+            "games": 66,
+            "margin_mae": 11.9848,
+            "margin_rmse": 14.5974,
+            "mean_signed_margin_error": -2.3969,
+            "mean_abs_predicted_margin": 6.9852,
+            "bets": 66,
+            "wins": 34,
+            "losses": 32,
+            "pushes": 0,
+            "win_rate_ex_push": 0.5152,
+            "hypothetical_roi_at_flat_minus110": -0.0165
+          },
+          "market_margin": {
+            "games": 66,
+            "margin_mae": 11.0379,
+            "margin_rmse": 13.2954,
+            "mean_signed_margin_error": -2.1439,
+            "mean_abs_predicted_margin": 9.1288,
+            "bets": 0,
+            "wins": 0,
+            "losses": 0,
+            "pushes": 0,
+            "win_rate_ex_push": null,
+            "hypothetical_roi_at_flat_minus110": null
+          }
+        }
+      }
+    },
+    "2025": {
+      "raw_margin": {
+        "0.0": {
+          "games": 285,
+          "margin_mae": 10.3975,
+          "margin_rmse": 13.4227,
+          "mean_signed_margin_error": -0.0058,
+          "mean_abs_predicted_margin": 3.2199,
+          "bets": 285,
+          "wins": 146,
+          "losses": 138,
+          "pushes": 1,
+          "win_rate_ex_push": 0.5141,
+          "hypothetical_roi_at_flat_minus110": -0.0185
+        },
+        "3.5": {
+          "games": 285,
+          "margin_mae": 10.3975,
+          "margin_rmse": 13.4227,
+          "mean_signed_margin_error": -0.0058,
+          "mean_abs_predicted_margin": 3.2199,
+          "bets": 127,
+          "wins": 62,
+          "losses": 65,
+          "pushes": 0,
+          "win_rate_ex_push": 0.4882,
+          "hypothetical_roi_at_flat_minus110": -0.068
+        },
+        "5.0": {
+          "games": 285,
+          "margin_mae": 10.3975,
+          "margin_rmse": 13.4227,
+          "mean_signed_margin_error": -0.0058,
+          "mean_abs_predicted_margin": 3.2199,
+          "bets": 76,
+          "wins": 36,
+          "losses": 40,
+          "pushes": 0,
+          "win_rate_ex_push": 0.4737,
+          "hypothetical_roi_at_flat_minus110": -0.0957
+        }
+      },
+      "direct_unscaled_margin": {
+        "0.0": {
+          "games": 285,
+          "margin_mae": 10.3975,
+          "margin_rmse": 13.4227,
+          "mean_signed_margin_error": -0.0058,
+          "mean_abs_predicted_margin": 3.2199,
+          "bets": 285,
+          "wins": 146,
+          "losses": 138,
+          "pushes": 1,
+          "win_rate_ex_push": 0.5141,
+          "hypothetical_roi_at_flat_minus110": -0.0185
+        },
+        "3.5": {
+          "games": 285,
+          "margin_mae": 10.3975,
+          "margin_rmse": 13.4227,
+          "mean_signed_margin_error": -0.0058,
+          "mean_abs_predicted_margin": 3.2199,
+          "bets": 127,
+          "wins": 62,
+          "losses": 65,
+          "pushes": 0,
+          "win_rate_ex_push": 0.4882,
+          "hypothetical_roi_at_flat_minus110": -0.068
+        },
+        "5.0": {
+          "games": 285,
+          "margin_mae": 10.3975,
+          "margin_rmse": 13.4227,
+          "mean_signed_margin_error": -0.0058,
+          "mean_abs_predicted_margin": 3.2199,
+          "bets": 76,
+          "wins": 36,
+          "losses": 40,
+          "pushes": 0,
+          "win_rate_ex_push": 0.4737,
+          "hypothetical_roi_at_flat_minus110": -0.0957
+        }
+      },
+      "direct_scaled_margin": {
+        "0.0": {
+          "games": 285,
+          "margin_mae": 10.1637,
+          "margin_rmse": 13.0952,
+          "mean_signed_margin_error": -0.2178,
+          "mean_abs_predicted_margin": 4.5715,
+          "bets": 285,
+          "wins": 145,
+          "losses": 139,
+          "pushes": 1,
+          "win_rate_ex_push": 0.5106,
+          "hypothetical_roi_at_flat_minus110": -0.0252
+        },
+        "3.5": {
+          "games": 285,
+          "margin_mae": 10.1637,
+          "margin_rmse": 13.0952,
+          "mean_signed_margin_error": -0.2178,
+          "mean_abs_predicted_margin": 4.5715,
+          "bets": 101,
+          "wins": 58,
+          "losses": 43,
+          "pushes": 0,
+          "win_rate_ex_push": 0.5743,
+          "hypothetical_roi_at_flat_minus110": 0.0963
+        },
+        "5.0": {
+          "games": 285,
+          "margin_mae": 10.1637,
+          "margin_rmse": 13.0952,
+          "mean_signed_margin_error": -0.2178,
+          "mean_abs_predicted_margin": 4.5715,
+          "bets": 56,
+          "wins": 28,
+          "losses": 28,
+          "pushes": 0,
+          "win_rate_ex_push": 0.5,
+          "hypothetical_roi_at_flat_minus110": -0.0455
+        }
+      },
+      "market_margin": {
+        "0.0": {
+          "games": 285,
+          "margin_mae": 9.6702,
+          "margin_rmse": 12.2448,
+          "mean_signed_margin_error": -0.607,
+          "mean_abs_predicted_margin": 5.3158,
+          "bets": 0,
+          "wins": 0,
+          "losses": 0,
+          "pushes": 0,
+          "win_rate_ex_push": null,
+          "hypothetical_roi_at_flat_minus110": null
+        },
+        "3.5": {
+          "games": 285,
+          "margin_mae": 9.6702,
+          "margin_rmse": 12.2448,
+          "mean_signed_margin_error": -0.607,
+          "mean_abs_predicted_margin": 5.3158,
+          "bets": 0,
+          "wins": 0,
+          "losses": 0,
+          "pushes": 0,
+          "win_rate_ex_push": null,
+          "hypothetical_roi_at_flat_minus110": null
+        },
+        "5.0": {
+          "games": 285,
+          "margin_mae": 9.6702,
+          "margin_rmse": 12.2448,
+          "mean_signed_margin_error": -0.607,
+          "mean_abs_predicted_margin": 5.3158,
+          "bets": 0,
+          "wins": 0,
+          "losses": 0,
+          "pushes": 0,
+          "win_rate_ex_push": null,
+          "hypothetical_roi_at_flat_minus110": null
+        }
+      },
+      "market_spread_strata": {
+        "spread_0_to_2_5": {
+          "raw_margin": {
+            "games": 74,
+            "margin_mae": 9.6599,
+            "margin_rmse": 13.046,
+            "mean_signed_margin_error": 1.3715,
+            "mean_abs_predicted_margin": 2.2749,
+            "bets": 74,
+            "wins": 37,
+            "losses": 37,
+            "pushes": 0,
+            "win_rate_ex_push": 0.5,
+            "hypothetical_roi_at_flat_minus110": -0.0455
+          },
+          "direct_unscaled_margin": {
+            "games": 74,
+            "margin_mae": 9.6599,
+            "margin_rmse": 13.046,
+            "mean_signed_margin_error": 1.3715,
+            "mean_abs_predicted_margin": 2.2749,
+            "bets": 74,
+            "wins": 37,
+            "losses": 37,
+            "pushes": 0,
+            "win_rate_ex_push": 0.5,
+            "hypothetical_roi_at_flat_minus110": -0.0455
+          },
+          "direct_scaled_margin": {
+            "games": 74,
+            "margin_mae": 9.8028,
+            "margin_rmse": 13.3091,
+            "mean_signed_margin_error": 0.6779,
+            "mean_abs_predicted_margin": 2.833,
+            "bets": 74,
+            "wins": 35,
+            "losses": 39,
+            "pushes": 0,
+            "win_rate_ex_push": 0.473,
+            "hypothetical_roi_at_flat_minus110": -0.0971
+          },
+          "market_margin": {
+            "games": 74,
+            "margin_mae": 8.9459,
+            "margin_rmse": 11.7545,
+            "mean_signed_margin_error": 0.0405,
+            "mean_abs_predicted_margin": 2.027,
+            "bets": 0,
+            "wins": 0,
+            "losses": 0,
+            "pushes": 0,
+            "win_rate_ex_push": null,
+            "hypothetical_roi_at_flat_minus110": null
+          }
+        },
+        "spread_3_to_6_5": {
+          "raw_margin": {
+            "games": 127,
+            "margin_mae": 9.6702,
+            "margin_rmse": 12.6653,
+            "mean_signed_margin_error": 1.1866,
+            "mean_abs_predicted_margin": 2.7798,
+            "bets": 127,
+            "wins": 63,
+            "losses": 63,
+            "pushes": 1,
+            "win_rate_ex_push": 0.5,
+            "hypothetical_roi_at_flat_minus110": -0.0451
+          },
+          "direct_unscaled_margin": {
+            "games": 127,
+            "margin_mae": 9.6702,
+            "margin_rmse": 12.6653,
+            "mean_signed_margin_error": 1.1866,
+            "mean_abs_predicted_margin": 2.7798,
+            "bets": 127,
+            "wins": 63,
+            "losses": 63,
+            "pushes": 1,
+            "win_rate_ex_push": 0.5,
+            "hypothetical_roi_at_flat_minus110": -0.0451
+          },
+          "direct_scaled_margin": {
+            "games": 127,
+            "margin_mae": 9.6283,
+            "margin_rmse": 12.5535,
+            "mean_signed_margin_error": 1.014,
+            "mean_abs_predicted_margin": 3.9936,
+            "bets": 127,
+            "wins": 65,
+            "losses": 61,
+            "pushes": 1,
+            "win_rate_ex_push": 0.5159,
+            "hypothetical_roi_at_flat_minus110": -0.015
+          },
+          "market_margin": {
+            "games": 127,
+            "margin_mae": 9.3898,
+            "margin_rmse": 11.9666,
+            "mean_signed_margin_error": 0.0512,
+            "mean_abs_predicted_margin": 4.311,
+            "bets": 0,
+            "wins": 0,
+            "losses": 0,
+            "pushes": 0,
+            "win_rate_ex_push": null,
+            "hypothetical_roi_at_flat_minus110": null
+          }
+        },
+        "spread_7_plus": {
+          "raw_margin": {
+            "games": 84,
+            "margin_mae": 12.1469,
+            "margin_rmse": 14.7927,
+            "mean_signed_margin_error": -3.0219,
+            "mean_abs_predicted_margin": 4.7176,
+            "bets": 84,
+            "wins": 46,
+            "losses": 38,
+            "pushes": 0,
+            "win_rate_ex_push": 0.5476,
+            "hypothetical_roi_at_flat_minus110": 0.0455
+          },
+          "direct_unscaled_margin": {
+            "games": 84,
+            "margin_mae": 12.1469,
+            "margin_rmse": 14.7927,
+            "mean_signed_margin_error": -3.0219,
+            "mean_abs_predicted_margin": 4.7176,
+            "bets": 84,
+            "wins": 46,
+            "losses": 38,
+            "pushes": 0,
+            "win_rate_ex_push": 0.5476,
+            "hypothetical_roi_at_flat_minus110": 0.0455
+          },
+          "direct_scaled_margin": {
+            "games": 84,
+            "margin_mae": 11.291,
+            "margin_rmse": 13.6937,
+            "mean_signed_margin_error": -2.8693,
+            "mean_abs_predicted_margin": 6.9766,
+            "bets": 84,
+            "wins": 45,
+            "losses": 39,
+            "pushes": 0,
+            "win_rate_ex_push": 0.5357,
+            "hypothetical_roi_at_flat_minus110": 0.0227
+          },
+          "market_margin": {
+            "games": 84,
+            "margin_mae": 10.7321,
+            "margin_rmse": 13.057,
+            "mean_signed_margin_error": -2.1726,
+            "mean_abs_predicted_margin": 9.7321,
+            "bets": 0,
+            "wins": 0,
+            "losses": 0,
+            "pushes": 0,
+            "win_rate_ex_push": null,
+            "hypothetical_roi_at_flat_minus110": null
+          }
+        }
+      }
+    },
+    "2026": {
+      "raw_margin": {
+        "0.0": {
+          "games": 121,
+          "margin_mae": 9.6795,
+          "margin_rmse": 12.4768,
+          "mean_signed_margin_error": 1.7433,
+          "mean_abs_predicted_margin": 3.1915,
+          "bets": 121,
+          "wins": 60,
+          "losses": 55,
+          "pushes": 6,
+          "win_rate_ex_push": 0.5217,
+          "hypothetical_roi_at_flat_minus110": -0.0038
+        },
+        "3.5": {
+          "games": 121,
+          "margin_mae": 9.6795,
+          "margin_rmse": 12.4768,
+          "mean_signed_margin_error": 1.7433,
+          "mean_abs_predicted_margin": 3.1915,
+          "bets": 44,
+          "wins": 23,
+          "losses": 19,
+          "pushes": 2,
+          "win_rate_ex_push": 0.5476,
+          "hypothetical_roi_at_flat_minus110": 0.0434
+        },
+        "5.0": {
+          "games": 121,
+          "margin_mae": 9.6795,
+          "margin_rmse": 12.4768,
+          "mean_signed_margin_error": 1.7433,
+          "mean_abs_predicted_margin": 3.1915,
+          "bets": 23,
+          "wins": 11,
+          "losses": 12,
+          "pushes": 0,
+          "win_rate_ex_push": 0.4783,
+          "hypothetical_roi_at_flat_minus110": -0.087
+        }
+      },
+      "direct_unscaled_margin": {
+        "0.0": {
+          "games": 121,
+          "margin_mae": 9.6795,
+          "margin_rmse": 12.4768,
+          "mean_signed_margin_error": 1.7433,
+          "mean_abs_predicted_margin": 3.1915,
+          "bets": 121,
+          "wins": 60,
+          "losses": 55,
+          "pushes": 6,
+          "win_rate_ex_push": 0.5217,
+          "hypothetical_roi_at_flat_minus110": -0.0038
+        },
+        "3.5": {
+          "games": 121,
+          "margin_mae": 9.6795,
+          "margin_rmse": 12.4768,
+          "mean_signed_margin_error": 1.7433,
+          "mean_abs_predicted_margin": 3.1915,
+          "bets": 44,
+          "wins": 23,
+          "losses": 19,
+          "pushes": 2,
+          "win_rate_ex_push": 0.5476,
+          "hypothetical_roi_at_flat_minus110": 0.0434
+        },
+        "5.0": {
+          "games": 121,
+          "margin_mae": 9.6795,
+          "margin_rmse": 12.4768,
+          "mean_signed_margin_error": 1.7433,
+          "mean_abs_predicted_margin": 3.1915,
+          "bets": 23,
+          "wins": 11,
+          "losses": 12,
+          "pushes": 0,
+          "win_rate_ex_push": 0.4783,
+          "hypothetical_roi_at_flat_minus110": -0.087
+        }
+      },
+      "direct_scaled_margin": {
+        "0.0": {
+          "games": 121,
+          "margin_mae": 9.7912,
+          "margin_rmse": 12.3271,
+          "mean_signed_margin_error": 1.9204,
+          "mean_abs_predicted_margin": 4.4831,
+          "bets": 121,
+          "wins": 59,
+          "losses": 56,
+          "pushes": 6,
+          "win_rate_ex_push": 0.513,
+          "hypothetical_roi_at_flat_minus110": -0.0195
+        },
+        "3.5": {
+          "games": 121,
+          "margin_mae": 9.7912,
+          "margin_rmse": 12.3271,
+          "mean_signed_margin_error": 1.9204,
+          "mean_abs_predicted_margin": 4.4831,
+          "bets": 48,
+          "wins": 26,
+          "losses": 22,
+          "pushes": 0,
+          "win_rate_ex_push": 0.5417,
+          "hypothetical_roi_at_flat_minus110": 0.0341
+        },
+        "5.0": {
+          "games": 121,
+          "margin_mae": 9.7912,
+          "margin_rmse": 12.3271,
+          "mean_signed_margin_error": 1.9204,
+          "mean_abs_predicted_margin": 4.4831,
+          "bets": 25,
+          "wins": 11,
+          "losses": 14,
+          "pushes": 0,
+          "win_rate_ex_push": 0.44,
+          "hypothetical_roi_at_flat_minus110": -0.16
+        }
+      },
+      "market_margin": {
+        "0.0": {
+          "games": 121,
+          "margin_mae": 9.5702,
+          "margin_rmse": 12.1772,
+          "mean_signed_margin_error": 1.3306,
+          "mean_abs_predicted_margin": 4.595,
+          "bets": 0,
+          "wins": 0,
+          "losses": 0,
+          "pushes": 0,
+          "win_rate_ex_push": null,
+          "hypothetical_roi_at_flat_minus110": null
+        },
+        "3.5": {
+          "games": 121,
+          "margin_mae": 9.5702,
+          "margin_rmse": 12.1772,
+          "mean_signed_margin_error": 1.3306,
+          "mean_abs_predicted_margin": 4.595,
+          "bets": 0,
+          "wins": 0,
+          "losses": 0,
+          "pushes": 0,
+          "win_rate_ex_push": null,
+          "hypothetical_roi_at_flat_minus110": null
+        },
+        "5.0": {
+          "games": 121,
+          "margin_mae": 9.5702,
+          "margin_rmse": 12.1772,
+          "mean_signed_margin_error": 1.3306,
+          "mean_abs_predicted_margin": 4.595,
+          "bets": 0,
+          "wins": 0,
+          "losses": 0,
+          "pushes": 0,
+          "win_rate_ex_push": null,
+          "hypothetical_roi_at_flat_minus110": null
+        }
+      },
+      "market_spread_strata": {
+        "spread_0_to_2_5": {
+          "raw_margin": {
+            "games": 29,
+            "margin_mae": 10.0721,
+            "margin_rmse": 12.7881,
+            "mean_signed_margin_error": 0.3918,
+            "mean_abs_predicted_margin": 1.7763,
+            "bets": 29,
+            "wins": 12,
+            "losses": 17,
+            "pushes": 0,
+            "win_rate_ex_push": 0.4138,
+            "hypothetical_roi_at_flat_minus110": -0.21
+          },
+          "direct_unscaled_margin": {
+            "games": 29,
+            "margin_mae": 10.0721,
+            "margin_rmse": 12.7881,
+            "mean_signed_margin_error": 0.3918,
+            "mean_abs_predicted_margin": 1.7763,
+            "bets": 29,
+            "wins": 12,
+            "losses": 17,
+            "pushes": 0,
+            "win_rate_ex_push": 0.4138,
+            "hypothetical_roi_at_flat_minus110": -0.21
+          },
+          "direct_scaled_margin": {
+            "games": 29,
+            "margin_mae": 9.9154,
+            "margin_rmse": 12.5989,
+            "mean_signed_margin_error": 0.0438,
+            "mean_abs_predicted_margin": 2.514,
+            "bets": 29,
+            "wins": 13,
+            "losses": 16,
+            "pushes": 0,
+            "win_rate_ex_push": 0.4483,
+            "hypothetical_roi_at_flat_minus110": -0.1442
+          },
+          "market_margin": {
+            "games": 29,
+            "margin_mae": 9.1207,
+            "margin_rmse": 11.5807,
+            "mean_signed_margin_error": -0.8793,
+            "mean_abs_predicted_margin": 2.0172,
+            "bets": 0,
+            "wins": 0,
+            "losses": 0,
+            "pushes": 0,
+            "win_rate_ex_push": null,
+            "hypothetical_roi_at_flat_minus110": null
+          }
+        },
+        "spread_3_to_6_5": {
+          "raw_margin": {
+            "games": 64,
+            "margin_mae": 10.7762,
+            "margin_rmse": 13.4894,
+            "mean_signed_margin_error": 2.5687,
+            "mean_abs_predicted_margin": 3.0495,
+            "bets": 64,
+            "wins": 28,
+            "losses": 33,
+            "pushes": 3,
+            "win_rate_ex_push": 0.459,
+            "hypothetical_roi_at_flat_minus110": -0.1179
+          },
+          "direct_unscaled_margin": {
+            "games": 64,
+            "margin_mae": 10.7762,
+            "margin_rmse": 13.4894,
+            "mean_signed_margin_error": 2.5687,
+            "mean_abs_predicted_margin": 3.0495,
+            "bets": 64,
+            "wins": 28,
+            "losses": 33,
+            "pushes": 3,
+            "win_rate_ex_push": 0.459,
+            "hypothetical_roi_at_flat_minus110": -0.1179
+          },
+          "direct_scaled_margin": {
+            "games": 64,
+            "margin_mae": 10.5895,
+            "margin_rmse": 13.1744,
+            "mean_signed_margin_error": 2.585,
+            "mean_abs_predicted_margin": 4.1438,
+            "bets": 64,
+            "wins": 30,
+            "losses": 31,
+            "pushes": 3,
+            "win_rate_ex_push": 0.4918,
+            "hypothetical_roi_at_flat_minus110": -0.0582
+          },
+          "market_margin": {
+            "games": 64,
+            "margin_mae": 10.4062,
+            "margin_rmse": 13.0668,
+            "mean_signed_margin_error": 1.7031,
+            "mean_abs_predicted_margin": 3.9844,
+            "bets": 0,
+            "wins": 0,
+            "losses": 0,
+            "pushes": 0,
+            "win_rate_ex_push": null,
+            "hypothetical_roi_at_flat_minus110": null
+          }
+        },
+        "spread_7_plus": {
+          "raw_margin": {
+            "games": 28,
+            "margin_mae": 6.7663,
+            "margin_rmse": 9.3503,
+            "mean_signed_margin_error": 1.2565,
+            "mean_abs_predicted_margin": 4.9819,
+            "bets": 28,
+            "wins": 20,
+            "losses": 5,
+            "pushes": 3,
+            "win_rate_ex_push": 0.8,
+            "hypothetical_roi_at_flat_minus110": 0.4708
+          },
+          "direct_unscaled_margin": {
+            "games": 28,
+            "margin_mae": 6.7663,
+            "margin_rmse": 9.3503,
+            "mean_signed_margin_error": 1.2565,
+            "mean_abs_predicted_margin": 4.9819,
+            "bets": 28,
+            "wins": 20,
+            "losses": 5,
+            "pushes": 3,
+            "win_rate_ex_push": 0.8,
+            "hypothetical_roi_at_flat_minus110": 0.4708
+          },
+          "direct_scaled_margin": {
+            "games": 28,
+            "margin_mae": 7.8377,
+            "margin_rmse": 9.775,
+            "mean_signed_margin_error": 2.3449,
+            "mean_abs_predicted_margin": 7.2981,
+            "bets": 28,
+            "wins": 16,
+            "losses": 9,
+            "pushes": 3,
+            "win_rate_ex_push": 0.64,
+            "hypothetical_roi_at_flat_minus110": 0.1981
+          },
+          "market_margin": {
+            "games": 28,
+            "margin_mae": 8.125,
+            "margin_rmse": 10.5657,
+            "mean_signed_margin_error": 2.7679,
+            "mean_abs_predicted_margin": 8.6607,
+            "bets": 0,
+            "wins": 0,
+            "losses": 0,
+            "pushes": 0,
+            "win_rate_ex_push": null,
+            "hypothetical_roi_at_flat_minus110": null
+          }
+        }
+      }
+    }
+  },
+  "decision_rule": "Never promote solely from this experiment. Require positive margin MAE delta against raw baseline in 2025 AND 2026, no deterioration versus market, stable directional ATS evidence, then separate fresh prospective Week 10+ validation.",
+  "publication_impact": "None: no site, frozen prediction, official grade, or total model changed.",
+  "total_2026_games": 121
+}
