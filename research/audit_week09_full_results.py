@@ -206,6 +206,49 @@ def main():
         margin=r["actual_home_margin"];line=r["bovada_home_favorite_spread"]
         favored=margin-line if line>0 else line-margin if line<0 else 0
         fav_wlp["P" if abs(favored)<1e-10 else "W" if favored>0 else "L"]+=1
+    # Same-vintage injury-model ablation: Nov 7/8 frozen *non-QB* score
+    # compared with its QB-EPA overlay at the identical archived Bovada quote.
+    # Thursday's original pregame projection is separate; never replace it.
+    qb_overlay_flips=[]
+    qb_overlay_games=[]
+    for r in final:
+        g=r["game_id"]
+        if g not in officials:continue
+        o=officials[g]
+        old_margin=n(r["original_non_qb_home"])-n(r["original_non_qb_away"])
+        final_margin=o["model_home_margin"]
+        market=o["bovada_home_favorite_spread"]
+        actual=o["actual_home_margin"]
+        old_edge=old_margin-market
+        new_edge=final_margin-market
+        if abs((old_margin+n(r["qb_margin_adjustment"]))-final_margin)>.0002:
+            raise ValueError(f"Saved QB overlay failed to reconcile game {g}")
+        if abs(n(r["projected_total"])-(n(r["original_non_qb_home"])+n(r["original_non_qb_away"])))>.0002:
+            raise ValueError(f"QB overlay modified totals at game {g}")
+        old_pick=o["home_team"] if old_edge>0 else o["away_team"] if old_edge<0 else "NO_LEAN"
+        new_pick=o["ats_pick"]
+        evidence={
+            "home":r.get("home_qb_starter_source",""),
+            "away":r.get("away_qb_starter_source",""),
+        }
+        item={
+            "game_id":g,
+            "pregame_nonqb_home_margin":round(old_margin,3),
+            "qb_margin_shift":round(n(r["qb_margin_adjustment"]),3),
+            "published_injury_home_margin":round(final_margin,3),
+            "market_home_margin":market,
+            "nonqb_ats_pick":old_pick,
+            "nonqb_ats_result":grade(old_edge,actual-market),
+            "published_ats_pick":new_pick,
+            "published_ats_result":o["ats_result"],
+            "starter_evidence":evidence,
+        }
+        qb_overlay_games.append(item)
+        if old_pick!=new_pick:qb_overlay_flips.append(item)
+    if len(qb_overlay_games)!=14:
+        raise ValueError(f"Expected 14 non-QB-vs-QB ablations, got {len(qb_overlay_games)}")
+    unverified_games=sum(any(source!="verified_pregame" for source in r["starter_evidence"].values())
+                          for r in qb_overlay_games)
     report={
         "audit":"WEEK09_COMPLETED_FULL_RESEARCH",
         "scope":"All completed Week 9 games: TNF Nov 5, 13 on Sunday Nov 8, MNF Nov 9 (15 games).",
@@ -222,6 +265,12 @@ def main():
             "avg_abs_actual_margin":round(sum(abs(r["actual_home_margin"]) for r in officials.values())/15,3),
         },
         "official_vs_original_baseline_direction_flips":flips,
+        "same_vintage_qb_overlay":{
+            "games_compared":len(qb_overlay_games),
+            "ats_pick_flips":qb_overlay_flips,
+            "unverified_at_least_one_QB_games":unverified_games,
+            "all_games":qb_overlay_games,
+        },
         "interpretation_caveats":[
             "Single Week 9 sample: 15 games is not enough to optimize weights or infer systematic bias.",
             "Research-model vintages are Nov 4; Sunday/Monday official forecasts are Nov 7/8 after final reported injuries. Same game/odds/result set but different forecast vintages.",
@@ -275,6 +324,8 @@ def main():
         f"- Mean absolute winning margin: model {official['avg_abs_predicted_margin']:.2f}, market {report['market_benchmark']['avg_abs_market_spread']:.2f}, actual {report['market_benchmark']['avg_abs_actual_margin']:.2f}.",
         f"- Model margin MAE {official['margin_mae']:.2f} vs market spread MAE {report['market_benchmark']['market_margin_mae']:.2f}; model didn't outperform the market on margin accuracy.",
         "- ATS side flips from Baseline to the final Injury model on previously completed games: "+", ".join(f["game_id"] for f in flips)+".",
+        f"- Same-vintage QB overlay flipped {len(qb_overlay_flips)} ATS directions; "+"; ".join(f"{x['game_id']} {x['nonqb_ats_pick']} ({x['nonqb_ats_result']}) → {x['published_ats_pick']} ({x['published_ats_result']})" for x in qb_overlay_flips)+".",
+        f"- At least one QB source was not independently verified in {unverified_games}/14 Sunday/Monday games.",
         "",
         "## Week 10 research gates",
         "",
