@@ -58,3 +58,13 @@ GitHub workflow `Test efficiency feature integrity` run #42847190835 failed sole
 Validate the *Week 10* probable and confirmed starting QBs against timestamped team/NFL sources, keep unknown/provisional labels explicit and compare verified-only versus unverified shifts separately. Preserve the published Baseline and Injury projections unless a genuinely prospective controlled alternative proves superior.
 
 No NFLMeta or EndzoneAPI credits were spent in these research workflows.
+
+
+## 4. QB starter-source metadata audit (new)
+
+- Added `research/audit_qb_starter_source_metadata.py`, `tests/test_qb_starter_source_metadata.py`, and `.github/workflows/audit-qb-starter-source-metadata.yml`. The audit is separate from the live model; it validates team/game membership, HTTPS source metadata, DST-aware exact kickoff versus publication time, and stale article timestamps, without claiming it has read article content.
+- The archived Week 9 input `data/qb_starters/2026_week09_confirmed.csv` has **8 entries**. The audit saved `data/week09_review/qb_source_metadata_audit_2026_week09.json` and .csv.
+- **7/8** entries have plausible recent source metadata but have **not** been content-verified by this automated audit; **1/8** needs manual reconfirmation because it is stale.
+- Specifically, the ATL Michael Penix Jr. Week 9 override (`2026_09_CIN_ATL`) cites a source dated **September 21, 2026**, about **1,146 hours (47.75 days)** before the actual kickoff. Merely being published before the game is insufficient for game-specific confirmation.
+- Research audit output status is `RESEARCH_METADATA_AUDIT_NO_OFFICIAL_CHANGES`. Do not automatically downgrade, retune, or rewrite Week 9 official predictions because of the audit. Source article content still requires a separate human or reliable pregame verification step.
+- The feature-integrity workflow runs the metadata unit tests alongside the existing QB pytest suite; the new tests cover correct DST handling and same-day publication before kickoff, which the prior `capture_qb_aware_injury.py` date-only check did not implement. Repairing future candidate-capture validation is a separate task and **has not been applied to the production projection pipeline**.
