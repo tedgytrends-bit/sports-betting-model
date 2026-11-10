@@ -40,7 +40,7 @@ jobs:
       - name: Validate QB and Injury engine
         run: |
           python -m py_compile qb_epa_model.py injury_model.py scripts/capture_qb_aware_injury.py research/validate_qb_starter_confirmations.py
-          python -m pytest -q tests/test_qb_epa_model.py tests/test_qb_confirmation_gate.py tests/test_qb_verified_only_sensitivity.py
+          python -m pytest -q tests/test_qb_epa_model.py tests/test_qb_confirmation_gate.py tests/test_qb_verified_only_sensitivity.py tests/test_qb_expected_starters.py
       - name: Generate versioned pregame research snapshot
         env:
           SEASON: ${{ github.event.inputs.season || '2026' }}
