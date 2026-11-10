@@ -25,9 +25,12 @@ from sklearn.linear_model import Ridge
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 
-from model import load_schedule_data, load_pbp, build_efficiency_model_dataset
+import sys
 
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+from model import load_schedule_data, load_pbp, build_efficiency_model_dataset
 OUT = ROOT / "data" / "week09_review"
 PREFIX = "standardized_margin_shadow_20261110"
 MIN_TRAIN = 500
