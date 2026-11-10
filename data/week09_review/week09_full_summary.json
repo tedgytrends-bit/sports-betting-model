@@ -731,6 +731,254 @@
       "margin_change_home": 1.518
     }
   ],
+  "same_vintage_qb_overlay": {
+    "games_compared": 14,
+    "ats_pick_flips": [
+      {
+        "game_id": "2026_09_NYG_PHI",
+        "pregame_nonqb_home_margin": -6.767,
+        "qb_margin_shift": 7.038,
+        "published_injury_home_margin": 0.271,
+        "market_home_margin": -3.0,
+        "nonqb_ats_pick": "NYG",
+        "nonqb_ats_result": "W",
+        "published_ats_pick": "PHI",
+        "published_ats_result": "L",
+        "starter_evidence": {
+          "home": "verified_pregame",
+          "away": "verified_pregame"
+        }
+      },
+      {
+        "game_id": "2026_09_BUF_MIN",
+        "pregame_nonqb_home_margin": -3.399,
+        "qb_margin_shift": 3.021,
+        "published_injury_home_margin": -0.378,
+        "market_home_margin": -3.0,
+        "nonqb_ats_pick": "BUF",
+        "nonqb_ats_result": "W",
+        "published_ats_pick": "MIN",
+        "published_ats_result": "L",
+        "starter_evidence": {
+          "home": "verified_pregame",
+          "away": "schedule_provisional_qb_unverified"
+        }
+      }
+    ],
+    "unverified_at_least_one_QB_games": 12,
+    "all_games": [
+      {
+        "game_id": "2026_09_ARI_SEA",
+        "pregame_nonqb_home_margin": 3.945,
+        "qb_margin_shift": -1.998,
+        "published_injury_home_margin": 1.947,
+        "market_home_margin": 8.5,
+        "nonqb_ats_pick": "ARI",
+        "nonqb_ats_result": "L",
+        "published_ats_pick": "ARI",
+        "published_ats_result": "L",
+        "starter_evidence": {
+          "home": "verified_pregame",
+          "away": "verified_pregame"
+        }
+      },
+      {
+        "game_id": "2026_09_CIN_ATL",
+        "pregame_nonqb_home_margin": -6.108,
+        "qb_margin_shift": 1.762,
+        "published_injury_home_margin": -4.346,
+        "market_home_margin": -3.0,
+        "nonqb_ats_pick": "CIN",
+        "nonqb_ats_result": "W",
+        "published_ats_pick": "CIN",
+        "published_ats_result": "W",
+        "starter_evidence": {
+          "home": "verified_pregame",
+          "away": "schedule_provisional_qb_unverified"
+        }
+      },
+      {
+        "game_id": "2026_09_CLE_NO",
+        "pregame_nonqb_home_margin": 4.934,
+        "qb_margin_shift": 2.7,
+        "published_injury_home_margin": 7.634,
+        "market_home_margin": 3.5,
+        "nonqb_ats_pick": "NO",
+        "nonqb_ats_result": "L",
+        "published_ats_pick": "NO",
+        "published_ats_result": "L",
+        "starter_evidence": {
+          "home": "schedule_provisional_qb_unverified",
+          "away": "verified_pregame"
+        }
+      },
+      {
+        "game_id": "2026_09_DAL_IND",
+        "pregame_nonqb_home_margin": -0.871,
+        "qb_margin_shift": 1.14,
+        "published_injury_home_margin": 0.268,
+        "market_home_margin": -4.0,
+        "nonqb_ats_pick": "IND",
+        "nonqb_ats_result": "P",
+        "published_ats_pick": "IND",
+        "published_ats_result": "P",
+        "starter_evidence": {
+          "home": "schedule_provisional_qb_unverified",
+          "away": "schedule_provisional_qb_unverified"
+        }
+      },
+      {
+        "game_id": "2026_09_DEN_CAR",
+        "pregame_nonqb_home_margin": 0.959,
+        "qb_margin_shift": -0.294,
+        "published_injury_home_margin": 0.666,
+        "market_home_margin": -2.5,
+        "nonqb_ats_pick": "CAR",
+        "nonqb_ats_result": "L",
+        "published_ats_pick": "CAR",
+        "published_ats_result": "L",
+        "starter_evidence": {
+          "home": "schedule_provisional_qb_unverified",
+          "away": "schedule_provisional_qb_unverified"
+        }
+      },
+      {
+        "game_id": "2026_09_DET_MIA",
+        "pregame_nonqb_home_margin": 0.538,
+        "qb_margin_shift": 0.649,
+        "published_injury_home_margin": 1.188,
+        "market_home_margin": -6.0,
+        "nonqb_ats_pick": "MIA",
+        "nonqb_ats_result": "L",
+        "published_ats_pick": "MIA",
+        "published_ats_result": "L",
+        "starter_evidence": {
+          "home": "schedule_provisional_qb_unverified",
+          "away": "schedule_provisional_qb_unverified"
+        }
+      },
+      {
+        "game_id": "2026_09_GB_NE",
+        "pregame_nonqb_home_margin": 3.012,
+        "qb_margin_shift": 0.004,
+        "published_injury_home_margin": 3.016,
+        "market_home_margin": 3.0,
+        "nonqb_ats_pick": "NE",
+        "nonqb_ats_result": "L",
+        "published_ats_pick": "NE",
+        "published_ats_result": "L",
+        "starter_evidence": {
+          "home": "schedule_provisional_qb_unverified",
+          "away": "schedule_provisional_qb_unverified"
+        }
+      },
+      {
+        "game_id": "2026_09_HOU_LAC",
+        "pregame_nonqb_home_margin": -9.017,
+        "qb_margin_shift": 0.997,
+        "published_injury_home_margin": -8.02,
+        "market_home_margin": -6.0,
+        "nonqb_ats_pick": "HOU",
+        "nonqb_ats_result": "W",
+        "published_ats_pick": "HOU",
+        "published_ats_result": "W",
+        "starter_evidence": {
+          "home": "schedule_provisional_qb_unverified",
+          "away": "schedule_provisional_qb_unverified"
+        }
+      },
+      {
+        "game_id": "2026_09_LA_WAS",
+        "pregame_nonqb_home_margin": -2.511,
+        "qb_margin_shift": 0.25,
+        "published_injury_home_margin": -2.26,
+        "market_home_margin": -4.0,
+        "nonqb_ats_pick": "WAS",
+        "nonqb_ats_result": "L",
+        "published_ats_pick": "WAS",
+        "published_ats_result": "L",
+        "starter_evidence": {
+          "home": "schedule_provisional_qb_unverified",
+          "away": "schedule_provisional_qb_unverified"
+        }
+      },
+      {
+        "game_id": "2026_09_LV_SF",
+        "pregame_nonqb_home_margin": 3.712,
+        "qb_margin_shift": 0.179,
+        "published_injury_home_margin": 3.891,
+        "market_home_margin": 9.5,
+        "nonqb_ats_pick": "LV",
+        "nonqb_ats_result": "L",
+        "published_ats_pick": "LV",
+        "published_ats_result": "L",
+        "starter_evidence": {
+          "home": "schedule_provisional_qb_unverified",
+          "away": "schedule_provisional_qb_unverified"
+        }
+      },
+      {
+        "game_id": "2026_09_NYG_PHI",
+        "pregame_nonqb_home_margin": -6.767,
+        "qb_margin_shift": 7.038,
+        "published_injury_home_margin": 0.271,
+        "market_home_margin": -3.0,
+        "nonqb_ats_pick": "NYG",
+        "nonqb_ats_result": "W",
+        "published_ats_pick": "PHI",
+        "published_ats_result": "L",
+        "starter_evidence": {
+          "home": "verified_pregame",
+          "away": "verified_pregame"
+        }
+      },
+      {
+        "game_id": "2026_09_NYJ_KC",
+        "pregame_nonqb_home_margin": 3.18,
+        "qb_margin_shift": 1.372,
+        "published_injury_home_margin": 4.551,
+        "market_home_margin": 8.5,
+        "nonqb_ats_pick": "NYJ",
+        "nonqb_ats_result": "L",
+        "published_ats_pick": "NYJ",
+        "published_ats_result": "L",
+        "starter_evidence": {
+          "home": "schedule_provisional_qb_unverified",
+          "away": "schedule_provisional_qb_unverified"
+        }
+      },
+      {
+        "game_id": "2026_09_TB_CHI",
+        "pregame_nonqb_home_margin": 5.113,
+        "qb_margin_shift": -1.17,
+        "published_injury_home_margin": 3.943,
+        "market_home_margin": 6.0,
+        "nonqb_ats_pick": "TB",
+        "nonqb_ats_result": "W",
+        "published_ats_pick": "TB",
+        "published_ats_result": "W",
+        "starter_evidence": {
+          "home": "schedule_provisional_qb_unverified",
+          "away": "schedule_provisional_qb_unverified"
+        }
+      },
+      {
+        "game_id": "2026_09_BUF_MIN",
+        "pregame_nonqb_home_margin": -3.399,
+        "qb_margin_shift": 3.021,
+        "published_injury_home_margin": -0.378,
+        "market_home_margin": -3.0,
+        "nonqb_ats_pick": "BUF",
+        "nonqb_ats_result": "W",
+        "published_ats_pick": "MIN",
+        "published_ats_result": "L",
+        "starter_evidence": {
+          "home": "verified_pregame",
+          "away": "schedule_provisional_qb_unverified"
+        }
+      }
+    ]
+  },
   "interpretation_caveats": [
     "Single Week 9 sample: 15 games is not enough to optimize weights or infer systematic bias.",
     "Research-model vintages are Nov 4; Sunday/Monday official forecasts are Nov 7/8 after final reported injuries. Same game/odds/result set but different forecast vintages.",

@@ -24,6 +24,8 @@ Do not interpret the market quotes as confirmed executable closing lines.
 - Mean absolute winning margin: model 3.11, market 5.37, actual 12.87.
 - Model margin MAE 11.49 vs market spread MAE 8.63; model didn't outperform the market on margin accuracy.
 - ATS side flips from Baseline to the final Injury model on previously completed games: 2026_09_NYG_PHI, 2026_09_GB_NE.
+- Same-vintage QB overlay flipped 2 ATS directions; 2026_09_NYG_PHI NYG (W) → PHI (L); 2026_09_BUF_MIN BUF (W) → MIN (L).
+- At least one QB source was not independently verified in 12/14 Sunday/Monday games.
 
 ## Week 10 research gates
 
