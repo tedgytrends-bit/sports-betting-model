@@ -1,0 +1,64 @@
+name: Research NFL margin feature scaling (shadow only)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/run_margin_feature_scale_shadow.py"
+      - ".github/workflows/standardized-margin-shadow.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: margin-standardization-shadow
+  cancel-in-progress: false
+
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install research dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Chronological feature-scaling and direct-margin identity study
+        run: |
+          python -m py_compile scripts/run_margin_feature_scale_shadow.py
+          python -u scripts/run_margin_feature_scale_shadow.py
+      - name: Guard no 2026 Week 9 leakage or publication changes
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          import pandas as pd
+          root = Path("data/week09_review")
+          report = json.loads((root / "standardized_margin_shadow_20261110.json").read_text())
+          preds = pd.read_csv(root / "standardized_margin_shadow_20261110.csv")
+          assert report["status"] == "RESEARCH_ONLY_NO_LIVE_CHANGES"
+          assert report["direct_margin_identity_max_error"] <= 1e-6
+          assert report["dataset"]["games"] >= 1000
+          assert len(preds) == report["dataset"]["games"]
+          assert not preds.game_id.duplicated().any()
+          assert not ((preds.season == 2026) & (preds.week > 8)).any()
+          assert {"2025", "2026"}.issubset(report["evaluation"])
+          print("PASS: historical margin test is chronological and research only.")
+          PY
+      - name: Archive only research outputs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/week09_review/standardized_margin_shadow_20261110.json data/week09_review/standardized_margin_shadow_20261110.csv
+          if ! git diff --cached --quiet; then
+            git commit -m "Archive train-fold-standardized margin comparison (research only)"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
