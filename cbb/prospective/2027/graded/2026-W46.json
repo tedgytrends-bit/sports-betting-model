@@ -673,6 +673,1182 @@
       "source": "Frozen CBBD odds; hypothetical -110 stakes",
       "tip_utc": "2026-11-10T00:30:00Z"
     },
+    "372742": {
+      "away": "Illinois",
+      "away_points": 78.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "Texas Tech",
+      "home_points": 84.0,
+      "home_spread": 2.5,
+      "id": "372742",
+      "market_provider": "Bovada",
+      "market_total": 167.5,
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": 9.46,
+          "margin_mae": 0.96,
+          "total": "W",
+          "total_edge": -22.466,
+          "total_mae": 16.966
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": 1.692,
+          "margin_mae": 6.808,
+          "total": "W",
+          "total_edge": -15.382,
+          "total_mae": 9.882
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": 1.139,
+          "margin_mae": 7.361,
+          "total": "W",
+          "total_edge": -15.219,
+          "total_mae": 9.719
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": 5.132,
+          "margin_mae": 3.368,
+          "total": "W",
+          "total_edge": -13.81,
+          "total_mae": 8.31
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": 3.383,
+          "margin_mae": 5.117,
+          "total": "W",
+          "total_edge": -14.951,
+          "total_mae": 9.451
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T01:00:00Z"
+    },
+    "372743": {
+      "away": "Wyoming",
+      "away_points": 63.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "North Carolina",
+      "home_points": 76.0,
+      "home_spread": -14.0,
+      "id": "372743",
+      "market_provider": "Bovada",
+      "market_total": 155.5,
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": -5.702,
+          "margin_mae": 4.702,
+          "total": "W",
+          "total_edge": -8.054,
+          "total_mae": 8.446
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": -2.327,
+          "margin_mae": 1.327,
+          "total": "L",
+          "total_edge": 3.436,
+          "total_mae": 19.936
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": -2.554,
+          "margin_mae": 1.554,
+          "total": "L",
+          "total_edge": 1.642,
+          "total_mae": 18.142
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": -2.34,
+          "margin_mae": 1.34,
+          "total": "L",
+          "total_edge": 3.89,
+          "total_mae": 20.39
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": -2.981,
+          "margin_mae": 1.981,
+          "total": "L",
+          "total_edge": 1.191,
+          "total_mae": 17.691
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T00:00:00Z"
+    },
+    "372744": {
+      "away": "Army",
+      "away_points": 55.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "New Haven",
+      "home_points": 63.0,
+      "home_spread": 1.5,
+      "id": "372744",
+      "market_provider": "Bovada",
+      "market_total": 131.5,
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": 6.444,
+          "margin_mae": 3.056,
+          "total": "L",
+          "total_edge": 8.084,
+          "total_mae": 21.584
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": -1.352,
+          "margin_mae": 10.852,
+          "total": "L",
+          "total_edge": 5.619,
+          "total_mae": 19.119
+        },
+        "player_opp_v3": {
+          "ats": "L",
+          "ats_edge": -2.311,
+          "margin_mae": 11.811,
+          "total": "L",
+          "total_edge": 8.424,
+          "total_mae": 21.924
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": -2.11,
+          "margin_mae": 11.61,
+          "total": "L",
+          "total_edge": 4.692,
+          "total_mae": 18.192
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": -3.158,
+          "margin_mae": 12.658,
+          "total": "L",
+          "total_edge": 8.401,
+          "total_mae": 21.901
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T00:00:00Z"
+    },
+    "372745": {
+      "away": "Northern Kentucky",
+      "away_points": 63.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "Saint Louis",
+      "home_points": 125.0,
+      "home_spread": -23.0,
+      "id": "372745",
+      "market_provider": "Bovada",
+      "market_total": 169.0,
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": -7.273,
+          "margin_mae": 46.273,
+          "total": "L",
+          "total_edge": -13.557,
+          "total_mae": 32.557
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": -4.507,
+          "margin_mae": 43.507,
+          "total": "L",
+          "total_edge": -6.635,
+          "total_mae": 25.635
+        },
+        "player_opp_v3": {
+          "ats": "L",
+          "ats_edge": -3.599,
+          "margin_mae": 42.599,
+          "total": "L",
+          "total_edge": -8.602,
+          "total_mae": 27.602
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": -6.406,
+          "margin_mae": 45.406,
+          "total": "L",
+          "total_edge": -7.987,
+          "total_mae": 26.987
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": -4.343,
+          "margin_mae": 43.343,
+          "total": "L",
+          "total_edge": -8.852,
+          "total_mae": 27.852
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T01:00:00Z"
+    },
+    "372746": {
+      "away": "Elon",
+      "away_points": 50.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "George Washington",
+      "home_points": 69.0,
+      "home_spread": -14.5,
+      "id": "372746",
+      "market_provider": "Bovada",
+      "market_total": 149.0,
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": 1.383,
+          "margin_mae": 3.117,
+          "total": "W",
+          "total_edge": -8.281,
+          "total_mae": 21.719
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": -4.399,
+          "margin_mae": 8.899,
+          "total": "W",
+          "total_edge": -1.87,
+          "total_mae": 28.13
+        },
+        "player_opp_v3": {
+          "ats": "L",
+          "ats_edge": -5.074,
+          "margin_mae": 9.574,
+          "total": "W",
+          "total_edge": -1.758,
+          "total_mae": 28.242
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": -3.773,
+          "margin_mae": 8.273,
+          "total": "W",
+          "total_edge": -2.842,
+          "total_mae": 27.158
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": -3.776,
+          "margin_mae": 8.276,
+          "total": "W",
+          "total_edge": -2.036,
+          "total_mae": 27.964
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T00:00:00Z"
+    },
+    "372747": {
+      "away": "Iona",
+      "away_points": 72.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "Fordham",
+      "home_points": 78.0,
+      "home_spread": -11.5,
+      "id": "372747",
+      "market_provider": "Bovada",
+      "market_total": 139.5,
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": -1.333,
+          "margin_mae": 4.167,
+          "total": "W",
+          "total_edge": 1.135,
+          "total_mae": 9.365
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": 3.18,
+          "margin_mae": 8.68,
+          "total": "W",
+          "total_edge": 2.526,
+          "total_mae": 7.974
+        },
+        "player_opp_v3": {
+          "ats": "L",
+          "ats_edge": 3.329,
+          "margin_mae": 8.829,
+          "total": "W",
+          "total_edge": 3.804,
+          "total_mae": 6.696
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": 0.747,
+          "margin_mae": 6.247,
+          "total": "W",
+          "total_edge": 0.948,
+          "total_mae": 9.552
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": 1.168,
+          "margin_mae": 6.668,
+          "total": "W",
+          "total_edge": 2.834,
+          "total_mae": 7.666
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T00:00:00Z"
+    },
+    "372748": {
+      "away": "Siena",
+      "away_points": 99.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "Dayton",
+      "home_points": 89.0,
+      "home_spread": -12.5,
+      "id": "372748",
+      "market_provider": "Bovada",
+      "market_total": 159.0,
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": 1.226,
+          "margin_mae": 23.726,
+          "total": "L",
+          "total_edge": -11.249,
+          "total_mae": 40.249
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": 9.269,
+          "margin_mae": 31.769,
+          "total": "L",
+          "total_edge": -2.948,
+          "total_mae": 31.948
+        },
+        "player_opp_v3": {
+          "ats": "L",
+          "ats_edge": 11.888,
+          "margin_mae": 34.388,
+          "total": "L",
+          "total_edge": -1.044,
+          "total_mae": 30.044
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": 12.491,
+          "margin_mae": 34.991,
+          "total": "L",
+          "total_edge": -2.999,
+          "total_mae": 31.999
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": 14.452,
+          "margin_mae": 36.952,
+          "total": "L",
+          "total_edge": -2.323,
+          "total_mae": 31.323
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T00:00:00Z"
+    },
+    "372749": {
+      "away": "Youngstown State",
+      "away_points": 78.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "Central Michigan",
+      "home_points": 91.0,
+      "home_spread": -3.5,
+      "id": "372749",
+      "market_provider": "Bovada",
+      "market_total": 152.5,
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": 16.432,
+          "margin_mae": 6.932,
+          "total": "L",
+          "total_edge": -5.769,
+          "total_mae": 22.269
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": 5.349,
+          "margin_mae": 4.151,
+          "total": "W",
+          "total_edge": 2.386,
+          "total_mae": 14.114
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": 3.6,
+          "margin_mae": 5.9,
+          "total": "W",
+          "total_edge": 0.843,
+          "total_mae": 15.657
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": 5.999,
+          "margin_mae": 3.501,
+          "total": "W",
+          "total_edge": 1.851,
+          "total_mae": 14.649
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": 4.892,
+          "margin_mae": 4.608,
+          "total": "W",
+          "total_edge": 0.294,
+          "total_mae": 16.206
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T00:00:00Z"
+    },
+    "372750": {
+      "away": "Kentucky",
+      "away_points": 69.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "Kansas",
+      "home_points": 89.0,
+      "home_spread": -4.0,
+      "id": "372750",
+      "market_provider": "Bovada",
+      "market_total": 155.5,
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": 5.762,
+          "margin_mae": 10.238,
+          "total": "L",
+          "total_edge": -11.449,
+          "total_mae": 13.949
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": 11.33,
+          "margin_mae": 4.67,
+          "total": "W",
+          "total_edge": 5.55,
+          "total_mae": 3.05
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": 11.325,
+          "margin_mae": 4.675,
+          "total": "W",
+          "total_edge": 5.924,
+          "total_mae": 3.424
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": 10.177,
+          "margin_mae": 5.823,
+          "total": "W",
+          "total_edge": 5.487,
+          "total_mae": 2.987
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": 10.584,
+          "margin_mae": 5.416,
+          "total": "W",
+          "total_edge": 5.732,
+          "total_mae": 3.232
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T02:58:00Z"
+    },
+    "372751": {
+      "away": "Southern",
+      "away_points": 47.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "Iowa State",
+      "home_points": 84.0,
+      "home_spread": -35.5,
+      "id": "372751",
+      "market_provider": "Bovada",
+      "market_total": 147.5,
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": -16.075,
+          "margin_mae": 17.575,
+          "total": "W",
+          "total_edge": -1.403,
+          "total_mae": 15.097
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": -1.346,
+          "margin_mae": 2.846,
+          "total": "L",
+          "total_edge": 0.981,
+          "total_mae": 17.481
+        },
+        "player_opp_v3": {
+          "ats": "L",
+          "ats_edge": -2.001,
+          "margin_mae": 3.501,
+          "total": "L",
+          "total_edge": 2.44,
+          "total_mae": 18.94
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": 1.96,
+          "margin_mae": 0.46,
+          "total": "L",
+          "total_edge": 0.654,
+          "total_mae": 17.154
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": 1.456,
+          "margin_mae": 0.044,
+          "total": "L",
+          "total_edge": 2.795,
+          "total_mae": 19.295
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T01:00:00Z"
+    },
+    "372752": {
+      "away": "San Diego",
+      "away_points": 75.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "Colorado",
+      "home_points": 83.0,
+      "home_spread": -13.0,
+      "id": "372752",
+      "market_provider": "Bovada",
+      "market_total": 152.0,
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": -1.154,
+          "margin_mae": 3.846,
+          "total": "L",
+          "total_edge": -4.999,
+          "total_mae": 10.999
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": -1.268,
+          "margin_mae": 3.732,
+          "total": "W",
+          "total_edge": 6.311,
+          "total_mae": 0.311
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": -0.638,
+          "margin_mae": 4.362,
+          "total": "W",
+          "total_edge": 8.326,
+          "total_mae": 2.326
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": -1.797,
+          "margin_mae": 3.203,
+          "total": "W",
+          "total_edge": 5.892,
+          "total_mae": 0.108
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": -1.235,
+          "margin_mae": 3.765,
+          "total": "W",
+          "total_edge": 7.863,
+          "total_mae": 1.863
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T02:00:00Z"
+    },
+    "372753": {
+      "away": "Yale",
+      "away_points": 61.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "Baylor",
+      "home_points": 90.0,
+      "home_spread": -21.5,
+      "id": "372753",
+      "market_provider": "Bovada",
+      "market_total": 157.0,
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": -2.686,
+          "margin_mae": 10.186,
+          "total": "W",
+          "total_edge": -10.433,
+          "total_mae": 4.433
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": 0.453,
+          "margin_mae": 7.047,
+          "total": "L",
+          "total_edge": 1.027,
+          "total_mae": 7.027
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": 1.496,
+          "margin_mae": 6.004,
+          "total": "L",
+          "total_edge": 0.74,
+          "total_mae": 6.74
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": 5.399,
+          "margin_mae": 2.101,
+          "total": "L",
+          "total_edge": 2.934,
+          "total_mae": 8.934
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": 6.026,
+          "margin_mae": 1.474,
+          "total": "L",
+          "total_edge": 0.882,
+          "total_mae": 6.882
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T01:00:00Z"
+    },
+    "372754": {
+      "away": "Northern Arizona",
+      "away_points": 59.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "Arizona",
+      "home_points": 90.0,
+      "home_spread": -36.5,
+      "id": "372754",
+      "market_provider": "Bovada",
+      "market_total": 156.0,
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": -18.966,
+          "margin_mae": 13.466,
+          "total": "W",
+          "total_edge": -4.423,
+          "total_mae": 2.577
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": -13.161,
+          "margin_mae": 7.661,
+          "total": "L",
+          "total_edge": 0.5,
+          "total_mae": 7.5
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": -15.085,
+          "margin_mae": 9.585,
+          "total": "W",
+          "total_edge": -2.317,
+          "total_mae": 4.683
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": -12.352,
+          "margin_mae": 6.852,
+          "total": "L",
+          "total_edge": 0.036,
+          "total_mae": 7.036
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": -13.855,
+          "margin_mae": 8.355,
+          "total": "W",
+          "total_edge": -2.291,
+          "total_mae": 4.709
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T02:00:00Z"
+    },
+    "372755": {
+      "away": "Charleston Southern",
+      "away_points": 64.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "Wake Forest",
+      "home_points": 82.0,
+      "home_spread": -18.5,
+      "id": "372755",
+      "market_provider": "Bovada",
+      "market_total": 154.5,
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": -7.375,
+          "margin_mae": 6.875,
+          "total": "W",
+          "total_edge": -12.864,
+          "total_mae": 4.364
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": 4.027,
+          "margin_mae": 4.527,
+          "total": "W",
+          "total_edge": -8.108,
+          "total_mae": 0.392
+        },
+        "player_opp_v3": {
+          "ats": "L",
+          "ats_edge": 5.098,
+          "margin_mae": 5.598,
+          "total": "W",
+          "total_edge": -6.537,
+          "total_mae": 1.963
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": 3.85,
+          "margin_mae": 4.35,
+          "total": "W",
+          "total_edge": -8.625,
+          "total_mae": 0.125
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": 4.861,
+          "margin_mae": 5.361,
+          "total": "W",
+          "total_edge": -7.024,
+          "total_mae": 1.476
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T00:00:00Z"
+    },
+    "372756": {
+      "away": "Michigan State",
+      "away_points": 79.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "Duke",
+      "home_points": 73.0,
+      "home_spread": -6.5,
+      "id": "372756",
+      "market_provider": "Bovada",
+      "market_total": 148.5,
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": 3.482,
+          "margin_mae": 15.982,
+          "total": "L",
+          "total_edge": -3.034,
+          "total_mae": 6.534
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": 8.758,
+          "margin_mae": 21.258,
+          "total": "W",
+          "total_edge": 5.459,
+          "total_mae": 1.959
+        },
+        "player_opp_v3": {
+          "ats": "L",
+          "ats_edge": 6.718,
+          "margin_mae": 19.218,
+          "total": "W",
+          "total_edge": 3.093,
+          "total_mae": 0.407
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": 6.67,
+          "margin_mae": 19.17,
+          "total": "W",
+          "total_edge": 5.297,
+          "total_mae": 1.797
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": 5.156,
+          "margin_mae": 17.656,
+          "total": "W",
+          "total_edge": 2.792,
+          "total_mae": 0.708
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T00:00:00Z"
+    },
+    "372757": {
+      "away": "Maryland Eastern Shore",
+      "away_points": 54.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "Boston College",
+      "home_points": 82.0,
+      "home_spread": -27.5,
+      "id": "372757",
+      "market_provider": "Draft Kings",
+      "market_total": 130.5,
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": -9.527,
+          "margin_mae": 10.027,
+          "total": "W",
+          "total_edge": 4.875,
+          "total_mae": 0.625
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": 3.561,
+          "margin_mae": 3.061,
+          "total": "W",
+          "total_edge": 7.85,
+          "total_mae": 2.35
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": 8.079,
+          "margin_mae": 7.579,
+          "total": "W",
+          "total_edge": 12.905,
+          "total_mae": 7.405
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": 5.719,
+          "margin_mae": 5.219,
+          "total": "W",
+          "total_edge": 9.079,
+          "total_mae": 3.579
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": 9.299,
+          "margin_mae": 8.799,
+          "total": "W",
+          "total_edge": 12.597,
+          "total_mae": 7.097
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T00:00:00Z"
+    },
+    "372758": {
+      "away": "Detroit Mercy",
+      "away_points": 55.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "Xavier",
+      "home_points": 100.0,
+      "home_spread": -32.0,
+      "id": "372758",
+      "market_provider": "Bovada",
+      "market_total": 158.5,
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": -3.376,
+          "margin_mae": 16.376,
+          "total": "W",
+          "total_edge": -17.298,
+          "total_mae": 13.798
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": 4.592,
+          "margin_mae": 8.408,
+          "total": "W",
+          "total_edge": -2.065,
+          "total_mae": 1.435
+        },
+        "player_opp_v3": {
+          "ats": "L",
+          "ats_edge": -1.272,
+          "margin_mae": 14.272,
+          "total": "W",
+          "total_edge": -1.944,
+          "total_mae": 1.556
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": 8.283,
+          "margin_mae": 4.717,
+          "total": "W",
+          "total_edge": -2.506,
+          "total_mae": 0.994
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": 2.954,
+          "margin_mae": 10.046,
+          "total": "W",
+          "total_edge": -1.657,
+          "total_mae": 1.843
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T00:00:00Z"
+    },
+    "372759": {
+      "away": "Bryant",
+      "away_points": 55.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "Providence",
+      "home_points": 78.0,
+      "home_spread": -28.5,
+      "id": "372759",
+      "market_provider": "Bovada",
+      "market_total": 147.5,
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": -14.673,
+          "margin_mae": 9.173,
+          "total": "W",
+          "total_edge": -8.857,
+          "total_mae": 5.643
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": -3.579,
+          "margin_mae": 1.921,
+          "total": "W",
+          "total_edge": -2.314,
+          "total_mae": 12.186
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": -0.795,
+          "margin_mae": 4.705,
+          "total": "L",
+          "total_edge": 0.179,
+          "total_mae": 14.679
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": -5.367,
+          "margin_mae": 0.133,
+          "total": "W",
+          "total_edge": -2.92,
+          "total_mae": 11.58
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": -2.039,
+          "margin_mae": 3.461,
+          "total": "W",
+          "total_edge": -0.228,
+          "total_mae": 14.272
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T00:00:00Z"
+    },
+    "372760": {
+      "away": "Delaware State",
+      "away_points": 78.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-10",
+      "home": "Georgetown",
+      "home_points": 83.0,
+      "home_spread": -27.5,
+      "id": "372760",
+      "market_provider": "Bovada",
+      "market_total": 142.5,
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": -13.233,
+          "margin_mae": 9.267,
+          "total": "L",
+          "total_edge": -0.957,
+          "total_mae": 19.457
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": -6.345,
+          "margin_mae": 16.155,
+          "total": "W",
+          "total_edge": 5.758,
+          "total_mae": 12.742
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": -4.985,
+          "margin_mae": 17.515,
+          "total": "W",
+          "total_edge": 7.231,
+          "total_mae": 11.269
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": -5.423,
+          "margin_mae": 17.077,
+          "total": "W",
+          "total_edge": 5.853,
+          "total_mae": 12.647
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": -4.331,
+          "margin_mae": 18.169,
+          "total": "W",
+          "total_edge": 6.871,
+          "total_mae": 11.629
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-10T23:30:00Z"
+    },
+    "372761": {
+      "away": "Creighton",
+      "away_points": 82.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "Kansas State",
+      "home_points": 89.0,
+      "home_spread": 3.0,
+      "id": "372761",
+      "market_provider": "Bovada",
+      "market_total": 158.0,
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": 12.962,
+          "margin_mae": 2.962,
+          "total": "L",
+          "total_edge": -14.208,
+          "total_mae": 27.208
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": -5.776,
+          "margin_mae": 15.776,
+          "total": "L",
+          "total_edge": -4.471,
+          "total_mae": 17.471
+        },
+        "player_opp_v3": {
+          "ats": "L",
+          "ats_edge": -8.413,
+          "margin_mae": 18.413,
+          "total": "L",
+          "total_edge": -5.316,
+          "total_mae": 18.316
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": -7.257,
+          "margin_mae": 17.257,
+          "total": "L",
+          "total_edge": -4.902,
+          "total_mae": 17.902
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": -9.773,
+          "margin_mae": 19.773,
+          "total": "L",
+          "total_edge": -6.221,
+          "total_mae": 19.221
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T02:00:00Z"
+    },
+    "372762": {
+      "away": "Florida",
+      "away_points": 81.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-10",
+      "home": "Florida State",
+      "home_points": 72.0,
+      "home_spread": 9.5,
+      "id": "372762",
+      "market_provider": "Bovada",
+      "market_total": 167.0,
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": 23.528,
+          "margin_mae": 23.028,
+          "total": "W",
+          "total_edge": -19.116,
+          "total_mae": 5.116
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": 10.645,
+          "margin_mae": 10.145,
+          "total": "W",
+          "total_edge": -14.844,
+          "total_mae": 0.844
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": 7.719,
+          "margin_mae": 7.219,
+          "total": "W",
+          "total_edge": -16.095,
+          "total_mae": 2.095
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": 14.157,
+          "margin_mae": 13.657,
+          "total": "W",
+          "total_edge": -14.435,
+          "total_mae": 0.435
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": 11.313,
+          "margin_mae": 10.813,
+          "total": "W",
+          "total_edge": -16.135,
+          "total_mae": 2.135
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-10T23:00:00Z"
+    },
     "374768": {
       "away": "USC",
       "away_points": 93.0,
@@ -2017,6 +3193,1686 @@
       "source": "Frozen CBBD odds; hypothetical -110 stakes",
       "tip_utc": "2026-11-09T23:30:00Z"
     },
+    "374817": {
+      "away": "Utah Tech",
+      "away_points": 86.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "Utah State",
+      "home_points": 118.0,
+      "home_spread": -25.5,
+      "id": "374817",
+      "market_provider": "Bovada",
+      "market_total": 155.0,
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": -5.332,
+          "margin_mae": 11.832,
+          "total": "L",
+          "total_edge": -7.609,
+          "total_mae": 56.609
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": -9.294,
+          "margin_mae": 15.794,
+          "total": "L",
+          "total_edge": -5.719,
+          "total_mae": 54.719
+        },
+        "player_opp_v3": {
+          "ats": "L",
+          "ats_edge": -9.973,
+          "margin_mae": 16.473,
+          "total": "L",
+          "total_edge": -7.316,
+          "total_mae": 56.316
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": -7.077,
+          "margin_mae": 13.577,
+          "total": "L",
+          "total_edge": -4.921,
+          "total_mae": 53.921
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": -8.167,
+          "margin_mae": 14.667,
+          "total": "L",
+          "total_edge": -8.089,
+          "total_mae": 57.089
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T02:00:00Z"
+    },
+    "374819": {
+      "away": "Washington State",
+      "away_points": 71.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "Duquesne",
+      "home_points": 72.0,
+      "home_spread": -5.0,
+      "id": "374819",
+      "market_provider": "Bovada",
+      "market_total": 148.5,
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": 12.756,
+          "margin_mae": 16.756,
+          "total": "W",
+          "total_edge": -7.681,
+          "total_mae": 2.181
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": 5.275,
+          "margin_mae": 9.275,
+          "total": "L",
+          "total_edge": 2.957,
+          "total_mae": 8.457
+        },
+        "player_opp_v3": {
+          "ats": "L",
+          "ats_edge": 4.427,
+          "margin_mae": 8.427,
+          "total": "L",
+          "total_edge": 3.861,
+          "total_mae": 9.361
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": 7.778,
+          "margin_mae": 11.778,
+          "total": "L",
+          "total_edge": 2.914,
+          "total_mae": 8.414
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": 6.709,
+          "margin_mae": 10.709,
+          "total": "L",
+          "total_edge": 3.455,
+          "total_mae": 8.955
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T00:00:00Z"
+    },
+    "374820": {
+      "away": "Winthrop",
+      "away_points": 79.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "Kennesaw State",
+      "home_points": 88.0,
+      "home_spread": -9.5,
+      "id": "374820",
+      "market_provider": "Bovada",
+      "market_total": 166.5,
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": 8.849,
+          "margin_mae": 9.349,
+          "total": "L",
+          "total_edge": -11.738,
+          "total_mae": 12.238
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": 12.147,
+          "margin_mae": 12.647,
+          "total": "W",
+          "total_edge": 0.473,
+          "total_mae": 0.027
+        },
+        "player_opp_v3": {
+          "ats": "L",
+          "ats_edge": 12.798,
+          "margin_mae": 13.298,
+          "total": "L",
+          "total_edge": -0.745,
+          "total_mae": 1.245
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": 9.552,
+          "margin_mae": 10.052,
+          "total": "W",
+          "total_edge": 0.273,
+          "total_mae": 0.227
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": 10.712,
+          "margin_mae": 11.212,
+          "total": "L",
+          "total_edge": -1.461,
+          "total_mae": 1.961
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T00:00:00Z"
+    },
+    "374821": {
+      "away": "Alcorn State",
+      "away_points": 57.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "Murray State",
+      "home_points": 94.0,
+      "home_spread": -26.5,
+      "id": "374821",
+      "market_provider": "Bovada",
+      "market_total": 164.5,
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": -2.844,
+          "margin_mae": 13.344,
+          "total": "W",
+          "total_edge": -12.716,
+          "total_mae": 0.784
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": 1.785,
+          "margin_mae": 8.715,
+          "total": "W",
+          "total_edge": -0.214,
+          "total_mae": 13.286
+        },
+        "player_opp_v3": {
+          "ats": "L",
+          "ats_edge": -0.632,
+          "margin_mae": 11.132,
+          "total": "W",
+          "total_edge": -3.42,
+          "total_mae": 10.08
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": 1.586,
+          "margin_mae": 8.914,
+          "total": "W",
+          "total_edge": -0.671,
+          "total_mae": 12.829
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": -0.258,
+          "margin_mae": 10.758,
+          "total": "W",
+          "total_edge": -3.84,
+          "total_mae": 9.66
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T01:00:00Z"
+    },
+    "374822": {
+      "away": "Houston Christian",
+      "away_points": 87.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "South Dakota",
+      "home_points": 76.0,
+      "home_spread": -2.5,
+      "id": "374822",
+      "market_provider": "Bovada",
+      "market_total": 156.5,
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": 5.508,
+          "margin_mae": 19.008,
+          "total": "L",
+          "total_edge": -3.375,
+          "total_mae": 9.875
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": 1.18,
+          "margin_mae": 14.68,
+          "total": "L",
+          "total_edge": -2.199,
+          "total_mae": 8.699
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": -0.234,
+          "margin_mae": 13.266,
+          "total": "L",
+          "total_edge": -4.275,
+          "total_mae": 10.775
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": 2.418,
+          "margin_mae": 15.918,
+          "total": "L",
+          "total_edge": -2.571,
+          "total_mae": 9.071
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": 0.268,
+          "margin_mae": 13.768,
+          "total": "L",
+          "total_edge": -5.34,
+          "total_mae": 11.84
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T01:00:00Z"
+    },
+    "374824": {
+      "away": "Little Rock",
+      "away_points": 69.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "New Mexico",
+      "home_points": 94.0,
+      "home_spread": -22.5,
+      "id": "374824",
+      "market_provider": "Bovada",
+      "market_total": 157.5,
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": -2.173,
+          "margin_mae": 4.673,
+          "total": "L",
+          "total_edge": -9.162,
+          "total_mae": 14.662
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": -1.994,
+          "margin_mae": 4.494,
+          "total": "W",
+          "total_edge": 4.92,
+          "total_mae": 0.58
+        },
+        "player_opp_v3": {
+          "ats": "L",
+          "ats_edge": -4.834,
+          "margin_mae": 7.334,
+          "total": "W",
+          "total_edge": 2.323,
+          "total_mae": 3.177
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": -3.582,
+          "margin_mae": 6.082,
+          "total": "W",
+          "total_edge": 4.424,
+          "total_mae": 1.076
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": -5.981,
+          "margin_mae": 8.481,
+          "total": "W",
+          "total_edge": 1.254,
+          "total_mae": 4.246
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T02:00:00Z"
+    },
+    "374825": {
+      "away": "La Salle",
+      "away_points": 59.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "Villanova",
+      "home_points": 80.0,
+      "home_spread": -23.0,
+      "id": "374825",
+      "market_provider": "Bovada",
+      "market_total": 159.5,
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": -4.18,
+          "margin_mae": 2.18,
+          "total": "W",
+          "total_edge": -11.567,
+          "total_mae": 8.933
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": -3.273,
+          "margin_mae": 1.273,
+          "total": "W",
+          "total_edge": -3.252,
+          "total_mae": 17.248
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": -4.543,
+          "margin_mae": 2.543,
+          "total": "W",
+          "total_edge": -2.502,
+          "total_mae": 17.998
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": -3.222,
+          "margin_mae": 1.222,
+          "total": "W",
+          "total_edge": -3.794,
+          "total_mae": 16.706
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": -4.783,
+          "margin_mae": 2.783,
+          "total": "W",
+          "total_edge": -3.631,
+          "total_mae": 16.869
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T00:00:00Z"
+    },
+    "374826": {
+      "away": "South Alabama",
+      "away_points": 69.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "UCF",
+      "home_points": 76.0,
+      "home_spread": -14.5,
+      "id": "374826",
+      "market_provider": "Draft Kings",
+      "market_total": 150.5,
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": 1.946,
+          "margin_mae": 9.446,
+          "total": "L",
+          "total_edge": 2.351,
+          "total_mae": 7.851
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": 5.594,
+          "margin_mae": 13.094,
+          "total": "L",
+          "total_edge": 17.625,
+          "total_mae": 23.125
+        },
+        "player_opp_v3": {
+          "ats": "L",
+          "ats_edge": 7.596,
+          "margin_mae": 15.096,
+          "total": "L",
+          "total_edge": 19.386,
+          "total_mae": 24.886
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": 7.841,
+          "margin_mae": 15.341,
+          "total": "L",
+          "total_edge": 17.523,
+          "total_mae": 23.023
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": 10.005,
+          "margin_mae": 17.505,
+          "total": "L",
+          "total_edge": 19.522,
+          "total_mae": 25.022
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T00:00:00Z"
+    },
+    "374827": {
+      "away": "Queens University",
+      "away_points": 82.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "BYU",
+      "home_points": 98.0,
+      "home_spread": -28.5,
+      "id": "374827",
+      "market_provider": "Draft Kings",
+      "market_total": 182.5,
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": -8.483,
+          "margin_mae": 4.017,
+          "total": "W",
+          "total_edge": -21.733,
+          "total_mae": 19.233
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": -5.528,
+          "margin_mae": 6.972,
+          "total": "W",
+          "total_edge": -7.967,
+          "total_mae": 5.467
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": -4.767,
+          "margin_mae": 7.733,
+          "total": "W",
+          "total_edge": -10.2,
+          "total_mae": 7.7
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": -4.274,
+          "margin_mae": 8.226,
+          "total": "W",
+          "total_edge": -8.105,
+          "total_mae": 5.605
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": -3.229,
+          "margin_mae": 9.271,
+          "total": "W",
+          "total_edge": -10.461,
+          "total_mae": 7.961
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T02:00:00Z"
+    },
+    "374828": {
+      "away": "Hofstra",
+      "away_points": 63.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "Arizona State",
+      "home_points": 85.0,
+      "home_spread": -16.5,
+      "id": "374828",
+      "market_provider": "Bovada",
+      "market_total": 133.5,
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": -2.389,
+          "margin_mae": 7.889,
+          "total": "W",
+          "total_edge": 7.151,
+          "total_mae": 7.349
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": 3.7,
+          "margin_mae": 1.8,
+          "total": "W",
+          "total_edge": 13.971,
+          "total_mae": 0.529
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": 5.578,
+          "margin_mae": 0.078,
+          "total": "W",
+          "total_edge": 15.255,
+          "total_mae": 0.755
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": 4.688,
+          "margin_mae": 0.812,
+          "total": "W",
+          "total_edge": 13.874,
+          "total_mae": 0.626
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": 6.601,
+          "margin_mae": 1.101,
+          "total": "W",
+          "total_edge": 14.502,
+          "total_mae": 0.002
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T02:00:00Z"
+    },
+    "374829": {
+      "away": "Weber State",
+      "away_points": 64.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "Utah",
+      "home_points": 85.0,
+      "home_spread": -18.5,
+      "id": "374829",
+      "market_provider": "Bovada",
+      "market_total": 155.0,
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": -0.167,
+          "margin_mae": 2.667,
+          "total": "W",
+          "total_edge": -9.421,
+          "total_mae": 3.421
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": 7.07,
+          "margin_mae": 4.57,
+          "total": "W",
+          "total_edge": -6.557,
+          "total_mae": 0.557
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": 7.579,
+          "margin_mae": 5.079,
+          "total": "W",
+          "total_edge": -5.376,
+          "total_mae": 0.624
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": 10.315,
+          "margin_mae": 7.815,
+          "total": "W",
+          "total_edge": -6.063,
+          "total_mae": 0.063
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": 10.85,
+          "margin_mae": 8.35,
+          "total": "W",
+          "total_edge": -5.158,
+          "total_mae": 0.842
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T02:00:00Z"
+    },
+    "374830": {
+      "away": "Montana",
+      "away_points": 58.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "San Francisco",
+      "home_points": 63.0,
+      "home_spread": -11.5,
+      "id": "374830",
+      "market_provider": "Bovada",
+      "market_total": 148.5,
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": 1.507,
+          "margin_mae": 8.007,
+          "total": "W",
+          "total_edge": -4.966,
+          "total_mae": 22.534
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": -2.619,
+          "margin_mae": 3.881,
+          "total": "W",
+          "total_edge": -3.548,
+          "total_mae": 23.952
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": -1.114,
+          "margin_mae": 5.386,
+          "total": "W",
+          "total_edge": -1.376,
+          "total_mae": 26.124
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": 1.169,
+          "margin_mae": 7.669,
+          "total": "W",
+          "total_edge": -2.536,
+          "total_mae": 24.964
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": 1.937,
+          "margin_mae": 8.437,
+          "total": "W",
+          "total_edge": -1.309,
+          "total_mae": 26.191
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T03:00:00Z"
+    },
+    "374831": {
+      "away": "Fairfield",
+      "away_points": 42.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "Wisconsin",
+      "home_points": 89.0,
+      "home_spread": -23.5,
+      "id": "374831",
+      "market_provider": "Bovada",
+      "market_total": 150.0,
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": -9.267,
+          "margin_mae": 32.767,
+          "total": "W",
+          "total_edge": -9.73,
+          "total_mae": 9.27
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": -8.885,
+          "margin_mae": 32.385,
+          "total": "W",
+          "total_edge": -2.853,
+          "total_mae": 16.147
+        },
+        "player_opp_v3": {
+          "ats": "L",
+          "ats_edge": -9.6,
+          "margin_mae": 33.1,
+          "total": "W",
+          "total_edge": -1.829,
+          "total_mae": 17.171
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": -11.308,
+          "margin_mae": 34.808,
+          "total": "W",
+          "total_edge": -3.933,
+          "total_mae": 15.067
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": -11.887,
+          "margin_mae": 35.387,
+          "total": "W",
+          "total_edge": -2.664,
+          "total_mae": 16.336
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T01:30:00Z"
+    },
+    "374832": {
+      "away": "NJIT",
+      "away_points": 64.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-10",
+      "home": "Rutgers",
+      "home_points": 101.0,
+      "home_spread": -24.5,
+      "id": "374832",
+      "market_provider": "Bovada",
+      "market_total": 143.5,
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": -7.782,
+          "margin_mae": 20.282,
+          "total": "L",
+          "total_edge": -8.679,
+          "total_mae": 30.179
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": -2.761,
+          "margin_mae": 15.261,
+          "total": "L",
+          "total_edge": -4.054,
+          "total_mae": 25.554
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": 0.571,
+          "margin_mae": 11.929,
+          "total": "W",
+          "total_edge": 1.725,
+          "total_mae": 19.775
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": -3.881,
+          "margin_mae": 16.381,
+          "total": "L",
+          "total_edge": -4.682,
+          "total_mae": 26.182
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": -0.46,
+          "margin_mae": 12.96,
+          "total": "W",
+          "total_edge": 0.439,
+          "total_mae": 21.061
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-10T23:30:00Z"
+    },
+    "374833": {
+      "away": "SE Louisiana",
+      "away_points": 51.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "Ole Miss",
+      "home_points": 91.0,
+      "home_spread": -25.5,
+      "id": "374833",
+      "market_provider": "Bovada",
+      "market_total": 147.5,
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": -4.264,
+          "margin_mae": 18.764,
+          "total": "L",
+          "total_edge": 0.084,
+          "total_mae": 5.584
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": -1.332,
+          "margin_mae": 15.832,
+          "total": "L",
+          "total_edge": 8.336,
+          "total_mae": 13.836
+        },
+        "player_opp_v3": {
+          "ats": "L",
+          "ats_edge": -2.263,
+          "margin_mae": 16.763,
+          "total": "L",
+          "total_edge": 7.11,
+          "total_mae": 12.61
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": -1.102,
+          "margin_mae": 15.602,
+          "total": "L",
+          "total_edge": 7.297,
+          "total_mae": 12.797
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": -1.761,
+          "margin_mae": 16.261,
+          "total": "L",
+          "total_edge": 5.83,
+          "total_mae": 11.33
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T01:30:00Z"
+    },
+    "374834": {
+      "away": "Bucknell",
+      "away_points": 61.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "Virginia",
+      "home_points": 95.0,
+      "home_spread": -37.5,
+      "id": "374834",
+      "market_provider": "Bovada",
+      "market_total": 148.5,
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": -11.305,
+          "margin_mae": 7.805,
+          "total": "W",
+          "total_edge": 1.831,
+          "total_mae": 5.669
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": -4.555,
+          "margin_mae": 1.055,
+          "total": "W",
+          "total_edge": 8.653,
+          "total_mae": 1.153
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": -4.52,
+          "margin_mae": 1.02,
+          "total": "W",
+          "total_edge": 8.062,
+          "total_mae": 0.562
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": -2.584,
+          "margin_mae": 0.916,
+          "total": "W",
+          "total_edge": 8.684,
+          "total_mae": 1.184
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": -2.607,
+          "margin_mae": 0.893,
+          "total": "W",
+          "total_edge": 7.962,
+          "total_mae": 0.462
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T02:00:00Z"
+    },
+    "374835": {
+      "away": "Virginia Tech",
+      "away_points": 93.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "Iowa",
+      "home_points": 88.0,
+      "home_spread": -5.0,
+      "id": "374835",
+      "market_provider": "Bovada",
+      "market_total": 142.5,
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": 3.662,
+          "margin_mae": 13.662,
+          "total": "L",
+          "total_edge": -1.454,
+          "total_mae": 39.954
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": -9.888,
+          "margin_mae": 0.112,
+          "total": "W",
+          "total_edge": 3.437,
+          "total_mae": 35.063
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": -12.194,
+          "margin_mae": 2.194,
+          "total": "W",
+          "total_edge": 1.425,
+          "total_mae": 37.075
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": -6.67,
+          "margin_mae": 3.33,
+          "total": "W",
+          "total_edge": 3.895,
+          "total_mae": 34.605
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": -8.968,
+          "margin_mae": 1.032,
+          "total": "W",
+          "total_edge": 0.734,
+          "total_mae": 37.766
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T00:00:00Z"
+    },
+    "374836": {
+      "away": "Harvard",
+      "away_points": 70.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "Northeastern",
+      "home_points": 74.0,
+      "home_spread": 4.0,
+      "id": "374836",
+      "market_provider": "Bovada",
+      "market_total": 146.5,
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": 6.825,
+          "margin_mae": 1.175,
+          "total": "W",
+          "total_edge": -4.98,
+          "total_mae": 2.48
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": -1.983,
+          "margin_mae": 9.983,
+          "total": "W",
+          "total_edge": -2.552,
+          "total_mae": 0.052
+        },
+        "player_opp_v3": {
+          "ats": "L",
+          "ats_edge": -3.926,
+          "margin_mae": 11.926,
+          "total": "W",
+          "total_edge": -3.655,
+          "total_mae": 1.155
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": -4.788,
+          "margin_mae": 12.788,
+          "total": "W",
+          "total_edge": -3.718,
+          "total_mae": 1.218
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": -6.87,
+          "margin_mae": 14.87,
+          "total": "W",
+          "total_edge": -4.82,
+          "total_mae": 2.32
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T00:00:00Z"
+    },
+    "374837": {
+      "away": "Eastern Kentucky",
+      "away_points": 71.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "Georgia Tech",
+      "home_points": 85.0,
+      "home_spread": -16.5,
+      "id": "374837",
+      "market_provider": "Bovada",
+      "market_total": 164.5,
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": -9.007,
+          "margin_mae": 6.507,
+          "total": "W",
+          "total_edge": -13.705,
+          "total_mae": 5.205
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": 1.118,
+          "margin_mae": 3.618,
+          "total": "W",
+          "total_edge": -6.14,
+          "total_mae": 2.36
+        },
+        "player_opp_v3": {
+          "ats": "L",
+          "ats_edge": 2.676,
+          "margin_mae": 5.176,
+          "total": "W",
+          "total_edge": -5.193,
+          "total_mae": 3.307
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": 1.007,
+          "margin_mae": 3.507,
+          "total": "W",
+          "total_edge": -6.355,
+          "total_mae": 2.145
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": 2.028,
+          "margin_mae": 4.528,
+          "total": "W",
+          "total_edge": -6.019,
+          "total_mae": 2.481
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T00:00:00Z"
+    },
+    "374838": {
+      "away": "Nicholls",
+      "away_points": 63.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "Tulane",
+      "home_points": 77.0,
+      "home_spread": -7.5,
+      "id": "374838",
+      "market_provider": "Bovada",
+      "market_total": 151.5,
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": 1.165,
+          "margin_mae": 5.335,
+          "total": "L",
+          "total_edge": 1.634,
+          "total_mae": 13.134
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": 2.566,
+          "margin_mae": 3.934,
+          "total": "L",
+          "total_edge": 9.929,
+          "total_mae": 21.429
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": 2.516,
+          "margin_mae": 3.984,
+          "total": "L",
+          "total_edge": 11.116,
+          "total_mae": 22.616
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": 6.029,
+          "margin_mae": 0.471,
+          "total": "L",
+          "total_edge": 10.341,
+          "total_mae": 21.841
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": 5.112,
+          "margin_mae": 1.388,
+          "total": "L",
+          "total_edge": 10.433,
+          "total_mae": 21.933
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T00:30:00Z"
+    },
+    "374839": {
+      "away": "Memphis",
+      "away_points": 81.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "Vanderbilt",
+      "home_points": 105.0,
+      "home_spread": -16.0,
+      "id": "374839",
+      "market_provider": "Bovada",
+      "market_total": 160.0,
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": 2.106,
+          "margin_mae": 5.894,
+          "total": "L",
+          "total_edge": -15.841,
+          "total_mae": 41.841
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": -6.24,
+          "margin_mae": 14.24,
+          "total": "L",
+          "total_edge": -0.163,
+          "total_mae": 26.163
+        },
+        "player_opp_v3": {
+          "ats": "L",
+          "ats_edge": -8.816,
+          "margin_mae": 16.816,
+          "total": "L",
+          "total_edge": -1.523,
+          "total_mae": 27.523
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": -4.818,
+          "margin_mae": 12.818,
+          "total": "L",
+          "total_edge": -0.128,
+          "total_mae": 26.128
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": -7.505,
+          "margin_mae": 15.505,
+          "total": "L",
+          "total_edge": -2.361,
+          "total_mae": 28.361
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T00:15:00Z"
+    },
+    "374840": {
+      "away": "Prairie View A&M",
+      "away_points": 63.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "SMU",
+      "home_points": 98.0,
+      "home_spread": -24.5,
+      "id": "374840",
+      "market_provider": "Bovada",
+      "market_total": 160.5,
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": -12.651,
+          "margin_mae": 23.151,
+          "total": "L",
+          "total_edge": -9.52,
+          "total_mae": 10.02
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": -4.563,
+          "margin_mae": 15.063,
+          "total": "L",
+          "total_edge": -2.321,
+          "total_mae": 2.821
+        },
+        "player_opp_v3": {
+          "ats": "L",
+          "ats_edge": -1.886,
+          "margin_mae": 12.386,
+          "total": "L",
+          "total_edge": -2.253,
+          "total_mae": 2.753
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": -2.82,
+          "margin_mae": 13.32,
+          "total": "L",
+          "total_edge": -1.587,
+          "total_mae": 2.087
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": -0.262,
+          "margin_mae": 10.762,
+          "total": "L",
+          "total_edge": -2.344,
+          "total_mae": 2.844
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T01:00:00Z"
+    },
+    "374841": {
+      "away": "Presbyterian",
+      "away_points": 60.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "NC State",
+      "home_points": 94.0,
+      "home_spread": -19.5,
+      "id": "374841",
+      "market_provider": "Bovada",
+      "market_total": 147.5,
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": -0.519,
+          "margin_mae": 15.019,
+          "total": "L",
+          "total_edge": -1.685,
+          "total_mae": 8.185
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": -0.321,
+          "margin_mae": 14.821,
+          "total": "W",
+          "total_edge": 5.952,
+          "total_mae": 0.548
+        },
+        "player_opp_v3": {
+          "ats": "L",
+          "ats_edge": -1.044,
+          "margin_mae": 15.544,
+          "total": "W",
+          "total_edge": 5.437,
+          "total_mae": 1.063
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": 1.501,
+          "margin_mae": 12.999,
+          "total": "W",
+          "total_edge": 5.783,
+          "total_mae": 0.717
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": 0.522,
+          "margin_mae": 13.978,
+          "total": "W",
+          "total_edge": 4.52,
+          "total_mae": 1.98
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T00:00:00Z"
+    },
+    "374842": {
+      "away": "UL Monroe",
+      "away_points": 92.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "TCU",
+      "home_points": 100.0,
+      "home_spread": -35.0,
+      "id": "374842",
+      "market_provider": "Bovada",
+      "market_total": 160.5,
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": -18.298,
+          "margin_mae": 8.702,
+          "total": "L",
+          "total_edge": -9.143,
+          "total_mae": 40.643
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": -4.42,
+          "margin_mae": 22.58,
+          "total": "W",
+          "total_edge": 6.82,
+          "total_mae": 24.68
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": -2.902,
+          "margin_mae": 24.098,
+          "total": "W",
+          "total_edge": 5.373,
+          "total_mae": 26.127
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": -6.295,
+          "margin_mae": 20.705,
+          "total": "W",
+          "total_edge": 6.096,
+          "total_mae": 25.404
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": -3.534,
+          "margin_mae": 23.466,
+          "total": "W",
+          "total_edge": 5.562,
+          "total_mae": 25.938
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T02:00:00Z"
+    },
+    "374844": {
+      "away": "Loyola Marymount",
+      "away_points": 69.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "Troy",
+      "home_points": 74.0,
+      "home_spread": 1.0,
+      "id": "374844",
+      "market_provider": "Bovada",
+      "market_total": 146.5,
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": 5.287,
+          "margin_mae": 0.713,
+          "total": "L",
+          "total_edge": 1.488,
+          "total_mae": 4.988
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": 0.59,
+          "margin_mae": 5.41,
+          "total": "L",
+          "total_edge": 8.487,
+          "total_mae": 11.987
+        },
+        "player_opp_v3": {
+          "ats": "L",
+          "ats_edge": -1.112,
+          "margin_mae": 7.112,
+          "total": "L",
+          "total_edge": 6.546,
+          "total_mae": 10.046
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": -2.581,
+          "margin_mae": 8.581,
+          "total": "L",
+          "total_edge": 8.332,
+          "total_mae": 11.832
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": -4.604,
+          "margin_mae": 10.604,
+          "total": "L",
+          "total_edge": 5.79,
+          "total_mae": 9.29
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T00:00:00Z"
+    },
+    "374845": {
+      "away": "Bradley",
+      "away_points": 45.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "Davidson",
+      "home_points": 62.0,
+      "home_spread": -11.0,
+      "id": "374845",
+      "market_provider": "Bovada",
+      "market_total": 139.0,
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": 1.087,
+          "margin_mae": 4.913,
+          "total": "W",
+          "total_edge": -0.272,
+          "total_mae": 31.728
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": -1.315,
+          "margin_mae": 7.315,
+          "total": "L",
+          "total_edge": 3.451,
+          "total_mae": 35.451
+        },
+        "player_opp_v3": {
+          "ats": "L",
+          "ats_edge": -1.295,
+          "margin_mae": 7.295,
+          "total": "L",
+          "total_edge": 3.04,
+          "total_mae": 35.04
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": 0.405,
+          "margin_mae": 5.595,
+          "total": "L",
+          "total_edge": 3.617,
+          "total_mae": 35.617
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": 0.371,
+          "margin_mae": 5.629,
+          "total": "L",
+          "total_edge": 2.483,
+          "total_mae": 34.483
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T00:00:00Z"
+    },
+    "374847": {
+      "away": "Mercer",
+      "away_points": 97.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "Georgia Southern",
+      "home_points": 91.0,
+      "home_spread": -1.0,
+      "id": "374847",
+      "market_provider": "Bovada",
+      "market_total": 164.0,
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": 9.288,
+          "margin_mae": 16.288,
+          "total": "L",
+          "total_edge": -17.621,
+          "total_mae": 41.621
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": 1.35,
+          "margin_mae": 8.35,
+          "total": "L",
+          "total_edge": -13.338,
+          "total_mae": 37.338
+        },
+        "player_opp_v3": {
+          "ats": "L",
+          "ats_edge": 0.693,
+          "margin_mae": 7.693,
+          "total": "L",
+          "total_edge": -15.237,
+          "total_mae": 39.237
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": -0.224,
+          "margin_mae": 6.776,
+          "total": "L",
+          "total_edge": -14.549,
+          "total_mae": 38.549
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": -0.238,
+          "margin_mae": 6.762,
+          "total": "L",
+          "total_edge": -16.257,
+          "total_mae": 40.257
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T00:00:00Z"
+    },
+    "374848": {
+      "away": "Maine",
+      "away_points": 65.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "Rhode Island",
+      "home_points": 71.0,
+      "home_spread": -20.5,
+      "id": "374848",
+      "market_provider": "Bovada",
+      "market_total": 140.5,
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": -0.655,
+          "margin_mae": 13.845,
+          "total": "L",
+          "total_edge": 3.805,
+          "total_mae": 8.305
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": -0.18,
+          "margin_mae": 14.32,
+          "total": "L",
+          "total_edge": 2.873,
+          "total_mae": 7.373
+        },
+        "player_opp_v3": {
+          "ats": "L",
+          "ats_edge": 1.097,
+          "margin_mae": 15.597,
+          "total": "L",
+          "total_edge": 3.189,
+          "total_mae": 7.689
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": 2.128,
+          "margin_mae": 16.628,
+          "total": "L",
+          "total_edge": 3.546,
+          "total_mae": 8.046
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": 3.42,
+          "margin_mae": 17.92,
+          "total": "L",
+          "total_edge": 3.029,
+          "total_mae": 7.529
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T00:00:00Z"
+    },
+    "374849": {
+      "away": "Texas State",
+      "away_points": 72.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "UT Rio Grande Valley",
+      "home_points": 65.0,
+      "home_spread": 6.5,
+      "id": "374849",
+      "market_provider": "Bovada",
+      "market_total": 143.5,
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": 15.384,
+          "margin_mae": 15.884,
+          "total": "L",
+          "total_edge": 0.61,
+          "total_mae": 7.11
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": -5.502,
+          "margin_mae": 5.002,
+          "total": "L",
+          "total_edge": 1.166,
+          "total_mae": 7.666
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": -9.514,
+          "margin_mae": 9.014,
+          "total": "W",
+          "total_edge": -3.088,
+          "total_mae": 3.412
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": -8.725,
+          "margin_mae": 8.225,
+          "total": "L",
+          "total_edge": 0.599,
+          "total_mae": 7.099
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": -12.521,
+          "margin_mae": 12.021,
+          "total": "W",
+          "total_edge": -4.143,
+          "total_mae": 2.357
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T00:30:00Z"
+    },
+    "374853": {
+      "away": "Belmont",
+      "away_points": 75.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "Lipscomb",
+      "home_points": 88.0,
+      "home_spread": 3.5,
+      "id": "374853",
+      "market_provider": "Bovada",
+      "market_total": 155.5,
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": 10.52,
+          "margin_mae": 5.98,
+          "total": "L",
+          "total_edge": -14.179,
+          "total_mae": 21.679
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": 5.956,
+          "margin_mae": 10.544,
+          "total": "L",
+          "total_edge": -12.115,
+          "total_mae": 19.615
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": 4.829,
+          "margin_mae": 11.671,
+          "total": "L",
+          "total_edge": -11.941,
+          "total_mae": 19.441
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": 5.702,
+          "margin_mae": 10.798,
+          "total": "L",
+          "total_edge": -13.024,
+          "total_mae": 20.524
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": 4.685,
+          "margin_mae": 11.815,
+          "total": "L",
+          "total_edge": -12.091,
+          "total_mae": 19.591
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T01:00:00Z"
+    },
     "377981": {
       "away": "UT Arlington",
       "away_points": 62.0,
@@ -2128,6 +4984,286 @@
       },
       "source": "Frozen CBBD odds; hypothetical -110 stakes",
       "tip_utc": "2026-11-10T04:59:00Z"
+    },
+    "377988": {
+      "away": "Georgia State",
+      "away_points": 92.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "Fresno State",
+      "home_points": 95.0,
+      "home_spread": -6.0,
+      "id": "377988",
+      "market_provider": "Bovada",
+      "market_total": 148.5,
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": 0.872,
+          "margin_mae": 3.872,
+          "total": "L",
+          "total_edge": -1.322,
+          "total_mae": 39.822
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": -10.274,
+          "margin_mae": 7.274,
+          "total": "W",
+          "total_edge": 8.031,
+          "total_mae": 30.469
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": -10.302,
+          "margin_mae": 7.302,
+          "total": "W",
+          "total_edge": 6.428,
+          "total_mae": 32.072
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": -10.724,
+          "margin_mae": 7.724,
+          "total": "W",
+          "total_edge": 7.296,
+          "total_mae": 31.204
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": -10.536,
+          "margin_mae": 7.536,
+          "total": "W",
+          "total_edge": 5.285,
+          "total_mae": 33.215
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T02:00:00Z"
+    },
+    "377989": {
+      "away": "Green Bay",
+      "away_points": 76.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "Northern Iowa",
+      "home_points": 89.0,
+      "home_spread": -3.5,
+      "id": "377989",
+      "market_provider": "Bovada",
+      "market_total": 151.0,
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": 3.281,
+          "margin_mae": 6.219,
+          "total": "L",
+          "total_edge": -1.528,
+          "total_mae": 15.528
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": 2.692,
+          "margin_mae": 6.808,
+          "total": "W",
+          "total_edge": 7.736,
+          "total_mae": 6.264
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": 1.58,
+          "margin_mae": 7.92,
+          "total": "W",
+          "total_edge": 5.238,
+          "total_mae": 8.762
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": 0.231,
+          "margin_mae": 9.269,
+          "total": "W",
+          "total_edge": 6.028,
+          "total_mae": 7.972
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": -0.248,
+          "margin_mae": 9.748,
+          "total": "W",
+          "total_edge": 3.984,
+          "total_mae": 10.016
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T01:00:00Z"
+    },
+    "377990": {
+      "away": "Evansville",
+      "away_points": 68.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "Middle Tennessee",
+      "home_points": 73.0,
+      "home_spread": -7.5,
+      "id": "377990",
+      "market_provider": "Bovada",
+      "market_total": 144.5,
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": 2.032,
+          "margin_mae": 4.532,
+          "total": "L",
+          "total_edge": 3.076,
+          "total_mae": 6.576
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": 0.325,
+          "margin_mae": 2.825,
+          "total": "L",
+          "total_edge": 9.259,
+          "total_mae": 12.759
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": -0.653,
+          "margin_mae": 1.847,
+          "total": "L",
+          "total_edge": 7.751,
+          "total_mae": 11.251
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": 1.598,
+          "margin_mae": 4.098,
+          "total": "L",
+          "total_edge": 9.446,
+          "total_mae": 12.946
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": 0.991,
+          "margin_mae": 3.491,
+          "total": "L",
+          "total_edge": 7.742,
+          "total_mae": 11.242
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T00:30:00Z"
+    },
+    "377992": {
+      "away": "UT Martin",
+      "away_points": 82.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "Arkansas State",
+      "home_points": 65.0,
+      "home_spread": -6.5,
+      "id": "377992",
+      "market_provider": "Bovada",
+      "market_total": 153.5,
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": 5.001,
+          "margin_mae": 28.501,
+          "total": "W",
+          "total_edge": -0.352,
+          "total_mae": 6.148
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": 11.722,
+          "margin_mae": 35.222,
+          "total": "L",
+          "total_edge": 3.629,
+          "total_mae": 10.129
+        },
+        "player_opp_v3": {
+          "ats": "L",
+          "ats_edge": 11.487,
+          "margin_mae": 34.987,
+          "total": "L",
+          "total_edge": 4.026,
+          "total_mae": 10.526
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": 11.163,
+          "margin_mae": 34.663,
+          "total": "L",
+          "total_edge": 3.445,
+          "total_mae": 9.945
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": 11.458,
+          "margin_mae": 34.958,
+          "total": "L",
+          "total_edge": 4.474,
+          "total_mae": 10.974
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T01:00:00Z"
+    },
+    "377993": {
+      "away": "Wright State",
+      "away_points": 76.0,
+      "captured_utc": "2026-11-10T14:10:53.330872Z",
+      "date": "2026-11-11",
+      "home": "Toledo",
+      "home_points": 68.0,
+      "home_spread": 2.0,
+      "id": "377993",
+      "market_provider": "Bovada",
+      "market_total": 159.5,
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": 6.384,
+          "margin_mae": 12.384,
+          "total": "W",
+          "total_edge": -9.508,
+          "total_mae": 5.992
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": 0.042,
+          "margin_mae": 6.042,
+          "total": "W",
+          "total_edge": -4.834,
+          "total_mae": 10.666
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": -1.066,
+          "margin_mae": 4.934,
+          "total": "W",
+          "total_edge": -6.636,
+          "total_mae": 8.864
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": 0.192,
+          "margin_mae": 6.192,
+          "total": "W",
+          "total_edge": -4.872,
+          "total_mae": 10.628
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": -0.856,
+          "margin_mae": 5.144,
+          "total": "W",
+          "total_edge": -6.484,
+          "total_mae": 9.016
+        }
+      },
+      "source": "Frozen CBBD odds; hypothetical -110 stakes",
+      "tip_utc": "2026-11-11T00:00:00Z"
     }
   },
   "untracked": {
@@ -2143,12 +5279,25 @@
     "374813": "No pre-tip frozen observation",
     "374814": "No pre-tip frozen observation",
     "374815": "No pre-tip frozen observation",
+    "374816": "No pre-tip frozen observation",
+    "374818": "No pre-tip frozen observation",
+    "374823": "No pre-tip frozen observation",
+    "374843": "No pre-tip frozen observation",
+    "374846": "No pre-tip frozen observation",
+    "374850": "No pre-tip frozen observation",
+    "374851": "No pre-tip frozen observation",
+    "374852": "No pre-tip frozen observation",
     "377979": "No pre-tip frozen observation",
     "377980": "No pre-tip frozen observation",
     "377982": "No pre-tip frozen observation",
     "377983": "No pre-tip frozen observation",
     "377984": "No pre-tip frozen observation",
-    "377985": "No pre-tip frozen observation"
+    "377985": "No pre-tip frozen observation",
+    "377987": "No pre-tip frozen observation",
+    "377991": "No pre-tip frozen observation",
+    "377994": "No pre-tip frozen observation",
+    "377995": "No pre-tip frozen observation",
+    "377996": "No pre-tip frozen observation"
   },
   "week": "2026-W46"
 }
