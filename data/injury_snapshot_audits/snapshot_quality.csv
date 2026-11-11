@@ -43,3 +43,4 @@ injuries_2026_week_09_20261108T130359Z.csv,2026-11-08T13:03:59+00:00,2026,9,362,
 injuries_2026_week_09_20261108T185644Z.csv,2026-11-08T18:56:44+00:00,2026,9,362,362,0,0,30,ARI;ATL;BAL;BUF;CAR;CHI;CIN;CLE;DAL;DEN;DET;GB;HOU;IND;JAX;KC;LA;LAC;LV;MIA;MIN;NE;NO;NYG;NYJ;PHI;SEA;SF;TB;WAS,valid_structure,True,Structure valid; team/player coverage is not certified by this check
 injuries_2026_week_10_20261111T072931Z.csv,2026-11-11T07:29:31+00:00,2026,10,20,20,0,0,2,NYG;WAS,valid_structure,True,Structure valid; team/player coverage is not certified by this check
 injuries_2026_week_10_20261111T132501Z.csv,2026-11-11T13:25:01+00:00,2026,10,20,20,0,0,2,NYG;WAS,valid_structure,True,Structure valid; team/player coverage is not certified by this check
+injuries_2026_week_10_20261111T191230Z.csv,2026-11-11T19:12:30+00:00,2026,10,20,20,0,0,2,NYG;WAS,valid_structure,True,Structure valid; team/player coverage is not certified by this check
