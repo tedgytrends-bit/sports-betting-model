@@ -3,236 +3,236 @@
     "baseline": {
       "ats": {
         "0": {
-          "decided_win_rate_pct": 51.41,
-          "games_with_model": 256,
-          "losses": 121,
-          "model_mae_points": 11.523,
-          "pushes": 5,
-          "roi_minus_110_pct": -1.83,
-          "selections": 254,
-          "wins": 128
+          "decided_win_rate_pct": 50.68,
+          "games_with_model": 302,
+          "losses": 145,
+          "model_mae_points": 11.661,
+          "pushes": 6,
+          "roi_minus_110_pct": -3.18,
+          "selections": 300,
+          "wins": 149
         },
         "3.5": {
-          "decided_win_rate_pct": 52.46,
-          "games_with_model": 256,
-          "losses": 87,
-          "model_mae_points": 11.523,
+          "decided_win_rate_pct": 51.87,
+          "games_with_model": 302,
+          "losses": 103,
+          "model_mae_points": 11.661,
           "pushes": 3,
-          "roi_minus_110_pct": 0.15,
-          "selections": 186,
-          "wins": 96
+          "roi_minus_110_pct": -0.96,
+          "selections": 217,
+          "wins": 111
         }
       },
       "total": {
         "0": {
-          "decided_win_rate_pct": 47.06,
-          "games_with_model": 256,
-          "losses": 135,
-          "model_mae_points": 15.706,
+          "decided_win_rate_pct": 47.51,
+          "games_with_model": 302,
+          "losses": 158,
+          "model_mae_points": 15.292,
           "pushes": 1,
-          "roi_minus_110_pct": -10.12,
-          "selections": 256,
-          "wins": 120
+          "roi_minus_110_pct": -9.27,
+          "selections": 302,
+          "wins": 143
         },
         "3.5": {
-          "decided_win_rate_pct": 48.13,
-          "games_with_model": 256,
-          "losses": 97,
-          "model_mae_points": 15.706,
+          "decided_win_rate_pct": 49.54,
+          "games_with_model": 302,
+          "losses": 110,
+          "model_mae_points": 15.292,
           "pushes": 1,
-          "roi_minus_110_pct": -8.08,
-          "selections": 188,
-          "wins": 90
+          "roi_minus_110_pct": -5.4,
+          "selections": 219,
+          "wins": 108
         }
       }
     },
     "player_all_v4": {
       "ats": {
         "0": {
-          "decided_win_rate_pct": 53.62,
-          "games_with_model": 213,
-          "losses": 96,
-          "model_mae_points": 9.999,
-          "pushes": 4,
-          "roi_minus_110_pct": 2.33,
-          "selections": 211,
-          "wins": 111
+          "decided_win_rate_pct": 54.76,
+          "games_with_model": 259,
+          "losses": 114,
+          "model_mae_points": 10.001,
+          "pushes": 5,
+          "roi_minus_110_pct": 4.46,
+          "selections": 257,
+          "wins": 138
         },
         "3.5": {
-          "decided_win_rate_pct": 57.03,
-          "games_with_model": 213,
-          "losses": 55,
-          "model_mae_points": 9.999,
-          "pushes": 0,
-          "roi_minus_110_pct": 8.88,
-          "selections": 128,
-          "wins": 73
+          "decided_win_rate_pct": 57.14,
+          "games_with_model": 259,
+          "losses": 66,
+          "model_mae_points": 10.001,
+          "pushes": 1,
+          "roi_minus_110_pct": 9.03,
+          "selections": 155,
+          "wins": 88
         }
       },
       "total": {
         "0": {
-          "decided_win_rate_pct": 54.25,
-          "games_with_model": 213,
-          "losses": 97,
-          "model_mae_points": 13.304,
+          "decided_win_rate_pct": 55.04,
+          "games_with_model": 259,
+          "losses": 116,
+          "model_mae_points": 13.145,
           "pushes": 1,
-          "roi_minus_110_pct": 3.54,
-          "selections": 213,
-          "wins": 115
+          "roi_minus_110_pct": 5.05,
+          "selections": 259,
+          "wins": 142
         },
         "3.5": {
-          "decided_win_rate_pct": 59.83,
-          "games_with_model": 213,
-          "losses": 47,
-          "model_mae_points": 13.304,
+          "decided_win_rate_pct": 59.86,
+          "games_with_model": 259,
+          "losses": 59,
+          "model_mae_points": 13.145,
           "pushes": 1,
-          "roi_minus_110_pct": 14.1,
-          "selections": 118,
-          "wins": 70
+          "roi_minus_110_pct": 14.19,
+          "selections": 148,
+          "wins": 88
         }
       }
     },
     "player_opp_v3": {
       "ats": {
         "0": {
-          "decided_win_rate_pct": 53.14,
-          "games_with_model": 213,
-          "losses": 97,
-          "model_mae_points": 10.291,
-          "pushes": 4,
-          "roi_minus_110_pct": 1.42,
-          "selections": 211,
-          "wins": 110
+          "decided_win_rate_pct": 55.56,
+          "games_with_model": 259,
+          "losses": 112,
+          "model_mae_points": 10.119,
+          "pushes": 5,
+          "roi_minus_110_pct": 5.94,
+          "selections": 257,
+          "wins": 140
         },
         "3.5": {
-          "decided_win_rate_pct": 54.2,
-          "games_with_model": 213,
-          "losses": 60,
-          "model_mae_points": 10.291,
-          "pushes": 2,
-          "roi_minus_110_pct": 3.42,
-          "selections": 133,
-          "wins": 71
+          "decided_win_rate_pct": 56.05,
+          "games_with_model": 259,
+          "losses": 69,
+          "model_mae_points": 10.119,
+          "pushes": 3,
+          "roi_minus_110_pct": 6.88,
+          "selections": 160,
+          "wins": 88
         }
       },
       "total": {
         "0": {
-          "decided_win_rate_pct": 52.83,
-          "games_with_model": 213,
-          "losses": 100,
-          "model_mae_points": 13.691,
+          "decided_win_rate_pct": 54.26,
+          "games_with_model": 259,
+          "losses": 118,
+          "model_mae_points": 13.448,
           "pushes": 1,
-          "roi_minus_110_pct": 0.85,
-          "selections": 213,
-          "wins": 112
+          "roi_minus_110_pct": 3.58,
+          "selections": 259,
+          "wins": 140
         },
         "3.5": {
-          "decided_win_rate_pct": 57.02,
-          "games_with_model": 213,
-          "losses": 52,
-          "model_mae_points": 13.691,
+          "decided_win_rate_pct": 58.62,
+          "games_with_model": 259,
+          "losses": 60,
+          "model_mae_points": 13.448,
           "pushes": 1,
-          "roi_minus_110_pct": 8.79,
-          "selections": 122,
-          "wins": 69
+          "roi_minus_110_pct": 11.83,
+          "selections": 146,
+          "wins": 85
         }
       }
     },
     "player_rot_v4": {
       "ats": {
         "0": {
-          "decided_win_rate_pct": 55.56,
-          "games_with_model": 213,
-          "losses": 92,
-          "model_mae_points": 10.146,
-          "pushes": 4,
-          "roi_minus_110_pct": 5.95,
-          "selections": 211,
-          "wins": 115
+          "decided_win_rate_pct": 56.35,
+          "games_with_model": 259,
+          "losses": 110,
+          "model_mae_points": 10.103,
+          "pushes": 5,
+          "roi_minus_110_pct": 7.43,
+          "selections": 257,
+          "wins": 142
         },
         "3.5": {
-          "decided_win_rate_pct": 55.88,
-          "games_with_model": 213,
-          "losses": 60,
-          "model_mae_points": 10.146,
-          "pushes": 1,
-          "roi_minus_110_pct": 6.64,
-          "selections": 137,
-          "wins": 76
+          "decided_win_rate_pct": 56.17,
+          "games_with_model": 259,
+          "losses": 71,
+          "model_mae_points": 10.103,
+          "pushes": 2,
+          "roi_minus_110_pct": 7.15,
+          "selections": 164,
+          "wins": 91
         }
       },
       "total": {
         "0": {
-          "decided_win_rate_pct": 55.66,
-          "games_with_model": 213,
-          "losses": 94,
-          "model_mae_points": 13.343,
+          "decided_win_rate_pct": 56.2,
+          "games_with_model": 259,
+          "losses": 113,
+          "model_mae_points": 13.159,
           "pushes": 1,
-          "roi_minus_110_pct": 6.23,
-          "selections": 213,
-          "wins": 118
+          "roi_minus_110_pct": 7.27,
+          "selections": 259,
+          "wins": 145
         },
         "3.5": {
-          "decided_win_rate_pct": 59.83,
-          "games_with_model": 213,
-          "losses": 47,
-          "model_mae_points": 13.343,
+          "decided_win_rate_pct": 60.96,
+          "games_with_model": 259,
+          "losses": 57,
+          "model_mae_points": 13.159,
           "pushes": 1,
-          "roi_minus_110_pct": 14.1,
-          "selections": 118,
-          "wins": 70
+          "roi_minus_110_pct": 16.26,
+          "selections": 147,
+          "wins": 89
         }
       }
     },
     "player_v2": {
       "ats": {
         "0": {
-          "decided_win_rate_pct": 54.62,
-          "games_with_model": 256,
-          "losses": 113,
-          "model_mae_points": 10.266,
-          "pushes": 5,
-          "roi_minus_110_pct": 4.19,
-          "selections": 254,
-          "wins": 136
+          "decided_win_rate_pct": 55.78,
+          "games_with_model": 302,
+          "losses": 130,
+          "model_mae_points": 10.131,
+          "pushes": 6,
+          "roi_minus_110_pct": 6.36,
+          "selections": 300,
+          "wins": 164
         },
         "3.5": {
-          "decided_win_rate_pct": 56.52,
-          "games_with_model": 256,
-          "losses": 70,
-          "model_mae_points": 10.266,
-          "pushes": 2,
-          "roi_minus_110_pct": 7.81,
-          "selections": 163,
-          "wins": 91
+          "decided_win_rate_pct": 57.75,
+          "games_with_model": 302,
+          "losses": 79,
+          "model_mae_points": 10.131,
+          "pushes": 3,
+          "roi_minus_110_pct": 10.1,
+          "selections": 190,
+          "wins": 108
         }
       },
       "total": {
         "0": {
-          "decided_win_rate_pct": 51.76,
-          "games_with_model": 256,
-          "losses": 123,
-          "model_mae_points": 14.039,
+          "decided_win_rate_pct": 53.82,
+          "games_with_model": 302,
+          "losses": 139,
+          "model_mae_points": 13.771,
           "pushes": 1,
-          "roi_minus_110_pct": -1.17,
-          "selections": 256,
-          "wins": 132
+          "roi_minus_110_pct": 2.74,
+          "selections": 302,
+          "wins": 162
         },
         "3.5": {
-          "decided_win_rate_pct": 54.36,
-          "games_with_model": 256,
-          "losses": 68,
-          "model_mae_points": 14.039,
+          "decided_win_rate_pct": 56.07,
+          "games_with_model": 302,
+          "losses": 76,
+          "model_mae_points": 13.771,
           "pushes": 1,
-          "roi_minus_110_pct": 3.76,
-          "selections": 150,
-          "wins": 81
+          "roi_minus_110_pct": 7.0,
+          "selections": 174,
+          "wins": 97
         }
       }
     }
   },
-  "as_of_utc": "2026-11-11T14:17:31.225497Z",
-  "completed_untracked_since_first_capture": 97,
+  "as_of_utc": "2026-11-12T14:19:39.038134Z",
+  "completed_untracked_since_first_capture": 118,
   "daily_by_central_date": [
     {
       "completed_tracked_games": 43,
@@ -1649,13 +1649,249 @@
           }
         }
       }
+    },
+    {
+      "completed_tracked_games": 46,
+      "date_central": "2026-11-11",
+      "models": {
+        "baseline": {
+          "ats": {
+            "0": {
+              "decided_win_rate_pct": 46.67,
+              "games_with_model": 46,
+              "losses": 24,
+              "model_mae_points": 12.428,
+              "pushes": 1,
+              "roi_minus_110_pct": -10.67,
+              "selections": 46,
+              "wins": 21
+            },
+            "3.5": {
+              "decided_win_rate_pct": 48.39,
+              "games_with_model": 46,
+              "losses": 16,
+              "model_mae_points": 12.428,
+              "pushes": 0,
+              "roi_minus_110_pct": -7.62,
+              "selections": 31,
+              "wins": 15
+            }
+          },
+          "total": {
+            "0": {
+              "decided_win_rate_pct": 50.0,
+              "games_with_model": 46,
+              "losses": 23,
+              "model_mae_points": 12.986,
+              "pushes": 0,
+              "roi_minus_110_pct": -4.55,
+              "selections": 46,
+              "wins": 23
+            },
+            "3.5": {
+              "decided_win_rate_pct": 58.06,
+              "games_with_model": 46,
+              "losses": 13,
+              "model_mae_points": 12.986,
+              "pushes": 0,
+              "roi_minus_110_pct": 10.85,
+              "selections": 31,
+              "wins": 18
+            }
+          }
+        },
+        "player_all_v4": {
+          "ats": {
+            "0": {
+              "decided_win_rate_pct": 60.0,
+              "games_with_model": 46,
+              "losses": 18,
+              "model_mae_points": 10.008,
+              "pushes": 1,
+              "roi_minus_110_pct": 14.23,
+              "selections": 46,
+              "wins": 27
+            },
+            "3.5": {
+              "decided_win_rate_pct": 57.69,
+              "games_with_model": 46,
+              "losses": 11,
+              "model_mae_points": 10.008,
+              "pushes": 1,
+              "roi_minus_110_pct": 9.76,
+              "selections": 27,
+              "wins": 15
+            }
+          },
+          "total": {
+            "0": {
+              "decided_win_rate_pct": 58.7,
+              "games_with_model": 46,
+              "losses": 19,
+              "model_mae_points": 12.408,
+              "pushes": 0,
+              "roi_minus_110_pct": 12.06,
+              "selections": 46,
+              "wins": 27
+            },
+            "3.5": {
+              "decided_win_rate_pct": 60.0,
+              "games_with_model": 46,
+              "losses": 12,
+              "model_mae_points": 12.408,
+              "pushes": 0,
+              "roi_minus_110_pct": 14.55,
+              "selections": 30,
+              "wins": 18
+            }
+          }
+        },
+        "player_opp_v3": {
+          "ats": {
+            "0": {
+              "decided_win_rate_pct": 66.67,
+              "games_with_model": 46,
+              "losses": 15,
+              "model_mae_points": 9.324,
+              "pushes": 1,
+              "roi_minus_110_pct": 26.68,
+              "selections": 46,
+              "wins": 30
+            },
+            "3.5": {
+              "decided_win_rate_pct": 65.38,
+              "games_with_model": 46,
+              "losses": 9,
+              "model_mae_points": 9.324,
+              "pushes": 1,
+              "roi_minus_110_pct": 23.91,
+              "selections": 27,
+              "wins": 17
+            }
+          },
+          "total": {
+            "0": {
+              "decided_win_rate_pct": 60.87,
+              "games_with_model": 46,
+              "losses": 18,
+              "model_mae_points": 12.322,
+              "pushes": 0,
+              "roi_minus_110_pct": 16.21,
+              "selections": 46,
+              "wins": 28
+            },
+            "3.5": {
+              "decided_win_rate_pct": 66.67,
+              "games_with_model": 46,
+              "losses": 8,
+              "model_mae_points": 12.322,
+              "pushes": 0,
+              "roi_minus_110_pct": 27.27,
+              "selections": 24,
+              "wins": 16
+            }
+          }
+        },
+        "player_rot_v4": {
+          "ats": {
+            "0": {
+              "decided_win_rate_pct": 60.0,
+              "games_with_model": 46,
+              "losses": 18,
+              "model_mae_points": 9.905,
+              "pushes": 1,
+              "roi_minus_110_pct": 14.23,
+              "selections": 46,
+              "wins": 27
+            },
+            "3.5": {
+              "decided_win_rate_pct": 57.69,
+              "games_with_model": 46,
+              "losses": 11,
+              "model_mae_points": 9.905,
+              "pushes": 1,
+              "roi_minus_110_pct": 9.76,
+              "selections": 27,
+              "wins": 15
+            }
+          },
+          "total": {
+            "0": {
+              "decided_win_rate_pct": 58.7,
+              "games_with_model": 46,
+              "losses": 19,
+              "model_mae_points": 12.304,
+              "pushes": 0,
+              "roi_minus_110_pct": 12.06,
+              "selections": 46,
+              "wins": 27
+            },
+            "3.5": {
+              "decided_win_rate_pct": 65.52,
+              "games_with_model": 46,
+              "losses": 10,
+              "model_mae_points": 12.304,
+              "pushes": 0,
+              "roi_minus_110_pct": 25.08,
+              "selections": 29,
+              "wins": 19
+            }
+          }
+        },
+        "player_v2": {
+          "ats": {
+            "0": {
+              "decided_win_rate_pct": 62.22,
+              "games_with_model": 46,
+              "losses": 17,
+              "model_mae_points": 9.375,
+              "pushes": 1,
+              "roi_minus_110_pct": 18.38,
+              "selections": 46,
+              "wins": 28
+            },
+            "3.5": {
+              "decided_win_rate_pct": 65.38,
+              "games_with_model": 46,
+              "losses": 9,
+              "model_mae_points": 9.375,
+              "pushes": 1,
+              "roi_minus_110_pct": 23.91,
+              "selections": 27,
+              "wins": 17
+            }
+          },
+          "total": {
+            "0": {
+              "decided_win_rate_pct": 65.22,
+              "games_with_model": 46,
+              "losses": 16,
+              "model_mae_points": 12.283,
+              "pushes": 0,
+              "roi_minus_110_pct": 24.51,
+              "selections": 46,
+              "wins": 30
+            },
+            "3.5": {
+              "decided_win_rate_pct": 66.67,
+              "games_with_model": 46,
+              "losses": 8,
+              "model_mae_points": 12.283,
+              "pushes": 0,
+              "roi_minus_110_pct": 27.27,
+              "selections": 24,
+              "wins": 16
+            }
+          }
+        }
+      }
     }
   ],
   "first_frozen_capture_utc": "2026-11-05T21:29:14.641689Z",
   "first_graded_tip_utc": "2026-11-05T22:00:00Z",
   "frozen_market_provider_counts": {
-    "Bovada": 235,
-    "Draft Kings": 21
+    "Bovada": 278,
+    "Draft Kings": 24
   },
   "interpretation": {
     "all_directional": "Edge cutoff zero means every non-tied directional lean on a frozen market line.",
@@ -1672,474 +1908,2912 @@
       "baseline": {
         "ats": {
           "0": {
-            "decided_win_rate_pct": 50.0,
-            "games_with_model": 90,
-            "losses": 45,
-            "model_mae_points": 11.021,
-            "pushes": 0,
-            "roi_minus_110_pct": -4.55,
-            "selections": 90,
-            "wins": 45
+            "decided_win_rate_pct": 47.52,
+            "games_with_model": 102,
+            "losses": 53,
+            "model_mae_points": 11.716,
+            "pushes": 1,
+            "roi_minus_110_pct": -9.18,
+            "selections": 102,
+            "wins": 48
           },
           "3.5": {
-            "decided_win_rate_pct": 55.17,
-            "games_with_model": 90,
-            "losses": 26,
-            "model_mae_points": 11.021,
+            "decided_win_rate_pct": 51.52,
+            "games_with_model": 102,
+            "losses": 32,
+            "model_mae_points": 11.716,
             "pushes": 0,
-            "roi_minus_110_pct": 5.33,
+            "roi_minus_110_pct": -1.65,
+            "selections": 66,
+            "wins": 34
+          }
+        },
+        "total": {
+          "0": {
+            "decided_win_rate_pct": 48.04,
+            "games_with_model": 102,
+            "losses": 53,
+            "model_mae_points": 14.389,
+            "pushes": 0,
+            "roi_minus_110_pct": -8.29,
+            "selections": 102,
+            "wins": 49
+          },
+          "3.5": {
+            "decided_win_rate_pct": 56.52,
+            "games_with_model": 102,
+            "losses": 30,
+            "model_mae_points": 14.389,
+            "pushes": 0,
+            "roi_minus_110_pct": 7.91,
+            "selections": 69,
+            "wins": 39
+          }
+        }
+      },
+      "player_all_v4": {
+        "ats": {
+          "0": {
+            "decided_win_rate_pct": 54.46,
+            "games_with_model": 102,
+            "losses": 46,
+            "model_mae_points": 10.184,
+            "pushes": 1,
+            "roi_minus_110_pct": 3.92,
+            "selections": 102,
+            "wins": 55
+          },
+          "3.5": {
+            "decided_win_rate_pct": 56.14,
+            "games_with_model": 102,
+            "losses": 25,
+            "model_mae_points": 10.184,
+            "pushes": 1,
+            "roi_minus_110_pct": 7.05,
             "selections": 58,
             "wins": 32
           }
         },
         "total": {
           "0": {
-            "decided_win_rate_pct": 42.22,
-            "games_with_model": 90,
-            "losses": 52,
-            "model_mae_points": 15.138,
-            "pushes": 0,
-            "roi_minus_110_pct": -19.39,
-            "selections": 90,
-            "wins": 38
-          },
-          "3.5": {
-            "decided_win_rate_pct": 50.0,
-            "games_with_model": 90,
-            "losses": 31,
-            "model_mae_points": 15.138,
-            "pushes": 0,
-            "roi_minus_110_pct": -4.55,
-            "selections": 62,
-            "wins": 31
-          }
-        }
-      },
-      "player_all_v4": {
-        "ats": {
-          "0": {
-            "decided_win_rate_pct": 50.0,
-            "games_with_model": 90,
-            "losses": 45,
-            "model_mae_points": 10.281,
-            "pushes": 0,
-            "roi_minus_110_pct": -4.55,
-            "selections": 90,
-            "wins": 45
-          },
-          "3.5": {
-            "decided_win_rate_pct": 52.0,
-            "games_with_model": 90,
-            "losses": 24,
-            "model_mae_points": 10.281,
-            "pushes": 0,
-            "roi_minus_110_pct": -0.73,
-            "selections": 50,
-            "wins": 26
-          }
-        },
-        "total": {
-          "0": {
-            "decided_win_rate_pct": 51.11,
-            "games_with_model": 90,
-            "losses": 44,
-            "model_mae_points": 13.676,
-            "pushes": 0,
-            "roi_minus_110_pct": -2.42,
-            "selections": 90,
-            "wins": 46
-          },
-          "3.5": {
             "decided_win_rate_pct": 56.86,
-            "games_with_model": 90,
-            "losses": 22,
-            "model_mae_points": 13.676,
+            "games_with_model": 102,
+            "losses": 44,
+            "model_mae_points": 13.024,
             "pushes": 0,
             "roi_minus_110_pct": 8.56,
-            "selections": 51,
-            "wins": 29
+            "selections": 102,
+            "wins": 58
+          },
+          "3.5": {
+            "decided_win_rate_pct": 60.32,
+            "games_with_model": 102,
+            "losses": 25,
+            "model_mae_points": 13.024,
+            "pushes": 0,
+            "roi_minus_110_pct": 15.15,
+            "selections": 63,
+            "wins": 38
           }
         }
       },
       "player_opp_v3": {
         "ats": {
           "0": {
-            "decided_win_rate_pct": 50.0,
-            "games_with_model": 90,
-            "losses": 45,
-            "model_mae_points": 10.747,
-            "pushes": 0,
-            "roi_minus_110_pct": -4.55,
-            "selections": 90,
-            "wins": 45
+            "decided_win_rate_pct": 57.43,
+            "games_with_model": 102,
+            "losses": 43,
+            "model_mae_points": 10.291,
+            "pushes": 1,
+            "roi_minus_110_pct": 9.54,
+            "selections": 102,
+            "wins": 58
           },
           "3.5": {
-            "decided_win_rate_pct": 46.94,
-            "games_with_model": 90,
-            "losses": 26,
-            "model_mae_points": 10.747,
-            "pushes": 0,
-            "roi_minus_110_pct": -10.39,
-            "selections": 49,
-            "wins": 23
+            "decided_win_rate_pct": 57.14,
+            "games_with_model": 102,
+            "losses": 24,
+            "model_mae_points": 10.291,
+            "pushes": 1,
+            "roi_minus_110_pct": 8.93,
+            "selections": 57,
+            "wins": 32
           }
         },
         "total": {
           "0": {
-            "decided_win_rate_pct": 54.44,
-            "games_with_model": 90,
-            "losses": 41,
-            "model_mae_points": 14.055,
+            "decided_win_rate_pct": 58.82,
+            "games_with_model": 102,
+            "losses": 42,
+            "model_mae_points": 13.194,
             "pushes": 0,
-            "roi_minus_110_pct": 3.94,
-            "selections": 90,
-            "wins": 49
+            "roi_minus_110_pct": 12.3,
+            "selections": 102,
+            "wins": 60
           },
           "3.5": {
-            "decided_win_rate_pct": 53.7,
-            "games_with_model": 90,
-            "losses": 25,
-            "model_mae_points": 14.055,
+            "decided_win_rate_pct": 61.4,
+            "games_with_model": 102,
+            "losses": 22,
+            "model_mae_points": 13.194,
             "pushes": 0,
-            "roi_minus_110_pct": 2.53,
-            "selections": 54,
-            "wins": 29
+            "roi_minus_110_pct": 17.22,
+            "selections": 57,
+            "wins": 35
           }
         }
       },
       "player_rot_v4": {
         "ats": {
           "0": {
-            "decided_win_rate_pct": 50.0,
-            "games_with_model": 90,
+            "decided_win_rate_pct": 55.45,
+            "games_with_model": 102,
             "losses": 45,
-            "model_mae_points": 10.643,
-            "pushes": 0,
-            "roi_minus_110_pct": -4.55,
-            "selections": 90,
-            "wins": 45
+            "model_mae_points": 10.235,
+            "pushes": 1,
+            "roi_minus_110_pct": 5.79,
+            "selections": 102,
+            "wins": 56
           },
           "3.5": {
-            "decided_win_rate_pct": 50.88,
-            "games_with_model": 90,
-            "losses": 28,
-            "model_mae_points": 10.643,
-            "pushes": 0,
-            "roi_minus_110_pct": -2.87,
-            "selections": 57,
-            "wins": 29
+            "decided_win_rate_pct": 55.74,
+            "games_with_model": 102,
+            "losses": 27,
+            "model_mae_points": 10.235,
+            "pushes": 1,
+            "roi_minus_110_pct": 6.3,
+            "selections": 62,
+            "wins": 34
           }
         },
         "total": {
           "0": {
-            "decided_win_rate_pct": 53.33,
-            "games_with_model": 90,
-            "losses": 42,
-            "model_mae_points": 13.666,
+            "decided_win_rate_pct": 56.86,
+            "games_with_model": 102,
+            "losses": 44,
+            "model_mae_points": 13.027,
             "pushes": 0,
-            "roi_minus_110_pct": 1.82,
-            "selections": 90,
-            "wins": 48
+            "roi_minus_110_pct": 8.56,
+            "selections": 102,
+            "wins": 58
           },
           "3.5": {
-            "decided_win_rate_pct": 58.18,
-            "games_with_model": 90,
-            "losses": 23,
-            "model_mae_points": 13.666,
+            "decided_win_rate_pct": 62.69,
+            "games_with_model": 102,
+            "losses": 25,
+            "model_mae_points": 13.027,
             "pushes": 0,
-            "roi_minus_110_pct": 11.07,
-            "selections": 55,
-            "wins": 32
+            "roi_minus_110_pct": 19.67,
+            "selections": 67,
+            "wins": 42
           }
         }
       },
       "player_v2": {
         "ats": {
           "0": {
-            "decided_win_rate_pct": 50.0,
-            "games_with_model": 90,
+            "decided_win_rate_pct": 55.45,
+            "games_with_model": 102,
             "losses": 45,
-            "model_mae_points": 11.002,
-            "pushes": 0,
-            "roi_minus_110_pct": -4.55,
-            "selections": 90,
-            "wins": 45
+            "model_mae_points": 10.369,
+            "pushes": 1,
+            "roi_minus_110_pct": 5.79,
+            "selections": 102,
+            "wins": 56
           },
           "3.5": {
-            "decided_win_rate_pct": 46.15,
-            "games_with_model": 90,
-            "losses": 28,
-            "model_mae_points": 11.002,
-            "pushes": 0,
-            "roi_minus_110_pct": -11.89,
-            "selections": 52,
-            "wins": 24
+            "decided_win_rate_pct": 56.9,
+            "games_with_model": 102,
+            "losses": 25,
+            "model_mae_points": 10.369,
+            "pushes": 1,
+            "roi_minus_110_pct": 8.47,
+            "selections": 59,
+            "wins": 33
           }
         },
         "total": {
           "0": {
-            "decided_win_rate_pct": 54.44,
-            "games_with_model": 90,
-            "losses": 41,
-            "model_mae_points": 14.054,
+            "decided_win_rate_pct": 61.76,
+            "games_with_model": 102,
+            "losses": 39,
+            "model_mae_points": 13.244,
             "pushes": 0,
-            "roi_minus_110_pct": 3.94,
-            "selections": 90,
-            "wins": 49
+            "roi_minus_110_pct": 17.91,
+            "selections": 102,
+            "wins": 63
           },
           "3.5": {
-            "decided_win_rate_pct": 57.14,
-            "games_with_model": 90,
-            "losses": 24,
-            "model_mae_points": 14.054,
+            "decided_win_rate_pct": 63.79,
+            "games_with_model": 102,
+            "losses": 21,
+            "model_mae_points": 13.244,
             "pushes": 0,
-            "roi_minus_110_pct": 9.09,
-            "selections": 56,
-            "wins": 32
+            "roi_minus_110_pct": 21.79,
+            "selections": 58,
+            "wins": 37
           }
         }
       }
     },
-    "tracked_games": 90
+    "tracked_games": 102
   },
   "last_7_days": {
     "models": {
       "baseline": {
         "ats": {
           "0": {
-            "decided_win_rate_pct": 51.41,
-            "games_with_model": 256,
-            "losses": 121,
-            "model_mae_points": 11.523,
-            "pushes": 5,
-            "roi_minus_110_pct": -1.83,
-            "selections": 254,
-            "wins": 128
+            "decided_win_rate_pct": 50.68,
+            "games_with_model": 302,
+            "losses": 145,
+            "model_mae_points": 11.661,
+            "pushes": 6,
+            "roi_minus_110_pct": -3.18,
+            "selections": 300,
+            "wins": 149
           },
           "3.5": {
-            "decided_win_rate_pct": 52.46,
-            "games_with_model": 256,
-            "losses": 87,
-            "model_mae_points": 11.523,
+            "decided_win_rate_pct": 51.87,
+            "games_with_model": 302,
+            "losses": 103,
+            "model_mae_points": 11.661,
             "pushes": 3,
-            "roi_minus_110_pct": 0.15,
-            "selections": 186,
-            "wins": 96
+            "roi_minus_110_pct": -0.96,
+            "selections": 217,
+            "wins": 111
           }
         },
         "total": {
           "0": {
-            "decided_win_rate_pct": 47.06,
-            "games_with_model": 256,
-            "losses": 135,
-            "model_mae_points": 15.706,
+            "decided_win_rate_pct": 47.51,
+            "games_with_model": 302,
+            "losses": 158,
+            "model_mae_points": 15.292,
             "pushes": 1,
-            "roi_minus_110_pct": -10.12,
-            "selections": 256,
-            "wins": 120
+            "roi_minus_110_pct": -9.27,
+            "selections": 302,
+            "wins": 143
           },
           "3.5": {
-            "decided_win_rate_pct": 48.13,
-            "games_with_model": 256,
-            "losses": 97,
-            "model_mae_points": 15.706,
+            "decided_win_rate_pct": 49.54,
+            "games_with_model": 302,
+            "losses": 110,
+            "model_mae_points": 15.292,
             "pushes": 1,
-            "roi_minus_110_pct": -8.08,
-            "selections": 188,
-            "wins": 90
+            "roi_minus_110_pct": -5.4,
+            "selections": 219,
+            "wins": 108
           }
         }
       },
       "player_all_v4": {
         "ats": {
           "0": {
-            "decided_win_rate_pct": 53.62,
-            "games_with_model": 213,
-            "losses": 96,
-            "model_mae_points": 9.999,
-            "pushes": 4,
-            "roi_minus_110_pct": 2.33,
-            "selections": 211,
-            "wins": 111
+            "decided_win_rate_pct": 54.76,
+            "games_with_model": 259,
+            "losses": 114,
+            "model_mae_points": 10.001,
+            "pushes": 5,
+            "roi_minus_110_pct": 4.46,
+            "selections": 257,
+            "wins": 138
           },
           "3.5": {
-            "decided_win_rate_pct": 57.03,
-            "games_with_model": 213,
-            "losses": 55,
-            "model_mae_points": 9.999,
-            "pushes": 0,
-            "roi_minus_110_pct": 8.88,
-            "selections": 128,
-            "wins": 73
+            "decided_win_rate_pct": 57.14,
+            "games_with_model": 259,
+            "losses": 66,
+            "model_mae_points": 10.001,
+            "pushes": 1,
+            "roi_minus_110_pct": 9.03,
+            "selections": 155,
+            "wins": 88
           }
         },
         "total": {
           "0": {
-            "decided_win_rate_pct": 54.25,
-            "games_with_model": 213,
-            "losses": 97,
-            "model_mae_points": 13.304,
+            "decided_win_rate_pct": 55.04,
+            "games_with_model": 259,
+            "losses": 116,
+            "model_mae_points": 13.145,
             "pushes": 1,
-            "roi_minus_110_pct": 3.54,
-            "selections": 213,
-            "wins": 115
+            "roi_minus_110_pct": 5.05,
+            "selections": 259,
+            "wins": 142
           },
           "3.5": {
-            "decided_win_rate_pct": 59.83,
-            "games_with_model": 213,
-            "losses": 47,
-            "model_mae_points": 13.304,
+            "decided_win_rate_pct": 59.86,
+            "games_with_model": 259,
+            "losses": 59,
+            "model_mae_points": 13.145,
             "pushes": 1,
-            "roi_minus_110_pct": 14.1,
-            "selections": 118,
-            "wins": 70
+            "roi_minus_110_pct": 14.19,
+            "selections": 148,
+            "wins": 88
           }
         }
       },
       "player_opp_v3": {
         "ats": {
           "0": {
-            "decided_win_rate_pct": 53.14,
-            "games_with_model": 213,
-            "losses": 97,
-            "model_mae_points": 10.291,
-            "pushes": 4,
-            "roi_minus_110_pct": 1.42,
-            "selections": 211,
-            "wins": 110
+            "decided_win_rate_pct": 55.56,
+            "games_with_model": 259,
+            "losses": 112,
+            "model_mae_points": 10.119,
+            "pushes": 5,
+            "roi_minus_110_pct": 5.94,
+            "selections": 257,
+            "wins": 140
           },
           "3.5": {
-            "decided_win_rate_pct": 54.2,
-            "games_with_model": 213,
-            "losses": 60,
-            "model_mae_points": 10.291,
-            "pushes": 2,
-            "roi_minus_110_pct": 3.42,
-            "selections": 133,
-            "wins": 71
+            "decided_win_rate_pct": 56.05,
+            "games_with_model": 259,
+            "losses": 69,
+            "model_mae_points": 10.119,
+            "pushes": 3,
+            "roi_minus_110_pct": 6.88,
+            "selections": 160,
+            "wins": 88
           }
         },
         "total": {
           "0": {
-            "decided_win_rate_pct": 52.83,
-            "games_with_model": 213,
-            "losses": 100,
-            "model_mae_points": 13.691,
+            "decided_win_rate_pct": 54.26,
+            "games_with_model": 259,
+            "losses": 118,
+            "model_mae_points": 13.448,
             "pushes": 1,
-            "roi_minus_110_pct": 0.85,
-            "selections": 213,
-            "wins": 112
+            "roi_minus_110_pct": 3.58,
+            "selections": 259,
+            "wins": 140
           },
           "3.5": {
-            "decided_win_rate_pct": 57.02,
-            "games_with_model": 213,
-            "losses": 52,
-            "model_mae_points": 13.691,
+            "decided_win_rate_pct": 58.62,
+            "games_with_model": 259,
+            "losses": 60,
+            "model_mae_points": 13.448,
             "pushes": 1,
-            "roi_minus_110_pct": 8.79,
-            "selections": 122,
-            "wins": 69
+            "roi_minus_110_pct": 11.83,
+            "selections": 146,
+            "wins": 85
           }
         }
       },
       "player_rot_v4": {
         "ats": {
           "0": {
-            "decided_win_rate_pct": 55.56,
-            "games_with_model": 213,
-            "losses": 92,
-            "model_mae_points": 10.146,
-            "pushes": 4,
-            "roi_minus_110_pct": 5.95,
-            "selections": 211,
-            "wins": 115
+            "decided_win_rate_pct": 56.35,
+            "games_with_model": 259,
+            "losses": 110,
+            "model_mae_points": 10.103,
+            "pushes": 5,
+            "roi_minus_110_pct": 7.43,
+            "selections": 257,
+            "wins": 142
           },
           "3.5": {
-            "decided_win_rate_pct": 55.88,
-            "games_with_model": 213,
-            "losses": 60,
-            "model_mae_points": 10.146,
-            "pushes": 1,
-            "roi_minus_110_pct": 6.64,
-            "selections": 137,
-            "wins": 76
+            "decided_win_rate_pct": 56.17,
+            "games_with_model": 259,
+            "losses": 71,
+            "model_mae_points": 10.103,
+            "pushes": 2,
+            "roi_minus_110_pct": 7.15,
+            "selections": 164,
+            "wins": 91
           }
         },
         "total": {
           "0": {
-            "decided_win_rate_pct": 55.66,
-            "games_with_model": 213,
-            "losses": 94,
-            "model_mae_points": 13.343,
+            "decided_win_rate_pct": 56.2,
+            "games_with_model": 259,
+            "losses": 113,
+            "model_mae_points": 13.159,
             "pushes": 1,
-            "roi_minus_110_pct": 6.23,
-            "selections": 213,
-            "wins": 118
+            "roi_minus_110_pct": 7.27,
+            "selections": 259,
+            "wins": 145
           },
           "3.5": {
-            "decided_win_rate_pct": 59.83,
-            "games_with_model": 213,
-            "losses": 47,
-            "model_mae_points": 13.343,
+            "decided_win_rate_pct": 60.96,
+            "games_with_model": 259,
+            "losses": 57,
+            "model_mae_points": 13.159,
             "pushes": 1,
-            "roi_minus_110_pct": 14.1,
-            "selections": 118,
-            "wins": 70
+            "roi_minus_110_pct": 16.26,
+            "selections": 147,
+            "wins": 89
           }
         }
       },
       "player_v2": {
         "ats": {
           "0": {
-            "decided_win_rate_pct": 54.62,
-            "games_with_model": 256,
-            "losses": 113,
-            "model_mae_points": 10.266,
-            "pushes": 5,
-            "roi_minus_110_pct": 4.19,
-            "selections": 254,
-            "wins": 136
+            "decided_win_rate_pct": 55.78,
+            "games_with_model": 302,
+            "losses": 130,
+            "model_mae_points": 10.131,
+            "pushes": 6,
+            "roi_minus_110_pct": 6.36,
+            "selections": 300,
+            "wins": 164
           },
           "3.5": {
-            "decided_win_rate_pct": 56.52,
-            "games_with_model": 256,
-            "losses": 70,
-            "model_mae_points": 10.266,
-            "pushes": 2,
-            "roi_minus_110_pct": 7.81,
-            "selections": 163,
-            "wins": 91
+            "decided_win_rate_pct": 57.75,
+            "games_with_model": 302,
+            "losses": 79,
+            "model_mae_points": 10.131,
+            "pushes": 3,
+            "roi_minus_110_pct": 10.1,
+            "selections": 190,
+            "wins": 108
           }
         },
         "total": {
           "0": {
-            "decided_win_rate_pct": 51.76,
-            "games_with_model": 256,
-            "losses": 123,
-            "model_mae_points": 14.039,
+            "decided_win_rate_pct": 53.82,
+            "games_with_model": 302,
+            "losses": 139,
+            "model_mae_points": 13.771,
             "pushes": 1,
-            "roi_minus_110_pct": -1.17,
-            "selections": 256,
-            "wins": 132
+            "roi_minus_110_pct": 2.74,
+            "selections": 302,
+            "wins": 162
           },
           "3.5": {
-            "decided_win_rate_pct": 54.36,
-            "games_with_model": 256,
-            "losses": 68,
-            "model_mae_points": 14.039,
+            "decided_win_rate_pct": 56.07,
+            "games_with_model": 302,
+            "losses": 76,
+            "model_mae_points": 13.771,
             "pushes": 1,
-            "roi_minus_110_pct": 3.76,
-            "selections": 150,
-            "wins": 81
+            "roi_minus_110_pct": 7.0,
+            "selections": 174,
+            "wins": 97
           }
         }
       }
     },
-    "tracked_games": 256
+    "tracked_games": 302
   },
-  "latest_graded_tip_utc": "2026-11-11T03:00:00Z",
+  "latest_graded_tip_utc": "2026-11-12T04:00:00Z",
   "local_reporting_timezone": "America/Chicago",
   "most_recent_60_games": [
+    {
+      "book": "Bovada",
+      "date_central": "2026-11-11",
+      "final_score": "77.0-65.0",
+      "frozen_home_spread": 8.5,
+      "frozen_total": 161.5,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "USC @ California",
+      "game_id": "374878",
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": 19.292,
+          "margin_mae": 22.792,
+          "total": "W",
+          "total_edge": -6.188,
+          "total_mae": 13.312
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": -1.781,
+          "margin_mae": 1.719,
+          "total": "L",
+          "total_edge": 5.906,
+          "total_mae": 25.406
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": -5.766,
+          "margin_mae": 2.266,
+          "total": "L",
+          "total_edge": 1.332,
+          "total_mae": 20.832
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": -2.791,
+          "margin_mae": 0.709,
+          "total": "L",
+          "total_edge": 5.611,
+          "total_mae": 25.111
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": -7.183,
+          "margin_mae": 3.683,
+          "total": "L",
+          "total_edge": 0.241,
+          "total_mae": 19.741
+        }
+      },
+      "tip_utc": "2026-11-12T04:00:00Z"
+    },
+    {
+      "book": "Bovada",
+      "date_central": "2026-11-11",
+      "final_score": "59.0-62.0",
+      "frozen_home_spread": 6.0,
+      "frozen_total": 137.5,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "Pacific @ Long Beach State",
+      "game_id": "374901",
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": 9.226,
+          "margin_mae": 0.226,
+          "total": "L",
+          "total_edge": 0.801,
+          "total_mae": 17.301
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": 4.755,
+          "margin_mae": 4.245,
+          "total": "L",
+          "total_edge": 0.028,
+          "total_mae": 16.528
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": 4.424,
+          "margin_mae": 4.576,
+          "total": "L",
+          "total_edge": 2.178,
+          "total_mae": 18.678
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": -1.863,
+          "margin_mae": 10.863,
+          "total": "W",
+          "total_edge": -0.477,
+          "total_mae": 16.023
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": -2.947,
+          "margin_mae": 11.947,
+          "total": "L",
+          "total_edge": 0.348,
+          "total_mae": 16.848
+        }
+      },
+      "tip_utc": "2026-11-12T03:00:00Z"
+    },
+    {
+      "book": "Bovada",
+      "date_central": "2026-11-11",
+      "final_score": "81.0-62.0",
+      "frozen_home_spread": -10.5,
+      "frozen_total": 141.5,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "Chicago State @ California Baptist",
+      "game_id": "374900",
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": -0.098,
+          "margin_mae": 29.402,
+          "total": "W",
+          "total_edge": 2.707,
+          "total_mae": 1.207
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": -2.65,
+          "margin_mae": 26.85,
+          "total": "W",
+          "total_edge": 3.553,
+          "total_mae": 2.053
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": -2.979,
+          "margin_mae": 26.521,
+          "total": "W",
+          "total_edge": 6.362,
+          "total_mae": 4.862
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": -0.657,
+          "margin_mae": 28.843,
+          "total": "W",
+          "total_edge": 3.971,
+          "total_mae": 2.471
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": -1.074,
+          "margin_mae": 28.426,
+          "total": "W",
+          "total_edge": 6.82,
+          "total_mae": 5.32
+        }
+      },
+      "tip_utc": "2026-11-12T03:00:00Z"
+    },
+    {
+      "book": "Bovada",
+      "date_central": "2026-11-11",
+      "final_score": "86.0-59.0",
+      "frozen_home_spread": -16.5,
+      "frozen_total": 148.5,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "UTSA @ Seattle U",
+      "game_id": "374881",
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": 0.696,
+          "margin_mae": 44.196,
+          "total": "W",
+          "total_edge": -3.825,
+          "total_mae": 0.325
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": -5.432,
+          "margin_mae": 38.068,
+          "total": "L",
+          "total_edge": 1.112,
+          "total_mae": 4.612
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": -9.147,
+          "margin_mae": 34.353,
+          "total": "W",
+          "total_edge": -1.847,
+          "total_mae": 1.653
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": -9.936,
+          "margin_mae": 33.564,
+          "total": "L",
+          "total_edge": 0.089,
+          "total_mae": 3.589
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": -12.843,
+          "margin_mae": 30.657,
+          "total": "W",
+          "total_edge": -2.23,
+          "total_mae": 1.27
+        }
+      },
+      "tip_utc": "2026-11-12T03:00:00Z"
+    },
+    {
+      "book": "Bovada",
+      "date_central": "2026-11-11",
+      "final_score": "66.0-100.0",
+      "frozen_home_spread": -37.5,
+      "frozen_total": 147.5,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "Mississippi Valley State @ Oregon",
+      "game_id": "374860",
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": -17.133,
+          "margin_mae": 13.633,
+          "total": "L",
+          "total_edge": -2.135,
+          "total_mae": 20.635
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": -2.262,
+          "margin_mae": 1.238,
+          "total": "W",
+          "total_edge": 6.363,
+          "total_mae": 12.137
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": -3.488,
+          "margin_mae": 0.012,
+          "total": "W",
+          "total_edge": 4.361,
+          "total_mae": 14.139
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": -2.538,
+          "margin_mae": 0.962,
+          "total": "W",
+          "total_edge": 5.665,
+          "total_mae": 12.835
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": -2.98,
+          "margin_mae": 0.52,
+          "total": "W",
+          "total_edge": 3.779,
+          "total_mae": 14.721
+        }
+      },
+      "tip_utc": "2026-11-12T03:00:00Z"
+    },
+    {
+      "book": "Bovada",
+      "date_central": "2026-11-11",
+      "final_score": "79.0-111.0",
+      "frozen_home_spread": -16.5,
+      "frozen_total": 162.0,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "Oakland @ Boise State",
+      "game_id": "377999",
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": 6.978,
+          "margin_mae": 8.522,
+          "total": "L",
+          "total_edge": -6.919,
+          "total_mae": 34.919
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": 8.313,
+          "margin_mae": 7.187,
+          "total": "W",
+          "total_edge": 4.624,
+          "total_mae": 23.376
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": 10.499,
+          "margin_mae": 5.001,
+          "total": "W",
+          "total_edge": 1.683,
+          "total_mae": 26.317
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": 8.148,
+          "margin_mae": 7.352,
+          "total": "W",
+          "total_edge": 4.634,
+          "total_mae": 23.366
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": 11.18,
+          "margin_mae": 4.32,
+          "total": "W",
+          "total_edge": 1.574,
+          "total_mae": 26.426
+        }
+      },
+      "tip_utc": "2026-11-12T02:00:00Z"
+    },
+    {
+      "book": "Bovada",
+      "date_central": "2026-11-11",
+      "final_score": "71.0-87.0",
+      "frozen_home_spread": -15.0,
+      "frozen_total": 150.5,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "Portland State @ Colorado State",
+      "game_id": "374857",
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": -2.806,
+          "margin_mae": 3.806,
+          "total": "L",
+          "total_edge": -4.494,
+          "total_mae": 11.994
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": 9.649,
+          "margin_mae": 8.649,
+          "total": "W",
+          "total_edge": 0.684,
+          "total_mae": 6.816
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": 10.064,
+          "margin_mae": 9.064,
+          "total": "W",
+          "total_edge": 1.105,
+          "total_mae": 6.395
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": 8.473,
+          "margin_mae": 7.473,
+          "total": "L",
+          "total_edge": -0.198,
+          "total_mae": 7.698
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": 8.965,
+          "margin_mae": 7.965,
+          "total": "W",
+          "total_edge": 0.614,
+          "total_mae": 6.886
+        }
+      },
+      "tip_utc": "2026-11-12T02:00:00Z"
+    },
+    {
+      "book": "Bovada",
+      "date_central": "2026-11-11",
+      "final_score": "60.0-94.0",
+      "frozen_home_spread": -34.5,
+      "frozen_total": 150.5,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "Lindenwood @ Nebraska",
+      "game_id": "374856",
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": -26.884,
+          "margin_mae": 26.384,
+          "total": "L",
+          "total_edge": -3.29,
+          "total_mae": 6.79
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": -9.939,
+          "margin_mae": 9.439,
+          "total": "W",
+          "total_edge": 4.739,
+          "total_mae": 1.239
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": -6.893,
+          "margin_mae": 6.393,
+          "total": "W",
+          "total_edge": 6.639,
+          "total_mae": 3.139
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": -10.15,
+          "margin_mae": 9.65,
+          "total": "W",
+          "total_edge": 4.839,
+          "total_mae": 1.339
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": -7.113,
+          "margin_mae": 6.613,
+          "total": "W",
+          "total_edge": 7.163,
+          "total_mae": 3.663
+        }
+      },
+      "tip_utc": "2026-11-12T02:00:00Z"
+    },
+    {
+      "book": "Bovada",
+      "date_central": "2026-11-11",
+      "final_score": "71.0-99.0",
+      "frozen_home_spread": -18.5,
+      "frozen_total": 180.0,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "Cal Poly @ Grand Canyon",
+      "game_id": "372772",
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": 0.993,
+          "margin_mae": 8.507,
+          "total": "W",
+          "total_edge": -24.166,
+          "total_mae": 14.166
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": -2.545,
+          "margin_mae": 12.045,
+          "total": "W",
+          "total_edge": -13.753,
+          "total_mae": 3.753
+        },
+        "player_opp_v3": {
+          "ats": "L",
+          "ats_edge": -3.71,
+          "margin_mae": 13.21,
+          "total": "W",
+          "total_edge": -16.443,
+          "total_mae": 6.443
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": -0.627,
+          "margin_mae": 10.127,
+          "total": "W",
+          "total_edge": -13.397,
+          "total_mae": 3.397
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": -1.819,
+          "margin_mae": 11.319,
+          "total": "W",
+          "total_edge": -16.499,
+          "total_mae": 6.499
+        }
+      },
+      "tip_utc": "2026-11-12T02:00:00Z"
+    },
+    {
+      "book": "Bovada",
+      "date_central": "2026-11-11",
+      "final_score": "69.0-81.0",
+      "frozen_home_spread": 1.5,
+      "frozen_total": 142.5,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "Valparaiso @ South Dakota State",
+      "game_id": "378004",
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": 15.304,
+          "margin_mae": 1.804,
+          "total": "L",
+          "total_edge": -2.049,
+          "total_mae": 9.549
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": 7.419,
+          "margin_mae": 6.081,
+          "total": "L",
+          "total_edge": -0.302,
+          "total_mae": 7.802
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": 7.244,
+          "margin_mae": 6.256,
+          "total": "W",
+          "total_edge": 0.355,
+          "total_mae": 7.145
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": 8.513,
+          "margin_mae": 4.987,
+          "total": "L",
+          "total_edge": -0.359,
+          "total_mae": 7.859
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": 8.486,
+          "margin_mae": 5.014,
+          "total": "W",
+          "total_edge": 0.357,
+          "total_mae": 7.143
+        }
+      },
+      "tip_utc": "2026-11-12T01:00:00Z"
+    },
+    {
+      "book": "Bovada",
+      "date_central": "2026-11-11",
+      "final_score": "53.0-76.0",
+      "frozen_home_spread": -31.5,
+      "frozen_total": 158.5,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "Robert Morris @ Arkansas",
+      "game_id": "377997",
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": -8.597,
+          "margin_mae": 0.097,
+          "total": "W",
+          "total_edge": -12.789,
+          "total_mae": 16.711
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": -0.166,
+          "margin_mae": 8.334,
+          "total": "L",
+          "total_edge": 1.067,
+          "total_mae": 30.567
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": -1.341,
+          "margin_mae": 7.159,
+          "total": "L",
+          "total_edge": 1.926,
+          "total_mae": 31.426
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": 4.198,
+          "margin_mae": 12.698,
+          "total": "L",
+          "total_edge": 2.151,
+          "total_mae": 31.651
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": 3.225,
+          "margin_mae": 11.725,
+          "total": "L",
+          "total_edge": 3.325,
+          "total_mae": 32.825
+        }
+      },
+      "tip_utc": "2026-11-12T01:00:00Z"
+    },
+    {
+      "book": "Bovada",
+      "date_central": "2026-11-11",
+      "final_score": "76.0-71.0",
+      "frozen_home_spread": 3.0,
+      "frozen_total": 151.0,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "Santa Clara @ North Texas",
+      "game_id": "374880",
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": 16.742,
+          "margin_mae": 18.742,
+          "total": "L",
+          "total_edge": 0.321,
+          "total_mae": 4.321
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": 12.083,
+          "margin_mae": 14.083,
+          "total": "L",
+          "total_edge": 4.63,
+          "total_mae": 8.63
+        },
+        "player_opp_v3": {
+          "ats": "L",
+          "ats_edge": 10.926,
+          "margin_mae": 12.926,
+          "total": "L",
+          "total_edge": 0.891,
+          "total_mae": 4.891
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": 11.013,
+          "margin_mae": 13.013,
+          "total": "L",
+          "total_edge": 4.118,
+          "total_mae": 8.118
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": 10.588,
+          "margin_mae": 12.588,
+          "total": "L",
+          "total_edge": 0.32,
+          "total_mae": 4.32
+        }
+      },
+      "tip_utc": "2026-11-12T01:00:00Z"
+    },
+    {
+      "book": "Bovada",
+      "date_central": "2026-11-11",
+      "final_score": "76.0-71.0",
+      "frozen_home_spread": 4.5,
+      "frozen_total": 142.5,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "Stephen F. Austin @ Abilene Christian",
+      "game_id": "374879",
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": 3.062,
+          "margin_mae": 3.562,
+          "total": "W",
+          "total_edge": 3.841,
+          "total_mae": 0.659
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": -0.425,
+          "margin_mae": 0.075,
+          "total": "W",
+          "total_edge": 3.907,
+          "total_mae": 0.593
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": -1.362,
+          "margin_mae": 0.862,
+          "total": "W",
+          "total_edge": 3.573,
+          "total_mae": 0.927
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": -2.374,
+          "margin_mae": 1.874,
+          "total": "W",
+          "total_edge": 2.968,
+          "total_mae": 1.532
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": -3.359,
+          "margin_mae": 2.859,
+          "total": "W",
+          "total_edge": 2.963,
+          "total_mae": 1.537
+        }
+      },
+      "tip_utc": "2026-11-12T01:00:00Z"
+    },
+    {
+      "book": "Bovada",
+      "date_central": "2026-11-11",
+      "final_score": "80.0-84.0",
+      "frozen_home_spread": -8.5,
+      "frozen_total": 151.5,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "Jackson State @ Southern Miss",
+      "game_id": "374869",
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": 8.597,
+          "margin_mae": 13.097,
+          "total": "L",
+          "total_edge": -9.51,
+          "total_mae": 22.01
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": 1.316,
+          "margin_mae": 5.816,
+          "total": "L",
+          "total_edge": -3.73,
+          "total_mae": 16.23
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": -1.804,
+          "margin_mae": 2.696,
+          "total": "L",
+          "total_edge": -6.015,
+          "total_mae": 18.515
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": 1.91,
+          "margin_mae": 6.41,
+          "total": "L",
+          "total_edge": -4.14,
+          "total_mae": 16.64
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": -0.449,
+          "margin_mae": 4.051,
+          "total": "L",
+          "total_edge": -5.74,
+          "total_mae": 18.24
+        }
+      },
+      "tip_utc": "2026-11-12T01:00:00Z"
+    },
+    {
+      "book": "Bovada",
+      "date_central": "2026-11-11",
+      "final_score": "46.0-92.0",
+      "frozen_home_spread": -36.5,
+      "frozen_total": 135.5,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "Jacksonville State @ Houston",
+      "game_id": "374862",
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": -21.32,
+          "margin_mae": 30.82,
+          "total": "W",
+          "total_edge": 15.356,
+          "total_mae": 12.856
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": -10.478,
+          "margin_mae": 19.978,
+          "total": "W",
+          "total_edge": 22.749,
+          "total_mae": 20.249
+        },
+        "player_opp_v3": {
+          "ats": "L",
+          "ats_edge": -9.307,
+          "margin_mae": 18.807,
+          "total": "W",
+          "total_edge": 24.057,
+          "total_mae": 21.557
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": -9.173,
+          "margin_mae": 18.673,
+          "total": "W",
+          "total_edge": 23.059,
+          "total_mae": 20.559
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": -8.287,
+          "margin_mae": 17.787,
+          "total": "W",
+          "total_edge": 23.633,
+          "total_mae": 21.133
+        }
+      },
+      "tip_utc": "2026-11-12T01:00:00Z"
+    },
+    {
+      "book": "Bovada",
+      "date_central": "2026-11-11",
+      "final_score": "71.0-80.0",
+      "frozen_home_spread": -18.0,
+      "frozen_total": 154.0,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "Oral Roberts @ Tulsa",
+      "game_id": "374858",
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": -0.335,
+          "margin_mae": 8.665,
+          "total": "W",
+          "total_edge": -9.265,
+          "total_mae": 6.265
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": -2.502,
+          "margin_mae": 6.498,
+          "total": "W",
+          "total_edge": -3.84,
+          "total_mae": 0.84
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": -3.084,
+          "margin_mae": 5.916,
+          "total": "W",
+          "total_edge": -3.711,
+          "total_mae": 0.711
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": -1.002,
+          "margin_mae": 7.998,
+          "total": "W",
+          "total_edge": -3.773,
+          "total_mae": 0.773
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": -1.623,
+          "margin_mae": 7.377,
+          "total": "W",
+          "total_edge": -3.98,
+          "total_mae": 0.98
+        }
+      },
+      "tip_utc": "2026-11-12T01:00:00Z"
+    },
+    {
+      "book": "Bovada",
+      "date_central": "2026-11-11",
+      "final_score": "77.0-85.0",
+      "frozen_home_spread": 2.5,
+      "frozen_total": 160.5,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "Pepperdine @ Sam Houston",
+      "game_id": "378003",
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": 4.413,
+          "margin_mae": 6.087,
+          "total": "L",
+          "total_edge": -6.941,
+          "total_mae": 8.441
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": -1.591,
+          "margin_mae": 12.091,
+          "total": "W",
+          "total_edge": 1.345,
+          "total_mae": 0.155
+        },
+        "player_opp_v3": {
+          "ats": "L",
+          "ats_edge": -1.276,
+          "margin_mae": 11.776,
+          "total": "W",
+          "total_edge": 1.008,
+          "total_mae": 0.492
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": -5.173,
+          "margin_mae": 15.673,
+          "total": "W",
+          "total_edge": 1.956,
+          "total_mae": 0.456
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": -4.865,
+          "margin_mae": 15.365,
+          "total": "W",
+          "total_edge": 0.623,
+          "total_mae": 0.877
+        }
+      },
+      "tip_utc": "2026-11-12T00:30:00Z"
+    },
+    {
+      "book": "Bovada",
+      "date_central": "2026-11-11",
+      "final_score": "73.0-91.0",
+      "frozen_home_spread": -7.0,
+      "frozen_total": 155.5,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "Kent State @ UNC Wilmington",
+      "game_id": "378002",
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": 6.073,
+          "margin_mae": 4.927,
+          "total": "L",
+          "total_edge": -6.467,
+          "total_mae": 14.967
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": 1.07,
+          "margin_mae": 9.93,
+          "total": "W",
+          "total_edge": 4.602,
+          "total_mae": 3.898
+        },
+        "player_opp_v3": {
+          "ats": "L",
+          "ats_edge": -0.281,
+          "margin_mae": 11.281,
+          "total": "W",
+          "total_edge": 2.742,
+          "total_mae": 5.758
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": 1.241,
+          "margin_mae": 9.759,
+          "total": "W",
+          "total_edge": 3.838,
+          "total_mae": 4.662
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": -0.228,
+          "margin_mae": 11.228,
+          "total": "W",
+          "total_edge": 1.435,
+          "total_mae": 7.065
+        }
+      },
+      "tip_utc": "2026-11-12T00:00:00Z"
+    },
+    {
+      "book": "Bovada",
+      "date_central": "2026-11-11",
+      "final_score": "82.0-73.0",
+      "frozen_home_spread": -4.0,
+      "frozen_total": 152.5,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "Milwaukee @ Indiana State",
+      "game_id": "378001",
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": 6.848,
+          "margin_mae": 19.848,
+          "total": "L",
+          "total_edge": -7.217,
+          "total_mae": 9.717
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": 5.825,
+          "margin_mae": 18.825,
+          "total": "L",
+          "total_edge": -0.605,
+          "total_mae": 3.105
+        },
+        "player_opp_v3": {
+          "ats": "L",
+          "ats_edge": 6.235,
+          "margin_mae": 19.235,
+          "total": "W",
+          "total_edge": 0.334,
+          "total_mae": 2.166
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": 5.965,
+          "margin_mae": 18.965,
+          "total": "L",
+          "total_edge": -0.898,
+          "total_mae": 3.398
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": 6.159,
+          "margin_mae": 19.159,
+          "total": "W",
+          "total_edge": 0.115,
+          "total_mae": 2.385
+        }
+      },
+      "tip_utc": "2026-11-12T00:00:00Z"
+    },
+    {
+      "book": "Bovada",
+      "date_central": "2026-11-11",
+      "final_score": "73.0-70.0",
+      "frozen_home_spread": -1.5,
+      "frozen_total": 147.5,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "UNC Asheville @ West Georgia",
+      "game_id": "374897",
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": 5.778,
+          "margin_mae": 10.278,
+          "total": "W",
+          "total_edge": -2.298,
+          "total_mae": 2.202
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": 2.25,
+          "margin_mae": 6.75,
+          "total": "W",
+          "total_edge": -1.329,
+          "total_mae": 3.171
+        },
+        "player_opp_v3": {
+          "ats": "L",
+          "ats_edge": 1.338,
+          "margin_mae": 5.838,
+          "total": "W",
+          "total_edge": -1.473,
+          "total_mae": 3.027
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": -1.254,
+          "margin_mae": 3.246,
+          "total": "W",
+          "total_edge": -3.787,
+          "total_mae": 0.713
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": -1.905,
+          "margin_mae": 2.595,
+          "total": "W",
+          "total_edge": -2.817,
+          "total_mae": 1.683
+        }
+      },
+      "tip_utc": "2026-11-12T00:00:00Z"
+    },
+    {
+      "book": "Bovada",
+      "date_central": "2026-11-11",
+      "final_score": "90.0-95.0",
+      "frozen_home_spread": -5.0,
+      "frozen_total": 165.5,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "William & Mary @ Florida Atlantic",
+      "game_id": "374896",
+      "models": {
+        "baseline": {
+          "ats": "P",
+          "ats_edge": 0.797,
+          "margin_mae": 0.797,
+          "total": "L",
+          "total_edge": -18.633,
+          "total_mae": 38.133
+        },
+        "player_all_v4": {
+          "ats": "P",
+          "ats_edge": 8.773,
+          "margin_mae": 8.773,
+          "total": "L",
+          "total_edge": -13.225,
+          "total_mae": 32.725
+        },
+        "player_opp_v3": {
+          "ats": "P",
+          "ats_edge": 8.269,
+          "margin_mae": 8.269,
+          "total": "L",
+          "total_edge": -12.088,
+          "total_mae": 31.588
+        },
+        "player_rot_v4": {
+          "ats": "P",
+          "ats_edge": 9.938,
+          "margin_mae": 9.938,
+          "total": "L",
+          "total_edge": -14.125,
+          "total_mae": 33.625
+        },
+        "player_v2": {
+          "ats": "P",
+          "ats_edge": 8.592,
+          "margin_mae": 8.592,
+          "total": "L",
+          "total_edge": -13.33,
+          "total_mae": 32.83
+        }
+      },
+      "tip_utc": "2026-11-12T00:00:00Z"
+    },
+    {
+      "book": "Bovada",
+      "date_central": "2026-11-11",
+      "final_score": "49.0-87.0",
+      "frozen_home_spread": -30.5,
+      "frozen_total": 149.5,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "NJIT @ VCU",
+      "game_id": "374895",
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": -13.975,
+          "margin_mae": 21.475,
+          "total": "W",
+          "total_edge": -6.541,
+          "total_mae": 6.959
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": -5.46,
+          "margin_mae": 12.96,
+          "total": "W",
+          "total_edge": -0.287,
+          "total_mae": 13.213
+        },
+        "player_opp_v3": {
+          "ats": "L",
+          "ats_edge": -2.667,
+          "margin_mae": 10.167,
+          "total": "L",
+          "total_edge": 2.63,
+          "total_mae": 16.13
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": -4.829,
+          "margin_mae": 12.329,
+          "total": "W",
+          "total_edge": -0.155,
+          "total_mae": 13.345
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": -2.525,
+          "margin_mae": 10.025,
+          "total": "L",
+          "total_edge": 1.944,
+          "total_mae": 15.444
+        }
+      },
+      "tip_utc": "2026-11-12T00:00:00Z"
+    },
+    {
+      "book": "Bovada",
+      "date_central": "2026-11-11",
+      "final_score": "71.0-61.0",
+      "frozen_home_spread": 4.0,
+      "frozen_total": 149.5,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "James Madison @ Delaware",
+      "game_id": "374894",
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": 23.43,
+          "margin_mae": 29.43,
+          "total": "W",
+          "total_edge": -2.581,
+          "total_mae": 14.919
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": 11.468,
+          "margin_mae": 17.468,
+          "total": "L",
+          "total_edge": 8.563,
+          "total_mae": 26.063
+        },
+        "player_opp_v3": {
+          "ats": "L",
+          "ats_edge": 9.544,
+          "margin_mae": 15.544,
+          "total": "L",
+          "total_edge": 6.101,
+          "total_mae": 23.601
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": 9.518,
+          "margin_mae": 15.518,
+          "total": "L",
+          "total_edge": 7.256,
+          "total_mae": 24.756
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": 8.134,
+          "margin_mae": 14.134,
+          "total": "L",
+          "total_edge": 4.805,
+          "total_mae": 22.305
+        }
+      },
+      "tip_utc": "2026-11-12T00:00:00Z"
+    },
+    {
+      "book": "Bovada",
+      "date_central": "2026-11-11",
+      "final_score": "59.0-69.0",
+      "frozen_home_spread": -5.0,
+      "frozen_total": 138.0,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "Stony Brook @ Princeton",
+      "game_id": "374893",
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": 8.075,
+          "margin_mae": 3.075,
+          "total": "L",
+          "total_edge": 0.775,
+          "total_mae": 10.775
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": 5.136,
+          "margin_mae": 0.136,
+          "total": "W",
+          "total_edge": -1.903,
+          "total_mae": 8.097
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": 5.83,
+          "margin_mae": 0.83,
+          "total": "L",
+          "total_edge": 1.685,
+          "total_mae": 11.685
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": 5.057,
+          "margin_mae": 0.057,
+          "total": "W",
+          "total_edge": -1.372,
+          "total_mae": 8.628
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": 4.909,
+          "margin_mae": 0.091,
+          "total": "L",
+          "total_edge": 2.186,
+          "total_mae": 12.186
+        }
+      },
+      "tip_utc": "2026-11-12T00:00:00Z"
+    },
+    {
+      "book": "Bovada",
+      "date_central": "2026-11-11",
+      "final_score": "71.0-60.0",
+      "frozen_home_spread": 4.5,
+      "frozen_total": 139.5,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "Old Dominion @ Norfolk State",
+      "game_id": "374890",
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": 6.019,
+          "margin_mae": 12.519,
+          "total": "W",
+          "total_edge": -9.726,
+          "total_mae": 1.226
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": 0.839,
+          "margin_mae": 7.339,
+          "total": "W",
+          "total_edge": -7.584,
+          "total_mae": 0.916
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": -0.896,
+          "margin_mae": 5.604,
+          "total": "W",
+          "total_edge": -11.664,
+          "total_mae": 3.164
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": 0.425,
+          "margin_mae": 6.925,
+          "total": "W",
+          "total_edge": -8.81,
+          "total_mae": 0.31
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": -0.733,
+          "margin_mae": 5.767,
+          "total": "W",
+          "total_edge": -12.823,
+          "total_mae": 4.323
+        }
+      },
+      "tip_utc": "2026-11-12T00:00:00Z"
+    },
+    {
+      "book": "Bovada",
+      "date_central": "2026-11-11",
+      "final_score": "59.0-90.0",
+      "frozen_home_spread": -28.5,
+      "frozen_total": 157.5,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "Colgate @ St. John's",
+      "game_id": "374874",
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": -7.46,
+          "margin_mae": 9.96,
+          "total": "W",
+          "total_edge": -9.534,
+          "total_mae": 1.034
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": -7.007,
+          "margin_mae": 9.507,
+          "total": "L",
+          "total_edge": 2.091,
+          "total_mae": 10.591
+        },
+        "player_opp_v3": {
+          "ats": "L",
+          "ats_edge": -7.746,
+          "margin_mae": 10.246,
+          "total": "L",
+          "total_edge": 0.499,
+          "total_mae": 8.999
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": -6.729,
+          "margin_mae": 9.229,
+          "total": "L",
+          "total_edge": 2.011,
+          "total_mae": 10.511
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": -7.417,
+          "margin_mae": 9.917,
+          "total": "W",
+          "total_edge": -0.195,
+          "total_mae": 8.305
+        }
+      },
+      "tip_utc": "2026-11-12T00:00:00Z"
+    },
+    {
+      "book": "Bovada",
+      "date_central": "2026-11-11",
+      "final_score": "53.0-68.0",
+      "frozen_home_spread": -4.5,
+      "frozen_total": 147.5,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "Campbell @ East Tennessee State",
+      "game_id": "374873",
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": 9.355,
+          "margin_mae": 1.145,
+          "total": "W",
+          "total_edge": -5.6,
+          "total_mae": 20.9
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": 14.748,
+          "margin_mae": 4.248,
+          "total": "L",
+          "total_edge": 4.895,
+          "total_mae": 31.395
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": 12.65,
+          "margin_mae": 2.15,
+          "total": "L",
+          "total_edge": 1.905,
+          "total_mae": 28.405
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": 13.026,
+          "margin_mae": 2.526,
+          "total": "L",
+          "total_edge": 3.144,
+          "total_mae": 29.644
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": 11.612,
+          "margin_mae": 1.112,
+          "total": "L",
+          "total_edge": 1.013,
+          "total_mae": 27.513
+        }
+      },
+      "tip_utc": "2026-11-12T00:00:00Z"
+    },
+    {
+      "book": "Bovada",
+      "date_central": "2026-11-11",
+      "final_score": "80.0-67.0",
+      "frozen_home_spread": 12.5,
+      "frozen_total": 150.5,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "Furman @ Holy Cross",
+      "game_id": "374867",
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": 7.407,
+          "margin_mae": 7.907,
+          "total": "W",
+          "total_edge": -0.717,
+          "total_mae": 2.783
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": -4.842,
+          "margin_mae": 4.342,
+          "total": "W",
+          "total_edge": -0.094,
+          "total_mae": 3.406
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": -4.653,
+          "margin_mae": 4.153,
+          "total": "L",
+          "total_edge": 0.176,
+          "total_mae": 3.676
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": -6.373,
+          "margin_mae": 5.873,
+          "total": "W",
+          "total_edge": -1.073,
+          "total_mae": 2.427
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": -6.004,
+          "margin_mae": 5.504,
+          "total": "W",
+          "total_edge": -0.194,
+          "total_mae": 3.306
+        }
+      },
+      "tip_utc": "2026-11-12T00:00:00Z"
+    },
+    {
+      "book": "Bovada",
+      "date_central": "2026-11-11",
+      "final_score": "41.0-77.0",
+      "frozen_home_spread": -22.5,
+      "frozen_total": 126.5,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "Saint Peter's @ South Carolina",
+      "game_id": "374866",
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": -2.954,
+          "margin_mae": 16.454,
+          "total": "L",
+          "total_edge": 4.711,
+          "total_mae": 13.211
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": -0.509,
+          "margin_mae": 14.009,
+          "total": "L",
+          "total_edge": 6.92,
+          "total_mae": 15.42
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": 1.684,
+          "margin_mae": 11.816,
+          "total": "L",
+          "total_edge": 10.355,
+          "total_mae": 18.855
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": -0.462,
+          "margin_mae": 13.962,
+          "total": "L",
+          "total_edge": 7.45,
+          "total_mae": 15.95
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": 1.295,
+          "margin_mae": 12.205,
+          "total": "L",
+          "total_edge": 9.766,
+          "total_mae": 18.266
+        }
+      },
+      "tip_utc": "2026-11-12T00:00:00Z"
+    },
+    {
+      "book": "Bovada",
+      "date_central": "2026-11-11",
+      "final_score": "59.0-99.0",
+      "frozen_home_spread": -25.5,
+      "frozen_total": 148.5,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "South Carolina State @ Notre Dame",
+      "game_id": "374863",
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": -15.261,
+          "margin_mae": 29.761,
+          "total": "L",
+          "total_edge": -1.65,
+          "total_mae": 11.15
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": -3.815,
+          "margin_mae": 18.315,
+          "total": "W",
+          "total_edge": 3.69,
+          "total_mae": 5.81
+        },
+        "player_opp_v3": {
+          "ats": "L",
+          "ats_edge": -1.63,
+          "margin_mae": 16.13,
+          "total": "W",
+          "total_edge": 7.159,
+          "total_mae": 2.341
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": -3.329,
+          "margin_mae": 17.829,
+          "total": "W",
+          "total_edge": 3.713,
+          "total_mae": 5.787
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": -1.96,
+          "margin_mae": 16.46,
+          "total": "W",
+          "total_edge": 6.513,
+          "total_mae": 2.987
+        }
+      },
+      "tip_utc": "2026-11-12T00:00:00Z"
+    },
+    {
+      "book": "Bovada",
+      "date_central": "2026-11-11",
+      "final_score": "70.0-84.0",
+      "frozen_home_spread": -3.5,
+      "frozen_total": 156.5,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "Marquette @ Michigan",
+      "game_id": "372770",
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": -0.388,
+          "margin_mae": 10.888,
+          "total": "W",
+          "total_edge": -16.507,
+          "total_mae": 14.007
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": 1.378,
+          "margin_mae": 9.122,
+          "total": "W",
+          "total_edge": -8.487,
+          "total_mae": 5.987
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": 2.04,
+          "margin_mae": 8.46,
+          "total": "W",
+          "total_edge": -5.662,
+          "total_mae": 3.162
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": 2.17,
+          "margin_mae": 8.33,
+          "total": "W",
+          "total_edge": -7.442,
+          "total_mae": 4.942
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": 1.925,
+          "margin_mae": 8.575,
+          "total": "W",
+          "total_edge": -5.382,
+          "total_mae": 2.882
+        }
+      },
+      "tip_utc": "2026-11-12T00:00:00Z"
+    },
+    {
+      "book": "Bovada",
+      "date_central": "2026-11-11",
+      "final_score": "62.0-72.0",
+      "frozen_home_spread": -11.5,
+      "frozen_total": 147.5,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "UMass Lowell @ Massachusetts",
+      "game_id": "372769",
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": -8.819,
+          "margin_mae": 7.319,
+          "total": "W",
+          "total_edge": -9.963,
+          "total_mae": 3.537
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": -8.239,
+          "margin_mae": 6.739,
+          "total": "W",
+          "total_edge": -6.556,
+          "total_mae": 6.944
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": -5.988,
+          "margin_mae": 4.488,
+          "total": "W",
+          "total_edge": -4.832,
+          "total_mae": 8.668
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": -9.262,
+          "margin_mae": 7.762,
+          "total": "W",
+          "total_edge": -7.368,
+          "total_mae": 6.132
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": -7.032,
+          "margin_mae": 5.532,
+          "total": "W",
+          "total_edge": -6.014,
+          "total_mae": 7.486
+        }
+      },
+      "tip_utc": "2026-11-12T00:00:00Z"
+    },
+    {
+      "book": "Bovada",
+      "date_central": "2026-11-11",
+      "final_score": "64.0-88.0",
+      "frozen_home_spread": -8.5,
+      "frozen_total": 156.0,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "Cornell @ St. Bonaventure",
+      "game_id": "372768",
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": 2.798,
+          "margin_mae": 12.702,
+          "total": "W",
+          "total_edge": -10.851,
+          "total_mae": 6.851
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": -1.019,
+          "margin_mae": 16.519,
+          "total": "W",
+          "total_edge": -5.634,
+          "total_mae": 1.634
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": 0.029,
+          "margin_mae": 15.471,
+          "total": "W",
+          "total_edge": -4.773,
+          "total_mae": 0.773
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": 0.605,
+          "margin_mae": 14.895,
+          "total": "W",
+          "total_edge": -5.576,
+          "total_mae": 1.576
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": 1.434,
+          "margin_mae": 14.066,
+          "total": "W",
+          "total_edge": -5.112,
+          "total_mae": 1.112
+        }
+      },
+      "tip_utc": "2026-11-12T00:00:00Z"
+    },
+    {
+      "book": "Bovada",
+      "date_central": "2026-11-11",
+      "final_score": "66.0-64.0",
+      "frozen_home_spread": -1.5,
+      "frozen_total": 140.5,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "American University @ Drexel",
+      "game_id": "372763",
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": 13.53,
+          "margin_mae": 17.03,
+          "total": "L",
+          "total_edge": 3.61,
+          "total_mae": 14.11
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": -0.873,
+          "margin_mae": 2.627,
+          "total": "L",
+          "total_edge": 3.706,
+          "total_mae": 14.206
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": -5.35,
+          "margin_mae": 1.85,
+          "total": "W",
+          "total_edge": -0.087,
+          "total_mae": 10.413
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": -2.357,
+          "margin_mae": 1.143,
+          "total": "L",
+          "total_edge": 2.654,
+          "total_mae": 13.154
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": -5.998,
+          "margin_mae": 2.498,
+          "total": "W",
+          "total_edge": -0.571,
+          "total_mae": 9.929
+        }
+      },
+      "tip_utc": "2026-11-12T00:00:00Z"
+    },
+    {
+      "book": "Bovada",
+      "date_central": "2026-11-11",
+      "final_score": "70.0-74.0",
+      "frozen_home_spread": -7.5,
+      "frozen_total": 164.5,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "Southern Indiana @ IU Indianapolis",
+      "game_id": "374888",
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": 1.991,
+          "margin_mae": 5.491,
+          "total": "W",
+          "total_edge": -15.299,
+          "total_mae": 5.201
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": -4.754,
+          "margin_mae": 1.254,
+          "total": "W",
+          "total_edge": -9.213,
+          "total_mae": 11.287
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": -6.478,
+          "margin_mae": 2.978,
+          "total": "W",
+          "total_edge": -11.43,
+          "total_mae": 9.07
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": -3.573,
+          "margin_mae": 0.073,
+          "total": "W",
+          "total_edge": -9.909,
+          "total_mae": 10.591
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": -4.875,
+          "margin_mae": 1.375,
+          "total": "W",
+          "total_edge": -12.369,
+          "total_mae": 8.131
+        }
+      },
+      "tip_utc": "2026-11-11T23:30:00Z"
+    },
+    {
+      "book": "Draft Kings",
+      "date_central": "2026-11-11",
+      "final_score": "91.0-81.0",
+      "frozen_home_spread": 1.5,
+      "frozen_total": 157.5,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "Charleston @ Temple",
+      "game_id": "374859",
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": 2.926,
+          "margin_mae": 11.426,
+          "total": "L",
+          "total_edge": -12.61,
+          "total_mae": 27.11
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": -2.268,
+          "margin_mae": 6.232,
+          "total": "L",
+          "total_edge": -7.446,
+          "total_mae": 21.946
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": -4.985,
+          "margin_mae": 3.515,
+          "total": "L",
+          "total_edge": -7.866,
+          "total_mae": 22.366
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": -3.726,
+          "margin_mae": 4.774,
+          "total": "L",
+          "total_edge": -8.138,
+          "total_mae": 22.638
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": -7.111,
+          "margin_mae": 1.389,
+          "total": "L",
+          "total_edge": -8.848,
+          "total_mae": 23.348
+        }
+      },
+      "tip_utc": "2026-11-11T23:30:00Z"
+    },
+    {
+      "book": "Bovada",
+      "date_central": "2026-11-11",
+      "final_score": "51.0-65.0",
+      "frozen_home_spread": -7.5,
+      "frozen_total": 149.5,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "North Carolina Central @ VMI",
+      "game_id": "374886",
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": 8.838,
+          "margin_mae": 2.338,
+          "total": "L",
+          "total_edge": 2.539,
+          "total_mae": 36.039
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": 4.722,
+          "margin_mae": 1.778,
+          "total": "L",
+          "total_edge": 5.734,
+          "total_mae": 39.234
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": 4.592,
+          "margin_mae": 1.908,
+          "total": "L",
+          "total_edge": 6.958,
+          "total_mae": 40.458
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": 9.611,
+          "margin_mae": 3.111,
+          "total": "L",
+          "total_edge": 6.899,
+          "total_mae": 40.399
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": 9.113,
+          "margin_mae": 2.613,
+          "total": "L",
+          "total_edge": 7.854,
+          "total_mae": 41.354
+        }
+      },
+      "tip_utc": "2026-11-11T23:00:00Z"
+    },
+    {
+      "book": "Bovada",
+      "date_central": "2026-11-11",
+      "final_score": "76.0-81.0",
+      "frozen_home_spread": 9.5,
+      "frozen_total": 146.5,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "Pennsylvania @ Navy",
+      "game_id": "374884",
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": 25.778,
+          "margin_mae": 11.278,
+          "total": "L",
+          "total_edge": -0.059,
+          "total_mae": 10.559
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": 14.667,
+          "margin_mae": 0.167,
+          "total": "W",
+          "total_edge": 2.843,
+          "total_mae": 7.657
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": 13.165,
+          "margin_mae": 1.335,
+          "total": "W",
+          "total_edge": 3.596,
+          "total_mae": 6.904
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": 15.498,
+          "margin_mae": 0.998,
+          "total": "W",
+          "total_edge": 2.429,
+          "total_mae": 8.071
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": 13.746,
+          "margin_mae": 0.754,
+          "total": "W",
+          "total_edge": 3.92,
+          "total_mae": 6.58
+        }
+      },
+      "tip_utc": "2026-11-11T22:58:00Z"
+    },
+    {
+      "book": "Bovada",
+      "date_central": "2026-11-11",
+      "final_score": "75.0-88.0",
+      "frozen_home_spread": -18.5,
+      "frozen_total": 152.5,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "Bethune-Cookman @ San Diego State",
+      "game_id": "374861",
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": -0.631,
+          "margin_mae": 4.869,
+          "total": "L",
+          "total_edge": -3.491,
+          "total_mae": 13.991
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": -6.649,
+          "margin_mae": 1.149,
+          "total": "W",
+          "total_edge": 4.419,
+          "total_mae": 6.081
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": -8.474,
+          "margin_mae": 2.974,
+          "total": "W",
+          "total_edge": 3.325,
+          "total_mae": 7.175
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": -5.042,
+          "margin_mae": 0.458,
+          "total": "W",
+          "total_edge": 3.816,
+          "total_mae": 6.684
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": -6.455,
+          "margin_mae": 0.955,
+          "total": "W",
+          "total_edge": 3.298,
+          "total_mae": 7.202
+        }
+      },
+      "tip_utc": "2026-11-11T22:00:00Z"
+    },
+    {
+      "book": "Bovada",
+      "date_central": "2026-11-11",
+      "final_score": "67.0-72.0",
+      "frozen_home_spread": -10.5,
+      "frozen_total": 151.5,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "North Carolina A&T @ East Carolina",
+      "game_id": "374883",
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": 6.004,
+          "margin_mae": 11.504,
+          "total": "W",
+          "total_edge": -18.07,
+          "total_mae": 5.57
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": 9.17,
+          "margin_mae": 14.67,
+          "total": "W",
+          "total_edge": -3.272,
+          "total_mae": 9.228
+        },
+        "player_opp_v3": {
+          "ats": "L",
+          "ats_edge": 6.438,
+          "margin_mae": 11.938,
+          "total": "W",
+          "total_edge": -8.214,
+          "total_mae": 4.286
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": 8.209,
+          "margin_mae": 13.709,
+          "total": "W",
+          "total_edge": -5.315,
+          "total_mae": 7.185
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": 5.181,
+          "margin_mae": 10.681,
+          "total": "W",
+          "total_edge": -11.057,
+          "total_mae": 1.443
+        }
+      },
+      "tip_utc": "2026-11-11T21:00:00Z"
+    },
+    {
+      "book": "Bovada",
+      "date_central": "2026-11-11",
+      "final_score": "83.0-80.0",
+      "frozen_home_spread": -7.5,
+      "frozen_total": 151.5,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "Saint Joseph's @ South Florida",
+      "game_id": "374882",
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": 1.35,
+          "margin_mae": 11.85,
+          "total": "L",
+          "total_edge": -4.607,
+          "total_mae": 16.107
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": 7.824,
+          "margin_mae": 18.324,
+          "total": "W",
+          "total_edge": 3.938,
+          "total_mae": 7.562
+        },
+        "player_opp_v3": {
+          "ats": "L",
+          "ats_edge": 6.818,
+          "margin_mae": 17.318,
+          "total": "W",
+          "total_edge": 3.086,
+          "total_mae": 8.414
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": 6.116,
+          "margin_mae": 16.616,
+          "total": "W",
+          "total_edge": 3.595,
+          "total_mae": 7.905
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": 5.794,
+          "margin_mae": 16.294,
+          "total": "W",
+          "total_edge": 3.567,
+          "total_mae": 7.933
+        }
+      },
+      "tip_utc": "2026-11-11T20:00:00Z"
+    },
+    {
+      "book": "Bovada",
+      "date_central": "2026-11-11",
+      "final_score": "93.0-107.0",
+      "frozen_home_spread": 10.5,
+      "frozen_total": 160.0,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "Loyola Chicago @ Air Force",
+      "game_id": "372771",
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": 20.381,
+          "margin_mae": 4.119,
+          "total": "L",
+          "total_edge": -12.08,
+          "total_mae": 52.08
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": 2.734,
+          "margin_mae": 21.766,
+          "total": "L",
+          "total_edge": -10.047,
+          "total_mae": 50.047
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": 3.394,
+          "margin_mae": 21.106,
+          "total": "L",
+          "total_edge": -9.385,
+          "total_mae": 49.385
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": 3.601,
+          "margin_mae": 20.899,
+          "total": "L",
+          "total_edge": -10.08,
+          "total_mae": 50.08
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": 3.798,
+          "margin_mae": 20.702,
+          "total": "L",
+          "total_edge": -9.741,
+          "total_mae": 49.741
+        }
+      },
+      "tip_utc": "2026-11-11T20:00:00Z"
+    },
+    {
+      "book": "Bovada",
+      "date_central": "2026-11-11",
+      "final_score": "69.0-81.0",
+      "frozen_home_spread": -11.5,
+      "frozen_total": 145.5,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "Incarnate Word @ UC Davis",
+      "game_id": "372764",
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": 4.65,
+          "margin_mae": 4.15,
+          "total": "L",
+          "total_edge": -5.347,
+          "total_mae": 9.847
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": 3.492,
+          "margin_mae": 2.992,
+          "total": "L",
+          "total_edge": -4.722,
+          "total_mae": 9.222
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": 2.713,
+          "margin_mae": 2.213,
+          "total": "L",
+          "total_edge": -4.37,
+          "total_mae": 8.87
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": 2.766,
+          "margin_mae": 2.266,
+          "total": "L",
+          "total_edge": -4.979,
+          "total_mae": 9.479
+        },
+        "player_v2": {
+          "ats": "W",
+          "ats_edge": 2.02,
+          "margin_mae": 1.52,
+          "total": "L",
+          "total_edge": -4.907,
+          "total_mae": 9.407
+        }
+      },
+      "tip_utc": "2026-11-11T19:00:00Z"
+    },
+    {
+      "book": "Draft Kings",
+      "date_central": "2026-11-11",
+      "final_score": "85.0-76.0",
+      "frozen_home_spread": 1.5,
+      "frozen_total": 139.5,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "Dartmouth @ UAlbany",
+      "game_id": "374875",
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": 7.246,
+          "margin_mae": 14.746,
+          "total": "W",
+          "total_edge": 1.869,
+          "total_mae": 19.631
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": 5.744,
+          "margin_mae": 13.244,
+          "total": "L",
+          "total_edge": -0.922,
+          "total_mae": 22.422
+        },
+        "player_opp_v3": {
+          "ats": "L",
+          "ats_edge": 5.972,
+          "margin_mae": 13.472,
+          "total": "L",
+          "total_edge": -0.23,
+          "total_mae": 21.73
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": 6.445,
+          "margin_mae": 13.945,
+          "total": "L",
+          "total_edge": -1.061,
+          "total_mae": 22.561
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": 6.034,
+          "margin_mae": 13.534,
+          "total": "L",
+          "total_edge": -1.444,
+          "total_mae": 22.944
+        }
+      },
+      "tip_utc": "2026-11-11T18:00:00Z"
+    },
+    {
+      "book": "Draft Kings",
+      "date_central": "2026-11-11",
+      "final_score": "65.0-87.0",
+      "frozen_home_spread": -8.5,
+      "frozen_total": 145.5,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "Florida A&M @ Kansas City",
+      "game_id": "374870",
+      "models": {
+        "baseline": {
+          "ats": "W",
+          "ats_edge": 1.727,
+          "margin_mae": 11.773,
+          "total": "W",
+          "total_edge": 4.769,
+          "total_mae": 1.731
+        },
+        "player_all_v4": {
+          "ats": "W",
+          "ats_edge": 3.801,
+          "margin_mae": 9.699,
+          "total": "W",
+          "total_edge": 8.821,
+          "total_mae": 2.321
+        },
+        "player_opp_v3": {
+          "ats": "W",
+          "ats_edge": 0.588,
+          "margin_mae": 12.912,
+          "total": "W",
+          "total_edge": 5.508,
+          "total_mae": 0.992
+        },
+        "player_rot_v4": {
+          "ats": "W",
+          "ats_edge": 1.653,
+          "margin_mae": 11.847,
+          "total": "W",
+          "total_edge": 7.415,
+          "total_mae": 0.915
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": -1.126,
+          "margin_mae": 14.626,
+          "total": "W",
+          "total_edge": 4.325,
+          "total_mae": 2.175
+        }
+      },
+      "tip_utc": "2026-11-11T17:00:00Z"
+    },
+    {
+      "book": "Bovada",
+      "date_central": "2026-11-11",
+      "final_score": "80.0-76.0",
+      "frozen_home_spread": -10.5,
+      "frozen_total": 138.5,
+      "frozen_utc": "2026-11-11T14:16:15.438625Z",
+      "game": "Fairleigh Dickinson @ East Texas A&M",
+      "game_id": "374876",
+      "models": {
+        "baseline": {
+          "ats": "L",
+          "ats_edge": 7.793,
+          "margin_mae": 22.293,
+          "total": "W",
+          "total_edge": 5.935,
+          "total_mae": 11.565
+        },
+        "player_all_v4": {
+          "ats": "L",
+          "ats_edge": 4.591,
+          "margin_mae": 19.091,
+          "total": "W",
+          "total_edge": 1.315,
+          "total_mae": 16.185
+        },
+        "player_opp_v3": {
+          "ats": "L",
+          "ats_edge": 3.387,
+          "margin_mae": 17.887,
+          "total": "W",
+          "total_edge": 0.876,
+          "total_mae": 16.624
+        },
+        "player_rot_v4": {
+          "ats": "L",
+          "ats_edge": 3.265,
+          "margin_mae": 17.765,
+          "total": "W",
+          "total_edge": 1.007,
+          "total_mae": 16.493
+        },
+        "player_v2": {
+          "ats": "L",
+          "ats_edge": 2.61,
+          "margin_mae": 17.11,
+          "total": "W",
+          "total_edge": 1.169,
+          "total_mae": 16.331
+        }
+      },
+      "tip_utc": "2026-11-11T16:30:00Z"
+    },
     {
       "book": "Bovada",
       "date_central": "2026-11-10",
@@ -2881,2478 +5555,40 @@
         }
       },
       "tip_utc": "2026-11-11T01:30:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-10",
-      "final_score": "42.0-89.0",
-      "frozen_home_spread": -23.5,
-      "frozen_total": 150.0,
-      "frozen_utc": "2026-11-10T14:10:53.330872Z",
-      "game": "Fairfield @ Wisconsin",
-      "game_id": "374831",
-      "models": {
-        "baseline": {
-          "ats": "L",
-          "ats_edge": -9.267,
-          "margin_mae": 32.767,
-          "total": "W",
-          "total_edge": -9.73,
-          "total_mae": 9.27
-        },
-        "player_all_v4": {
-          "ats": "L",
-          "ats_edge": -8.885,
-          "margin_mae": 32.385,
-          "total": "W",
-          "total_edge": -2.853,
-          "total_mae": 16.147
-        },
-        "player_opp_v3": {
-          "ats": "L",
-          "ats_edge": -9.6,
-          "margin_mae": 33.1,
-          "total": "W",
-          "total_edge": -1.829,
-          "total_mae": 17.171
-        },
-        "player_rot_v4": {
-          "ats": "L",
-          "ats_edge": -11.308,
-          "margin_mae": 34.808,
-          "total": "W",
-          "total_edge": -3.933,
-          "total_mae": 15.067
-        },
-        "player_v2": {
-          "ats": "L",
-          "ats_edge": -11.887,
-          "margin_mae": 35.387,
-          "total": "W",
-          "total_edge": -2.664,
-          "total_mae": 16.336
-        }
-      },
-      "tip_utc": "2026-11-11T01:30:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-10",
-      "final_score": "82.0-65.0",
-      "frozen_home_spread": -6.5,
-      "frozen_total": 153.5,
-      "frozen_utc": "2026-11-10T14:10:53.330872Z",
-      "game": "UT Martin @ Arkansas State",
-      "game_id": "377992",
-      "models": {
-        "baseline": {
-          "ats": "L",
-          "ats_edge": 5.001,
-          "margin_mae": 28.501,
-          "total": "W",
-          "total_edge": -0.352,
-          "total_mae": 6.148
-        },
-        "player_all_v4": {
-          "ats": "L",
-          "ats_edge": 11.722,
-          "margin_mae": 35.222,
-          "total": "L",
-          "total_edge": 3.629,
-          "total_mae": 10.129
-        },
-        "player_opp_v3": {
-          "ats": "L",
-          "ats_edge": 11.487,
-          "margin_mae": 34.987,
-          "total": "L",
-          "total_edge": 4.026,
-          "total_mae": 10.526
-        },
-        "player_rot_v4": {
-          "ats": "L",
-          "ats_edge": 11.163,
-          "margin_mae": 34.663,
-          "total": "L",
-          "total_edge": 3.445,
-          "total_mae": 9.945
-        },
-        "player_v2": {
-          "ats": "L",
-          "ats_edge": 11.458,
-          "margin_mae": 34.958,
-          "total": "L",
-          "total_edge": 4.474,
-          "total_mae": 10.974
-        }
-      },
-      "tip_utc": "2026-11-11T01:00:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-10",
-      "final_score": "76.0-89.0",
-      "frozen_home_spread": -3.5,
-      "frozen_total": 151.0,
-      "frozen_utc": "2026-11-10T14:10:53.330872Z",
-      "game": "Green Bay @ Northern Iowa",
-      "game_id": "377989",
-      "models": {
-        "baseline": {
-          "ats": "W",
-          "ats_edge": 3.281,
-          "margin_mae": 6.219,
-          "total": "L",
-          "total_edge": -1.528,
-          "total_mae": 15.528
-        },
-        "player_all_v4": {
-          "ats": "W",
-          "ats_edge": 2.692,
-          "margin_mae": 6.808,
-          "total": "W",
-          "total_edge": 7.736,
-          "total_mae": 6.264
-        },
-        "player_opp_v3": {
-          "ats": "W",
-          "ats_edge": 1.58,
-          "margin_mae": 7.92,
-          "total": "W",
-          "total_edge": 5.238,
-          "total_mae": 8.762
-        },
-        "player_rot_v4": {
-          "ats": "W",
-          "ats_edge": 0.231,
-          "margin_mae": 9.269,
-          "total": "W",
-          "total_edge": 6.028,
-          "total_mae": 7.972
-        },
-        "player_v2": {
-          "ats": "L",
-          "ats_edge": -0.248,
-          "margin_mae": 9.748,
-          "total": "W",
-          "total_edge": 3.984,
-          "total_mae": 10.016
-        }
-      },
-      "tip_utc": "2026-11-11T01:00:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-10",
-      "final_score": "75.0-88.0",
-      "frozen_home_spread": 3.5,
-      "frozen_total": 155.5,
-      "frozen_utc": "2026-11-10T14:10:53.330872Z",
-      "game": "Belmont @ Lipscomb",
-      "game_id": "374853",
-      "models": {
-        "baseline": {
-          "ats": "W",
-          "ats_edge": 10.52,
-          "margin_mae": 5.98,
-          "total": "L",
-          "total_edge": -14.179,
-          "total_mae": 21.679
-        },
-        "player_all_v4": {
-          "ats": "W",
-          "ats_edge": 5.956,
-          "margin_mae": 10.544,
-          "total": "L",
-          "total_edge": -12.115,
-          "total_mae": 19.615
-        },
-        "player_opp_v3": {
-          "ats": "W",
-          "ats_edge": 4.829,
-          "margin_mae": 11.671,
-          "total": "L",
-          "total_edge": -11.941,
-          "total_mae": 19.441
-        },
-        "player_rot_v4": {
-          "ats": "W",
-          "ats_edge": 5.702,
-          "margin_mae": 10.798,
-          "total": "L",
-          "total_edge": -13.024,
-          "total_mae": 20.524
-        },
-        "player_v2": {
-          "ats": "W",
-          "ats_edge": 4.685,
-          "margin_mae": 11.815,
-          "total": "L",
-          "total_edge": -12.091,
-          "total_mae": 19.591
-        }
-      },
-      "tip_utc": "2026-11-11T01:00:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-10",
-      "final_score": "63.0-98.0",
-      "frozen_home_spread": -24.5,
-      "frozen_total": 160.5,
-      "frozen_utc": "2026-11-10T14:10:53.330872Z",
-      "game": "Prairie View A&M @ SMU",
-      "game_id": "374840",
-      "models": {
-        "baseline": {
-          "ats": "L",
-          "ats_edge": -12.651,
-          "margin_mae": 23.151,
-          "total": "L",
-          "total_edge": -9.52,
-          "total_mae": 10.02
-        },
-        "player_all_v4": {
-          "ats": "L",
-          "ats_edge": -4.563,
-          "margin_mae": 15.063,
-          "total": "L",
-          "total_edge": -2.321,
-          "total_mae": 2.821
-        },
-        "player_opp_v3": {
-          "ats": "L",
-          "ats_edge": -1.886,
-          "margin_mae": 12.386,
-          "total": "L",
-          "total_edge": -2.253,
-          "total_mae": 2.753
-        },
-        "player_rot_v4": {
-          "ats": "L",
-          "ats_edge": -2.82,
-          "margin_mae": 13.32,
-          "total": "L",
-          "total_edge": -1.587,
-          "total_mae": 2.087
-        },
-        "player_v2": {
-          "ats": "L",
-          "ats_edge": -0.262,
-          "margin_mae": 10.762,
-          "total": "L",
-          "total_edge": -2.344,
-          "total_mae": 2.844
-        }
-      },
-      "tip_utc": "2026-11-11T01:00:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-10",
-      "final_score": "87.0-76.0",
-      "frozen_home_spread": -2.5,
-      "frozen_total": 156.5,
-      "frozen_utc": "2026-11-10T14:10:53.330872Z",
-      "game": "Houston Christian @ South Dakota",
-      "game_id": "374822",
-      "models": {
-        "baseline": {
-          "ats": "L",
-          "ats_edge": 5.508,
-          "margin_mae": 19.008,
-          "total": "L",
-          "total_edge": -3.375,
-          "total_mae": 9.875
-        },
-        "player_all_v4": {
-          "ats": "L",
-          "ats_edge": 1.18,
-          "margin_mae": 14.68,
-          "total": "L",
-          "total_edge": -2.199,
-          "total_mae": 8.699
-        },
-        "player_opp_v3": {
-          "ats": "W",
-          "ats_edge": -0.234,
-          "margin_mae": 13.266,
-          "total": "L",
-          "total_edge": -4.275,
-          "total_mae": 10.775
-        },
-        "player_rot_v4": {
-          "ats": "L",
-          "ats_edge": 2.418,
-          "margin_mae": 15.918,
-          "total": "L",
-          "total_edge": -2.571,
-          "total_mae": 9.071
-        },
-        "player_v2": {
-          "ats": "L",
-          "ats_edge": 0.268,
-          "margin_mae": 13.768,
-          "total": "L",
-          "total_edge": -5.34,
-          "total_mae": 11.84
-        }
-      },
-      "tip_utc": "2026-11-11T01:00:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-10",
-      "final_score": "57.0-94.0",
-      "frozen_home_spread": -26.5,
-      "frozen_total": 164.5,
-      "frozen_utc": "2026-11-10T14:10:53.330872Z",
-      "game": "Alcorn State @ Murray State",
-      "game_id": "374821",
-      "models": {
-        "baseline": {
-          "ats": "L",
-          "ats_edge": -2.844,
-          "margin_mae": 13.344,
-          "total": "W",
-          "total_edge": -12.716,
-          "total_mae": 0.784
-        },
-        "player_all_v4": {
-          "ats": "W",
-          "ats_edge": 1.785,
-          "margin_mae": 8.715,
-          "total": "W",
-          "total_edge": -0.214,
-          "total_mae": 13.286
-        },
-        "player_opp_v3": {
-          "ats": "L",
-          "ats_edge": -0.632,
-          "margin_mae": 11.132,
-          "total": "W",
-          "total_edge": -3.42,
-          "total_mae": 10.08
-        },
-        "player_rot_v4": {
-          "ats": "W",
-          "ats_edge": 1.586,
-          "margin_mae": 8.914,
-          "total": "W",
-          "total_edge": -0.671,
-          "total_mae": 12.829
-        },
-        "player_v2": {
-          "ats": "L",
-          "ats_edge": -0.258,
-          "margin_mae": 10.758,
-          "total": "W",
-          "total_edge": -3.84,
-          "total_mae": 9.66
-        }
-      },
-      "tip_utc": "2026-11-11T01:00:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-10",
-      "final_score": "61.0-90.0",
-      "frozen_home_spread": -21.5,
-      "frozen_total": 157.0,
-      "frozen_utc": "2026-11-10T14:10:53.330872Z",
-      "game": "Yale @ Baylor",
-      "game_id": "372753",
-      "models": {
-        "baseline": {
-          "ats": "L",
-          "ats_edge": -2.686,
-          "margin_mae": 10.186,
-          "total": "W",
-          "total_edge": -10.433,
-          "total_mae": 4.433
-        },
-        "player_all_v4": {
-          "ats": "W",
-          "ats_edge": 0.453,
-          "margin_mae": 7.047,
-          "total": "L",
-          "total_edge": 1.027,
-          "total_mae": 7.027
-        },
-        "player_opp_v3": {
-          "ats": "W",
-          "ats_edge": 1.496,
-          "margin_mae": 6.004,
-          "total": "L",
-          "total_edge": 0.74,
-          "total_mae": 6.74
-        },
-        "player_rot_v4": {
-          "ats": "W",
-          "ats_edge": 5.399,
-          "margin_mae": 2.101,
-          "total": "L",
-          "total_edge": 2.934,
-          "total_mae": 8.934
-        },
-        "player_v2": {
-          "ats": "W",
-          "ats_edge": 6.026,
-          "margin_mae": 1.474,
-          "total": "L",
-          "total_edge": 0.882,
-          "total_mae": 6.882
-        }
-      },
-      "tip_utc": "2026-11-11T01:00:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-10",
-      "final_score": "47.0-84.0",
-      "frozen_home_spread": -35.5,
-      "frozen_total": 147.5,
-      "frozen_utc": "2026-11-10T14:10:53.330872Z",
-      "game": "Southern @ Iowa State",
-      "game_id": "372751",
-      "models": {
-        "baseline": {
-          "ats": "L",
-          "ats_edge": -16.075,
-          "margin_mae": 17.575,
-          "total": "W",
-          "total_edge": -1.403,
-          "total_mae": 15.097
-        },
-        "player_all_v4": {
-          "ats": "L",
-          "ats_edge": -1.346,
-          "margin_mae": 2.846,
-          "total": "L",
-          "total_edge": 0.981,
-          "total_mae": 17.481
-        },
-        "player_opp_v3": {
-          "ats": "L",
-          "ats_edge": -2.001,
-          "margin_mae": 3.501,
-          "total": "L",
-          "total_edge": 2.44,
-          "total_mae": 18.94
-        },
-        "player_rot_v4": {
-          "ats": "W",
-          "ats_edge": 1.96,
-          "margin_mae": 0.46,
-          "total": "L",
-          "total_edge": 0.654,
-          "total_mae": 17.154
-        },
-        "player_v2": {
-          "ats": "W",
-          "ats_edge": 1.456,
-          "margin_mae": 0.044,
-          "total": "L",
-          "total_edge": 2.795,
-          "total_mae": 19.295
-        }
-      },
-      "tip_utc": "2026-11-11T01:00:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-10",
-      "final_score": "63.0-125.0",
-      "frozen_home_spread": -23.0,
-      "frozen_total": 169.0,
-      "frozen_utc": "2026-11-10T14:10:53.330872Z",
-      "game": "Northern Kentucky @ Saint Louis",
-      "game_id": "372745",
-      "models": {
-        "baseline": {
-          "ats": "L",
-          "ats_edge": -7.273,
-          "margin_mae": 46.273,
-          "total": "L",
-          "total_edge": -13.557,
-          "total_mae": 32.557
-        },
-        "player_all_v4": {
-          "ats": "L",
-          "ats_edge": -4.507,
-          "margin_mae": 43.507,
-          "total": "L",
-          "total_edge": -6.635,
-          "total_mae": 25.635
-        },
-        "player_opp_v3": {
-          "ats": "L",
-          "ats_edge": -3.599,
-          "margin_mae": 42.599,
-          "total": "L",
-          "total_edge": -8.602,
-          "total_mae": 27.602
-        },
-        "player_rot_v4": {
-          "ats": "L",
-          "ats_edge": -6.406,
-          "margin_mae": 45.406,
-          "total": "L",
-          "total_edge": -7.987,
-          "total_mae": 26.987
-        },
-        "player_v2": {
-          "ats": "L",
-          "ats_edge": -4.343,
-          "margin_mae": 43.343,
-          "total": "L",
-          "total_edge": -8.852,
-          "total_mae": 27.852
-        }
-      },
-      "tip_utc": "2026-11-11T01:00:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-10",
-      "final_score": "78.0-84.0",
-      "frozen_home_spread": 2.5,
-      "frozen_total": 167.5,
-      "frozen_utc": "2026-11-10T14:10:53.330872Z",
-      "game": "Illinois @ Texas Tech",
-      "game_id": "372742",
-      "models": {
-        "baseline": {
-          "ats": "W",
-          "ats_edge": 9.46,
-          "margin_mae": 0.96,
-          "total": "W",
-          "total_edge": -22.466,
-          "total_mae": 16.966
-        },
-        "player_all_v4": {
-          "ats": "W",
-          "ats_edge": 1.692,
-          "margin_mae": 6.808,
-          "total": "W",
-          "total_edge": -15.382,
-          "total_mae": 9.882
-        },
-        "player_opp_v3": {
-          "ats": "W",
-          "ats_edge": 1.139,
-          "margin_mae": 7.361,
-          "total": "W",
-          "total_edge": -15.219,
-          "total_mae": 9.719
-        },
-        "player_rot_v4": {
-          "ats": "W",
-          "ats_edge": 5.132,
-          "margin_mae": 3.368,
-          "total": "W",
-          "total_edge": -13.81,
-          "total_mae": 8.31
-        },
-        "player_v2": {
-          "ats": "W",
-          "ats_edge": 3.383,
-          "margin_mae": 5.117,
-          "total": "W",
-          "total_edge": -14.951,
-          "total_mae": 9.451
-        }
-      },
-      "tip_utc": "2026-11-11T01:00:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-10",
-      "final_score": "68.0-73.0",
-      "frozen_home_spread": -7.5,
-      "frozen_total": 144.5,
-      "frozen_utc": "2026-11-10T14:10:53.330872Z",
-      "game": "Evansville @ Middle Tennessee",
-      "game_id": "377990",
-      "models": {
-        "baseline": {
-          "ats": "L",
-          "ats_edge": 2.032,
-          "margin_mae": 4.532,
-          "total": "L",
-          "total_edge": 3.076,
-          "total_mae": 6.576
-        },
-        "player_all_v4": {
-          "ats": "L",
-          "ats_edge": 0.325,
-          "margin_mae": 2.825,
-          "total": "L",
-          "total_edge": 9.259,
-          "total_mae": 12.759
-        },
-        "player_opp_v3": {
-          "ats": "W",
-          "ats_edge": -0.653,
-          "margin_mae": 1.847,
-          "total": "L",
-          "total_edge": 7.751,
-          "total_mae": 11.251
-        },
-        "player_rot_v4": {
-          "ats": "L",
-          "ats_edge": 1.598,
-          "margin_mae": 4.098,
-          "total": "L",
-          "total_edge": 9.446,
-          "total_mae": 12.946
-        },
-        "player_v2": {
-          "ats": "L",
-          "ats_edge": 0.991,
-          "margin_mae": 3.491,
-          "total": "L",
-          "total_edge": 7.742,
-          "total_mae": 11.242
-        }
-      },
-      "tip_utc": "2026-11-11T00:30:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-10",
-      "final_score": "72.0-65.0",
-      "frozen_home_spread": 6.5,
-      "frozen_total": 143.5,
-      "frozen_utc": "2026-11-10T14:10:53.330872Z",
-      "game": "Texas State @ UT Rio Grande Valley",
-      "game_id": "374849",
-      "models": {
-        "baseline": {
-          "ats": "L",
-          "ats_edge": 15.384,
-          "margin_mae": 15.884,
-          "total": "L",
-          "total_edge": 0.61,
-          "total_mae": 7.11
-        },
-        "player_all_v4": {
-          "ats": "W",
-          "ats_edge": -5.502,
-          "margin_mae": 5.002,
-          "total": "L",
-          "total_edge": 1.166,
-          "total_mae": 7.666
-        },
-        "player_opp_v3": {
-          "ats": "W",
-          "ats_edge": -9.514,
-          "margin_mae": 9.014,
-          "total": "W",
-          "total_edge": -3.088,
-          "total_mae": 3.412
-        },
-        "player_rot_v4": {
-          "ats": "W",
-          "ats_edge": -8.725,
-          "margin_mae": 8.225,
-          "total": "L",
-          "total_edge": 0.599,
-          "total_mae": 7.099
-        },
-        "player_v2": {
-          "ats": "W",
-          "ats_edge": -12.521,
-          "margin_mae": 12.021,
-          "total": "W",
-          "total_edge": -4.143,
-          "total_mae": 2.357
-        }
-      },
-      "tip_utc": "2026-11-11T00:30:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-10",
-      "final_score": "63.0-77.0",
-      "frozen_home_spread": -7.5,
-      "frozen_total": 151.5,
-      "frozen_utc": "2026-11-10T14:10:53.330872Z",
-      "game": "Nicholls @ Tulane",
-      "game_id": "374838",
-      "models": {
-        "baseline": {
-          "ats": "W",
-          "ats_edge": 1.165,
-          "margin_mae": 5.335,
-          "total": "L",
-          "total_edge": 1.634,
-          "total_mae": 13.134
-        },
-        "player_all_v4": {
-          "ats": "W",
-          "ats_edge": 2.566,
-          "margin_mae": 3.934,
-          "total": "L",
-          "total_edge": 9.929,
-          "total_mae": 21.429
-        },
-        "player_opp_v3": {
-          "ats": "W",
-          "ats_edge": 2.516,
-          "margin_mae": 3.984,
-          "total": "L",
-          "total_edge": 11.116,
-          "total_mae": 22.616
-        },
-        "player_rot_v4": {
-          "ats": "W",
-          "ats_edge": 6.029,
-          "margin_mae": 0.471,
-          "total": "L",
-          "total_edge": 10.341,
-          "total_mae": 21.841
-        },
-        "player_v2": {
-          "ats": "W",
-          "ats_edge": 5.112,
-          "margin_mae": 1.388,
-          "total": "L",
-          "total_edge": 10.433,
-          "total_mae": 21.933
-        }
-      },
-      "tip_utc": "2026-11-11T00:30:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-10",
-      "final_score": "81.0-105.0",
-      "frozen_home_spread": -16.0,
-      "frozen_total": 160.0,
-      "frozen_utc": "2026-11-10T14:10:53.330872Z",
-      "game": "Memphis @ Vanderbilt",
-      "game_id": "374839",
-      "models": {
-        "baseline": {
-          "ats": "W",
-          "ats_edge": 2.106,
-          "margin_mae": 5.894,
-          "total": "L",
-          "total_edge": -15.841,
-          "total_mae": 41.841
-        },
-        "player_all_v4": {
-          "ats": "L",
-          "ats_edge": -6.24,
-          "margin_mae": 14.24,
-          "total": "L",
-          "total_edge": -0.163,
-          "total_mae": 26.163
-        },
-        "player_opp_v3": {
-          "ats": "L",
-          "ats_edge": -8.816,
-          "margin_mae": 16.816,
-          "total": "L",
-          "total_edge": -1.523,
-          "total_mae": 27.523
-        },
-        "player_rot_v4": {
-          "ats": "L",
-          "ats_edge": -4.818,
-          "margin_mae": 12.818,
-          "total": "L",
-          "total_edge": -0.128,
-          "total_mae": 26.128
-        },
-        "player_v2": {
-          "ats": "L",
-          "ats_edge": -7.505,
-          "margin_mae": 15.505,
-          "total": "L",
-          "total_edge": -2.361,
-          "total_mae": 28.361
-        }
-      },
-      "tip_utc": "2026-11-11T00:15:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-10",
-      "final_score": "76.0-68.0",
-      "frozen_home_spread": 2.0,
-      "frozen_total": 159.5,
-      "frozen_utc": "2026-11-10T14:10:53.330872Z",
-      "game": "Wright State @ Toledo",
-      "game_id": "377993",
-      "models": {
-        "baseline": {
-          "ats": "L",
-          "ats_edge": 6.384,
-          "margin_mae": 12.384,
-          "total": "W",
-          "total_edge": -9.508,
-          "total_mae": 5.992
-        },
-        "player_all_v4": {
-          "ats": "L",
-          "ats_edge": 0.042,
-          "margin_mae": 6.042,
-          "total": "W",
-          "total_edge": -4.834,
-          "total_mae": 10.666
-        },
-        "player_opp_v3": {
-          "ats": "W",
-          "ats_edge": -1.066,
-          "margin_mae": 4.934,
-          "total": "W",
-          "total_edge": -6.636,
-          "total_mae": 8.864
-        },
-        "player_rot_v4": {
-          "ats": "L",
-          "ats_edge": 0.192,
-          "margin_mae": 6.192,
-          "total": "W",
-          "total_edge": -4.872,
-          "total_mae": 10.628
-        },
-        "player_v2": {
-          "ats": "W",
-          "ats_edge": -0.856,
-          "margin_mae": 5.144,
-          "total": "W",
-          "total_edge": -6.484,
-          "total_mae": 9.016
-        }
-      },
-      "tip_utc": "2026-11-11T00:00:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-10",
-      "final_score": "65.0-71.0",
-      "frozen_home_spread": -20.5,
-      "frozen_total": 140.5,
-      "frozen_utc": "2026-11-10T14:10:53.330872Z",
-      "game": "Maine @ Rhode Island",
-      "game_id": "374848",
-      "models": {
-        "baseline": {
-          "ats": "W",
-          "ats_edge": -0.655,
-          "margin_mae": 13.845,
-          "total": "L",
-          "total_edge": 3.805,
-          "total_mae": 8.305
-        },
-        "player_all_v4": {
-          "ats": "W",
-          "ats_edge": -0.18,
-          "margin_mae": 14.32,
-          "total": "L",
-          "total_edge": 2.873,
-          "total_mae": 7.373
-        },
-        "player_opp_v3": {
-          "ats": "L",
-          "ats_edge": 1.097,
-          "margin_mae": 15.597,
-          "total": "L",
-          "total_edge": 3.189,
-          "total_mae": 7.689
-        },
-        "player_rot_v4": {
-          "ats": "L",
-          "ats_edge": 2.128,
-          "margin_mae": 16.628,
-          "total": "L",
-          "total_edge": 3.546,
-          "total_mae": 8.046
-        },
-        "player_v2": {
-          "ats": "L",
-          "ats_edge": 3.42,
-          "margin_mae": 17.92,
-          "total": "L",
-          "total_edge": 3.029,
-          "total_mae": 7.529
-        }
-      },
-      "tip_utc": "2026-11-11T00:00:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-10",
-      "final_score": "97.0-91.0",
-      "frozen_home_spread": -1.0,
-      "frozen_total": 164.0,
-      "frozen_utc": "2026-11-10T14:10:53.330872Z",
-      "game": "Mercer @ Georgia Southern",
-      "game_id": "374847",
-      "models": {
-        "baseline": {
-          "ats": "L",
-          "ats_edge": 9.288,
-          "margin_mae": 16.288,
-          "total": "L",
-          "total_edge": -17.621,
-          "total_mae": 41.621
-        },
-        "player_all_v4": {
-          "ats": "L",
-          "ats_edge": 1.35,
-          "margin_mae": 8.35,
-          "total": "L",
-          "total_edge": -13.338,
-          "total_mae": 37.338
-        },
-        "player_opp_v3": {
-          "ats": "L",
-          "ats_edge": 0.693,
-          "margin_mae": 7.693,
-          "total": "L",
-          "total_edge": -15.237,
-          "total_mae": 39.237
-        },
-        "player_rot_v4": {
-          "ats": "W",
-          "ats_edge": -0.224,
-          "margin_mae": 6.776,
-          "total": "L",
-          "total_edge": -14.549,
-          "total_mae": 38.549
-        },
-        "player_v2": {
-          "ats": "W",
-          "ats_edge": -0.238,
-          "margin_mae": 6.762,
-          "total": "L",
-          "total_edge": -16.257,
-          "total_mae": 40.257
-        }
-      },
-      "tip_utc": "2026-11-11T00:00:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-10",
-      "final_score": "45.0-62.0",
-      "frozen_home_spread": -11.0,
-      "frozen_total": 139.0,
-      "frozen_utc": "2026-11-10T14:10:53.330872Z",
-      "game": "Bradley @ Davidson",
-      "game_id": "374845",
-      "models": {
-        "baseline": {
-          "ats": "W",
-          "ats_edge": 1.087,
-          "margin_mae": 4.913,
-          "total": "W",
-          "total_edge": -0.272,
-          "total_mae": 31.728
-        },
-        "player_all_v4": {
-          "ats": "L",
-          "ats_edge": -1.315,
-          "margin_mae": 7.315,
-          "total": "L",
-          "total_edge": 3.451,
-          "total_mae": 35.451
-        },
-        "player_opp_v3": {
-          "ats": "L",
-          "ats_edge": -1.295,
-          "margin_mae": 7.295,
-          "total": "L",
-          "total_edge": 3.04,
-          "total_mae": 35.04
-        },
-        "player_rot_v4": {
-          "ats": "W",
-          "ats_edge": 0.405,
-          "margin_mae": 5.595,
-          "total": "L",
-          "total_edge": 3.617,
-          "total_mae": 35.617
-        },
-        "player_v2": {
-          "ats": "W",
-          "ats_edge": 0.371,
-          "margin_mae": 5.629,
-          "total": "L",
-          "total_edge": 2.483,
-          "total_mae": 34.483
-        }
-      },
-      "tip_utc": "2026-11-11T00:00:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-10",
-      "final_score": "69.0-74.0",
-      "frozen_home_spread": 1.0,
-      "frozen_total": 146.5,
-      "frozen_utc": "2026-11-10T14:10:53.330872Z",
-      "game": "Loyola Marymount @ Troy",
-      "game_id": "374844",
-      "models": {
-        "baseline": {
-          "ats": "W",
-          "ats_edge": 5.287,
-          "margin_mae": 0.713,
-          "total": "L",
-          "total_edge": 1.488,
-          "total_mae": 4.988
-        },
-        "player_all_v4": {
-          "ats": "W",
-          "ats_edge": 0.59,
-          "margin_mae": 5.41,
-          "total": "L",
-          "total_edge": 8.487,
-          "total_mae": 11.987
-        },
-        "player_opp_v3": {
-          "ats": "L",
-          "ats_edge": -1.112,
-          "margin_mae": 7.112,
-          "total": "L",
-          "total_edge": 6.546,
-          "total_mae": 10.046
-        },
-        "player_rot_v4": {
-          "ats": "L",
-          "ats_edge": -2.581,
-          "margin_mae": 8.581,
-          "total": "L",
-          "total_edge": 8.332,
-          "total_mae": 11.832
-        },
-        "player_v2": {
-          "ats": "L",
-          "ats_edge": -4.604,
-          "margin_mae": 10.604,
-          "total": "L",
-          "total_edge": 5.79,
-          "total_mae": 9.29
-        }
-      },
-      "tip_utc": "2026-11-11T00:00:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-10",
-      "final_score": "60.0-94.0",
-      "frozen_home_spread": -19.5,
-      "frozen_total": 147.5,
-      "frozen_utc": "2026-11-10T14:10:53.330872Z",
-      "game": "Presbyterian @ NC State",
-      "game_id": "374841",
-      "models": {
-        "baseline": {
-          "ats": "L",
-          "ats_edge": -0.519,
-          "margin_mae": 15.019,
-          "total": "L",
-          "total_edge": -1.685,
-          "total_mae": 8.185
-        },
-        "player_all_v4": {
-          "ats": "L",
-          "ats_edge": -0.321,
-          "margin_mae": 14.821,
-          "total": "W",
-          "total_edge": 5.952,
-          "total_mae": 0.548
-        },
-        "player_opp_v3": {
-          "ats": "L",
-          "ats_edge": -1.044,
-          "margin_mae": 15.544,
-          "total": "W",
-          "total_edge": 5.437,
-          "total_mae": 1.063
-        },
-        "player_rot_v4": {
-          "ats": "W",
-          "ats_edge": 1.501,
-          "margin_mae": 12.999,
-          "total": "W",
-          "total_edge": 5.783,
-          "total_mae": 0.717
-        },
-        "player_v2": {
-          "ats": "W",
-          "ats_edge": 0.522,
-          "margin_mae": 13.978,
-          "total": "W",
-          "total_edge": 4.52,
-          "total_mae": 1.98
-        }
-      },
-      "tip_utc": "2026-11-11T00:00:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-10",
-      "final_score": "71.0-85.0",
-      "frozen_home_spread": -16.5,
-      "frozen_total": 164.5,
-      "frozen_utc": "2026-11-10T14:10:53.330872Z",
-      "game": "Eastern Kentucky @ Georgia Tech",
-      "game_id": "374837",
-      "models": {
-        "baseline": {
-          "ats": "W",
-          "ats_edge": -9.007,
-          "margin_mae": 6.507,
-          "total": "W",
-          "total_edge": -13.705,
-          "total_mae": 5.205
-        },
-        "player_all_v4": {
-          "ats": "L",
-          "ats_edge": 1.118,
-          "margin_mae": 3.618,
-          "total": "W",
-          "total_edge": -6.14,
-          "total_mae": 2.36
-        },
-        "player_opp_v3": {
-          "ats": "L",
-          "ats_edge": 2.676,
-          "margin_mae": 5.176,
-          "total": "W",
-          "total_edge": -5.193,
-          "total_mae": 3.307
-        },
-        "player_rot_v4": {
-          "ats": "L",
-          "ats_edge": 1.007,
-          "margin_mae": 3.507,
-          "total": "W",
-          "total_edge": -6.355,
-          "total_mae": 2.145
-        },
-        "player_v2": {
-          "ats": "L",
-          "ats_edge": 2.028,
-          "margin_mae": 4.528,
-          "total": "W",
-          "total_edge": -6.019,
-          "total_mae": 2.481
-        }
-      },
-      "tip_utc": "2026-11-11T00:00:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-10",
-      "final_score": "70.0-74.0",
-      "frozen_home_spread": 4.0,
-      "frozen_total": 146.5,
-      "frozen_utc": "2026-11-10T14:10:53.330872Z",
-      "game": "Harvard @ Northeastern",
-      "game_id": "374836",
-      "models": {
-        "baseline": {
-          "ats": "W",
-          "ats_edge": 6.825,
-          "margin_mae": 1.175,
-          "total": "W",
-          "total_edge": -4.98,
-          "total_mae": 2.48
-        },
-        "player_all_v4": {
-          "ats": "L",
-          "ats_edge": -1.983,
-          "margin_mae": 9.983,
-          "total": "W",
-          "total_edge": -2.552,
-          "total_mae": 0.052
-        },
-        "player_opp_v3": {
-          "ats": "L",
-          "ats_edge": -3.926,
-          "margin_mae": 11.926,
-          "total": "W",
-          "total_edge": -3.655,
-          "total_mae": 1.155
-        },
-        "player_rot_v4": {
-          "ats": "L",
-          "ats_edge": -4.788,
-          "margin_mae": 12.788,
-          "total": "W",
-          "total_edge": -3.718,
-          "total_mae": 1.218
-        },
-        "player_v2": {
-          "ats": "L",
-          "ats_edge": -6.87,
-          "margin_mae": 14.87,
-          "total": "W",
-          "total_edge": -4.82,
-          "total_mae": 2.32
-        }
-      },
-      "tip_utc": "2026-11-11T00:00:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-10",
-      "final_score": "93.0-88.0",
-      "frozen_home_spread": -5.0,
-      "frozen_total": 142.5,
-      "frozen_utc": "2026-11-10T14:10:53.330872Z",
-      "game": "Virginia Tech @ Iowa",
-      "game_id": "374835",
-      "models": {
-        "baseline": {
-          "ats": "L",
-          "ats_edge": 3.662,
-          "margin_mae": 13.662,
-          "total": "L",
-          "total_edge": -1.454,
-          "total_mae": 39.954
-        },
-        "player_all_v4": {
-          "ats": "W",
-          "ats_edge": -9.888,
-          "margin_mae": 0.112,
-          "total": "W",
-          "total_edge": 3.437,
-          "total_mae": 35.063
-        },
-        "player_opp_v3": {
-          "ats": "W",
-          "ats_edge": -12.194,
-          "margin_mae": 2.194,
-          "total": "W",
-          "total_edge": 1.425,
-          "total_mae": 37.075
-        },
-        "player_rot_v4": {
-          "ats": "W",
-          "ats_edge": -6.67,
-          "margin_mae": 3.33,
-          "total": "W",
-          "total_edge": 3.895,
-          "total_mae": 34.605
-        },
-        "player_v2": {
-          "ats": "W",
-          "ats_edge": -8.968,
-          "margin_mae": 1.032,
-          "total": "W",
-          "total_edge": 0.734,
-          "total_mae": 37.766
-        }
-      },
-      "tip_utc": "2026-11-11T00:00:00Z"
-    },
-    {
-      "book": "Draft Kings",
-      "date_central": "2026-11-10",
-      "final_score": "69.0-76.0",
-      "frozen_home_spread": -14.5,
-      "frozen_total": 150.5,
-      "frozen_utc": "2026-11-10T14:10:53.330872Z",
-      "game": "South Alabama @ UCF",
-      "game_id": "374826",
-      "models": {
-        "baseline": {
-          "ats": "L",
-          "ats_edge": 1.946,
-          "margin_mae": 9.446,
-          "total": "L",
-          "total_edge": 2.351,
-          "total_mae": 7.851
-        },
-        "player_all_v4": {
-          "ats": "L",
-          "ats_edge": 5.594,
-          "margin_mae": 13.094,
-          "total": "L",
-          "total_edge": 17.625,
-          "total_mae": 23.125
-        },
-        "player_opp_v3": {
-          "ats": "L",
-          "ats_edge": 7.596,
-          "margin_mae": 15.096,
-          "total": "L",
-          "total_edge": 19.386,
-          "total_mae": 24.886
-        },
-        "player_rot_v4": {
-          "ats": "L",
-          "ats_edge": 7.841,
-          "margin_mae": 15.341,
-          "total": "L",
-          "total_edge": 17.523,
-          "total_mae": 23.023
-        },
-        "player_v2": {
-          "ats": "L",
-          "ats_edge": 10.005,
-          "margin_mae": 17.505,
-          "total": "L",
-          "total_edge": 19.522,
-          "total_mae": 25.022
-        }
-      },
-      "tip_utc": "2026-11-11T00:00:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-10",
-      "final_score": "59.0-80.0",
-      "frozen_home_spread": -23.0,
-      "frozen_total": 159.5,
-      "frozen_utc": "2026-11-10T14:10:53.330872Z",
-      "game": "La Salle @ Villanova",
-      "game_id": "374825",
-      "models": {
-        "baseline": {
-          "ats": "W",
-          "ats_edge": -4.18,
-          "margin_mae": 2.18,
-          "total": "W",
-          "total_edge": -11.567,
-          "total_mae": 8.933
-        },
-        "player_all_v4": {
-          "ats": "W",
-          "ats_edge": -3.273,
-          "margin_mae": 1.273,
-          "total": "W",
-          "total_edge": -3.252,
-          "total_mae": 17.248
-        },
-        "player_opp_v3": {
-          "ats": "W",
-          "ats_edge": -4.543,
-          "margin_mae": 2.543,
-          "total": "W",
-          "total_edge": -2.502,
-          "total_mae": 17.998
-        },
-        "player_rot_v4": {
-          "ats": "W",
-          "ats_edge": -3.222,
-          "margin_mae": 1.222,
-          "total": "W",
-          "total_edge": -3.794,
-          "total_mae": 16.706
-        },
-        "player_v2": {
-          "ats": "W",
-          "ats_edge": -4.783,
-          "margin_mae": 2.783,
-          "total": "W",
-          "total_edge": -3.631,
-          "total_mae": 16.869
-        }
-      },
-      "tip_utc": "2026-11-11T00:00:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-10",
-      "final_score": "79.0-88.0",
-      "frozen_home_spread": -9.5,
-      "frozen_total": 166.5,
-      "frozen_utc": "2026-11-10T14:10:53.330872Z",
-      "game": "Winthrop @ Kennesaw State",
-      "game_id": "374820",
-      "models": {
-        "baseline": {
-          "ats": "L",
-          "ats_edge": 8.849,
-          "margin_mae": 9.349,
-          "total": "L",
-          "total_edge": -11.738,
-          "total_mae": 12.238
-        },
-        "player_all_v4": {
-          "ats": "L",
-          "ats_edge": 12.147,
-          "margin_mae": 12.647,
-          "total": "W",
-          "total_edge": 0.473,
-          "total_mae": 0.027
-        },
-        "player_opp_v3": {
-          "ats": "L",
-          "ats_edge": 12.798,
-          "margin_mae": 13.298,
-          "total": "L",
-          "total_edge": -0.745,
-          "total_mae": 1.245
-        },
-        "player_rot_v4": {
-          "ats": "L",
-          "ats_edge": 9.552,
-          "margin_mae": 10.052,
-          "total": "W",
-          "total_edge": 0.273,
-          "total_mae": 0.227
-        },
-        "player_v2": {
-          "ats": "L",
-          "ats_edge": 10.712,
-          "margin_mae": 11.212,
-          "total": "L",
-          "total_edge": -1.461,
-          "total_mae": 1.961
-        }
-      },
-      "tip_utc": "2026-11-11T00:00:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-10",
-      "final_score": "71.0-72.0",
-      "frozen_home_spread": -5.0,
-      "frozen_total": 148.5,
-      "frozen_utc": "2026-11-10T14:10:53.330872Z",
-      "game": "Washington State @ Duquesne",
-      "game_id": "374819",
-      "models": {
-        "baseline": {
-          "ats": "L",
-          "ats_edge": 12.756,
-          "margin_mae": 16.756,
-          "total": "W",
-          "total_edge": -7.681,
-          "total_mae": 2.181
-        },
-        "player_all_v4": {
-          "ats": "L",
-          "ats_edge": 5.275,
-          "margin_mae": 9.275,
-          "total": "L",
-          "total_edge": 2.957,
-          "total_mae": 8.457
-        },
-        "player_opp_v3": {
-          "ats": "L",
-          "ats_edge": 4.427,
-          "margin_mae": 8.427,
-          "total": "L",
-          "total_edge": 3.861,
-          "total_mae": 9.361
-        },
-        "player_rot_v4": {
-          "ats": "L",
-          "ats_edge": 7.778,
-          "margin_mae": 11.778,
-          "total": "L",
-          "total_edge": 2.914,
-          "total_mae": 8.414
-        },
-        "player_v2": {
-          "ats": "L",
-          "ats_edge": 6.709,
-          "margin_mae": 10.709,
-          "total": "L",
-          "total_edge": 3.455,
-          "total_mae": 8.955
-        }
-      },
-      "tip_utc": "2026-11-11T00:00:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-10",
-      "final_score": "55.0-78.0",
-      "frozen_home_spread": -28.5,
-      "frozen_total": 147.5,
-      "frozen_utc": "2026-11-10T14:10:53.330872Z",
-      "game": "Bryant @ Providence",
-      "game_id": "372759",
-      "models": {
-        "baseline": {
-          "ats": "W",
-          "ats_edge": -14.673,
-          "margin_mae": 9.173,
-          "total": "W",
-          "total_edge": -8.857,
-          "total_mae": 5.643
-        },
-        "player_all_v4": {
-          "ats": "W",
-          "ats_edge": -3.579,
-          "margin_mae": 1.921,
-          "total": "W",
-          "total_edge": -2.314,
-          "total_mae": 12.186
-        },
-        "player_opp_v3": {
-          "ats": "W",
-          "ats_edge": -0.795,
-          "margin_mae": 4.705,
-          "total": "L",
-          "total_edge": 0.179,
-          "total_mae": 14.679
-        },
-        "player_rot_v4": {
-          "ats": "W",
-          "ats_edge": -5.367,
-          "margin_mae": 0.133,
-          "total": "W",
-          "total_edge": -2.92,
-          "total_mae": 11.58
-        },
-        "player_v2": {
-          "ats": "W",
-          "ats_edge": -2.039,
-          "margin_mae": 3.461,
-          "total": "W",
-          "total_edge": -0.228,
-          "total_mae": 14.272
-        }
-      },
-      "tip_utc": "2026-11-11T00:00:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-10",
-      "final_score": "55.0-100.0",
-      "frozen_home_spread": -32.0,
-      "frozen_total": 158.5,
-      "frozen_utc": "2026-11-10T14:10:53.330872Z",
-      "game": "Detroit Mercy @ Xavier",
-      "game_id": "372758",
-      "models": {
-        "baseline": {
-          "ats": "L",
-          "ats_edge": -3.376,
-          "margin_mae": 16.376,
-          "total": "W",
-          "total_edge": -17.298,
-          "total_mae": 13.798
-        },
-        "player_all_v4": {
-          "ats": "W",
-          "ats_edge": 4.592,
-          "margin_mae": 8.408,
-          "total": "W",
-          "total_edge": -2.065,
-          "total_mae": 1.435
-        },
-        "player_opp_v3": {
-          "ats": "L",
-          "ats_edge": -1.272,
-          "margin_mae": 14.272,
-          "total": "W",
-          "total_edge": -1.944,
-          "total_mae": 1.556
-        },
-        "player_rot_v4": {
-          "ats": "W",
-          "ats_edge": 8.283,
-          "margin_mae": 4.717,
-          "total": "W",
-          "total_edge": -2.506,
-          "total_mae": 0.994
-        },
-        "player_v2": {
-          "ats": "W",
-          "ats_edge": 2.954,
-          "margin_mae": 10.046,
-          "total": "W",
-          "total_edge": -1.657,
-          "total_mae": 1.843
-        }
-      },
-      "tip_utc": "2026-11-11T00:00:00Z"
-    },
-    {
-      "book": "Draft Kings",
-      "date_central": "2026-11-10",
-      "final_score": "54.0-82.0",
-      "frozen_home_spread": -27.5,
-      "frozen_total": 130.5,
-      "frozen_utc": "2026-11-10T14:10:53.330872Z",
-      "game": "Maryland Eastern Shore @ Boston College",
-      "game_id": "372757",
-      "models": {
-        "baseline": {
-          "ats": "L",
-          "ats_edge": -9.527,
-          "margin_mae": 10.027,
-          "total": "W",
-          "total_edge": 4.875,
-          "total_mae": 0.625
-        },
-        "player_all_v4": {
-          "ats": "W",
-          "ats_edge": 3.561,
-          "margin_mae": 3.061,
-          "total": "W",
-          "total_edge": 7.85,
-          "total_mae": 2.35
-        },
-        "player_opp_v3": {
-          "ats": "W",
-          "ats_edge": 8.079,
-          "margin_mae": 7.579,
-          "total": "W",
-          "total_edge": 12.905,
-          "total_mae": 7.405
-        },
-        "player_rot_v4": {
-          "ats": "W",
-          "ats_edge": 5.719,
-          "margin_mae": 5.219,
-          "total": "W",
-          "total_edge": 9.079,
-          "total_mae": 3.579
-        },
-        "player_v2": {
-          "ats": "W",
-          "ats_edge": 9.299,
-          "margin_mae": 8.799,
-          "total": "W",
-          "total_edge": 12.597,
-          "total_mae": 7.097
-        }
-      },
-      "tip_utc": "2026-11-11T00:00:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-10",
-      "final_score": "79.0-73.0",
-      "frozen_home_spread": -6.5,
-      "frozen_total": 148.5,
-      "frozen_utc": "2026-11-10T14:10:53.330872Z",
-      "game": "Michigan State @ Duke",
-      "game_id": "372756",
-      "models": {
-        "baseline": {
-          "ats": "L",
-          "ats_edge": 3.482,
-          "margin_mae": 15.982,
-          "total": "L",
-          "total_edge": -3.034,
-          "total_mae": 6.534
-        },
-        "player_all_v4": {
-          "ats": "L",
-          "ats_edge": 8.758,
-          "margin_mae": 21.258,
-          "total": "W",
-          "total_edge": 5.459,
-          "total_mae": 1.959
-        },
-        "player_opp_v3": {
-          "ats": "L",
-          "ats_edge": 6.718,
-          "margin_mae": 19.218,
-          "total": "W",
-          "total_edge": 3.093,
-          "total_mae": 0.407
-        },
-        "player_rot_v4": {
-          "ats": "L",
-          "ats_edge": 6.67,
-          "margin_mae": 19.17,
-          "total": "W",
-          "total_edge": 5.297,
-          "total_mae": 1.797
-        },
-        "player_v2": {
-          "ats": "L",
-          "ats_edge": 5.156,
-          "margin_mae": 17.656,
-          "total": "W",
-          "total_edge": 2.792,
-          "total_mae": 0.708
-        }
-      },
-      "tip_utc": "2026-11-11T00:00:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-10",
-      "final_score": "64.0-82.0",
-      "frozen_home_spread": -18.5,
-      "frozen_total": 154.5,
-      "frozen_utc": "2026-11-10T14:10:53.330872Z",
-      "game": "Charleston Southern @ Wake Forest",
-      "game_id": "372755",
-      "models": {
-        "baseline": {
-          "ats": "W",
-          "ats_edge": -7.375,
-          "margin_mae": 6.875,
-          "total": "W",
-          "total_edge": -12.864,
-          "total_mae": 4.364
-        },
-        "player_all_v4": {
-          "ats": "L",
-          "ats_edge": 4.027,
-          "margin_mae": 4.527,
-          "total": "W",
-          "total_edge": -8.108,
-          "total_mae": 0.392
-        },
-        "player_opp_v3": {
-          "ats": "L",
-          "ats_edge": 5.098,
-          "margin_mae": 5.598,
-          "total": "W",
-          "total_edge": -6.537,
-          "total_mae": 1.963
-        },
-        "player_rot_v4": {
-          "ats": "L",
-          "ats_edge": 3.85,
-          "margin_mae": 4.35,
-          "total": "W",
-          "total_edge": -8.625,
-          "total_mae": 0.125
-        },
-        "player_v2": {
-          "ats": "L",
-          "ats_edge": 4.861,
-          "margin_mae": 5.361,
-          "total": "W",
-          "total_edge": -7.024,
-          "total_mae": 1.476
-        }
-      },
-      "tip_utc": "2026-11-11T00:00:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-10",
-      "final_score": "78.0-91.0",
-      "frozen_home_spread": -3.5,
-      "frozen_total": 152.5,
-      "frozen_utc": "2026-11-10T14:10:53.330872Z",
-      "game": "Youngstown State @ Central Michigan",
-      "game_id": "372749",
-      "models": {
-        "baseline": {
-          "ats": "W",
-          "ats_edge": 16.432,
-          "margin_mae": 6.932,
-          "total": "L",
-          "total_edge": -5.769,
-          "total_mae": 22.269
-        },
-        "player_all_v4": {
-          "ats": "W",
-          "ats_edge": 5.349,
-          "margin_mae": 4.151,
-          "total": "W",
-          "total_edge": 2.386,
-          "total_mae": 14.114
-        },
-        "player_opp_v3": {
-          "ats": "W",
-          "ats_edge": 3.6,
-          "margin_mae": 5.9,
-          "total": "W",
-          "total_edge": 0.843,
-          "total_mae": 15.657
-        },
-        "player_rot_v4": {
-          "ats": "W",
-          "ats_edge": 5.999,
-          "margin_mae": 3.501,
-          "total": "W",
-          "total_edge": 1.851,
-          "total_mae": 14.649
-        },
-        "player_v2": {
-          "ats": "W",
-          "ats_edge": 4.892,
-          "margin_mae": 4.608,
-          "total": "W",
-          "total_edge": 0.294,
-          "total_mae": 16.206
-        }
-      },
-      "tip_utc": "2026-11-11T00:00:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-10",
-      "final_score": "99.0-89.0",
-      "frozen_home_spread": -12.5,
-      "frozen_total": 159.0,
-      "frozen_utc": "2026-11-10T14:10:53.330872Z",
-      "game": "Siena @ Dayton",
-      "game_id": "372748",
-      "models": {
-        "baseline": {
-          "ats": "L",
-          "ats_edge": 1.226,
-          "margin_mae": 23.726,
-          "total": "L",
-          "total_edge": -11.249,
-          "total_mae": 40.249
-        },
-        "player_all_v4": {
-          "ats": "L",
-          "ats_edge": 9.269,
-          "margin_mae": 31.769,
-          "total": "L",
-          "total_edge": -2.948,
-          "total_mae": 31.948
-        },
-        "player_opp_v3": {
-          "ats": "L",
-          "ats_edge": 11.888,
-          "margin_mae": 34.388,
-          "total": "L",
-          "total_edge": -1.044,
-          "total_mae": 30.044
-        },
-        "player_rot_v4": {
-          "ats": "L",
-          "ats_edge": 12.491,
-          "margin_mae": 34.991,
-          "total": "L",
-          "total_edge": -2.999,
-          "total_mae": 31.999
-        },
-        "player_v2": {
-          "ats": "L",
-          "ats_edge": 14.452,
-          "margin_mae": 36.952,
-          "total": "L",
-          "total_edge": -2.323,
-          "total_mae": 31.323
-        }
-      },
-      "tip_utc": "2026-11-11T00:00:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-10",
-      "final_score": "72.0-78.0",
-      "frozen_home_spread": -11.5,
-      "frozen_total": 139.5,
-      "frozen_utc": "2026-11-10T14:10:53.330872Z",
-      "game": "Iona @ Fordham",
-      "game_id": "372747",
-      "models": {
-        "baseline": {
-          "ats": "W",
-          "ats_edge": -1.333,
-          "margin_mae": 4.167,
-          "total": "W",
-          "total_edge": 1.135,
-          "total_mae": 9.365
-        },
-        "player_all_v4": {
-          "ats": "L",
-          "ats_edge": 3.18,
-          "margin_mae": 8.68,
-          "total": "W",
-          "total_edge": 2.526,
-          "total_mae": 7.974
-        },
-        "player_opp_v3": {
-          "ats": "L",
-          "ats_edge": 3.329,
-          "margin_mae": 8.829,
-          "total": "W",
-          "total_edge": 3.804,
-          "total_mae": 6.696
-        },
-        "player_rot_v4": {
-          "ats": "L",
-          "ats_edge": 0.747,
-          "margin_mae": 6.247,
-          "total": "W",
-          "total_edge": 0.948,
-          "total_mae": 9.552
-        },
-        "player_v2": {
-          "ats": "L",
-          "ats_edge": 1.168,
-          "margin_mae": 6.668,
-          "total": "W",
-          "total_edge": 2.834,
-          "total_mae": 7.666
-        }
-      },
-      "tip_utc": "2026-11-11T00:00:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-10",
-      "final_score": "50.0-69.0",
-      "frozen_home_spread": -14.5,
-      "frozen_total": 149.0,
-      "frozen_utc": "2026-11-10T14:10:53.330872Z",
-      "game": "Elon @ George Washington",
-      "game_id": "372746",
-      "models": {
-        "baseline": {
-          "ats": "W",
-          "ats_edge": 1.383,
-          "margin_mae": 3.117,
-          "total": "W",
-          "total_edge": -8.281,
-          "total_mae": 21.719
-        },
-        "player_all_v4": {
-          "ats": "L",
-          "ats_edge": -4.399,
-          "margin_mae": 8.899,
-          "total": "W",
-          "total_edge": -1.87,
-          "total_mae": 28.13
-        },
-        "player_opp_v3": {
-          "ats": "L",
-          "ats_edge": -5.074,
-          "margin_mae": 9.574,
-          "total": "W",
-          "total_edge": -1.758,
-          "total_mae": 28.242
-        },
-        "player_rot_v4": {
-          "ats": "L",
-          "ats_edge": -3.773,
-          "margin_mae": 8.273,
-          "total": "W",
-          "total_edge": -2.842,
-          "total_mae": 27.158
-        },
-        "player_v2": {
-          "ats": "L",
-          "ats_edge": -3.776,
-          "margin_mae": 8.276,
-          "total": "W",
-          "total_edge": -2.036,
-          "total_mae": 27.964
-        }
-      },
-      "tip_utc": "2026-11-11T00:00:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-10",
-      "final_score": "55.0-63.0",
-      "frozen_home_spread": 1.5,
-      "frozen_total": 131.5,
-      "frozen_utc": "2026-11-10T14:10:53.330872Z",
-      "game": "Army @ New Haven",
-      "game_id": "372744",
-      "models": {
-        "baseline": {
-          "ats": "W",
-          "ats_edge": 6.444,
-          "margin_mae": 3.056,
-          "total": "L",
-          "total_edge": 8.084,
-          "total_mae": 21.584
-        },
-        "player_all_v4": {
-          "ats": "L",
-          "ats_edge": -1.352,
-          "margin_mae": 10.852,
-          "total": "L",
-          "total_edge": 5.619,
-          "total_mae": 19.119
-        },
-        "player_opp_v3": {
-          "ats": "L",
-          "ats_edge": -2.311,
-          "margin_mae": 11.811,
-          "total": "L",
-          "total_edge": 8.424,
-          "total_mae": 21.924
-        },
-        "player_rot_v4": {
-          "ats": "L",
-          "ats_edge": -2.11,
-          "margin_mae": 11.61,
-          "total": "L",
-          "total_edge": 4.692,
-          "total_mae": 18.192
-        },
-        "player_v2": {
-          "ats": "L",
-          "ats_edge": -3.158,
-          "margin_mae": 12.658,
-          "total": "L",
-          "total_edge": 8.401,
-          "total_mae": 21.901
-        }
-      },
-      "tip_utc": "2026-11-11T00:00:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-10",
-      "final_score": "63.0-76.0",
-      "frozen_home_spread": -14.0,
-      "frozen_total": 155.5,
-      "frozen_utc": "2026-11-10T14:10:53.330872Z",
-      "game": "Wyoming @ North Carolina",
-      "game_id": "372743",
-      "models": {
-        "baseline": {
-          "ats": "W",
-          "ats_edge": -5.702,
-          "margin_mae": 4.702,
-          "total": "W",
-          "total_edge": -8.054,
-          "total_mae": 8.446
-        },
-        "player_all_v4": {
-          "ats": "W",
-          "ats_edge": -2.327,
-          "margin_mae": 1.327,
-          "total": "L",
-          "total_edge": 3.436,
-          "total_mae": 19.936
-        },
-        "player_opp_v3": {
-          "ats": "W",
-          "ats_edge": -2.554,
-          "margin_mae": 1.554,
-          "total": "L",
-          "total_edge": 1.642,
-          "total_mae": 18.142
-        },
-        "player_rot_v4": {
-          "ats": "W",
-          "ats_edge": -2.34,
-          "margin_mae": 1.34,
-          "total": "L",
-          "total_edge": 3.89,
-          "total_mae": 20.39
-        },
-        "player_v2": {
-          "ats": "W",
-          "ats_edge": -2.981,
-          "margin_mae": 1.981,
-          "total": "L",
-          "total_edge": 1.191,
-          "total_mae": 17.691
-        }
-      },
-      "tip_utc": "2026-11-11T00:00:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-10",
-      "final_score": "64.0-101.0",
-      "frozen_home_spread": -24.5,
-      "frozen_total": 143.5,
-      "frozen_utc": "2026-11-10T14:10:53.330872Z",
-      "game": "NJIT @ Rutgers",
-      "game_id": "374832",
-      "models": {
-        "baseline": {
-          "ats": "L",
-          "ats_edge": -7.782,
-          "margin_mae": 20.282,
-          "total": "L",
-          "total_edge": -8.679,
-          "total_mae": 30.179
-        },
-        "player_all_v4": {
-          "ats": "L",
-          "ats_edge": -2.761,
-          "margin_mae": 15.261,
-          "total": "L",
-          "total_edge": -4.054,
-          "total_mae": 25.554
-        },
-        "player_opp_v3": {
-          "ats": "W",
-          "ats_edge": 0.571,
-          "margin_mae": 11.929,
-          "total": "W",
-          "total_edge": 1.725,
-          "total_mae": 19.775
-        },
-        "player_rot_v4": {
-          "ats": "L",
-          "ats_edge": -3.881,
-          "margin_mae": 16.381,
-          "total": "L",
-          "total_edge": -4.682,
-          "total_mae": 26.182
-        },
-        "player_v2": {
-          "ats": "L",
-          "ats_edge": -0.46,
-          "margin_mae": 12.96,
-          "total": "W",
-          "total_edge": 0.439,
-          "total_mae": 21.061
-        }
-      },
-      "tip_utc": "2026-11-10T23:30:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-10",
-      "final_score": "78.0-83.0",
-      "frozen_home_spread": -27.5,
-      "frozen_total": 142.5,
-      "frozen_utc": "2026-11-10T14:10:53.330872Z",
-      "game": "Delaware State @ Georgetown",
-      "game_id": "372760",
-      "models": {
-        "baseline": {
-          "ats": "W",
-          "ats_edge": -13.233,
-          "margin_mae": 9.267,
-          "total": "L",
-          "total_edge": -0.957,
-          "total_mae": 19.457
-        },
-        "player_all_v4": {
-          "ats": "W",
-          "ats_edge": -6.345,
-          "margin_mae": 16.155,
-          "total": "W",
-          "total_edge": 5.758,
-          "total_mae": 12.742
-        },
-        "player_opp_v3": {
-          "ats": "W",
-          "ats_edge": -4.985,
-          "margin_mae": 17.515,
-          "total": "W",
-          "total_edge": 7.231,
-          "total_mae": 11.269
-        },
-        "player_rot_v4": {
-          "ats": "W",
-          "ats_edge": -5.423,
-          "margin_mae": 17.077,
-          "total": "W",
-          "total_edge": 5.853,
-          "total_mae": 12.647
-        },
-        "player_v2": {
-          "ats": "W",
-          "ats_edge": -4.331,
-          "margin_mae": 18.169,
-          "total": "W",
-          "total_edge": 6.871,
-          "total_mae": 11.629
-        }
-      },
-      "tip_utc": "2026-11-10T23:30:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-10",
-      "final_score": "81.0-72.0",
-      "frozen_home_spread": 9.5,
-      "frozen_total": 167.0,
-      "frozen_utc": "2026-11-10T14:10:53.330872Z",
-      "game": "Florida @ Florida State",
-      "game_id": "372762",
-      "models": {
-        "baseline": {
-          "ats": "W",
-          "ats_edge": 23.528,
-          "margin_mae": 23.028,
-          "total": "W",
-          "total_edge": -19.116,
-          "total_mae": 5.116
-        },
-        "player_all_v4": {
-          "ats": "W",
-          "ats_edge": 10.645,
-          "margin_mae": 10.145,
-          "total": "W",
-          "total_edge": -14.844,
-          "total_mae": 0.844
-        },
-        "player_opp_v3": {
-          "ats": "W",
-          "ats_edge": 7.719,
-          "margin_mae": 7.219,
-          "total": "W",
-          "total_edge": -16.095,
-          "total_mae": 2.095
-        },
-        "player_rot_v4": {
-          "ats": "W",
-          "ats_edge": 14.157,
-          "margin_mae": 13.657,
-          "total": "W",
-          "total_edge": -14.435,
-          "total_mae": 0.435
-        },
-        "player_v2": {
-          "ats": "W",
-          "ats_edge": 11.313,
-          "margin_mae": 10.813,
-          "total": "W",
-          "total_edge": -16.135,
-          "total_mae": 2.135
-        }
-      },
-      "tip_utc": "2026-11-10T23:00:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-09",
-      "final_score": "73.0-66.0",
-      "frozen_home_spread": -7.0,
-      "frozen_total": 156.5,
-      "frozen_utc": "2026-11-09T14:20:31.293345Z",
-      "game": "Portland @ Hawai'i",
-      "game_id": "377986",
-      "models": {
-        "baseline": {
-          "ats": "L",
-          "ats_edge": 1.245,
-          "margin_mae": 15.245,
-          "total": "L",
-          "total_edge": 2.592,
-          "total_mae": 20.092
-        },
-        "player_all_v4": {
-          "ats": "L",
-          "ats_edge": 3.841,
-          "margin_mae": 17.841,
-          "total": "L",
-          "total_edge": 9.996,
-          "total_mae": 27.496
-        },
-        "player_opp_v3": {
-          "ats": "L",
-          "ats_edge": 3.831,
-          "margin_mae": 17.831,
-          "total": "L",
-          "total_edge": 8.528,
-          "total_mae": 26.028
-        },
-        "player_rot_v4": {
-          "ats": "L",
-          "ats_edge": 4.082,
-          "margin_mae": 18.082,
-          "total": "L",
-          "total_edge": 11.177,
-          "total_mae": 28.677
-        },
-        "player_v2": {
-          "ats": "L",
-          "ats_edge": 3.084,
-          "margin_mae": 17.084,
-          "total": "L",
-          "total_edge": 7.758,
-          "total_mae": 25.258
-        }
-      },
-      "tip_utc": "2026-11-10T04:59:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-09",
-      "final_score": "73.0-91.0",
-      "frozen_home_spread": -17.0,
-      "frozen_total": 146.0,
-      "frozen_utc": "2026-11-09T14:20:31.293345Z",
-      "game": "Rice @ Stanford",
-      "game_id": "374792",
-      "models": {
-        "baseline": {
-          "ats": "L",
-          "ats_edge": -4.337,
-          "margin_mae": 5.337,
-          "total": "L",
-          "total_edge": -2.075,
-          "total_mae": 20.075
-        },
-        "player_all_v4": {
-          "ats": "W",
-          "ats_edge": 1.675,
-          "margin_mae": 0.675,
-          "total": "L",
-          "total_edge": -0.132,
-          "total_mae": 18.132
-        },
-        "player_opp_v3": {
-          "ats": "W",
-          "ats_edge": 3.613,
-          "margin_mae": 2.613,
-          "total": "W",
-          "total_edge": 2.14,
-          "total_mae": 15.86
-        },
-        "player_rot_v4": {
-          "ats": "W",
-          "ats_edge": 6.985,
-          "margin_mae": 5.985,
-          "total": "W",
-          "total_edge": 1.329,
-          "total_mae": 16.671
-        },
-        "player_v2": {
-          "ats": "W",
-          "ats_edge": 7.881,
-          "margin_mae": 6.881,
-          "total": "W",
-          "total_edge": 2.082,
-          "total_mae": 15.918
-        }
-      },
-      "tip_utc": "2026-11-10T03:00:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-09",
-      "final_score": "64.0-77.0",
-      "frozen_home_spread": -34.5,
-      "frozen_total": 151.5,
-      "frozen_utc": "2026-11-09T14:20:31.293345Z",
-      "game": "Mississippi Valley State @ Washington",
-      "game_id": "374785",
-      "models": {
-        "baseline": {
-          "ats": "W",
-          "ats_edge": -16.998,
-          "margin_mae": 4.502,
-          "total": "W",
-          "total_edge": -7.943,
-          "total_mae": 2.557
-        },
-        "player_all_v4": {
-          "ats": "W",
-          "ats_edge": -5.321,
-          "margin_mae": 16.179,
-          "total": "W",
-          "total_edge": -0.465,
-          "total_mae": 10.035
-        },
-        "player_opp_v3": {
-          "ats": "W",
-          "ats_edge": -6.498,
-          "margin_mae": 15.002,
-          "total": "W",
-          "total_edge": -1.711,
-          "total_mae": 8.789
-        },
-        "player_rot_v4": {
-          "ats": "W",
-          "ats_edge": -3.788,
-          "margin_mae": 17.712,
-          "total": "W",
-          "total_edge": -0.461,
-          "total_mae": 10.039
-        },
-        "player_v2": {
-          "ats": "W",
-          "ats_edge": -4.622,
-          "margin_mae": 16.878,
-          "total": "W",
-          "total_edge": -2.576,
-          "total_mae": 7.924
-        }
-      },
-      "tip_utc": "2026-11-10T03:00:00Z"
-    },
-    {
-      "book": "Bovada",
-      "date_central": "2026-11-09",
-      "final_score": "84.0-94.0",
-      "frozen_home_spread": -17.0,
-      "frozen_total": 161.5,
-      "frozen_utc": "2026-11-09T14:20:31.293345Z",
-      "game": "Eastern Washington @ Oregon State",
-      "game_id": "374797",
-      "models": {
-        "baseline": {
-          "ats": "L",
-          "ats_edge": 6.39,
-          "margin_mae": 13.39,
-          "total": "L",
-          "total_edge": -12.413,
-          "total_mae": 28.913
-        },
-        "player_all_v4": {
-          "ats": "L",
-          "ats_edge": 5.786,
-          "margin_mae": 12.786,
-          "total": "L",
-          "total_edge": -1.839,
-          "total_mae": 18.339
-        },
-        "player_opp_v3": {
-          "ats": "L",
-          "ats_edge": 3.675,
-          "margin_mae": 10.675,
-          "total": "L",
-          "total_edge": -4.455,
-          "total_mae": 20.955
-        },
-        "player_rot_v4": {
-          "ats": "L",
-          "ats_edge": 8.604,
-          "margin_mae": 15.604,
-          "total": "L",
-          "total_edge": -1.498,
-          "total_mae": 17.998
-        },
-        "player_v2": {
-          "ats": "L",
-          "ats_edge": 6.718,
-          "margin_mae": 13.718,
-          "total": "L",
-          "total_edge": -4.829,
-          "total_mae": 21.329
-        }
-      },
-      "tip_utc": "2026-11-10T02:30:00Z"
     }
   ],
   "paired_model_accuracy_vs_baseline": [
     {
-      "ats_mae_improvement_vs_baseline": 1.256,
+      "ats_mae_improvement_vs_baseline": 1.53,
       "model": "player_v2",
       "note": "Positive = lower player-model forecast error on identical frozen games.",
-      "paired_games": 256,
-      "total_mae_improvement_vs_baseline": 1.667
+      "paired_games": 302,
+      "total_mae_improvement_vs_baseline": 1.52
     },
     {
-      "ats_mae_improvement_vs_baseline": 0.988,
+      "ats_mae_improvement_vs_baseline": 1.364,
       "model": "player_opp_v3",
       "note": "Positive = lower player-model forecast error on identical frozen games.",
-      "paired_games": 213,
-      "total_mae_improvement_vs_baseline": 2.11
+      "paired_games": 259,
+      "total_mae_improvement_vs_baseline": 1.854
     },
     {
-      "ats_mae_improvement_vs_baseline": 1.133,
+      "ats_mae_improvement_vs_baseline": 1.38,
       "model": "player_rot_v4",
       "note": "Positive = lower player-model forecast error on identical frozen games.",
-      "paired_games": 213,
-      "total_mae_improvement_vs_baseline": 2.458
+      "paired_games": 259,
+      "total_mae_improvement_vs_baseline": 2.143
     },
     {
-      "ats_mae_improvement_vs_baseline": 1.281,
+      "ats_mae_improvement_vs_baseline": 1.483,
       "model": "player_all_v4",
       "note": "Positive = lower player-model forecast error on identical frozen games.",
-      "paired_games": 213,
-      "total_mae_improvement_vs_baseline": 2.497
+      "paired_games": 259,
+      "total_mae_improvement_vs_baseline": 2.157
     }
   ],
   "season": 2027,
-  "tracked_games": 256,
+  "tracked_games": 302,
   "type": "cbb_prospective_research_performance",
   "version": 1
 }
