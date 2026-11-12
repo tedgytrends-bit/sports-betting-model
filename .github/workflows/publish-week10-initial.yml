@@ -1,0 +1,67 @@
+name: Publish Week 10 initial public NFL projections (before Thursday)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/publish_week10_initial.py"
+      - ".github/workflows/publish-week10-initial.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-week10-initial-pregame
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - name: Checkout immutable history and publish script
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install public source model dependencies
+        run: python -m pip install -r requirements.txt pytest
+      - name: Compile and test pregame models
+        run: |
+          python -m py_compile scripts/publish_week10_initial.py
+          python -m pytest -q tests/test_qb_epa_model.py tests/test_qb_confirmation_gate.py tests/test_qb_expected_starters.py tests/test_qb_verified_only_sensitivity.py tests/test_qb_starter_source_metadata.py
+      - name: Produce frozen first-public Week 10 board
+        run: python -u scripts/publish_week10_initial.py
+      - name: Validate all 14 games and 28 model rows
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import pandas as pd
+          p=Path("data/public_snapshots")
+          df=pd.read_csv(p/"nfl_week10_initial_projections_2026-11-12.csv")
+          m=json.loads((p/"nfl_week10_initial_projections_2026-11-12_manifest.json").read_text())
+          q=pd.read_csv(p/"nfl_week10_bovada_initial_2026-11-12.csv")
+          assert len(df)==28 and df.game_id.nunique()==14
+          assert not df.duplicated(["game_id","model"]).any()
+          assert set(df.model)=={"baseline","injury"} and len(q)==14
+          assert m["status"]=="INITIAL_PUBLIC_PREGAME_2026_WEEK10_PROVISIONAL_QB"
+          assert df.apply(lambda row: abs(row.projected_home+row.projected_away-row.projected_total)<.02,axis=1).all()
+          assert set(df.game_id)=={"2026_10_"+a+"_"+h for a,h in zip(q.away_team,q.home_team)}
+          assert all(pd.to_datetime(df.published_at_utc,utc=True)<pd.to_datetime(df.kickoff_utc,utc=True))
+          assert df.loc[df.game_id=="2026_10_WAS_NYG"].shape[0]==2
+          print("PASS: all 14 pregame Bovada-priced games, frozen baseline and injury forecasts.")
+          PY
+      - name: Commit immutable Week 10 artifacts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/public_snapshots/nfl_week10_initial_projections_2026-11-12.csv
+          git add data/public_snapshots/nfl_week10_initial_projections_2026-11-12_manifest.json
+          git commit -m "Publish immutable pre-TNF 2026 Week 10 Baseline and Injury score snapshots"
+          git pull --rebase origin main
+          git push origin HEAD:main
