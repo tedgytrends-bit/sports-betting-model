@@ -212,6 +212,14 @@ if len(out)!=14:
     st.stop()
 st.dataframe(out,hide_index=True,width="stretch",height=530)
 st.caption(
+    "**Thursday WAS @ NYG injury cross-check:** Washington C Lucas Patrick and TE "
+    "Colson Yankoff are OUT; Giants LB Malik Harrison is questionable. "
+    "Both Jayden Daniels and J.J. McCarthy practiced fully Wednesday and have no game "
+    "designation. Those exact final-report statuses were present in the timestamped "
+    "injury snapshot before the original Thursday model publication. "
+    "Game-day inactives are not yet confirmed; the frozen forecasts are unchanged."
+)
+st.caption(
     "The two separately timestamped QB-source corrections (Arizona Carson Beck, Seattle Drew Lock) are research updates, not rewrites of the initial Thursday scores. ATS and total differences are directional comparisons, not betting recommendations. "
     "The Injury model currently relies on largely provisional starting-QB identities; "
     "Saturday/Sunday pregame updates must be captured separately."
