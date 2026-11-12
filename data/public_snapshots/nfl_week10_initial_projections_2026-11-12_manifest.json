@@ -1,0 +1,26 @@
+{
+  "status": "INITIAL_PUBLIC_PREGAME_2026_WEEK10_PROVISIONAL_QB",
+  "published_at_utc": "2026-11-12T13:29:01Z",
+  "games": 14,
+  "rows": 28,
+  "models": [
+    "baseline",
+    "injury"
+  ],
+  "report_path": "data/public_snapshots/nfl_week10_initial_projections_2026-11-12.csv",
+  "market_initial_path": "data/public_snapshots/nfl_week10_bovada_initial_2026-11-12.csv",
+  "market_source": "Bovada screenshots user sent Thursday Nov 12 ~07:20-07:21 CT, not an authenticated sportsbook quote timestamp",
+  "model_training": "Completed nflverse games through prior week; unscaled Ridge(alpha=10), ten-game team lookback, existing production model coefficients unmodified",
+  "injury_data": "Public nflverse injury feed; latest saved Week 10 injury snapshot preferred when point-in-time eligible",
+  "starter_source_counts": {
+    "schedule_provisional_qb_unverified": 27,
+    "coach_expected_pregame_unverified": 1
+  },
+  "verified_starters": 0,
+  "two_verified_teams_games": 0,
+  "source_rejected_rows": [],
+  "known_out_or_ir_watchlist_checked": true,
+  "release_ready_final_injury": false,
+  "results_record_policy": "Initial publication is preserved and may be graded as its own forward public snapshot. A later Week 10 final model and market snapshot must be saved separately and selected for prospective grade BEFORE each kickoff, not retroactively.",
+  "warning": "Model starter names and injury inputs may remain provisional; these are INITIAL public estimates, NOT confirmed final pregames. No retroactive Week 8/9 changes and no claims of betting profitability."
+}
