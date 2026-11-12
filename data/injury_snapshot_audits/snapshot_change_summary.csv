@@ -252,3 +252,9 @@ season,week,team,change_type,change_count
 2026,9,WAS,practice_status,2
 2026,9,WAS,report_primary_injury,3
 2026,9,WAS,report_status,3
+2026,10,NYG,practice_status,2
+2026,10,NYG,report_primary_injury,1
+2026,10,NYG,report_status,1
+2026,10,WAS,practice_status,2
+2026,10,WAS,report_primary_injury,2
+2026,10,WAS,report_status,2
