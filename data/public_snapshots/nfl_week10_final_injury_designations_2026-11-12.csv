@@ -1,0 +1,7 @@
+game_id,team,player_name,position,injury,final_game_status,practice_wednesday,report_date,source_url
+2026_10_WAS_NYG,WAS,Lucas Patrick,C,Concussion,OUT,DNP,2026-11-11,https://www.commanders.com/news/game-status-commanders-giants-week-10-lucas-patrick
+2026_10_WAS_NYG,WAS,Colson Yankoff,TE,Knee,OUT,DNP,2026-11-11,https://www.commanders.com/news/game-status-commanders-giants-week-10-lucas-patrick
+2026_10_WAS_NYG,NYG,Malik Harrison,LB,Groin,QUESTIONABLE,LP,2026-11-11,https://www.giants.com/news/giants-vs-commanders-week-10-injury-report-qb-j-j-mccarthy-rb-cam-skattebo-limited
+2026_10_WAS_NYG,WAS,Jayden Daniels,QB,Left elbow,NO_GAME_DESIGNATION,FP,2026-11-11,https://www.commanders.com/team/injury-report/
+2026_10_WAS_NYG,NYG,J.J. McCarthy,QB,Hip,NO_GAME_DESIGNATION,FP,2026-11-11,https://www.giants.com/team/injury-report/
+2026_10_WAS_NYG,NYG,Cam Skattebo,RB,Hamstring,NO_GAME_DESIGNATION,FP,2026-11-11,https://www.giants.com/team/injury-report/
