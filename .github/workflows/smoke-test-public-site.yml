@@ -8,6 +8,7 @@ on:
       - "app.py"
       - "pages/Results.py"
       - "pages/Week_09_Projection_Board.py"
+      - "pages/Week_10_Projection_Board.py"
       - "pages/Public_Projection_Board.py"
       - "data/four_model_week08/week08_four_model_comparison.csv"
       - "data/public_snapshots/nfl_week_09_six_model_research_2026-11-04.csv"
@@ -15,6 +16,9 @@ on:
       - "data/public_snapshots/nfl_week09_final_injury_2026-11-08.csv"
       - "data/public_snapshots/nfl_week09_kickoffs_2026.csv"
       - "docs/index.html"
+      - "docs/week09.html"
+      - "data/public_snapshots/nfl_week10_initial_projections_2026-11-12.csv"
+      - "data/public_snapshots/nfl_week10_bovada_initial_2026-11-12.csv"
       - "data/bovada_lines.csv"
       - ".github/workflows/smoke-test-public-site.yml"
 
@@ -41,14 +45,21 @@ jobs:
           js=re.search(r"<script>(.*?)</script>",html,re.S)
           assert js, "Missing website app script"
           Path("/tmp/tedgy-site.js").write_text(js.group(1),encoding="utf-8")
-          assert "nfl_week09_injury_qb_epa_margin_2026-11-05.csv" in html
-          assert "nfl_week09_final_injury_2026-11-08.csv" in html
-          assert "data.games=buildWeek9(data.rows9,data.market,data.injuryV2,data.finalInjury,data.kickoffs)" in html
+          archived=Path("docs/week09.html").read_text(encoding="utf-8")
+          assert "nfl_week09_injury_qb_epa_margin_2026-11-05.csv" in archived
+          assert "nfl_week09_final_injury_2026-11-08.csv" in archived
+          assert "data.games=buildWeek9(data.rows9,data.market,data.injuryV2,data.finalInjury,data.kickoffs)" in archived
+          assert "tnf.completed=true" in archived
+          assert "COMPLETED · ORIGINAL TNF" in archived
+          assert "data.games=buildWeek10(data.week10,data.market)" in html
+          assert "nfl_week10_initial_projections_2026-11-12.csv" in html
+          assert 'data-model="baseline"' in html and 'data-model="injury"' in html
+          assert "INITIAL · QB CHECK PENDING" in html
+          assert "Initial · Nov 12" in html
           assert "Date.parse(a.kickoffUtc)-Date.parse(b.kickoffUtc)" in html
-          assert "tnf.completed=true" in html
-          assert "COMPLETED · ORIGINAL TNF" in html
-          assert 'id="model-select"' not in html, "Public board should not offer competing projections"
-          assert "Final pregame" in html
+          assert "week09.html" in html
+          # The Week 10 homepage has exactly two public model views.
+          assert 'id="model-select"' not in html
           # X/social crawlers cannot execute the site's JS. Social tags and
           # the referenced 1200x630 PNG must exist in static HTML and docs.
           head=html.split("</head>",1)[0]
@@ -95,6 +106,22 @@ jobs:
           assert ordered[-1]["game_id"]=="2026_09_BUF_MIN", "Monday night must be last"
           assert {r["game_id"] for r in final}=={r["game_id"] for r in ordered[1:]}
           print("PASS: 15 Week 9 games in kickoff order, original TNF forecast preserved, 14 finals unchanged")
+          with Path("data/public_snapshots/nfl_week10_initial_projections_2026-11-12.csv").open() as f:
+              initial=list(csv.DictReader(f))
+          with Path("data/public_snapshots/nfl_week10_bovada_initial_2026-11-12.csv").open() as f:
+              week10market=list(csv.DictReader(f))
+          assert len(initial)==28 and len({r["game_id"] for r in initial})==14
+          assert len(week10market)==14
+          assert {r["model"] for r in initial}=={"baseline","injury"}
+          assert {r["game_id"] for r in initial}=={
+              "2026_10_"+r["away_team"]+"_"+r["home_team"] for r in week10market
+          }
+          from datetime import datetime, timezone
+          for r in initial:
+              assert datetime.fromisoformat(r["published_at_utc"].replace("Z","+00:00"))<datetime.fromisoformat(r["kickoff_utc"].replace("Z","+00:00"))
+              a,h,t=(float(r[k]) for k in ("projected_away","projected_home","projected_total"))
+              assert all(map(math.isfinite,(a,h,t))) and abs(a+h-t)<.02
+          print("PASS: 14 Week 10 games, both initial models, preserved Bovada quotes and pregame timing")
           PY
           node --check /tmp/tedgy-site.js
       - name: Test actual routed app and historical links
@@ -112,7 +139,9 @@ jobs:
               assert len(app.dataframe) >= 1, f"{label}: expected rendered data table"
               print("PASS:", label, "tables:", len(app.dataframe))
 
-          verify("Week 9 public landing")
+          verify("Week 10 public landing")
+          app.switch_page("pages/Week_09_Projection_Board.py").run()
+          verify("Week 9 archive page")
           app.switch_page("pages/Results.py").run()
           verify("Public results record from Week 8")
           assert any("Week 8" in str(x.body) for x in app.subheader), "Results Week 8 heading missing"
