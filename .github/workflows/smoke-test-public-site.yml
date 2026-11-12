@@ -54,7 +54,15 @@ jobs:
           assert "data.games=buildWeek10(data.week10,data.market)" in html
           assert "nfl_week10_initial_projections_2026-11-12.csv" in html
           assert 'data-model="baseline"' in html and 'data-model="injury"' in html
-          assert "INITIAL · QB CHECK PENDING" in html
+          assert "FINAL INJURY REPORT" in html
+          assert "INACTIVES PENDING" not in html
+          assert "nfl_week10_final_injury_designations_2026-11-12.csv" in html
+          with Path("data/public_snapshots/nfl_week10_final_injury_designations_2026-11-12.csv").open() as f:
+              injury_status=list(csv.DictReader(f))
+          assert len(injury_status)==6
+          assert {r["final_game_status"] for r in injury_status}=={"OUT","QUESTIONABLE","NO_GAME_DESIGNATION"}
+          assert {r["player_name"] for r in injury_status if r["final_game_status"]=="OUT"}=={"Lucas Patrick","Colson Yankoff"}
+          assert {r["player_name"] for r in injury_status if r["final_game_status"]=="QUESTIONABLE"}=={"Malik Harrison"}
           assert "Initial · Nov 12" in html
           assert "Date.parse(a.kickoffUtc)-Date.parse(b.kickoffUtc)" in html
           assert "week09.html" in html
