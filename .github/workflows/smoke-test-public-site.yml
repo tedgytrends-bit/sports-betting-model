@@ -17,6 +17,7 @@ on:
       - "data/public_snapshots/nfl_week09_kickoffs_2026.csv"
       - "docs/index.html"
       - "docs/week09.html"
+      - "docs/week10.html"
       - "data/public_snapshots/nfl_week10_initial_projections_2026-11-12.csv"
       - "data/public_snapshots/nfl_week10_bovada_initial_2026-11-12.csv"
       - "data/bovada_lines.csv"
@@ -54,6 +55,11 @@ jobs:
           assert "data.games=buildWeek10(data.week10,data.market)" in html
           assert "nfl_week10_initial_projections_2026-11-12.csv" in html
           assert 'data-model="baseline"' in html and 'data-model="injury"' in html
+          fresh=Path("docs/week10.html").read_text(encoding="utf-8")
+          assert "FINAL INJURY REPORT" in fresh
+          assert "nfl_week10_final_injury_designations_2026-11-12.csv" in fresh
+          assert "INACTIVES PENDING" not in fresh.upper()
+          assert 'name="tedgy-page-revision"' in fresh
           assert "FINAL INJURY REPORT" in html
           assert "INACTIVES PENDING" not in html
           assert "nfl_week10_final_injury_designations_2026-11-12.csv" in html
