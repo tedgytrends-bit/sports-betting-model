@@ -12,6 +12,7 @@ import streamlit as st
 ROOT=Path(__file__).resolve().parents[1]
 SNAP=ROOT/"data"/"public_snapshots"/"nfl_week10_initial_projections_2026-11-12.csv"
 MARKET=ROOT/"data"/"bovada_lines.csv"
+QB_UPDATE=ROOT/"data"/"public_snapshots"/"nfl_week10_qb_corrected_2026-11-12.csv"
 SOURCE="https://github.com/tedgytrends-bit/sports-betting-model/blob/main/"
 SEASON=2026
 WEEK=10
@@ -61,6 +62,7 @@ def decode(row,quote):
         "_time":local,
         "Kickoff (CT)":local.strftime("%a %b %-d · %-I:%M %p"),
         "Game":f"{away} @ {home}",
+        "Projection version":("QB-corrected preview" if row.get("qb_updated",False) else "Initial · Nov 12"),
         "Bovada":f"{format_side(s,home,away,'display')} · O/U {total:g}",
         "Projected score":f"{away} {a:.1f} – {home} {h:.1f}",
         "Projected total":round(t,1),
@@ -90,6 +92,45 @@ if not SNAP.exists() or not MARKET.exists():
 
 df=pd.read_csv(SNAP,low_memory=False)
 quotes=pd.read_csv(MARKET,low_memory=False)
+# Overlay only a separate, timestamped QB-source correction when available.
+# Keep the initial 28-row file untouched. Updated scores are not a final
+# Saturday/Sunday inactive-list publication.
+revised_games=set()
+if QB_UPDATE.exists():
+    update=pd.read_csv(QB_UPDATE,low_memory=False)
+    expected={"2026_10_LA_ARI":"Carson Beck","2026_10_SEA_LV":"Drew Lock"}
+    if len(update)!=2 or set(update.game_id)!=set(expected):
+        st.error("Separate QB correction archive is incomplete or modified.")
+        st.stop()
+    if not update.model.eq("injury").all() or not update.publication_status.eq(
+        "QB_CORRECTED_PREGAME_RESEARCH_UPDATE_NOT_FINAL"
+    ).all():
+        st.error("Source-verified correction label invalid.")
+        st.stop()
+    for _,revised in update.iterrows():
+        gid=str(revised.game_id)
+        if not any(expected[gid] in str(revised[k]) for k in ("home_qb_name","away_qb_name")):
+            st.error(f"Wrong corrected quarterback for {gid}")
+            st.stop()
+        target=df.index[df.game_id.eq(gid)&df.model.eq("injury")]
+        if len(target)!=1:
+            st.error(f"Missing original Injury row for {gid}")
+            st.stop()
+        original=df.loc[target[0]]
+        if pd.to_datetime(revised.published_at_utc,utc=True)>=pd.to_datetime(original.kickoff_utc,utc=True):
+            st.error("Correction was not before kickoff.")
+            st.stop()
+        if abs(float(revised.projected_home)+float(revised.projected_away)-float(revised.projected_total))>.02:
+            st.error("Invalid corrected score sum.")
+            st.stop()
+        for field in (
+            "projected_home","projected_away","projected_total","model_version",
+            "home_qb_name","away_qb_name","home_qb_starter_source",
+            "away_qb_starter_source",
+        ):
+            df.loc[target[0],field]=revised[field]
+        revised_games.add(gid)
+
 required={
     "published_at_utc","publication_status","game_id","season","week",
     "kickoff_utc","away_team","home_team","model","projected_away",
@@ -152,6 +193,8 @@ selection=st.radio(
 )
 model="injury" if selection.startswith("Injury") else "baseline"
 chosen=df[df.model.eq(model)].sort_values(["kickoff","game_id"]).copy()
+chosen["qb_updated"]=chosen.game_id.isin(revised_games)&chosen.model.eq("injury")
+
 rows=[]
 for _,row in chosen.iterrows():
     key=team(row.away_team)+"@"+team(row.home_team)
@@ -169,7 +212,7 @@ if len(out)!=14:
     st.stop()
 st.dataframe(out,hide_index=True,width="stretch",height=530)
 st.caption(
-    "ATS and total differences are directional comparisons, not betting recommendations. "
+    "The two separately timestamped QB-source corrections (Arizona Carson Beck, Seattle Drew Lock) are research updates, not rewrites of the initial Thursday scores. ATS and total differences are directional comparisons, not betting recommendations. "
     "The Injury model currently relies on largely provisional starting-QB identities; "
     "Saturday/Sunday pregame updates must be captured separately."
 )
