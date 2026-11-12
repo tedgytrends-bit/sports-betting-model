@@ -13,6 +13,7 @@ ROOT=Path(__file__).resolve().parents[1]
 SNAP=ROOT/"data"/"public_snapshots"/"nfl_week10_initial_projections_2026-11-12.csv"
 MARKET=ROOT/"data"/"bovada_lines.csv"
 QB_UPDATE=ROOT/"data"/"public_snapshots"/"nfl_week10_qb_corrected_2026-11-12.csv"
+FINAL_INJURIES=ROOT/"data"/"public_snapshots"/"nfl_week10_final_injury_designations_2026-11-12.csv"
 SOURCE="https://github.com/tedgytrends-bit/sports-betting-model/blob/main/"
 SEASON=2026
 WEEK=10
@@ -92,6 +93,41 @@ if not SNAP.exists() or not MARKET.exists():
 
 df=pd.read_csv(SNAP,low_memory=False)
 quotes=pd.read_csv(MARKET,low_memory=False)
+if not FINAL_INJURIES.exists():
+    st.error("Final Week 10 injury-status snapshot is missing.")
+    st.stop()
+injury_designations=pd.read_csv(FINAL_INJURIES,low_memory=False)
+required_status={"game_id","team","player_name","position","injury","final_game_status"}
+if not required_status.issubset(injury_designations.columns):
+    st.error("Incomplete final injury report fields.")
+    st.stop()
+tnf=injury_designations.loc[
+    injury_designations.game_id.eq("2026_10_WAS_NYG")
+]
+if len(tnf)!=6 or tnf.final_game_status.eq("OUT").sum()!=2 or tnf.final_game_status.eq("QUESTIONABLE").sum()!=1:
+    st.error("Final TNF injury designation count does not match the official reports.")
+    st.stop()
+
+def final_injury_label(game_id):
+    subset=injury_designations.loc[injury_designations.game_id.eq(game_id)]
+    if subset.empty:
+        return "—"
+    out=subset.loc[subset.final_game_status.eq("OUT")]
+    question=subset.loc[subset.final_game_status.eq("QUESTIONABLE")]
+    cleared=subset.loc[subset.final_game_status.eq("NO_GAME_DESIGNATION")]
+    pieces=[]
+    if len(out):
+        pieces.append("OUT: "+", ".join(
+            f"{row.team} {row.position} {row.player_name}" for row in out.itertuples()
+        ))
+    if len(question):
+        pieces.append("QUESTIONABLE: "+", ".join(
+            f"{row.team} {row.position} {row.player_name}" for row in question.itertuples()
+        ))
+    if len(cleared):
+        pieces.append("No game designation: "+", ".join(cleared.player_name))
+    return " | ".join(pieces)
+
 # Overlay only a separate, timestamped QB-source correction when available.
 # Keep the initial 28-row file untouched. Updated scores are not a final
 # Saturday/Sunday inactive-list publication.
@@ -205,19 +241,25 @@ for _,row in chosen.iterrows():
     if isinstance(quote,pd.DataFrame):
         st.error(f"Duplicate market game {key}.")
         st.stop()
-    rows.append(decode(row,quote))
+    entry=decode(row,quote)
+    entry["Official final injuries"]=final_injury_label(str(row.game_id))
+    rows.append(entry)
 out=pd.DataFrame(rows).sort_values("_time").drop(columns=["_time"])
 if len(out)!=14:
     st.error("Week 10 board is missing games.")
     st.stop()
 st.dataframe(out,hide_index=True,width="stretch",height=530)
+st.markdown(
+    "**Thursday WAS @ NYG — official final injury report:** "
+    "**OUT:** WAS C Lucas Patrick (concussion), WAS TE Colson Yankoff (knee). "
+    "**QUESTIONABLE:** NYG LB Malik Harrison (groin). "
+    "**No game designation:** Jayden Daniels, J.J. McCarthy, Cam Skattebo. "
+    "This final injury report was already included in the original frozen projections. "
+    "No game designation does not independently establish the game-day active list."
+)
 st.caption(
-    "**Thursday WAS @ NYG injury cross-check:** Washington C Lucas Patrick and TE "
-    "Colson Yankoff are OUT; Giants LB Malik Harrison is questionable. "
-    "Both Jayden Daniels and J.J. McCarthy practiced fully Wednesday and have no game "
-    "designation. Those exact final-report statuses were present in the timestamped "
-    "injury snapshot before the original Thursday model publication. "
-    "Game-day inactives are not yet confirmed; the frozen forecasts are unchanged."
+    "[Washington official report](https://www.commanders.com/team/injury-report/) · "
+    "[Giants official report](https://www.giants.com/team/injury-report/)"
 )
 st.caption(
     "The two separately timestamped QB-source corrections (Arizona Carson Beck, Seattle Drew Lock) are research updates, not rewrites of the initial Thursday scores. ATS and total differences are directional comparisons, not betting recommendations. "
