@@ -11,6 +11,7 @@ import streamlit as st
 
 ROOT = Path(__file__).resolve().parents[1]
 WEEK_8 = ROOT / "data" / "four_model_week08" / "week08_four_model_comparison.csv"
+WEEK_9_SUMMARY = ROOT / "data" / "public_snapshots" / "nfl_week09_results_summary_2026-11-10.csv"
 
 st.title("Tedgy Trends — Model Results")
 st.caption("2026 NFL ATS and totals · Public tracking starts Week 8")
@@ -54,6 +55,40 @@ def record(values: pd.Series) -> tuple[str, str]:
     if missing:
         extra += f" · {missing} ungraded"
     return rec, extra
+
+st.subheader("Week 9 · Nov 5–9, 2026")
+if WEEK_9_SUMMARY.exists():
+    week9=pd.read_csv(WEEK_9_SUMMARY)
+    official=week9.loc[
+        week9.model.eq("injury")
+        & week9.source_status.eq("OFFICIAL_FROZEN_INJURY")
+        & week9.games.eq(15)
+    ]
+    baseline9=week9.loc[
+        week9.model.eq("baseline")
+        & week9.source_status.eq("RESEARCH_FROZEN_BASELINE")
+        & week9.games.eq(15)
+    ]
+    if len(official)==1:
+        rec=official.iloc[0]
+        a,b=st.columns(2)
+        a.metric("Official Injury ATS",f"{int(rec.ats_wins)}–{int(rec.ats_losses)}–{int(rec.ats_pushes)}")
+        b.metric("Official Injury totals",f"{int(rec.totals_wins)}–{int(rec.totals_losses)}")
+        st.caption("All 15 Week 9 games, frozen pregame Injury model. No model changes or retrospective substitutions.")
+    else:
+        st.warning("Week 9 official Injury audit lacks one complete validated record.")
+    if len(baseline9)==1:
+        b=baseline9.iloc[0]
+        st.caption(
+            f"Separate Week 9 Baseline research comparison: ATS "
+            f"{int(b.ats_wins)}–{int(b.ats_losses)}–{int(b.ats_pushes)}, "
+            f"totals {int(b.totals_wins)}–{int(b.totals_losses)}. "
+            "This is research, not a second official Injury record."
+        )
+else:
+    st.warning("Week 9 audit is missing; do not infer a public record.")
+st.caption("Source: data/week09_review/week09_full_summary.json · Audited Nov 10, 2026")
+st.divider()
 
 st.subheader("Week 8 · Nov 1, 2026")
 left, right = st.columns(2)
@@ -105,4 +140,5 @@ st.caption(
     "Historical and experimental performance are not combined into this public record."
 )
 st.page_link("pages/Public_Projection_Board.py", label="View original Week 8 published projections", icon=":material/history:")
+st.page_link("pages/Week_10_Projection_Board.py", label="View current Week 10 projections", icon=":material/sports_football:")
 st.caption("Experimental model research · Not betting advice")
