@@ -1,0 +1,27 @@
+{
+  "status": "QB_CORRECTED_PREGAME_RESEARCH_UPDATE_NOT_FINAL",
+  "captured_at_utc": "2026-11-12T13:51:47Z",
+  "games_updated": 2,
+  "initial_frozen_file": "data/public_snapshots/nfl_week10_initial_projections_2026-11-12.csv",
+  "correction_file": "data/public_snapshots/nfl_week10_qb_corrected_2026-11-12.csv",
+  "corrected_QBs": [
+    {
+      "game_id": "2026_10_SEA_LV",
+      "qb_change_team": "SEA",
+      "qb_change_name": "Drew Lock",
+      "qb_prior_dropbacks": 476.0,
+      "qb_confidence": "sample_available"
+    },
+    {
+      "game_id": "2026_10_LA_ARI",
+      "qb_change_team": "ARI",
+      "qb_change_name": "Carson Beck",
+      "qb_prior_dropbacks": 0.0,
+      "qb_confidence": "insufficient_data"
+    }
+  ],
+  "market_snapshot_unchanged": "data/public_snapshots/nfl_week10_bovada_initial_2026-11-12.csv",
+  "starter_source_gate": "Reviewed primary team reports for named Week 10 matchup, publication and review prior to kickoff. Updated game can still change by gameday.",
+  "invariant": "The initial 28-row published first pregame model record is immutable. These two Sunday candidate updates cannot rewrite it.",
+  "rookie_note": "Carson Beck has no prior NFL regular-season dropbacks. The 2026 historical EPA QB magnitude has NOT been validated for a rookie; treat model margin as a research sensitivity, not a calibrated value."
+}
