@@ -11,11 +11,19 @@ st.set_page_config(
     layout="wide",
 )
 
-week09 = st.Page(
-    "pages/Week_09_Projection_Board.py",
-    title="Week 9 Projections",
+week10 = st.Page(
+    "pages/Week_10_Projection_Board.py",
+    title="Week 10 Projections",
     icon="🏈",
     default=True,
+)
+
+week09 = st.Page(
+    "pages/Week_09_Projection_Board.py",
+    title="Week 9 Archived Projections",
+    icon="🏈",
+    url_path="week-9-projections",
+    visibility="hidden",
 )
 
 results = st.Page(
@@ -67,6 +75,6 @@ legacy = [
     st.Page("pages/Endzone_Injury_Sample_Test.py", title="EndzoneAPI Injury Sample Test", visibility="hidden"),
 ]
 
-nav = st.navigation([week09, results, week08_published, week08_comparison, *legacy])
-st.sidebar.caption("Tedgy Trends · Public UI v2026.11.05-simple")
+nav = st.navigation([week10, results, week09, week08_published, week08_comparison, *legacy])
+st.sidebar.caption("Tedgy Trends · Public UI v2026.11.12-week10")
 nav.run()
