@@ -135,5 +135,43 @@ class CoachExpectedStarterTests(unittest.TestCase):
         capture.reject_known_inactive_qb(board,watch)
 
 
+    def test_real_week10_miami_ir_does_not_pass_old_schedule_starter(self):
+        """Retroactive QA: original Nov15 Miami input was wrong; now blocked."""
+        project=Path(__file__).resolve().parents[1]
+        watch=pd.read_csv(project/"data"/"qb_starters"/"2026_week10_watchlist.csv")
+        frozen=pd.read_csv(project/"data"/"public_snapshots"/"nfl_week10_sunday_pregame_2026-11-15.csv")
+        erroneous=frozen.loc[
+            frozen.game_id.eq("2026_10_MIA_IND") & frozen.model.eq("injury")
+        ]
+        self.assertEqual(len(erroneous),1)
+        old=erroneous.iloc[0]
+        self.assertEqual(old.away_qb_name,"Malik Willis")
+        qb_board=pd.DataFrame([{
+            "game_id":"2026_10_MIA_IND","team":"MIA",
+            "qb_name":old.away_qb_name
+        }])
+        with self.assertRaisesRegex(ValueError,"Known unavailable QB"):
+            capture.reject_known_inactive_qb(qb_board,watch)
+        qb_board.loc[0,"qb_name"]="Kyle McCord"
+        capture.reject_known_inactive_qb(qb_board,watch)
+
+    def test_kyle_mccord_source_confirmed_with_correct_gsis_and_zero_sample(self):
+        project=Path(__file__).resolve().parents[1]
+        c=pd.read_csv(project/"data"/"qb_starters"/"2026_week10_confirmed.csv")
+        m=c.loc[c.game_id.eq("2026_10_MIA_IND") & c.team.eq("MIA")]
+        self.assertEqual(len(m),1)
+        self.assertEqual(m.iloc[0].qb_id,"00-0040014")
+        self.assertEqual(m.iloc[0].qb_name,"Kyle McCord")
+        self.assertEqual(str(m.iloc[0].source_reviewed).lower(),"true")
+        correction=pd.read_csv(
+            project/"data"/"public_snapshots"/"nfl_week10_mia_ind_mccord_corrected_2026-11-15.csv"
+        )
+        self.assertEqual(len(correction),1)
+        self.assertEqual(correction.iloc[0].away_qb_name,"Kyle McCord")
+        self.assertEqual(correction.iloc[0].away_qb_starter_source,"verified_pregame")
+        self.assertEqual(float(correction.iloc[0].new_qb_prior_dropbacks),0.0)
+        # First published forecast stays preserved and is not falsely relabeled.
+
+
 if __name__=="__main__":
     unittest.main()
