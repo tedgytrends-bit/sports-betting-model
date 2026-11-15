@@ -20,6 +20,11 @@ on:
       - "docs/week10.html"
       - "data/public_snapshots/nfl_week10_initial_projections_2026-11-12.csv"
       - "data/public_snapshots/nfl_week10_bovada_initial_2026-11-12.csv"
+      - "data/public_snapshots/nfl_week10_bovada_sunday_2026-11-15T1256Z.csv"
+      - "data/public_snapshots/nfl_week10_sunday_pregame_2026-11-15.csv"
+      - "data/public_snapshots/nfl_week10_sunday_official_injury_designations_2026-11-15.csv"
+      - "data/public_snapshots/nfl_week10_ne_det_official_inactives_2026-11-15.csv"
+      - "data/public_snapshots/nfl_week10_ne_det_inactives_adjusted_2026-11-15.csv"
       - "data/bovada_lines.csv"
       - ".github/workflows/smoke-test-public-site.yml"
 
@@ -136,6 +141,39 @@ jobs:
               a,h,t=(float(r[k]) for k in ("projected_away","projected_home","projected_total"))
               assert all(map(math.isfinite,(a,h,t))) and abs(a+h-t)<.02
           print("PASS: 14 Week 10 games, both initial models, preserved Bovada quotes and pregame timing")
+          with Path("data/public_snapshots/nfl_week10_bovada_sunday_2026-11-15T1256Z.csv").open() as f:
+              sunday_quotes=list(csv.DictReader(f))
+          with Path("data/public_snapshots/nfl_week10_sunday_pregame_2026-11-15.csv").open() as f:
+              sunday_models=list(csv.DictReader(f))
+          with Path("data/public_snapshots/nfl_week10_sunday_official_injury_designations_2026-11-15.csv").open() as f:
+              sunday_injury=list(csv.DictReader(f))
+          with Path("data/public_snapshots/nfl_week10_ne_det_official_inactives_2026-11-15.csv").open() as f:
+              ne_det_inactives=list(csv.DictReader(f))
+          with Path("data/public_snapshots/nfl_week10_ne_det_inactives_adjusted_2026-11-15.csv").open() as f:
+              revised_ne_det=list(csv.DictReader(f))
+          assert len(sunday_quotes)==13 and len(sunday_models)==26
+          assert set(x["game_id"] for x in sunday_models)=={
+              "2026_10_"+x["away_team"]+"_"+x["home_team"] for x in sunday_quotes
+          }
+          assert len({(x["game_id"],x["model"]) for x in sunday_models})==26
+          assert {x["model"] for x in sunday_models}=={"injury","baseline"}
+          assert len(sunday_injury)==169 and len({x["team"] for x in sunday_injury})==26
+          assert len(ne_det_inactives)==20
+          assert {x["final_active_status"] for x in ne_det_inactives}=={"INACTIVE","ACTIVE_CONFIRMED"}
+          assert len(revised_ne_det)==1 and revised_ne_det[0]["game_id"]=="2026_10_NE_DET"
+          for p in (html,fresh):
+              assert "nfl_week10_sunday_pregame_2026-11-15.csv" in p
+              assert "nfl_week10_sunday_official_injury_designations_2026-11-15.csv" in p
+              assert "nfl_week10_ne_det_official_inactives_2026-11-15.csv" in p
+              assert "nfl_week10_ne_det_inactives_adjusted_2026-11-15.csv" in p
+              assert "SUNDAY_NOV15_PREINACTIVES_PREGAME_INJURY_REFRESH" in p
+              assert "NE_DET_OFFICIAL_GAMEDAY_INACTIVES_PREGAME_UPDATE" in p
+          for x in sunday_models+revised_ne_det:
+              assert datetime.fromisoformat(x["published_at_utc"].replace("Z","+00:00"))<datetime.fromisoformat(x["kickoff_utc"].replace("Z","+00:00"))
+              a,h,t=(float(x[k]) for k in ("projected_away","projected_home","projected_total"))
+              assert all(map(math.isfinite,(a,h,t))) and abs(a+h-t)<.02
+          print("PASS: Sunday 13 Bovada quotes, 26 refreshed model rows, 169 official injuries, NE-DET official actives/inactives and chronological score")
+
           PY
           node --check /tmp/tedgy-site.js
       - name: Test actual routed app and historical links
