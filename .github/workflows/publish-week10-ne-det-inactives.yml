@@ -1,0 +1,67 @@
+name: Capture NFL Week10 NE-DET confirmed inactives pregame update
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/publish_week10_ne_det_inactives.py"
+      - ".github/workflows/publish-week10-ne-det-inactives.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nfl-week10-ne-det-official-inactives-frozen
+  cancel-in-progress: false
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install historical nflverse player and injury dependencies
+        run: python -m pip install -r requirements.txt pytest
+      - name: Compile and run source-quality tests
+        run: |
+          python -m py_compile scripts/publish_week10_ne_det_inactives.py
+          python -m pytest -q tests/test_qb_expected_starters.py tests/test_qb_confirmation_gate.py
+      - name: Re-score early kickoff using primary team inactive sources
+        run: python -u scripts/publish_week10_ne_det_inactives.py
+      - name: Validate same market, original history and before kickoff
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import pandas as pd
+          root=Path("data/public_snapshots")
+          original=pd.read_csv(root/"nfl_week10_sunday_pregame_2026-11-15.csv")
+          revised=pd.read_csv(root/"nfl_week10_ne_det_inactives_adjusted_2026-11-15.csv")
+          report=json.loads((root/"nfl_week10_ne_det_inactives_adjusted_2026-11-15_manifest.json").read_text())
+          assert len(original)==26 and len(revised)==1
+          r=revised.iloc[0]
+          assert r.game_id=="2026_10_NE_DET" and r.model=="injury"
+          assert r.publication_status=="NE_DET_OFFICIAL_GAMEDAY_INACTIVES_PREGAME_UPDATE"
+          assert pd.to_datetime(r.published_at_utc,utc=True)<pd.to_datetime(r.kickoff_utc,utc=True)
+          assert abs(r.projected_away+r.projected_home-r.projected_total)<.02
+          assert len(report["matched_gameday_identity_rows"])>=11
+          assert len(pd.read_csv(root/"nfl_week10_initial_projections_2026-11-12.csv"))==28
+          assert r.bovada_total==51.0 and r.bovada_home_favored_spread==2.5
+          print("PASS: NE DET official game-day list applied; older archives and sportsbook snapshot preserved")
+          PY
+      - name: Archive new NE-DET pregame inactive-adjusted score only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/public_snapshots/nfl_week10_ne_det_inactives_adjusted_2026-11-15.csv
+          git add data/public_snapshots/nfl_week10_ne_det_inactives_adjusted_2026-11-15_manifest.json
+          git add data/injury_snapshots/injuries_2026_week_10_20261115T*.csv
+          git commit -m "Archive separate pregame NE-DET official inactives Injury score revision"
+          git pull --rebase origin main
+          git push origin HEAD:main
