@@ -81,3 +81,22 @@ Static `docs/index.html` and `docs/week10.html` now REQUIRE the Miami corrector 
 **Structural gap still outstanding:** nflverse *practice injury reports* omit players already on injured reserve, whether QBs or non-QBs. The team-level Injury model's final-report count adjustment is NOT a full injured-roster/IR availability model. Add an independent current roster status and team transaction roster gate to the publication pipeline before declaring future weeks final; no claim of a complete future solution has been made. In the meantime, do not call incomplete pregame model source statuses fully verified, and fail closed if official IR/OUT vs selected QB conflicts.
 
 The official first Sunday 07:04 and Thursday Nov12 records remain immutable, and the one-game 09:07 correction is a separately tracked later vintage.
+
+
+## Further audit — separate current roster statuses; November 15, 9:23 a.m. CT
+
+An independent **zero-paid-credit** nflverse `roster_2026.csv` analysis was run by `research/audit_week10_roster_reserve_status.py` / GitHub Action **#43729580593, success**, saved at `data/week10_review/week10_roster_reserve_secondary_audit_20261115.json`.
+
+**As of the roster feed's latest Week 10 entries**, across the 26 Sunday/Monday teams: **258 records carry `status=RES`** (broad reserve category). **236 of those are not listed as OUT in the final game-specific weekly practice injury report**. This is *not* equivalent to 236 new injured starters: reserve records encompass PUP/IR/other reserve statuses, backups, previous longer-term absences and non-starters. They must be assigned correct roles and vintage before any adjustment to predicted points.
+
+The key source sanity checks succeeded:
+- **Malik Willis (MIA): `RES` in Week 10**, GSIS `00-0038128`, and independently confirmed IR by Miami Nov10.
+- **Kyle McCord (MIA): `ACT` in Week 10**, GSIS `00-0040014`, and team-confirmed Sunday starter. 
+- Also reserved: MIA Zach Sieler (DL, IR) and De'Von Achane (RB, IR). 
+- All **26 source-corrected projected Week 10 QBs** match **`ACT`** for their exact GSIS ID and actual team in the Week 10 public roster feed. Roster ACT means *eligible to be on active roster*, not independently verified starting QB or game-day active (that separate confirmation remains necessary).
+
+**New reusable safeguard:** `research/validate_live_qb_roster.py` downloads the exact public nflverse roster season and refuses `RES`, mismatched player GSIS/name, stale roster weeks or wrong team when a QB is being used for a current-week release. `tests/test_qb_live_roster.py` contains explicit former-Willis RES failure, McCord ACT success and stale-ID/source tests. The current `scripts/capture_qb_aware_injury.py` calls this roster gate; an unavailable/stale current-week roster blocks `release_ready` while allowing a clearly research-only shadow. A current exact roster contradiction fails hard. The earlier explicit team-specific OUT/IR watchlist is still a separate additional check, not a replacement for roster eligibility.
+
+**Remaining scope restriction:** This safeguard fixes the **QB roster eligibility** failure path in future research captures, but does not yet transform the full non-QB 258 reserve records into properly weighted player-level injury features. Such a change needs a timestamped, injury-role-aware historical calibration/backtest. Do not assume the published Week 10 totals or ATS are fully player injury-adjusted simply because final game designations were incorporated.
+
+All prior Thursday and Sunday prospective score/market archives remain immutable, and no paid APIs were called.
