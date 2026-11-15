@@ -17,6 +17,7 @@ FINAL_INJURIES=ROOT/"data"/"public_snapshots"/"nfl_week10_final_injury_designati
 SUNDAY=ROOT/"data"/"public_snapshots"/"nfl_week10_sunday_pregame_2026-11-15.csv"
 SUNDAY_INJURIES=ROOT/"data"/"public_snapshots"/"nfl_week10_sunday_official_injury_designations_2026-11-15.csv"
 NE_DET_ACTIVES=ROOT/"data"/"public_snapshots"/"nfl_week10_ne_det_official_inactives_2026-11-15.csv"
+NE_DET_FINAL=ROOT/"data"/"public_snapshots"/"nfl_week10_ne_det_inactives_adjusted_2026-11-15.csv"
 SOURCE="https://github.com/tedgytrends-bit/sports-betting-model/blob/main/"
 SEASON=2026
 WEEK=10
@@ -299,6 +300,37 @@ st.info(
     "Original Nov 12 scores and Bovada snapshot are preserved."
 )
 
+# Independent gameday NE-DET Injury-only score; Baseline and Thursday/Sunday archives untouched.
+if not NE_DET_FINAL.exists():
+    st.error("Missing separately timestamped official NE–DET inactive-adjusted Injury projection.")
+    st.stop()
+revised_early=pd.read_csv(NE_DET_FINAL,low_memory=False)
+if len(revised_early)!=1:
+    st.error("Expected exactly one early game official inactive adjusted Injury projection.")
+    st.stop()
+early=revised_early.iloc[0]
+if (str(early.game_id)!="2026_10_NE_DET" or str(early.model)!="injury"
+        or str(early.publication_status)!="NE_DET_OFFICIAL_GAMEDAY_INACTIVES_PREGAME_UPDATE"):
+    st.error("Invalid NE–DET official inactive score record.")
+    st.stop()
+early_idx=df.index[df.game_id.eq("2026_10_NE_DET")&df.model.eq("injury")]
+if len(early_idx)!=1:
+    st.error("Original NE–DET Injury model row absent.")
+    st.stop()
+early_kickoff=pd.to_datetime(df.loc[early_idx[0],"kickoff"],utc=True)
+early_publish=pd.to_datetime(early.published_at_utc,utc=True)
+if early_publish>=early_kickoff or early_publish<=sunday_timestamp:
+    st.error("NE–DET later inactive version lacks valid before-kickoff chronology.")
+    st.stop()
+if abs(float(early.projected_home)+float(early.projected_away)-float(early.projected_total))>.02:
+    st.error("NE–DET after inactive score sum invalid.")
+    st.stop()
+for field in ("projected_home","projected_away","projected_total","model_version",
+              "home_qb_name","away_qb_name","home_qb_starter_source","away_qb_starter_source"):
+    df.loc[early_idx[0],field]=early[field]
+df["inactives_updated"]=False
+df.loc[early_idx[0],"inactives_updated"]=True
+
 selection=st.radio(
     "Model view",
     options=["Injury · QB provisional","Baseline"],
@@ -308,6 +340,7 @@ selection=st.radio(
 model="injury" if selection.startswith("Injury") else "baseline"
 chosen=df[df.model.eq(model)].sort_values(["kickoff","game_id"]).copy()
 chosen["qb_updated"]=chosen.game_id.isin(revised_games)&chosen.model.eq("injury")&~chosen["sunday_updated"]
+chosen["inactives_updated"]=chosen.get("inactives_updated",False)
 
 rows=[]
 for _,row in chosen.iterrows():
@@ -320,6 +353,8 @@ for _,row in chosen.iterrows():
         st.error(f"Duplicate market game {key}.")
         st.stop()
     entry=decode(row,quote)
+    if bool(row.get("inactives_updated",False)):
+        entry["Projection version"]="Confirmed inactives · 7:18 AM CT"
     entry["Official final injuries"]=final_injury_label(str(row.game_id))
     if str(row.game_id)=="2026_10_NE_DET":
         active=ne_det_actives.loc[ne_det_actives.final_active_status.eq("ACTIVE_CONFIRMED")]
@@ -357,7 +392,7 @@ st.caption(
     "**Patriots–Lions official game-day update:** New England WR A.J. Brown and "
     "RB Rhamondre Stevenson are ACTIVE; Detroit WR Amon-Ra St. Brown and RB "
     "Sione Vaki are ACTIVE. Both teams have posted their full inactive lists; "
-    "the 7:04 AM CT model snapshot remains marked pre-inactives."
+    "a new 7:18 AM CT Injury-only score was archived after game-day inactives, separately from the 7:04 AM model."
 )
 st.caption(
     "[Patriots official inactives](https://www.patriots.com/news/week-10-inactives-patriots-vs-lions) · "
