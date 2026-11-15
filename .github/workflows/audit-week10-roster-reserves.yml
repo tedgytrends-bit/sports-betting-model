@@ -1,0 +1,58 @@
+name: Research week10 roster-reserve vs final practice injury report (no paid APIs)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "research/audit_week10_roster_reserve_status.py"
+      - ".github/workflows/audit-week10-roster-reserves.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nfl-2026-w10-roster-reserve-audit
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install public dataframe/network utilities
+        run: python -m pip install pandas requests
+      - name: Check source-missing IR/reserve roster coverage
+        run: |
+          python -m py_compile research/audit_week10_roster_reserve_status.py
+          python -u research/audit_week10_roster_reserve_status.py
+      - name: Validate source metadata and no production mutation
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path("data/week10_review/week10_roster_reserve_secondary_audit_20261115.json")
+          x=json.loads(p.read_text())
+          assert x["status"]=="RESEARCH_SECONDARY_ROSTER_RESERVE_AUDIT_NOT_MODEL_INPUT"
+          assert x["included_teams"]==26 and x["qb_count"]==26
+          assert x["latest_roster_week_in_source"]>=9
+          assert len(x["qb_2026_statuses"])==26
+          assert "not proof" in x["critical_caveat"]
+          print("PASS: 26 teams/QBs audited against separate current roster, no live model changes")
+          PY
+      - name: Archive diagnostic only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/week10_review/week10_roster_reserve_secondary_audit_20261115.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Archive full Week10 secondary reserve roster and injury report coverage gaps"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
