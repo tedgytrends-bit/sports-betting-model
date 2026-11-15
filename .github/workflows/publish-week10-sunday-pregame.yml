@@ -1,0 +1,77 @@
+name: Publish Week 10 Sunday pre-inactives injury/market refresh
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/publish_week10_sunday_pregame.py"
+      - ".github/workflows/publish-week10-sunday-pregame.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nfl-2026-week10-sunday-pregame-once
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install public NFL model dependencies
+        run: python -m pip install -r requirements.txt pytest
+      - name: Compile model and check existing QB invariants
+        run: |
+          python -m py_compile scripts/publish_week10_sunday_pregame.py
+          python -m pytest -q tests/test_qb_confirmation_gate.py tests/test_qb_expected_starters.py tests/test_qb_verified_only_sensitivity.py
+      - name: Freeze newly priced Sunday morning prospective Baseline and Injury
+        run: python -u scripts/publish_week10_sunday_pregame.py
+      - name: Validate 13 games 2 models recent official injuries and no Thursday leakage
+        run: |
+          python - <<'PY'
+          import json
+          import pandas as pd
+          from pathlib import Path
+          d=Path("data/public_snapshots")
+          q=pd.read_csv(d/"nfl_week10_bovada_sunday_2026-11-15T1256Z.csv")
+          p=pd.read_csv(d/"nfl_week10_sunday_pregame_2026-11-15.csv")
+          a=pd.read_csv(d/"nfl_week10_sunday_injury_overlay_audit_2026-11-15.csv")
+          m=json.loads((d/"nfl_week10_sunday_pregame_2026-11-15_manifest.json").read_text())
+          assert len(q)==13 and len(p)==26 and p.game_id.nunique()==13
+          assert not p.duplicated(["game_id","model"]).any()
+          assert set(p.model)=={"baseline","injury"}
+          assert set(p.game_id)=={"2026_10_"+x.away_team+"_"+x.home_team for x in q.itertuples()}
+          assert "2026_10_WAS_NYG" not in set(p.game_id)
+          assert set(p.publication_status)=={"SUNDAY_NOV15_PREINACTIVES_PREGAME_INJURY_REFRESH"}
+          assert all(pd.to_datetime(p.published_at_utc,utc=True)<pd.to_datetime(p.kickoff_utc,utc=True))
+          assert p.apply(lambda x: abs(x.projected_away+x.projected_home-x.projected_total)<.02,axis=1).all()
+          assert p.loc[p.model.eq("injury")].home_qb_name.notna().all()
+          assert m["source_of_week10_injury_snapshot"]["matched_fraction"]>=.9
+          assert m["source_of_week10_injury_snapshot"]["official_players"]==len(a)
+          assert all(x in m["qb_source_counts"] for x in ("verified_pregame","coach_expected_pregame_unverified"))
+          assert len(pd.read_csv(d/"nfl_week10_initial_projections_2026-11-12.csv"))==28
+          print("PASS: 13 games, 26 scored records, official designations, time-safe Sunday publication and immutable Thursday historical data")
+          PY
+      - name: Commit only archived Sunday prospective artifacts and new input snapshot
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/public_snapshots/nfl_week10_sunday_pregame_2026-11-15.csv
+          git add data/public_snapshots/nfl_week10_sunday_pregame_2026-11-15_manifest.json
+          git add data/public_snapshots/nfl_week10_sunday_injury_overlay_audit_2026-11-15.csv
+          git add data/injury_snapshots/injuries_2026_week_10_20261115T*.csv
+          if git diff --cached --quiet; then
+            echo "No new Sunday outputs; unexpected"
+            exit 1
+          fi
+          git commit -m "Freeze Week 10 Sunday 13-game Baseline and Injury pre-inactives with Bovada screenshots"
+          git pull --rebase origin main
+          git push origin HEAD:main
