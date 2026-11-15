@@ -30,7 +30,7 @@ WATCH=ROOT/"data"/"qb_starters"/"2026_week10_watchlist.csv"
 def normalized(s):
     x=unicodedata.normalize("NFKD",str(s)).encode("ascii","ignore").decode().lower()
     x=re.sub(r"[^a-z0-9 ]","",x)
-    x=re.sub(r"\\b(jr|ii|iii|iv|sr)\\b","",x)
+    x=re.sub(r"\b(jr|ii|iii|iv|sr)\b","",x)
     return " ".join(x.split())
 
 def main():
