@@ -139,7 +139,10 @@ function injuryStatusHTML(g){
  const all=(Array.isArray(data.injuryReport)?data.injuryReport:[]).concat(Array.isArray(data.injurySun)?data.injurySun:[]);
  const rows=all.filter(r=>r.game_id===g.id);
  if(!rows.length)return '';
- const byStatus=status=>rows.filter(r=>clean(r.final_game_status)===status);
+ const finalized=(Array.isArray(data.inactivesNE)?data.inactivesNE:[]).filter(r=>r.game_id===g.id);
+ const key=r=>norm(r.team)+'|'+clean(r.player_name).toLowerCase().replace(/[^a-z0-9]/g,'');
+ const resolved=new Set(finalized.map(key));
+ const byStatus=status=>rows.filter(r=>clean(r.final_game_status)===status&&!resolved.has(key(r)));
  const labels=items=>items.map(r=>esc(r.team+' '+r.position+' '+r.player_name+(r.injury?' ('+r.injury+')':''))).join('; ');
  const out=byStatus('OUT'),q=byStatus('QUESTIONABLE'),doubt=byStatus('DOUBTFUL'),cleared=byStatus('NO_GAME_DESIGNATION');
  return confirmedGameDayStatusHTML(g)+'<div class="injury-summary"><div class="injury-tag">OFFICIAL FINAL INJURY DESIGNATIONS · '+(g.id==='2026_10_WAS_NYG'?'NOV 11':'NOV 14')+'</div>'
