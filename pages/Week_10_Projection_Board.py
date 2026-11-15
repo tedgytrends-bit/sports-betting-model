@@ -18,6 +18,8 @@ SUNDAY=ROOT/"data"/"public_snapshots"/"nfl_week10_sunday_pregame_2026-11-15.csv"
 SUNDAY_INJURIES=ROOT/"data"/"public_snapshots"/"nfl_week10_sunday_official_injury_designations_2026-11-15.csv"
 NE_DET_ACTIVES=ROOT/"data"/"public_snapshots"/"nfl_week10_ne_det_official_inactives_2026-11-15.csv"
 NE_DET_FINAL=ROOT/"data"/"public_snapshots"/"nfl_week10_ne_det_inactives_adjusted_2026-11-15.csv"
+MIA_CORRECTED=ROOT/"data"/"public_snapshots"/"nfl_week10_mia_ind_mccord_corrected_2026-11-15.csv"
+QB_CROSSCHECK=ROOT/"data"/"public_snapshots"/"nfl_week10_qb_identity_crosscheck_2026-11-15.csv"
 SOURCE="https://github.com/tedgytrends-bit/sports-betting-model/blob/main/"
 SEASON=2026
 WEEK=10
@@ -331,6 +333,66 @@ for field in ("projected_home","projected_away","projected_total","model_version
 df["inactives_updated"]=False
 df.loc[early_idx[0],"inactives_updated"]=True
 
+# Independent source verification after the frozen 07:04 CT forecast:
+# Miami QB Malik Willis is on IR; Kyle McCord starts. Do not conceal the
+# earlier mistake or interpret a rookie's uncalibrated QB EPA as a bet.
+if not MIA_CORRECTED.exists() or not QB_CROSSCHECK.exists():
+    st.error("QB source correction/audit missing: suppress inaccurate Miami Injury board.")
+    st.stop()
+qb_audit=pd.read_csv(QB_CROSSCHECK)
+if len(qb_audit)!=26 or qb_audit.team.nunique()!=26 or not qb_audit.corrected_matches_reference.astype(str).str.lower().eq("true").all():
+    st.error("Week 10 QB cross-check incomplete: not safe to display corrected QB Injury projections.")
+    st.stop()
+mia=pd.read_csv(MIA_CORRECTED)
+if len(mia)!=1:
+    st.error("Miami corrected QB forecast is not unique.")
+    st.stop()
+fix=mia.iloc[0]
+if not (
+    str(fix.game_id)=="2026_10_MIA_IND"
+    and str(fix.away_qb_name)=="Kyle McCord"
+    and str(fix.new_qb_id)=="00-0040014"
+    and str(fix.publication_status)=="MIA_IND_KYLE_MCCORD_PREGAME_SOURCE_CORRECTION"
+    and str(fix.away_qb_starter_source)=="verified_pregame"
+    and float(fix.new_qb_prior_dropbacks)==0
+):
+    st.error("Miami QB update failed authoritative starter and rookie sample check.")
+    st.stop()
+id_mia=df.index[df.game_id.eq("2026_10_MIA_IND")&df.model.eq("injury")]
+if len(id_mia)!=1 or str(df.loc[id_mia[0],"away_qb_name"])!="Malik Willis":
+    st.error("Historical Miami Injury release was replaced or corrupted.")
+    st.stop()
+if not pd.to_datetime(fix.published_at_utc,utc=True)<pd.to_datetime(df.loc[id_mia[0],"kickoff"],utc=True):
+    st.error("Miami corrected source was published after the scheduled kickoff.")
+    st.stop()
+if not pd.to_datetime(fix.published_at_utc,utc=True)>sunday_timestamp:
+    st.error("Miami corrected forecast is older than the Sunday frozen version.")
+    st.stop()
+if abs(float(fix.projected_home)+float(fix.projected_away)-float(fix.projected_total))>.02:
+    st.error("Miami projected scores do not add to the projected total.")
+    st.stop()
+for field in (
+    "projected_home","projected_away","projected_total","model_version",
+    "home_qb_name","away_qb_name","home_qb_starter_source","away_qb_starter_source"
+):
+    df.loc[id_mia[0],field]=fix[field]
+df["mia_qb_uncalibrated"]=False
+df.loc[id_mia[0],"mia_qb_uncalibrated"]=True
+st.warning(
+    "**QB SOURCE CORRECTION — Miami @ Indianapolis:** Malik Willis was placed on IR "
+    "November 10. The Dolphins officially announced Kyle McCord as today's starter. "
+    "The prior Sunday 7:04 AM model incorrectly used Willis. "
+    "This separately frozen 9:07 AM correction uses McCord, but he has ZERO NFL regular-season "
+    "dropbacks in our model: the replacement EPA impact is NOT calibrated. "
+    "**PASS on ATS/totals betting interpretation for this game.** "
+    "The original pregame snapshot is preserved for transparent grading."
+)
+st.caption(
+    "Week 10 QB audit: all 26 match an independent current roster index after the Miami correction; "
+    "five have supporting team-specific starting-QB announcements, one coach-expected, "
+    "and 20 only secondary depth-chart corroboration. This does not prove everyone is game-day active."
+)
+
 selection=st.radio(
     "Model view",
     options=["Injury · QB provisional","Baseline"],
@@ -353,6 +415,10 @@ for _,row in chosen.iterrows():
         st.error(f"Duplicate market game {key}.")
         st.stop()
     entry=decode(row,quote)
+    if bool(row.get("mia_qb_uncalibrated",False)):
+        entry["Projection version"]="Kyle McCord QB corrected · 9:07 AM CT · UNCALIBRATED"
+        entry["ATS lean"]="PASS — rookie QB valuation uncalibrated"
+        entry["Total lean"]="Research-only — QB first start"
     if bool(row.get("inactives_updated",False)):
         entry["Projection version"]="Confirmed inactives · 7:18 AM CT"
     entry["Official final injuries"]=final_injury_label(str(row.game_id))
@@ -387,6 +453,10 @@ st.caption(
     "Sunday pre-inactives forecasts include NFL final injury statuses as of Nov 14 and the Nov 15 6:56 AM CT Bovada screenshot. Historical Thursday and two QB-source research archives remain preserved separately. ATS and total differences are directional comparisons, not betting recommendations. "
     "The Injury model currently relies on largely provisional starting-QB identities; "
     "Saturday/Sunday pregame updates must be captured separately."
+)
+st.caption(
+    "[Miami Dolphins official game preview](https://www.miamidolphins.com/news/game-preview-miami-dolphins-at-indianapolis-colts) · "
+    "[Source-corrected Injury forecast](https://github.com/tedgytrends-bit/sports-betting-model/blob/main/data/public_snapshots/nfl_week10_mia_ind_mccord_corrected_2026-11-15.csv)"
 )
 st.caption(
     "**Patriots–Lions official game-day update:** New England WR A.J. Brown and "
