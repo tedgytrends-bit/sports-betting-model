@@ -60,6 +60,16 @@ def main():
     not_in_final=reserve.loc[
         ~reserve.apply(lambda r:(r.team,r.full_name.lower().strip()) in final_out,axis=1)
     ]
+    # Critically separate records actually present in the roster's latest
+    # published week from historical-only reserve rows that may be stale.
+    reserve_latest=reserve.loc[reserve.week.eq(maxweek)]
+    not_in_final_latest=reserve_latest.loc[
+        ~reserve_latest.apply(lambda r:(r.team,r.full_name.lower().strip()) in final_out,axis=1)
+    ]
+    key_players=df.loc[
+        df.team.eq("MIA")
+        & df.full_name.isin(["Malik Willis","Kyle McCord","Zach Sieler","De'Von Achane"])
+    ][["team","full_name","position","status","week","gsis_id"]].to_dict("records")
     original_qbs=[]
     for g in injury.itertuples():
         for side in ("away","home"):
@@ -94,6 +104,12 @@ def main():
         "included_teams":len(teams),
         "source_status_counts":df.status.value_counts().to_dict(),
         "reserve_population_count":len(reserve),
+        "reserve_latest_week_count":len(reserve_latest),
+        "reserve_latest_week_absent_from_final_injury_report":len(not_in_final_latest),
+        "reserve_latest_week_missing_sample":not_in_final_latest[
+            ["team","full_name","position","status","week","gsis_id"]
+        ].head(70).to_dict("records"),
+        "key_miami_player_roster_statuses":key_players,
         "reserve_not_listed_out_in_final_weekly_report":len(not_in_final),
         "reserve_sample_absent_from_final_report":not_in_final[
             ["team","full_name","position","status","week","gsis_id"]
@@ -102,10 +118,10 @@ def main():
         "qb_2026_statuses":qb_check,
         "qb_unavailable_or_missing": [q for q in qb_check
            if q["roster_status"] in {"RES","IR","SUS","EXE","NOT_EXACTLY_ONE_MATCH"}],
-        "critical_caveat":"Roster statuses are nflverse public secondary data as-of their latest listed roster week; not proof of live game-day actives. 'RES' is reserve category and may include IR/PUP/suspension. This file is diagnostic only and cannot silently alter live models or historical forecasts.",
+        "critical_caveat":"Roster statuses are nflverse public secondary data as-of their latest listed roster week; not proof of live game-day actives. Historical-only RES records are often stale and are NOT current absences. Use reserve_latest_week_count and source timestamps rather than raw reserve_population_count. 'RES' is reserve category and may include IR/PUP/suspension. This file is diagnostic only and cannot silently alter live models or historical forecasts.",
     }
     RESULT.parent.mkdir(parents=True,exist_ok=True)
     RESULT.write_text(json.dumps(report,indent=2,allow_nan=False)+"\n")
-    print(json.dumps({k:report[k] for k in ("status","latest_roster_week_in_source","included_teams","reserve_population_count","reserve_not_listed_out_in_final_weekly_report","qb_count","qb_unavailable_or_missing")},indent=2))
+    print(json.dumps({k:report[k] for k in ("status","latest_roster_week_in_source","included_teams","reserve_population_count","reserve_not_listed_out_in_final_weekly_report","reserve_latest_week_count","reserve_latest_week_absent_from_final_injury_report","key_miami_player_roster_statuses","qb_count","qb_unavailable_or_missing")},indent=2))
 if __name__=="__main__":
     main()
