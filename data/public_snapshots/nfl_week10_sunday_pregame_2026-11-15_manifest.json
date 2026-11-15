@@ -1,0 +1,130 @@
+{
+  "status": "SUNDAY_NOV15_PREINACTIVES_PREGAME_INJURY_REFRESH",
+  "published_at_utc": "2026-11-15T13:04:38Z",
+  "models": [
+    "baseline",
+    "injury"
+  ],
+  "games": 13,
+  "rows": 26,
+  "original_immutable": "data/public_snapshots/nfl_week10_initial_projections_2026-11-12.csv",
+  "screenshot_prices": "data/public_snapshots/nfl_week10_bovada_sunday_2026-11-15T1256Z.csv",
+  "official_injury_statuses": "data/public_snapshots/nfl_week10_sunday_official_injury_designations_2026-11-15.csv",
+  "source_of_week10_injury_snapshot": {
+    "latest_original_source": "data/injury_snapshots/injuries_2026_week_10_20261115T071912Z.csv",
+    "new_snapshot": "data/injury_snapshots/injuries_2026_week_10_20261115T130438Z.csv",
+    "official_players": 169,
+    "official_matched": 164,
+    "unmatched_official": [
+      {
+        "team": "HOU",
+        "player_name_normalized": "braden smith",
+        "official_status": "QUESTIONABLE"
+      },
+      {
+        "team": "HOU",
+        "player_name_normalized": "jake hummel",
+        "official_status": "QUESTIONABLE"
+      },
+      {
+        "team": "LA",
+        "player_name_normalized": "kamren curl",
+        "official_status": "QUESTIONABLE"
+      },
+      {
+        "team": "ARI",
+        "player_name_normalized": "zach carter",
+        "official_status": "OUT"
+      },
+      {
+        "team": "PIT",
+        "player_name_normalized": "pat freiermuth",
+        "official_status": "QUESTIONABLE"
+      }
+    ],
+    "matched_fraction": 0.9704,
+    "explicit_status_changes": [
+      {
+        "team": "ATL",
+        "player": "Divine Deablo",
+        "old_snapshot": "DOUBTFUL",
+        "official_new": "OUT"
+      },
+      {
+        "team": "CAR",
+        "player": "Mike Jackson",
+        "old_snapshot": "DOUBTFUL",
+        "official_new": "OUT"
+      },
+      {
+        "team": "CAR",
+        "player": "Brady Christensen",
+        "old_snapshot": "QUESTIONABLE",
+        "official_new": "OUT"
+      },
+      {
+        "team": "CAR",
+        "player": "Jonathon Brooks",
+        "old_snapshot": "DOUBTFUL",
+        "official_new": "OUT"
+      },
+      {
+        "team": "CIN",
+        "player": "Jalen Davis",
+        "old_snapshot": "DOUBTFUL",
+        "official_new": "OUT"
+      },
+      {
+        "team": "CIN",
+        "player": "Andrei Iosivas",
+        "old_snapshot": "DOUBTFUL",
+        "official_new": "OUT"
+      },
+      {
+        "team": "CIN",
+        "player": "Brian Parker II",
+        "old_snapshot": "DOUBTFUL",
+        "official_new": "OUT"
+      },
+      {
+        "team": "DAL",
+        "player": "Devin Moore",
+        "old_snapshot": "QUESTIONABLE",
+        "official_new": "OUT"
+      },
+      {
+        "team": "HOU",
+        "player": "David Montgomery",
+        "old_snapshot": "QUESTIONABLE",
+        "official_new": "OUT"
+      },
+      {
+        "team": "HOU",
+        "player": "Jaylin Smith",
+        "old_snapshot": "QUESTIONABLE",
+        "official_new": "OUT"
+      },
+      {
+        "team": "IND",
+        "player": "Will Mallory",
+        "old_snapshot": "QUESTIONABLE",
+        "official_new": "OUT"
+      },
+      {
+        "team": "KC",
+        "player": "Kenneth Walker III",
+        "old_snapshot": "QUESTIONABLE",
+        "official_new": "OUT"
+      }
+    ]
+  },
+  "confirmed_2026_week10_qbs": 2,
+  "coach_expected_2026_week10_qbs": 1,
+  "qb_source_counts": {
+    "schedule_provisional_qb_unverified": 23,
+    "verified_pregame": 2,
+    "coach_expected_pregame_unverified": 1
+  },
+  "policy": "Keep Thursday snapshot immutable. Final NFL injury designations are pre-inactives; do not call them final active lists. Some manually verified QB names and others remain provisional. Sunday 8:30 AM CT earliest kickoff. No paid injury or odds API credits.",
+  "note": "Site may display this as separate, timestamped updated pregame projection; original Thursday release remains independently reproducible and gradeable."
+}
