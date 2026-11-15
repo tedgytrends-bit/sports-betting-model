@@ -14,6 +14,8 @@ SNAP=ROOT/"data"/"public_snapshots"/"nfl_week10_initial_projections_2026-11-12.c
 MARKET=ROOT/"data"/"bovada_lines.csv"
 QB_UPDATE=ROOT/"data"/"public_snapshots"/"nfl_week10_qb_corrected_2026-11-12.csv"
 FINAL_INJURIES=ROOT/"data"/"public_snapshots"/"nfl_week10_final_injury_designations_2026-11-12.csv"
+SUNDAY=ROOT/"data"/"public_snapshots"/"nfl_week10_sunday_pregame_2026-11-15.csv"
+SUNDAY_INJURIES=ROOT/"data"/"public_snapshots"/"nfl_week10_sunday_official_injury_designations_2026-11-15.csv"
 SOURCE="https://github.com/tedgytrends-bit/sports-betting-model/blob/main/"
 SEASON=2026
 WEEK=10
@@ -63,7 +65,7 @@ def decode(row,quote):
         "_time":local,
         "Kickoff (CT)":local.strftime("%a %b %-d · %-I:%M %p"),
         "Game":f"{away} @ {home}",
-        "Projection version":("QB-corrected preview" if row.get("qb_updated",False) else "Initial · Nov 12"),
+        "Projection version":("Sunday Nov 15 · pre-inactives" if row.get("sunday_updated",False) else "QB-corrected preview" if row.get("qb_updated",False) else "Initial · Nov 12"),
         "Bovada":f"{format_side(s,home,away,'display')} · O/U {total:g}",
         "Projected score":f"{away} {a:.1f} – {home} {h:.1f}",
         "Projected total":round(t,1),
@@ -97,6 +99,15 @@ if not FINAL_INJURIES.exists():
     st.error("Final Week 10 injury-status snapshot is missing.")
     st.stop()
 injury_designations=pd.read_csv(FINAL_INJURIES,low_memory=False)
+if not SUNDAY_INJURIES.exists():
+    st.error("Complete Sunday final injury report is not available.")
+    st.stop()
+sunday_inj=pd.read_csv(SUNDAY_INJURIES,low_memory=False)
+if len(sunday_inj)!=169 or sunday_inj.game_id.nunique()!=13 or sunday_inj.team.nunique()!=26:
+    st.error("Sunday injury report does not cover the complete Week 10 slate.")
+    st.stop()
+injury_designations=pd.concat([injury_designations,sunday_inj],ignore_index=True)
+
 required_status={"game_id","team","player_name","position","injury","final_game_status"}
 if not required_status.issubset(injury_designations.columns):
     st.error("Incomplete final injury report fields.")
@@ -221,6 +232,65 @@ st.info(
     "identities may change before kickoff. No Week 8/9 forecasts were replaced."
 )
 
+# The original Nov 12 public rows are validated above and never edited on
+# disk. Apply a separately timestamped Sunday pre-inactives release only to
+# in-memory display rows, retaining the archived publication evidence.
+sunday_games=set()
+sunday_timestamp=None
+if not SUNDAY.exists():
+    st.error("Sunday 13-game refreshed pregame archive is not available.")
+    st.stop()
+sunday=pd.read_csv(SUNDAY,low_memory=False)
+if len(sunday)!=26 or sunday.game_id.nunique()!=13 or set(sunday.model)!={"baseline","injury"}:
+    st.error("Sunday model refresh must contain 13 unique Baseline/Injury game pairs.")
+    st.stop()
+if sunday.duplicated(["game_id","model"]).any() or sunday.published_at_utc.nunique()!=1:
+    st.error("Sunday archive contains duplicate model games or inconsistent timestamps.")
+    st.stop()
+if not sunday.publication_status.eq("SUNDAY_NOV15_PREINACTIVES_PREGAME_INJURY_REFRESH").all():
+    st.error("Sunday update does not carry validated pre-inactives provenance.")
+    st.stop()
+sunday_timestamp=pd.to_datetime(sunday.published_at_utc.iloc[0],utc=True)
+df["sunday_updated"]=False
+for _,revised in sunday.iterrows():
+    gid=str(revised.game_id)
+    if gid=="2026_10_WAS_NYG":
+        st.error("Thursday original result was incorrectly included in a Sunday refresh.")
+        st.stop()
+    target=df.index[df.game_id.eq(gid)&df.model.eq(revised.model)]
+    if len(target)!=1:
+        st.error(f"Missing original Sunday model row for {gid}.")
+        st.stop()
+    old=df.loc[target[0]]
+    if not sunday_timestamp<old.kickoff:
+        st.error("Sunday model row published after the corresponding game kickoff.")
+        st.stop()
+    if str(revised.away_team)!=str(old.away_team) or str(revised.home_team)!=str(old.home_team):
+        st.error("Model source changed game/team identity.")
+        st.stop()
+    a,h,t=(float(revised[k]) for k in ("projected_away","projected_home","projected_total"))
+    if abs(a+h-t)>.02 or not pd.notna(a+h+t):
+        st.error("Sunday projected total and component scores disagree.")
+        st.stop()
+    for field in (
+        "projected_away","projected_home","projected_total","model_version",
+        "home_qb_name","away_qb_name","home_qb_starter_source","away_qb_starter_source",
+        "home_injury_report_available","away_injury_report_available",
+    ):
+        df.loc[target[0],field]=revised.get(field,"")
+    df.loc[target[0],"sunday_updated"]=True
+    sunday_games.add(gid)
+if len(sunday_games)!=13 or df.sunday_updated.sum()!=26:
+    st.error("Sunday model archive did not update both models for every remaining game.")
+    st.stop()
+st.info(
+    "Sunday Nov 15 pregame score refresh: **"+
+    sunday_timestamp.tz_convert("America/Chicago").strftime("%-I:%M %p CT")+
+    "**, all 13 games. NFL final injury designations updated Nov 14; "+
+    "game-day inactives are separate and some quarterbacks remain schedule-provisional. "+
+    "Original Nov 12 scores and Bovada snapshot are preserved."
+)
+
 selection=st.radio(
     "Model view",
     options=["Injury · QB provisional","Baseline"],
@@ -229,7 +299,7 @@ selection=st.radio(
 )
 model="injury" if selection.startswith("Injury") else "baseline"
 chosen=df[df.model.eq(model)].sort_values(["kickoff","game_id"]).copy()
-chosen["qb_updated"]=chosen.game_id.isin(revised_games)&chosen.model.eq("injury")
+chosen["qb_updated"]=chosen.game_id.isin(revised_games)&chosen.model.eq("injury")&~chosen["sunday_updated"]
 
 rows=[]
 for _,row in chosen.iterrows():
@@ -262,7 +332,7 @@ st.caption(
     "[Giants official report](https://www.giants.com/team/injury-report/)"
 )
 st.caption(
-    "The two separately timestamped QB-source corrections (Arizona Carson Beck, Seattle Drew Lock) are research updates, not rewrites of the initial Thursday scores. ATS and total differences are directional comparisons, not betting recommendations. "
+    "Sunday pre-inactives forecasts include NFL final injury statuses as of Nov 14 and the Nov 15 6:56 AM CT Bovada screenshot. Historical Thursday and two QB-source research archives remain preserved separately. ATS and total differences are directional comparisons, not betting recommendations. "
     "The Injury model currently relies on largely provisional starting-QB identities; "
     "Saturday/Sunday pregame updates must be captured separately."
 )
