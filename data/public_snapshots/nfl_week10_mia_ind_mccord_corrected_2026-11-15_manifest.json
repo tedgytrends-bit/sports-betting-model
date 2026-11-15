@@ -1,0 +1,21 @@
+{
+  "status": "MIA_IND_KYLE_MCCORD_PREGAME_SOURCE_CORRECTION",
+  "captured_at_utc": "2026-11-15T15:07:30Z",
+  "games": 1,
+  "model": "injury",
+  "source_verified_for_miami": true,
+  "qb_name": "Kyle McCord",
+  "qb_gsis_id": "00-0040014",
+  "model_prior_dropbacks": 0.0,
+  "model_confidence": "insufficient_data",
+  "original_26_row_sunday_snapshot": "data/public_snapshots/nfl_week10_sunday_pregame_2026-11-15.csv",
+  "new_file": "data/public_snapshots/nfl_week10_mia_ind_mccord_corrected_2026-11-15.csv",
+  "market": "data/public_snapshots/nfl_week10_bovada_sunday_2026-11-15T1256Z.csv",
+  "all_candidate_QB_source_counts": {
+    "schedule_provisional_qb_unverified": 22,
+    "verified_pregame": 3,
+    "coach_expected_pregame_unverified": 1
+  },
+  "no_rewrite": "Original Sunday 26 rows, Sunday NE official inactive update, November12 initial board, and previous prospective Week8-9 are untouched.",
+  "calibration_caution": "McCord has zero NFL regular-season QB EPA observations. The chosen shrinkage prior might over/understate his real replacement value; no betting recommendation until validated."
+}
