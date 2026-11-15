@@ -25,6 +25,10 @@ on:
       - "data/public_snapshots/nfl_week10_sunday_official_injury_designations_2026-11-15.csv"
       - "data/public_snapshots/nfl_week10_ne_det_official_inactives_2026-11-15.csv"
       - "data/public_snapshots/nfl_week10_ne_det_inactives_adjusted_2026-11-15.csv"
+      - "data/public_snapshots/nfl_week10_mia_ind_mccord_corrected_2026-11-15.csv"
+      - "data/public_snapshots/nfl_week10_qb_identity_crosscheck_2026-11-15.csv"
+      - "data/qb_starters/2026_week10_confirmed.csv"
+      - "data/qb_starters/2026_week10_watchlist.csv"
       - "data/bovada_lines.csv"
       - ".github/workflows/smoke-test-public-site.yml"
 
@@ -173,6 +177,35 @@ jobs:
               a,h,t=(float(x[k]) for k in ("projected_away","projected_home","projected_total"))
               assert all(map(math.isfinite,(a,h,t))) and abs(a+h-t)<.02
           print("PASS: Sunday 13 Bovada quotes, 26 refreshed model rows, 169 official injuries, NE-DET official actives/inactives and chronological score")
+          with Path("data/public_snapshots/nfl_week10_mia_ind_mccord_corrected_2026-11-15.csv").open() as f:
+              mccord_fix=list(csv.DictReader(f))
+          with Path("data/public_snapshots/nfl_week10_qb_identity_crosscheck_2026-11-15.csv").open() as f:
+              qb_audit=list(csv.DictReader(f))
+          with Path("data/qb_starters/2026_week10_watchlist.csv").open() as f:
+              watchlist=list(csv.DictReader(f))
+          assert len(mccord_fix)==1 and len(qb_audit)==26
+          assert len({r["team"] for r in qb_audit})==26
+          assert all(r["corrected_matches_reference"]=="true" for r in qb_audit)
+          assert sum(r["previous_matches_reference"]=="false" for r in qb_audit)==1
+          assert {r["team"] for r in qb_audit if r["previous_matches_reference"]=="false"}=={"MIA"}
+          assert sum(r["source_evidence_type"]=="TEAM_CONFIRMED" for r in qb_audit)==5
+          assert sum(r["source_evidence_type"]=="COACH_EXPECTED_NOT_FINAL" for r in qb_audit)==1
+          assert sum(r["source_evidence_type"]=="SECONDARY_CORROBORATED_NOT_GAME_DAY_CONFIRMED" for r in qb_audit)==20
+          q=mccord_fix[0]
+          assert q["game_id"]=="2026_10_MIA_IND" and q["away_qb_name"]=="Kyle McCord"
+          assert q["previous_incorrect_qb"]=="Malik Willis" and q["new_qb_id"]=="00-0040014"
+          assert q["new_qb_prior_dropbacks"] in ("0","0.0")
+          assert q["away_qb_starter_source"]=="verified_pregame"
+          assert q["publication_status"]=="MIA_IND_KYLE_MCCORD_PREGAME_SOURCE_CORRECTION"
+          assert datetime.fromisoformat(q["published_at_utc"].replace("Z","+00:00"))<datetime.fromisoformat(q["kickoff_utc"].replace("Z","+00:00"))
+          assert any(r["game_id"]=="2026_10_MIA_IND" and r["player_name"]=="Malik Willis" and r["starter_confirmation_status"]=="IR_REPORTED" for r in watchlist)
+          for html_text in (html,fresh):
+              assert "nfl_week10_mia_ind_mccord_corrected_2026-11-15.csv" in html_text
+              assert "nfl_week10_qb_identity_crosscheck_2026-11-15.csv" in html_text
+              assert "MIA_IND_KYLE_MCCORD_PREGAME_SOURCE_CORRECTION" in html_text
+              assert "PASS — uncalibrated rookie QB" in html_text
+          print("PASS: Official McCord starter, IR Willis rejected, 26 audited QBs, rookie-EPA ATS PASS, and original Sunday forecast preserved")
+
 
           PY
           node --check /tmp/tedgy-site.js
