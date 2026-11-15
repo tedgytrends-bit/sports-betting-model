@@ -1,0 +1,21 @@
+game_id,team,position,player_name,final_active_status,source_url,source_published_at_utc,source_reviewed_at_utc
+2026_10_NE_DET,NE,CB,Carlton Davis,INACTIVE,https://www.patriots.com/news/week-10-inactives-patriots-vs-lions,2026-11-15T13:03:00Z,2026-11-15T13:13:08Z
+2026_10_NE_DET,NE,C,Ben Brown,INACTIVE,https://www.patriots.com/news/week-10-inactives-patriots-vs-lions,2026-11-15T13:03:00Z,2026-11-15T13:13:08Z
+2026_10_NE_DET,NE,T,Dametrious Crownover,INACTIVE,https://www.patriots.com/news/week-10-inactives-patriots-vs-lions,2026-11-15T13:03:00Z,2026-11-15T13:13:08Z
+2026_10_NE_DET,NE,S,Brenden Schooler,INACTIVE,https://www.patriots.com/news/week-10-inactives-patriots-vs-lions,2026-11-15T13:03:00Z,2026-11-15T13:13:08Z
+2026_10_NE_DET,NE,T,Walter Rouse,INACTIVE,https://www.patriots.com/news/week-10-inactives-patriots-vs-lions,2026-11-15T13:03:00Z,2026-11-15T13:13:08Z
+2026_10_NE_DET,NE,QB,Behren Morton,INACTIVE,https://www.patriots.com/news/week-10-inactives-patriots-vs-lions,2026-11-15T13:03:00Z,2026-11-15T13:13:08Z
+2026_10_NE_DET,DET,CB,D.J. Reed,INACTIVE,https://www.detroitlions.com/news/inactives-lions-vs-patriots-stbrown-vaki-cisco,2026-11-15T13:00:00Z,2026-11-15T13:13:08Z
+2026_10_NE_DET,DET,CB,Keith Abney,INACTIVE,https://www.detroitlions.com/news/inactives-lions-vs-patriots-stbrown-vaki-cisco,2026-11-15T13:00:00Z,2026-11-15T13:13:08Z
+2026_10_NE_DET,DET,LB,Amen Ogbongbemiga,INACTIVE,https://www.detroitlions.com/news/inactives-lions-vs-patriots-stbrown-vaki-cisco,2026-11-15T13:00:00Z,2026-11-15T13:13:08Z
+2026_10_NE_DET,DET,C,Cade Mays,INACTIVE,https://www.detroitlions.com/news/inactives-lions-vs-patriots-stbrown-vaki-cisco,2026-11-15T13:00:00Z,2026-11-15T13:13:08Z
+2026_10_NE_DET,DET,DT,Mekhi Wingo,INACTIVE,https://www.detroitlions.com/news/inactives-lions-vs-patriots-stbrown-vaki-cisco,2026-11-15T13:00:00Z,2026-11-15T13:13:08Z
+2026_10_NE_DET,DET,DE,Amad Hassanein,INACTIVE,https://www.detroitlions.com/news/inactives-lions-vs-patriots-stbrown-vaki-cisco,2026-11-15T13:00:00Z,2026-11-15T13:13:08Z
+2026_10_NE_DET,NE,WR,A.J. Brown,ACTIVE_CONFIRMED,https://www.patriots.com/news/inactives-analysis-patriots-wr-a-j-brown-rb-rhamondre-stevenson-officially-active-for-sunday-s-game-vs-lions-in-munich,2026-11-15T13:01:00Z,2026-11-15T13:13:08Z
+2026_10_NE_DET,NE,RB,Rhamondre Stevenson,ACTIVE_CONFIRMED,https://www.patriots.com/news/inactives-analysis-patriots-wr-a-j-brown-rb-rhamondre-stevenson-officially-active-for-sunday-s-game-vs-lions-in-munich,2026-11-15T13:01:00Z,2026-11-15T13:13:08Z
+2026_10_NE_DET,NE,FB,Reggie Gilliam,ACTIVE_CONFIRMED,https://www.patriots.com/news/inactives-analysis-patriots-wr-a-j-brown-rb-rhamondre-stevenson-officially-active-for-sunday-s-game-vs-lions-in-munich,2026-11-15T13:01:00Z,2026-11-15T13:13:08Z
+2026_10_NE_DET,NE,G,Greg Van Roten,ACTIVE_CONFIRMED,https://www.patriots.com/news/inactives-analysis-patriots-wr-a-j-brown-rb-rhamondre-stevenson-officially-active-for-sunday-s-game-vs-lions-in-munich,2026-11-15T13:01:00Z,2026-11-15T13:13:08Z
+2026_10_NE_DET,NE,CB,Charles Woods,ACTIVE_CONFIRMED,https://www.patriots.com/news/inactives-analysis-patriots-wr-a-j-brown-rb-rhamondre-stevenson-officially-active-for-sunday-s-game-vs-lions-in-munich,2026-11-15T13:01:00Z,2026-11-15T13:13:08Z
+2026_10_NE_DET,DET,WR,Amon-Ra St. Brown,ACTIVE_CONFIRMED,https://www.detroitlions.com/news/inactives-lions-vs-patriots-stbrown-vaki-cisco,2026-11-15T13:00:00Z,2026-11-15T13:13:08Z
+2026_10_NE_DET,DET,RB,Sione Vaki,ACTIVE_CONFIRMED,https://www.detroitlions.com/news/inactives-lions-vs-patriots-stbrown-vaki-cisco,2026-11-15T13:00:00Z,2026-11-15T13:13:08Z
+2026_10_NE_DET,DET,S,Andre Cisco,ACTIVE_CONFIRMED,https://www.detroitlions.com/news/inactives-lions-vs-patriots-stbrown-vaki-cisco,2026-11-15T13:00:00Z,2026-11-15T13:13:08Z
