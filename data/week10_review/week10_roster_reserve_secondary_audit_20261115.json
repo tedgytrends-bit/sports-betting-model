@@ -1,0 +1,877 @@
+{
+  "status": "RESEARCH_SECONDARY_ROSTER_RESERVE_AUDIT_NOT_MODEL_INPUT",
+  "generated_at_utc": "2026-11-15T15:21:59.761362+00:00",
+  "roster_url": "https://github.com/nflverse/nflverse-data/releases/download/rosters/roster_2026.csv",
+  "roster_total_rows_downloaded": 3073,
+  "latest_roster_week_in_source": 10,
+  "game_week": 10,
+  "included_teams": 26,
+  "source_status_counts": {
+    "ACT": 1394,
+    "DEV": 448,
+    "CUT": 361,
+    "RES": 273,
+    "RET": 17,
+    "INA": 13,
+    "EXE": 2,
+    "TRT": 1,
+    "TRC": 1
+  },
+  "reserve_population_count": 275,
+  "reserve_not_listed_out_in_final_weekly_report": 253,
+  "reserve_sample_absent_from_final_report": [
+    {
+      "team": "BUF",
+      "full_name": "Demetrius Flannigan-Fowles",
+      "position": "LB",
+      "status": "RES",
+      "week": 1,
+      "gsis_id": "00-0035020"
+    },
+    {
+      "team": "CAR",
+      "full_name": "Ryan Hayes",
+      "position": "OL",
+      "status": "RES",
+      "week": 1,
+      "gsis_id": "00-0039042"
+    },
+    {
+      "team": "GB",
+      "full_name": "McCallan Castles",
+      "position": "TE",
+      "status": "RES",
+      "week": 1,
+      "gsis_id": "00-0039263"
+    },
+    {
+      "team": "JAX",
+      "full_name": "Carter Bradley",
+      "position": "QB",
+      "status": "RES",
+      "week": 1,
+      "gsis_id": "00-0039534"
+    },
+    {
+      "team": "KC",
+      "full_name": "Chris Oladokun",
+      "position": "QB",
+      "status": "RES",
+      "week": 1,
+      "gsis_id": "00-0037324"
+    },
+    {
+      "team": "KC",
+      "full_name": "EJ Smith",
+      "position": "RB",
+      "status": "RES",
+      "week": 1,
+      "gsis_id": "00-0040964"
+    },
+    {
+      "team": "LA",
+      "full_name": "Zech McPhearson",
+      "position": "DB",
+      "status": "RES",
+      "week": 1,
+      "gsis_id": "00-0036917"
+    },
+    {
+      "team": "LAC",
+      "full_name": "Sincere Brown",
+      "position": "WR",
+      "status": "RES",
+      "week": 1,
+      "gsis_id": "00-0041374"
+    },
+    {
+      "team": "LV",
+      "full_name": "Chase Roberts",
+      "position": "WR",
+      "status": "RES",
+      "week": 1,
+      "gsis_id": "00-0041004"
+    },
+    {
+      "team": "MIA",
+      "full_name": "Carter Warren",
+      "position": "OL",
+      "status": "RES",
+      "week": 1,
+      "gsis_id": "00-0039004"
+    },
+    {
+      "team": "MIN",
+      "full_name": "Jacob Roberts",
+      "position": "LB",
+      "status": "RES",
+      "week": 1,
+      "gsis_id": "00-0040786"
+    },
+    {
+      "team": "NYJ",
+      "full_name": "Dominic Richardson",
+      "position": "RB",
+      "status": "RES",
+      "week": 1,
+      "gsis_id": "00-0040937"
+    },
+    {
+      "team": "NYJ",
+      "full_name": "Connor Hulstein",
+      "position": "TE",
+      "status": "RES",
+      "week": 1,
+      "gsis_id": "00-0041577"
+    },
+    {
+      "team": "SF",
+      "full_name": "Victor Dimukeje",
+      "position": "DL",
+      "status": "RES",
+      "week": 1,
+      "gsis_id": "00-0036896"
+    },
+    {
+      "team": "SF",
+      "full_name": "Brett Toth",
+      "position": "OL",
+      "status": "RES",
+      "week": 6,
+      "gsis_id": "00-0035743"
+    },
+    {
+      "team": "BUF",
+      "full_name": "C.J. Gardner-Johnson",
+      "position": "DB",
+      "status": "RES",
+      "week": 8,
+      "gsis_id": "00-0035253"
+    },
+    {
+      "team": "NYJ",
+      "full_name": "Tre Brown",
+      "position": "DB",
+      "status": "RES",
+      "week": 8,
+      "gsis_id": "00-0036885"
+    },
+    {
+      "team": "ARI",
+      "full_name": "Kendrick Bourne",
+      "position": "WR",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0033307"
+    },
+    {
+      "team": "ARI",
+      "full_name": "James Conner",
+      "position": "RB",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0033553"
+    },
+    {
+      "team": "ARI",
+      "full_name": "Gardner Minshew",
+      "position": "QB",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0035289"
+    },
+    {
+      "team": "ARI",
+      "full_name": "Joey Blount",
+      "position": "DB",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0037141"
+    },
+    {
+      "team": "ARI",
+      "full_name": "Zachary Carter",
+      "position": "DL",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0037804"
+    },
+    {
+      "team": "ARI",
+      "full_name": "Paris Johnson Jr.",
+      "position": "OL",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0038540"
+    },
+    {
+      "team": "ARI",
+      "full_name": "Michael Wilson",
+      "position": "WR",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0038559"
+    },
+    {
+      "team": "ARI",
+      "full_name": "Jalen Brooks",
+      "position": "WR",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0038640"
+    },
+    {
+      "team": "ARI",
+      "full_name": "Tip Reiman",
+      "position": "TE",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0039737"
+    },
+    {
+      "team": "ARI",
+      "full_name": "Trey Benson",
+      "position": "RB",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0039921"
+    },
+    {
+      "team": "ARI",
+      "full_name": "Will Johnson",
+      "position": "DB",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0040751"
+    },
+    {
+      "team": "ARI",
+      "full_name": "Jeremiyah Love",
+      "position": "RB",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0041027"
+    },
+    {
+      "team": "ARI",
+      "full_name": "Chase Bisontis",
+      "position": "OL",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0041468"
+    },
+    {
+      "team": "ARI",
+      "full_name": "Kaleb Proctor",
+      "position": "DL",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0041555"
+    },
+    {
+      "team": "ATL",
+      "full_name": "Storm Norton",
+      "position": "OL",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0033752"
+    },
+    {
+      "team": "ATL",
+      "full_name": "Samson Ebukam",
+      "position": "DL",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0033945"
+    },
+    {
+      "team": "ATL",
+      "full_name": "Da'Shawn Hand",
+      "position": "DL",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0034371"
+    },
+    {
+      "team": "ATL",
+      "full_name": "Trey Sermon",
+      "position": "RB",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0036984"
+    },
+    {
+      "team": "ATL",
+      "full_name": "Brian Robinson",
+      "position": "RB",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0037746"
+    },
+    {
+      "team": "ATL",
+      "full_name": "DeAngelo Malone",
+      "position": "LB",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0037808"
+    },
+    {
+      "team": "ATL",
+      "full_name": "JD Bertrand",
+      "position": "LB",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0039370"
+    },
+    {
+      "team": "ATL",
+      "full_name": "Michael Jerrell",
+      "position": "OL",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0039842"
+    },
+    {
+      "team": "ATL",
+      "full_name": "Jalon Walker",
+      "position": "LB",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0040577"
+    },
+    {
+      "team": "ATL",
+      "full_name": "Anterio Thompson",
+      "position": "DL",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0041484"
+    },
+    {
+      "team": "BAL",
+      "full_name": "Ethan Pocic",
+      "position": "OL",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0033901"
+    },
+    {
+      "team": "BAL",
+      "full_name": "Lamar Jackson",
+      "position": "QB",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0034796"
+    },
+    {
+      "team": "BAL",
+      "full_name": "Durham Smythe",
+      "position": "TE",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0034798"
+    },
+    {
+      "team": "BAL",
+      "full_name": "Tyler Huntley",
+      "position": "QB",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0035993"
+    },
+    {
+      "team": "BAL",
+      "full_name": "Danny Pinter",
+      "position": "OL",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0036215"
+    },
+    {
+      "team": "BAL",
+      "full_name": "Skylar Thompson",
+      "position": "QB",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0037327"
+    },
+    {
+      "team": "BAL",
+      "full_name": "Tavius Robinson",
+      "position": "LB",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0038505"
+    },
+    {
+      "team": "BAL",
+      "full_name": "Jovaughn Gwyn",
+      "position": "OL",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0038629"
+    },
+    {
+      "team": "BAL",
+      "full_name": "Bilhal Kone",
+      "position": "DB",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0040073"
+    },
+    {
+      "team": "BAL",
+      "full_name": "Tyler Loop",
+      "position": "K",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0040074"
+    },
+    {
+      "team": "BAL",
+      "full_name": "Adam Randall",
+      "position": "RB",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0040888"
+    },
+    {
+      "team": "BAL",
+      "full_name": "Jahquez Robinson",
+      "position": "DB",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0040988"
+    },
+    {
+      "team": "BUF",
+      "full_name": "Josh Palmer",
+      "position": "WR",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0036988"
+    },
+    {
+      "team": "BUF",
+      "full_name": "Tyrell Shavers",
+      "position": "WR",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0038679"
+    },
+    {
+      "team": "BUF",
+      "full_name": "Dorian Strong",
+      "position": "DB",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0040197"
+    },
+    {
+      "team": "BUF",
+      "full_name": "Zane Durant",
+      "position": "DL",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0041091"
+    },
+    {
+      "team": "CAR",
+      "full_name": "Taylor Moton",
+      "position": "OL",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0033284"
+    },
+    {
+      "team": "CAR",
+      "full_name": "Jaycee Horn",
+      "position": "DB",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0036944"
+    },
+    {
+      "team": "CAR",
+      "full_name": "Ikem Ekwonu",
+      "position": "OL",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0037229"
+    },
+    {
+      "team": "CAR",
+      "full_name": "Akayleb Evans",
+      "position": "DB",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0038101"
+    },
+    {
+      "team": "CAR",
+      "full_name": "Thomas Incoom",
+      "position": "LB",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0038791"
+    },
+    {
+      "team": "CAR",
+      "full_name": "Cam Jackson",
+      "position": "DL",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0040174"
+    },
+    {
+      "team": "CAR",
+      "full_name": "Nic Scourton",
+      "position": "LB",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0040746"
+    },
+    {
+      "team": "CAR",
+      "full_name": "Chris Brazzell II",
+      "position": "WR",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0041047"
+    },
+    {
+      "team": "CIN",
+      "full_name": "Tanner Hudson",
+      "position": "TE",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0034613"
+    },
+    {
+      "team": "CIN",
+      "full_name": "Ja'Sir Taylor",
+      "position": "DB",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0037307"
+    },
+    {
+      "team": "CIN",
+      "full_name": "Swayze Bozeman",
+      "position": "LB",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0039313"
+    },
+    {
+      "team": "CIN",
+      "full_name": "Erick All",
+      "position": "TE",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0039814"
+    },
+    {
+      "team": "CIN",
+      "full_name": "Cashius Howell",
+      "position": "DL",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0041546"
+    },
+    {
+      "team": "CLE",
+      "full_name": "Jeremiah Owusu-Koramoah",
+      "position": "LB",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0036915"
+    },
+    {
+      "team": "CLE",
+      "full_name": "Teven Jenkins",
+      "position": "OL",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0036953"
+    },
+    {
+      "team": "CLE",
+      "full_name": "Alex Wright",
+      "position": "DL",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0037251"
+    },
+    {
+      "team": "CLE",
+      "full_name": "Kalia Davis",
+      "position": "DL",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0037832"
+    },
+    {
+      "team": "CLE",
+      "full_name": "Damarri Mathis",
+      "position": "DB",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0038105"
+    },
+    {
+      "team": "CLE",
+      "full_name": "Elijah Chatman",
+      "position": "DL",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0039764"
+    },
+    {
+      "team": "CLE",
+      "full_name": "Edefuan Ulofoshio",
+      "position": "LB",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0039878"
+    },
+    {
+      "team": "CLE",
+      "full_name": "Raheim Sanders",
+      "position": "RB",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0040466"
+    },
+    {
+      "team": "CLE",
+      "full_name": "Joe Royer",
+      "position": "TE",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0041087"
+    },
+    {
+      "team": "DAL",
+      "full_name": "Jalen Thompson",
+      "position": "DB",
+      "status": "RES",
+      "week": 10,
+      "gsis_id": "00-0035705"
+    }
+  ],
+  "qb_count": 26,
+  "qb_2026_statuses": [
+    {
+      "game_id": "2026_10_NE_DET",
+      "team": "NE",
+      "reported": "Drake Maye",
+      "roster_status": "ACT",
+      "player_id": "00-0039851",
+      "source_latest_week": 10
+    },
+    {
+      "game_id": "2026_10_NE_DET",
+      "team": "DET",
+      "reported": "Jared Goff",
+      "roster_status": "ACT",
+      "player_id": "00-0033106",
+      "source_latest_week": 10
+    },
+    {
+      "game_id": "2026_10_BUF_NYJ",
+      "team": "BUF",
+      "reported": "Josh Allen",
+      "roster_status": "ACT",
+      "player_id": "00-0034857",
+      "source_latest_week": 10
+    },
+    {
+      "game_id": "2026_10_BUF_NYJ",
+      "team": "NYJ",
+      "reported": "Geno Smith",
+      "roster_status": "ACT",
+      "player_id": "00-0030565",
+      "source_latest_week": 10
+    },
+    {
+      "game_id": "2026_10_CAR_NO",
+      "team": "CAR",
+      "reported": "Bryce Young",
+      "roster_status": "ACT",
+      "player_id": "00-0039150",
+      "source_latest_week": 10
+    },
+    {
+      "game_id": "2026_10_CAR_NO",
+      "team": "NO",
+      "reported": "Tyler Shough",
+      "roster_status": "ACT",
+      "player_id": "00-0040743",
+      "source_latest_week": 10
+    },
+    {
+      "game_id": "2026_10_HOU_CLE",
+      "team": "HOU",
+      "reported": "C.J. Stroud",
+      "roster_status": "ACT",
+      "player_id": "00-0039163",
+      "source_latest_week": 10
+    },
+    {
+      "game_id": "2026_10_HOU_CLE",
+      "team": "CLE",
+      "reported": "Deshaun Watson",
+      "roster_status": "ACT",
+      "player_id": "00-0033537",
+      "source_latest_week": 10
+    },
+    {
+      "game_id": "2026_10_JAX_TEN",
+      "team": "JAX",
+      "reported": "Trevor Lawrence",
+      "roster_status": "ACT",
+      "player_id": "00-0036971",
+      "source_latest_week": 10
+    },
+    {
+      "game_id": "2026_10_JAX_TEN",
+      "team": "TEN",
+      "reported": "Cam Ward",
+      "roster_status": "ACT",
+      "player_id": "00-0040676",
+      "source_latest_week": 10
+    },
+    {
+      "game_id": "2026_10_KC_ATL",
+      "team": "KC",
+      "reported": "Patrick Mahomes",
+      "roster_status": "ACT",
+      "player_id": "00-0033873",
+      "source_latest_week": 10
+    },
+    {
+      "game_id": "2026_10_KC_ATL",
+      "team": "ATL",
+      "reported": "Michael Penix Jr.",
+      "roster_status": "ACT",
+      "player_id": "00-0039917",
+      "source_latest_week": 10
+    },
+    {
+      "game_id": "2026_10_MIA_IND",
+      "team": "MIA",
+      "reported": "Kyle McCord",
+      "roster_status": "ACT",
+      "player_id": "00-0040014",
+      "source_latest_week": 10
+    },
+    {
+      "game_id": "2026_10_MIA_IND",
+      "team": "IND",
+      "reported": "Daniel Jones",
+      "roster_status": "ACT",
+      "player_id": "00-0035710",
+      "source_latest_week": 10
+    },
+    {
+      "game_id": "2026_10_MIN_GB",
+      "team": "MIN",
+      "reported": "Kirk Cousins",
+      "roster_status": "ACT",
+      "player_id": "00-0029604",
+      "source_latest_week": 10
+    },
+    {
+      "game_id": "2026_10_MIN_GB",
+      "team": "GB",
+      "reported": "Jordan Love",
+      "roster_status": "ACT",
+      "player_id": "00-0036264",
+      "source_latest_week": 10
+    },
+    {
+      "game_id": "2026_10_LA_ARI",
+      "team": "LA",
+      "reported": "Matthew Stafford",
+      "roster_status": "ACT",
+      "player_id": "00-0026498",
+      "source_latest_week": 10
+    },
+    {
+      "game_id": "2026_10_LA_ARI",
+      "team": "ARI",
+      "reported": "Carson Beck",
+      "roster_status": "ACT",
+      "player_id": "00-0041561",
+      "source_latest_week": 10
+    },
+    {
+      "game_id": "2026_10_SEA_LV",
+      "team": "SEA",
+      "reported": "Drew Lock",
+      "roster_status": "ACT",
+      "player_id": "00-0035704",
+      "source_latest_week": 10
+    },
+    {
+      "game_id": "2026_10_SEA_LV",
+      "team": "LV",
+      "reported": "Fernando Mendoza",
+      "roster_status": "ACT",
+      "player_id": "00-0041562",
+      "source_latest_week": 10
+    },
+    {
+      "game_id": "2026_10_SF_DAL",
+      "team": "SF",
+      "reported": "Brock Purdy",
+      "roster_status": "ACT",
+      "player_id": "00-0037834",
+      "source_latest_week": 10
+    },
+    {
+      "game_id": "2026_10_SF_DAL",
+      "team": "DAL",
+      "reported": "Dak Prescott",
+      "roster_status": "ACT",
+      "player_id": "00-0033077",
+      "source_latest_week": 10
+    },
+    {
+      "game_id": "2026_10_PIT_CIN",
+      "team": "PIT",
+      "reported": "Aaron Rodgers",
+      "roster_status": "ACT",
+      "player_id": "00-0023459",
+      "source_latest_week": 10
+    },
+    {
+      "game_id": "2026_10_PIT_CIN",
+      "team": "CIN",
+      "reported": "Joe Burrow",
+      "roster_status": "ACT",
+      "player_id": "00-0036442",
+      "source_latest_week": 10
+    },
+    {
+      "game_id": "2026_10_LAC_BAL",
+      "team": "LAC",
+      "reported": "Justin Herbert",
+      "roster_status": "ACT",
+      "player_id": "00-0036355",
+      "source_latest_week": 10
+    },
+    {
+      "game_id": "2026_10_LAC_BAL",
+      "team": "BAL",
+      "reported": "Jacoby Brissett",
+      "roster_status": "ACT",
+      "player_id": "00-0033119",
+      "source_latest_week": 10
+    }
+  ],
+  "qb_unavailable_or_missing": [],
+  "critical_caveat": "Roster statuses are nflverse public secondary data as-of their latest listed roster week; not proof of live game-day actives. 'RES' is reserve category and may include IR/PUP/suspension. This file is diagnostic only and cannot silently alter live models or historical forecasts."
+}
