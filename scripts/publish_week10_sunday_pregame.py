@@ -42,7 +42,7 @@ def canonical(s):
 def normalize_name(x):
     s=unicodedata.normalize("NFKD",str(x)).encode("ascii","ignore").decode()
     s=re.sub(r"[^a-zA-Z0-9 ]","",s).strip().lower()
-    s=re.sub(r"\\b(jr|ii|iii|iv|sr)\\b","",s)
+    s=re.sub(r"\b(jr|ii|iii|iv|sr)\b","",s)
     return " ".join(s.split())
 
 def latest_saved_snapshot():
