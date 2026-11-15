@@ -16,6 +16,7 @@ QB_UPDATE=ROOT/"data"/"public_snapshots"/"nfl_week10_qb_corrected_2026-11-12.csv
 FINAL_INJURIES=ROOT/"data"/"public_snapshots"/"nfl_week10_final_injury_designations_2026-11-12.csv"
 SUNDAY=ROOT/"data"/"public_snapshots"/"nfl_week10_sunday_pregame_2026-11-15.csv"
 SUNDAY_INJURIES=ROOT/"data"/"public_snapshots"/"nfl_week10_sunday_official_injury_designations_2026-11-15.csv"
+NE_DET_ACTIVES=ROOT/"data"/"public_snapshots"/"nfl_week10_ne_det_official_inactives_2026-11-15.csv"
 SOURCE="https://github.com/tedgytrends-bit/sports-betting-model/blob/main/"
 SEASON=2026
 WEEK=10
@@ -107,6 +108,13 @@ if len(sunday_inj)!=169 or sunday_inj.game_id.nunique()!=13 or sunday_inj.team.n
     st.error("Sunday injury report does not cover the complete Week 10 slate.")
     st.stop()
 injury_designations=pd.concat([injury_designations,sunday_inj],ignore_index=True)
+if not NE_DET_ACTIVES.exists():
+    st.error("Missing official New England/Detroit game-day inactives.")
+    st.stop()
+ne_det_actives=pd.read_csv(NE_DET_ACTIVES)
+if len(ne_det_actives)!=20 or ne_det_actives.final_active_status.eq("INACTIVE").sum()!=12 or ne_det_actives.final_active_status.eq("ACTIVE_CONFIRMED").sum()!=8:
+    st.error("Incomplete official NE-DET game-day inactives.")
+    st.stop()
 
 required_status={"game_id","team","player_name","position","injury","final_game_status"}
 if not required_status.issubset(injury_designations.columns):
@@ -313,6 +321,15 @@ for _,row in chosen.iterrows():
         st.stop()
     entry=decode(row,quote)
     entry["Official final injuries"]=final_injury_label(str(row.game_id))
+    if str(row.game_id)=="2026_10_NE_DET":
+        active=ne_det_actives.loc[ne_det_actives.final_active_status.eq("ACTIVE_CONFIRMED")]
+        inactive=ne_det_actives.loc[ne_det_actives.final_active_status.eq("INACTIVE")]
+        entry["Game-day status"]=(
+            "CONFIRMED INACTIVE: "+", ".join(inactive.team+" "+inactive.player_name)
+            +" | CONFIRMED ACTIVE: "+", ".join(active.team+" "+active.player_name)
+        )
+    else:
+        entry["Game-day status"]="Final injury designations; game-day inactives not independently verified"
     rows.append(entry)
 out=pd.DataFrame(rows).sort_values("_time").drop(columns=["_time"])
 if len(out)!=14:
@@ -335,6 +352,16 @@ st.caption(
     "Sunday pre-inactives forecasts include NFL final injury statuses as of Nov 14 and the Nov 15 6:56 AM CT Bovada screenshot. Historical Thursday and two QB-source research archives remain preserved separately. ATS and total differences are directional comparisons, not betting recommendations. "
     "The Injury model currently relies on largely provisional starting-QB identities; "
     "Saturday/Sunday pregame updates must be captured separately."
+)
+st.caption(
+    "**Patriots–Lions official game-day update:** New England WR A.J. Brown and "
+    "RB Rhamondre Stevenson are ACTIVE; Detroit WR Amon-Ra St. Brown and RB "
+    "Sione Vaki are ACTIVE. Both teams have posted their full inactive lists; "
+    "the 7:04 AM CT model snapshot remains marked pre-inactives."
+)
+st.caption(
+    "[Patriots official inactives](https://www.patriots.com/news/week-10-inactives-patriots-vs-lions) · "
+    "[Lions official inactives](https://www.detroitlions.com/news/inactives-lions-vs-patriots-stbrown-vaki-cisco)"
 )
 st.link_button(
     "View frozen first-public Week 10 data",
