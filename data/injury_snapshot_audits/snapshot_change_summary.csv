@@ -262,6 +262,10 @@ season,week,team,change_type,change_count
 2026,10,ATL,practice_status,9
 2026,10,ATL,report_primary_injury,5
 2026,10,ATL,report_status,5
+2026,10,BAL,feed_membership,2
+2026,10,BAL,report_primary_injury,2
+2026,10,BAL,report_secondary_injury,1
+2026,10,BAL,report_status,2
 2026,10,BUF,feed_membership,3
 2026,10,BUF,practice_status,6
 2026,10,BUF,report_primary_injury,5
@@ -300,8 +304,8 @@ season,week,team,change_type,change_count
 2026,10,HOU,report_status,11
 2026,10,IND,feed_membership,3
 2026,10,IND,practice_status,5
-2026,10,IND,report_primary_injury,7
-2026,10,IND,report_status,7
+2026,10,IND,report_primary_injury,8
+2026,10,IND,report_status,8
 2026,10,JAX,feed_membership,1
 2026,10,JAX,practice_status,7
 2026,10,JAX,report_primary_injury,4
@@ -315,6 +319,10 @@ season,week,team,change_type,change_count
 2026,10,LA,report_primary_injury,7
 2026,10,LA,report_secondary_injury,2
 2026,10,LA,report_status,7
+2026,10,LAC,practice_status,6
+2026,10,LAC,report_primary_injury,10
+2026,10,LAC,report_secondary_injury,1
+2026,10,LAC,report_status,10
 2026,10,LV,feed_membership,1
 2026,10,LV,practice_status,3
 2026,10,LV,report_primary_injury,1
