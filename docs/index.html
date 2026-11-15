@@ -75,7 +75,7 @@
 // Read-only display of archived, committed GitHub data. Never run/retrain models in the browser.
 const REPO='https://raw.githubusercontent.com/tedgytrends-bit/sports-betting-model/main/';
 const ARCHIVE='https://github.com/tedgytrends-bit/sports-betting-model/blob/main/';
-const SOURCES={sunday:'data/public_snapshots/nfl_week10_sunday_pregame_2026-11-15.csv',injurySun:'data/public_snapshots/nfl_week10_sunday_official_injury_designations_2026-11-15.csv',injuryReport:'data/public_snapshots/nfl_week10_final_injury_designations_2026-11-12.csv',week9grades:'data/public_snapshots/nfl_week09_results_summary_2026-11-10.csv',week10:'data/public_snapshots/nfl_week10_initial_projections_2026-11-12.csv',qbUpdate:'data/public_snapshots/nfl_week10_qb_corrected_2026-11-12.csv',week9:'data/public_snapshots/nfl_week_09_six_model_research_2026-11-04.csv',injuryV2:'data/public_snapshots/nfl_week09_injury_qb_epa_margin_2026-11-05.csv',finalInjury:'data/public_snapshots/nfl_week09_final_injury_2026-11-08.csv',kickoffs:'data/public_snapshots/nfl_week09_kickoffs_2026.csv',market:'data/bovada_lines.csv',week8:'data/four_model_week08/week08_four_model_comparison.csv'};
+const SOURCES={inactivesNE:'data/public_snapshots/nfl_week10_ne_det_official_inactives_2026-11-15.csv',sunday:'data/public_snapshots/nfl_week10_sunday_pregame_2026-11-15.csv',injurySun:'data/public_snapshots/nfl_week10_sunday_official_injury_designations_2026-11-15.csv',injuryReport:'data/public_snapshots/nfl_week10_final_injury_designations_2026-11-12.csv',week9grades:'data/public_snapshots/nfl_week09_results_summary_2026-11-10.csv',week10:'data/public_snapshots/nfl_week10_initial_projections_2026-11-12.csv',qbUpdate:'data/public_snapshots/nfl_week10_qb_corrected_2026-11-12.csv',week9:'data/public_snapshots/nfl_week_09_six_model_research_2026-11-04.csv',injuryV2:'data/public_snapshots/nfl_week09_injury_qb_epa_margin_2026-11-05.csv',finalInjury:'data/public_snapshots/nfl_week09_final_injury_2026-11-08.csv',kickoffs:'data/public_snapshots/nfl_week09_kickoffs_2026.csv',market:'data/bovada_lines.csv',week8:'data/four_model_week08/week08_four_model_comparison.csv'};
 const MODEL_NAMES={baseline:'Baseline',injury:'Injury (QB EPA)',efficiency:'Efficiency (research)',combined:'Combined (research)'};
 const COLORS={JAX:'#006778',BAL:'#35245d',CIN:'#ee6026',ATL:'#a6192e',DAL:'#184a80',IND:'#154880',LA:'#144886',LAR:'#144886',WAS:'#652f39',CLE:'#b94e16',NO:'#88774a',NYJ:'#195441',KC:'#b81930',DET:'#1561a3',MIA:'#007f86',DEN:'#ec651c',CAR:'#0079aa',NYG:'#0a3060',PHI:'#005b55',HOU:'#173858',LAC:'#f0b531',LV:'#5a6069',SF:'#ae2437',GB:'#15553c',NE:'#163c70',ARI:'#9e1436',SEA:'#1c567b',TB:'#b82834',CHI:'#c2561b',BUF:'#184c92',MIN:'#5c3383',TEN:'#385a82',PIT:'#eab634'};
 const TEAM_NAMES={JAX:'Jacksonville Jaguars',BAL:'Baltimore Ravens',CIN:'Cincinnati Bengals',ATL:'Atlanta Falcons',DAL:'Dallas Cowboys',IND:'Indianapolis Colts',LA:'Los Angeles Rams',LAR:'Los Angeles Rams',WAS:'Washington Commanders',CLE:'Cleveland Browns',NO:'New Orleans Saints',NYJ:'New York Jets',KC:'Kansas City Chiefs',DET:'Detroit Lions',MIA:'Miami Dolphins',DEN:'Denver Broncos',CAR:'Carolina Panthers',NYG:'New York Giants',PHI:'Philadelphia Eagles',HOU:'Houston Texans',LAC:'Los Angeles Chargers',LV:'Las Vegas Raiders',SF:'San Francisco 49ers',GB:'Green Bay Packers',NE:'New England Patriots',ARI:'Arizona Cardinals',SEA:'Seattle Seahawks',TB:'Tampa Bay Buccaneers',CHI:'Chicago Bears',BUF:'Buffalo Bills',MIN:'Minnesota Vikings',TEN:'Tennessee Titans',PIT:'Pittsburgh Steelers'};
@@ -121,6 +121,19 @@ function calc(g,model=state.model){const p=modelProj(g,model);if(!p||![p.a,p.h,p
   return {...p,margin,edge,tEdge:totalEdge,atsTeam:ats,atsSpread:spread,atsEdge:Math.abs(edge),totalSide:Number.isFinite(totalEdge)?(Math.abs(totalEdge)<0.0001?'Even':totalEdge>0?'Over':'Under'):'Market unavailable',totalEdge:Math.abs(totalEdge)};
 }
 function modelFav(g,c){return !c?'—':Math.abs(c.margin)<0.05?'Pick’em':`${c.margin>0?g.home:g.away} -${f(Math.abs(c.margin))}`}
+function confirmedGameDayStatusHTML(g){
+ const all=Array.isArray(data.inactivesNE)?data.inactivesNE:[];
+ const rows=all.filter(r=>r.game_id===g.id);
+ if(!rows.length)return '';
+ const inactive=rows.filter(r=>r.final_active_status==='INACTIVE');
+ const active=rows.filter(r=>r.final_active_status==='ACTIVE_CONFIRMED');
+ if(inactive.length!==12||active.length!==8)throw Error('Incomplete NE-DET game-day active/inactive evidence');
+ const list=arr=>arr.map(r=>esc(r.team+' '+r.position+' '+r.player_name)).join(', ');
+ return '<div class="injury-summary" style="border-color:#51647b;background:#14242c"><div class="injury-tag">CONFIRMED SUNDAY GAME-DAY INACTIVES · NOV 15</div>'
+  +'<div><span class="injury-out">INACTIVE ('+inactive.length+'):</span> '+list(inactive)+'</div>'
+  +'<div class="injury-cleared"><b>CONFIRMED ACTIVE ('+active.length+'):</b> '+list(active)+'</div>'
+  +'<div style="color:var(--muted)">Source: official Patriots and Lions team announcements · separate from the Nov 14 final injury designations</div></div>';
+}
 function injuryStatusHTML(g){
  const all=(Array.isArray(data.injuryReport)?data.injuryReport:[]).concat(Array.isArray(data.injurySun)?data.injurySun:[]);
  const rows=all.filter(r=>r.game_id===g.id);
@@ -128,7 +141,7 @@ function injuryStatusHTML(g){
  const byStatus=status=>rows.filter(r=>clean(r.final_game_status)===status);
  const labels=items=>items.map(r=>esc(r.team+' '+r.position+' '+r.player_name+(r.injury?' ('+r.injury+')':''))).join('; ');
  const out=byStatus('OUT'),q=byStatus('QUESTIONABLE'),doubt=byStatus('DOUBTFUL'),cleared=byStatus('NO_GAME_DESIGNATION');
- return '<div class="injury-summary"><div class="injury-tag">OFFICIAL FINAL INJURY DESIGNATIONS · '+(g.id==='2026_10_WAS_NYG'?'NOV 11':'NOV 14')+'</div>'
+ return confirmedGameDayStatusHTML(g)+'<div class="injury-summary"><div class="injury-tag">OFFICIAL FINAL INJURY DESIGNATIONS · '+(g.id==='2026_10_WAS_NYG'?'NOV 11':'NOV 14')+'</div>'
     +(out.length?'<div><span class="injury-out">OUT:</span> '+labels(out)+'</div>':'')
     +(doubt.length?'<div><span class="injury-questionable">DOUBTFUL:</span> '+labels(doubt)+'</div>':'')+(q.length?'<div><span class="injury-questionable">QUESTIONABLE:</span> '+labels(q)+'</div>':'')
     +(cleared.length?'<div class="injury-cleared"><b>No game designation:</b> '+cleared.map(r=>esc(r.player_name)).join(', ')+'</div>':'')
