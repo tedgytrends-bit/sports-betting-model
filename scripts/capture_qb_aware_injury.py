@@ -22,6 +22,7 @@ if str(ROOT) not in sys.path: sys.path.insert(0,str(ROOT))
 from model import load_schedule_data,load_pbp
 from injury_model import load_injury_reports,project_qb_aware_injury
 from research.validate_qb_starter_confirmations import validate_starter_confirmations
+from research.validate_live_qb_roster import fetch_roster,enforce_active_roster_qbs
 
 OUT=ROOT/"data"/"qb_epa_shadow"
 SEASONS=(2021,2022,2023,2024,2025,2026)
@@ -167,6 +168,30 @@ def run(season:int,week:int)->None:
     watchlist=pd.read_csv(watchlist_file,dtype=str,keep_default_na=False) if watchlist_file.exists() else None
     if watchlist is not None:
         reject_known_inactive_qb(board,watchlist)
+    # A second, independent roster-status feed catches IR/RES players absent
+    # from weekly practice reports and manually curated watchlists. Its
+    # current-week data may not be published early in the week; still allow a
+    # RESEARCH candidate but mark it NOT READY. If a current roster explicitly
+    # contradicts our QB, fail rather than publish a bad name.
+    roster_gate_passed=False
+    roster_gate_issue=None
+    roster_url=None
+    roster_sha256=None
+    roster_audit=pd.DataFrame()
+    try:
+        roster,roster_url,roster_sha256=fetch_roster(season)
+        roster_audit=enforce_active_roster_qbs(board,roster,season=season,week=week)
+        roster_gate_passed=True
+    except ValueError as ex:
+        issue=str(ex)
+        if "Roster source has not reached" in issue or "not current Week" in issue:
+            roster_gate_issue=issue
+            print("Research ONLY: current-week roster has not been published; official release blocked: "+issue)
+        else:
+            raise
+    except Exception as ex:
+        roster_gate_issue=type(ex).__name__+": "+str(ex)
+        print("Research ONLY: public roster validation unavailable; official release blocked: "+roster_gate_issue)
     result["captured_at_utc"]=now.isoformat()
     result["source_type"]="PREGAME_RESEARCH_PENDING_RELEASE"
     qb_counts=board.starter_source.value_counts().to_dict()
@@ -183,6 +208,11 @@ def run(season:int,week:int)->None:
         source_audit.to_csv(audit_path,index=False)
         source_audit_file=str(audit_path.relative_to(ROOT))
     board.to_csv(qb,index=False)
+    roster_audit_file=None
+    if not roster_audit.empty:
+        path=OUT/f"{stem}_qb_live_roster_audit.csv"
+        roster_audit.to_csv(path,index=False)
+        roster_audit_file=str(path.relative_to(ROOT))
     metadata={
         "status":"RESEARCH_CAPTURE_ONLY_NO_RETROACTIVE_REWRITE",
         "captured_at_utc":now.isoformat(),
@@ -195,7 +225,12 @@ def run(season:int,week:int)->None:
         "both_starters_verified_games":int(result["both_qbs_source_verified"].sum()),
         "rejected_override_count":rejected_count,
         "coach_expected_starter_count":len(expected_starters) if expected_starters is not None else 0,
-        "release_ready":bool(board.starter_source.eq("verified_pregame").all()),
+        "release_ready":bool(roster_gate_passed and board.starter_source.eq("verified_pregame").all()),
+        "current_week_roster_gate_passed":bool(roster_gate_passed),
+        "current_week_roster_gate_issue":roster_gate_issue,
+        "current_week_roster_audit":roster_audit_file,
+        "public_nflverse_roster_url":roster_url,
+        "public_nflverse_roster_sha256":roster_sha256,
         "known_unavailable_qb_watchlist_checked":watchlist is not None,
         "starter_source_audit":source_audit_file,
         "verification_policy":"Only manually content-reviewed game-specific source statements with traceable timestamps are eligible. Provisional QB shifts remain research-only.",
@@ -205,6 +240,8 @@ def run(season:int,week:int)->None:
         "warnings":[
             "NFLverse upcoming starter listings are provisional unless a recent game-specific source is explicitly reviewed.",
             "A source URL and timestamp alone do not establish QB starter confirmation.",
+            "An ACTIVE nflverse roster status is required for final release; it does not by itself confirm starting role.",
+            "Weekly practice injury reports omit long-term IR/reserve players; roster gate is independent and source-vintage-aware.",
             "Coach-expected starters may override outdated schedule QBs but remain explicitly unverified.",
             "The verified-only sensitivity remains research-only and does not rewrite the original candidate.",
             "Known IR/OUT starters in the timestamped watchlist block the research candidate if erroneously selected.",
