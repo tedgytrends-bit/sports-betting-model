@@ -1,0 +1,142 @@
+{
+  "status": "NE_DET_OFFICIAL_GAMEDAY_INACTIVES_PREGAME_UPDATE",
+  "created_utc": "2026-11-15T13:18:33Z",
+  "games": 1,
+  "model": "injury",
+  "initial_immutable": "data/public_snapshots/nfl_week10_initial_projections_2026-11-12.csv",
+  "first_sunday_immutable": "data/public_snapshots/nfl_week10_sunday_pregame_2026-11-15.csv",
+  "matched_gameday_identity_rows": [
+    {
+      "team": "NE",
+      "name": "Carlton Davis",
+      "status": "INACTIVE",
+      "before": "OUT",
+      "after": "Out"
+    },
+    {
+      "team": "NE",
+      "name": "Ben Brown",
+      "status": "INACTIVE",
+      "before": "OUT",
+      "after": "Out"
+    },
+    {
+      "team": "NE",
+      "name": "Brenden Schooler",
+      "status": "INACTIVE",
+      "before": "QUESTIONABLE",
+      "after": "Out"
+    },
+    {
+      "team": "NE",
+      "name": "Walter Rouse",
+      "status": "INACTIVE",
+      "before": "QUESTIONABLE",
+      "after": "Out"
+    },
+    {
+      "team": "DET",
+      "name": "D.J. Reed",
+      "status": "INACTIVE",
+      "before": "OUT",
+      "after": "Out"
+    },
+    {
+      "team": "DET",
+      "name": "Cade Mays",
+      "status": "INACTIVE",
+      "before": "OUT",
+      "after": "Out"
+    },
+    {
+      "team": "NE",
+      "name": "A.J. Brown",
+      "status": "ACTIVE_CONFIRMED",
+      "before": "QUESTIONABLE",
+      "after": ""
+    },
+    {
+      "team": "NE",
+      "name": "Rhamondre Stevenson",
+      "status": "ACTIVE_CONFIRMED",
+      "before": "QUESTIONABLE",
+      "after": ""
+    },
+    {
+      "team": "NE",
+      "name": "Reggie Gilliam",
+      "status": "ACTIVE_CONFIRMED",
+      "before": "QUESTIONABLE",
+      "after": ""
+    },
+    {
+      "team": "NE",
+      "name": "Greg Van Roten",
+      "status": "ACTIVE_CONFIRMED",
+      "before": "QUESTIONABLE",
+      "after": ""
+    },
+    {
+      "team": "NE",
+      "name": "Charles Woods",
+      "status": "ACTIVE_CONFIRMED",
+      "before": "QUESTIONABLE",
+      "after": ""
+    },
+    {
+      "team": "DET",
+      "name": "Amon-Ra St. Brown",
+      "status": "ACTIVE_CONFIRMED",
+      "before": "QUESTIONABLE",
+      "after": ""
+    },
+    {
+      "team": "DET",
+      "name": "Sione Vaki",
+      "status": "ACTIVE_CONFIRMED",
+      "before": "QUESTIONABLE",
+      "after": ""
+    }
+  ],
+  "unmatched_gameday_identity_rows": [
+    {
+      "player": "Dametrious Crownover",
+      "team": "NE",
+      "status": "INACTIVE"
+    },
+    {
+      "player": "Behren Morton",
+      "team": "NE",
+      "status": "INACTIVE"
+    },
+    {
+      "player": "Keith Abney",
+      "team": "DET",
+      "status": "INACTIVE"
+    },
+    {
+      "player": "Amen Ogbongbemiga",
+      "team": "DET",
+      "status": "INACTIVE"
+    },
+    {
+      "player": "Mekhi Wingo",
+      "team": "DET",
+      "status": "INACTIVE"
+    },
+    {
+      "player": "Amad Hassanein",
+      "team": "DET",
+      "status": "INACTIVE"
+    },
+    {
+      "player": "Andre Cisco",
+      "team": "DET",
+      "status": "ACTIVE_CONFIRMED"
+    }
+  ],
+  "new_source_snapshot": "data/injury_snapshots/injuries_2026_week_10_20261115T131833Z.csv",
+  "game_inactives_archived": "data/public_snapshots/nfl_week10_ne_det_official_inactives_2026-11-15.csv",
+  "review_note": "Separate before-kickoff Monday? No: early Sunday international game. Only new NE-DET Injury margin/total in this file. Other 12 Sunday games and Thursday remain original published vintages.",
+  "quarterback_source_warning": "NE Drake Maye and DET Jared Goff remain schedule-provisional names; neither official inactive list declares a different starter."
+}
