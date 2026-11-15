@@ -50,3 +50,34 @@ Primary team reports:
 - Static site GitHub Actions Pages and smoke tests have passed after Sunday changes. A targeted smoke-test upgrade (`smoke-test-public-site.yml`) checks all Sunday output file counts, time safety, source mention and original immutable records.
 
 **Next:** Sunday 90-min-to-kickoff game-day inactive lists for normal noon CT/afternoon/night games should be checked individually and posted with exact source times if asked to update. NEVER label questionable as inactive. Any subsequent new official scores should have fresh pregame UTC timestamps and independent named files; do not overwrite original Sunday 7:04 and 7:18 NE snapshots. User can provide further Bovada quotes. No paid API credits without express permission.
+
+
+## November 15, 9:07 a.m. CT — critical Malik Willis IR / Kyle McCord fix and full QB audit
+
+**Priority: MODEL INPUT INTEGRITY, not an apparent betting edge.**
+
+User observed Dolphins projected QB was Malik Willis despite officially being on **injured reserve since November 10**. This was a genuine source failure: the nflverse completed-game/next-schedule QB field retained Willis, while the standard *final Week 10 practice injury report* omits players already on longer-term injured reserve. The existing `reject_known_inactive_qb` was fail-closed only for players *already entered in the curated watchlist*; Miami had not been included in that watchlist.
+
+Primary team evidence:
+- [Miami placed Malik Willis on IR Nov 10](https://www.miamidolphins.com/news/dolphins-make-roster-moves-x8063)
+- [Miami official Nov 14 game preview states Kyle McCord starts at Indianapolis Nov15](https://www.miamidolphins.com/news/game-preview-miami-dolphins-at-indianapolis-colts)
+- [Head coach Hafley explicitly discusses McCord as new starter on Nov11](https://www.miamidolphins.com/news/transcript-hc-jeff-hafley-press-conference-november-11)
+
+Added to `data/qb_starters/2026_week10_confirmed.csv`: MIA **Kyle McCord**, player GSIS **00-0040014** cross-checked against a 2026 nflverse-linked player registry, exact primary Dolphins source, article publication Nov14 9:30am ET and actual review timestamp Nov15 9:04am CT. Added both Willis `IR_REPORTED` (hard-blocked) and McCord team-confirmed to `data/qb_starters/2026_week10_watchlist.csv`.
+
+**Model rerun succeeded before kickoff**, workflow [#43728053483](https://github.com/tedgytrends-bit/sports-betting-model/actions/runs/43728053483), publication **2026-11-15T15:07:30Z** (9:07:30am CT), `data/public_snapshots/nfl_week10_mia_ind_mccord_corrected_2026-11-15.csv` + JSON manifest. Recomputed actual QB-aware Injury model under corrected QB ID rather than merely relabeling the UI:
+
+| MIA @ IND | MIA | IND | Total | QB name |
+|---|---:|---:|---:|---|
+| Original 07:04 Sunday snapshot — **wrong** | 21.6 | 22.3 | 43.8 | Malik Willis (IR) |
+| Subsequent 09:07 source-corrected preview | 22.9 | 20.9 | 43.8 | Kyle McCord (Miami confirmed) |
+
+This apparent **model Miami outright win** is *not a reliable betting edge*: McCord has **zero NFL regular-season dropbacks**, model `confidence=insufficient_data`, and a non-calibrated EPA-to-points fallback. Book line user screenshot Colts -4.5, total 37.5. The site explicitly labels Miami's **Injury ATS "PASS — uncalibrated rookie QB"** and totals as research only rather than a confident recommendation. Do **NOT** promote the 6.5-point ATS discrepancy to the user's bet ledger.
+
+A **26-player independent starting-QB identity crosscheck** `data/public_snapshots/nfl_week10_qb_identity_crosscheck_2026-11-15.csv` compared all 26 Sunday/Monday model QB names with a separately updated contemporary [Nov15 independent depth chart index](https://lineupfield.com/starting-quarterbacks/), adjusted where authoritative team-reported starter superseded stale depth chart (Seattle Lock). Original model **25/26 match**, exception Miami. Corrected model **26/26 agree with independent roster reference**. Evidence levels: **5** direct team-specific starter announcements (MIA McCord, ARI Beck, SEA Lock, CLE Watson, MIN Cousins), **1** coach-expected (BAL Brissett), **20** independently secondary-depth-chart-corroborated *but not primary-source verified or confirmed active*. This crosscheck does NOT prove the remaining 20 starters are final game-day actives, and is not equivalent to an authoritative full inactive list.
+
+Static `docs/index.html` and `docs/week10.html` now REQUIRE the Miami corrector and 26-team crosscheck, show the new one-game score version and QB names, and flag rookie QB valuation as **PASS** rather than misleading high-confidence ATS. Streamlit `pages/Week_10_Projection_Board.py` similarly gates on these files and preserves earlier wrong Sunday version (for transparent error tracking) and every other game's history. Unit tests `tests/test_qb_expected_starters.py` explicitly assert the old Willis version is caught by IR guard and McCord/GSIS/source is correct; website smoke tests assert a 26/26 check, one archived error, hard-blocked IR, and rookie ATS PASS. GitHub Pages deployment and CI passed.
+
+**Structural gap still outstanding:** nflverse *practice injury reports* omit players already on injured reserve, whether QBs or non-QBs. The team-level Injury model's final-report count adjustment is NOT a full injured-roster/IR availability model. Add an independent current roster status and team transaction roster gate to the publication pipeline before declaring future weeks final; no claim of a complete future solution has been made. In the meantime, do not call incomplete pregame model source statuses fully verified, and fail closed if official IR/OUT vs selected QB conflicts.
+
+The official first Sunday 07:04 and Thursday Nov12 records remain immutable, and the one-game 09:07 correction is a separately tracked later vintage.
