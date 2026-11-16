@@ -231,7 +231,7 @@ jobs:
           assert sum(r["week"]=="9" and r["model"]=="baseline" and r["record_class"]=="RESEARCH_COMPARATOR" for r in games)==15
           for file in ("docs/index.html","docs/week10.html"):
               text=Path(file).read_text()
-              assert '<script src="./public-results.js"></script>' in text
+              assert '<script src="./public-results.js?v=20261116-mobile-results-v3"></script>' in text
               assert "resultsGames:'data/public_results/nfl_2026_graded_games.csv'" in text
               assert "window.renderPublicResults(data)" in text
               assert 'id="results-week-filter"' in text and 'id="results-day-filter"' in text
