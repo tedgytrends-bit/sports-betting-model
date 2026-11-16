@@ -18,6 +18,10 @@ on:
       - "docs/index.html"
       - "docs/week09.html"
       - "docs/week10.html"
+      - "docs/public-results.js"
+      - "tests/public-results-dom-smoke.cjs"
+      - "data/public_results/nfl_2026_graded_games.csv"
+      - "data/public_results/nfl_2026_results_summary.csv"
       - "data/public_snapshots/nfl_week10_initial_projections_2026-11-12.csv"
       - "data/public_snapshots/nfl_week10_bovada_initial_2026-11-12.csv"
       - "data/public_snapshots/nfl_week10_bovada_sunday_2026-11-15T1256Z.csv"
@@ -209,6 +213,29 @@ jobs:
 
           PY
           node --check /tmp/tedgy-site.js
+          node --check docs/public-results.js
+          python - <<'PY'
+          import csv,json
+          from pathlib import Path
+          d=Path("data/public_results")
+          with (d/"nfl_2026_graded_games.csv").open() as f:
+              games=list(csv.DictReader(f))
+          with (d/"nfl_2026_results_summary.csv").open() as f:
+              summary=list(csv.DictReader(f))
+          assert len(games)>=86 and len(summary)>=8
+          assert {r["model"] for r in games}=={"injury","baseline"}
+          assert all(r["score_status"] in ("FINAL","PENDING") for r in games)
+          assert sum(r["week"]=="9" and r["model"]=="baseline" and r["record_class"]=="RESEARCH_COMPARATOR" for r in games)==15
+          for file in ("docs/index.html","docs/week10.html"):
+              text=Path(file).read_text()
+              assert '<script src="./public-results.js"></script>' in text
+              assert "resultsGames:'data/public_results/nfl_2026_graded_games.csv'" in text
+              assert "window.renderPublicResults(data)" in text
+              assert 'id="results-week-filter"' in text and 'id="results-day-filter"' in text
+          Path("/tmp/tedgy-public-results.json").write_text(json.dumps({"resultsGames":games,"resultsSummary":summary}))
+          print("PASS: both public pages load the same cumulative results dataset, 15 Week9 research Baseline games separate")
+          PY
+          node tests/public-results-dom-smoke.cjs /tmp/tedgy-public-results.json
       - name: Test actual routed app and historical links
         run: |
           python - <<'PY'
@@ -228,8 +255,10 @@ jobs:
           app.switch_page("pages/Week_09_Projection_Board.py").run()
           verify("Week 9 archive page")
           app.switch_page("pages/Results.py").run()
-          verify("Public results record from Week 8")
-          assert any("Week 8" in str(x.body) for x in app.subheader), "Results Week 8 heading missing"
+          verify("Auto-updated Week8 onward public results")
+          assert any("Week-by-week performance" in str(x.body) for x in app.subheader), "Results weekly summary missing"
+          assert any("Game-by-game results" in str(x.body) for x in app.subheader), "Results per-game table missing"
+          assert len(app.dataframe)>=2, "Results needs weekly and game tables"
           app.switch_page("pages/Public_Projection_Board.py").run()
           verify("Original Week 8 permalink preserved")
           PY
