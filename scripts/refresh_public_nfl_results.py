@@ -11,6 +11,8 @@ without changing the old forecast. Previous finalized game grades are locked:
 if a later run would change a score, projection vintage, price or grade, fail
 rather than silently rewriting the public record.
 
+Scheduled repeats without newly FINAL games are idempotent and do not commit.
+
 A public model directional-lean record is not an actual bet ledger or
 evidence of positive expected value. Baseline Week 9 is labeled research.
 """
