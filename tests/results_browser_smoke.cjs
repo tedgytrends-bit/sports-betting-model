@@ -14,10 +14,19 @@ const BASE_URL='http://127.0.0.1:'+PORT;
 async function main(){
   const child=spawn('python3',['-m','http.server',String(PORT),'--bind','127.0.0.1','--directory',SITE],{stdio:'ignore'});
   try{
+    // Wait for the local static preview port rather than partially parsing
+    // aborted HTTP responses while the server is still starting.
+    const net=require('node:net');
     let ready=false;
     for(let i=0;i<35;i++){
-      try{const resp=await fetch(BASE_URL+'/index.html');if(resp.ok){ready=true;break}}catch{}
-      await new Promise(r=>setTimeout(r,250));
+      ready=await new Promise(resolve=>{
+        const socket=net.connect({host:'127.0.0.1',port:PORT});
+        socket.once('connect',()=>{socket.destroy();resolve(true)});
+        socket.once('error',()=>{socket.destroy();resolve(false)});
+        socket.setTimeout(750,()=>{socket.destroy();resolve(false)});
+      });
+      if(ready)break;
+      await new Promise(resolve=>setTimeout(resolve,250));
     }
     assert.ok(ready,'Local GitHub Pages preview server failed');
     const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
