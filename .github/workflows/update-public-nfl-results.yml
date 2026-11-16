@@ -1,0 +1,92 @@
+name: Update Tedgy Trends public NFL results after completed game days
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Local Central Thursday/Sunday/Monday game-night settlement:
+    # Fri/Mon/Tue 05:40 & 07:40 UTC (late CT or just after midnight).
+    # Two runs cover OT, ESPN source publication delay and both DST/CST.
+    - cron: "40 5,7 * 1,9-12 1,2,5"
+    # Optional Sunday afternoon completed games before SNF is final.
+    - cron: "45 23 * 1,9-12 0"
+  push:
+    branches: [main]
+    paths:
+      - "scripts/refresh_public_nfl_results.py"
+      - "tests/test_public_nfl_results.py"
+      - ".github/workflows/update-public-nfl-results.yml"
+      - "data/public_snapshots/nfl_week*.csv"
+      - "data/four_model_week08/week08_four_model_comparison.csv"
+      - "data/week09_review/week09_full_ats_totals_grade.csv"
+      - "data/bovada_lines.csv"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: tedgy-public-nfl-results-single-writer
+  cancel-in-progress: false
+
+jobs:
+  grade:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout whole model publication history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install lightweight public-only score and test clients
+        run: python -m pip install requests pytest
+      - name: Compile and verify frozen results grading mathematics
+        run: |
+          python -m py_compile scripts/refresh_public_nfl_results.py
+          python -m pytest -q tests/test_public_nfl_results.py
+      - name: Capture officially FINAL scores and refresh public results data
+        run: python -u scripts/refresh_public_nfl_results.py
+      - name: Validate unique grades and no pre-kickoff score leakage
+        run: |
+          python - <<'PY'
+          import csv
+          import json
+          from pathlib import Path
+          root=Path("data/public_results")
+          files=["nfl_2026_graded_games.csv","nfl_2026_results_summary.csv",
+                 "nfl_2026_results_metadata.json","nfl_2026_verified_final_scores.csv"]
+          assert all((root/x).exists() for x in files),files
+          games=list(csv.DictReader((root/files[0]).open()))
+          sums=list(csv.DictReader((root/files[1]).open()))
+          meta=json.loads((root/files[2]).read_text())
+          keys={(r["game_id"],r["model"]) for r in games}
+          assert len(keys)==len(games), "Duplicate game/model result"
+          assert len([r for r in games if r["week"]=="8"])==28
+          assert len([r for r in games if r["week"]=="9"])==30
+          assert len([r for r in games if r["week"]=="10"])==28
+          assert all(r["score_status"] in ("FINAL","PENDING") for r in games)
+          assert all(r["ats_result"]=="Pending" and r["total_result"]=="Pending" for r in games if r["score_status"]=="PENDING")
+          assert all(r["score_source_url"] for r in games if r["score_status"]=="FINAL")
+          assert all(r["week"]!="9" or r["model"]!="baseline" or r["record_class"]=="RESEARCH_COMPARATOR" for r in games)
+          assert all(r["record_class"]=="PUBLIC_PUBLISHED" for r in games if r["week"]=="10")
+          assert any(r["week"]=="ALL" and r["model"]=="injury" for r in sums)
+          assert meta["no_retroactive_changes"] and meta["rows"]==len(games)
+          print("PASS: public results 14 Week8 + 15 Week9 + 14 Week10, partial finals supported, Week9 Baseline research only")
+          PY
+      - name: Commit only when completed results or prospective coverage changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/public_results/nfl_2026_graded_games.csv
+          git add data/public_results/nfl_2026_results_summary.csv
+          git add data/public_results/nfl_2026_verified_final_scores.csv
+          git add data/public_results/nfl_2026_results_metadata.json
+          if git diff --cached --quiet; then
+            echo "No new FINAL scores or changed pregame snapshots; no commit necessary."
+            exit 0
+          fi
+          git commit -m "Auto-grade completed NFL games and refresh Week 8 onward public ATS/totals records"
+          git pull --rebase origin main
+          git push origin HEAD:main
