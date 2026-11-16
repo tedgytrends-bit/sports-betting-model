@@ -13,6 +13,8 @@ on:
     branches: [main]
     paths:
       - "scripts/refresh_public_nfl_results.py"
+      - "scripts/build_full_directional_results.py"
+      - "tests/test_full_directional_results.py"
       - "tests/test_public_nfl_results.py"
       - ".github/workflows/update-public-nfl-results.yml"
       - "data/public_snapshots/nfl_week*.csv"
@@ -44,10 +46,12 @@ jobs:
         run: python -m pip install requests pytest
       - name: Compile and verify frozen results grading mathematics
         run: |
-          python -m py_compile scripts/refresh_public_nfl_results.py
-          python -m pytest -q tests/test_public_nfl_results.py
+          python -m py_compile scripts/refresh_public_nfl_results.py scripts/build_full_directional_results.py
+          python -m pytest -q tests/test_public_nfl_results.py tests/test_full_directional_results.py
       - name: Capture officially FINAL scores and refresh public results data
         run: python -u scripts/refresh_public_nfl_results.py
+      - name: Produce separately labeled full directional record using pregame baseline tiebreaker
+        run: python -u scripts/build_full_directional_results.py
       - name: Validate unique grades and no pre-kickoff score leakage
         run: |
           python - <<'PY'
@@ -73,6 +77,24 @@ jobs:
           assert all(r["record_class"]=="PUBLIC_PUBLISHED" for r in games if r["week"]=="10")
           assert any(r["week"]=="ALL" and r["model"]=="injury" for r in sums)
           assert meta["no_retroactive_changes"] and meta["rows"]==len(games)
+          with (root/"nfl_2026_full_directional_games.csv").open() as f:
+            derived=list(csv.DictReader(f))
+          with (root/"nfl_2026_full_directional_summary.csv").open() as f:
+            directional_summary=list(csv.DictReader(f))
+          policy=json.loads((root/"nfl_2026_full_directional_policy.json").read_text())
+          assert len(derived)==len({g["game_id"] for g in games})
+          assert all(r["model"]=="injury" and r["total_pick"] in ("Over","Under") for r in derived)
+          assert all(r["total_result"] in ("Win","Loss","Push") for r in derived if r["score_status"]=="FINAL")
+          fixed=[r for r in derived if r["game_id"]=="2026_08_IND_JAX"]
+          assert len(fixed)==1 and fixed[0]["total_pick"]=="Over" and fixed[0]["total_result"]=="Win"
+          assert fixed[0]["original_total_pick"]=="No lean"
+          assert fixed[0]["selection_provenance"]=="POSTHOC_POLICY_USING_PREEXISTING_PREGAME_BASELINE"
+          original=[r for r in games if r["game_id"]=="2026_08_IND_JAX" and r["model"]=="injury"]
+          assert len(original)==1 and original[0]["total_result"]=="No lean"
+          total=[r for r in directional_summary if r["week"]=="ALL" and r["model"]=="injury"]
+          assert len(total)==1 and int(total[0]["totals_no_lean"])==0
+          assert int(total[0]["totals_wins"])==int(next(r for r in sums if r["week"]=="ALL" and r["model"]=="injury")["totals_wins"])+1
+          assert "retrospective" in policy["explicit_non_claim"].lower()
           print("PASS: public results 14 Week8 + 15 Week9 + 14 Week10, partial finals supported, Week9 Baseline research only")
           PY
       - name: Commit only when completed results or prospective coverage changed
@@ -83,6 +105,9 @@ jobs:
           git add data/public_results/nfl_2026_results_summary.csv
           git add data/public_results/nfl_2026_verified_final_scores.csv
           git add data/public_results/nfl_2026_results_metadata.json
+          git add data/public_results/nfl_2026_full_directional_games.csv
+          git add data/public_results/nfl_2026_full_directional_summary.csv
+          git add data/public_results/nfl_2026_full_directional_policy.json
           if git diff --cached --quiet; then
             echo "No new FINAL scores or changed pregame snapshots; no commit necessary."
             exit 0
