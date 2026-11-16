@@ -1,0 +1,21 @@
+{
+  "policy_adopted_utc": "2026-11-16T14:55:00Z",
+  "record_class": "DERIVED_DIRECTIONAL_TIEBREAK",
+  "name": "Complete directional record \u2014 Injury with pregame Baseline tie-break on zero-edge games",
+  "explicit_non_claim": "Original Injury model never published an Over selection for Week8 IND@JAX; original prospective record remains 23-18 plus one no-pick. The derived 24-18 includes an Over assigned after results were known under a retrospective rule using an independently published pregame Baseline projection.",
+  "tie_policy": "If Injury projected total equals Bovada, take direction of previously PUBLIC_PUBLISHED Baseline projected total vs pregame Bovada market. If both equal, choose Under only for post-policy kickoffs; do not retroactively infer earlier matches.",
+  "historical_fallbacks": [
+    {
+      "game_id": "2026_08_IND_JAX",
+      "result": "Win",
+      "selection": "Over",
+      "reason": "POSTHOC_POLICY_USING_PREEXISTING_PREGAME_BASELINE",
+      "baseline_projection": "46.9",
+      "original_injury_projection": "46.0",
+      "bovada_total": "46.0",
+      "actual_total": 49
+    }
+  ],
+  "never_rewrite": "data/public_results/nfl_2026_graded_games.csv",
+  "latest_generated_at_utc": "2026-11-16T15:37:33+00:00"
+}
