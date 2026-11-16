@@ -598,7 +598,7 @@ function showPublishedWeek(week){
  links.push('<a href="./week10.html">Week 10 projection archive</a>');
  $('future-board-archives').innerHTML=links.join('');
 }
-function attachResultsToBoard(){if(!Array.isArray(data.directionalGames))return;const mapped=new Map(data.directionalGames.filter(x=>Number(x.week)===10&&x.model==='injury').map(x=>[x.game_id,x]));for(const g of data.games){const result=mapped.get(g.id);if(result){g.publicResult=result;g.completed=result.score_status==='FINAL';}}}
+function attachResultsToBoard(){if(!Array.isArray(data.directionalGames))return;const ids=new Set(data.games.map(g=>g.id));const mapped=new Map(data.directionalGames.filter(x=>ids.has(x.game_id)&&x.model==='injury').map(x=>[x.game_id,x]));for(const g of data.games){const result=mapped.get(g.id);if(result){g.publicResult=result;g.completed=result.score_status==='FINAL';}}}
 async function init(){sourceState('CONNECTING TO GITHUB…');const fetched=await Promise.allSettled(Object.entries(SOURCES).map(async([key,path])=>[key,await loadCSV(path)]));
  for(let i=0;i<fetched.length;i++){const name=Object.keys(SOURCES)[i],r=fetched[i];if(r.status==='fulfilled')data[name==='week9'?'rows9':name]=r.value[1];else data.errors.push(`${name}: ${String(r.reason.message||r.reason)}`)}
  try{if(publishedWeekNumbers()[0]<=10 || !publishedWeekNumbers().length)assertFields(data.market,['season','week','away_team','home_team','home_favorite_spread','total_line','captured_at_utc'],'Bovada');if(!(publishedWeekNumbers()[0]>10))assertFields(data.injuryReport,['game_id','team','player_name','position','injury','final_game_status','report_date','source_url'],'Week 10 final injury report');
