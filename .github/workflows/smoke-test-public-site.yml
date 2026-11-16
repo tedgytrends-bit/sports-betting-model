@@ -85,7 +85,11 @@ jobs:
           assert {r["final_game_status"] for r in injury_status}=={"OUT","QUESTIONABLE","NO_GAME_DESIGNATION"}
           assert {r["player_name"] for r in injury_status if r["final_game_status"]=="OUT"}=={"Lucas Patrick","Colson Yankoff"}
           assert {r["player_name"] for r in injury_status if r["final_game_status"]=="QUESTIONABLE"}=={"Malik Harrison"}
-          assert "Initial · Nov 12" in html
+          assert 'id="board-snapshot-label"' in html
+          assert "Latest saved pregame · Nov 15" in html
+          assert 'href="./week09.html"' in html
+          assert 'Week 9 Archive</a></nav>' not in html
+          assert '<button class="navbtn" data-view="method">About</button>' in html
           assert "Date.parse(a.kickoffUtc)-Date.parse(b.kickoffUtc)" in html
           assert "week09.html" in html
           # The Week 10 homepage has exactly two public model views.
