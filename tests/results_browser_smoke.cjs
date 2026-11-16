@@ -149,6 +149,7 @@ async function main(){
               showPublishedWeek(11);
               attachResultsToBoard();
               renderBoard();
+              showView('board');
               return {game:week[0].id,week:publishedWeekNumbers()[0]};
             });
             assert.equal(future.game,'2026_11_MIA_IND');
