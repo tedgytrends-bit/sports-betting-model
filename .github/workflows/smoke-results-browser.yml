@@ -1,0 +1,52 @@
+name: Real browser smoke test for Tedgy Trends Results page
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "docs/public-results.js"
+      - "docs/index.html"
+      - "docs/week10.html"
+      - "tests/results_browser_smoke.cjs"
+      - ".github/workflows/smoke-results-browser.yml"
+      - "data/public_results/**"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tedgy-real-results-browser
+  cancel-in-progress: true
+
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install headless Chromium test runtime
+        run: |
+          npm install --no-save playwright
+          npx playwright install chromium
+      - name: Stage results assets exactly like Pages deployment
+        run: |
+          mkdir -p docs/data/public_results
+          cp data/public_results/nfl_2026_*.csv docs/data/public_results/
+          cp data/public_results/nfl_2026_*.json docs/data/public_results/
+          test -s docs/data/public_results/nfl_2026_full_directional_games.csv
+          node --check docs/public-results.js
+          node --check tests/results_browser_smoke.cjs
+      - name: Test actual mobile and desktop rendering on both public routes
+        run: node tests/results_browser_smoke.cjs
+      - name: Save visual screenshots to troubleshoot layout
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tedgy-results-browser-images
+          path: artifacts/results-*.png
+          if-no-files-found: ignore
+          retention-days: 7
