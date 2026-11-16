@@ -99,22 +99,54 @@
     return esc(r.away_team)+' '+esc(r.actual_away)+' – '+esc(r.home_team)+' '+esc(r.actual_home);
   };
   function render(data){
-    const games=data.resultsGames||[],summary=data.resultsSummary||[];
-    validate(games,summary);
+    const originalGames=data.resultsGames||[],originalSummary=data.resultsSummary||[];
+    validate(originalGames,originalSummary);
+    const games=data.directionalGames||[],summary=data.directionalSummary||[];
+    const originalInjury=originalGames.filter(r=>r.model==='injury'&&r.record_class==='PUBLIC_PUBLISHED');
+    if(games.length!==originalInjury.length||games.length<43
+       ||new Set(games.map(r=>r.game_id)).size!==games.length)
+      throw Error('Full directional archive is missing a unique Injury model row per game');
+    const originalMap=new Map(originalInjury.map(r=>[r.game_id,r]));
+    for(const r of games){
+      const old=originalMap.get(r.game_id);
+      if(!old||r.model!=='injury'||r.record_class!=='DERIVED_DIRECTIONAL_TIEBREAK'
+        ||!['Over','Under'].includes(r.total_pick)
+        ||!['Win','Loss','Push','Pending'].includes(r.total_result))
+        throw Error('Invalid complete-direction data '+r.game_id);
+      for(const key of ['ats_result','ats_pick','actual_home','actual_away','projected_total','bovada_total','score_status']){
+        if(String(old[key])!==String(r[key]))
+          throw Error('Derived results changed the underlying frozen match '+r.game_id+' field '+key);
+      }
+      if(old.total_result==='No lean'){
+        if(r.selection_provenance!=='POSTHOC_POLICY_USING_PREEXISTING_PREGAME_BASELINE'
+           &&r.selection_provenance!=='PROSPECTIVE_POLICY_EXACT_TWO_MODEL_TIE_UNDER')
+          throw Error('Missing clear origin for directional tie-break '+r.game_id);
+      }else if(r.total_result!==old.total_result||r.total_pick!==old.total_pick){
+        throw Error('Improper changed non-tie injury grade '+r.game_id);
+      }
+    }
+    const expectedSpecial=games.find(r=>r.game_id==='2026_08_IND_JAX');
+    if(!expectedSpecial||expectedSpecial.total_pick!=='Over'
+      ||expectedSpecial.total_result!=='Win'
+      ||expectedSpecial.fallback_projected_total!=='46.9'
+      ||expectedSpecial.original_total_result!=='No lean')
+      throw Error('Cannot authenticate Week8 independently sourced fallback Over');
     const totalFinal=new Set(games.filter(r=>r.score_status==='FINAL').map(r=>r.game_id)).size;
     const totalPending=new Set(games.filter(r=>r.score_status==='PENDING').map(r=>r.game_id)).size;
     const latest=summary[0]?.last_grade_run_utc;
     $('results-notice').innerHTML='<span style="font-size:20px;color:var(--accent)">ⓘ</span>'
       +'<div><strong>2026 overall Injury model · '+totalFinal+' games final'
       +(totalPending?' · '+totalPending+' pending':'')+'.</strong> '
-      +'Week 8 onward. Results update automatically after Thursday, Sunday and Monday games become FINAL. '
-      +'Last graded '+esc(formatDate(latest))+'. Actual game totals are displayed even if the model had no pregame pick. '
-      +'These are model projection records, not placed bets.</div>';
+      +'Complete directional view (Injury, with a Baseline tie-break for exact-market totals). '
+      +'Week 8 IND–JAX Over was assigned retrospectively on Nov 16 using the previously published Baseline Over forecast; '
+      +'it was not an original Injury-model play. Original archived record remains unchanged. '
+      +'Auto-updated after final games · last graded '+esc(formatDate(latest))+'. '
+      +'Model tracking only, not placed bets.</div>';
 
     const cards=['ats','totals'];
     $('results-cards').innerHTML=cards.map(market=>{
-      const result=summaryFor(summary,'ALL','injury','PUBLIC_PUBLISHED');
-      if(!result)throw Error('Official cumulative Injury record missing');
+      const result=summaryFor(summary,'ALL','injury','DERIVED_DIRECTIONAL_TIEBREAK');
+      if(!result)throw Error('Complete directional Injury record missing');
       const c=rec(result,market),win=market==='ats'?result.ats_win_pct:result.totals_win_pct;
       const finished=num(result.games_final),pending=num(result.games_pending);
       const neutral=market==='ats'?num(result.ats_no_lean):num(result.totals_no_lean);
@@ -127,7 +159,7 @@
         +'<div class="model-desc">'+graded+' directional results'
         +(pushed?' · '+pushed+' push':'')
         +' · '+numWin+' win rate · '+roi(result,market)+' illustrative -110 ROI'
-        +(neutral?' · '+neutral+' game with no pregame pick':'')
+        +(market==='totals'?' · includes 1 retrospective Baseline tie-breaker':'')
         +(pending?' · '+pending+' pending':'')+'</div></div>';
     }).join('');
 
@@ -154,19 +186,19 @@
     if(dayFilter)dayFilter.value=filterState.day;
     const weekRows=weeks.filter(w=>filterState.week==='all'||String(w)===filterState.week);
     const results=weekRows.map(w=>{
-      const i=summaryFor(summary,w,'injury','PUBLIC_PUBLISHED');
+      const i=summaryFor(summary,w,'injury','DERIVED_DIRECTIONAL_TIEBREAK');
       if(!i)throw Error('Missing Injury results row for Week '+w);
-      const neutral=num(i.totals_no_lean),notes=neutral?' <small>('+neutral+' market-exact projection)</small>':'';
+      const notes=w===8?' <small>† Baseline tiebreaker on one exact-market total</small>':'';
       return '<tr><td><b>Week '+w+'</b></td><td>'+esc(rec(i,'ats'))+'</td>'
       +'<td>'+esc(rec(i,'totals'))+notes+'</td><td>'+num(i.games_final)+'/'+num(i.games_expected)+'</td>'
       +'<td>'+roi(i,'ats')+'</td><td>'+roi(i,'totals')+'</td></tr>';
     });
     $('week-results').innerHTML=results.join('');
     $('week-title').textContent='Weekly Injury model record · 2026';
-    $('results-desc').textContent='All published Injury-model directions are graded against archived pre-kickoff Bovada lines. '
-      +'Actual final scores and market outcomes are shown for every completed matchup. '
-      +'When the model projected exactly the bookmaker total, it made no pick; no win was invented. '
-      +'ROI is a theoretical flat -110 benchmark, not actual betting returns.';
+    $('results-desc').textContent='Complete directional record: original published Injury leans plus an explicitly labeled fallback when the Injury total equals Bovada. '
+      +'Week 8 IND–JAX Over uses the previously published Baseline forecast (46.9 vs line 46), assigned under this policy after the game. '
+      +'Original prospective Injury record remains archived at 23–18 with one no-pick. '
+      +'Hypothetical -110 ROI is NOT an actual wager return.';
 
     const combined=new Map();
     for(const r of games.filter(g=>g.model==='injury'&&shownWeek(g)&&shownDay(g))){
@@ -191,12 +223,10 @@
       const actualTotalResult=!Number.isFinite(finalTotal)?'Pending'
         :Math.abs(finalTotal-marketTotal)<1e-8?'Push'
         :finalTotal>marketTotal?'Over':'Under';
-      const ats=pick.ats_pick==='No lean'?'No ATS pick':pick.ats_pick;
-      const totalNeutral=pick.total_result==='No lean';
-      const totalCell=totalNeutral
-        ?'<span title="This model forecast matched the Bovada total exactly. It did not select a side.">No pregame pick</span>'
-          +(pick.score_status==='FINAL'?' · Market '+gradeLabel(actualTotalResult)+' won':'')
-        :esc(pick.total_pick)+' · '+gradeLabel(pick.total_result);
+      const ats=pick.ats_pick;
+      const adjusted=pick.selection_provenance==='POSTHOC_POLICY_USING_PREEXISTING_PREGAME_BASELINE';
+      const totalCell=esc(pick.total_pick)+' · '+gradeLabel(pick.total_result)
+        +(adjusted?' <small title="Retrospectively adopted Nov 16 policy: pre-existing public Baseline forecast 46.9 > Bovada 46. This was NOT an original Injury model Over pick.">† Baseline tiebreaker (retrospective)</small>':'');
       return '<tr><td><b>W'+g.week+'</b> '+esc(g.day)+'</td>'
         +'<td>'+esc(g.away)+' @ '+esc(g.home)+gamemark+'</td>'
         +'<td>'+finalText(pick)+'</td><td>'+esc(market)+'</td>'
@@ -207,8 +237,8 @@
     $('results-game-desc').textContent=together.length+' games shown, '
       +together.filter(g=>g.injury?.score_status==='FINAL').length+' final; '
       +together.filter(g=>g.injury?.score_status==='PENDING').length+' awaiting final. '
-      +'IND @ JAX Week 8 had a 46.0 model total versus Bovada 46.0: actual 49, so market Over won, but no pregame total pick was made. '
-      +'† Miami QB adjustment uncalibrated. Select a week or day to filter.';
+      +'† Week8 IND @ JAX Over 46 — Win is a retrospective Baseline tiebreaker, not an original Injury pick; original historical grade preserved. '
+      +'Miami QB adjustment remains uncalibrated. Select a week or day to filter.';
   }
   window.renderPublicResults=render;
 })();
