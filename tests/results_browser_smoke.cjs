@@ -9,14 +9,14 @@ const {chromium}=require('playwright');
 const ROOT=path.resolve(__dirname,'..');
 const SITE=path.join(ROOT,'docs');
 const PORT=8765;
-const URL='http://127.0.0.1:'+PORT;
+const BASE_URL='http://127.0.0.1:'+PORT;
 
 async function main(){
   const child=spawn('python3',['-m','http.server',String(PORT),'--bind','127.0.0.1','--directory',SITE],{stdio:'ignore'});
   try{
     let ready=false;
     for(let i=0;i<35;i++){
-      try{const resp=await fetch(URL+'/index.html');if(resp.ok){ready=true;break}}catch{}
+      try{const resp=await fetch(BASE_URL+'/index.html');if(resp.ok){ready=true;break}}catch{}
       await new Promise(r=>setTimeout(r,250));
     }
     assert.ok(ready,'Local GitHub Pages preview server failed');
@@ -36,7 +36,7 @@ async function main(){
             if(!abs.startsWith(ROOT+path.sep)||!fs.existsSync(abs)){await route.fulfill({status:404,body:'not found'});return}
             await route.fulfill({status:200,contentType:'text/csv; charset=utf-8',body:fs.readFileSync(abs)});
           });
-          const target=URL+'/'+routeName+'?view=results';
+          const target=BASE_URL+'/'+routeName+'?view=results';
           await page.goto(target,{waitUntil:'domcontentloaded'});
           await page.locator('.result-game-card').first().waitFor({timeout:30000});
           assert.equal(await page.locator('.result-overview-card').count(),2,'Must show two overall record cards');
