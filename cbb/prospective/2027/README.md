@@ -1,42 +1,43 @@
 # Tedgy Trends CBB — Prospective Research Results
 
-**As of November 15, 2026, 07:53 AM Central Time**
+**As of November 16, 2026, 09:51 AM Central Time**
 
 Research-only performance from projections **actually frozen before tipoff**. No historical picks are retroactively inserted.
 
-**Tracked completed games:** 437 · **Completed without valid frozen record:** 141 · **Invalid frozen records:** 0
+**Tracked completed games:** 471 · **Completed without valid frozen record:** 150 · **Invalid frozen records:** 0
 
 ## Season-to-date — all directional leans (no edge threshold)
 
 | Model | ATS W–L–P | ATS ROI | ATS point error | Totals W–L–P | Totals ROI | Total point error |
 |---|---:|---:|---:|---:|---:|---:|
-| Team baseline | 220-209-6 | -2.07% | 11.89 | 229-203-5 | +1.19% | 14.30 |
-| Player v2 | 225-204-6 | +0.13% | 10.50 | 232-200-5 | +2.50% | 13.87 |
-| Player + opponent v3 | 207-180-5 | +2.09% | 10.41 | 208-181-5 | +2.05% | 13.70 |
-| Player + rotation v4 | 203-184-5 | +0.14% | 10.41 | 218-171-5 | +6.90% | 13.32 |
-| Player + opponent + rotation v4 | 210-177-5 | +3.55% | 10.21 | 213-176-5 | +4.48% | 13.33 |
+| Team baseline | 235-228-6 | -3.06% | 11.97 | 248-218-5 | +1.58% | 14.28 |
+| Player v2 | 249-214-6 | +2.64% | 10.47 | 247-219-5 | +1.18% | 13.98 |
+| Player + opponent v3 | 232-189-5 | +5.14% | 10.39 | 222-201-5 | +0.19% | 13.84 |
+| Player + rotation v4 | 225-196-5 | +2.01% | 10.40 | 233-190-5 | +5.10% | 13.47 |
+| Player + opponent + rotation v4 | 231-190-5 | +4.69% | 10.22 | 230-193-5 | +3.76% | 13.47 |
 
 ## ATS results when projected edge is at least 3.5 points
 
 | Model | ATS record | Hypothetical ROI | Number of selected games |
 |---|---:|---:|---:|
-| Team baseline | 165-147-3 | +0.95% | 315 |
-| Player v2 | 147-127-3 | +2.40% | 277 |
-| Player + opponent v3 | 123-117-3 | -2.13% | 243 |
-| Player + rotation v4 | 129-112-2 | +2.17% | 243 |
-| Player + opponent + rotation v4 | 125-106-1 | +3.29% | 232 |
+| Team baseline | 175-161-3 | -0.56% | 339 |
+| Player v2 | 163-133-3 | +5.08% | 299 |
+| Player + opponent v3 | 142-124-3 | +1.89% | 269 |
+| Player + rotation v4 | 141-118-2 | +3.90% | 261 |
+| Player + opponent + rotation v4 | 142-114-1 | +5.87% | 257 |
 
 ## Recent tracking windows
 
 | Window | Tracked completed games | Player v2 ATS | Player v2 ATS ROI | Player v2 totals | Player v2 totals ROI |
 |---|---:|---:|---:|---:|---:|
-| Past 48 hours | 111 | 52-59 | -10.57% | 55-52-4 | -1.80% |
-| Past 7 days | 287 | 145-141-1 | -3.20% | 157-126-4 | +5.83% |
+| Past 48 hours | 90 | 51-39 | +8.18% | 47-41-2 | +1.92% |
+| Past 7 days | 305 | 158-146-1 | -0.77% | 164-137-4 | +3.96% |
 
 ## By game date (Central Time)
 
 | Date | Tracked games | Player v2 ATS | Player v2 totals |
 |---|---:|---:|---:|
+| 2026-11-15 | 34 | 24-10 | 15-19 |
 | 2026-11-14 | 56 | 27-29 | 32-22-2 |
 | 2026-11-13 | 55 | 25-30 | 23-30-2 |
 | 2026-11-12 | 24 | 9-15 | 15-9 |
@@ -54,35 +55,35 @@ Positive = the additional model reduced average point error **on identical froze
 
 | Model | Matched games | ATS error reduction | Totals error reduction |
 |---|---:|---:|---:|
-| Player v2 | 437 | +1.391 | +0.432 |
-| Player + opponent v3 | 394 | +1.396 | +0.498 |
-| Player + rotation v4 | 394 | +1.395 | +0.875 |
-| Player + opponent + rotation v4 | 394 | +1.593 | +0.870 |
+| Player v2 | 471 | +1.497 | +0.295 |
+| Player + opponent v3 | 428 | +1.506 | +0.334 |
+| Player + rotation v4 | 428 | +1.495 | +0.712 |
+| Player + opponent + rotation v4 | 428 | +1.672 | +0.709 |
 
 ## Most recently completed tracked games
 
 | Date (Central) | Matchup | Final (away–home) | Frozen home spread | Frozen total | Player v2 ATS | Player v2 total |
 |---|---|---:|---:|---:|---:|---:|
-| 2026-11-14 | New Mexico @ Santa Clara | 85.0-90.0 | 1.5 | 167.0 | L | L |
-| 2026-11-14 | Utah Valley @ Nevada | 73.0-71.0 | -9.5 | 153.0 | L | L |
-| 2026-11-14 | Montana @ North Dakota | 80.0-71.0 | -1.5 | 151.0 | W | P |
-| 2026-11-14 | Furman @ Belmont | 62.0-72.0 | -3.0 | 154.5 | L | W |
-| 2026-11-14 | Northwestern State @ Little Rock | 83.0-84.0 | -9.5 | 143.5 | L | W |
-| 2026-11-14 | Louisiana Tech @ Nicholls | 68.0-71.0 | -1.5 | 139.5 | W | W |
-| 2026-11-14 | UL Monroe @ Grand Canyon | 52.0-88.0 | -32.5 | 163.5 | W | L |
-| 2026-11-14 | UC Davis @ Sacramento State | 75.0-56.0 | -3.5 | 160.0 | L | W |
-| 2026-11-14 | UMBC @ Towson | 42.0-68.0 | -10.5 | 146.5 | W | W |
-| 2026-11-14 | IU Indianapolis @ Morehead State | 75.0-79.0 | 2.5 | 159.5 | W | W |
-| 2026-11-14 | Cincinnati @ Dayton | 95.0-72.0 | 6.5 | 147.0 | W | W |
-| 2026-11-14 | Binghamton @ Duquesne | 58.0-71.0 | -15.5 | 146.5 | W | W |
-| 2026-11-14 | UAB @ Jacksonville State | 68.0-71.0 | 3.5 | 149.5 | W | L |
-| 2026-11-14 | NJIT @ Fairfield | 60.0-63.0 | -11.5 | 141.5 | L | W |
-| 2026-11-14 | Howard @ Davidson | 64.0-58.0 | -8.5 | 141.5 | W | W |
-| 2026-11-14 | Austin Peay @ Wichita State | 60.0-76.0 | -12.5 | 154.0 | W | L |
-| 2026-11-14 | Lipscomb @ Western Carolina | 75.0-68.0 | -3.5 | 157.5 | L | W |
-| 2026-11-14 | Portland State @ San Francisco | 84.0-68.0 | -11.0 | 143.5 | L | W |
-| 2026-11-14 | Rider @ Villanova | 62.0-99.0 | -36.0 | 145.5 | L | W |
-| 2026-11-14 | UT Rio Grande Valley @ UT Arlington | 77.0-85.0 | -3.5 | 140.5 | W | W |
+| 2026-11-15 | Alabama State @ San José State | 68.0-80.0 | -12.5 | 155.5 | L | L |
+| 2026-11-15 | Texas State @ UTSA | 87.0-67.0 | 4.5 | 149.5 | W | W |
+| 2026-11-15 | Coastal Carolina @ Wisconsin | 81.0-89.0 | -28.5 | 147.5 | W | W |
+| 2026-11-15 | Arkansas-Pine Bluff @ USC | 46.0-122.0 | -44.5 | 158.5 | W | W |
+| 2026-11-15 | Syracuse @ St. John's | 62.0-79.0 | -12.5 | 150.5 | L | L |
+| 2026-11-15 | Cal Poly @ Montana State | 52.0-77.0 | -7.5 | 166.5 | L | W |
+| 2026-11-15 | Canisius @ Buffalo | 55.0-79.0 | -14.5 | 151.5 | L | L |
+| 2026-11-15 | Western Michigan @ Southern Indiana | 80.0-59.0 | 7.5 | 139.5 | W | L |
+| 2026-11-15 | New Haven @ Penn State | 52.0-86.0 | -24.5 | 142.5 | W | L |
+| 2026-11-15 | San Diego State @ New Mexico State | 73.0-61.0 | 12.5 | 143.5 | W | L |
+| 2026-11-15 | Chicago State @ Loyola Marymount | 49.0-86.0 | -17.5 | 140.5 | W | L |
+| 2026-11-15 | Mercyhurst @ James Madison | 71.0-80.0 | -15.5 | 137.5 | W | W |
+| 2026-11-15 | Idaho State @ Seattle U | 70.0-77.0 | -16.5 | 144.5 | L | W |
+| 2026-11-15 | Purdue Fort Wayne @ Eastern Illinois | 86.0-74.0 | 3.5 | 146.5 | W | L |
+| 2026-11-15 | Cleveland State @ Alabama A&M | 74.0-73.0 | -2.5 | 144.5 | L | W |
+| 2026-11-15 | Baylor @ Texas | 72.0-75.0 | -4.5 | 158.5 | L | L |
+| 2026-11-15 | Iowa @ Creighton | 69.0-70.0 | 4.5 | 145.5 | W | L |
+| 2026-11-15 | High Point @ Saint Louis | 68.0-58.0 | -7.5 | 164.5 | W | W |
+| 2026-11-15 | Missouri @ Marquette | 69.0-64.0 | -1.5 | 154.5 | W | W |
+| 2026-11-15 | Princeton @ Rhode Island | 72.0-79.0 | -7.5 | 137.5 | W | L |
 
 ## Interpretation
 
