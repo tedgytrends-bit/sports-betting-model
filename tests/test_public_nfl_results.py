@@ -70,7 +70,7 @@ class PublicResultsTests(unittest.TestCase):
         self.assertEqual(wait["ats_result"],"Pending")
         self.assertEqual(wait["score_status"],"PENDING")
         g=with_scores(p,18,21,"scoreboard.example","2026-11-16T12:00:00Z")
-        self.assertEqual(g["ats_result"],"Loss")  # model MIA, Colts win by 3 (< -4.5 spread)
+        self.assertEqual(g["ats_result"],"Win")  # MIA +4.5 covers when the Colts win by 3
         immutable_grade(g,g.copy())
         changed=g.copy();changed["actual_home"]="22"
         with self.assertRaisesRegex(ValueError,"retroactive"):
