@@ -110,7 +110,7 @@
 <div class="hero"><div><div class="eyebrow">2026 NFL SEASON · WEEK 10</div><h1>Week 10 projections<span>.</span></h1><p>Projected scores, ATS and totals leans, and archived Bovada lines. Switch between the Injury and Baseline models; tap any matchup for details.</p></div><div class="hero-side"><div class="pill-outline" id="connection">CONNECTING TO GITHUB…</div><div class="update" id="model-stamp">WAITING FOR MODEL SNAPSHOT</div><div class="update" id="market-stamp">WAITING FOR ARCHIVED LINES</div></div></div>
 <div class="kpi-grid"><div class="kpi"><div class="kpi-label">Matchups <span class="kpi-glyph">◦</span></div><div class="kpi-val" id="kpi-games">—</div><div class="kpi-note">Complete Week 10 slate</div></div><div class="kpi"><div class="kpi-label">ATS gaps ≥ 3 <span class="kpi-glyph">◦</span></div><div class="kpi-val green" id="kpi-ats">—</div><div class="kpi-note">Points versus archived Bovada spread</div></div><div class="kpi"><div class="kpi-label">Total gaps ≥ 3 <span class="kpi-glyph">◦</span></div><div class="kpi-val" id="kpi-totals">—</div><div class="kpi-note">Points versus archived Bovada total</div></div></div>
 <div class="controls"><div class="control-left"><span class="control-label">MODEL</span><div class="seg"><button type="button" class="on" data-model="injury">Injury · QB-aware</button><button type="button" data-model="baseline">Baseline</button></div><span class="snapshot-caption" id="board-snapshot-label">Archived pregame · Week 10</span></div><div class="control-right"><label class="search-wrap"><span>⌕</span><input aria-label="Search a team" id="search" placeholder="Search a team…" type="search"/></label><select aria-label="Filter games" class="select" id="edge-filter"><option value="all">All games</option><option value="ats">ATS edge ≥ 3</option><option value="total">Total edge ≥ 3</option></select><select aria-label="Sort games" class="select" id="sort"><option value="time">Sort: Kickoff</option><option value="ats">Largest ATS edge</option><option value="total">Largest total edge</option></select></div></div>
-<div id="board-content"><div class="empty">Loading Week 10 projections…</div></div><details class="past-boards"><summary>Previous weeks and archived projections</summary><p>These are historical pregame snapshots—not current picks.</p><a href="./week09.html">Week 9 projection archive</a><a href="https://github.com/tedgytrends-bit/sports-betting-model/blob/main/data/four_model_week08/week08_four_model_comparison.csv" target="_blank" rel="noopener noreferrer">Week 8 published board and scores</a></details>
+<div id="board-content"><div class="empty">Loading Week 10 projections…</div></div><details class="past-boards"><summary>Previous weeks and archived projections</summary><p>These are historical pregame snapshots—not current picks.</p><span id="future-board-archives"></span><a href="./week09.html">Week 9 projection archive</a><a href="https://github.com/tedgytrends-bit/sports-betting-model/blob/main/data/four_model_week08/week08_four_model_comparison.csv" target="_blank" rel="noopener noreferrer">Week 8 published board and scores</a></details>
 </section>
 <section class="view" id="view-results">
 <div class="results-head">
@@ -273,7 +273,7 @@ function gameHTML(g){const c=calc(g),rookw=g.qbRookieUncalibrated&&state.model==
  const condensedInjury=injuryMarkup?'<details class="game-injuries"><summary>'+(g.inactivesScoreUpdated?'Game-day inactives confirmed':`Official injuries · ${statusCounts.out} out · ${statusCounts.questionable} questionable`)+'</summary>'+injuryMarkup+'</details>':'';
  const completedResult=g.publicResult&&g.publicResult.score_status==='FINAL'?g.publicResult:null;
  const finalMarkup=completedResult?'<div class="completed-strip"><b>FINAL: '+esc(g.away)+' '+esc(completedResult.actual_away)+' – '+esc(g.home)+' '+esc(completedResult.actual_home)+'</b> · Injury ATS '+esc(completedResult.ats_result)+' · Totals '+esc(completedResult.total_result)+'</div>':'';
- return `<article class="game-card"><div class="game-top"><span class="time">${esc(dateLabel(g.date))} · ${esc(kickoffLabel(g))} · ${esc(g.away)} @ ${esc(g.home)}</span><span class="signal ${g.completed?'muted':''}">${completedResult?'FINAL · PREGAME PROJECTION':g.qbRookieUncalibrated&&state.model==='injury'?'MCCORD CONFIRMED · QB VALUE UNCALIBRATED':g.inactivesScoreUpdated?'CONFIRMED INACTIVES · SCORE UPDATED':injuryRows.length?'FINAL INJURY REPORT':g.sundayUpdated?'SUNDAY AM · PREGAME':g.qbUpdated?'QB-SOURCE UPDATE':'INITIAL · QB STATUS UNVERIFIED'}</span></div><div class="game-body"><div class="team-row">${teamBadge(g.away)}<div class="team-name">${esc(TEAM_NAMES[g.away]||g.away)}<div class="team-sub">Away</div></div><div class="score-wrap"><div class="score">${f(c.a)}</div><div class="score-label">projected</div></div></div><div class="away-sep">@</div><div class="team-row">${teamBadge(g.home)}<div class="team-name">${esc(TEAM_NAMES[g.home]||g.home)}<div class="team-sub">Home</div></div><div class="score-wrap"><div class="score">${f(c.h)}</div><div class="score-label">projected</div></div></div></div><div class="market-grid"><div class="market-box"><div class="market-label">Bovada spread</div><div class="market-val">${marketFav(g)}</div></div><div class="market-box"><div class="market-label">Model spread</div><div class="market-val emphasis">${modelFav(g,c)}</div></div><div class="market-box"><div class="market-label">Bovada total</div><div class="market-val">${g.market?f(g.market.total_line):'—'}</div></div><div class="market-box"><div class="market-label">Model total</div><div class="market-val emphasis">${f(c.total)}</div></div></div><div class="leans"><div class="lean ${atsStrong?'good':''}"><div><div class="lean-kicker">ATS LEAN</div><div class="lean-value">${esc(atsLean)}</div></div><div class="edge">${Number.isFinite(c.atsEdge)?f(c.atsEdge)+' pts':''}</div></div><div class="lean ${totStrong?'good':''}"><div><div class="lean-kicker">TOTAL LEAN</div><div class="lean-value">${esc(totalLean)}</div></div><div class="edge">${Number.isFinite(c.totalEdge)?f(c.totalEdge)+' pts':''}</div></div></div>${finalMarkup}${condensedInjury}${rookw?'<div class="injury-summary"><b>PRIMARY-SOURCE QB CORRECTION:</b> Miami confirmed Kyle McCord starts; Malik Willis on IR. McCord has zero prior NFL regular-season dropbacks. This replacement EPA estimate is not calibrated: <b>PASS for wagering</b>. The original Sunday model with Willis remains archived.</div>':''}<div class="card-foot"><small>${(g.inactivesScoreUpdated&&state.model==='injury')?'Injury · Inactives':g.sundayUpdated?(state.model==='baseline'?'Baseline · Sun AM':'Injury · Sun AM'):state.model==='baseline'?'Baseline · Thu Initial':g.qbUpdated?'Injury · QB corrected':'Injury · QB provisional'} · ${g.market?'Bovada screenshot':'Market unavailable'}${g.id==='2026_10_WAS_NYG'?' · RAIN RISK': ''}</small><button class="details-link" data-game="${esc(g.id)}">GAME BREAKDOWN ↗</button></div></article>`;
+ return `<article class="game-card"><div class="game-top"><span class="time">${esc(dateLabel(g.date))} · ${esc(kickoffLabel(g))} · ${esc(g.away)} @ ${esc(g.home)}</span><span class="signal ${g.completed?'muted':''}">${completedResult?'FINAL · PREGAME PROJECTION':g.qbRookieUncalibrated&&state.model==='injury'?'MCCORD CONFIRMED · QB VALUE UNCALIBRATED':g.inactivesScoreUpdated?'CONFIRMED INACTIVES · SCORE UPDATED':injuryRows.length?'FINAL INJURY REPORT':g.sundayUpdated?'SUNDAY AM · PREGAME':g.qbUpdated?'QB-SOURCE UPDATE':g.genericWeek?'PUBLISHED PREGAME · QB UNVERIFIED':'INITIAL · QB STATUS UNVERIFIED'}</span></div><div class="game-body"><div class="team-row">${teamBadge(g.away)}<div class="team-name">${esc(TEAM_NAMES[g.away]||g.away)}<div class="team-sub">Away</div></div><div class="score-wrap"><div class="score">${f(c.a)}</div><div class="score-label">projected</div></div></div><div class="away-sep">@</div><div class="team-row">${teamBadge(g.home)}<div class="team-name">${esc(TEAM_NAMES[g.home]||g.home)}<div class="team-sub">Home</div></div><div class="score-wrap"><div class="score">${f(c.h)}</div><div class="score-label">projected</div></div></div></div><div class="market-grid"><div class="market-box"><div class="market-label">Bovada spread</div><div class="market-val">${marketFav(g)}</div></div><div class="market-box"><div class="market-label">Model spread</div><div class="market-val emphasis">${modelFav(g,c)}</div></div><div class="market-box"><div class="market-label">Bovada total</div><div class="market-val">${g.market?f(g.market.total_line):'—'}</div></div><div class="market-box"><div class="market-label">Model total</div><div class="market-val emphasis">${f(c.total)}</div></div></div><div class="leans"><div class="lean ${atsStrong?'good':''}"><div><div class="lean-kicker">ATS LEAN</div><div class="lean-value">${esc(atsLean)}</div></div><div class="edge">${Number.isFinite(c.atsEdge)?f(c.atsEdge)+' pts':''}</div></div><div class="lean ${totStrong?'good':''}"><div><div class="lean-kicker">TOTAL LEAN</div><div class="lean-value">${esc(totalLean)}</div></div><div class="edge">${Number.isFinite(c.totalEdge)?f(c.totalEdge)+' pts':''}</div></div></div>${finalMarkup}${condensedInjury}${rookw?'<div class="injury-summary"><b>PRIMARY-SOURCE QB CORRECTION:</b> Miami confirmed Kyle McCord starts; Malik Willis on IR. McCord has zero prior NFL regular-season dropbacks. This replacement EPA estimate is not calibrated: <b>PASS for wagering</b>. The original Sunday model with Willis remains archived.</div>':''}<div class="card-foot"><small>${(g.inactivesScoreUpdated&&state.model==='injury')?'Injury · Inactives':g.sundayUpdated?(state.model==='baseline'?'Baseline · Sun AM':'Injury · Sun AM'):state.model==='baseline'?'Baseline · Thu Initial':g.qbUpdated?'Injury · QB corrected':'Injury · QB provisional'} · ${g.market?'Bovada screenshot':'Market unavailable'}${g.id==='2026_10_WAS_NYG'?' · RAIN RISK': ''}</small><button class="details-link" data-game="${esc(g.id)}">GAME BREAKDOWN ↗</button></div></article>`;
 }
 function renderBoard(){const games=data.games;if(!games.length){$('board-content').innerHTML='<div class="empty">Live projections could not be loaded. Check the GitHub connection and data status above.</div>';return}
  const all=games.map(g=>({...g,derived:calc(g)}));$('kpi-games').textContent=games.length;$('kpi-ats').textContent=all.filter(g=>!(g.qbRookieUncalibrated&&state.model==='injury')&&g.derived&&g.derived.atsEdge>=3).length;$('kpi-totals').textContent=all.filter(g=>!(g.qbRookieUncalibrated&&state.model==='injury')&&g.derived&&g.derived.totalEdge>=3).length;
@@ -294,6 +294,26 @@ function marketPrice(value){
  const p=num(value);return !Number.isFinite(p)?'—':p>0?'+'+fmt(p):fmt(p);
 }
 function openDrawer(id){
+ const selected=data.games.find(g=>g.id===id);
+ if(selected&&selected.genericWeek){
+   const primary=calc(selected),base=calc(selected,'baseline'),injury=calc(selected,'injury');
+   if(!primary)return;
+   state.current=id;
+   $('drawer-title').textContent=(TEAM_NAMES[selected.away]||selected.away)+' at '+(TEAM_NAMES[selected.home]||selected.home);
+   const marginText=Number.isFinite(primary.edge)
+      ?(primary.atsTeam==='No edge'?'Model matches the market':primary.atsTeam+' '+sign(primary.atsSpread))
+      :'Market unavailable';
+   $('drawer-content').innerHTML='<div class="drawer-headline">Week '+esc(selected.id.split('_')[1])
+     +' · '+esc(dateLabel(selected.date))+' · '+esc(kickoffLabel(selected))+' · saved before kickoff</div>'
+     +'<div class="drawer-score"><div class="drawer-team"><div class="large">'+f(primary.a)+'</div><div class="tname">'+esc(selected.away)+'</div><div class="loc">PROJECTED</div></div><div class="versus">AT</div><div class="drawer-team"><div class="large">'+f(primary.h)+'</div><div class="tname">'+esc(selected.home)+'</div><div class="loc">PROJECTED</div></div></div>'
+     +'<div class="detail-columns"><div class="detail-panel"><h4>Spread</h4><div class="detail-row"><span>Bovada</span><strong>'+esc(marketFav(selected))+'</strong></div><div class="detail-row"><span>Model direction</span><strong>'+esc(marginText)+'</strong></div><div class="detail-row"><span>Difference</span><strong>'+f(primary.atsEdge)+' pts</strong></div></div>'
+     +'<div class="detail-panel"><h4>Total</h4><div class="detail-row"><span>Bovada</span><strong>'+f(selected.market.total_line)+'</strong></div><div class="detail-row"><span>Projected</span><strong>'+f(primary.total)+'</strong></div><div class="detail-row"><span>Difference</span><strong>'+f(primary.totalEdge)+' pts</strong></div></div></div>'
+     +'<div class="detail-panel"><h4>Both published models</h4><div class="detail-row"><span>Injury</span><strong>'+f(injury.a)+' – '+f(injury.h)+' · '+f(injury.total)+' total</strong></div><div class="detail-row"><span>Baseline</span><strong>'+f(base.a)+' – '+f(base.h)+' · '+f(base.total)+' total</strong></div></div>'
+     +'<p class="data-note">Injury designations and starting-quarterback identities are not independently verified in this published-score archive. Do not infer confirmed game-day availability from the model name.</p>'
+     +'<p class="sourceline"><a href="'+esc(ARCHIVE+selected.modelArchive)+'" target="_blank" rel="noopener noreferrer">Original forecast file ↗</a> · <a href="'+esc(ARCHIVE+SOURCES.market)+'" target="_blank" rel="noopener noreferrer">Bovada price archive ↗</a></p>';
+   $('overlay').classList.add('open');document.body.style.overflow='hidden';return;
+ }
+
  const g=data.games.find(g=>g.id===id);
  if(!g)return;
  const c=calc(g),b=calc(g,'baseline'),inj=calc(g,'injury');
@@ -501,15 +521,100 @@ function renderResults(){
   return window.renderPublicResults(data);
 }
 function sourceState(message,severity='info'){$('connection').textContent=message;$('connection').className='pill-outline'+(severity==='error'?' error-state':'');}
+function localDateForKickoff(kickoff){
+ const t=new Date(kickoff);if(!Number.isFinite(t.getTime()))throw Error('Invalid kickoff time');
+ const parts=Object.fromEntries(new Intl.DateTimeFormat('en-US',{
+   timeZone:'America/Chicago',year:'numeric',month:'2-digit',day:'2-digit'
+ }).formatToParts(t).map(p=>[p.type,p.value]));
+ return parts.year+'-'+parts.month+'-'+parts.day;
+}
+function publishedWeekNumbers(){
+ if(!Array.isArray(data.resultsGames))return [];
+ return [...new Set(data.resultsGames.filter(r=>Number(r.season)===2026&&
+   Number(r.week)>=11&&r.record_class==='PUBLIC_PUBLISHED'&&
+   ['injury','baseline'].includes(r.model)).map(r=>Number(r.week)))].sort((a,b)=>b-a);
+}
+function buildPublishedWeek(week){
+ const cohort=data.resultsGames.filter(r=>Number(r.week)===week&&
+   Number(r.season)===2026&&r.record_class==='PUBLIC_PUBLISHED'&&
+   ['injury','baseline'].includes(r.model));
+ if(!cohort.length)throw Error('No published model games for Week '+week);
+ const byGame=new Map();
+ for(const r of cohort){
+   if(!r.game_id.startsWith('2026_'+String(week).padStart(2,'0')+'_'))
+     throw Error('Published matchup ID mismatch '+r.game_id);
+   const kickoff=Date.parse(r.kickoff_utc),
+     projection=Date.parse(r.published_at_utc),quote=Date.parse(r.quote_at_utc);
+   if(![kickoff,projection,quote].every(Number.isFinite)||projection>=kickoff||quote>=kickoff)
+     throw Error('Published forecast/market must be timestamped before kickoff '+r.game_id);
+   if(!['projected_away','projected_home','projected_total','home_favored_spread','bovada_total'].every(k=>finite(r[k])))
+     throw Error('Missing published projection or market '+r.game_id);
+   if(Math.abs(num(r.projected_away)+num(r.projected_home)-num(r.projected_total))>.11)
+     throw Error('Published score/total mismatch '+r.game_id);
+   const away=norm(r.away_team),home=norm(r.home_team);
+   if(!r.game_id.endsWith('_'+away+'_'+home))
+     throw Error('Unexpected published home/away teams '+r.game_id);
+   let g=byGame.get(r.game_id);
+   if(!g){
+     g={id:r.game_id,date:localDateForKickoff(r.kickoff_utc),
+       away,home,kickoffUtc:r.kickoff_utc,models:{},researchOnly:false,
+       genericWeek:true,completed:false,
+       qbInfo:{away:'Not confirmed',home:'Not confirmed',awaySource:'No game-day source',homeSource:'No game-day source'},
+       market:{home_favorite_spread:r.home_favored_spread,
+         total_line:r.bovada_total,captured_at_utc:r.quote_at_utc},
+       modelArchive:r.forecast_file};
+     byGame.set(r.game_id,g);
+   }
+   if(g.models[r.model]||g.away!==away||g.home!==home||g.kickoffUtc!==r.kickoff_utc||
+     Math.abs(num(g.market.home_favorite_spread)-num(r.home_favored_spread))>.02||
+     Math.abs(num(g.market.total_line)-num(r.bovada_total))>.02)
+       throw Error('Duplicate model or inconsistent published matchup '+r.game_id);
+   g.models[r.model]=r;
+   if(r.model==='injury')g.qbRookieUncalibrated=String(r.source_warning).includes('NOT CALIBRATED');
+ }
+ const out=[...byGame.values()].sort((a,b)=>Date.parse(a.kickoffUtc)-Date.parse(b.kickoffUtc));
+ if(out.some(g=>!g.models.injury||!g.models.baseline))
+   throw Error('Week '+week+' missing a published Baseline/Injury model pair');
+ return out;
+}
+function showPublishedWeek(week){
+ const archived=publishedWeekNumbers()[0]>week;
+ const title=document.querySelector('#view-board .hero h1');
+ const eyebrow=document.querySelector('#view-board .hero .eyebrow');
+ const desc=document.querySelector('#view-board .hero p');
+ title.innerHTML='Week '+week+' projections<span>.</span>';
+ eyebrow.textContent='2026 NFL SEASON · '+(archived?'ARCHIVED ':'')+'WEEK '+week;
+ desc.textContent='Published pregame projections, ATS and total leans, compared with the saved Bovada lines. Select a model or open a matchup for details.';
+ document.querySelector('.season-tag').textContent='2026 SEASON / WEEK '+week+(archived?' ARCHIVE':'');
+ document.querySelector('#view-board .kpi-note').textContent='Published Week '+week+' matchups';
+ $('board-snapshot-label').textContent='Published pregame · Week '+week;
+ $('model-stamp').textContent='Published and archived before kickoff';
+ $('market-stamp').textContent='Archived Bovada lines · pregame';
+ sourceState('ARCHIVED · '+data.games.length+' GAMES');
+ $('data-banner').textContent='Week '+week+' · published forecasts and archived Bovada lines · final scores update after games finish';
+ $('update-strip').classList.remove('data-error');
+ const links=publishedWeekNumbers().filter(w=>w!==week).map(w=>
+   '<a href="./?week='+w+'">Week '+w+' projections</a>');
+ links.push('<a href="./week10.html">Week 10 projection archive</a>');
+ $('future-board-archives').innerHTML=links.join('');
+}
 function attachResultsToBoard(){if(!Array.isArray(data.directionalGames))return;const mapped=new Map(data.directionalGames.filter(x=>Number(x.week)===10&&x.model==='injury').map(x=>[x.game_id,x]));for(const g of data.games){const result=mapped.get(g.id);if(result){g.publicResult=result;g.completed=result.score_status==='FINAL';}}}
 async function init(){sourceState('CONNECTING TO GITHUB…');const fetched=await Promise.allSettled(Object.entries(SOURCES).map(async([key,path])=>[key,await loadCSV(path)]));
  for(let i=0;i<fetched.length;i++){const name=Object.keys(SOURCES)[i],r=fetched[i];if(r.status==='fulfilled')data[name==='week9'?'rows9':name]=r.value[1];else data.errors.push(`${name}: ${String(r.reason.message||r.reason)}`)}
- try{assertFields(data.market,['season','week','away_team','home_team','home_favorite_spread','total_line','captured_at_utc'],'Bovada');assertFields(data.injuryReport,['game_id','team','player_name','position','injury','final_game_status','report_date','source_url'],'Week 10 final injury report');
- const game10=data.injuryReport.filter(r=>r.game_id==='2026_10_WAS_NYG');
- if(game10.length!==6||game10.filter(r=>r.final_game_status==='OUT').length!==2||game10.filter(r=>r.final_game_status==='QUESTIONABLE').length!==1)throw Error('Incomplete official TNF injury-status archive');
- assertFields(data.miaMcCord,['game_id','published_at_utc','publication_status','away_qb_name','new_qb_id','projected_away','projected_home','projected_total'],'Miami official QB update');
- if(!Array.isArray(data.qbAudit)||data.qbAudit.length!==26||data.qbAudit.filter(r=>r.corrected_matches_reference!=='true').length)throw Error('Incomplete Week 10 independent QB audit');
- data.games=buildWeek10(data.week10,data.market);attachResultsToBoard();$('model-stamp').textContent=data.sundayAt?'Updated pregame · '+stamp(data.sundayAt):'Initial pregame · '+stamp(data.frozenAt);$('market-stamp').textContent='Bovada snapshot · '+stamp(data.archivedAt);$('board-snapshot-label').textContent=data.sundayAt?'Latest saved pregame · Nov 15':'Initial saved pregame · Nov 12';sourceState(`ARCHIVED · ${data.games.length} GAMES`);$('data-banner').textContent=data.sundayAt?'Week 10 projections · Sunday refresh archived Nov 15 · final scores appear as games finish':'Week 10 projections · original pregame data archived Nov 12';$('update-strip').classList.remove('data-error');renderBoard();}catch(err){data.errors.push('Week 10: '+String(err.message||err));sourceState('DATA REQUIRES ATTENTION','error');$('data-banner').textContent='Week 10 unavailable — a complete pregame model or Bovada archive was not verified.';$('update-strip').classList.add('data-error');$('board-content').innerHTML='<div class="empty">Unable to verify complete Week 10 model and Bovada archives. No fabricated projections are displayed.</div>';}
+ try{if(publishedWeekNumbers()[0]<=10 || !publishedWeekNumbers().length)assertFields(data.market,['season','week','away_team','home_team','home_favorite_spread','total_line','captured_at_utc'],'Bovada');if(!(publishedWeekNumbers()[0]>10))assertFields(data.injuryReport,['game_id','team','player_name','position','injury','final_game_status','report_date','source_url'],'Week 10 final injury report');
+ const game10=Array.isArray(data.injuryReport)?data.injuryReport.filter(r=>r.game_id==='2026_10_WAS_NYG'):[];
+ if(!(publishedWeekNumbers()[0]>10)&&(game10.length!==6||game10.filter(r=>r.final_game_status==='OUT').length!==2||game10.filter(r=>r.final_game_status==='QUESTIONABLE').length!==1))throw Error('Incomplete official TNF injury-status archive');
+ if(!(publishedWeekNumbers()[0]>10))assertFields(data.miaMcCord,['game_id','published_at_utc','publication_status','away_qb_name','new_qb_id','projected_away','projected_home','projected_total'],'Miami official QB update');
+ if(!(publishedWeekNumbers()[0]>10)&&(!Array.isArray(data.qbAudit)||data.qbAudit.length!==26||data.qbAudit.filter(r=>r.corrected_matches_reference!=='true').length))throw Error('Incomplete Week 10 independent QB audit');
+ const publishedWeeks=publishedWeekNumbers();
+ const requestedWeek=Number(new URLSearchParams(window.location.search).get('week'));
+ if(publishedWeeks.length && (publishedWeeks[0]>10)){
+   const chosen=publishedWeeks.includes(requestedWeek)?requestedWeek:publishedWeeks[0];
+   data.games=buildPublishedWeek(chosen);attachResultsToBoard();
+   showPublishedWeek(chosen);renderBoard();
+ }else{
+ data.games=buildWeek10(data.week10,data.market);attachResultsToBoard();$('model-stamp').textContent=data.sundayAt?'Updated pregame · '+stamp(data.sundayAt):'Initial pregame · '+stamp(data.frozenAt);$('market-stamp').textContent='Bovada snapshot · '+stamp(data.archivedAt);$('board-snapshot-label').textContent=data.sundayAt?'Latest saved pregame · Nov 15':'Initial saved pregame · Nov 12';sourceState(`ARCHIVED · ${data.games.length} GAMES`);$('data-banner').textContent=data.sundayAt?'Week 10 projections · Sunday refresh archived Nov 15 · final scores appear as games finish':'Week 10 projections · original pregame data archived Nov 12';$('update-strip').classList.remove('data-error');renderBoard();
+ }}catch(err){data.errors.push('Projection board: '+String(err.message||err));sourceState('DATA REQUIRES ATTENTION','error');$('data-banner').textContent='Week 10 unavailable — a complete pregame model or Bovada archive was not verified.';$('update-strip').classList.add('data-error');$('board-content').innerHTML='<div class="empty">Unable to verify complete Week 10 model and Bovada archives. No fabricated projections are displayed.</div>';}
  try{
     assertFields(data.resultsGames,['season','week','game_id','model','record_class','score_status','ats_result','total_result','away_team','home_team'],'Auto-graded public games');
     assertFields(data.resultsSummary,['season','week','model','record_class','games_final','ats_wins','totals_wins'],'Auto-graded model summaries');
