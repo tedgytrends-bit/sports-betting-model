@@ -25,7 +25,7 @@ DST=ROOT/"data"/"public_results"/"nfl_2026_full_directional_games.csv"
 SUMMARY=ROOT/"data"/"public_results"/"nfl_2026_full_directional_summary.csv"
 META=ROOT/"data"/"public_results"/"nfl_2026_full_directional_policy.json"
 POLICY_AT="2026-11-16T14:55:00Z"
-GRADE_FIELDS=["game_id","week","day","away_team","home_team","score_status","actual_away","actual_home",
+GRADE_FIELDS=["game_id","model","week","day","away_team","home_team","score_status","actual_away","actual_home",
               "home_favored_spread","bovada_total","ats_pick","ats_result","total_pick","total_result",
               "original_total_pick","original_total_result","projected_total","selection_provenance",
               "fallback_model","fallback_projected_total","policy_adopted_utc","published_at_utc",
