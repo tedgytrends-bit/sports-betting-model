@@ -22,6 +22,9 @@ on:
       - "tests/public-results-dom-smoke.cjs"
       - "data/public_results/nfl_2026_graded_games.csv"
       - "data/public_results/nfl_2026_results_summary.csv"
+      - "data/public_results/nfl_2026_full_directional_games.csv"
+      - "data/public_results/nfl_2026_full_directional_summary.csv"
+      - "data/public_results/nfl_2026_full_directional_policy.json"
       - "data/public_snapshots/nfl_week10_initial_projections_2026-11-12.csv"
       - "data/public_snapshots/nfl_week10_bovada_initial_2026-11-12.csv"
       - "data/public_snapshots/nfl_week10_bovada_sunday_2026-11-15T1256Z.csv"
@@ -232,7 +235,28 @@ jobs:
               assert "resultsGames:'data/public_results/nfl_2026_graded_games.csv'" in text
               assert "window.renderPublicResults(data)" in text
               assert 'id="results-week-filter"' in text and 'id="results-day-filter"' in text
-          Path("/tmp/tedgy-public-results.json").write_text(json.dumps({"resultsGames":games,"resultsSummary":summary}))
+          with (d/"nfl_2026_full_directional_games.csv").open() as f:
+              directional_games=list(csv.DictReader(f))
+          with (d/"nfl_2026_full_directional_summary.csv").open() as f:
+              directional_summary=list(csv.DictReader(f))
+          assert len(directional_games)==len({r["game_id"] for r in games})
+          assert len(directional_summary)>=4
+          assert all(g["model"]=="injury" for g in directional_games)
+          assert all(g["total_result"]!="No lean" and g["total_pick"] in ("Over","Under")
+                     for g in directional_games)
+          original=next(r for r in games if r["game_id"]=="2026_08_IND_JAX" and r["model"]=="injury")
+          adjusted=next(r for r in directional_games if r["game_id"]=="2026_08_IND_JAX")
+          assert original["total_result"]=="No lean" and original["total_pick"]=="No lean"
+          assert adjusted["total_pick"]=="Over" and adjusted["total_result"]=="Win"
+          assert adjusted["selection_provenance"]=="POSTHOC_POLICY_USING_PREEXISTING_PREGAME_BASELINE"
+          for file in ("docs/index.html","docs/week10.html"):
+              html=Path(file).read_text()
+              assert "directionalGames:'data/public_results/nfl_2026_full_directional_games.csv'" in html
+              assert "directionalSummary:'data/public_results/nfl_2026_full_directional_summary.csv'" in html
+          Path("/tmp/tedgy-public-results.json").write_text(json.dumps({
+              "resultsGames":games,"resultsSummary":summary,
+              "directionalGames":directional_games,"directionalSummary":directional_summary,
+          }))
           print("PASS: both public pages load the same cumulative results dataset, 15 Week9 research Baseline games separate")
           PY
           node tests/public-results-dom-smoke.cjs /tmp/tedgy-public-results.json
