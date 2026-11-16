@@ -174,7 +174,13 @@ def week8_rows():
             graded=with_scores(item,r["actual_away_score"],r["actual_home_score"],
                                "data/four_model_week08/week08_four_model_comparison.csv",
                                "2026-11-01T23:59:59Z")
-            if graded["ats_result"].lower()!=r[model+"_ats_result"].lower() or graded["total_result"].lower()!=r[model+"_total_result"].lower():
+            original_ats=r[model+"_ats_result"].lower()
+            original_tot=r[model+"_total_result"].lower()
+            # The historical published Week8 archive calls a zero-edge
+            # directional non-pick "No bet", equivalent to our "No lean".
+            if original_tot=="no bet":original_tot="no lean"
+            if original_ats=="no bet":original_ats="no lean"
+            if graded["ats_result"].lower()!=original_ats or graded["total_result"].lower()!=original_tot:
                 raise ValueError("Week8 original audit grade mismatch "+r["game_id"]+" "+model)
             out.append(graded)
     return out
