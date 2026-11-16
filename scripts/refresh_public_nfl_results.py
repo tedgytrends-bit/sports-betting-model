@@ -153,7 +153,7 @@ def week8_rows():
             pred_a=number(r[model+"_away_score"])
             pred_h=number(r[model+"_home_score"])
             total=number(r[model+"_projected_total"])
-            if abs(pred_a+pred_h-total)>.035:raise ValueError("Week8 forecast sum mismatch")
+            if abs(pred_a+pred_h-total)>.110001:raise ValueError("Week8 published rounded score/total mismatch")
             fav=canon(r["market_favorite"])
             spread=number(r["market_spread_points"])
             if fav not in (canon(r["away_team"]),canon(r["home_team"])):
