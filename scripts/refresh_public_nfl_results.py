@@ -425,7 +425,9 @@ def main():
         payload=json.loads(Path(args.offline_scores).read_text())
         score_lookup=load_espn_finals(score_dates(kickoffs.values()),now,fetcher=lambda day:payload[day])
     elif kickoffs:
-        score_lookup=load_espn_finals(score_dates(kickoffs.values()),now)
+        # Query only unverified games, never re-download the whole season.
+        outstanding=[kickoffs[g] for g in games if g not in verified]
+        score_lookup=load_espn_finals(score_dates(outstanding),now) if outstanding else {}
     else:
         score_lookup={}
     for game in sorted(games):
@@ -477,6 +479,14 @@ def main():
             prev=existing[(item["game_id"],item["model"])]
             item["score_verified_at_utc"]=prev["score_verified_at_utc"]
     combined.sort(key=lambda r:(int(r["week"]),r["kickoff_utc"],r["game_id"],r["model"]))
+    # Do not commit on idle scheduled runs; old published records remain stable.
+    current_fields=[{k:str(row.get(k,"")) for k in FIELDS} for row in combined]
+    old_fields=[{k:str(row.get(k,"")) for k in FIELDS} for row in read(OLD)]
+    if old_fields and current_fields==old_fields:
+        print(json.dumps({"status":"NO_CHANGE","graded_games":
+             len({x["game_id"] for x in combined if x["score_status"]=="FINAL"}),
+             "pending_games":len({x["game_id"] for x in combined if x["score_status"]=="PENDING"})}))
+        return
     summary=summarize(combined,now)
     DEST.mkdir(parents=True,exist_ok=True)
     write_csv(OLD,combined,FIELDS)
