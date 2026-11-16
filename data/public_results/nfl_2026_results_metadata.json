@@ -1,0 +1,20 @@
+{
+  "season": 2026,
+  "graded_at_utc": "2026-11-16T14:07:41+00:00",
+  "source": "ESPN public scoreboard with explicit completed/final flag for Week10+; verified official Week8/Week9 archived results; user-provided Bovada prices",
+  "games_weeks": {
+    "8": 14,
+    "9": 15,
+    "10": 14
+  },
+  "graded_games": 42,
+  "pending_games": 1,
+  "rows": 86,
+  "source_file": "data/public_results/nfl_2026_graded_games.csv",
+  "summary_file": "data/public_results/nfl_2026_results_summary.csv",
+  "final_scores_file": "data/public_results/nfl_2026_verified_final_scores.csv",
+  "record_policy": "Week8 both published; Week9 Injury official/Baseline research; Week10+ both pregame published with latest valid before-kickoff version. Rookie/unverified QB labels remain visible; no bet execution implied.",
+  "grading": "All-game directional ATS and totals; pushes excluded from win%; illustrative -110 ROI only, never actual bet ROI.",
+  "no_retroactive_changes": true,
+  "next_release": "GitHub Actions cron Friday, Monday and Tuesday after each NFL game night in America/Chicago (including daylight time)."
+}
