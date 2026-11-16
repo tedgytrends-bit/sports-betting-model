@@ -1,183 +1,156 @@
-"""Tedgy Trends public results: ONE overall Injury model and every completed game.
+"""Tedgy Trends complete Injury directional results, preserving original prospective grades.
 
-The original pregame forecasts and saved Week8 zero-edge 'No bet' stay immutable.
-A market-side winner is NOT retroactively a model pick when the model had no edge.
-Baseline research stays in GitHub but is intentionally hidden from this public page.
+The exact-market Week8 IND@JAX tie was resolved *retrospectively* from an
+existing published Baseline Over projection. Display as derived Injury-series
+Over/Win, NEVER suggest the original Injury release picked Over.
 """
 from pathlib import Path
 import pandas as pd
 import streamlit as st
 
 ROOT=Path(__file__).resolve().parents[1]
-RESULTS=ROOT/"data"/"public_results"/"nfl_2026_graded_games.csv"
-SUMMARY=ROOT/"data"/"public_results"/"nfl_2026_results_summary.csv"
-MARKET="https://github.com/tedgytrends-bit/sports-betting-model/blob/main/data/public_results/"
-STATES={"FINAL","PENDING"}
-OUTCOMES={"Win","Loss","Push","No lean","Pending"}
+DIR=ROOT/"data"/"public_results"
+RAW=DIR/"nfl_2026_graded_games.csv"
+FULL=DIR/"nfl_2026_full_directional_games.csv"
+SUMMARY=DIR/"nfl_2026_full_directional_summary.csv"
+POLICY=DIR/"nfl_2026_full_directional_policy.json"
+URL="https://github.com/tedgytrends-bit/sports-betting-model/blob/main/data/public_results/"
 
-st.title("Tedgy Trends — Overall Model Record")
-st.caption("2026 Injury model · Week 8 onward · ATS and totals · Updated after Thursday, Sunday and Monday game days")
+st.title("Tedgy Trends — Overall Injury Model Record")
+st.caption("2026 · Week 8 onward · ATS and totals · grades updated after completed game days")
 
-if not RESULTS.exists() or not SUMMARY.exists():
-    st.error("Public grading files are not available; cannot infer a record.")
+if any(not p.exists() for p in [RAW,FULL,SUMMARY,POLICY]):
+    st.error("Results source is incomplete. Records cannot be inferred.")
     st.stop()
-
-source=pd.read_csv(RESULTS,dtype={"game_id":str,"model":str,"record_class":str,"score_status":str},keep_default_na=False)
-summary=pd.read_csv(SUMMARY,dtype={"week":str,"model":str,"record_class":str},keep_default_na=False)
-required={"game_id","season","week","model","record_class","score_status","ats_result",
-          "total_result","actual_away","actual_home","home_favored_spread","bovada_total",
-          "away_team","home_team","day","score_source_url","forecast_file",
-          "ats_pick","total_pick"}
-if not required.issubset(source.columns):
-    st.error("Public results data is missing required fields.")
+original=pd.read_csv(RAW,keep_default_na=False)
+games=pd.read_csv(FULL,keep_default_na=False)
+summary=pd.read_csv(SUMMARY,dtype={"week":str},keep_default_na=False)
+published=original.loc[original.model.eq("injury") & original.record_class.eq("PUBLIC_PUBLISHED")]
+if len(games)!=len(published) or games.game_id.nunique()!=len(games):
+    st.error("Derived results are missing one or more original published games.")
     st.stop()
-if source.duplicated(["game_id","model"]).any() or not set(source.score_status).issubset(STATES):
-    st.error("Invalid public results: duplicate model/game or final state.")
+if (not games.model.eq("injury").all()
+    or not games.record_class.eq("DERIVED_DIRECTIONAL_TIEBREAK").all()
+    or not games.total_pick.isin(["Over","Under"]).all()
+    or not games.total_result.isin(["Win","Loss","Push","Pending"]).all()
+    or not games.score_status.isin(["FINAL","PENDING"]).all()):
+    st.error("Results contain an invalid model, pick, or final-status value.")
     st.stop()
-if not set(source.ats_result).issubset(OUTCOMES) or not set(source.total_result).issubset(OUTCOMES):
-    st.error("Invalid result category in saved public grades.")
-    st.stop()
-if any(source.loc[source.score_status.eq("PENDING"),c].ne("Pending").any()
-       for c in ("ats_result","total_result")):
-    st.error("A game was graded before its final score.")
-    st.stop()
-for week,count in ((8,14),(9,15),(10,14)):
-    subset=source.loc[pd.to_numeric(source.week,errors="coerce").eq(week)]
-    if len(subset)!=count*2 or subset.game_id.nunique()!=count:
-        st.error(f"Week {week} public record incomplete. Results withheld.")
+old_by_game=published.set_index("game_id")
+for row in games.itertuples(index=False):
+    if row.game_id not in old_by_game.index:
+        st.error("A new game has no original Injury forecast.")
         st.stop()
-
-df=source.loc[source.model.eq("injury") & source.record_class.eq("PUBLIC_PUBLISHED")].copy()
-if len(df)!=source.game_id.nunique():
-    st.error("Every published game needs one official Injury model record.")
-    st.stop()
-if (df.loc[df.score_status.eq("FINAL"),"score_source_url"].astype(str).eq("")).any():
-    st.error("Missing source for an officially completed game.")
+    old=old_by_game.loc[row.game_id]
+    if any(str(getattr(row,key))!=str(old[key]) for key in
+           ("actual_away","actual_home","ats_pick","ats_result","projected_total",
+            "bovada_total","score_status")):
+        st.error("A historical result or market value differs from the published archive.")
+        st.stop()
+    if old["total_result"]=="No lean":
+        if row.selection_provenance!="POSTHOC_POLICY_USING_PREEXISTING_PREGAME_BASELINE":
+            st.error("An exact-market tie has no disclosed pre-existing tiebreaker.")
+            st.stop()
+    elif row.total_result!=old["total_result"] or row.total_pick!=old["total_pick"]:
+        st.error("Non-tied published Injury results cannot be rewritten.")
+        st.stop()
+fix=games.loc[games.game_id.eq("2026_08_IND_JAX")]
+if len(fix)!=1 or fix.iloc[0].total_pick!="Over" or fix.iloc[0].total_result!="Win" or str(fix.iloc[0].fallback_projected_total)!="46.9":
+    st.error("Week 8 source-backed Over tiebreak cannot be verified.")
     st.stop()
 
 def get_summary(week):
-    subset=summary.loc[
-        summary.week.eq(str(week)) & summary.model.eq("injury")
-        & summary.record_class.eq("PUBLIC_PUBLISHED")
-    ]
-    if len(subset)!=1:
-        raise ValueError(f"Expected one official Injury summary for {week}")
-    return subset.iloc[0]
+    rec=summary.loc[summary.week.eq(str(week)) & summary.model.eq("injury")
+                    & summary.record_class.eq("DERIVED_DIRECTIONAL_TIEBREAK")]
+    if len(rec)!=1:raise ValueError("Missing exact Injury model summary")
+    return rec.iloc[0]
 
 def record(row,kind):
     prefix="ats_" if kind=="ATS" else "totals_"
-    w,l,p=(int(row[prefix+x]) for x in ("wins","losses","pushes"))
+    w,l,p=(int(row[prefix+x]) for x in ["wins","losses","pushes"])
     return f"{w}–{l}"+(f"–{p}" if p else "")
 
 def roi(row,kind):
-    k="illustrative_flat_110_"+("ats" if kind=="ATS" else "totals")+"_roi_pct"
-    return f"{float(row[k]):+.1f}%" if str(row[k]).strip() else "—"
+    key="illustrative_flat_110_"+("ats" if kind=="ATS" else "totals")+"_roi_pct"
+    return f"{float(row[key]):+.1f}%" if str(row[key]).strip() else "—"
 
-all_record=get_summary("ALL")
-final_count=df.loc[df.score_status.eq("FINAL"),"game_id"].nunique()
-pending_count=df.loc[df.score_status.eq("PENDING"),"game_id"].nunique()
+overall=get_summary("ALL")
+finals=int(games.score_status.eq("FINAL").sum())
+pending=int(games.score_status.eq("PENDING").sum())
 st.info(
-    f"**Overall Injury model record — {final_count} completed games, {pending_count} pending.** "
-    "Results update after games are officially final. Each completed matchup also shows "
-    "the actual market total outcome, including games where the model projected exactly "
-    "the bookmaker's number. No hypothetical bets are recorded as placed bets."
+    f"**Overall Injury model directional record:** {finals} completed games, {pending} pending. "
+    "For the Week 8 Indianapolis–Jacksonville exact-market total, the previously "
+    "published Baseline forecast breaks the tie: **Over 46 — Win**. "
+    "That tiebreaker was assigned retrospectively; it was not the original Injury pick. "
+    "The original published record is retained unchanged."
 )
-
-c_ats,c_totals=st.columns(2)
-for col,kind in ((c_ats,"ATS"),(c_totals,"Totals")):
-    with col:
-        st.metric("Overall Injury "+kind+" record",record(all_record,kind))
-        pct=all_record["ats_win_pct" if kind=="ATS" else "totals_win_pct"]
-        neutral=int(all_record["ats_no_lean" if kind=="ATS" else "totals_no_lean"])
-        graded=final_count-neutral
-        st.caption(
-            f"{graded} graded directions · {float(pct):.1f}% decisive win rate · "
-            f"{roi(all_record,kind)} illustrative flat -110 ROI"
-            if str(pct).strip() else "No decisive graded games"
-        )
-        if neutral:
-            st.caption(
-                f"{neutral} completed game with a pregame projection exactly equal to "
-                "the market: its actual outcome is shown below, but it is not a model win."
-            )
-        if pending_count:
-            st.caption(f"{pending_count} future or unfinished game pending")
+left,right=st.columns(2)
+for column,kind in [(left,"ATS"),(right,"Totals")]:
+    with column:
+        st.metric("Overall Injury "+kind+" Record",record(overall,kind))
+        rate=overall["ats_win_pct" if kind=="ATS" else "totals_win_pct"]
+        st.caption(f"{float(rate):.1f}% win rate · {roi(overall,kind)} illustrative -110 ROI")
+        if kind=="Totals":st.caption("Includes one retrospective Baseline directional tiebreaker.")
+        if pending:st.caption(f"{pending} game pending")
 
 st.subheader("Week-by-week performance")
-weeks=sorted((int(x) for x in summary.week.unique() if str(x).isdigit()),reverse=True)
-week_rows=[]
-for wk in weeks:
-    r=get_summary(wk)
-    neutral=int(r.totals_no_lean)
-    week_rows.append({
-        "Week":wk,
-        "Injury ATS":record(r,"ATS"),
-        "Injury totals":record(r,"Totals")+(f" ({neutral} exact-market projection)" if neutral else ""),
-        "Final / Games":f"{int(r.games_final)}/{int(r.games_expected)}",
-        "ATS ROI*":roi(r,"ATS"),
-        "Totals ROI*":roi(r,"Totals"),
+weeks=sorted([int(x) for x in summary.week.unique() if str(x).isdigit()],reverse=True)
+rows=[]
+for week in weeks:
+    val=get_summary(week)
+    rows.append({
+        "Week":week,"Injury ATS":record(val,"ATS"),
+        "Injury totals":record(val,"Totals")+(" †" if week==8 else ""),
+        "Final / games":f"{int(val.games_final)}/{int(val.games_expected)}",
+        "ATS ROI*":roi(val,"ATS"),"Totals ROI*":roi(val,"Totals"),
     })
-st.dataframe(pd.DataFrame(week_rows),hide_index=True,width="stretch")
-st.caption("*Illustrative flat -110 ROI assumes wagering every directional model lean; not actual betting returns.")
+st.dataframe(pd.DataFrame(rows),hide_index=True,width="stretch")
+st.caption("† Week8 Indianapolis–Jacksonville Over uses a retrospectively adopted tiebreaker from a pre-existing Baseline projection. *ROI is theoretical, not actual betting returns.")
 
 st.subheader("Game-by-game results")
-left,right=st.columns(2)
-with left:
-    chosen=st.selectbox("Week",options=["All weeks"]+["Week "+str(w) for w in weeks])
-with right:
-    day=st.selectbox("Game day",options=["All game days","Thursday","Sunday","Monday"])
-view=df.copy()
-if chosen!="All weeks":
-    view=view.loc[pd.to_numeric(view.week,errors="coerce").eq(int(chosen.split()[-1]))]
-if day!="All game days":
-    view=view.loc[view.day.eq(day)]
-game_rows=[]
-for _,g in view.iterrows():
-    final=g.score_status=="FINAL"
-    actual_total=int(g.actual_away)+int(g.actual_home) if final else None
-    line=float(g.bovada_total)
-    outcome=(
-        ("Market total Push" if actual_total==line
-         else "Market Over won" if actual_total>line else "Market Under won")
-        if final else "Pending"
-    )
-    spread=float(g.home_favored_spread)
-    favorite=g.home_team if spread>0 else g.away_team
-    market=(f"{favorite} -{abs(spread):g}" if spread else "PK")+f" / {line:g}"
-    ats_result=f"{g.ats_pick}: {g.ats_result}"
-    if g.total_result=="No lean":
-        total_grade=f"No pregame pick — {outcome}" if final else "No pregame pick — pending"
-    else:
-        total_grade=f"{g.total_pick}: {g.total_result}"
-    first_start=" · uncalibrated QB" if "NOT CALIBRATED" in g.source_warning else ""
-    final_score=(
-        f"{g.away_team} {int(g.actual_away)} – {g.home_team} {int(g.actual_home)}"
-        if final else "Pending"
-    )
-    game_rows.append({
-        "Week":int(g.week),"Day":g.day,
-        "Matchup":f"{g.away_team} @ {g.home_team}",
-        "Final score":final_score,
-        "Archived Bovada":market,
-        "Injury ATS pick / grade":ats_result,
-        "Injury totals pick / grade":total_grade+first_start,
-        "Actual total outcome":f"{actual_total} points · {outcome}" if final else "Pending",
-        "Forecast archive":Path(g.forecast_file).name,
-        "_kickoff":g.kickoff_utc,
+c1,c2=st.columns(2)
+with c1:which=st.selectbox("Week",["All weeks"]+["Week "+str(x) for x in weeks])
+with c2:day=st.selectbox("Game day",["All game days","Thursday","Sunday","Monday"])
+subset=games
+if which!="All weeks":
+    subset=subset.loc[pd.to_numeric(subset.week,errors="coerce").eq(int(which.split()[-1]))]
+if day!="All game days":subset=subset.loc[subset.day.eq(day)]
+table=[]
+for item in subset.itertuples(index=False):
+    final=item.score_status=="FINAL"
+    actual=int(item.actual_away)+int(item.actual_home) if final else None
+    line=float(item.bovada_total)
+    actual_result=("Push" if actual==line else "Over" if actual>line else "Under") if final else "Pending"
+    home=float(item.home_favored_spread)
+    favorite=item.home_team if home>0 else item.away_team
+    market=(f"{favorite} -{abs(home):g}" if home else "PK")+f" / {line:g}"
+    fallback=item.selection_provenance=="POSTHOC_POLICY_USING_PREEXISTING_PREGAME_BASELINE"
+    table.append({
+        "Week":int(item.week),"Day":item.day,
+        "Matchup":f"{item.away_team} @ {item.home_team}",
+        "Final":(f"{item.away_team} {int(item.actual_away)} – {item.home_team} {int(item.actual_home)}" if final else "Pending"),
+        "Bovada":market,
+        "Injury ATS":f"{item.ats_pick} — {item.ats_result}",
+        "Injury total":f"{item.total_pick} {line:g} — {item.total_result}"+(" † Retrospective tiebreak" if fallback else ""),
+        "Actual total":(f"{actual} · {actual_result}" if final else "Pending"),
+        "Forecast source":Path(item.forecast_file).name,
+        "_kickoff":item.kickoff_utc
     })
-game_rows.sort(key=lambda r:(r["Week"],r["_kickoff"],r["Matchup"]),reverse=True)
-if game_rows:
-    st.dataframe(pd.DataFrame(game_rows).drop(columns=["_kickoff"]),hide_index=True,width="stretch",height=560)
+table.sort(key=lambda x:(x["Week"],x["_kickoff"],x["Matchup"]),reverse=True)
+if table:
+    st.dataframe(pd.DataFrame(table).drop(columns=["_kickoff"]),hide_index=True,width="stretch",height=560)
 else:
-    st.info("No games match those filters.")
+    st.info("No games match that filter.")
 
 st.caption(
-    "Week 8 IND @ JAX: the Injury model total was 46.0, identical to Bovada 46.0. "
-    "The actual game totaled 49, so market Over won, but no pregame model total was picked. "
-    "Historical records are not rewritten to retroactively create a model win."
+    "A total is a PUSH only when the actual game's points equal the sportsbook total. "
+    "For IND @ JAX, the model and Bovada both had 46, but the game finished at 49: "
+    "Over 46 won. The original Injury forecast of exactly 46 had no directional pick; "
+    "its retrospective tiebreaker is disclosed above."
 )
 st.markdown(
-    "[Audited game-by-game data]("+MARKET+"nfl_2026_graded_games.csv) · "
-    "[Weekly and overall record]("+MARKET+"nfl_2026_results_summary.csv)"
+    "[Complete directional record]("+URL+"nfl_2026_full_directional_games.csv) · "
+    "[Original unmodified Injury record]("+URL+"nfl_2026_graded_games.csv)"
 )
-st.page_link("pages/Week_10_Projection_Board.py",label="View Week 10 projections",icon=":material/sports_football:")
+st.page_link("pages/Week_10_Projection_Board.py",
+    label="View Week 10 projections",icon=":material/sports_football:")
