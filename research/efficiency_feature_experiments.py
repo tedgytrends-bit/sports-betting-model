@@ -9,30 +9,24 @@ from __future__ import annotations
 import json
 from datetime import datetime, timezone
 from pathlib import Path
-
 import numpy as np
 import pandas as pd
+from scipy.stats import binomtest
 from sklearn.linear_model import Ridge
 
-# When a script is executed as `python research/script.py`, Python places
-# the research/ directory (not the repository root) at sys.path[0].
-# Add the repository root so top-level modules such as model.py resolve.
 import sys
-
 REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from model import (
-    build_efficiency_model_dataset,
-    load_pbp,
-    load_schedule_data,
-)
+from model import build_efficiency_model_dataset, load_pbp, load_schedule_data
 
 OUT = Path("data/efficiency_feature_experiments")
 MIN_TRAIN_GAMES = 500
 ALPHA = 10.0
 THRESHOLDS = (1.5, 2.5, 3.5)
+PRIMARY_BASELINE = "baseline_frozen_features"
+PRIMARY_PASSING = "baseline_plus_all_passing"
 
 
 def _team_split_history(pbp: pd.DataFrame, schedule: pd.DataFrame) -> pd.DataFrame:
@@ -102,7 +96,6 @@ def _pregame_split_features(schedule: pd.DataFrame, team_games: pd.DataFrame) ->
             vals = {}
             for metric in metrics:
                 vals[metric] = pd.to_numeric(recent[metric], errors="coerce").mean() if metric in recent else np.nan
-            # Opponent-adjusted matchup components: offense vs opposing defense.
             sides[side] = vals
         h, a = sides["home"], sides["away"]
         if not h or not a:
@@ -124,13 +117,10 @@ def _pregame_split_features(schedule: pd.DataFrame, team_games: pd.DataFrame) ->
             row[f"away_{unit}_success_matchup"] = (
                 a.get(f"off_success_{unit}", np.nan) - h.get(f"def_success_allowed_{unit}", np.nan)
             )
-        # Expected game play volume is a pace proxy, not a possession forecast.
         row["expected_game_plays"] = (
             h.get("off_plays_pass", np.nan) + h.get("off_plays_rush", np.nan)
             + a.get("off_plays_pass", np.nan) + a.get("off_plays_rush", np.nan)
         )
-        # Prior-season shrinkage: blend current rolling values with that team's
-        # most recent completed prior-season mean, using four pseudo-games.
         for side, team in (("home", game.home_team), ("away", game.away_team)):
             prior_team = prior[prior["team"].eq(team)].copy()
             if not prior_team.empty:
@@ -151,40 +141,18 @@ def _pregame_split_features(schedule: pd.DataFrame, team_games: pd.DataFrame) ->
     return pd.DataFrame(rows)
 
 
-def _feature_sets(
-    data: pd.DataFrame,
-    baseline_columns: list[str],
-    experimental_columns: list[str],
-) -> dict[str, list[str]]:
+def _feature_sets(data: pd.DataFrame, baseline_columns: list[str], experimental_columns: list[str]) -> dict[str, list[str]]:
     """Build controlled passing-feature ablations from the frozen baseline."""
-    excluded = {
-        "game_id", "gameday", "season", "week", "home_team", "away_team",
-        "home_score", "away_score", "spread_line", "total_line",
-    }
-    base = [
-        c for c in baseline_columns
-        if c in data.columns and c not in excluded
-        and pd.api.types.is_numeric_dtype(data[c])
-    ]
-    split = [
-        c for c in experimental_columns
-        if c in data.columns and c not in excluded
-        and "_shrunk_" not in c and c != "expected_game_plays"
-    ]
+    excluded = {"game_id", "gameday", "season", "week", "home_team", "away_team",
+                "home_score", "away_score", "spread_line", "total_line"}
+    base = [c for c in baseline_columns if c in data.columns and c not in excluded
+            and pd.api.types.is_numeric_dtype(data[c])]
+    split = [c for c in experimental_columns if c in data.columns and c not in excluded
+             and "_shrunk_" not in c and c != "expected_game_plays"]
     passing = [c for c in split if "_pass" in c or "pass_" in c]
-    # Explicitly separate efficiency, success-rate and volume information.
-    pass_efficiency = [
-        c for c in passing
-        if ("_epa_" in c or "_epa_matchup" in c)
-    ]
-    pass_success = [
-        c for c in passing
-        if "_success_" in c or "_success_matchup" in c
-    ]
-    pass_volume = [
-        c for c in passing
-        if "_plays_" in c or "plays_faced_pass" in c
-    ]
+    pass_efficiency = [c for c in passing if ("_epa_" in c or "_epa_matchup" in c)]
+    pass_success = [c for c in passing if "_success_" in c or "_success_matchup" in c]
+    pass_volume = [c for c in passing if "_plays_" in c or "plays_faced_pass" in c]
     if not base:
         raise RuntimeError("Frozen baseline feature list is empty.")
     return {
@@ -194,6 +162,8 @@ def _feature_sets(
         "baseline_plus_pass_volume_only": list(dict.fromkeys(base + pass_volume)),
         "baseline_plus_all_passing": list(dict.fromkeys(base + passing)),
     }
+
+
 def _fit_weekly(data: pd.DataFrame, features: list[str], alpha: float = ALPHA) -> pd.DataFrame:
     data = data.dropna(subset=["gameday", "home_score", "away_score"]).sort_values("gameday").copy()
     data["test_week"] = data["gameday"].dt.to_period("W").astype(str)
@@ -220,7 +190,6 @@ def _fit_weekly(data: pd.DataFrame, features: list[str], alpha: float = ALPHA) -
 
 
 def _directional_summary(frame: pd.DataFrame, edge_col: str, actual_col: str) -> dict:
-    """Grade every game directionally, with no minimum edge threshold."""
     eligible = frame.dropna(subset=[edge_col, actual_col]).copy()
     eligible = eligible[eligible[edge_col] != 0].copy()
     wins = int(((eligible[edge_col] * eligible[actual_col]) > 0).sum())
@@ -228,17 +197,13 @@ def _directional_summary(frame: pd.DataFrame, edge_col: str, actual_col: str) ->
     losses = int(len(eligible) - wins - pushes)
     no_lean = int((frame[edge_col] == 0).sum())
     return {
-        "games_evaluated": int(len(frame)),
-        "directional_picks": int(len(eligible)),
-        "wins": wins, "losses": losses, "pushes": pushes,
-        "no_lean": no_lean,
-        "accuracy_pct_ex_pushes": round(100 * wins / (wins + losses), 3)
-            if wins + losses else None,
+        "games_evaluated": int(len(frame)), "directional_picks": int(len(eligible)),
+        "wins": wins, "losses": losses, "pushes": pushes, "no_lean": no_lean,
+        "accuracy_pct_ex_pushes": round(100 * wins / (wins + losses), 3) if wins + losses else None,
     }
 
 
 def _wilson_interval(wins: int, trials: int, z: float = 1.959963984540054) -> tuple[float | None, float | None]:
-    """95% Wilson score interval for a binomial accuracy estimate."""
     if trials <= 0:
         return None, None
     p = wins / trials
@@ -249,52 +214,31 @@ def _wilson_interval(wins: int, trials: int, z: float = 1.959963984540054) -> tu
 
 
 def _edge_band_summary(frame: pd.DataFrame, edge_col: str, actual_col: str) -> list[dict]:
-    """Report directional grading by absolute projected edge and 95% intervals."""
-    bands = [
-        ("0_to_1", 0.0, 1.0),
-        ("1_to_2", 1.0, 2.0),
-        ("2_to_3", 2.0, 3.0),
-        ("3_to_4", 3.0, 4.0),
-        ("4_plus", 4.0, float("inf")),
-    ]
+    bands = [("0_to_1", 0.0, 1.0), ("1_to_2", 1.0, 2.0), ("2_to_3", 2.0, 3.0),
+             ("3_to_4", 3.0, 4.0), ("4_plus", 4.0, float("inf"))]
     eligible = frame.dropna(subset=[edge_col, actual_col]).copy()
     eligible["abs_edge"] = eligible[edge_col].abs()
     results = []
     for label, lower, upper in bands:
-        band = eligible[
-            (eligible["abs_edge"] >= lower)
-            & (eligible["abs_edge"] < upper)
-            & (eligible[edge_col] != 0)
-        ].copy()
+        band = eligible[(eligible["abs_edge"] >= lower) & (eligible["abs_edge"] < upper)
+                        & (eligible[edge_col] != 0)].copy()
         wins = int(((band[edge_col] * band[actual_col]) > 0).sum())
         pushes = int((band[actual_col] == 0).sum())
         losses = int(len(band) - wins - pushes)
         graded = wins + losses
         ci_low, ci_high = _wilson_interval(wins, graded)
-        results.append({
-            "edge_band_points": label,
-            "games": int(len(band)),
-            "wins": wins,
-            "losses": losses,
-            "pushes": pushes,
-            "graded_games_ex_pushes": graded,
-            "accuracy_pct_ex_pushes": round(100 * wins / graded, 3) if graded else None,
-            "accuracy_95pct_wilson_ci": [ci_low, ci_high],
-        })
+        results.append({"edge_band_points": label, "games": int(len(band)), "wins": wins,
+                        "losses": losses, "pushes": pushes, "graded_games_ex_pushes": graded,
+                        "accuracy_pct_ex_pushes": round(100 * wins / graded, 3) if graded else None,
+                        "accuracy_95pct_wilson_ci": [ci_low, ci_high]})
     zero_edge = eligible[eligible[edge_col] == 0]
-    results.append({
-        "edge_band_points": "zero_edge_no_lean",
-        "games": int(len(zero_edge)),
-        "wins": 0, "losses": 0, "pushes": 0,
-        "graded_games_ex_pushes": 0,
-        "accuracy_pct_ex_pushes": None,
-        "accuracy_95pct_wilson_ci": [None, None],
-    })
+    results.append({"edge_band_points": "zero_edge_no_lean", "games": int(len(zero_edge)),
+                    "wins": 0, "losses": 0, "pushes": 0, "graded_games_ex_pushes": 0,
+                    "accuracy_pct_ex_pushes": None, "accuracy_95pct_wilson_ci": [None, None]})
     return results
 
 
 def _combined_band_summary(frame: pd.DataFrame, edge_col: str, actual_col: str) -> dict:
-    """Summarize the combined 2-4 point edge range, without selecting games by result."""
     eligible = frame.dropna(subset=[edge_col, actual_col]).copy()
     abs_edge = eligible[edge_col].abs()
     band = eligible[(abs_edge >= 2.0) & (abs_edge < 4.0) & (eligible[edge_col] != 0)]
@@ -303,20 +247,17 @@ def _combined_band_summary(frame: pd.DataFrame, edge_col: str, actual_col: str) 
     losses = int(len(band) - wins - pushes)
     graded = wins + losses
     ci_low, ci_high = _wilson_interval(wins, graded)
-    return {
-        "edge_band_points": "2_to_4_combined",
-        "games": int(len(band)), "wins": wins, "losses": losses, "pushes": pushes,
-        "graded_games_ex_pushes": graded,
-        "accuracy_pct_ex_pushes": round(100 * wins / graded, 3) if graded else None,
-        "accuracy_95pct_wilson_ci": [ci_low, ci_high],
-    }
+    return {"edge_band_points": "2_to_4_combined", "games": int(len(band)),
+            "wins": wins, "losses": losses, "pushes": pushes,
+            "graded_games_ex_pushes": graded,
+            "accuracy_pct_ex_pushes": round(100 * wins / graded, 3) if graded else None,
+            "accuracy_95pct_wilson_ci": [ci_low, ci_high]}
 
 
 def _roi_summary(frame: pd.DataFrame, edge_col: str, actual_col: str, label: str) -> dict:
     result = {"variant": label, "n_games": int(len(frame))}
     for threshold in THRESHOLDS:
         bets = frame[frame[edge_col].abs() >= threshold].copy()
-        # Zero ATS/total margin is a push. Stakes are flat 1 unit at -110.
         wins = ((bets[edge_col] * bets[actual_col]) > 0).sum()
         pushes = (bets[actual_col] == 0).sum()
         losses = len(bets) - wins - pushes
@@ -324,10 +265,104 @@ def _roi_summary(frame: pd.DataFrame, edge_col: str, actual_col: str, label: str
         result[f"threshold_{threshold:.1f}"] = {
             "bets": int(len(bets)), "wins": int(wins), "losses": int(losses),
             "pushes": int(pushes), "units": round(float(units), 4),
-            "roi_pct": round(float(100 * units / len(bets)), 3) if len(bets) else None,
-        }
+            "roi_pct": round(float(100 * units / len(bets)), 3) if len(bets) else None}
     return result
 
+
+def _exact_binomial_two_sided(k: int, n: int) -> float:
+    """Exact two-sided binomial tail probability under p=0.5."""
+    if n <= 0:
+        return 1.0
+    return float(binomtest(k, n, p=0.5, alternative="two-sided").pvalue)
+
+
+def _mcnemar_p_value(baseline_only_correct: int, passing_only_correct: int) -> dict:
+    """Exact conditional McNemar test using discordant paired outcomes."""
+    b = int(baseline_only_correct)
+    c = int(passing_only_correct)
+    n = b + c
+    return {
+        "discordant_pairs": n,
+        "baseline_only_correct": b,
+        "passing_only_correct": c,
+        "exact_two_sided_p_value": _exact_binomial_two_sided(min(b, c), n),
+    }
+
+
+def _matched_directional_comparison(
+    predictions: pd.DataFrame,
+    baseline_name: str = PRIMARY_BASELINE,
+    passing_name: str = PRIMARY_PASSING,
+) -> dict:
+    """Paired same-game directional comparison, excluding pushes and zero-edge no-leans."""
+    pair = predictions[predictions["variant"].isin([baseline_name, passing_name])].copy()
+    if pair.empty:
+        raise RuntimeError("Primary baseline/passing variants are absent from predictions.")
+    if pair.duplicated(["game_id", "variant"]).any():
+        raise RuntimeError("Duplicate game_id/variant rows detected; matched test is ambiguous.")
+
+    # Validate game-level actual outcomes independently before pivoting predictions.
+    truth_cols = ["game_id", "season", "week", "gameday", "actual_ats_margin", "actual_total_margin"]
+    truth = pair[truth_cols].drop_duplicates()
+    if truth["game_id"].duplicated().any():
+        raise RuntimeError("Actual ATS/total outcomes differ within a game across variants.")
+
+    results = {}
+    for market, edge_col, actual_col in (
+        ("ats", "ats_edge", "actual_ats_margin"),
+        ("totals", "total_edge", "actual_total_margin"),
+    ):
+        edges = pair.pivot(index="game_id", columns="variant", values=edge_col)
+        required = [baseline_name, passing_name]
+        missing = [name for name in required if name not in edges.columns]
+        if missing:
+            raise RuntimeError(f"Missing paired columns for {market}: {missing}")
+        outcomes = truth.set_index("game_id")[actual_col]
+        matched = edges.join(outcomes.rename("actual_margin"), how="inner")
+
+        b_edge = matched[baseline_name].to_numpy(dtype=float)
+        p_edge = matched[passing_name].to_numpy(dtype=float)
+        actual = matched["actual_margin"].to_numpy(dtype=float)
+        complete = np.isfinite(b_edge) & np.isfinite(p_edge) & np.isfinite(actual)
+        pushes = complete & (actual == 0)
+        no_lean = complete & (actual != 0) & ((b_edge == 0) | (p_edge == 0))
+        eligible = complete & (actual != 0) & (b_edge != 0) & (p_edge != 0)
+
+        baseline_right = np.sign(b_edge[eligible]) == np.sign(actual[eligible])
+        passing_right = np.sign(p_edge[eligible]) == np.sign(actual[eligible])
+        both_correct = int(np.count_nonzero(baseline_right & passing_right))
+        both_wrong = int(np.count_nonzero(~baseline_right & ~passing_right))
+        baseline_only = int(np.count_nonzero(baseline_right & ~passing_right))
+        passing_only = int(np.count_nonzero(~baseline_right & passing_right))
+        n = int(eligible.sum())
+        pval = _mcnemar_p_value(baseline_only, passing_only)
+
+        results[market] = {
+            "matched_games_with_both_predictions": int(complete.sum()),
+            "actual_market_pushes_excluded": int(pushes.sum()),
+            "either_model_no_lean_excluded": int(no_lean.sum()),
+            "evaluated_paired_games": n,
+            "both_correct": both_correct,
+            "both_wrong": both_wrong,
+            "baseline_only_correct": baseline_only,
+            "passing_only_correct": passing_only,
+            "baseline_accuracy_pct": round(100 * (both_correct + baseline_only) / n, 3) if n else None,
+            "passing_accuracy_pct": round(100 * (both_correct + passing_only) / n, 3) if n else None,
+            "accuracy_difference_percentage_points": round(100 * (passing_only - baseline_only) / n, 3) if n else None,
+            "mcnemar_exact": pval,
+            "interpretation": (
+                "Tests whether the two models have different directional accuracy on the same paired games. "
+                "Only discordant pairs drive the exact McNemar p-value; both-correct and both-wrong pairs do not. "
+                "A small p-value is evidence of a difference, not proof of profitability."
+            ),
+        }
+
+    return {
+        "comparison": f"{baseline_name} vs {passing_name}",
+        "grading": "Directional ATS side / over-under relative to the same nflverse spread_line and total_line; actual margin zero is a push.",
+        "eligible_rule": "Both models must have a non-zero directional lean and a non-push actual result; no-lean cases are counted separately and omitted from McNemar.",
+        "markets": results,
+    }
 
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
@@ -345,11 +380,7 @@ def main() -> None:
     data["gameday"] = pd.to_datetime(data["gameday"], errors="coerce")
     variants = _feature_sets(data, baseline_columns, experimental_columns)
 
-    summaries = []
-    prediction_frames = []
-    # Feature ablations use the default alpha. Regularization sensitivity is
-    # assessed separately on baseline and all-passing sets; alpha is not
-    # selected on the test set and no tuned value is promoted automatically.
+    summaries, prediction_frames = [], []
     alpha_variants = {
         "baseline_frozen_features": variants["baseline_frozen_features"],
         "baseline_plus_all_passing": variants["baseline_plus_all_passing"],
@@ -375,11 +406,10 @@ def main() -> None:
         pred["actual_total_margin"] = pred["actual_total"] - pred["total_line"]
         prediction_frames.append(pred)
     all_preds = pd.concat(prediction_frames, ignore_index=True)
-    # Fair comparison: intersection of game IDs predicted by every variant.
-    common = set.intersection(*[
-        set(g["game_id"]) for _, g in all_preds.groupby("variant")
-    ])
+    # Same common game IDs across every variant, as before.
+    common = set.intersection(*[set(g["game_id"]) for _, g in all_preds.groupby("variant")])
     all_preds = all_preds[all_preds["game_id"].isin(common)].copy()
+
     def metric_summary(group: pd.DataFrame, name: str) -> dict:
         ats = group.dropna(subset=["ats_edge", "actual_ats_margin"])
         totals = group.dropna(subset=["total_edge", "actual_total_margin"])
@@ -404,6 +434,7 @@ def main() -> None:
         summary["common_games"] = summary.pop("games")
         summaries.append(summary)
 
+    paired = _matched_directional_comparison(all_preds)
     season_summaries = []
     for (name, season), group in all_preds.groupby(["variant", "season"]):
         summary = metric_summary(group, name)
@@ -421,15 +452,17 @@ def main() -> None:
         "ridge_alpha": ALPHA,
         "regularization_sensitivity_alphas": [3.0, 10.0, 30.0, 100.0],
         "regularization_warning": "Alpha sensitivity is descriptive on the same chronological test period; do not choose alpha from these results without a separate nested or later holdout.",
-        "comparison_rule": "Same intersection of weekly chronological out-of-sample game IDs across every variant.",
+        "comparison_rule": "Same intersection of weekly chronological out-of-sample game IDs across every variant; primary paired comparison additionally uses baseline vs all-passing at alpha=10.",
         "market_line_warning": "spread_line and total_line come from nflverse schedule data; they are not verified executable sportsbook quotes.",
         "thresholds": list(THRESHOLDS),
         "feature_counts": {name: len(cols) for name, cols in variants.items()},
         "run_feature_counts": {name: len(cols) for name, cols, _alpha in runs},
         "feature_names": variants,
         "variants": summaries,
+        "matched_directional_comparison": paired,
         "season_results": season_summaries,
         "season_comparison_warning": "Season-level samples are smaller and descriptive; do not select a feature set based on the best season or treat threshold ROI as independently validated.",
+        "matched_test_warning": "Exact McNemar is an unadjusted two-sided paired test; it addresses directional correctness only, not betting profitability. These historical seasons have previously been inspected and are not a pristine holdout.",
         "prediction_csv": str(csv_path),
     }
     json_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
