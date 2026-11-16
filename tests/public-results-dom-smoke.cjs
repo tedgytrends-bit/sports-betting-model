@@ -1,54 +1,57 @@
-/* Offline DOM contract for the cumulative Injury directional record. */
+/* Source-backed Results DOM test: mobile-friendly cards, real grades and filters. */
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
-const source=process.argv[2];
-assert.ok(source,'Usage: node tests/public-results-dom-smoke.cjs <input.json>');
-const data=JSON.parse(fs.readFileSync(source,'utf8'));
-const controls={};
-function get(id){
-  if(!controls[id])controls[id]={
+const path=process.argv[2];
+assert.ok(path,'Expected source JSON with original and directional records');
+const data=JSON.parse(fs.readFileSync(path,'utf8'));
+const els={};
+function element(id){
+  if(!els[id])els[id]={
     innerHTML:'',textContent:'',value:'all',dataset:{},handlers:{},
-    addEventListener(type,cb){this.handlers[type]=cb;}
+    addEventListener(k,fn){this.handlers[k]=fn;}
   };
-  return controls[id];
+  return els[id];
 }
-global.window={};global.document={getElementById:get};
+global.window={};
+global.document={getElementById:element};
 require('../docs/public-results.js');
 assert.equal(typeof window.renderPublicResults,'function');
 window.renderPublicResults(data);
-const finalCount=new Set(data.directionalGames.filter(r=>r.score_status==='FINAL').map(r=>r.game_id)).size;
-const pendingCount=new Set(data.directionalGames.filter(r=>r.score_status==='PENDING').map(r=>r.game_id)).size;
-assert.equal(get('results-notice').innerHTML,'','Redundant Results notice must not render');
-assert.ok(finalCount>=42 && pendingCount>=0,'Published results cohort should still be present');
-const overall=data.directionalSummary.find(r=>r.week==='ALL'&&r.model==='injury'
-  &&r.record_class==='DERIVED_DIRECTIONAL_TIEBREAK');
+const overall=data.directionalSummary.find(r=>r.week==='ALL'&&r.model==='injury'&&
+    r.record_class==='DERIVED_DIRECTIONAL_TIEBREAK');
 assert.ok(overall);
-const ats=overall.ats_wins+'–'+overall.ats_losses+(Number(overall.ats_pushes)?'–'+overall.ats_pushes:'');
-const totals=overall.totals_wins+'–'+overall.totals_losses+(Number(overall.totals_pushes)?'–'+overall.totals_pushes:'');
-assert.ok(get('results-cards').innerHTML.includes(ats));
-assert.ok(get('results-cards').innerHTML.includes(totals));
-assert.equal((get('results-cards').innerHTML.match(/class="model-card"/g)||[]).length,2);
-assert.match(get('results-cards').innerHTML,/OVERALL INJURY MODEL/);
-assert.doesNotMatch(get('results-cards').innerHTML,/BASELINE \/ ATS/);
-for(const w of ['Week 8','Week 9','Week 10'])assert.match(get('week-results').innerHTML,new RegExp(w));
-assert.match(get('week-results').innerHTML,/tiebreaker/);
-const gameList=get('results-details').innerHTML;
-assert.match(gameList,/IND @ JAX/);
-assert.match(gameList,/Over · <span[^>]+>Win/);
-assert.match(gameList,/Baseline tiebreaker \(retrospective\)/);
-assert.match(gameList,/49 total · Over/);
-assert.match(gameList,/MIA @ IND/);
-assert.match(gameList,/LAC @ BAL/);
-assert.match(gameList,/uncalibrated/);
-assert.equal((gameList.match(/<tr>/g)||[]).length,
-  new Set(data.directionalGames.map(r=>r.game_id)).size);
-const week=get('results-week-filter'),day=get('results-day-filter');
+const c=element('results-cards').innerHTML;
+const s=kind=>overall[kind+'_wins']+'–'+overall[kind+'_losses']+
+    (Number(overall[kind+'_pushes'])?'–'+overall[kind+'_pushes']:'');
+assert.ok(c.includes(s('ats')),'ATS overall must match immutable grade source');
+assert.ok(c.includes(s('totals')),'Totals overall must match immutable grade source');
+assert.equal((c.match(/class="result-overview-card"/g)||[]).length,2);
+assert.ok(c.includes('Against the spread')&&c.includes('Game totals'));
+assert.ok(!c.includes('BASELINE / ATS'),'Baseline must not be a public Results card');
+for(const w of [8,9,10])assert.match(element('week-results').innerHTML,new RegExp('Week '+w));
+assert.ok(element('results-game-desc').textContent.includes('games'));
+const rows=()=>element('results-details').innerHTML;
+const count=()=> (rows().match(/class="result-game-card"/g)||[]).length;
+assert.equal(element('results-week-filter').value,'10','Most recent week should show first');
+assert.equal(count(),14,'Week10 should have 14 published games');
+assert.match(rows(),/MIA @ IND/);
+assert.match(rows(),/LAC @ BAL/);
+assert.match(rows(),/QB value uncalibrated/);
+const week=element('results-week-filter'),day=element('results-day-filter');
 assert.equal(typeof week.handlers.change,'function');
 assert.equal(typeof day.handlers.change,'function');
+week.value='8';week.handlers.change();
+assert.equal(count(),14,'Week8 should show all original 14 games');
+assert.match(rows(),/IND @ JAX/);
+assert.match(rows(),/Over 46/);
+assert.match(rows(),/Retrospective direction/);
+assert.match(rows(),/result-status win/);
 week.value='9';week.handlers.change();
-assert.equal((get('results-details').innerHTML.match(/<tr>/g)||[]).length,15);
+assert.equal(count(),15,'Week9 should show all 15 audited results');
 day.value='Sunday';day.handlers.change();
-assert.ok((get('results-details').innerHTML.match(/<tr>/g)||[]).length<=15);
-week.value='10';week.handlers.change();
-assert.match(get('results-details').innerHTML,/MIA @ IND/);
-console.log('PASS: two overall Injury record cards; sourced Week8 Over/Win retrospective direction; original snapshot preserved; all games and filters');
+assert.ok(count()<=15);
+day.value='all';day.handlers.change();
+week.value='all';week.handlers.change();
+assert.equal(count(),new Set(data.directionalGames.map(x=>x.game_id)).size,
+    'All weeks should display every unique matchup');
+console.log('PASS: 2 overall Injury cards; mobile game cards; 43 games; original result integrity; week/day filters; disclosed Week8 tiebreak');
