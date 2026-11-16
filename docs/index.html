@@ -184,7 +184,25 @@ function csvParse(input){ // RFC4180 quoted commas, line endings, and escaped qu
   return rows.map(cells=>Object.fromEntries(headers.map((h,i)=>[h,cells[i]??''])));
 }
 function assertFields(rows,fields,label){if(!rows.length)throw new Error(label+': no rows');const cols=Object.keys(rows[0]);const missing=fields.filter(f=>!cols.includes(f));if(missing.length)throw new Error(label+': missing '+missing.join(', '))}
-async function loadCSV(path){const url=REPO+path+'?t='+Math.floor(Date.now()/60000);const res=await fetch(url,{cache:'no-store'});if(!res.ok)throw new Error(path+': HTTP '+res.status);return csvParse(await res.text())}
+async function loadCSV(path){
+  const stamp=Math.floor(Date.now()/60000);
+  // Public results ship INSIDE GitHub Pages at each graded-game deployment.
+  // Fall back to raw GitHub if a cached older Pages release lacks the file.
+  const sources=path.startsWith('data/public_results/')
+    ? ['./'+path+'?v='+stamp,REPO+path+'?v='+stamp]
+    : [REPO+path+'?v='+stamp];
+  let lastError=null;
+  for(const url of sources){
+    try{
+      const res=await fetch(url,{cache:'no-store'});
+      if(!res.ok)throw new Error('HTTP '+res.status);
+      const csv=csvParse(await res.text());
+      if(!Array.isArray(csv)||!csv.length)throw Error('Empty CSV: '+path);
+      return csv;
+    }catch(error){lastError=error}
+  }
+  throw Error(path+': '+String(lastError&&lastError.message||'unavailable'));
+}
 function sourceLink(path,label){return `<a class="archive-link" href="${ARCHIVE+path}" target="_blank" rel="noopener noreferrer">${esc(label)} ↗</a>`}
 function dateLabel(date){if(!/^\d{4}-\d\d-\d\d$/.test(clean(date)))return 'Date unavailable';const d=new Date(date+'T12:00:00Z');return new Intl.DateTimeFormat('en-US',{timeZone:'UTC',weekday:'long',month:'long',day:'numeric'}).format(d)}
 function stamp(x){const d=new Date(x);return Number.isNaN(d.getTime())?'Unavailable':new Intl.DateTimeFormat('en-US',{timeZone:'America/Chicago',month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'}).format(d)}
