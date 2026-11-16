@@ -518,7 +518,7 @@ async function init(){sourceState('CONNECTING TO GITHUB…');const fetched=await
     data.errors.push('Public Results: '+String(err.message||err));
     $('results-error').innerHTML='<div>Live results could not be verified: '+esc(String(err.message||err))+'. No unverified grades were displayed.</div>';$('results-error').style.display='flex';
   }
- $('sync-errors').textContent=data.errors.length?data.errors.join(' · '):'';
+ if(data.errors.length)console.warn('Tedgy Trends data validation details:',data.errors.join(' | '));
 }
 for(const b of document.querySelectorAll('[data-view]'))b.addEventListener('click',()=>showView(b.dataset.view));
 for(const b of document.querySelectorAll('[data-model]'))b.addEventListener('click',()=>{state.model=b.dataset.model;document.querySelectorAll('[data-model]').forEach(v=>v.classList.toggle('on',v.dataset.model===state.model));renderBoard();if(state.current)openDrawer(state.current)});
@@ -529,9 +529,9 @@ $('overlay').addEventListener('click',e=>{if(e.target.id==='overlay')closeDrawer
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer()});
 $('close-drawer').addEventListener('click',closeDrawer);
 init();
-const initialResultsView=new URLSearchParams(window.location.search).get('view');
-if(initialResultsView==='results')showView('results');
+const requestedView=new URLSearchParams(window.location.search).get('view');
+if(['results','method'].includes(requestedView))showView(requestedView);
 
 </script>
-<div aria-live="polite" class="shell" id="sync-errors" role="status"></div></body>
+</body>
 </html>
