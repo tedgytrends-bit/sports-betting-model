@@ -20,18 +20,27 @@ assert.equal(typeof window.renderPublicResults,'function','Missing render functi
 window.renderPublicResults(dataset);
 const finalCount=new Set(dataset.resultsGames.filter(r=>r.score_status==='FINAL').map(r=>r.game_id)).size;
 const pendingCount=new Set(dataset.resultsGames.filter(r=>r.score_status==='PENDING').map(r=>r.game_id)).size;
-assert.match(el('results-notice').innerHTML,new RegExp(finalCount+' NFL games graded'));
+assert.match(el('results-notice').innerHTML,new RegExp(finalCount+' games final'));
 assert.match(el('results-notice').innerHTML,new RegExp(pendingCount+' pending'));
-for(const model of ['injury','baseline']){
-  const summary=dataset.resultsSummary.find(r=>r.week==='ALL'&&r.model===model&&r.record_class==='PUBLIC_PUBLISHED');
-  assert.ok(summary,'Missing cumulative '+model);
-  const rec=summary.ats_wins+'–'+summary.ats_losses+(Number(summary.ats_pushes)?'–'+summary.ats_pushes:'');
-  assert.ok(el('results-cards').innerHTML.includes(rec),'Cumulative ATS card does not match stored '+model+' summary');
-}
+const overall=dataset.resultsSummary.find(r=>r.week==='ALL'&&r.model==='injury'&&r.record_class==='PUBLIC_PUBLISHED');
+assert.ok(overall,'Missing published overall Injury record');
+const atsRecord=overall.ats_wins+'–'+overall.ats_losses+(Number(overall.ats_pushes)?'–'+overall.ats_pushes:'');
+const totalRecord=overall.totals_wins+'–'+overall.totals_losses+(Number(overall.totals_pushes)?'–'+overall.totals_pushes:'');
+assert.ok(el('results-cards').innerHTML.includes(atsRecord),'Missing overall Injury ATS');
+assert.ok(el('results-cards').innerHTML.includes(totalRecord),'Missing overall Injury totals');
+assert.equal((el('results-cards').innerHTML.match(/class="model-card"/g)||[]).length,2,
+  'Public results should have only two Injury model record cards');
+assert.doesNotMatch(el('results-cards').innerHTML,/baseline/i);
+assert.doesNotMatch(el('results-cards').innerHTML,/no lean/i);
+assert.match(el('results-cards').innerHTML,/OVERALL INJURY MODEL/);
 assert.match(el('week-results').innerHTML,/Week 10/);
 assert.match(el('week-results').innerHTML,/Week 9/);
 assert.match(el('week-results').innerHTML,/Week 8/);
-assert.match(el('week-results').innerHTML,/research baseline/);
+assert.doesNotMatch(el('week-results').innerHTML,/baseline/i);
+assert.match(el('results-details').innerHTML,/IND @ JAX/);
+assert.match(el('results-details').innerHTML,/No pregame pick/);
+assert.match(el('results-details').innerHTML,/Market.*Over.*won/);
+assert.match(el('results-details').innerHTML,/49 total.*Over/);
 assert.match(el('results-details').innerHTML,/MIA @ IND/);
 assert.match(el('results-details').innerHTML,/LAC @ BAL/);
 if(pendingCount) assert.match(el('results-details').innerHTML,/Pending/);
@@ -49,4 +58,4 @@ day.value='Sunday';day.handlers.change();
 assert.ok((el('results-details').innerHTML.match(/<tr>/g)||[]).length<=15);
 week.value='10';week.handlers.change();
 assert.match(el('results-details').innerHTML,/Week 10|MIA @ IND/);
-console.log('PASS: public Results JS renders all published games, cumulative cards, research exclusion and working week/day filters');
+console.log('PASS: two overall Injury cards, no public Baseline, Week8 exact-total market Over outcome without model win, full results and filters');
