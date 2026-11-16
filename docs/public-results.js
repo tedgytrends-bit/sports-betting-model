@@ -131,18 +131,6 @@
       ||expectedSpecial.fallback_projected_total!=='46.9'
       ||expectedSpecial.original_total_result!=='No lean')
       throw Error('Cannot authenticate Week8 independently sourced fallback Over');
-    const totalFinal=new Set(games.filter(r=>r.score_status==='FINAL').map(r=>r.game_id)).size;
-    const totalPending=new Set(games.filter(r=>r.score_status==='PENDING').map(r=>r.game_id)).size;
-    const latest=summary[0]?.last_grade_run_utc;
-    $('results-notice').innerHTML='<span style="font-size:20px;color:var(--accent)">ⓘ</span>'
-      +'<div><strong>2026 overall Injury model · '+totalFinal+' games final'
-      +(totalPending?' · '+totalPending+' pending':'')+'.</strong> '
-      +'Complete directional view (Injury, with a Baseline tie-break for exact-market totals). '
-      +'Week 8 IND–JAX Over was assigned retrospectively on Nov 16 using the previously published Baseline Over forecast; '
-      +'it was not an original Injury-model play. Original archived record remains unchanged. '
-      +'Auto-updated after final games · last graded '+esc(formatDate(latest))+'. '
-      +'Model tracking only, not placed bets.</div>';
-
     const cards=['ats','totals'];
     $('results-cards').innerHTML=cards.map(market=>{
       const result=summaryFor(summary,'ALL','injury','DERIVED_DIRECTIONAL_TIEBREAK');
