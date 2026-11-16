@@ -123,6 +123,35 @@ async function main(){
           console.log('PASS browser '+viewport.name+' '+(routeName||'index.html')+' cards='+metrics.cards.map(x=>x.value).join('/')+' viewport='+metrics.width+' docwidth='+metrics.documentWidth+' screenshot='+screenshot);
           await page.close();
         }
+        // Historical board remains functional but has no competing stale
+        // Results or Methodology tabs: those return to the current site.
+        const archive=await browser.newPage({viewport:{width:viewport.width,height:viewport.height}});
+        const archiveErrors=[];
+        archive.on('pageerror',error=>archiveErrors.push(String(error)));
+        await archive.route('https://raw.githubusercontent.com/tedgytrends-bit/sports-betting-model/main/**',async route=>{
+          const parsed=new URL(route.request().url());
+          const relative=decodeURIComponent(parsed.pathname.split('/main/')[1]||'');
+          const file=path.resolve(ROOT,relative);
+          if(!relative||!file.startsWith(ROOT+path.sep)||!fs.existsSync(file))
+            return route.fulfill({status:404,body:'Missing archived CSV'});
+          return route.fulfill({status:200,contentType:'text/csv',body:fs.readFileSync(file)});
+        });
+        await archive.goto(BASE_URL+'/week09.html',{waitUntil:'domcontentloaded'});
+        await archive.locator('.game-card').first().waitFor({timeout:30000});
+        assert.equal(await archive.locator('.game-card').count(),15,'Week9 archive missing frozen matchups');
+        assert.match(await archive.locator('#view-board h1').innerText(),/Week 9 archive/);
+        const archiveNav=viewport.width<850?'.mobile-nav':'.desktop-nav';
+        assert.equal(await archive.locator(archiveNav+' a[href="./"]').count(),1);
+        assert.equal(await archive.locator(archiveNav+' a[href="./?view=results"]').count(),1);
+        assert.equal(await archive.locator(archiveNav+' a[href="./?view=method"]').count(),1);
+        assert.equal(await archive.locator(archiveNav+' [data-view="results"]').count(),0,
+          'Do not show stale Week8 Results on the historical archive');
+        const archiveWidth=await archive.evaluate(()=>document.documentElement.scrollWidth);
+        assert.ok(archiveWidth<=viewport.width+2,
+          'Week9 archive horizontally overflows on '+viewport.name);
+        assert.deepEqual(archiveErrors,[], 'Week9 archive script errors');
+        console.log('PASS browser '+viewport.name+' Week9 archive: 15 frozen games, no stale results navigation, back links valid');
+        await archive.close();
       }
     }finally{await browser.close()}
   }finally{child.kill('SIGTERM')}
