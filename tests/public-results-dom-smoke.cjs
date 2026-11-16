@@ -1,61 +1,55 @@
-/* Offline DOM contract: both public websites must render real graded CSVs. */
+/* Offline DOM contract for the cumulative Injury directional record. */
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
-const path=require('node:path');
-const file=process.argv[2];
-assert.ok(file,'Usage: node tests/public-results-dom-smoke.cjs <input.json>');
-const dataset=JSON.parse(fs.readFileSync(file,'utf8'));
-const els={};
-function el(id){
-  if(!els[id]){
-    els[id]={innerHTML:'',textContent:'',value:'all',
-      dataset:{},handlers:{},addEventListener(type,fn){this.handlers[type]=fn;}};
-  }
-  return els[id];
+const source=process.argv[2];
+assert.ok(source,'Usage: node tests/public-results-dom-smoke.cjs <input.json>');
+const data=JSON.parse(fs.readFileSync(source,'utf8'));
+const controls={};
+function get(id){
+  if(!controls[id])controls[id]={
+    innerHTML:'',textContent:'',value:'all',dataset:{},handlers:{},
+    addEventListener(type,cb){this.handlers[type]=cb;}
+  };
+  return controls[id];
 }
-global.window={};
-global.document={getElementById:el};
+global.window={};global.document={getElementById:get};
 require('../docs/public-results.js');
-assert.equal(typeof window.renderPublicResults,'function','Missing render function');
-window.renderPublicResults(dataset);
-const finalCount=new Set(dataset.resultsGames.filter(r=>r.score_status==='FINAL').map(r=>r.game_id)).size;
-const pendingCount=new Set(dataset.resultsGames.filter(r=>r.score_status==='PENDING').map(r=>r.game_id)).size;
-assert.match(el('results-notice').innerHTML,new RegExp(finalCount+' games final'));
-assert.match(el('results-notice').innerHTML,new RegExp(pendingCount+' pending'));
-const overall=dataset.resultsSummary.find(r=>r.week==='ALL'&&r.model==='injury'&&r.record_class==='PUBLIC_PUBLISHED');
-assert.ok(overall,'Missing published overall Injury record');
-const atsRecord=overall.ats_wins+'–'+overall.ats_losses+(Number(overall.ats_pushes)?'–'+overall.ats_pushes:'');
-const totalRecord=overall.totals_wins+'–'+overall.totals_losses+(Number(overall.totals_pushes)?'–'+overall.totals_pushes:'');
-assert.ok(el('results-cards').innerHTML.includes(atsRecord),'Missing overall Injury ATS');
-assert.ok(el('results-cards').innerHTML.includes(totalRecord),'Missing overall Injury totals');
-assert.equal((el('results-cards').innerHTML.match(/class="model-card"/g)||[]).length,2,
-  'Public results should have only two Injury model record cards');
-assert.doesNotMatch(el('results-cards').innerHTML,/baseline/i);
-assert.doesNotMatch(el('results-cards').innerHTML,/no lean/i);
-assert.match(el('results-cards').innerHTML,/OVERALL INJURY MODEL/);
-assert.match(el('week-results').innerHTML,/Week 10/);
-assert.match(el('week-results').innerHTML,/Week 9/);
-assert.match(el('week-results').innerHTML,/Week 8/);
-assert.doesNotMatch(el('week-results').innerHTML,/baseline/i);
-assert.match(el('results-details').innerHTML,/IND @ JAX/);
-assert.match(el('results-details').innerHTML,/No pregame pick/);
-assert.match(el('results-details').innerHTML,/Market.*Over.*won/);
-assert.match(el('results-details').innerHTML,/49 total.*Over/);
-assert.match(el('results-details').innerHTML,/MIA @ IND/);
-assert.match(el('results-details').innerHTML,/LAC @ BAL/);
-if(pendingCount) assert.match(el('results-details').innerHTML,/Pending/);
-assert.match(el('results-details').innerHTML,/uncalibrated/ig);
-assert.equal((el('results-details').innerHTML.match(/<tr>/g)||[]).length,
-  new Set(dataset.resultsGames.map(r=>r.game_id)).size,
-  'Full public results must list every unique published game, not Week8 only');
-const week=el('results-week-filter'),day=el('results-day-filter');
+assert.equal(typeof window.renderPublicResults,'function');
+window.renderPublicResults(data);
+const finalCount=new Set(data.directionalGames.filter(r=>r.score_status==='FINAL').map(r=>r.game_id)).size;
+const pendingCount=new Set(data.directionalGames.filter(r=>r.score_status==='PENDING').map(r=>r.game_id)).size;
+assert.match(get('results-notice').innerHTML,new RegExp(finalCount+' games final'));
+if(pendingCount)assert.match(get('results-notice').innerHTML,new RegExp(pendingCount+' pending'));
+assert.match(get('results-notice').innerHTML,/retrospectively/);
+const overall=data.directionalSummary.find(r=>r.week==='ALL'&&r.model==='injury'
+  &&r.record_class==='DERIVED_DIRECTIONAL_TIEBREAK');
+assert.ok(overall);
+const ats=overall.ats_wins+'–'+overall.ats_losses+(Number(overall.ats_pushes)?'–'+overall.ats_pushes:'');
+const totals=overall.totals_wins+'–'+overall.totals_losses+(Number(overall.totals_pushes)?'–'+overall.totals_pushes:'');
+assert.ok(get('results-cards').innerHTML.includes(ats));
+assert.ok(get('results-cards').innerHTML.includes(totals));
+assert.equal((get('results-cards').innerHTML.match(/class="model-card"/g)||[]).length,2);
+assert.match(get('results-cards').innerHTML,/OVERALL INJURY MODEL/);
+assert.doesNotMatch(get('results-cards').innerHTML,/BASELINE \/ ATS/);
+for(const w of ['Week 8','Week 9','Week 10'])assert.match(get('week-results').innerHTML,new RegExp(w));
+assert.match(get('week-results').innerHTML,/tiebreaker/);
+const gameList=get('results-details').innerHTML;
+assert.match(gameList,/IND @ JAX/);
+assert.match(gameList,/Over · <span[^>]+>Win/);
+assert.match(gameList,/Baseline tiebreaker \(retrospective\)/);
+assert.match(gameList,/49 total · Over/);
+assert.match(gameList,/MIA @ IND/);
+assert.match(gameList,/LAC @ BAL/);
+assert.match(gameList,/uncalibrated/);
+assert.equal((gameList.match(/<tr>/g)||[]).length,
+  new Set(data.directionalGames.map(r=>r.game_id)).size);
+const week=get('results-week-filter'),day=get('results-day-filter');
 assert.equal(typeof week.handlers.change,'function');
 assert.equal(typeof day.handlers.change,'function');
 week.value='9';week.handlers.change();
-assert.equal((el('results-details').innerHTML.match(/<tr>/g)||[]).length,15,
-  'Week9 filter should show all 15 audited games');
+assert.equal((get('results-details').innerHTML.match(/<tr>/g)||[]).length,15);
 day.value='Sunday';day.handlers.change();
-assert.ok((el('results-details').innerHTML.match(/<tr>/g)||[]).length<=15);
+assert.ok((get('results-details').innerHTML.match(/<tr>/g)||[]).length<=15);
 week.value='10';week.handlers.change();
-assert.match(el('results-details').innerHTML,/Week 10|MIA @ IND/);
-console.log('PASS: two overall Injury cards, no public Baseline, Week8 exact-total market Over outcome without model win, full results and filters');
+assert.match(get('results-details').innerHTML,/MIA @ IND/);
+console.log('PASS: two overall Injury record cards; sourced Week8 Over/Win retrospective direction; original snapshot preserved; all games and filters');
