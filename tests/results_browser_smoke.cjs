@@ -159,7 +159,11 @@ async function main(){
         assert.ok(archiveWidth<=viewport.width+2,
           'Week9 archive horizontally overflows on '+viewport.name);
         assert.deepEqual(archiveErrors,[], 'Week9 archive script errors');
-        console.log('PASS browser '+viewport.name+' Week9 archive: 15 frozen games, no stale results navigation, back links valid');
+        await archive.locator(archiveNav+' a[href="./?view=method"]').click();
+        await archive.locator('#view-method.active').waitFor({timeout:25000});
+        assert.match(await archive.locator('#view-method h1').innerText(),/About the models/);
+        assert.ok(archive.url().includes('view=method'),'Historical About link lost its direct-view parameter');
+        console.log('PASS browser '+viewport.name+' Week9 archive: 15 frozen games, current-site About link and Results navigation valid');
         await archive.close();
       }
     }finally{await browser.close()}
