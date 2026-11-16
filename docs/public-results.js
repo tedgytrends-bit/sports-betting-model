@@ -1,232 +1,187 @@
-/* Tedgy Trends read-only, continuously updated NFL prospective results UI.
-   All grades are GitHub Actions outputs from frozen pregame forecasts and
-   explicit FINAL NFL scores; never grade or train in the browser. */
-(function () {
+/* Tedgy Trends — simple, read-only Injury model results.
+ * This page uses validated frozen source grades and a separately labeled
+ * directional tiebreak for the Week 8 exactly-at-market Injury total.
+ * It NEVER writes or backfills forecasts in the browser. */
+(() => {
   'use strict';
+
   const $ = id => document.getElementById(id);
-  const esc = value => String(value === null || value === undefined ? '' : value)
-      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-      .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
-  const num = value => value === '' || value === null || value === undefined ? NaN : Number(value);
-  const expectedStatus = new Set(['FINAL','PENDING']);
-  const grades = new Set(['Win','Loss','Push','No lean','Pending']);
-  const stat = (rec,prefix,field) => {
-    const value = num(rec[prefix + field]);
-    return Number.isFinite(value) ? value : 0;
+  const escape = value => String(value ?? '').replace(/[&<>"']/g,
+    ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+  const number = value => value === '' || value == null ? NaN : Number(value);
+  const n = x => Number.isFinite(number(x)) ? number(x) : 0;
+  const classFor = result => result === 'Win' ? 'win' :
+      result === 'Loss' ? 'loss' : result === 'Push' ? 'push' : 'pending';
+  const grade = result => '<span class="result-status '+classFor(result)+'">'+escape(result)+'</span>';
+  const val = value => Number.isFinite(number(value)) ? String(number(value)) : '—';
+  const record = (r,category) => {
+    const pre = category === 'ats' ? 'ats_' : 'totals_';
+    const win = n(r[pre+'wins']), loss=n(r[pre+'losses']), push=n(r[pre+'pushes']);
+    return win+'–'+loss+(push?'–'+push:'');
   };
-  const rec = (row,market) => {
-    if (!row) return '—';
-    const pref = market === 'ats' ? 'ats_' : 'totals_';
-    const w = stat(row,pref,'wins'), l=stat(row,pref,'losses'), p=stat(row,pref,'pushes');
-    return w+'–'+l+(p ? '–'+p : '');
-  };
-  const roi = (row,market) => {
-    if (!row) return '—';
-    const key='illustrative_flat_110_'+(market==='ats'?'ats':'totals')+'_roi_pct';
-    return Number.isFinite(num(row[key])) ? num(row[key]).toFixed(1)+'%' : '—';
-  };
-  const formatDate = value => {
-    const t=new Date(value);
-    return Number.isFinite(t.getTime()) ?
-      new Intl.DateTimeFormat('en-US',{timeZone:'America/Chicago',month:'short',
-         day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'}).format(t)
-      : 'Unverified';
-  };
-  const gradeLabel = value => {
-    const s=String(value||'Pending');
-    const color = s==='Win' ? '#b8e58d' : s==='Loss' ? '#ffb7b0' : '#c9d1db';
-    return '<span style="font-weight:800;color:'+color+'">'+esc(s)+'</span>';
-  };
-  const summaryFor=(summary,week,model,klass)=>
-      summary.find(s=>String(s.week)===String(week)&&s.model===model&&s.record_class===klass);
-  const tally=(games,model,field)=>{
-    const vals=games.filter(r=>r.model===model&&r.record_class==='PUBLIC_PUBLISHED'
-       &&r.score_status==='FINAL');
-    return {wins:vals.filter(r=>r[field]==='Win').length,
-      losses:vals.filter(r=>r[field]==='Loss').length,
-      pushes:vals.filter(r=>r[field]==='Push').length,
-      no_lean:vals.filter(r=>r[field]==='No lean').length};
-  };
-  const validate=(games,summary)=>{
-    if(!Array.isArray(games)||games.length<58)throw Error('Results source does not cover original Week8 and Week9 public records');
-    if(!Array.isArray(summary)||summary.length<6)throw Error('Missing week-by-week results summary');
+
+  const state={week:null,day:'all'};
+  function verify(raw, summary, directional, adjustedSummary) {
+    if(!Array.isArray(raw)||!Array.isArray(summary)||!Array.isArray(directional)
+       ||!Array.isArray(adjustedSummary)||directional.length<43)
+      throw Error('Results files are missing or incomplete.');
+    const unique=new Map();
+    for(const x of raw){
+      const key=x.game_id+'|'+x.model;
+      if(unique.has(key))throw Error('Duplicate published record: '+key);
+      unique.set(key,x);
+      if(!['FINAL','PENDING'].includes(x.score_status))
+        throw Error('Invalid completion status: '+key);
+    }
+    if(directional.length!==raw.filter(r=>r.model==='injury'&&r.record_class==='PUBLIC_PUBLISHED').length)
+      throw Error('Directional games do not match the published Injury cohort.');
     const seen=new Set();
-    for(const r of games){
-      if(!r.game_id||!['baseline','injury'].includes(r.model)||!expectedStatus.has(r.score_status))
-        throw Error('Invalid game/model/status in results archive');
-      const key=r.game_id+'|'+r.model;
-      if(seen.has(key))throw Error('Duplicate graded game/model row '+key);
-      seen.add(key);
-      if(!grades.has(r.ats_result)||!grades.has(r.total_result))
-        throw Error('Nonstandard game result '+key);
-      if(r.score_status==='PENDING' && (r.ats_result!=='Pending'||r.total_result!=='Pending'||String(r.actual_home).trim()!==''))
-        throw Error('Pending game prematurely graded');
-      if(r.score_status==='FINAL' && (![r.actual_home,r.actual_away].every(x=>Number.isInteger(num(x)))||
-          !r.score_source_url))
-        throw Error('FINAL game has no authenticated final score');
-      if(String(r.week)==='9'&&r.model==='baseline'&&r.record_class!=='RESEARCH_COMPARATOR')
-        throw Error('Week9 retrospective Baseline improperly promoted to official cumulative record');
+    for(const item of directional){
+      if(item.model!=='injury'||item.record_class!=='DERIVED_DIRECTIONAL_TIEBREAK'
+         ||seen.has(item.game_id)||!['Over','Under'].includes(item.total_pick)
+         ||!['Win','Loss','Push','Pending'].includes(item.total_result))
+        throw Error('Invalid or duplicate game in Injury records: '+item.game_id);
+      seen.add(item.game_id);
+      const original=unique.get(item.game_id+'|injury');
+      if(!original||original.record_class!=='PUBLIC_PUBLISHED')
+        throw Error('Missing original forecast for '+item.game_id);
+      for(const field of ['ats_pick','ats_result','projected_total','bovada_total',
+                          'score_status','actual_away','actual_home']){
+        if(String(item[field])!==String(original[field]))
+          throw Error('Game result or original model value was changed: '+item.game_id);
+      }
+      if(original.total_result!=='No lean' &&
+         (item.total_result!==original.total_result||item.total_pick!==original.total_pick))
+        throw Error('Unexpected rewrite of an Injury pick: '+item.game_id);
+      if(original.total_result==='No lean' &&
+        !['POSTHOC_POLICY_USING_PREEXISTING_PREGAME_BASELINE',
+          'PROSPECTIVE_POLICY_EXACT_TWO_MODEL_TIE_UNDER'].includes(item.selection_provenance))
+        throw Error('An exact-market fallback lacks a documented source: '+item.game_id);
+      if(item.score_status==='FINAL' &&
+        (!Number.isInteger(number(item.actual_home))||!Number.isInteger(number(item.actual_away))))
+        throw Error('Final score is missing: '+item.game_id);
     }
-    const current=new Set(games.map(r=>String(r.week)));
-    if(!current.has('8')||!current.has('9')||!current.has('10'))
-      throw Error('Results are missing a known published week');
-    for(const [wk,count] of [['8',14],['9',15],['10',14]]){
-      const sub=games.filter(r=>String(r.week)===wk);
-      if(sub.length!==count*2||new Set(sub.map(r=>r.game_id)).size!==count)
-        throw Error('Incomplete Week '+wk+' result cohort: '+sub.length);
-    }
-    for(const model of ['baseline','injury']){
-      const official=summaryFor(summary,'ALL',model,'PUBLIC_PUBLISHED');
-      if(!official)throw Error('Missing cumulative '+model+' record');
-      const included=games.filter(r=>r.model===model&&r.record_class==='PUBLIC_PUBLISHED');
-      if(num(official.games_expected)!==included.length
-         ||num(official.games_final)!==included.filter(r=>r.score_status==='FINAL').length)
-         throw Error('Cumulative graded game count mismatch '+model);
-      for(const [field,prefix] of [['ats_result','ats_'],['total_result','totals_']]){
-        const t=tally(games,model,field);
-        for(const [key,col] of [['wins','wins'],['losses','losses'],['pushes','pushes'],['no_lean','no_lean']]){
-          if(t[key]!==num(official[prefix+col]))
-            throw Error('Cumulative '+model+' '+field+' '+key+' disagrees with game-by-game grades');
-        }
+    const tie=directional.find(r=>r.game_id==='2026_08_IND_JAX');
+    if(!tie||tie.total_pick!=='Over'||tie.total_result!=='Win'
+      ||tie.fallback_projected_total!=='46.9'
+      ||tie.original_total_result!=='No lean')
+      throw Error('Week 8 tie-breaker does not match the archived pregame evidence.');
+    const overall=adjustedSummary.find(s=>s.week==='ALL'&&s.model==='injury'&&
+      s.record_class==='DERIVED_DIRECTIONAL_TIEBREAK');
+    if(!overall||n(overall.games_expected)!==directional.length||
+       n(overall.games_final)!==directional.filter(r=>r.score_status==='FINAL').length)
+      throw Error('Overall record does not reconcile with game-by-game grades.');
+    for(const kind of ['ats','totals']){
+      for(const [field,label] of [['Win','wins'],['Loss','losses'],['Push','pushes']]){
+        if(n(overall[kind+'_'+label])!==directional.filter(r=>r.score_status==='FINAL'&&
+          r[(kind==='ats'?'ats_result':'total_result')]===field).length)
+          throw Error('Overall '+kind+' record does not match the games.');
       }
     }
-  };
-  const filterState={week:'all',day:'all'};
-  const shownWeek=(row)=>filterState.week==='all'||String(row.week)===filterState.week;
-  const shownDay=(row)=>filterState.day==='all'||row.day===filterState.day;
-  const finalText=(r)=>{
-    if(!r||r.score_status!=='FINAL')return 'Pending';
-    return esc(r.away_team)+' '+esc(r.actual_away)+' – '+esc(r.home_team)+' '+esc(r.actual_home);
-  };
-  function render(data){
-    const originalGames=data.resultsGames||[],originalSummary=data.resultsSummary||[];
-    validate(originalGames,originalSummary);
-    const games=data.directionalGames||[],summary=data.directionalSummary||[];
-    const originalInjury=originalGames.filter(r=>r.model==='injury'&&r.record_class==='PUBLIC_PUBLISHED');
-    if(games.length!==originalInjury.length||games.length<43
-       ||new Set(games.map(r=>r.game_id)).size!==games.length)
-      throw Error('Full directional archive is missing a unique Injury model row per game');
-    const originalMap=new Map(originalInjury.map(r=>[r.game_id,r]));
-    for(const r of games){
-      const old=originalMap.get(r.game_id);
-      if(!old||r.model!=='injury'||r.record_class!=='DERIVED_DIRECTIONAL_TIEBREAK'
-        ||!['Over','Under'].includes(r.total_pick)
-        ||!['Win','Loss','Push','Pending'].includes(r.total_result))
-        throw Error('Invalid complete-direction data '+r.game_id);
-      for(const key of ['ats_result','ats_pick','actual_home','actual_away','projected_total','bovada_total','score_status']){
-        if(String(old[key])!==String(r[key]))
-          throw Error('Derived results changed the underlying frozen match '+r.game_id+' field '+key);
-      }
-      if(old.total_result==='No lean'){
-        if(r.selection_provenance!=='POSTHOC_POLICY_USING_PREEXISTING_PREGAME_BASELINE'
-           &&r.selection_provenance!=='PROSPECTIVE_POLICY_EXACT_TWO_MODEL_TIE_UNDER')
-          throw Error('Missing clear origin for directional tie-break '+r.game_id);
-      }else if(r.total_result!==old.total_result||r.total_pick!==old.total_pick){
-        throw Error('Improper changed non-tie injury grade '+r.game_id);
-      }
-    }
-    const expectedSpecial=games.find(r=>r.game_id==='2026_08_IND_JAX');
-    if(!expectedSpecial||expectedSpecial.total_pick!=='Over'
-      ||expectedSpecial.total_result!=='Win'
-      ||expectedSpecial.fallback_projected_total!=='46.9'
-      ||expectedSpecial.original_total_result!=='No lean')
-      throw Error('Cannot authenticate Week8 independently sourced fallback Over');
-    const cards=['ats','totals'];
-    $('results-cards').innerHTML=cards.map(market=>{
-      const result=summaryFor(summary,'ALL','injury','DERIVED_DIRECTIONAL_TIEBREAK');
-      if(!result)throw Error('Complete directional Injury record missing');
-      const c=rec(result,market),win=market==='ats'?result.ats_win_pct:result.totals_win_pct;
-      const finished=num(result.games_final),pending=num(result.games_pending);
-      const neutral=market==='ats'?num(result.ats_no_lean):num(result.totals_no_lean);
-      const pushed=market==='ats'?num(result.ats_pushes):num(result.totals_pushes);
-      const graded=finished-neutral;
-      const numWin=Number.isFinite(num(win))?num(win).toFixed(1)+'%':'—';
-      return '<div class="model-card"><div class="model-name">OVERALL INJURY MODEL · '
-        +(market==='ats'?'ATS RECORD':'TOTALS RECORD')+'</div>'
-        +'<div class="model-value">'+esc(c)+'</div>'
-        +'<div class="model-desc">'+graded+' directional results'
-        +(pushed?' · '+pushed+' push':'')
-        +' · '+numWin+' win rate · '+roi(result,market)+' illustrative -110 ROI'
-        +(market==='totals'?' · includes 1 retrospective Baseline tie-breaker':'')
-        +(pending?' · '+pending+' pending':'')+'</div></div>';
-    }).join('');
-
-    const weeks=[...new Set(games.map(r=>Number(r.week)))].sort((a,b)=>b-a);
-    const weekFilter=$('results-week-filter'),dayFilter=$('results-day-filter');
-    if(weekFilter){
-      const choices=['<option value="all">All published weeks</option>'].concat(
-        weeks.map(w=>'<option value="'+w+'">Week '+w+'</option>')
-      ).join('');
-      if(weekFilter.innerHTML!==choices)weekFilter.innerHTML=choices;
-      if(!weeks.map(String).includes(filterState.week))filterState.week='all';
-      weekFilter.value=filterState.week;
-      if(!weekFilter.dataset.wired){
-        weekFilter.addEventListener('change',()=>{
-          filterState.week=weekFilter.value; render(data);
-        });weekFilter.dataset.wired='true';
-      }
-    }
-    if(dayFilter && !dayFilter.dataset.wired){
-      dayFilter.addEventListener('change',()=>{
-        filterState.day=dayFilter.value;render(data);
-      });dayFilter.dataset.wired='true';
-    }
-    if(dayFilter)dayFilter.value=filterState.day;
-    const weekRows=weeks.filter(w=>filterState.week==='all'||String(w)===filterState.week);
-    const results=weekRows.map(w=>{
-      const i=summaryFor(summary,w,'injury','DERIVED_DIRECTIONAL_TIEBREAK');
-      if(!i)throw Error('Missing Injury results row for Week '+w);
-      const notes=w===8?' <small>† Baseline tiebreaker on one exact-market total</small>':'';
-      return '<tr><td><b>Week '+w+'</b></td><td>'+esc(rec(i,'ats'))+'</td>'
-      +'<td>'+esc(rec(i,'totals'))+notes+'</td><td>'+num(i.games_final)+'/'+num(i.games_expected)+'</td>'
-      +'<td>'+roi(i,'ats')+'</td><td>'+roi(i,'totals')+'</td></tr>';
-    });
-    $('week-results').innerHTML=results.join('');
-    $('week-title').textContent='Weekly Injury model record · 2026';
-    $('results-desc').textContent='Complete directional record: original published Injury leans plus an explicitly labeled fallback when the Injury total equals Bovada. '
-      +'Week 8 IND–JAX Over uses the previously published Baseline forecast (46.9 vs line 46), assigned under this policy after the game. '
-      +'Original prospective Injury record remains archived at 23–18 with one no-pick. '
-      +'Hypothetical -110 ROI is NOT an actual wager return.';
-
-    const combined=new Map();
-    for(const r of games.filter(g=>g.model==='injury'&&shownWeek(g)&&shownDay(g))){
-      const key=r.game_id;
-      if(combined.has(key))throw Error('Duplicate published Injury game '+key);
-      combined.set(key,{game_id:r.game_id,week:Number(r.week),day:r.day,
-        away:r.away_team,home:r.home_team,kickoff:r.kickoff_utc,injury:r});
-    }
-    const together=[...combined.values()].sort((a,b)=>b.week-a.week
-      ||(b.kickoff||'').localeCompare(a.kickoff||'')||a.game_id.localeCompare(b.game_id));
-    $('results-details').innerHTML=together.map(g=>{
-      const pick=g.injury;
-      const market=Number.isFinite(num(pick?.home_favored_spread))?
-        (num(pick.home_favored_spread)>0?g.home+' -'+Math.abs(num(pick.home_favored_spread)):
-         num(pick.home_favored_spread)<0?g.away+' -'+Math.abs(num(pick.home_favored_spread)):"PK")+
-        ' / '+Number(pick.bovada_total).toFixed(1):'Unavailable';
-      const gamemark=g.injury&&g.injury.source_warning.includes('NOT CALIBRATED')?
-        ' <span title="First-start QB adjustment uncalibrated; not an official bet recommendation">†</span>':'';
-      const finalTotal=pick.score_status==='FINAL'
-        ?num(pick.actual_away)+num(pick.actual_home):NaN;
-      const marketTotal=num(pick.bovada_total);
-      const actualTotalResult=!Number.isFinite(finalTotal)?'Pending'
-        :Math.abs(finalTotal-marketTotal)<1e-8?'Push'
-        :finalTotal>marketTotal?'Over':'Under';
-      const ats=pick.ats_pick;
-      const adjusted=pick.selection_provenance==='POSTHOC_POLICY_USING_PREEXISTING_PREGAME_BASELINE';
-      const totalCell=esc(pick.total_pick)+' · '+gradeLabel(pick.total_result)
-        +(adjusted?' <small title="Retrospectively adopted Nov 16 policy: pre-existing public Baseline forecast 46.9 > Bovada 46. This was NOT an original Injury model Over pick.">† Baseline tiebreaker (retrospective)</small>':'');
-      return '<tr><td><b>W'+g.week+'</b> '+esc(g.day)+'</td>'
-        +'<td>'+esc(g.away)+' @ '+esc(g.home)+gamemark+'</td>'
-        +'<td>'+finalText(pick)+'</td><td>'+esc(market)+'</td>'
-        +'<td>'+esc(ats)+' · '+gradeLabel(pick.ats_result)+'</td>'
-        +'<td>'+totalCell+'</td>'
-        +'<td>'+esc(Number.isFinite(finalTotal)?finalTotal+' total · '+actualTotalResult:actualTotalResult)+'</td></tr>';
-    }).join('');
-    $('results-game-desc').textContent=together.length+' games shown, '
-      +together.filter(g=>g.injury?.score_status==='FINAL').length+' final; '
-      +together.filter(g=>g.injury?.score_status==='PENDING').length+' awaiting final. '
-      +'† Week8 IND @ JAX Over 46 — Win is a retrospective Baseline tiebreaker, not an original Injury pick; original historical grade preserved. '
-      +'Miami QB adjustment remains uncalibrated. Select a week or day to filter.';
+    return overall;
   }
+
+  function resultCard(overall,kind){
+    const title=kind==='ats'?'Against the spread':'Game totals';
+    const key=kind==='ats'?'ats':'totals';
+    const percentage=number(overall[key+'_win_pct']);
+    const finalCount=n(overall.games_final), pending=n(overall.games_pending);
+    return '<div class="result-overview-card">'
+      +'<div class="result-overview-label">'+escape(title)+'</div>'
+      +'<div class="result-overview-value">'+escape(record(overall,key))+'</div>'
+      +'<div class="result-overview-meta">'+(Number.isFinite(percentage)?percentage.toFixed(1)+'% win rate':'')
+      +' · '+finalCount+' finished'+(pending?' · '+pending+' pending':'')+'</div></div>';
+  }
+
+  function weeklyRows(games,summary){
+    const weeks=[...new Set(games.map(x=>Number(x.week)))].sort((a,b)=>b-a);
+    $('week-results').innerHTML=weeks.map(week=>{
+      const x=summary.find(row=>String(row.week)===String(week)&&
+        row.record_class==='DERIVED_DIRECTIONAL_TIEBREAK'&&row.model==='injury');
+      if(!x)throw Error('Week '+week+' is missing its official summary.');
+      return '<div class="result-week-row">'
+        +'<div class="result-week-name"><strong>Week '+week+'</strong><small>'
+        +n(x.games_final)+' of '+n(x.games_expected)+' final</small></div>'
+        +'<div class="result-week-record"><span>ATS</span><strong>'+escape(record(x,'ats'))+'</strong></div>'
+        +'<div class="result-week-record"><span>Totals</span><strong>'+escape(record(x,'totals'))+'</strong></div></div>';
+    }).join('');
+    $('week-title').textContent='Week-by-week results';
+    $('results-desc').textContent='Injury model · 2026 season';
+    return weeks;
+  }
+
+  function gameCard(item){
+    const finished=item.score_status==='FINAL';
+    const homeMargin=number(item.home_favored_spread);
+    const fav=homeMargin>0 ? item.home_team :
+      homeMargin<0 ? item.away_team : 'Pick’em';
+    const spread=homeMargin===0?'PK':fav+' -'+val(Math.abs(homeMargin));
+    const total=number(item.bovada_total);
+    const score=finished
+      ?escape(item.away_team)+' '+escape(val(item.actual_away))+'  –  '
+         +escape(item.home_team)+' '+escape(val(item.actual_home))
+      :'Awaiting final score';
+    const fallback=item.selection_provenance==='POSTHOC_POLICY_USING_PREEXISTING_PREGAME_BASELINE';
+    const rookie=(item.source_warning||'').includes('NOT CALIBRATED');
+    const marketNumber=val(item.bovada_total);
+    const atsPick=item.ats_pick==='No lean'?'No recorded direction':item.ats_pick;
+    const totalPick=item.total_pick+' '+marketNumber;
+    const recordTotal=finished?n(item.actual_home)+n(item.actual_away):null;
+    const actualTotal=finished?recordTotal+' points':'—';
+    const day=escape(item.day||'');
+    return '<article class="result-game-card">'
+      +'<div class="result-game-top"><span>WEEK '+escape(item.week)+' · '+day.toUpperCase()
+      +'</span>'+grade(finished?'Final':'Pending')+'</div>'
+      +'<div class="result-game-score"><strong>'+escape(item.away_team)+' @ '+escape(item.home_team)
+      +'</strong><span>'+score+'</span></div>'
+      +'<div class="result-market">Bovada: '+escape(spread)+' · Total '+escape(marketNumber)
+      +(finished?' · Final '+escape(actualTotal):'')+'</div>'
+      +'<div class="result-picks">'
+      +'<div><div class="result-pick-title">ATS</div><div class="result-pick-line"><b>'+escape(atsPick)+'</b>'+grade(item.ats_result)+'</div></div>'
+      +'<div><div class="result-pick-title">TOTAL</div><div class="result-pick-line"><b>'+escape(totalPick)+'</b>'+grade(item.total_result)+'</div></div>'
+      +'</div>'
+      +(fallback?'<div class="result-game-note">† Retrospective direction from the archived Baseline forecast; not an original Injury pick.</div>':'')
+      +(rookie?'<div class="result-game-note">QB value uncalibrated · research-only prediction</div>':'')
+      +'</article>';
+  }
+
+  function render(data) {
+    const raw=data.resultsGames||[],sourceSummary=data.resultsSummary||[];
+    const games=data.directionalGames||[],summary=data.directionalSummary||[];
+    const overall=verify(raw,sourceSummary,games,summary);
+    const weeks=weeklyRows(games,summary);
+    $('results-cards').innerHTML=resultCard(overall,'ats')+resultCard(overall,'totals');
+    if(state.week===null)state.week=String(weeks[0]);
+    if(state.week!=='all'&&!weeks.map(String).includes(state.week))state.week=String(weeks[0]);
+
+    const weekSelect=$('results-week-filter'),daySelect=$('results-day-filter');
+    const values=['<option value="all">All weeks</option>',...weeks.map(w=>
+      '<option value="'+w+'">Week '+w+'</option>')].join('');
+    if(weekSelect.innerHTML!==values)weekSelect.innerHTML=values;
+    weekSelect.value=state.week;
+    daySelect.value=state.day;
+
+    if(!weekSelect.dataset.bound){
+      weekSelect.addEventListener('change',()=>{state.week=weekSelect.value;render(data);});
+      weekSelect.dataset.bound='yes';
+    }
+    if(!daySelect.dataset.bound){
+      daySelect.addEventListener('change',()=>{state.day=daySelect.value;render(data);});
+      daySelect.dataset.bound='yes';
+    }
+
+    const filtered=games.filter(g=>(state.week==='all'||String(g.week)===state.week)
+      &&(state.day==='all'||g.day===state.day))
+      .sort((a,b)=>Number(b.week)-Number(a.week)
+        ||String(b.kickoff_utc||'').localeCompare(String(a.kickoff_utc||''))
+        ||a.game_id.localeCompare(b.game_id));
+    const complete=filtered.filter(g=>g.score_status==='FINAL').length;
+    $('results-game-desc').textContent=filtered.length+' games · '+complete+' final'
+      +(filtered.length-complete?' · '+(filtered.length-complete)+' pending':'');
+    $('results-details').innerHTML=filtered.length
+      ?filtered.map(gameCard).join('')
+      :'<div class="results-empty">No games match those filters.</div>';
+  }
+
   window.renderPublicResults=render;
 })();
