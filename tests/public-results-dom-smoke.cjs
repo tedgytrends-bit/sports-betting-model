@@ -18,9 +18,8 @@ assert.equal(typeof window.renderPublicResults,'function');
 window.renderPublicResults(data);
 const finalCount=new Set(data.directionalGames.filter(r=>r.score_status==='FINAL').map(r=>r.game_id)).size;
 const pendingCount=new Set(data.directionalGames.filter(r=>r.score_status==='PENDING').map(r=>r.game_id)).size;
-assert.match(get('results-notice').innerHTML,new RegExp(finalCount+' games final'));
-if(pendingCount)assert.match(get('results-notice').innerHTML,new RegExp(pendingCount+' pending'));
-assert.match(get('results-notice').innerHTML,/retrospectively/);
+assert.equal(get('results-notice').innerHTML,'','Redundant Results notice must not render');
+assert.ok(finalCount>=42 && pendingCount>=0,'Published results cohort should still be present');
 const overall=data.directionalSummary.find(r=>r.week==='ALL'&&r.model==='injury'
   &&r.record_class==='DERIVED_DIRECTIONAL_TIEBREAK');
 assert.ok(overall);
