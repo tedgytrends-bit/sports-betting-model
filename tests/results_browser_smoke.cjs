@@ -130,6 +130,37 @@ async function main(){
           const screenshot='artifacts/results-'+viewport.name+(routeName?'-week10':'')+'.png';
           await page.screenshot({path:path.join(ROOT,screenshot),fullPage:false});
           console.log('PASS browser '+viewport.name+' '+(routeName||'index.html')+' cards='+metrics.cards.map(x=>x.value).join('/')+' viewport='+metrics.width+' docwidth='+metrics.documentWidth+' screenshot='+screenshot);
+          if(!routeName){
+            // Simulate an independently published future week. This is a
+            // fixture ONLY, never a real forecast or user-facing Week11 pick.
+            const future=await page.evaluate(()=>{
+              const base=data.resultsGames.filter(r=>r.game_id==='2026_10_MIA_IND'&&
+                r.record_class==='PUBLIC_PUBLISHED');
+              if(base.length!==2)throw Error('Missing Week10 test model pair');
+              const replacement=base.map(r=>({
+                ...r,week:'11',game_id:'2026_11_MIA_IND',
+                kickoff_utc:'2026-11-20T01:15:00+00:00',
+                published_at_utc:'2026-11-18T15:00:00+00:00',
+                quote_at_utc:'2026-11-18T14:00:00+00:00',
+              }));
+              data.resultsGames.push(...replacement);
+              const week=buildPublishedWeek(11);
+              data.games=week;
+              showPublishedWeek(11);
+              attachResultsToBoard();
+              renderBoard();
+              return {game:week[0].id,week:publishedWeekNumbers()[0]};
+            });
+            assert.equal(future.game,'2026_11_MIA_IND');
+            assert.equal(future.week,11);
+            assert.equal(await page.locator('.game-card').count(),1);
+            assert.match(await page.locator('#view-board .hero h1').innerText(),/Week 11 projections/);
+            assert.match(await page.locator('#future-board-archives').innerText(),/Week 10 projection archive/);
+            await page.locator('.game-card [data-game]').click();
+            assert.match(await page.locator('#drawer-content').innerText(),/Both published models/);
+            await page.locator('#close-drawer').click();
+            console.log('PASS synthetic future-week behavior: validated two model snapshots, archived Bovada, dynamic Week11 main board, Week10 preservation and matchup details');
+          }
           await page.close();
         }
         // Historical board remains functional but has no competing stale
