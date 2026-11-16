@@ -158,7 +158,7 @@ async function main(){
             assert.match(await page.locator('#view-board .hero h1').innerText(),/Week 11 projections/);
             assert.match(await page.locator('#future-board-archives').innerText(),/Week 10 projection archive/);
             await page.locator('.game-card [data-game]').click();
-            assert.match(await page.locator('#drawer-content').innerText(),/Both published models/);
+            assert.match(await page.locator('#drawer-content').innerText(),/Both published models/i);
             await page.locator('#close-drawer').click();
             console.log('PASS synthetic future-week behavior: validated two model snapshots, archived Bovada, dynamic Week11 main board, Week10 preservation and matchup details');
           }
