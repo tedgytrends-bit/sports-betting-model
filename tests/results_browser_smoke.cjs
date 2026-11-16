@@ -70,6 +70,51 @@ async function main(){
           await page.selectOption('#results-day-filter','Monday');
           assert.ok(await page.locator('.result-game-card').count()>=1,'Monday games filter empty');
           assert.deepEqual(errors,[],'JavaScript page exceptions: '+errors.join('; '));
+          // Full-site audit: remove old Week9 navigation and test every active view.
+          const nav=viewport.width<850?'.mobile-nav':'.desktop-nav';
+          const items=(await page.locator(nav).innerText()).toLowerCase();
+          assert.ok(items.includes('projections')&&items.includes('results')&&items.includes('about'),
+            'Navigation missing a main destination: '+items);
+          assert.ok(!items.includes('week 9'),'Week9 archive must not have a top-level tab');
+          await page.locator(nav+' [data-view="board"]').click();
+          await page.locator('.game-card').first().waitFor({timeout:15000});
+          assert.equal(await page.locator('.game-card').count(),14,'Full Week10 slate not loaded');
+          assert.match(await page.locator('#kpi-games').innerText(),/14/);
+          assert.match(await page.locator('.hero h1').first().innerText(),/Week 10 projections/);
+          assert.match(await page.locator('#board-snapshot-label').innerText(),/Latest saved pregame/);
+          assert.ok(await page.locator('.completed-strip').count()>=13,'Archived finals missing from the projection board');
+          assert.ok(await page.locator('.game-injuries').count()>=10,'Official injury information unexpectedly missing');
+          assert.equal(await page.locator('.game-injuries[open]').count(),0,
+            'Detailed injury lists should be collapsed by default');
+          const archives=page.locator('.past-boards');
+          assert.equal(await archives.count(),1,'Past weekly boards must remain findable');
+          await archives.locator('summary').click();
+          assert.match(await archives.innerText(),/Week 9 projection archive/);
+          assert.ok((await archives.locator('a[href="./week09.html"]').count())===1);
+          await page.locator('#search').fill('Miami');
+          assert.equal(await page.locator('.game-card').count(),1,'Team search failed');
+          await page.locator('#search').fill('');
+          assert.equal(await page.locator('.game-card').count(),14);
+          await page.locator('[data-model="baseline"]').click();
+          assert.equal(await page.locator('.game-card').count(),14);
+          await page.locator('[data-model="injury"]').click();
+          await page.locator('.game-card').first().locator('[data-game]').click();
+          assert.ok(await page.locator('#overlay').evaluate(el=>el.classList.contains('open')),
+            'Matchup detail drawer did not open');
+          await page.locator('#close-drawer').click();
+          assert.ok(!await page.locator('#overlay').evaluate(el=>el.classList.contains('open')));
+          const boardWidth=await page.evaluate(()=>document.documentElement.scrollWidth);
+          assert.ok(boardWidth<=viewport.width+2,'Projections horizontally overflow '+viewport.name+
+            ': '+boardWidth+' versus '+viewport.width);
+          await page.locator(nav+' [data-view="method"]').click();
+          assert.match(await page.locator('#view-method h1').innerText(),/About the models/);
+          assert.equal(await page.locator('#view-method .method-card').count(),4);
+          assert.equal(await page.locator('.about-more[open]').count(),0);
+          await page.locator('.about-more summary').click();
+          assert.ok(await page.locator('.about-more a').count()>=5,'Audit sources are inaccessible');
+          await page.locator(nav+' [data-view="results"]').click();
+          assert.ok(page.url().includes('view=results'),'Deep link not updated when selecting Results');
+          assert.equal(await page.locator('.result-overview-card').count(),2);
           fs.mkdirSync(path.join(ROOT,'artifacts'),{recursive:true});
           await page.selectOption('#results-week-filter','10');
           await page.selectOption('#results-day-filter','all');
