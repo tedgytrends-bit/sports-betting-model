@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "docs/**"
+      - "data/public_results/**"
       - ".github/workflows/deploy-tedgy-trends.yml"
   workflow_dispatch:
 
@@ -28,6 +29,17 @@ jobs:
         uses: actions/checkout@v4
       - name: Confirm site artifact is present
         run: test -s docs/index.html
+      - name: Stage validated public results under same-origin Pages assets
+        run: |
+          mkdir -p docs/data/public_results
+          cp data/public_results/nfl_2026_graded_games.csv docs/data/public_results/
+          cp data/public_results/nfl_2026_results_summary.csv docs/data/public_results/
+          cp data/public_results/nfl_2026_full_directional_games.csv docs/data/public_results/
+          cp data/public_results/nfl_2026_full_directional_summary.csv docs/data/public_results/
+          cp data/public_results/nfl_2026_full_directional_policy.json docs/data/public_results/
+          cp data/public_results/nfl_2026_results_metadata.json docs/data/public_results/
+          test -s docs/data/public_results/nfl_2026_full_directional_games.csv
+          test -s docs/data/public_results/nfl_2026_full_directional_summary.csv
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
       - name: Upload static site
