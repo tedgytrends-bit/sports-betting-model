@@ -410,6 +410,8 @@ $('overlay').addEventListener('click',e=>{if(e.target.id==='overlay')closeDrawer
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer()});
 $('close-drawer').addEventListener('click',closeDrawer);
 init();
+const initialResultsView=new URLSearchParams(window.location.search).get('view');
+if(initialResultsView==='results')showView('results');
 
 </script>
 <div aria-live="polite" class="shell" id="sync-errors" role="status"></div></body>
