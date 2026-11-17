@@ -30,7 +30,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - run: python -m pip install -r requirements.txt pytest
+      - run: python -m pip install pytest
       - run: python -m pytest -q cbb/tests/test_ats_diagnostic.py
       - run: python -m cbb.ats_diagnostic --data-repo audit-data --output-dir diagnostic
       - run: cat diagnostic/ats_diagnostic.md >> "$GITHUB_STEP_SUMMARY"

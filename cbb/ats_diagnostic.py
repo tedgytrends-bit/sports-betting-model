@@ -126,11 +126,17 @@ def load_games(repo, root):
                      if capture < entry[0] < tip - timedelta(minutes=1)
                      and observed < entry[1] and entry[2] == market["provider"] and entry[4] == identity]
             day = utc_date(grade["tip_utc"]).astimezone(CENTRAL).date().isoformat()
-            games.append(dict(id=ident, day=day, capture=capture, observed=observed,
-                              tip=tip, available=available, spread=spread, actual=margin,
-                              preds=preds, edges=edges, picks=picks, neutral=game.get("neutral_site"),
-                              coverage=availability_group(game), provider=market["provider"],
-                              model_commit=freeze["model_commit"], later=max(later, default=None)))
+            row = dict(id=ident, day=day, capture=capture, observed=observed,
+                       tip=tip, available=available, spread=spread, actual=margin,
+                       preds=preds, edges=edges, picks=picks, neutral=game.get("neutral_site"),
+                       coverage=availability_group(game), provider=market["provider"],
+                       model_commit=freeze["model_commit"], later=max(later, default=None))
+            for model in MODELS:
+                checked = grade["models"][model]
+                if (checked["ats_edge"] != edges[model]
+                        or (edges[model] and checked["ats"] != score(row, pick(row, model)))):
+                    raise ValueError(f"Frozen ATS replay differs from journal for {ident}/{model}")
+            games.append(row)
     if not games:
         raise ValueError("No common eligible games")
     return games, dict(counts)
@@ -195,13 +201,14 @@ def side(game, model):
     return "favorite" if selection == favorite else "underdog"
 
 
-def paired_delta(candidate, reference, alpha=0.05):
+def paired_delta(candidate, reference, alpha=0.05, *, compare_returns=True):
     by_day = defaultdict(list)
     for (g, ats, pred), (other, old_ats, old_pred) in zip(candidate, reference, strict=True):
         if g["id"] != other["id"]:
             raise ValueError("Unmatched paired comparison")
         mae = abs(pred - g["actual"]) - abs(old_pred - g["actual"])
-        by_day[g["day"]].append((mae, 100 * (units(ats) - units(old_ats))))
+        return_delta = 100 * (units(ats) - units(old_ats)) if compare_returns else 0
+        by_day[g["day"]].append((mae, return_delta))
     days = [(len(rows), *(sum(col) for col in zip(*rows))) for rows in by_day.values()]
     if not days:
         return None
@@ -216,10 +223,12 @@ def paired_delta(candidate, reference, alpha=0.05):
         values = sorted(series)
         intervals.append([values[int(alpha / 2 * len(values))],
                           values[int((1 - alpha / 2) * len(values))]])
-    return dict(games=n, day_blocks=len(days), margin_mae_delta=mae / n,
-                return_per_eligible_game_delta_pct=net / n, interval_level=1 - alpha,
-                mae_interval=intervals[0] if intervals else None,
-                return_interval_pct=intervals[1] if intervals else None)
+    result = dict(games=n, day_blocks=len(days), margin_mae_delta=mae / n,
+                  interval_level=1 - alpha, mae_interval=intervals[0] if intervals else None)
+    if compare_returns:
+        result.update(return_per_eligible_game_delta_pct=net / n,
+                      return_interval_pct=intervals[1] if intervals else None)
+    return result
 
 
 def compare(games, left, right):
@@ -266,7 +275,7 @@ def walk_forward(games):
     return dict(folds=folds, market=metrics(market),
                 models={m: dict(frozen=metrics(frozen[m]), corrected=metrics(corrected[m]),
                                 corrected_minus_frozen=paired_delta(corrected[m], frozen[m], 0.05 / 6),
-                                corrected_minus_market_mae=paired_delta(corrected[m], market, 0.05 / 6))
+                                corrected_minus_market_mae=paired_delta(corrected[m], market, compare_returns=False))
                         for m in MODELS})
 
 
@@ -360,8 +369,11 @@ def render(data):
                             for bucket, metrics in groups.items()),
                       table(info["selection_location"].items()),
                       table((k, info["later_pretip"][k]) for k in ("frozen", "later"))])
+    lines.extend(["## Paired comparison",
+                  "Combined minus Opponent adds rotation features conditional on opponent features. "
+                  "Rotation-only minus Opponent swaps feature families."])
     for name, pair in data["pairs"].items():
-        lines.extend([f"## {name}", f"{pair['opposite_picks']} opposite picks and "
+        lines.extend([f"### {name}", f"{pair['opposite_picks']} opposite picks and "
                       f"{pair['only_one_picked']} games where only one model picked.",
                       table(pair["on_opposite_picks"].items())])
         for group, delta in [("Overall", pair["overall"]), *pair["by_coverage"].items(),
@@ -370,8 +382,6 @@ def render(data):
                 lines.append(f"- {group} ({delta['games']} games). MAE delta "
                              f"{fmt(delta['margin_mae_delta'])} points, return delta "
                              f"{fmt(delta['return_per_eligible_game_delta_pct'])} pp per eligible game.")
-        lines.append("The Combined minus Opponent comparison adds rotation features conditional on opponent features. "
-                     "Rotation-only minus Opponent swaps feature families.")
     walk = data["walk_forward"]
     lines.extend(["## Chronological evaluation",
                   "The fixed candidate shrinks model edges 25% toward the frozen spread and fits a home-margin "
