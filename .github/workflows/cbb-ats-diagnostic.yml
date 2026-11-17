@@ -1,0 +1,40 @@
+name: CBB ATS Diagnostic
+
+on:
+  pull_request:
+    paths:
+      - 'cbb/ats_diagnostic.py'
+      - 'cbb/tests/test_ats_diagnostic.py'
+      - '.github/workflows/cbb-ats-diagnostic.yml'
+  workflow_dispatch:
+    inputs:
+      data_ref:
+        description: Prospective data commit SHA with full first-parent grade history
+        required: true
+        default: '6022b1c067eef01adc9a663330df61174e194076'
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.data_ref || '6022b1c067eef01adc9a663330df61174e194076' }}
+          path: audit-data
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install -r requirements.txt pytest
+      - run: python -m pytest -q cbb/tests/test_ats_diagnostic.py
+      - run: python -m cbb.ats_diagnostic --data-repo audit-data --output-dir diagnostic
+      - run: cat diagnostic/ats_diagnostic.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cbb-ats-diagnostic
+          path: diagnostic/
