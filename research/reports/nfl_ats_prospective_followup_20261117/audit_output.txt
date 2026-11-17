@@ -1,0 +1,25 @@
+Frozen Bovada 9 games 15
+home_favored_spread [0, 0, 0] MAE 8.6333
+baseline_predicted_home_margin [4, 10, 1] MAE 11.021
+passing_predicted_home_margin [3, 11, 1] MAE 10.8314
+flips 3
+Frozen Bovada 10 games 14
+home_favored_spread [0, 0, 0] MAE 10.3929
+baseline_predicted_home_margin [3, 11, 0] MAE 13.001
+passing_predicted_home_margin [4, 10, 0] MAE 12.4678
+flips 1
+Week 10 two Bovada captures baseline_predicted_home_margin N 13 aligned/opposed/flat [5, 5, 3] mean line value 0.1154 ATS [4, 9, 0] actual captured price ROI -40.91
+Week 10 two Bovada captures passing_predicted_home_margin N 13 aligned/opposed/flat [5, 5, 3] mean line value 0.1154 ATS [5, 8, 0] actual captured price ROI -26.09
+Week 10 initial QB pair 14
+QB off [5, 9, 0] MAE 12.0965
+QB on [8, 6, 0] MAE 11.1655
+QB arm flips 3
+2024 281 market Brier 0.25014 log loss 0.69342
+2024 281 market+baseline Brier 0.25021 log loss 0.69359
+2024 281 market+baseline+passing delta Brier 0.24961 log loss 0.69237
+2025 284 market Brier 0.25141 log loss 0.69597
+2025 284 market+baseline Brier 0.25258 log loss 0.69832
+2025 284 market+baseline+passing delta Brier 0.25277 log loss 0.69884
+2026 114 market Brier 0.25251 log loss 0.69818
+2026 114 market+baseline Brier 0.25197 log loss 0.69711
+2026 114 market+baseline+passing delta Brier 0.25383 log loss 0.70086
