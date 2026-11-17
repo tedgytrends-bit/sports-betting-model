@@ -8,6 +8,10 @@ on:
       - "data/public_results/**"
       - ".github/workflows/deploy-tedgy-trends.yml"
   workflow_dispatch:
+  workflow_run:
+    workflows: ["Update Tedgy Trends public NFL results after completed game days"]
+    types: [completed]
+    branches: [main]
 
 permissions:
   contents: read
@@ -20,6 +24,7 @@ concurrency:
 
 jobs:
   deploy:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -27,6 +32,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          ref: main
       - name: Confirm site artifact is present
         run: test -s docs/index.html
       - name: Stage validated public results under same-origin Pages assets
