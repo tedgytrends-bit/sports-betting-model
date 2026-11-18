@@ -1,0 +1,123 @@
+{
+  "capture_type": "research_shadow",
+  "capture_utc": "2026-11-18T14:19:38.369326Z",
+  "capture_version": 1,
+  "frozen_rule": "First snapshot within 24 hours before tip with at least one market line",
+  "game": {
+    "away": "Weber State",
+    "away_team_id": "345",
+    "baseline": {
+      "ats_edge": -3.755,
+      "ats_lean": "away",
+      "projected_away_points": 66.07,
+      "projected_home_points": 94.32,
+      "projected_margin_home": 28.245,
+      "projected_total": 160.387,
+      "total_edge": -10.113,
+      "total_lean": "under",
+      "training_games": 31259
+    },
+    "coverage": {
+      "away_elite_recruits": 0,
+      "away_games_played": 4,
+      "away_prior_matched": 4,
+      "away_roster_eligible": 14,
+      "away_verified_portal": 1,
+      "home_elite_recruits": 0,
+      "home_games_played": 4,
+      "home_prior_matched": 8,
+      "home_roster_eligible": 15,
+      "home_verified_portal": 4
+    },
+    "freeze_candidate": true,
+    "home": "Utah State",
+    "home_team_id": "329",
+    "id": "375089",
+    "market": {
+      "as_of_utc": "2026-11-18T14:19:38.369326Z",
+      "home_spread": -32.0,
+      "provider": "Bovada",
+      "total": 170.5
+    },
+    "neutral_site": false,
+    "player_all_v4": {
+      "ats_edge": 2.778,
+      "ats_lean": "home",
+      "projected_away_points": 63.78,
+      "projected_home_points": 98.56,
+      "projected_margin_home": 34.778,
+      "projected_total": 162.34,
+      "total_edge": -8.16,
+      "total_lean": "under",
+      "training_games": 31259
+    },
+    "player_opp_v3": {
+      "ats_edge": 5.577,
+      "ats_lean": "home",
+      "projected_away_points": 62.6,
+      "projected_home_points": 100.18,
+      "projected_margin_home": 37.577,
+      "projected_total": 162.774,
+      "total_edge": -7.726,
+      "total_lean": "under",
+      "training_games": 31259
+    },
+    "player_rot_v4": {
+      "ats_edge": 2.429,
+      "ats_lean": "home",
+      "projected_away_points": 64.0,
+      "projected_home_points": 98.43,
+      "projected_margin_home": 34.429,
+      "projected_total": 162.436,
+      "total_edge": -8.064,
+      "total_lean": "under",
+      "training_games": 31259
+    },
+    "player_v2": {
+      "ats_edge": 5.011,
+      "ats_lean": "home",
+      "projected_away_points": 62.66,
+      "projected_home_points": 99.68,
+      "projected_margin_home": 37.011,
+      "projected_total": 162.341,
+      "total_edge": -8.159,
+      "total_lean": "under",
+      "training_games": 31259
+    },
+    "research_quality": "adequate",
+    "rotation_coverage": {
+      "away": {
+        "box_coverage": 1.0,
+        "last_box_present": true,
+        "past_game_boxes": 4,
+        "prior_key_minutes_missing": 0.0
+      },
+      "home": {
+        "box_coverage": 1.0,
+        "last_box_present": true,
+        "past_game_boxes": 4,
+        "prior_key_minutes_missing": 0.0
+      }
+    },
+    "season": 2027,
+    "tip_utc": "2026-11-19T02:00:00Z"
+  },
+  "model_commit": "af01280c236016583aa6597ec4aa3648b3b44137",
+  "snapshot_path": "cbb/prospective/2027/snapshots/20261118T141938369326_44322768830.json",
+  "source": "CollegeBasketballData API as received at capture time",
+  "source_sha256": {
+    "boxes.json": "4e1c6991f73306aeae7e5f6902ad990fbd97252fd86cb0262648605a79a44ddc",
+    "games.json": "d46c36c41d8037d792936f970b4f6836ee72ab6c99d5a774f6c6a34402aa80df",
+    "historical_game_players_2022_gzip": "3fc80e7d3b0963611757d7554e2ab25f8fa9b452db6b1c93ae4c8c911ec66d8d",
+    "historical_game_players_2023_gzip": "28ec46bff415aea0e871ec2c59c7d97326cbb1b72396e66fb3db3d5a91c73fa3",
+    "historical_game_players_2024_gzip": "da66322378204140f5bbd9a0500f20914cfa11d2ea789261bfb12840f9a68ff3",
+    "historical_game_players_2025_gzip": "c650c07c0ceeb6b25ff1877a04490eec5b5dfa2a73d4456157cdd618e17d0b2b",
+    "historical_game_players_2026_gzip": "f1d1f95b023e4e340a95f9eb9ee15546863fbbeed218ac01119ae8d20f345414",
+    "lines.json": "0b45cf2c282a93284b316eb70d07a79531409f1dd7ec653890d004c000a4b6be",
+    "live_game_players_gzip": "d93ba299cea35a1e521c69f0ed20859be371a0b0a48b74efee6ce6933a247d8f",
+    "portal.json": "1120680b643a03192b5f9361ae57e37e6a535c5a40b4622761ab597962101951",
+    "prior_players.json": "b0ef0a21b4e64a811eb29fd569f711257f4088ebd2abbfad89921542d577638e",
+    "recruits.json": "e6d4bbefdadeb90fa70b094eca3aa2cbd19b76397daaab1b1e9c847059ec2bff",
+    "rosters.json": "b3d36c7ac1fbeaca4af5b3acba9ffe03325dc5ab35969b04e81ee7d42c721e62"
+  }
+}
