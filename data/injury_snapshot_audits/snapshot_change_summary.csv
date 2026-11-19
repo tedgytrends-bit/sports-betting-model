@@ -372,3 +372,10 @@ season,week,team,change_type,change_count
 2026,10,WAS,practice_status,2
 2026,10,WAS,report_primary_injury,2
 2026,10,WAS,report_status,2
+2026,11,HOU,practice_status,2
+2026,11,HOU,report_primary_injury,7
+2026,11,HOU,report_secondary_injury,1
+2026,11,HOU,report_status,7
+2026,11,IND,practice_status,1
+2026,11,IND,report_primary_injury,9
+2026,11,IND,report_status,9
