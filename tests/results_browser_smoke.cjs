@@ -4,10 +4,24 @@
 const fs=require('node:fs');
 const path=require('node:path');
 const assert=require('node:assert/strict');
-const {spawn}=require('node:child_process');
+const {spawn,execFileSync}=require('node:child_process');
 const {chromium}=require('playwright');
 const ROOT=path.resolve(__dirname,'..');
 const SITE=path.join(ROOT,'docs');
+const source=JSON.parse(execFileSync('python3',['-c',`
+import csv,json
+from pathlib import Path
+p=Path("data/public_results")
+games=list(csv.DictReader((p/"nfl_2026_full_directional_games.csv").open()))
+summary=list(csv.DictReader((p/"nfl_2026_full_directional_summary.csv").open()))
+overall=next(r for r in summary if r["week"]=="ALL")
+def record(kind):
+    pushes=int(overall[kind+"_pushes"])
+    return overall[kind+"_wins"]+"–"+overall[kind+"_losses"]+("–"+str(pushes) if pushes else "")
+latest=max(int(r["week"]) for r in games)
+print(json.dumps(dict(latest=latest,current=sum(int(r["week"])==latest for r in games),
+                     all=len(games),ats=record("ats"),totals=record("totals"))))
+`],{cwd:ROOT,encoding:'utf8'}));
 const PORT=8765;
 const BASE_URL='http://127.0.0.1:'+PORT;
 
@@ -49,9 +63,9 @@ async function main(){
           await page.goto(target,{waitUntil:'domcontentloaded'});
           await page.locator('.result-game-card').first().waitFor({timeout:30000});
           assert.equal(await page.locator('.result-overview-card').count(),2,'Must show two overall record cards');
-          assert.equal(await page.locator('.result-game-card').count(),14,'Initial filter should show current Week10 games');
-          assert.ok((await page.locator('#results-cards').innerText()).includes('24–18'),'Directional Injury total record missing');
-          assert.ok((await page.locator('#results-cards').innerText()).includes('16–25–1'),'Injury ATS record missing');
+          assert.equal(await page.locator('.result-game-card').count(),source.current,'Initial filter should show latest published week');
+          assert.ok((await page.locator('#results-cards').innerText()).includes(source.totals),'Directional Injury total record missing');
+          assert.ok((await page.locator('#results-cards').innerText()).includes(source.ats),'Injury ATS record missing');
           assert.equal(await page.locator('#results-error').isVisible(),false,'Error notice shown despite complete data');
           assert.equal(await page.locator('#view-results').evaluate(el=>el.classList.contains('active')),true);
           const metrics=await page.evaluate(()=>({
@@ -75,7 +89,7 @@ async function main(){
           await page.selectOption('#results-week-filter','9');
           assert.equal(await page.locator('.result-game-card').count(),15);
           await page.selectOption('#results-week-filter','all');
-          assert.equal(await page.locator('.result-game-card').count(),43);
+          assert.equal(await page.locator('.result-game-card').count(),source.all);
           await page.selectOption('#results-day-filter','Monday');
           assert.ok(await page.locator('.result-game-card').count()>=1,'Monday games filter empty');
           assert.deepEqual(errors,[],'JavaScript page exceptions: '+errors.join('; '));
@@ -87,14 +101,24 @@ async function main(){
           assert.ok(!items.includes('week 9'),'Week9 archive must not have a top-level tab');
           await page.locator(nav+' [data-view="board"]').click();
           await page.locator('.game-card').first().waitFor({timeout:15000});
-          assert.equal(await page.locator('.game-card').count(),14,'Full Week10 slate not loaded');
-          assert.match(await page.locator('#kpi-games').innerText(),/14/);
-          assert.match(await page.locator('.hero h1').first().innerText(),/Week 10 projections/);
+          const currentWeek=routeName?10:source.latest;
+          const currentGames=routeName?14:source.current;
+          assert.equal(await page.locator('.game-card').count(),currentGames,'Published slate not loaded');
+          assert.equal(Number(await page.locator('#kpi-games').innerText()),currentGames);
+          assert.match(await page.locator('.hero h1').first().innerText(),new RegExp('Week '+currentWeek+' projections'));
+          if(currentWeek===10){
           assert.match(await page.locator('#board-snapshot-label').innerText(),/Latest saved pregame/);
           assert.ok(await page.locator('.completed-strip').count()>=13,'Archived finals missing from the projection board');
           assert.ok(await page.locator('.game-injuries').count()>=10,'Official injury information unexpectedly missing');
           assert.equal(await page.locator('.game-injuries[open]').count(),0,
             'Detailed injury lists should be collapsed by default');
+          }else{
+            assert.match(await page.locator('#board-snapshot-label').innerText(),new RegExp('Week '+currentWeek));
+            assert.match(await page.locator('.game-card').first().innerText(),/IND @ HOU/);
+            await page.locator('[data-game="2026_11_ARI_KC"]').click();
+            assert.match(await page.locator('#drawer-content').innerText(),/Carson Beck/);
+            await page.locator('#close-drawer').click();
+          }
           const archives=page.locator('.past-boards');
           assert.equal(await archives.count(),1,'Past weekly boards must remain findable');
           await archives.locator('summary').click();
@@ -103,9 +127,9 @@ async function main(){
           await page.locator('#search').fill('Miami');
           assert.equal(await page.locator('.game-card').count(),1,'Team search failed');
           await page.locator('#search').fill('');
-          assert.equal(await page.locator('.game-card').count(),14);
+          assert.equal(await page.locator('.game-card').count(),currentGames);
           await page.locator('[data-model="baseline"]').click();
-          assert.equal(await page.locator('.game-card').count(),14);
+          assert.equal(await page.locator('.game-card').count(),currentGames);
           await page.locator('[data-model="injury"]').click();
           await page.locator('.game-card').first().locator('[data-game]').click();
           assert.ok(await page.locator('#overlay').evaluate(el=>el.classList.contains('open')),
@@ -130,7 +154,7 @@ async function main(){
           const screenshot='artifacts/results-'+viewport.name+(routeName?'-week10':'')+'.png';
           await page.screenshot({path:path.join(ROOT,screenshot),fullPage:false});
           console.log('PASS browser '+viewport.name+' '+(routeName||'index.html')+' cards='+metrics.cards.map(x=>x.value).join('/')+' viewport='+metrics.width+' docwidth='+metrics.documentWidth+' screenshot='+screenshot);
-          if(!routeName){
+          if(!routeName&&source.latest===10){
             // Simulate an independently published future week. This is a
             // fixture ONLY, never a real forecast or user-facing Week11 pick.
             const future=await page.evaluate(()=>{

@@ -32,8 +32,11 @@ for(const w of [8,9,10])assert.match(element('week-results').innerHTML,new RegEx
 assert.ok(element('results-game-desc').textContent.includes('games'));
 const rows=()=>element('results-details').innerHTML;
 const count=()=> (rows().match(/class="result-game-card"/g)||[]).length;
-assert.equal(element('results-week-filter').value,'10','Most recent week should show first');
-assert.equal(count(),14,'Week10 should have 14 published games');
+const latestWeek=Math.max(...data.directionalGames.map(r=>Number(r.week)));
+assert.equal(element('results-week-filter').value,String(latestWeek),'Most recent week should show first');
+assert.equal(count(),data.directionalGames.filter(r=>Number(r.week)===latestWeek).length);
+element('results-week-filter').value='10';
+element('results-week-filter').handlers.change();
 assert.match(rows(),/MIA @ IND/);
 assert.match(rows(),/LAC @ BAL/);
 assert.match(rows(),/QB value uncalibrated/);
