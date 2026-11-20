@@ -86,8 +86,12 @@ async function main(){
           assert.match(await indi.innerText(),/Over 46/i);
           assert.match(await indi.innerText(),/Win/i);
           assert.match(await indi.innerText(),/Retrospective/i);
+          assert.match(await page.locator('.result-game-card').first().innerText(),/CAR @ GB/);
+          assert.match(await page.locator('.result-game-card').last().innerText(),/CHI @ SEA/);
           await page.selectOption('#results-week-filter','9');
           assert.equal(await page.locator('.result-game-card').count(),15);
+          assert.match(await page.locator('.result-game-card').first().innerText(),/JAX @ BAL/);
+          assert.match(await page.locator('.result-game-card').last().innerText(),/BUF @ MIN/);
           await page.selectOption('#results-week-filter','all');
           assert.equal(await page.locator('.result-game-card').count(),source.all);
           await page.selectOption('#results-day-filter','Monday');

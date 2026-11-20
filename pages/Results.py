@@ -115,6 +115,10 @@ subset=games
 if which!="All weeks":
     subset=subset.loc[pd.to_numeric(subset.week,errors="coerce").eq(int(which.split()[-1]))]
 if day!="All game days":subset=subset.loc[subset.day.eq(day)]
+kickoff_path=DIR/"nfl_2026_game_kickoffs.csv"
+kickoff_map=(pd.read_csv(kickoff_path).set_index("game_id").kickoff_utc.to_dict()
+             if kickoff_path.exists() else {})
+day_order={"Thursday":0,"Friday":1,"Saturday":2,"Sunday":3,"Monday":4,"Tuesday":5,"Wednesday":6}
 table=[]
 for item in subset.itertuples(index=False):
     final=item.score_status=="FINAL"
@@ -134,11 +138,12 @@ for item in subset.itertuples(index=False):
         "Injury total":f"{item.total_pick} {line:g} — {item.total_result}"+(" † Retrospective tiebreak" if fallback else ""),
         "Actual total":(f"{actual} · {actual_result}" if final else "Pending"),
         "Forecast source":Path(item.forecast_file).name,
-        "_kickoff":item.kickoff_utc
+        "_kickoff":item.kickoff_utc or kickoff_map.get(item.game_id,""),
+        "_day_order":day_order.get(item.day,7)
     })
-table.sort(key=lambda x:(x["Week"],x["_kickoff"],x["Matchup"]),reverse=True)
+table.sort(key=lambda x:(-x["Week"],x["_day_order"],x["_kickoff"],x["Matchup"]))
 if table:
-    st.dataframe(pd.DataFrame(table).drop(columns=["_kickoff"]),hide_index=True,width="stretch",height=560)
+    st.dataframe(pd.DataFrame(table).drop(columns=["_kickoff","_day_order"]),hide_index=True,width="stretch",height=560)
 else:
     st.info("No games match that filter.")
 

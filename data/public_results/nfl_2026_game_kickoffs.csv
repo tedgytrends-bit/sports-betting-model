@@ -1,0 +1,15 @@
+game_id,kickoff_utc,source_url
+2026_08_CAR_GB,2026-10-30 00:15:00+00:00,https://raw.githubusercontent.com/nflverse/nfldata/master/data/games.csv
+2026_08_ARI_DAL,2026-11-01 18:00:00+00:00,https://raw.githubusercontent.com/nflverse/nfldata/master/data/games.csv
+2026_08_ATL_TB,2026-11-01 18:00:00+00:00,https://raw.githubusercontent.com/nflverse/nfldata/master/data/games.csv
+2026_08_BAL_BUF,2026-11-01 18:00:00+00:00,https://raw.githubusercontent.com/nflverse/nfldata/master/data/games.csv
+2026_08_CLE_PIT,2026-11-01 18:00:00+00:00,https://raw.githubusercontent.com/nflverse/nfldata/master/data/games.csv
+2026_08_IND_JAX,2026-11-01 18:00:00+00:00,https://raw.githubusercontent.com/nflverse/nfldata/master/data/games.csv
+2026_08_LV_NYJ,2026-11-01 18:00:00+00:00,https://raw.githubusercontent.com/nflverse/nfldata/master/data/games.csv
+2026_08_MIN_DET,2026-11-01 18:00:00+00:00,https://raw.githubusercontent.com/nflverse/nfldata/master/data/games.csv
+2026_08_TEN_CIN,2026-11-01 18:00:00+00:00,https://raw.githubusercontent.com/nflverse/nfldata/master/data/games.csv
+2026_08_LAC_LA,2026-11-01 21:05:00+00:00,https://raw.githubusercontent.com/nflverse/nfldata/master/data/games.csv
+2026_08_KC_DEN,2026-11-01 21:25:00+00:00,https://raw.githubusercontent.com/nflverse/nfldata/master/data/games.csv
+2026_08_NE_MIA,2026-11-01 21:25:00+00:00,https://raw.githubusercontent.com/nflverse/nfldata/master/data/games.csv
+2026_08_PHI_WAS,2026-11-02 01:20:00+00:00,https://raw.githubusercontent.com/nflverse/nfldata/master/data/games.csv
+2026_08_CHI_SEA,2026-11-03 01:15:00+00:00,https://raw.githubusercontent.com/nflverse/nfldata/master/data/games.csv

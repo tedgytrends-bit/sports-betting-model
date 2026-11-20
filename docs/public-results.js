@@ -170,11 +170,18 @@
       daySelect.dataset.bound='yes';
     }
 
+    const kickoffByGame=new Map((data.resultsKickoffs||[]).map(r=>[r.game_id,r.kickoff_utc]));
+    const dayOrder={Thursday:0,Friday:1,Saturday:2,Sunday:3,Monday:4,Tuesday:5,Wednesday:6};
+    function chronological(a,b){
+      const aTime=Date.parse(a.kickoff_utc||kickoffByGame.get(a.game_id)||'');
+      const bTime=Date.parse(b.kickoff_utc||kickoffByGame.get(b.game_id)||'');
+      if(Number.isFinite(aTime)&&Number.isFinite(bTime))return aTime-bTime||a.game_id.localeCompare(b.game_id);
+      return (dayOrder[a.day]??7)-(dayOrder[b.day]??7)||a.game_id.localeCompare(b.game_id);
+    }
     const filtered=games.filter(g=>(state.week==='all'||String(g.week)===state.week)
       &&(state.day==='all'||g.day===state.day))
       .sort((a,b)=>Number(b.week)-Number(a.week)
-        ||String(b.kickoff_utc||'').localeCompare(String(a.kickoff_utc||''))
-        ||a.game_id.localeCompare(b.game_id));
+        ||chronological(a,b));
     const complete=filtered.filter(g=>g.score_status==='FINAL').length;
     $('results-game-desc').textContent=filtered.length+' games · '+complete+' final'
       +(filtered.length-complete?' · '+(filtered.length-complete)+' pending':'');

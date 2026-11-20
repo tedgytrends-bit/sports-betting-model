@@ -4,6 +4,9 @@ const fs=require('node:fs');
 const path=process.argv[2];
 assert.ok(path,'Expected source JSON with original and directional records');
 const data=JSON.parse(fs.readFileSync(path,'utf8'));
+data.resultsKickoffs=fs.readFileSync(require('node:path').join(__dirname,'../data/public_results/nfl_2026_game_kickoffs.csv'),'utf8').trim().split(/\r?\n/).slice(1).map(line=>{
+ const [game_id,kickoff_utc]=line.split(',');return {game_id,kickoff_utc};
+});
 const els={};
 function element(id){
   if(!els[id])els[id]={
@@ -45,12 +48,17 @@ assert.equal(typeof week.handlers.change,'function');
 assert.equal(typeof day.handlers.change,'function');
 week.value='8';week.handlers.change();
 assert.equal(count(),14,'Week8 should show all original 14 games');
+assert.ok(rows().indexOf('CAR @ GB')<rows().indexOf('IND @ JAX'),'Week8 Thursday must precede Sunday');
+assert.ok(rows().indexOf('PHI @ WAS')<rows().indexOf('CHI @ SEA'),'Week8 Sunday must precede Monday');
+assert.ok(rows().indexOf('LAC @ LA')<rows().indexOf('KC @ DEN'),'Sunday 4:05 must precede 4:25');
 assert.match(rows(),/IND @ JAX/);
 assert.match(rows(),/Over 46/);
 assert.match(rows(),/Retrospective direction/);
 assert.match(rows(),/result-status win/);
 week.value='9';week.handlers.change();
 assert.equal(count(),15,'Week9 should show all 15 audited results');
+assert.ok(rows().indexOf('JAX @ BAL')<rows().indexOf('CIN @ ATL'),'Week9 TNF must come first');
+assert.ok(rows().indexOf('TB @ CHI')<rows().indexOf('BUF @ MIN'),'Week9 MNF must come last');
 day.value='Sunday';day.handlers.change();
 assert.ok(count()<=15);
 day.value='all';day.handlers.change();
