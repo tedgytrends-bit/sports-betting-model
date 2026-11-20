@@ -390,6 +390,9 @@ season,week,team,change_type,change_count
 2026,11,IND,report_status,10
 2026,11,JAX,practice_status,2
 2026,11,KC,practice_status,1
+2026,11,LAC,feed_membership,2
+2026,11,LAC,position,1
+2026,11,LAC,practice_status,4
 2026,11,LV,feed_membership,1
 2026,11,LV,practice_secondary_injury,1
 2026,11,LV,practice_status,4
