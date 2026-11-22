@@ -392,8 +392,11 @@ season,week,team,change_type,change_count
 2026,11,CHI,practice_status,1
 2026,11,CHI,report_primary_injury,1
 2026,11,CHI,report_status,1
-2026,11,CIN,feed_membership,1
-2026,11,CIN,practice_status,1
+2026,11,CIN,feed_membership,2
+2026,11,CIN,practice_status,3
+2026,11,CIN,report_primary_injury,9
+2026,11,CIN,report_secondary_injury,1
+2026,11,CIN,report_status,9
 2026,11,DAL,feed_membership,3
 2026,11,DAL,practice_status,6
 2026,11,DAL,report_primary_injury,8
@@ -474,5 +477,7 @@ season,week,team,change_type,change_count
 2026,11,TEN,practice_status,11
 2026,11,TEN,report_primary_injury,5
 2026,11,TEN,report_status,5
-2026,11,WAS,feed_membership,1
-2026,11,WAS,practice_status,1
+2026,11,WAS,feed_membership,3
+2026,11,WAS,practice_status,4
+2026,11,WAS,report_primary_injury,3
+2026,11,WAS,report_status,3
