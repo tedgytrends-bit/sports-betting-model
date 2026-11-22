@@ -1,10 +1,10 @@
 # Tedgy Trends CBB — Upcoming Projections
 
-**Updated: November 21, 2026, 07:58 AM CT**
+**Updated: November 22, 2026, 07:57 AM CT**
 
 **Latest projections** update with new results, roster inputs and observed sportsbook lines. The originally frozen pretip forecasts used for the official research scorecard never change.
 
-**Next eight days:** 415 upcoming games · **With market lines:** 44 · **Without market lines:** 371
+**Next eight days:** 406 upcoming games · **With market lines:** 35 · **Without market lines:** 371
 
 [Results and ROI](README.md) · [Frozen pretip picks](frozen/) · [All upcoming forecasts as JSON](latest.json)
 
@@ -12,230 +12,185 @@
 
 All times Central. ATS leans show **which team and spread** the model favors; parentheses show model-vs-market edge in points, not probability.
 
-### Saturday, November 21, 2026
+### Sunday, November 22, 2026
 
 | Tip / matchup | Market at capture | Model | Projected score (away / home) | Projected total | ATS lean | Total lean |
 |---|---|---|---|---:|---|---|
-| 10:00 AM · **Siena @ Bucknell** | Bucknell +6.5 / Total 156.5 (Bovada) | Team baseline | Siena 73.3 / Bucknell 77.0 | 150.3 | Bucknell +6.5 (10.1 pt) | Under 156.5 (6.2 pt) |
-|  |  | Player v2 | Siena 74.0 / Bucknell 74.9 | 149.0 | Bucknell +6.5 (7.4 pt) | Under 156.5 (7.5 pt) |
-|  |  | Player + opponent v3 | Siena 73.1 / Bucknell 77.5 | 150.7 | Bucknell +6.5 (10.9 pt) | Under 156.5 (5.8 pt) |
-|  |  | Player + rotation v4 | Siena 74.9 / Bucknell 72.9 | 147.8 | Bucknell +6.5 (4.5 pt) | Under 156.5 (8.7 pt) |
-|  |  | Player + opponent + rotation v4 | Siena 74.5 / Bucknell 75.7 | 150.3 | Bucknell +6.5 (7.7 pt) | Under 156.5 (6.2 pt) |
-| 10:00 AM · **South Carolina Upstate @ UNC Greensboro** | UNC Greensboro -6.5 / Total 146.5 (Bovada) | Team baseline | South Carolina Upstate 67.5 / UNC Greensboro 79.4 | 146.9 | UNC Greensboro -6.5 (5.4 pt) | Over 146.5 (0.4 pt) |
-|  |  | Player v2 | South Carolina Upstate 66.9 / UNC Greensboro 81.0 | 147.8 | UNC Greensboro -6.5 (7.6 pt) | Over 146.5 (1.3 pt) |
-|  |  | Player + opponent v3 | South Carolina Upstate 67.0 / UNC Greensboro 81.6 | 148.6 | UNC Greensboro -6.5 (8.2 pt) | Over 146.5 (2.1 pt) |
-|  |  | Player + rotation v4 | South Carolina Upstate 67.6 / UNC Greensboro 79.5 | 147.0 | UNC Greensboro -6.5 (5.4 pt) | Over 146.5 (0.5 pt) |
-|  |  | Player + opponent + rotation v4 | South Carolina Upstate 67.7 / UNC Greensboro 79.4 | 147.1 | UNC Greensboro -6.5 (5.2 pt) | Over 146.5 (0.6 pt) |
-| 11:00 AM · **Detroit Mercy @ Michigan State** | Michigan State -41.5 / Total 150.5 (Bovada) | Team baseline | Detroit Mercy 58.2 / Michigan State 91.2 | 149.3 | Detroit Mercy +41.5 (8.5 pt) | Under 150.5 (1.2 pt) |
-|  |  | Player v2 | Detroit Mercy 57.8 / Michigan State 95.9 | 153.7 | Detroit Mercy +41.5 (3.4 pt) | Over 150.5 (3.2 pt) |
-|  |  | Player + opponent v3 | Detroit Mercy 57.2 / Michigan State 96.7 | 153.9 | Detroit Mercy +41.5 (2.0 pt) | Over 150.5 (3.4 pt) |
-|  |  | Player + rotation v4 | Detroit Mercy 57.4 / Michigan State 96.6 | 154.0 | Detroit Mercy +41.5 (2.3 pt) | Over 150.5 (3.5 pt) |
-|  |  | Player + opponent + rotation v4 | Detroit Mercy 57.2 / Michigan State 97.8 | 155.0 | Detroit Mercy +41.5 (0.8 pt) | Over 150.5 (4.5 pt) |
-| 11:00 AM · **Columbia @ Boston University** | Boston University +1.5 / Total 143.5 (Bovada) | Team baseline | Columbia 69.5 / Boston University 77.2 | 146.7 | Boston University +1.5 (9.2 pt) | Over 143.5 (3.2 pt) |
-|  |  | Player v2 | Columbia 72.2 / Boston University 71.3 | 143.5 | Boston University +1.5 (0.6 pt) | Over 143.5 (0.0 pt) |
-|  |  | Player + opponent v3 | Columbia 72.3 / Boston University 72.9 | 145.2 | Boston University +1.5 (2.0 pt) | Over 143.5 (1.7 pt) |
-|  |  | Player + rotation v4 | Columbia 72.8 / Boston University 69.3 | 142.1 | Columbia -1.5 (2.0 pt) | Under 143.5 (1.4 pt) |
-|  |  | Player + opponent + rotation v4 | Columbia 72.9 / Boston University 70.4 | 143.3 | Columbia -1.5 (1.0 pt) | Under 143.5 (0.2 pt) |
-| 12:00 PM · **New Hampshire @ New Haven** | New Haven +2.5 / Total 130.5 (Bovada) | Team baseline | New Hampshire 68.8 / New Haven 68.8 | 137.7 | New Haven +2.5 (2.5 pt) | Over 130.5 (7.2 pt) |
-|  |  | Player v2 | New Hampshire 69.3 / New Haven 65.5 | 134.7 | New Hampshire -2.5 (1.3 pt) | Over 130.5 (4.2 pt) |
-|  |  | Player + opponent v3 | New Hampshire 68.0 / New Haven 67.2 | 135.2 | New Haven +2.5 (1.7 pt) | Over 130.5 (4.7 pt) |
-|  |  | Player + rotation v4 | New Hampshire 68.8 / New Haven 63.5 | 132.4 | New Hampshire -2.5 (2.8 pt) | Over 130.5 (1.9 pt) |
-|  |  | Player + opponent + rotation v4 | New Hampshire 68.0 / New Haven 65.4 | 133.5 | New Hampshire -2.5 (0.1 pt) | Over 130.5 (3.0 pt) |
-| 12:00 PM · **Queens University @ LSU** | LSU -27.5 / Total 173.5 (Draft Kings) | Team baseline | Queens University 68.2 / LSU 94.4 | 162.6 | Queens University +27.5 (1.3 pt) | Under 173.5 (10.9 pt) |
-|  |  | Player v2 | Queens University 73.9 / LSU 90.7 | 164.5 | Queens University +27.5 (10.8 pt) | Under 173.5 (9.0 pt) |
-|  |  | Player + opponent v3 | Queens University 73.9 / LSU 90.6 | 164.5 | Queens University +27.5 (10.8 pt) | Under 173.5 (9.0 pt) |
-|  |  | Player + rotation v4 | Queens University 75.2 / LSU 89.8 | 165.0 | Queens University +27.5 (12.8 pt) | Under 173.5 (8.5 pt) |
-|  |  | Player + opponent + rotation v4 | Queens University 75.2 / LSU 89.8 | 165.0 | Queens University +27.5 (12.9 pt) | Under 173.5 (8.5 pt) |
-| 12:00 PM · **Denver @ Eastern Michigan** | Eastern Michigan -7.5 / Total 140.0 (Bovada) | Team baseline | Denver 62.1 / Eastern Michigan 80.5 | 142.6 | Eastern Michigan -7.5 (10.8 pt) | Over 140.0 (2.6 pt) |
-|  |  | Player v2 | Denver 66.7 / Eastern Michigan 72.1 | 138.8 | Denver +7.5 (2.1 pt) | Under 140.0 (1.2 pt) |
-|  |  | Player + opponent v3 | Denver 68.3 / Eastern Michigan 69.9 | 138.2 | Denver +7.5 (5.9 pt) | Under 140.0 (1.8 pt) |
-|  |  | Player + rotation v4 | Denver 66.4 / Eastern Michigan 72.7 | 139.1 | Denver +7.5 (1.2 pt) | Under 140.0 (0.9 pt) |
-|  |  | Player + opponent + rotation v4 | Denver 67.8 / Eastern Michigan 70.5 | 138.4 | Denver +7.5 (4.8 pt) | Under 140.0 (1.6 pt) |
-| 12:00 PM · **Kent State @ Cleveland State** | Cleveland State +3.0 / Total 148.0 (Bovada) | Team baseline | Kent State 69.4 / Cleveland State 81.3 | 150.7 | Cleveland State +3.0 (14.8 pt) | Over 148.0 (2.7 pt) |
-|  |  | Player v2 | Kent State 76.2 / Cleveland State 74.4 | 150.6 | Cleveland State +3.0 (1.2 pt) | Over 148.0 (2.6 pt) |
-|  |  | Player + opponent v3 | Kent State 75.4 / Cleveland State 74.6 | 149.9 | Cleveland State +3.0 (2.2 pt) | Over 148.0 (1.9 pt) |
-|  |  | Player + rotation v4 | Kent State 75.7 / Cleveland State 74.9 | 150.6 | Cleveland State +3.0 (2.2 pt) | Over 148.0 (2.6 pt) |
-|  |  | Player + opponent + rotation v4 | Kent State 75.0 / Cleveland State 75.7 | 150.7 | Cleveland State +3.0 (3.7 pt) | Over 148.0 (2.7 pt) |
-| 12:30 PM · **Mercyhurst @ Western Illinois** | Western Illinois +5.5 / Total 130.5 (Bovada) | Team baseline | Mercyhurst 66.8 / Western Illinois 72.8 | 139.6 | Western Illinois +5.5 (11.6 pt) | Over 130.5 (9.1 pt) |
-|  |  | Player v2 | Mercyhurst 69.7 / Western Illinois 60.8 | 130.5 | Mercyhurst -5.5 (3.4 pt) | Over 130.5 (0.0 pt) |
-|  |  | Player + opponent v3 | Mercyhurst 69.2 / Western Illinois 61.2 | 130.4 | Mercyhurst -5.5 (2.5 pt) | Under 130.5 (0.1 pt) |
-|  |  | Player + rotation v4 | Mercyhurst 70.4 / Western Illinois 61.5 | 131.9 | Mercyhurst -5.5 (3.3 pt) | Over 130.5 (1.4 pt) |
-|  |  | Player + opponent + rotation v4 | Mercyhurst 69.9 / Western Illinois 62.7 | 132.6 | Mercyhurst -5.5 (1.7 pt) | Over 130.5 (2.1 pt) |
-| 01:00 PM · **Northern Illinois @ Bowling Green** | Bowling Green -5.5 / Total 149.5 (Bovada) | Team baseline | Northern Illinois 71.0 / Bowling Green 78.4 | 149.5 | Bowling Green -5.5 (1.9 pt) | Under 149.5 (0.0 pt) |
-|  |  | Player v2 | Northern Illinois 74.1 / Bowling Green 80.6 | 154.7 | Bowling Green -5.5 (1.0 pt) | Over 149.5 (5.2 pt) |
-|  |  | Player + opponent v3 | Northern Illinois 74.4 / Bowling Green 80.4 | 154.8 | Bowling Green -5.5 (0.5 pt) | Over 149.5 (5.3 pt) |
-|  |  | Player + rotation v4 | Northern Illinois 74.0 / Bowling Green 78.9 | 152.8 | Northern Illinois +5.5 (0.6 pt) | Over 149.5 (3.3 pt) |
-|  |  | Player + opponent + rotation v4 | Northern Illinois 74.4 / Bowling Green 78.3 | 152.7 | Northern Illinois +5.5 (1.6 pt) | Over 149.5 (3.2 pt) |
-| 01:00 PM · **Lafayette @ Syracuse** | Syracuse -25.5 / Total 143.5 (Bovada) | Team baseline | Lafayette 68.5 / Syracuse 79.5 | 147.9 | Lafayette +25.5 (14.5 pt) | Over 143.5 (4.4 pt) |
-|  |  | Player v2 | Lafayette 62.8 / Syracuse 89.2 | 152.0 | Syracuse -25.5 (1.0 pt) | Over 143.5 (8.5 pt) |
-|  |  | Player + opponent v3 | Lafayette 62.0 / Syracuse 90.4 | 152.4 | Syracuse -25.5 (2.9 pt) | Over 143.5 (8.9 pt) |
-|  |  | Player + rotation v4 | Lafayette 62.5 / Syracuse 86.6 | 149.0 | Lafayette +25.5 (1.4 pt) | Over 143.5 (5.5 pt) |
-|  |  | Player + opponent + rotation v4 | Lafayette 62.2 / Syracuse 87.9 | 150.0 | Syracuse -25.5 (0.2 pt) | Over 143.5 (6.5 pt) |
-| 01:00 PM · **Fordham @ Portland** | Portland +5.0 / Total 149.0 (Bovada) | Team baseline | Fordham 73.2 / Portland 87.1 | 160.3 | Portland +5.0 (18.9 pt) | Over 149.0 (11.3 pt) |
-|  |  | Player v2 | Fordham 79.9 / Portland 76.4 | 156.3 | Portland +5.0 (1.5 pt) | Over 149.0 (7.3 pt) |
-|  |  | Player + opponent v3 | Fordham 80.2 / Portland 76.5 | 156.7 | Portland +5.0 (1.3 pt) | Over 149.0 (7.7 pt) |
-|  |  | Player + rotation v4 | Fordham 77.4 / Portland 74.3 | 151.6 | Portland +5.0 (1.9 pt) | Over 149.0 (2.6 pt) |
-|  |  | Player + opponent + rotation v4 | Fordham 77.5 / Portland 73.6 | 151.1 | Portland +5.0 (1.1 pt) | Over 149.0 (2.1 pt) |
-| 01:00 PM · **Little Rock @ North Florida** | North Florida +4.5 / Total 160.5 (Bovada) | Team baseline | Little Rock 73.1 / North Florida 79.0 | 152.0 | North Florida +4.5 (10.4 pt) | Under 160.5 (8.5 pt) |
-|  |  | Player v2 | Little Rock 79.7 / North Florida 77.4 | 157.1 | North Florida +4.5 (2.2 pt) | Under 160.5 (3.4 pt) |
-|  |  | Player + opponent v3 | Little Rock 78.8 / North Florida 79.5 | 158.4 | North Florida +4.5 (5.2 pt) | Under 160.5 (2.1 pt) |
-|  |  | Player + rotation v4 | Little Rock 79.6 / North Florida 76.5 | 156.1 | North Florida +4.5 (1.4 pt) | Under 160.5 (4.4 pt) |
-|  |  | Player + opponent + rotation v4 | Little Rock 78.9 / North Florida 78.6 | 157.5 | North Florida +4.5 (4.1 pt) | Under 160.5 (3.0 pt) |
-| 01:00 PM · **Stony Brook @ Saint Peter's** | Saint Peter's +5.5 / Total 126.0 (Bovada) | Team baseline | Stony Brook 64.8 / Saint Peter's 63.4 | 128.2 | Saint Peter's +5.5 (4.0 pt) | Over 126.0 (2.2 pt) |
-|  |  | Player v2 | Stony Brook 66.6 / Saint Peter's 56.7 | 123.3 | Stony Brook -5.5 (4.4 pt) | Under 126.0 (2.7 pt) |
-|  |  | Player + opponent v3 | Stony Brook 67.1 / Saint Peter's 56.8 | 123.9 | Stony Brook -5.5 (4.7 pt) | Under 126.0 (2.1 pt) |
-|  |  | Player + rotation v4 | Stony Brook 65.5 / Saint Peter's 55.9 | 121.4 | Stony Brook -5.5 (4.1 pt) | Under 126.0 (4.6 pt) |
-|  |  | Player + opponent + rotation v4 | Stony Brook 66.1 / Saint Peter's 55.4 | 121.5 | Stony Brook -5.5 (5.1 pt) | Under 126.0 (4.5 pt) |
-| 01:00 PM · **Navy @ Rider** | Rider +4.5 / Total 135.5 (Bovada) | Team baseline | Navy 68.2 / Rider 70.9 | 139.1 | Rider +4.5 (7.2 pt) | Over 135.5 (3.6 pt) |
-|  |  | Player v2 | Navy 69.7 / Rider 66.2 | 135.9 | Rider +4.5 (1.0 pt) | Over 135.5 (0.4 pt) |
-|  |  | Player + opponent v3 | Navy 69.5 / Rider 67.2 | 136.6 | Rider +4.5 (2.2 pt) | Over 135.5 (1.1 pt) |
-|  |  | Player + rotation v4 | Navy 70.5 / Rider 63.3 | 133.8 | Navy -4.5 (2.7 pt) | Under 135.5 (1.7 pt) |
-|  |  | Player + opponent + rotation v4 | Navy 70.6 / Rider 64.5 | 135.1 | Navy -4.5 (1.6 pt) | Under 135.5 (0.4 pt) |
-| 02:00 PM · **St. Thomas-Minnesota @ Milwaukee** | Milwaukee +1.5 / Total 152.5 (Draft Kings) | Team baseline | St. Thomas-Minnesota 76.1 / Milwaukee 74.2 | 150.2 | St. Thomas-Minnesota -1.5 (0.4 pt) | Under 152.5 (2.3 pt) |
-|  |  | Player v2 | St. Thomas-Minnesota 78.0 / Milwaukee 74.1 | 152.1 | St. Thomas-Minnesota -1.5 (2.4 pt) | Under 152.5 (0.4 pt) |
-|  |  | Player + opponent v3 | St. Thomas-Minnesota 76.6 / Milwaukee 75.7 | 152.3 | Milwaukee +1.5 (0.6 pt) | Under 152.5 (0.2 pt) |
-|  |  | Player + rotation v4 | St. Thomas-Minnesota 77.9 / Milwaukee 73.4 | 151.3 | St. Thomas-Minnesota -1.5 (3.1 pt) | Under 152.5 (1.2 pt) |
-|  |  | Player + opponent + rotation v4 | St. Thomas-Minnesota 77.0 / Milwaukee 75.4 | 152.4 | St. Thomas-Minnesota -1.5 (0.1 pt) | Under 152.5 (0.1 pt) |
-| 02:00 PM · **UT Rio Grande Valley @ Austin Peay** | Austin Peay -5.5 / Total 146.5 (Draft Kings) | Team baseline | UT Rio Grande Valley 68.1 / Austin Peay 75.9 | 144.0 | Austin Peay -5.5 (2.3 pt) | Under 146.5 (2.5 pt) |
-|  |  | Player v2 | UT Rio Grande Valley 63.7 / Austin Peay 83.9 | 147.6 | Austin Peay -5.5 (14.8 pt) | Over 146.5 (1.1 pt) |
-|  |  | Player + opponent v3 | UT Rio Grande Valley 62.9 / Austin Peay 82.5 | 145.5 | Austin Peay -5.5 (14.1 pt) | Under 146.5 (1.0 pt) |
-|  |  | Player + rotation v4 | UT Rio Grande Valley 61.2 / Austin Peay 80.0 | 141.2 | Austin Peay -5.5 (13.3 pt) | Under 146.5 (5.3 pt) |
-|  |  | Player + opponent + rotation v4 | UT Rio Grande Valley 60.5 / Austin Peay 78.7 | 139.3 | Austin Peay -5.5 (12.7 pt) | Under 146.5 (7.2 pt) |
-| 02:00 PM · **Drake @ Missouri State** | Missouri State +3.5 / Total 142.5 (Bovada) | Team baseline | Drake 69.5 / Missouri State 76.4 | 146.0 | Missouri State +3.5 (10.4 pt) | Over 142.5 (3.5 pt) |
-|  |  | Player v2 | Drake 74.5 / Missouri State 70.3 | 144.8 | Drake -3.5 (0.7 pt) | Over 142.5 (2.3 pt) |
-|  |  | Player + opponent v3 | Drake 74.9 / Missouri State 70.2 | 145.2 | Drake -3.5 (1.2 pt) | Over 142.5 (2.7 pt) |
-|  |  | Player + rotation v4 | Drake 74.7 / Missouri State 69.8 | 144.4 | Drake -3.5 (1.4 pt) | Over 142.5 (1.9 pt) |
-|  |  | Player + opponent + rotation v4 | Drake 74.9 / Missouri State 69.7 | 144.6 | Drake -3.5 (1.7 pt) | Over 142.5 (2.1 pt) |
-| 02:00 PM · **Indiana State @ Middle Tennessee** | Middle Tennessee -2.5 / Total 151.0 (Bovada) | Team baseline | Indiana State 73.7 / Middle Tennessee 77.4 | 151.1 | Middle Tennessee -2.5 (1.2 pt) | Over 151.0 (0.1 pt) |
-|  |  | Player v2 | Indiana State 75.1 / Middle Tennessee 78.0 | 153.1 | Middle Tennessee -2.5 (0.4 pt) | Over 151.0 (2.1 pt) |
-|  |  | Player + opponent v3 | Indiana State 76.1 / Middle Tennessee 76.5 | 152.5 | Indiana State +2.5 (2.1 pt) | Over 151.0 (1.5 pt) |
-|  |  | Player + rotation v4 | Indiana State 75.4 / Middle Tennessee 77.1 | 152.5 | Indiana State +2.5 (0.9 pt) | Over 151.0 (1.5 pt) |
-|  |  | Player + opponent + rotation v4 | Indiana State 76.5 / Middle Tennessee 75.0 | 151.5 | Indiana State +2.5 (3.9 pt) | Over 151.0 (0.5 pt) |
-| 02:30 PM · **Army @ Binghamton** | Binghamton +1.5 / Total 135.5 (Bovada) | Team baseline | Army 64.7 / Binghamton 74.0 | 138.7 | Binghamton +1.5 (10.9 pt) | Over 135.5 (3.2 pt) |
-|  |  | Player v2 | Army 67.1 / Binghamton 68.3 | 135.4 | Binghamton +1.5 (2.7 pt) | Under 135.5 (0.1 pt) |
-|  |  | Player + opponent v3 | Army 69.2 / Binghamton 66.4 | 135.5 | Army -1.5 (1.3 pt) | Over 135.5 (0.0 pt) |
-|  |  | Player + rotation v4 | Army 67.1 / Binghamton 65.6 | 132.6 | Army -1.5 (0.0 pt) | Under 135.5 (2.9 pt) |
-|  |  | Player + opponent + rotation v4 | Army 69.2 / Binghamton 63.1 | 132.4 | Army -1.5 (4.6 pt) | Under 135.5 (3.1 pt) |
-| 03:00 PM · **UAlbany @ Canisius** | Canisius +1.5 / Total 142.5 (Draft Kings) | Team baseline | UAlbany 68.4 / Canisius 74.6 | 143.0 | Canisius +1.5 (7.7 pt) | Over 142.5 (0.5 pt) |
-|  |  | Player v2 | UAlbany 71.7 / Canisius 72.2 | 143.9 | Canisius +1.5 (2.0 pt) | Over 142.5 (1.4 pt) |
-|  |  | Player + opponent v3 | UAlbany 71.0 / Canisius 74.1 | 145.1 | Canisius +1.5 (4.5 pt) | Over 142.5 (2.6 pt) |
-|  |  | Player + rotation v4 | UAlbany 71.2 / Canisius 70.5 | 141.6 | Canisius +1.5 (0.8 pt) | Under 142.5 (0.9 pt) |
-|  |  | Player + opponent + rotation v4 | UAlbany 70.5 / Canisius 72.1 | 142.5 | Canisius +1.5 (3.1 pt) | Over 142.5 (0.0 pt) |
-| 03:00 PM · **Pennsylvania @ La Salle** | La Salle -1.5 / Total 160.0 (Bovada) | Team baseline | Pennsylvania 70.9 / La Salle 81.0 | 151.9 | La Salle -1.5 (8.6 pt) | Under 160.0 (8.1 pt) |
-|  |  | Player v2 | Pennsylvania 74.9 / La Salle 76.1 | 151.0 | Pennsylvania +1.5 (0.3 pt) | Under 160.0 (9.0 pt) |
-|  |  | Player + opponent v3 | Pennsylvania 75.3 / La Salle 76.0 | 151.3 | Pennsylvania +1.5 (0.8 pt) | Under 160.0 (8.7 pt) |
-|  |  | Player + rotation v4 | Pennsylvania 73.0 / La Salle 73.5 | 146.5 | Pennsylvania +1.5 (1.0 pt) | Under 160.0 (13.5 pt) |
-|  |  | Player + opponent + rotation v4 | Pennsylvania 74.0 / La Salle 73.3 | 147.3 | Pennsylvania +1.5 (2.2 pt) | Under 160.0 (12.7 pt) |
-| 03:00 PM · **South Florida @ George Mason** | George Mason -3.0 / Total 146.5 (Bovada) | Team baseline | South Florida 66.6 / George Mason 78.5 | 145.0 | George Mason -3.0 (8.9 pt) | Under 146.5 (1.5 pt) |
-|  |  | Player v2 | South Florida 74.5 / George Mason 79.6 | 154.1 | George Mason -3.0 (2.1 pt) | Over 146.5 (7.6 pt) |
-|  |  | Player + opponent v3 | South Florida 76.2 / George Mason 77.6 | 153.8 | South Florida +3.0 (1.6 pt) | Over 146.5 (7.3 pt) |
-|  |  | Player + rotation v4 | South Florida 74.7 / George Mason 77.3 | 152.0 | South Florida +3.0 (0.4 pt) | Over 146.5 (5.5 pt) |
-|  |  | Player + opponent + rotation v4 | South Florida 76.6 / George Mason 74.7 | 151.3 | South Florida +3.0 (4.9 pt) | Over 146.5 (4.8 pt) |
-| 03:00 PM · **Central Arkansas @ Jacksonville** | Jacksonville +3.5 / Total 144.5 (Bovada) | Team baseline | Central Arkansas 71.3 / Jacksonville 80.5 | 151.8 | Jacksonville +3.5 (12.6 pt) | Over 144.5 (7.3 pt) |
-|  |  | Player v2 | Central Arkansas 74.9 / Jacksonville 76.2 | 151.1 | Jacksonville +3.5 (4.9 pt) | Over 144.5 (6.6 pt) |
-|  |  | Player + opponent v3 | Central Arkansas 75.9 / Jacksonville 75.6 | 151.5 | Jacksonville +3.5 (3.1 pt) | Over 144.5 (7.0 pt) |
-|  |  | Player + rotation v4 | Central Arkansas 74.8 / Jacksonville 75.5 | 150.3 | Jacksonville +3.5 (4.2 pt) | Over 144.5 (5.8 pt) |
-|  |  | Player + opponent + rotation v4 | Central Arkansas 76.3 / Jacksonville 74.8 | 151.0 | Jacksonville +3.5 (2.0 pt) | Over 144.5 (6.5 pt) |
-| 03:30 PM · **UC Irvine @ San Diego** | San Diego +5.0 / Total 134.5 (Bovada) | Team baseline | UC Irvine 71.3 / San Diego 76.2 | 147.6 | San Diego +5.0 (9.9 pt) | Over 134.5 (13.1 pt) |
-|  |  | Player v2 | UC Irvine 72.4 / San Diego 75.7 | 148.1 | San Diego +5.0 (8.3 pt) | Over 134.5 (13.6 pt) |
-|  |  | Player + opponent v3 | UC Irvine 72.3 / San Diego 75.5 | 147.9 | San Diego +5.0 (8.2 pt) | Over 134.5 (13.4 pt) |
-|  |  | Player + rotation v4 | UC Irvine 72.1 / San Diego 75.7 | 147.8 | San Diego +5.0 (8.6 pt) | Over 134.5 (13.3 pt) |
-|  |  | Player + opponent + rotation v4 | UC Irvine 72.1 / San Diego 75.1 | 147.2 | San Diego +5.0 (8.1 pt) | Over 134.5 (12.7 pt) |
-| 04:00 PM · **Southern Miss @ Nicholls** | Nicholls +3.5 / Total 142.5 (Bovada) | Team baseline | Southern Miss 72.6 / Nicholls 74.9 | 147.5 | Nicholls +3.5 (5.8 pt) | Over 142.5 (5.0 pt) |
-|  |  | Player v2 | Southern Miss 74.2 / Nicholls 76.2 | 150.4 | Nicholls +3.5 (5.5 pt) | Over 142.5 (7.9 pt) |
-|  |  | Player + opponent v3 | Southern Miss 73.7 / Nicholls 77.2 | 150.9 | Nicholls +3.5 (7.1 pt) | Over 142.5 (8.4 pt) |
-|  |  | Player + rotation v4 | Southern Miss 73.4 / Nicholls 74.5 | 147.9 | Nicholls +3.5 (4.7 pt) | Over 142.5 (5.4 pt) |
-|  |  | Player + opponent + rotation v4 | Southern Miss 72.9 / Nicholls 75.9 | 148.8 | Nicholls +3.5 (6.5 pt) | Over 142.5 (6.3 pt) |
-| 04:00 PM · **Winthrop @ Wofford** | Wofford -6.5 / Total 165.5 (Bovada) | Team baseline | Winthrop 73.4 / Wofford 89.8 | 163.2 | Wofford -6.5 (9.8 pt) | Under 165.5 (2.3 pt) |
-|  |  | Player v2 | Winthrop 78.0 / Wofford 90.7 | 168.8 | Wofford -6.5 (6.2 pt) | Over 165.5 (3.3 pt) |
-|  |  | Player + opponent v3 | Winthrop 78.0 / Wofford 90.4 | 168.3 | Wofford -6.5 (5.9 pt) | Over 165.5 (2.8 pt) |
-|  |  | Player + rotation v4 | Winthrop 77.4 / Wofford 87.1 | 164.5 | Wofford -6.5 (3.3 pt) | Under 165.5 (1.0 pt) |
-|  |  | Player + opponent + rotation v4 | Winthrop 77.2 / Wofford 86.8 | 164.0 | Wofford -6.5 (3.0 pt) | Under 165.5 (1.5 pt) |
-| 04:00 PM · **Northeastern @ Stonehill** | Stonehill +7.5 / Total 146.5 (Bovada) | Team baseline | Northeastern 72.8 / Stonehill 75.6 | 148.5 | Stonehill +7.5 (10.3 pt) | Over 146.5 (2.0 pt) |
-|  |  | Player v2 | Northeastern 75.4 / Stonehill 67.9 | 143.3 | Stonehill +7.5 (0.0 pt) | Under 146.5 (3.2 pt) |
-|  |  | Player + opponent v3 | Northeastern 76.0 / Stonehill 68.2 | 144.2 | Northeastern -7.5 (0.2 pt) | Under 146.5 (2.3 pt) |
-|  |  | Player + rotation v4 | Northeastern 75.6 / Stonehill 67.2 | 142.8 | Northeastern -7.5 (0.9 pt) | Under 146.5 (3.7 pt) |
-|  |  | Player + opponent + rotation v4 | Northeastern 76.6 / Stonehill 67.9 | 144.5 | Northeastern -7.5 (1.2 pt) | Under 146.5 (2.0 pt) |
-| 05:00 PM · **Maine @ Massachusetts** | Massachusetts -12.5 / Total 139.5 (Bovada) | Team baseline | Maine 64.9 / Massachusetts 73.5 | 138.5 | Maine +12.5 (3.9 pt) | Under 139.5 (1.0 pt) |
-|  |  | Player v2 | Maine 63.6 / Massachusetts 74.5 | 138.1 | Maine +12.5 (1.6 pt) | Under 139.5 (1.4 pt) |
-|  |  | Player + opponent v3 | Maine 63.6 / Massachusetts 75.8 | 139.3 | Maine +12.5 (0.3 pt) | Under 139.5 (0.2 pt) |
-|  |  | Player + rotation v4 | Maine 64.2 / Massachusetts 72.8 | 137.0 | Maine +12.5 (3.9 pt) | Under 139.5 (2.5 pt) |
-|  |  | Player + opponent + rotation v4 | Maine 64.3 / Massachusetts 74.1 | 138.5 | Maine +12.5 (2.7 pt) | Under 139.5 (1.0 pt) |
-| 05:00 PM · **Coppin State @ Georgetown** | Georgetown -31.5 / Total 142.5 (Bovada) | Team baseline | Coppin State 60.9 / Georgetown 81.2 | 142.1 | Coppin State +31.5 (11.2 pt) | Under 142.5 (0.4 pt) |
-|  |  | Player v2 | Coppin State 60.9 / Georgetown 82.6 | 143.5 | Coppin State +31.5 (9.9 pt) | Over 142.5 (1.0 pt) |
-|  |  | Player + opponent v3 | Coppin State 60.3 / Georgetown 83.1 | 143.4 | Coppin State +31.5 (8.7 pt) | Over 142.5 (0.9 pt) |
-|  |  | Player + rotation v4 | Coppin State 60.8 / Georgetown 81.5 | 142.4 | Coppin State +31.5 (10.8 pt) | Under 142.5 (0.1 pt) |
-|  |  | Player + opponent + rotation v4 | Coppin State 60.6 / Georgetown 82.1 | 142.6 | Coppin State +31.5 (10.0 pt) | Over 142.5 (0.1 pt) |
-| 05:00 PM · **UNC Wilmington @ Norfolk State** | Norfolk State +13.5 / Total 151.5 (Bovada) | Team baseline | UNC Wilmington 77.5 / Norfolk State 76.3 | 153.8 | Norfolk State +13.5 (12.3 pt) | Over 151.5 (2.3 pt) |
-|  |  | Player v2 | UNC Wilmington 80.1 / Norfolk State 70.1 | 150.2 | Norfolk State +13.5 (3.5 pt) | Under 151.5 (1.3 pt) |
-|  |  | Player + opponent v3 | UNC Wilmington 80.6 / Norfolk State 70.8 | 151.4 | Norfolk State +13.5 (3.8 pt) | Under 151.5 (0.1 pt) |
-|  |  | Player + rotation v4 | UNC Wilmington 81.0 / Norfolk State 71.7 | 152.7 | Norfolk State +13.5 (4.2 pt) | Over 151.5 (1.2 pt) |
-|  |  | Player + opponent + rotation v4 | UNC Wilmington 81.5 / Norfolk State 71.8 | 153.4 | Norfolk State +13.5 (3.8 pt) | Over 151.5 (1.9 pt) |
-| 06:00 PM · **Gardner-Webb @ VMI** | VMI -8.5 / Total 148.5 (Bovada) | Team baseline | Gardner-Webb 64.0 / VMI 84.0 | 148.0 | VMI -8.5 (11.6 pt) | Under 148.5 (0.5 pt) |
-|  |  | Player v2 | Gardner-Webb 67.1 / VMI 84.6 | 151.7 | VMI -8.5 (9.0 pt) | Over 148.5 (3.2 pt) |
-|  |  | Player + opponent v3 | Gardner-Webb 68.3 / VMI 81.8 | 150.1 | VMI -8.5 (5.1 pt) | Over 148.5 (1.6 pt) |
-|  |  | Player + rotation v4 | Gardner-Webb 66.4 / VMI 81.3 | 147.7 | VMI -8.5 (6.4 pt) | Under 148.5 (0.8 pt) |
-|  |  | Player + opponent + rotation v4 | Gardner-Webb 68.0 / VMI 78.3 | 146.3 | VMI -8.5 (1.8 pt) | Under 148.5 (2.2 pt) |
-| 06:00 PM · **Charleston Southern @ Mercer** | Mercer -8.5 / Total 162.5 (Bovada) | Team baseline | Charleston Southern 72.9 / Mercer 82.3 | 155.1 | Mercer -8.5 (0.9 pt) | Under 162.5 (7.4 pt) |
-|  |  | Player v2 | Charleston Southern 71.8 / Mercer 82.6 | 154.4 | Mercer -8.5 (2.4 pt) | Under 162.5 (8.1 pt) |
-|  |  | Player + opponent v3 | Charleston Southern 72.5 / Mercer 82.3 | 154.8 | Mercer -8.5 (1.2 pt) | Under 162.5 (7.7 pt) |
-|  |  | Player + rotation v4 | Charleston Southern 71.4 / Mercer 79.3 | 150.7 | Charleston Southern +8.5 (0.7 pt) | Under 162.5 (11.8 pt) |
-|  |  | Player + opponent + rotation v4 | Charleston Southern 72.5 / Mercer 78.6 | 151.1 | Charleston Southern +8.5 (2.3 pt) | Under 162.5 (11.4 pt) |
-| 06:00 PM · **Brown @ Vermont** | Vermont -3.5 / Total 133.5 (Bovada) | Team baseline | Brown 63.9 / Vermont 77.1 | 141.1 | Vermont -3.5 (9.7 pt) | Over 133.5 (7.6 pt) |
-|  |  | Player v2 | Brown 64.7 / Vermont 75.0 | 139.6 | Vermont -3.5 (6.8 pt) | Over 133.5 (6.1 pt) |
-|  |  | Player + opponent v3 | Brown 65.4 / Vermont 73.9 | 139.3 | Vermont -3.5 (5.0 pt) | Over 133.5 (5.8 pt) |
-|  |  | Player + rotation v4 | Brown 64.1 / Vermont 72.1 | 136.2 | Vermont -3.5 (4.5 pt) | Over 133.5 (2.7 pt) |
-|  |  | Player + opponent + rotation v4 | Brown 65.0 / Vermont 70.5 | 135.5 | Vermont -3.5 (2.1 pt) | Over 133.5 (2.0 pt) |
-| 06:00 PM · **Michigan @ Villanova** | Villanova +4.0 / Total 160.5 (Bovada) | Team baseline | Michigan 69.5 / Villanova 85.0 | 154.5 | Villanova +4.0 (19.5 pt) | Under 160.5 (6.0 pt) |
-|  |  | Player v2 | Michigan 80.9 / Villanova 79.0 | 160.0 | Villanova +4.0 (2.1 pt) | Under 160.5 (0.5 pt) |
-|  |  | Player + opponent v3 | Michigan 81.7 / Villanova 78.5 | 160.1 | Villanova +4.0 (0.8 pt) | Under 160.5 (0.4 pt) |
-|  |  | Player + rotation v4 | Michigan 81.3 / Villanova 79.1 | 160.3 | Villanova +4.0 (1.8 pt) | Under 160.5 (0.2 pt) |
-|  |  | Player + opponent + rotation v4 | Michigan 82.1 / Villanova 78.1 | 160.2 | Michigan -4.0 (0.0 pt) | Under 160.5 (0.3 pt) |
-| 06:00 PM · **Morehead State @ Elon** | Elon -13.0 / Total 142.5 (Bovada) | Team baseline | Morehead State 70.6 / Elon 78.0 | 148.6 | Morehead State +13.0 (5.6 pt) | Over 142.5 (6.1 pt) |
-|  |  | Player v2 | Morehead State 71.1 / Elon 80.0 | 151.0 | Morehead State +13.0 (4.1 pt) | Over 142.5 (8.5 pt) |
-|  |  | Player + opponent v3 | Morehead State 67.8 / Elon 83.7 | 151.5 | Elon -13.0 (2.9 pt) | Over 142.5 (9.0 pt) |
-|  |  | Player + rotation v4 | Morehead State 70.9 / Elon 77.7 | 148.5 | Morehead State +13.0 (6.2 pt) | Over 142.5 (6.0 pt) |
-|  |  | Player + opponent + rotation v4 | Morehead State 68.2 / Elon 82.0 | 150.1 | Elon -13.0 (0.8 pt) | Over 142.5 (7.6 pt) |
-| 06:00 PM · **Northern Arizona @ Cal Poly** | Cal Poly -8.0 / Total 156.5 (Bovada) | Team baseline | Northern Arizona 69.5 / Cal Poly 80.6 | 150.1 | Cal Poly -8.0 (3.0 pt) | Under 156.5 (6.4 pt) |
-|  |  | Player v2 | Northern Arizona 72.8 / Cal Poly 79.9 | 152.6 | Northern Arizona +8.0 (0.9 pt) | Under 156.5 (3.9 pt) |
-|  |  | Player + opponent v3 | Northern Arizona 72.1 / Cal Poly 79.8 | 151.9 | Northern Arizona +8.0 (0.3 pt) | Under 156.5 (4.6 pt) |
-|  |  | Player + rotation v4 | Northern Arizona 73.0 / Cal Poly 77.8 | 150.8 | Northern Arizona +8.0 (3.1 pt) | Under 156.5 (5.7 pt) |
-|  |  | Player + opponent + rotation v4 | Northern Arizona 72.8 / Cal Poly 77.8 | 150.6 | Northern Arizona +8.0 (3.0 pt) | Under 156.5 (5.9 pt) |
-| 06:00 PM · **Cornell @ Morgan State** | Morgan State +6.5 / Total 161.5 (Bovada) | Team baseline | Cornell 68.7 / Morgan State 83.8 | 152.5 | Morgan State +6.5 (21.7 pt) | Under 161.5 (9.0 pt) |
-|  |  | Player v2 | Cornell 72.2 / Morgan State 81.7 | 153.8 | Morgan State +6.5 (16.0 pt) | Under 161.5 (7.7 pt) |
-|  |  | Player + opponent v3 | Cornell 76.5 / Morgan State 75.2 | 151.7 | Morgan State +6.5 (5.1 pt) | Under 161.5 (9.8 pt) |
-|  |  | Player + rotation v4 | Cornell 72.1 / Morgan State 80.1 | 152.2 | Morgan State +6.5 (14.5 pt) | Under 161.5 (9.3 pt) |
-|  |  | Player + opponent + rotation v4 | Cornell 76.6 / Morgan State 72.4 | 149.0 | Morgan State +6.5 (2.3 pt) | Under 161.5 (12.5 pt) |
-| 06:00 PM · **Radford @ Chattanooga** | Chattanooga -8.5 / Total 155.5 (Bovada) | Team baseline | Radford 68.5 / Chattanooga 83.3 | 151.8 | Chattanooga -8.5 (6.4 pt) | Under 155.5 (3.7 pt) |
-|  |  | Player v2 | Radford 71.9 / Chattanooga 81.1 | 153.0 | Chattanooga -8.5 (0.8 pt) | Under 155.5 (2.5 pt) |
-|  |  | Player + opponent v3 | Radford 72.8 / Chattanooga 80.7 | 153.5 | Radford +8.5 (0.7 pt) | Under 155.5 (2.0 pt) |
-|  |  | Player + rotation v4 | Radford 70.9 / Chattanooga 78.9 | 149.8 | Radford +8.5 (0.5 pt) | Under 155.5 (5.7 pt) |
-|  |  | Player + opponent + rotation v4 | Radford 72.2 / Chattanooga 78.3 | 150.5 | Radford +8.5 (2.5 pt) | Under 155.5 (5.0 pt) |
-| 06:00 PM · **California Baptist @ Loyola Marymount** | Loyola Marymount — / Total 134.5 (Bovada) | Team baseline | California Baptist 64.2 / Loyola Marymount 81.8 | 146.1 | — | Over 134.5 (11.6 pt) |
-|  |  | Player v2 | California Baptist 64.9 / Loyola Marymount 84.8 | 149.7 | — | Over 134.5 (15.2 pt) |
-|  |  | Player + opponent v3 | California Baptist 64.2 / Loyola Marymount 84.8 | 149.0 | — | Over 134.5 (14.5 pt) |
-|  |  | Player + rotation v4 | California Baptist 64.9 / Loyola Marymount 81.8 | 146.7 | — | Over 134.5 (12.2 pt) |
-|  |  | Player + opponent + rotation v4 | California Baptist 64.2 / Loyola Marymount 80.6 | 144.8 | — | Over 134.5 (10.3 pt) |
-| 06:30 PM · **Presbyterian @ Tennessee Tech** | Tennessee Tech -8.5 / Total 164.5 (Bovada) | Team baseline | Presbyterian 69.7 / Tennessee Tech 93.6 | 163.3 | Tennessee Tech -8.5 (15.3 pt) | Under 164.5 (1.2 pt) |
-|  |  | Player v2 | Presbyterian 74.8 / Tennessee Tech 84.0 | 158.8 | Tennessee Tech -8.5 (0.7 pt) | Under 164.5 (5.7 pt) |
-|  |  | Player + opponent v3 | Presbyterian 74.9 / Tennessee Tech 84.5 | 159.5 | Tennessee Tech -8.5 (1.1 pt) | Under 164.5 (5.0 pt) |
-|  |  | Player + rotation v4 | Presbyterian 75.5 / Tennessee Tech 85.5 | 161.1 | Tennessee Tech -8.5 (1.5 pt) | Under 164.5 (3.4 pt) |
-|  |  | Player + opponent + rotation v4 | Presbyterian 75.8 / Tennessee Tech 86.9 | 162.7 | Tennessee Tech -8.5 (2.6 pt) | Under 164.5 (1.8 pt) |
-| 07:00 PM · **Texas A&M-Corpus Christi @ Oral Roberts** | Oral Roberts -2.5 / Total 140.5 (Bovada) | Team baseline | Texas A&M-Corpus Christi 62.8 / Oral Roberts 77.8 | 140.6 | Oral Roberts -2.5 (12.6 pt) | Over 140.5 (0.1 pt) |
-|  |  | Player v2 | Texas A&M-Corpus Christi 66.0 / Oral Roberts 77.4 | 143.4 | Oral Roberts -2.5 (8.8 pt) | Over 140.5 (2.9 pt) |
-|  |  | Player + opponent v3 | Texas A&M-Corpus Christi 65.1 / Oral Roberts 77.7 | 142.8 | Oral Roberts -2.5 (10.0 pt) | Over 140.5 (2.3 pt) |
-|  |  | Player + rotation v4 | Texas A&M-Corpus Christi 65.8 / Oral Roberts 75.4 | 141.2 | Oral Roberts -2.5 (7.1 pt) | Over 140.5 (0.7 pt) |
-|  |  | Player + opponent + rotation v4 | Texas A&M-Corpus Christi 65.3 / Oral Roberts 75.9 | 141.3 | Oral Roberts -2.5 (8.1 pt) | Over 140.5 (0.8 pt) |
-| 07:00 PM · **Troy @ Valparaiso** | Valparaiso — / Total 139.0 (Bovada) | Team baseline | Troy 65.1 / Valparaiso 79.3 | 144.4 | — | Over 139.0 (5.4 pt) |
-|  |  | Player v2 | Troy 68.5 / Valparaiso 75.9 | 144.4 | — | Over 139.0 (5.4 pt) |
-|  |  | Player + opponent v3 | Troy 68.5 / Valparaiso 75.2 | 143.7 | — | Over 139.0 (4.7 pt) |
-|  |  | Player + rotation v4 | Troy 68.5 / Valparaiso 74.6 | 143.1 | — | Over 139.0 (4.1 pt) |
-|  |  | Player + opponent + rotation v4 | Troy 68.6 / Valparaiso 74.3 | 142.9 | — | Over 139.0 (3.9 pt) |
-| 10:00 PM · **Washington State @ Duke** | Duke — / Total 147.5 (Bovada) | Team baseline | Washington State 70.1 / Duke 80.9 | 151.0 | — | Over 147.5 (3.5 pt) |
-|  |  | Player v2 | Washington State 66.0 / Duke 91.5 | 157.5 | — | Over 147.5 (10.0 pt) |
-|  |  | Player + opponent v3 | Washington State 65.4 / Duke 93.2 | 158.6 | — | Over 147.5 (11.1 pt) |
-|  |  | Player + rotation v4 | Washington State 65.9 / Duke 91.0 | 156.8 | — | Over 147.5 (9.3 pt) |
-|  |  | Player + opponent + rotation v4 | Washington State 65.8 / Duke 92.8 | 158.6 | — | Over 147.5 (11.1 pt) |
+| 11:00 AM · **Butler @ Nebraska** | Nebraska -12.0 / Total 155.0 (Bovada) | Team baseline | Butler 71.2 / Nebraska 79.0 | 150.2 | Butler +12.0 (4.2 pt) | Under 155.0 (4.8 pt) |
+|  |  | Player v2 | Butler 70.1 / Nebraska 88.9 | 159.0 | Nebraska -12.0 (6.8 pt) | Over 155.0 (4.0 pt) |
+|  |  | Player + opponent v3 | Butler 69.0 / Nebraska 88.1 | 157.2 | Nebraska -12.0 (7.1 pt) | Over 155.0 (2.2 pt) |
+|  |  | Player + rotation v4 | Butler 70.9 / Nebraska 87.4 | 158.4 | Nebraska -12.0 (4.5 pt) | Over 155.0 (3.4 pt) |
+|  |  | Player + opponent + rotation v4 | Butler 70.0 / Nebraska 87.3 | 157.3 | Nebraska -12.0 (5.3 pt) | Over 155.0 (2.3 pt) |
+| 12:00 PM · **Chicago State @ Marquette** | Marquette -34.5 / Total 139.5 (Bovada) | Team baseline | Chicago State 58.6 / Marquette 79.0 | 137.6 | Chicago State +34.5 (14.1 pt) | Under 139.5 (1.9 pt) |
+|  |  | Player v2 | Chicago State 55.9 / Marquette 86.6 | 142.4 | Chicago State +34.5 (3.8 pt) | Over 139.5 (2.9 pt) |
+|  |  | Player + opponent v3 | Chicago State 54.2 / Marquette 88.0 | 142.1 | Chicago State +34.5 (0.7 pt) | Over 139.5 (2.6 pt) |
+|  |  | Player + rotation v4 | Chicago State 54.2 / Marquette 84.4 | 138.6 | Chicago State +34.5 (4.3 pt) | Under 139.5 (0.9 pt) |
+|  |  | Player + opponent + rotation v4 | Chicago State 53.0 / Marquette 85.9 | 138.9 | Chicago State +34.5 (1.6 pt) | Under 139.5 (0.6 pt) |
+| 12:00 PM · **Towson @ American University** | American University -1.5 / Total 131.5 (Bovada) | Team baseline | Towson 63.3 / American University 71.5 | 134.8 | American University -1.5 (6.7 pt) | Over 131.5 (3.3 pt) |
+|  |  | Player v2 | Towson 62.6 / American University 72.7 | 135.3 | American University -1.5 (8.6 pt) | Over 131.5 (3.8 pt) |
+|  |  | Player + opponent v3 | Towson 62.0 / American University 72.6 | 134.6 | American University -1.5 (9.1 pt) | Over 131.5 (3.1 pt) |
+|  |  | Player + rotation v4 | Towson 62.3 / American University 69.8 | 132.1 | American University -1.5 (6.0 pt) | Over 131.5 (0.6 pt) |
+|  |  | Player + opponent + rotation v4 | Towson 62.1 / American University 69.7 | 131.8 | American University -1.5 (6.1 pt) | Over 131.5 (0.3 pt) |
+| 12:00 PM · **Fairfield @ Long Island University** | Long Island University -2.5 / Total 145.5 (Bovada) | Team baseline | Fairfield 68.7 / Long Island University 77.1 | 145.8 | Long Island University -2.5 (5.9 pt) | Over 145.5 (0.3 pt) |
+|  |  | Player v2 | Fairfield 75.0 / Long Island University 64.9 | 139.9 | Fairfield +2.5 (12.7 pt) | Under 145.5 (5.6 pt) |
+|  |  | Player + opponent v3 | Fairfield 73.2 / Long Island University 68.7 | 141.9 | Fairfield +2.5 (7.0 pt) | Under 145.5 (3.6 pt) |
+|  |  | Player + rotation v4 | Fairfield 75.3 / Long Island University 64.1 | 139.4 | Fairfield +2.5 (13.7 pt) | Under 145.5 (6.1 pt) |
+|  |  | Player + opponent + rotation v4 | Fairfield 73.6 / Long Island University 67.8 | 141.4 | Fairfield +2.5 (8.4 pt) | Under 145.5 (4.1 pt) |
+| 12:00 PM · **Dayton @ Northwestern** | Northwestern +3.5 / Total 135.5 (Bovada) | Team baseline | Dayton 70.0 / Northwestern 71.6 | 141.6 | Northwestern +3.5 (5.1 pt) | Over 135.5 (6.1 pt) |
+|  |  | Player v2 | Dayton 73.0 / Northwestern 73.5 | 146.5 | Northwestern +3.5 (4.1 pt) | Over 135.5 (11.0 pt) |
+|  |  | Player + opponent v3 | Dayton 71.3 / Northwestern 76.0 | 147.3 | Northwestern +3.5 (8.2 pt) | Over 135.5 (11.8 pt) |
+|  |  | Player + rotation v4 | Dayton 72.8 / Northwestern 72.6 | 145.4 | Northwestern +3.5 (3.3 pt) | Over 135.5 (9.9 pt) |
+|  |  | Player + opponent + rotation v4 | Dayton 71.4 / Northwestern 75.1 | 146.6 | Northwestern +3.5 (7.2 pt) | Over 135.5 (11.1 pt) |
+| 12:00 PM · **Western Illinois @ Canisius** | Canisius -4.0 / Total 140.5 (Bovada) | Team baseline | Western Illinois 68.5 / Canisius 78.4 | 146.9 | Canisius -4.0 (5.9 pt) | Over 140.5 (6.4 pt) |
+|  |  | Player v2 | Western Illinois 67.5 / Canisius 82.4 | 149.9 | Canisius -4.0 (10.9 pt) | Over 140.5 (9.4 pt) |
+|  |  | Player + opponent v3 | Western Illinois 68.9 / Canisius 81.4 | 150.3 | Canisius -4.0 (8.5 pt) | Over 140.5 (9.8 pt) |
+|  |  | Player + rotation v4 | Western Illinois 67.3 / Canisius 79.3 | 146.6 | Canisius -4.0 (8.0 pt) | Over 140.5 (6.1 pt) |
+|  |  | Player + opponent + rotation v4 | Western Illinois 68.8 / Canisius 78.3 | 147.0 | Canisius -4.0 (5.5 pt) | Over 140.5 (6.5 pt) |
+| 01:00 PM · **San Diego @ Fordham** | Fordham -3.0 / Total 144.0 (Bovada) | Team baseline | San Diego 71.8 / Fordham 74.9 | 146.7 | Fordham -3.0 (0.1 pt) | Over 144.0 (2.7 pt) |
+|  |  | Player v2 | San Diego 70.5 / Fordham 77.3 | 147.8 | Fordham -3.0 (3.9 pt) | Over 144.0 (3.8 pt) |
+|  |  | Player + opponent v3 | San Diego 71.1 / Fordham 76.2 | 147.3 | Fordham -3.0 (2.1 pt) | Over 144.0 (3.3 pt) |
+|  |  | Player + rotation v4 | San Diego 70.6 / Fordham 75.0 | 145.6 | Fordham -3.0 (1.5 pt) | Over 144.0 (1.6 pt) |
+|  |  | Player + opponent + rotation v4 | San Diego 71.2 / Fordham 73.8 | 145.0 | San Diego +3.0 (0.4 pt) | Over 144.0 (1.0 pt) |
+| 01:00 PM · **UMass Lowell @ Cincinnati** | Cincinnati -30.5 / Total 147.5 (Bovada) | Team baseline | UMass Lowell 63.5 / Cincinnati 77.5 | 141.0 | UMass Lowell +30.5 (16.6 pt) | Under 147.5 (6.5 pt) |
+|  |  | Player v2 | UMass Lowell 63.1 / Cincinnati 90.6 | 153.7 | UMass Lowell +30.5 (3.0 pt) | Over 147.5 (6.2 pt) |
+|  |  | Player + opponent v3 | UMass Lowell 62.0 / Cincinnati 94.2 | 156.2 | Cincinnati -30.5 (1.7 pt) | Over 147.5 (8.7 pt) |
+|  |  | Player + rotation v4 | UMass Lowell 63.2 / Cincinnati 85.1 | 148.3 | UMass Lowell +30.5 (8.5 pt) | Over 147.5 (0.8 pt) |
+|  |  | Player + opponent + rotation v4 | UMass Lowell 62.5 / Cincinnati 88.5 | 151.1 | UMass Lowell +30.5 (4.5 pt) | Over 147.5 (3.6 pt) |
+| 01:00 PM · **William & Mary @ Youngstown State** | Youngstown State +2.5 / Total 164.5 (Bovada) | Team baseline | William & Mary 77.7 / Youngstown State 76.6 | 154.3 | Youngstown State +2.5 (1.4 pt) | Under 164.5 (10.2 pt) |
+|  |  | Player v2 | William & Mary 77.5 / Youngstown State 77.4 | 154.9 | Youngstown State +2.5 (2.4 pt) | Under 164.5 (9.6 pt) |
+|  |  | Player + opponent v3 | William & Mary 77.1 / Youngstown State 79.7 | 156.8 | Youngstown State +2.5 (5.1 pt) | Under 164.5 (7.7 pt) |
+|  |  | Player + rotation v4 | William & Mary 76.8 / Youngstown State 76.1 | 152.9 | Youngstown State +2.5 (1.8 pt) | Under 164.5 (11.6 pt) |
+|  |  | Player + opponent + rotation v4 | William & Mary 76.8 / Youngstown State 78.5 | 155.3 | Youngstown State +2.5 (4.2 pt) | Under 164.5 (9.2 pt) |
+| 01:00 PM · **South Dakota @ Utah Tech** | Utah Tech -1.5 / Total 152.5 (Bovada) | Team baseline | South Dakota 77.1 / Utah Tech 76.8 | 153.9 | South Dakota +1.5 (1.8 pt) | Over 152.5 (1.4 pt) |
+|  |  | Player v2 | South Dakota 74.2 / Utah Tech 75.3 | 149.5 | South Dakota +1.5 (0.4 pt) | Under 152.5 (3.0 pt) |
+|  |  | Player + opponent v3 | South Dakota 74.4 / Utah Tech 74.5 | 149.0 | South Dakota +1.5 (1.4 pt) | Under 152.5 (3.5 pt) |
+|  |  | Player + rotation v4 | South Dakota 74.4 / Utah Tech 75.3 | 149.7 | South Dakota +1.5 (0.6 pt) | Under 152.5 (2.8 pt) |
+|  |  | Player + opponent + rotation v4 | South Dakota 74.8 / Utah Tech 74.4 | 149.2 | South Dakota +1.5 (1.9 pt) | Under 152.5 (3.3 pt) |
+| 01:00 PM · **Wyoming @ Duquesne** | Duquesne +3.5 / Total 138.5 (Bovada) | Team baseline | Wyoming 68.4 / Duquesne 70.7 | 139.1 | Duquesne +3.5 (5.8 pt) | Over 138.5 (0.6 pt) |
+|  |  | Player v2 | Wyoming 72.5 / Duquesne 70.5 | 143.0 | Duquesne +3.5 (1.5 pt) | Over 138.5 (4.5 pt) |
+|  |  | Player + opponent v3 | Wyoming 73.4 / Duquesne 68.8 | 142.1 | Wyoming -3.5 (1.1 pt) | Over 138.5 (3.6 pt) |
+|  |  | Player + rotation v4 | Wyoming 72.1 / Duquesne 67.4 | 139.5 | Wyoming -3.5 (1.2 pt) | Over 138.5 (1.0 pt) |
+|  |  | Player + opponent + rotation v4 | Wyoming 73.3 / Duquesne 65.4 | 138.7 | Wyoming -3.5 (4.3 pt) | Over 138.5 (0.2 pt) |
+| 01:00 PM · **George Washington @ Western Kentucky** | Western Kentucky +5.5 / Total 148.5 (Bovada) | Team baseline | George Washington 71.4 / Western Kentucky 70.1 | 141.5 | Western Kentucky +5.5 (4.2 pt) | Under 148.5 (7.0 pt) |
+|  |  | Player v2 | George Washington 73.8 / Western Kentucky 71.6 | 145.4 | Western Kentucky +5.5 (3.3 pt) | Under 148.5 (3.1 pt) |
+|  |  | Player + opponent v3 | George Washington 73.8 / Western Kentucky 72.2 | 146.1 | Western Kentucky +5.5 (3.8 pt) | Under 148.5 (2.5 pt) |
+|  |  | Player + rotation v4 | George Washington 73.4 / Western Kentucky 70.8 | 144.2 | Western Kentucky +5.5 (2.9 pt) | Under 148.5 (4.3 pt) |
+|  |  | Player + opponent + rotation v4 | George Washington 73.6 / Western Kentucky 71.3 | 144.9 | Western Kentucky +5.5 (3.1 pt) | Under 148.5 (3.6 pt) |
+| 01:30 PM · **Robert Morris @ New Mexico State** | New Mexico State -1.5 / Total 137.5 (Bovada) | Team baseline | Robert Morris 68.0 / New Mexico State 71.8 | 139.8 | New Mexico State -1.5 (2.2 pt) | Over 137.5 (2.3 pt) |
+|  |  | Player v2 | Robert Morris 68.9 / New Mexico State 72.0 | 140.9 | New Mexico State -1.5 (1.7 pt) | Over 137.5 (3.4 pt) |
+|  |  | Player + opponent v3 | Robert Morris 68.8 / New Mexico State 72.7 | 141.5 | New Mexico State -1.5 (2.5 pt) | Over 137.5 (4.0 pt) |
+|  |  | Player + rotation v4 | Robert Morris 68.8 / New Mexico State 70.3 | 139.1 | Robert Morris +1.5 (0.1 pt) | Over 137.5 (1.6 pt) |
+|  |  | Player + opponent + rotation v4 | Robert Morris 69.1 / New Mexico State 71.1 | 140.2 | New Mexico State -1.5 (0.5 pt) | Over 137.5 (2.7 pt) |
+| 02:00 PM · **Southern Indiana @ Texas** | Texas -39.5 / Total 149.0 (Bovada) | Team baseline | Southern Indiana 65.4 / Texas 85.2 | 150.5 | Southern Indiana +39.5 (19.7 pt) | Over 149.0 (1.5 pt) |
+|  |  | Player v2 | Southern Indiana 61.5 / Texas 94.6 | 156.1 | Southern Indiana +39.5 (6.4 pt) | Over 149.0 (7.1 pt) |
+|  |  | Player + opponent v3 | Southern Indiana 62.5 / Texas 93.6 | 156.1 | Southern Indiana +39.5 (8.5 pt) | Over 149.0 (7.1 pt) |
+|  |  | Player + rotation v4 | Southern Indiana 61.7 / Texas 93.4 | 155.0 | Southern Indiana +39.5 (7.8 pt) | Over 149.0 (6.0 pt) |
+|  |  | Player + opponent + rotation v4 | Southern Indiana 63.0 / Texas 92.0 | 154.9 | Southern Indiana +39.5 (10.5 pt) | Over 149.0 (5.9 pt) |
+| 02:00 PM · **West Florida @ South Alabama** | South Alabama -6.5 / Total 141.5 (Bovada) | Team baseline | West Florida 76.6 / South Alabama 79.9 | 156.5 | West Florida +6.5 (3.1 pt) | Over 141.5 (15.0 pt) |
+|  |  | Player v2 | West Florida 73.4 / South Alabama 86.9 | 160.3 | South Alabama -6.5 (7.0 pt) | Over 141.5 (18.8 pt) |
+|  |  | Player + opponent v3 | West Florida 73.9 / South Alabama 86.5 | 160.4 | South Alabama -6.5 (6.0 pt) | Over 141.5 (18.9 pt) |
+|  |  | Player + rotation v4 | West Florida 73.5 / South Alabama 82.4 | 155.9 | South Alabama -6.5 (2.3 pt) | Over 141.5 (14.4 pt) |
+|  |  | Player + opponent + rotation v4 | West Florida 74.1 / South Alabama 81.9 | 156.0 | South Alabama -6.5 (1.4 pt) | Over 141.5 (14.5 pt) |
+| 02:00 PM · **Troy @ Nicholls** | Nicholls +5.5 / Total 135.5 (Bovada) | Team baseline | Troy 67.4 / Nicholls 76.0 | 143.4 | Nicholls +5.5 (14.1 pt) | Over 135.5 (7.9 pt) |
+|  |  | Player v2 | Troy 73.3 / Nicholls 68.8 | 142.1 | Nicholls +5.5 (0.9 pt) | Over 135.5 (6.6 pt) |
+|  |  | Player + opponent v3 | Troy 73.3 / Nicholls 67.7 | 140.9 | Troy -5.5 (0.2 pt) | Over 135.5 (5.4 pt) |
+|  |  | Player + rotation v4 | Troy 73.3 / Nicholls 67.9 | 141.2 | Nicholls +5.5 (0.1 pt) | Over 135.5 (5.7 pt) |
+|  |  | Player + opponent + rotation v4 | Troy 73.5 / Nicholls 67.1 | 140.6 | Troy -5.5 (0.9 pt) | Over 135.5 (5.1 pt) |
+| 02:30 PM · **UAlbany @ Mercyhurst** | Mercyhurst +1.5 / Total 129.5 (Draft Kings) | Team baseline | UAlbany 68.8 / Mercyhurst 68.5 | 137.3 | Mercyhurst +1.5 (1.2 pt) | Over 129.5 (7.8 pt) |
+|  |  | Player v2 | UAlbany 66.3 / Mercyhurst 66.8 | 133.0 | Mercyhurst +1.5 (2.0 pt) | Over 129.5 (3.5 pt) |
+|  |  | Player + opponent v3 | UAlbany 64.4 / Mercyhurst 69.2 | 133.5 | Mercyhurst +1.5 (6.3 pt) | Over 129.5 (4.0 pt) |
+|  |  | Player + rotation v4 | UAlbany 66.1 / Mercyhurst 65.8 | 131.9 | Mercyhurst +1.5 (1.2 pt) | Over 129.5 (2.4 pt) |
+|  |  | Player + opponent + rotation v4 | UAlbany 64.1 / Mercyhurst 68.2 | 132.4 | Mercyhurst +1.5 (5.6 pt) | Over 129.5 (2.9 pt) |
+| 02:30 PM · **Virginia Tech @ Oklahoma State** | Oklahoma State +1.5 / Total 159.5 (Bovada) | Team baseline | Virginia Tech 77.9 / Oklahoma State 76.1 | 154.0 | Virginia Tech -1.5 (0.3 pt) | Under 159.5 (5.5 pt) |
+|  |  | Player v2 | Virginia Tech 79.8 / Oklahoma State 81.7 | 161.5 | Oklahoma State +1.5 (3.4 pt) | Over 159.5 (2.0 pt) |
+|  |  | Player + opponent v3 | Virginia Tech 79.4 / Oklahoma State 82.6 | 162.0 | Oklahoma State +1.5 (4.7 pt) | Over 159.5 (2.5 pt) |
+|  |  | Player + rotation v4 | Virginia Tech 80.3 / Oklahoma State 80.8 | 161.0 | Oklahoma State +1.5 (2.0 pt) | Over 159.5 (1.5 pt) |
+|  |  | Player + opponent + rotation v4 | Virginia Tech 80.2 / Oklahoma State 82.0 | 162.2 | Oklahoma State +1.5 (3.3 pt) | Over 159.5 (2.7 pt) |
+| 02:30 PM · **McNeese @ Texas State** | Texas State -2.5 / Total 142.5 (Bovada) | Team baseline | McNeese 65.4 / Texas State 91.1 | 156.5 | Texas State -2.5 (23.2 pt) | Over 142.5 (14.0 pt) |
+|  |  | Player v2 | McNeese 70.8 / Texas State 83.5 | 154.3 | Texas State -2.5 (10.1 pt) | Over 142.5 (11.8 pt) |
+|  |  | Player + opponent v3 | McNeese 70.0 / Texas State 83.2 | 153.2 | Texas State -2.5 (10.6 pt) | Over 142.5 (10.7 pt) |
+|  |  | Player + rotation v4 | McNeese 71.3 / Texas State 84.5 | 155.9 | Texas State -2.5 (10.7 pt) | Over 142.5 (13.4 pt) |
+|  |  | Player + opponent + rotation v4 | McNeese 70.6 / Texas State 84.2 | 154.8 | Texas State -2.5 (11.0 pt) | Over 142.5 (12.3 pt) |
+| 03:30 PM · **UC Irvine @ Loyola Marymount** | Loyola Marymount +3.0 / Total 138.5 (Bovada) | Team baseline | UC Irvine 71.7 / Loyola Marymount 74.4 | 146.1 | Loyola Marymount +3.0 (5.7 pt) | Over 138.5 (7.6 pt) |
+|  |  | Player v2 | UC Irvine 72.8 / Loyola Marymount 77.2 | 150.0 | Loyola Marymount +3.0 (7.3 pt) | Over 138.5 (11.5 pt) |
+|  |  | Player + opponent v3 | UC Irvine 73.9 / Loyola Marymount 74.7 | 148.6 | Loyola Marymount +3.0 (3.8 pt) | Over 138.5 (10.1 pt) |
+|  |  | Player + rotation v4 | UC Irvine 72.9 / Loyola Marymount 75.2 | 148.1 | Loyola Marymount +3.0 (5.3 pt) | Over 138.5 (9.6 pt) |
+|  |  | Player + opponent + rotation v4 | UC Irvine 74.0 / Loyola Marymount 71.6 | 145.6 | Loyola Marymount +3.0 (0.5 pt) | Over 138.5 (7.1 pt) |
+| 03:30 PM · **Richmond @ Liberty** | Liberty -1.5 / Total 142.5 (Bovada) | Team baseline | Richmond 71.8 / Liberty 74.8 | 146.6 | Liberty -1.5 (1.5 pt) | Over 142.5 (4.1 pt) |
+|  |  | Player v2 | Richmond 72.6 / Liberty 77.0 | 149.6 | Liberty -1.5 (2.9 pt) | Over 142.5 (7.1 pt) |
+|  |  | Player + opponent v3 | Richmond 73.5 / Liberty 75.7 | 149.2 | Liberty -1.5 (0.7 pt) | Over 142.5 (6.7 pt) |
+|  |  | Player + rotation v4 | Richmond 72.6 / Liberty 75.3 | 147.9 | Liberty -1.5 (1.2 pt) | Over 142.5 (5.4 pt) |
+|  |  | Player + opponent + rotation v4 | Richmond 73.7 / Liberty 74.2 | 147.8 | Richmond +1.5 (1.0 pt) | Over 142.5 (5.3 pt) |
+| 04:00 PM · **NJIT @ Boston College** | Boston College -24.5 / Total 136.5 (Bovada) | Team baseline | NJIT 53.6 / Boston College 79.8 | 133.4 | Boston College -24.5 (1.7 pt) | Under 136.5 (3.1 pt) |
+|  |  | Player v2 | NJIT 53.9 / Boston College 83.8 | 137.6 | Boston College -24.5 (5.4 pt) | Over 136.5 (1.1 pt) |
+|  |  | Player + opponent v3 | NJIT 53.0 / Boston College 85.9 | 138.9 | Boston College -24.5 (8.4 pt) | Over 136.5 (2.4 pt) |
+|  |  | Player + rotation v4 | NJIT 53.2 / Boston College 80.3 | 133.5 | Boston College -24.5 (2.6 pt) | Under 136.5 (3.0 pt) |
+|  |  | Player + opponent + rotation v4 | NJIT 52.5 / Boston College 82.0 | 134.5 | Boston College -24.5 (4.9 pt) | Under 136.5 (2.0 pt) |
+| 04:00 PM · **Rice @ Lamar** | Lamar -2.5 / Total 165.5 (Bovada) | Team baseline | Rice 73.3 / Lamar 86.1 | 159.3 | Lamar -2.5 (10.3 pt) | Under 165.5 (6.2 pt) |
+|  |  | Player v2 | Rice 74.3 / Lamar 80.9 | 155.2 | Lamar -2.5 (4.2 pt) | Under 165.5 (10.3 pt) |
+|  |  | Player + opponent v3 | Rice 74.9 / Lamar 81.5 | 156.4 | Lamar -2.5 (4.2 pt) | Under 165.5 (9.1 pt) |
+|  |  | Player + rotation v4 | Rice 76.4 / Lamar 80.8 | 157.2 | Lamar -2.5 (2.0 pt) | Under 165.5 (8.3 pt) |
+|  |  | Player + opponent + rotation v4 | Rice 76.6 / Lamar 81.5 | 158.0 | Lamar -2.5 (2.4 pt) | Under 165.5 (7.5 pt) |
+| 04:00 PM · **UNC Asheville @ Samford** | Samford -9.5 / Total 155.5 (Bovada) | Team baseline | UNC Asheville 70.7 / Samford 81.7 | 152.3 | Samford -9.5 (1.5 pt) | Under 155.5 (3.2 pt) |
+|  |  | Player v2 | UNC Asheville 71.4 / Samford 83.9 | 155.3 | Samford -9.5 (3.0 pt) | Under 155.5 (0.2 pt) |
+|  |  | Player + opponent v3 | UNC Asheville 71.2 / Samford 83.2 | 154.4 | Samford -9.5 (2.5 pt) | Under 155.5 (1.1 pt) |
+|  |  | Player + rotation v4 | UNC Asheville 71.7 / Samford 80.2 | 151.9 | UNC Asheville +9.5 (1.0 pt) | Under 155.5 (3.6 pt) |
+|  |  | Player + opponent + rotation v4 | UNC Asheville 72.0 / Samford 79.5 | 151.4 | UNC Asheville +9.5 (2.0 pt) | Under 155.5 (4.1 pt) |
+| 04:00 PM · **Cal State Fullerton @ Portland State** | Portland State -4.5 / Total 163.5 (Draft Kings) | Team baseline | Cal State Fullerton 70.6 / Portland State 90.6 | 161.2 | Portland State -4.5 (15.5 pt) | Under 163.5 (2.3 pt) |
+|  |  | Player v2 | Cal State Fullerton 76.6 / Portland State 83.0 | 159.6 | Portland State -4.5 (1.9 pt) | Under 163.5 (3.9 pt) |
+|  |  | Player + opponent v3 | Cal State Fullerton 76.2 / Portland State 84.1 | 160.3 | Portland State -4.5 (3.3 pt) | Under 163.5 (3.2 pt) |
+|  |  | Player + rotation v4 | Cal State Fullerton 76.7 / Portland State 81.3 | 158.0 | Portland State -4.5 (0.2 pt) | Under 163.5 (5.5 pt) |
+|  |  | Player + opponent + rotation v4 | Cal State Fullerton 76.4 / Portland State 82.6 | 159.0 | Portland State -4.5 (1.6 pt) | Under 163.5 (4.5 pt) |
+| 04:30 PM · **Temple @ Stephen F. Austin** | Stephen F. Austin +1.5 / Total 144.5 (Bovada) | Team baseline | Temple 67.9 / Stephen F. Austin 80.8 | 148.7 | Stephen F. Austin +1.5 (14.4 pt) | Over 144.5 (4.2 pt) |
+|  |  | Player v2 | Temple 73.5 / Stephen F. Austin 75.1 | 148.7 | Stephen F. Austin +1.5 (3.1 pt) | Over 144.5 (4.2 pt) |
+|  |  | Player + opponent v3 | Temple 73.6 / Stephen F. Austin 74.7 | 148.3 | Stephen F. Austin +1.5 (2.5 pt) | Over 144.5 (3.8 pt) |
+|  |  | Player + rotation v4 | Temple 74.4 / Stephen F. Austin 75.8 | 150.2 | Stephen F. Austin +1.5 (3.0 pt) | Over 144.5 (5.7 pt) |
+|  |  | Player + opponent + rotation v4 | Temple 74.5 / Stephen F. Austin 75.6 | 150.0 | Stephen F. Austin +1.5 (2.6 pt) | Over 144.5 (5.5 pt) |
+| 05:00 PM · **Utah @ Minnesota** | Minnesota -10.5 / Total 130.5 (Bovada) | Team baseline | Utah 61.0 / Minnesota 77.1 | 138.1 | Minnesota -10.5 (5.5 pt) | Over 130.5 (7.6 pt) |
+|  |  | Player v2 | Utah 62.6 / Minnesota 73.8 | 136.4 | Minnesota -10.5 (0.7 pt) | Over 130.5 (5.9 pt) |
+|  |  | Player + opponent v3 | Utah 60.7 / Minnesota 75.2 | 135.9 | Minnesota -10.5 (4.0 pt) | Over 130.5 (5.4 pt) |
+|  |  | Player + rotation v4 | Utah 63.0 / Minnesota 71.7 | 134.7 | Utah +10.5 (1.8 pt) | Over 130.5 (4.2 pt) |
+|  |  | Player + opponent + rotation v4 | Utah 61.2 / Minnesota 73.3 | 134.5 | Minnesota -10.5 (1.6 pt) | Over 130.5 (4.0 pt) |
+| 05:00 PM · **Southern Miss @ Valparaiso** | Valparaiso -8.5 / Total 145.5 (Bovada) | Team baseline | Southern Miss 71.8 / Valparaiso 77.3 | 149.1 | Southern Miss +8.5 (2.9 pt) | Over 145.5 (3.6 pt) |
+|  |  | Player v2 | Southern Miss 70.1 / Valparaiso 82.6 | 152.8 | Valparaiso -8.5 (4.0 pt) | Over 145.5 (7.3 pt) |
+|  |  | Player + opponent v3 | Southern Miss 70.2 / Valparaiso 83.2 | 153.3 | Valparaiso -8.5 (4.5 pt) | Over 145.5 (7.8 pt) |
+|  |  | Player + rotation v4 | Southern Miss 69.8 / Valparaiso 81.8 | 151.5 | Valparaiso -8.5 (3.6 pt) | Over 145.5 (6.0 pt) |
+|  |  | Player + opponent + rotation v4 | Southern Miss 69.7 / Valparaiso 82.1 | 151.9 | Valparaiso -8.5 (3.9 pt) | Over 145.5 (6.4 pt) |
+| 06:00 PM · **Delaware @ UCLA** | UCLA -29.5 / Total 145.0 (Bovada) | Team baseline | Delaware 67.8 / UCLA 82.2 | 150.1 | Delaware +29.5 (15.1 pt) | Over 145.0 (5.1 pt) |
+|  |  | Player v2 | Delaware 69.6 / UCLA 84.8 | 154.4 | Delaware +29.5 (14.3 pt) | Over 145.0 (9.4 pt) |
+|  |  | Player + opponent v3 | Delaware 70.6 / UCLA 82.7 | 153.3 | Delaware +29.5 (17.4 pt) | Over 145.0 (8.3 pt) |
+|  |  | Player + rotation v4 | Delaware 70.0 / UCLA 84.6 | 154.7 | Delaware +29.5 (14.9 pt) | Over 145.0 (9.7 pt) |
+|  |  | Player + opponent + rotation v4 | Delaware 71.0 / UCLA 82.0 | 153.0 | Delaware +29.5 (18.6 pt) | Over 145.0 (8.0 pt) |
+| 06:00 PM · **Rhode Island @ UAB** | UAB +2.5 / Total 149.5 (Bovada) | Team baseline | Rhode Island 73.2 / UAB 72.9 | 146.1 | UAB +2.5 (2.2 pt) | Under 149.5 (3.4 pt) |
+|  |  | Player v2 | Rhode Island 73.4 / UAB 70.1 | 143.5 | Rhode Island -2.5 (0.8 pt) | Under 149.5 (6.0 pt) |
+|  |  | Player + opponent v3 | Rhode Island 73.1 / UAB 71.0 | 144.1 | UAB +2.5 (0.3 pt) | Under 149.5 (5.4 pt) |
+|  |  | Player + rotation v4 | Rhode Island 73.8 / UAB 67.9 | 141.7 | Rhode Island -2.5 (3.3 pt) | Under 149.5 (7.8 pt) |
+|  |  | Player + opponent + rotation v4 | Rhode Island 73.2 / UAB 68.7 | 141.9 | Rhode Island -2.5 (2.0 pt) | Under 149.5 (7.6 pt) |
+| 06:00 PM · **California Baptist @ Portland** | Portland -9.5 / Total 147.0 (Bovada) | Team baseline | California Baptist 71.3 / Portland 86.2 | 157.4 | Portland -9.5 (5.4 pt) | Over 147.0 (10.4 pt) |
+|  |  | Player v2 | California Baptist 72.1 / Portland 85.6 | 157.7 | Portland -9.5 (4.1 pt) | Over 147.0 (10.7 pt) |
+|  |  | Player + opponent v3 | California Baptist 71.4 / Portland 85.8 | 157.3 | Portland -9.5 (4.9 pt) | Over 147.0 (10.3 pt) |
+|  |  | Player + rotation v4 | California Baptist 71.1 / Portland 83.1 | 154.2 | Portland -9.5 (2.4 pt) | Over 147.0 (7.2 pt) |
+|  |  | Player + opponent + rotation v4 | California Baptist 70.3 / Portland 82.9 | 153.1 | Portland -9.5 (3.1 pt) | Over 147.0 (6.1 pt) |
+| 07:00 PM · **Louisiana @ USC** | USC -33.5 / Total 147.5 (Draft Kings) | Team baseline | Louisiana 57.8 / USC 87.0 | 144.9 | Louisiana +33.5 (4.3 pt) | Under 147.5 (2.6 pt) |
+|  |  | Player v2 | Louisiana 57.8 / USC 88.6 | 146.4 | Louisiana +33.5 (2.6 pt) | Under 147.5 (1.1 pt) |
+|  |  | Player + opponent v3 | Louisiana 57.6 / USC 88.2 | 145.8 | Louisiana +33.5 (2.9 pt) | Under 147.5 (1.7 pt) |
+|  |  | Player + rotation v4 | Louisiana 57.0 / USC 89.0 | 146.0 | Louisiana +33.5 (1.5 pt) | Under 147.5 (1.5 pt) |
+|  |  | Player + opponent + rotation v4 | Louisiana 57.0 / USC 88.3 | 145.4 | Louisiana +33.5 (2.2 pt) | Under 147.5 (2.1 pt) |
+| 07:00 PM · **UT Martin @ Utah Valley** | Utah Valley -7.5 / Total 145.5 (Bovada) | Team baseline | UT Martin 78.9 / Utah Valley 76.5 | 155.4 | UT Martin +7.5 (10.0 pt) | Over 145.5 (9.9 pt) |
+|  |  | Player v2 | UT Martin 72.8 / Utah Valley 83.4 | 156.2 | Utah Valley -7.5 (3.1 pt) | Over 145.5 (10.7 pt) |
+|  |  | Player + opponent v3 | UT Martin 72.9 / Utah Valley 82.3 | 155.3 | Utah Valley -7.5 (1.9 pt) | Over 145.5 (9.8 pt) |
+|  |  | Player + rotation v4 | UT Martin 74.0 / Utah Valley 81.0 | 155.0 | UT Martin +7.5 (0.4 pt) | Over 145.5 (9.5 pt) |
+|  |  | Player + opponent + rotation v4 | UT Martin 74.2 / Utah Valley 79.9 | 154.1 | UT Martin +7.5 (1.7 pt) | Over 145.5 (8.6 pt) |
+| 08:30 PM · **Seattle U @ UC San Diego** | UC San Diego — / Total 145.5 (Bovada) | Team baseline | Seattle U 73.7 / UC San Diego 78.7 | 152.4 | — | Over 145.5 (6.9 pt) |
+|  |  | Player v2 | Seattle U 72.9 / UC San Diego 80.3 | 153.2 | — | Over 145.5 (7.7 pt) |
+|  |  | Player + opponent v3 | Seattle U 73.0 / UC San Diego 78.9 | 151.9 | — | Over 145.5 (6.4 pt) |
+|  |  | Player + rotation v4 | Seattle U 73.7 / UC San Diego 77.6 | 151.3 | — | Over 145.5 (5.8 pt) |
+|  |  | Player + opponent + rotation v4 | Seattle U 73.9 / UC San Diego 76.3 | 150.2 | — | Over 145.5 (4.7 pt) |
+| 10:59 PM · **San José State @ Loyola Chicago** | Loyola Chicago -3.5 / Total 146.5 (Draft Kings) | Team baseline | San José State 71.7 / Loyola Chicago 79.0 | 150.7 | Loyola Chicago -3.5 (3.8 pt) | Over 146.5 (4.2 pt) |
+|  |  | Player v2 | San José State 73.9 / Loyola Chicago 75.9 | 149.7 | San José State +3.5 (1.5 pt) | Over 146.5 (3.2 pt) |
+|  |  | Player + opponent v3 | San José State 73.1 / Loyola Chicago 76.5 | 149.6 | San José State +3.5 (0.1 pt) | Over 146.5 (3.1 pt) |
+|  |  | Player + rotation v4 | San José State 73.2 / Loyola Chicago 74.6 | 147.8 | San José State +3.5 (2.1 pt) | Over 146.5 (1.3 pt) |
+|  |  | Player + opponent + rotation v4 | San José State 72.7 / Loyola Chicago 75.6 | 148.3 | San José State +3.5 (0.6 pt) | Over 146.5 (1.8 pt) |
 
 ## How to read this board
 
