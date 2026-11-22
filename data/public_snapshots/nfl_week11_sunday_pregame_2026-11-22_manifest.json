@@ -1,0 +1,34 @@
+{
+  "published_at_utc": "2026-11-22T14:27:43+00:00",
+  "games": 12,
+  "models": [
+    "baseline",
+    "injury"
+  ],
+  "starter_evidence": {
+    "schedule_provisional_qb_unverified": 22,
+    "verified_pregame": 1,
+    "coach_expected_pregame_unverified": 1
+  },
+  "roster_checked_team_games": 24,
+  "paid_api_requests": 0,
+  "input_sha256": {
+    "schedule.csv": "a5a8424213a4e975a58b8d0eb1d0ecf6b42c676eb7e44ed24e1559aa508cc341",
+    "roster.csv": "7c829312a04778f0add61d20a41725b39b7455079534ff5d1b9b369403e157ef",
+    "pbp_2021.csv.gz": "c4d090bad9c7a73c43be227aad27f1f0c2ce08a73f213447ba4cce9d61fc92e6",
+    "pbp_2022.csv.gz": "b5ed86bb48777dbbad57609dcd3203237d913c5fd6cd8de9d1712e5a3538dcd7",
+    "pbp_2023.csv.gz": "a5d1e76aa3f3857b356edd9de33cefb73bfd23f1cfbf3d5354f7a69e70fe80e9",
+    "pbp_2024.csv.gz": "04a20f23586401dc33f938d5f6c38447f4bf939c61a2308290862a0c4d0ce977",
+    "pbp_2025.csv.gz": "5362b392d6421f4139e9f4a76daadfa72ba5769239c325a19299a633caa35f94",
+    "pbp_2026.csv.gz": "03ee0be992c016388bce89d0baeaa2d4d4958f2b61635fab61ff032848d26076",
+    "injury_2021.csv": "1049fb9ff0fe7cfcf3ba8bfe1f5a35d3aba985c461c8fb7bf5201735b6d34254",
+    "injury_2022.csv": "5f0d60324e597edd1a2ced8540b04e40b51dd440591dd1df11b8d96343387c9e",
+    "injury_2023.csv": "16b04e21da5aa3944cfa9c22cafcc84ed7e6d9866eaddf0344e9b8cbf2f63afe",
+    "injury_2024.csv": "498bce8e13cb64b2ab9bb0ad6cb81d0a63c2ddb24016c9fc90c2de2126fae449",
+    "injury_2025.csv": "873ca1606dd575bd01152508a243ef6b3a0f8f97b90b707217e62ee8c7ceb735",
+    "injury_2026.csv": "c6e2c17e8d0daa67533e1999da91e89c951f657e2cc876e39970bae8911d4964"
+  },
+  "injury_snapshot": "data/injury_snapshots/injuries_2026_week_11_20261122T065119Z.csv",
+  "kickoff_source": "https://media.nfl.com/news-and-releases/week-11-schedule-change--jaguars-giants-to-4-25-p-m--et--steeler",
+  "sunday_refresh": "New snapshot after updated user Bovada quotes and final injury reports"
+}

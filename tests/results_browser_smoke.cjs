@@ -120,7 +120,9 @@ async function main(){
             assert.match(await page.locator('#board-snapshot-label').innerText(),new RegExp('Week '+currentWeek));
             assert.match(await page.locator('.game-card').first().innerText(),/IND @ HOU/);
             await page.locator('[data-game="2026_11_ARI_KC"]').click();
-            assert.match(await page.locator('#drawer-content').innerText(),/Carson Beck/);
+            assert.match(await page.locator('#drawer-content').innerText(),/Josh Johnson/);
+            assert.match(await page.locator('#drawer-content').innerText(),/Carson Beck OUT/);
+            assert.match(await page.locator('#drawer-content').innerText(),/Sunday morning projections/);
             await page.locator('#close-drawer').click();
           }
           const archives=page.locator('.past-boards');
