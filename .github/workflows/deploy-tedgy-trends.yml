@@ -15,6 +15,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
   pages: write
   id-token: write
 
@@ -54,6 +55,30 @@ jobs:
         uses: actions/upload-pages-artifact@v4
         with:
           path: docs
+          name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
+      - name: Wait for the current site artifact to become discoverable
+        uses: actions/github-script@v7
+        env:
+          SITE_ARTIFACT: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
+        with:
+          script: |
+            for (let attempt = 0; attempt < 10; attempt++) {
+              const response = await github.rest.actions.listWorkflowRunArtifacts({
+                ...context.repo,
+                run_id: context.runId,
+                name: process.env.SITE_ARTIFACT,
+                per_page: 100,
+              });
+              const matches = response.data.artifacts.filter(
+                artifact => artifact.name === process.env.SITE_ARTIFACT && !artifact.expired
+              );
+              if (matches.length === 1) return;
+              if (matches.length > 1) throw new Error("Duplicate current-attempt site artifact");
+              await new Promise(resolve => setTimeout(resolve, 3000));
+            }
+            throw new Error("Uploaded site artifact did not become discoverable");
       - name: Deploy site
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          artifact_name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}

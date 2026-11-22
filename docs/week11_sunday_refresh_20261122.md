@@ -18,3 +18,5 @@ Sources checked:
 The public board reads the new Sunday model snapshot, displays final injury designations, updated market spreads/totals and QB evidence, and keeps TNF first with its final score and grades. Pending Results picks use the same updated quotes and projections. All previous 88 final model-game rows remain identical. The original Sunday source versions and initial Thursday forecasts remain separately timestamped.
 
 Local validation passed 156 tests plus the Results DOM tests, score/total arithmetic, whole-slate roster checks, manual Johnson attestation, and preservation of TNF and earlier finals. No paid NFLMeta or EndzoneAPI requests were made. New forecast and QB audits are saved under data/public_snapshots/nfl_week11_*2026-11-22* with an input-hash manifest.
+
+Deployment recovery uses a unique Pages artifact name per workflow run and attempt and checks artifact discovery before deploying. This addresses both delayed artifact listing and duplicate artifacts on retries, which blocked the initial Sunday deployment. The change is limited to deployment reliability.
