@@ -102,7 +102,21 @@ def refresh_live_player_boxes(season=2027,
     session = requests.Session()
     calls = 0
     for left, right in elapsed_windows(start, now):
-        newly_observed = get_week(session, season, left, right, token)
+        try:
+            newly_observed = get_week(session, season, left, right, token)
+        except requests.HTTPError as exc:
+            if (exc.response is not None and exc.response.status_code == 429
+                    and previous and previous_refresh and archive.exists()):
+                # Preserve the previous observed pretip rotation cache.
+                # Do not claim a fresh capture or invent player observations.
+                print("CBB_LIVE_ROTATION_STALE_RATE_LIMIT",
+                      json.dumps({"last_successful_capture_utc": previous_refresh,
+                                  "attempted_capture_utc": now.isoformat(),
+                                  "reason": "CBBD /games/players HTTP 429",
+                                  "cached_rows": len(previous)}),
+                      flush=True)
+                return previous, {**old_meta, "stale_due_to_rate_limit": True}
+            raise
         calls += 1
         for row in newly_observed:
             if int(row.get("season") or 0) != season:
