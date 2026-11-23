@@ -6,3 +6,4 @@
 2026-11-06 verify readable rolling research scorecard publishing, no changes to frozen model history.
 2026-11-06 publish human-readable ATS and total leans for upcoming CBB games on daily results data branch.
 2026-11-23 recover missed scheduled CBB prospective snapshot and grade November 22 results; preserve frozen records.
+2026-11-23 retry after CBBD 429 cache fallback patch; grade November 22 frozen pretip selections.
