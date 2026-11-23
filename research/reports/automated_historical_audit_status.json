@@ -1,10 +1,10 @@
 {
   "model_version": "0.8.0",
-  "generated_at_utc": "2026-11-22T11:06:13.398662+00:00",
+  "generated_at_utc": "2026-11-23T22:07:24.825022+00:00",
   "status": "completed",
-  "games_in_score_model_backtest": 1051,
+  "games_in_score_model_backtest": 1062,
   "summary_rows": 5,
-  "diagnostic_rows": 49,
+  "diagnostic_rows": 48,
   "direct_total_equivalence_max_abs_diff": 1.4210854715202004e-14,
   "warnings": [],
   "note": "Historical research only. Public schedule lines are not verified sportsbook-timestamp records. Fixed -110 ROI uses a 3.5-point threshold for point-valued model edges. Residual-model adjustments are much smaller and are not directly comparable to score-model edges."
