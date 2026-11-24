@@ -1,0 +1,26 @@
+name: CBB archived research recovery
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [".github/workflows/cbb-research-recovery.yml"]
+permissions:
+  contents: read
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          ref: cbb-prospective
+          path: archive
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - run: python -m cbb.research_recovery
+      - uses: actions/upload-artifact@v4
+        with:
+          name: research-recovery
+          path: research_recovery.json
