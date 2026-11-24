@@ -1,6 +1,6 @@
 {
   "season": 2026,
-  "graded_at_utc": "2026-11-23T06:48:08+00:00",
+  "graded_at_utc": "2026-11-24T16:25:44+00:00",
   "source": "ESPN public scoreboard with explicit completed/final flag for Week10+; verified official Week8/Week9 archived results; user-provided Bovada prices",
   "games_weeks": {
     "8": 14,
@@ -8,8 +8,8 @@
     "10": 14,
     "11": 13
   },
-  "graded_games": 55,
-  "pending_games": 1,
+  "graded_games": 56,
+  "pending_games": 0,
   "rows": 112,
   "source_file": "data/public_results/nfl_2026_graded_games.csv",
   "summary_file": "data/public_results/nfl_2026_results_summary.csv",
