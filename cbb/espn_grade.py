@@ -13,7 +13,7 @@ from cbb.prospective_publish import GitHubStore
 URL = "https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard"
 
 def norm(s):
-    return re.sub(r"[^a-z0-9]", "", unicodedata.normalize("NFKD", str(s)).lower())
+    return re.sub(r"[^a-z0-9]", "", unicodedata.normalize("NFKD", str(s)).encode("ascii", "ignore").decode().lower())
 
 def match(game, events):
     candidates = []
@@ -29,6 +29,9 @@ def match(game, events):
                 sides = {x["homeAway"]: x for x in c["competitors"]}
                 if len(c["competitors"]) != 2 or set(sides) != {"home", "away"}:
                     continue
+                if game.get("neutral_site") and c.get("neutralSite"):
+                    if norm(game["home"]) in {norm(sides["away"]["team"].get(n, "")) for n in ("location", "displayName", "shortDisplayName")}:
+                        sides = {"home": sides["away"], "away": sides["home"]}
                 if not all(norm(game[k]) in {norm(sides[k]["team"].get(n, "")) for n in
                            ("location", "displayName", "shortDisplayName", "name")}
                            for k in ("home", "away")):
@@ -97,7 +100,12 @@ def main():
             print("MATCH", ident, g["away"], g["home"], final["awayPoints"], final["homePoints"], final["espnId"])
         else:
             unmatched.append(ident)
-            print("UNMATCHED", ident, g["away"], g["home"])
+            print("UNMATCHED", ident, g["away"], g["home"], g["tip_utc"])
+            for event in dates[day]:
+                for c in event.get("competitions", []):
+                    names = [x.get("team", {}).get("location", "") for x in c.get("competitors", [])]
+                    if any(norm(g[k]) == norm(n) for k in ("home", "away") for n in names):
+                        print("CANDIDATE", ident, event.get("id"), c.get("date"), c.get("status", {}).get("type", {}).get("name"), names)
     print("ESPN_RECOVERY", len(rows), "matched;", len(unmatched), "unmatched")
     if args.publish and rows:
         execute(store, rows, 2027)
