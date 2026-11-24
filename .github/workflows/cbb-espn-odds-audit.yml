@@ -1,0 +1,26 @@
+name: CBB ESPN pretip odds audit
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [".github/workflows/cbb-espn-odds-audit.yml"]
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          ref: cbb-prospective
+          path: archive
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - run: python -m cbb.espn_odds_probe
+      - uses: actions/upload-artifact@v4
+        with:
+          name: espn-odds-audit
+          path: espn_odds_audit.json
