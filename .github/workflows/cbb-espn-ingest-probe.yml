@@ -1,0 +1,27 @@
+name: CBB ESPN ingestion probe
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['cbb/espn_ingest_probe.py', '.github/workflows/cbb-espn-ingest-probe.yml']
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - uses: actions/cache@v4
+        with:
+          path: cbb/data/espn_shadow
+          key: cbb-espn-shadow-${{ github.run_id }}
+          restore-keys: cbb-espn-shadow-
+      - run: python -m cbb.espn_ingest_probe --days 2 --limit 12
+      - uses: actions/upload-artifact@v4
+        with:
+          name: espn-shadow-sample
+          path: cbb/data/espn_shadow
