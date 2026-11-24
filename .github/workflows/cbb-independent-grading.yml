@@ -1,12 +1,14 @@
 name: CBB independent grading audit
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '35 12,16 * 11,12,1,2,3,4 *'
   push:
     branches: [main]
     paths:
       - 'cbb/espn-grade-trigger.txt'
 permissions:
-  contents: read
+  contents: write
 concurrency:
   group: cbb-2027-shadow-capture
   cancel-in-progress: false
@@ -23,5 +25,5 @@ jobs:
           python-version: '3.11'
       - run: python -m pip install -r requirements.txt pytest
       - run: python -m pytest -q cbb/tests
-      - name: Audit ESPN matches against frozen games (no writes)
-        run: python -m cbb.espn_grade --days 14
+      - name: Grade verified ESPN finals against frozen games
+        run: python -m cbb.espn_grade --days 30 --publish
