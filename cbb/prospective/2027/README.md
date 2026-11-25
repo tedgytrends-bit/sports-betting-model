@@ -1,10 +1,10 @@
 # Tedgy Trends CBB — Prospective Research Results
 
-**As of November 24, 2026, 09:07 AM Central Time**
+**As of November 25, 2026, 12:56 PM Central Time**
 
 Research-only performance from projections **actually frozen before tipoff**. No historical picks are retroactively inserted.
 
-**Tracked completed games:** 764 · **Completed without valid frozen record:** 216 · **Invalid frozen records:** 0
+**Tracked completed games:** 764 · **Completed without valid frozen record:** 341 · **Invalid frozen records:** 0
 
 ## Season-to-date — all directional leans (no edge threshold)
 
@@ -30,8 +30,8 @@ Research-only performance from projections **actually frozen before tipoff**. No
 
 | Window | Tracked completed games | Player v2 ATS | Player v2 ATS ROI | Player v2 totals | Player v2 totals ROI |
 |---|---:|---:|---:|---:|---:|
-| Past 48 hours | 35 | 17-17 | -4.55% | 23-12 | +25.45% |
-| Past 7 days | 271 | 144-121-2 | +3.71% | 153-117-1 | +8.15% |
+| Past 48 hours | 0 | — | — | — | — |
+| Past 7 days | 215 | 111-98-2 | +1.38% | 122-92-1 | +8.79% |
 
 ## By game date (Central Time)
 
@@ -95,4 +95,4 @@ Positive = the additional model reduced average point error **on identical froze
 - Untracked completed games and invalid records are disclosed, never credited as wins or losses.
 - This is a short-sample research record. Results do not establish positive expected value.
 
-[Upcoming projections, projected scores and ATS/totals leans](PROJECTIONS.md) · [Machine-readable review](performance_report.json) · [Full threshold scorecard](season_results.json) · [Original frozen games](frozen/) · [Weekly audit](graded/)
+[November 22–24 reconstructed research records](research/2026-11-22-to-24.json) · [Upcoming projections, projected scores and ATS/totals leans](PROJECTIONS.md) · [Machine-readable review](performance_report.json) · [Full threshold scorecard](season_results.json) · [Original frozen games](frozen/) · [Weekly audit](graded/)

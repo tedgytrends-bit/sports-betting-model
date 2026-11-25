@@ -6,7 +6,7 @@
       "away_points": 68.0,
       "captured_utc": "2026-11-15T13:52:48.422264Z",
       "date": "2026-11-16",
-      "home": "San José State",
+      "home": "San Jos\u00e9 State",
       "home_points": 80.0,
       "home_spread": -12.5,
       "id": "372813",
@@ -2246,7 +2246,7 @@
       "away_points": 86.0,
       "captured_utc": "2026-11-18T14:19:38.369326Z",
       "date": "2026-11-19",
-      "home": "San José State",
+      "home": "San Jos\u00e9 State",
       "home_points": 92.0,
       "home_spread": -6.5,
       "id": "372863",
@@ -16365,7 +16365,10 @@
     "378684": "No pre-tip frozen observation",
     "378685": "No pre-tip frozen observation",
     "378690": "No pre-tip frozen observation",
-    "378694": "No pre-tip frozen observation"
+    "378694": "No pre-tip frozen observation",
+    "375222": "No pre-tip frozen observation",
+    "378089": "No pre-tip frozen observation",
+    "375235": "No pre-tip frozen observation"
   },
   "week": "2026-W47"
 }
