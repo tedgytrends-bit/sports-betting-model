@@ -9,7 +9,7 @@ from cbb.prospective import utc_date
 
 MODELS = ("baseline","player_v2","player_opp_v3","player_rot_v4","player_all_v4")
 def main():
-    board=json.loads(Path("archive/cbb/prospective/2027/latest.json").read_text())
+    board=json.loads(Path("archive/cbb/prospective/2027/snapshots/20261122T135759379135_45030081991.json").read_text())
     captured=utc_date(board["capture_utc"])
     zone=ZoneInfo("America/Chicago")
     counts=Counter()
@@ -17,18 +17,17 @@ def main():
     for g in board["games"]:
         tip=utc_date(g["tip_utc"])
         day=tip.astimezone(zone).date().isoformat()
-        if day not in ("2026-11-23","2026-11-24") or captured>=tip:
+        if day not in ("2026-11-22","2026-11-23","2026-11-24") or captured>=tip:
             continue
         row={k:g.get(k) for k in ("id","away","home","tip_utc","market",*MODELS)}
         row["date"]=day
         rows.append(row)
     events=[]
-    for day in ("20261123","20261124"):
+    for day in ("20261122","20261123","20261124","20261125"):
         r=requests.get(URL,params={"dates":day,"groups":50,"limit":1000},timeout=45)
         r.raise_for_status()
         events.extend(r.json()["events"])
     for row in rows:
-        if row["date"]!="2026-11-23": continue
         g=next(g for g in board["games"] if g["id"]==row["id"])
         final=match(g,events)
         row["final"]=final
@@ -46,10 +45,10 @@ def main():
                 outcome="W" if value>0 else "L" if value<0 else "P"
                 for threshold in (0,3.5):
                     if abs(edge)>=threshold: counts[(model,market,threshold,outcome)]+=1
-    result={"capture_utc":board["capture_utc"],"rows":rows,"records":{"|".join(map(str,k)):v for k,v in counts.items()}}
+    result={"classification":"archived_pretip_research","capture_utc":board["capture_utc"],"rows":rows,"records":{"|".join(map(str,k)):v for k,v in counts.items()}}
     Path("research_recovery.json").write_text(json.dumps(result,indent=2))
     print("RESEARCH_RECORDS",json.dumps(result["records"]))
-    for day in ("2026-11-23","2026-11-24"):
+    for day in ("2026-11-22","2026-11-23","2026-11-24"):
         subset=[r for r in rows if r["date"]==day]
         print("COVERAGE",day,len(subset),sum(r["market"].get("home_spread") is not None for r in subset),sum(r["market"].get("total") is not None for r in subset))
         for row in subset: print("RESEARCH_GAME",json.dumps(row))
