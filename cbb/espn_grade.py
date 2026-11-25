@@ -1,6 +1,7 @@
 """Recover existing frozen results without CBBD or new market data."""
 import argparse
 import os
+from pathlib import Path
 import re
 import unicodedata
 from datetime import datetime, timedelta, timezone
@@ -61,18 +62,27 @@ def main():
     p = argparse.ArgumentParser()
     p.add_argument("--publish", action="store_true")
     p.add_argument("--days", type=int, default=7)
+    p.add_argument("--checkout", action="store_true")
     args = p.parse_args()
-    store = GitHubStore(os.environ["GITHUB_REPOSITORY"], "cbb-prospective", os.environ["GITHUB_TOKEN"])
+    if args.checkout:
+        from cbb.espn_capture_release import CheckoutStore
+        store = CheckoutStore()
+    else:
+        store = GitHubStore(os.environ["GITHUB_REPOSITORY"], "cbb-prospective", os.environ["GITHUB_TOKEN"])
     root = "cbb/prospective/2027"
     now = datetime.now(timezone.utc)
     cutoff = now - timedelta(days=args.days)
-    # Enumerate the git tree rather than the 1000-entry contents listing.
-    base = "https://api.github.com/repos/" + store.repository
-    r = store.session.get(base + "/git/trees/" + store.branch, params={"recursive": "1"}, timeout=60)
-    r.raise_for_status()
-    tree = r.json()
-    if tree.get("truncated"):
-        raise RuntimeError("Incomplete frozen inventory")
+    if args.checkout:
+        tree = {"tree": [{"path": str(p.relative_to("archive"))}
+                         for p in (Path("archive") / root / "frozen").glob("*.json")]}
+    else:
+        # Enumerate the git tree rather than the 1000-entry contents listing.
+        base = "https://api.github.com/repos/" + store.repository
+        r = store.session.get(base + "/git/trees/" + store.branch, params={"recursive": "1"}, timeout=60)
+        r.raise_for_status()
+        tree = r.json()
+        if tree.get("truncated"):
+            raise RuntimeError("Incomplete frozen inventory")
     known = set()
     for week in iso_weeks_between(FIRST_CAPTURE_UTC.date(), now.date()):
         journal = store.read_json(f"{root}/graded/{week}.json") or {}
