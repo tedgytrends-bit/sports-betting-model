@@ -1,1 +1,1 @@
-Recover verified ESPN finals inventory, November 22 onward, and refresh cumulative records.
+2026-11-25: validate full post-outage tracked and untracked reconciliation.
