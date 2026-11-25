@@ -219,6 +219,9 @@ def run(args):
     rotation_map = pregame_rotation_features(data["games"], rotation_boxes)
     rotation_rows = attach_rotations(enriched, rotation_map)
     rotation_plus_opp = attach_adjustments(rotation_rows, opponent_features)
+    if os.getenv("CBB_SAVE_DERIVED_TRAINING") == "1":
+        from cbb.training_checkpoint import save_derived
+        save_derived(rotation_plus_opp, priors, args.season)
     v4_rotation = fitted_predictions(
         rotation_rows, args.season, lines, PLAYER_FEATURES + ROTATION_FEATURES,
         250, "player_rot_v4",
