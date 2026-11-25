@@ -143,6 +143,8 @@ def build_capture(
                 "away_games_played": int(b.get("away_games", 0)),
             },
         }
+        if g.get("espn_id"):
+            record["espn_id"] = str(g["espn_id"])
         # v3 is an optional *new-capture-only* research shadow.
         # NEVER add it retroactively to existing immutable frozen games.
         if by_opponent is not None:
