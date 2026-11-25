@@ -6,6 +6,8 @@ import unicodedata
 from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 from cbb.prospective_grade import execute, iso_weeks_between, FIRST_CAPTURE_UTC
 from cbb.prospective import utc_date
 from cbb.prospective_publish import GitHubStore
@@ -75,6 +77,8 @@ def main():
     rows = []
     unmatched = []
     session = requests.Session()
+    retries = Retry(total=4, backoff_factor=1, status_forcelist=(429, 500, 502, 503, 504))
+    session.mount("https://", HTTPAdapter(max_retries=retries))
     for item in tree["tree"]:
         path = item["path"]
         if not path.startswith(root + "/frozen/") or not path.endswith(".json"):
