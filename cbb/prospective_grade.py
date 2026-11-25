@@ -86,7 +86,7 @@ def grade_frozen(frozen: dict, final: dict) -> dict:
         "home_points": hp, "away_points": ap,
         "home_spread": spread, "market_total": total_line,
         "market_provider": line.get("provider"), "models": models,
-        "source": "Frozen CBBD odds; hypothetical -110 stakes",
+        "source": f"Frozen {line.get('provider') or 'archived'} odds; hypothetical -110 stakes",
     }
 
 
