@@ -1,0 +1,56 @@
+name: CBB five-model ESPN capture
+on:
+  workflow_call:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/cbb-espn-fit.yml', 'cbb/espn_model_inputs.py', 'cbb/espn_capture_release.py']
+permissions:
+  contents: write
+concurrency:
+  group: cbb-five-model-fit
+  cancel-in-progress: false
+jobs:
+  fit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      CBB_SOURCE_DESCRIPTION: ESPN scoreboards, pretip markets, rosters and completed boxes; archived training, recruitment, transfers and prior-season talent. ESPN player boxes omit advanced usage and efficiency when unavailable.
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          ref: cbb-prospective
+          path: archive
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt pytest
+      - run: python -m pytest -q cbb/tests
+      - uses: actions/cache/restore@v4
+        with:
+          path: cbb/data/raw
+          key: cbb-historical-2022-to-2026-v3
+          fail-on-cache-miss: true
+      - uses: actions/cache/restore@v4
+        with:
+          path: cbb/data/rotation
+          key: cbb-rotation-game-boxes-2022-to-2026-v1
+          fail-on-cache-miss: true
+      - uses: actions/cache/restore@v4
+        with:
+          path: cbb/data/rotation_live
+          key: cbb-rotation-live-2027-45030081991
+      - uses: actions/cache/restore@v4
+        with:
+          path: cbb/data/espn_season
+          key: cbb-espn-season-2027-${{ github.run_id }}
+          restore-keys: cbb-espn-season-2027-
+      - run: python -m cbb.espn_season_cache
+      - run: python -m cbb.espn_model_inputs
+      - run: python -m cbb.prospective
+      - uses: actions/upload-artifact@v4
+        with:
+          name: five-model-espn-candidate
+          path: cbb/outputs/prospective/latest_capture.json
+          if-no-files-found: error
