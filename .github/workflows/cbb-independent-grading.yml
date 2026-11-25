@@ -40,7 +40,7 @@ jobs:
           git config user.email github-actions@users.noreply.github.com
           # Retire the earlier ESPN-only filename once its replacement exists.
           for old in cbb/prospective/2027/finals/espn-*.json; do
-            if [ -f "$old" ] && [ -f "$(dirname "$old")/\${old##*/espn-}" ]; then git rm -- "$old"; fi
+            if [ -f "$old" ] && [ -f "$(dirname "$old")/${old##*/espn-}" ]; then git rm -- "$old"; fi
           done
           git add cbb/prospective/2027
           git diff --cached --quiet && exit 0
