@@ -247,6 +247,8 @@ def run(args):
         rotation_player=v4_rotation,
         combined_player=v4_all,
     )
+    if os.getenv("CBB_SOURCE_DESCRIPTION"):
+        board["source"] = os.environ["CBB_SOURCE_DESCRIPTION"]
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(board, indent=2, sort_keys=True, allow_nan=False), encoding="utf-8")
