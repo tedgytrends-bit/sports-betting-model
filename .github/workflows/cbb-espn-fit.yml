@@ -1,7 +1,15 @@
 name: CBB five-model ESPN capture
 on:
   workflow_call:
+    inputs:
+      checkpoint_drill:
+        type: boolean
+        default: false
   workflow_dispatch:
+    inputs:
+      checkpoint_drill:
+        type: boolean
+        default: false
   push:
     branches: [main]
     paths: ['.github/workflows/cbb-espn-fit.yml', 'cbb/espn_model_inputs.py', 'cbb/espn_capture_release.py']
@@ -29,11 +37,13 @@ jobs:
       - run: pip install -r requirements.txt pytest
       - run: python -m pytest -q cbb/tests
       - uses: actions/cache/restore@v4
+        if: inputs.checkpoint_drill != true
         with:
           path: cbb/data/raw
           key: cbb-historical-2022-to-2026-v3
           fail-on-cache-miss: false
       - uses: actions/cache/restore@v4
+        if: inputs.checkpoint_drill != true
         with:
           path: cbb/data/rotation
           key: cbb-rotation-game-boxes-2022-to-2026-v1
@@ -65,6 +75,7 @@ jobs:
           git -C archive pull --ff-only origin cbb-prospective
           python -m cbb.espn_capture_release
       - name: Atomically publish tested projections
+        if: inputs.checkpoint_drill != true
         working-directory: archive
         run: |
           git config user.name github-actions
