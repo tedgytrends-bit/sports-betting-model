@@ -34,7 +34,8 @@ jobs:
           git pull --ff-only origin cbb-prospective
           mkdir -p cbb/prospective/2027/research
           cp ../research_recovery.json cbb/prospective/2027/research/2026-11-22-to-24.json
-          git add cbb/prospective/2027/research/2026-11-22-to-24.json
+          cp ../research_recovery.md cbb/prospective/2027/research/2026-11-22-to-24.md
+          git add cbb/prospective/2027/research/2026-11-22-to-24.{json,md}
           git diff --cached --quiet && exit 0
           git -c user.name=github-actions -c user.email=github-actions@users.noreply.github.com commit -m "Publish archived CBB research recovery for November 22–24"
           git config user.name github-actions
