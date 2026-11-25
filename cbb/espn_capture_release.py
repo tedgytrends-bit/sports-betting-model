@@ -11,6 +11,10 @@ from cbb.espn_daily_board import MODELS
 class CheckoutStore:
     branch = "cbb-prospective"
 
+    def read_json(self, path):
+        file = Path("archive") / path
+        return json.loads(file.read_text()) if file.exists() else None
+
     def put_text(self, path, content, immutable=False):
         file = Path("archive") / path
         if immutable and file.exists():
