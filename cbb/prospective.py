@@ -126,7 +126,7 @@ def build_capture(
             "market": {
                 "provider": provider, "home_spread": home_spread,
                 "total": market_total,
-                "as_of_utc": now.isoformat().replace("+00:00", "Z"),
+                "as_of_utc": g.get("market_observed_utc") or now.isoformat().replace("+00:00", "Z"),
             },
             "baseline": model_fields(b),
             "player_v2": model_fields(p),
