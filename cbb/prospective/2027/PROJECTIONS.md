@@ -1,6 +1,6 @@
 # Tedgy Trends CBB — Upcoming Projections
 
-**Updated: November 25, 2026, 01:02 PM CT**
+**Updated: November 25, 2026, 01:08 PM CT**
 
 **Latest projections** update with new results, roster inputs and observed sportsbook lines. The originally frozen pretip forecasts used for the official research scorecard never change.
 
@@ -141,11 +141,11 @@ All times Central. ATS leans show **which team and spread** the model favors; pa
 |  |  | Player + opponent v3 | Bellarmine 75.7 / Northern Kentucky 74.5 | 150.2 | Bellarmine +7.5 (8.7 pt) | Over 146.5 (3.7 pt) |
 |  |  | Player + rotation v4 | Bellarmine 67.9 / Northern Kentucky 69.2 | 137.1 | Bellarmine +7.5 (6.1 pt) | Under 146.5 (9.4 pt) |
 |  |  | Player + opponent + rotation v4 | Bellarmine 68.6 / Northern Kentucky 67.9 | 136.5 | Bellarmine +7.5 (8.2 pt) | Under 146.5 (10.0 pt) |
-| 06:00 PM · **SMU @ Utah State** | Utah State -4.5 / Total 162.5 (DraftKings) | Team baseline | SMU 76.4 / Utah State 82.8 | 159.2 | Utah State -4.5 (1.9 pt) | Under 162.5 (3.3 pt) |
-|  |  | Player v2 | SMU 76.7 / Utah State 82.1 | 158.8 | Utah State -4.5 (0.9 pt) | Under 162.5 (3.7 pt) |
-|  |  | Player + opponent v3 | SMU 78.4 / Utah State 80.4 | 158.8 | SMU +4.5 (2.5 pt) | Under 162.5 (3.7 pt) |
-|  |  | Player + rotation v4 | SMU 77.3 / Utah State 82.8 | 160.0 | Utah State -4.5 (1.0 pt) | Under 162.5 (2.5 pt) |
-|  |  | Player + opponent + rotation v4 | SMU 79.0 / Utah State 80.5 | 159.4 | SMU +4.5 (3.0 pt) | Under 162.5 (3.1 pt) |
+| 06:00 PM · **SMU @ Utah State** | Utah State -3.5 / Total 162.5 (DraftKings) | Team baseline | SMU 76.4 / Utah State 82.8 | 159.2 | Utah State -3.5 (2.9 pt) | Under 162.5 (3.3 pt) |
+|  |  | Player v2 | SMU 76.7 / Utah State 82.1 | 158.8 | Utah State -3.5 (1.9 pt) | Under 162.5 (3.7 pt) |
+|  |  | Player + opponent v3 | SMU 78.4 / Utah State 80.4 | 158.8 | SMU +3.5 (1.5 pt) | Under 162.5 (3.7 pt) |
+|  |  | Player + rotation v4 | SMU 77.3 / Utah State 82.8 | 160.0 | Utah State -3.5 (2.0 pt) | Under 162.5 (2.5 pt) |
+|  |  | Player + opponent + rotation v4 | SMU 79.0 / Utah State 80.5 | 159.4 | SMU +3.5 (2.0 pt) | Under 162.5 (3.1 pt) |
 | 06:00 PM · **Norfolk State @ NC State** | NC State -27.5 / Total 150.5 (DraftKings) | Team baseline | Norfolk State 63.7 / NC State 85.3 | 149.0 | Norfolk State +27.5 (6.0 pt) | Under 150.5 (1.5 pt) |
 |  |  | Player v2 | Norfolk State 60.8 / NC State 90.5 | 151.3 | NC State -27.5 (2.2 pt) | Over 150.5 (0.8 pt) |
 |  |  | Player + opponent v3 | Norfolk State 60.0 / NC State 91.0 | 151.1 | NC State -27.5 (3.5 pt) | Over 150.5 (0.6 pt) |
@@ -221,11 +221,11 @@ All times Central. ATS leans show **which team and spread** the model favors; pa
 |  |  | Player + opponent v3 | Incarnate Word 64.2 / Hawai'i 79.0 | 143.1 | Incarnate Word +16.5 (1.7 pt) | Over 139.5 (3.6 pt) |
 |  |  | Player + rotation v4 | Incarnate Word 58.4 / Hawai'i 78.8 | 137.1 | Hawai'i -16.5 (3.9 pt) | Under 139.5 (2.4 pt) |
 |  |  | Player + opponent + rotation v4 | Incarnate Word 58.7 / Hawai'i 76.4 | 135.1 | Hawai'i -16.5 (1.2 pt) | Under 139.5 (4.4 pt) |
-| 10:59 PM · **Stanford @ Saint Louis** | Saint Louis -3.5 / Total 152.5 (DraftKings) | Team baseline | Stanford 74.9 / Saint Louis 75.9 | 150.8 | Stanford +3.5 (2.5 pt) | Under 152.5 (1.7 pt) |
-|  |  | Player v2 | Stanford 78.0 / Saint Louis 73.8 | 151.8 | Stanford +3.5 (7.6 pt) | Under 152.5 (0.7 pt) |
-|  |  | Player + opponent v3 | Stanford 74.3 / Saint Louis 77.2 | 151.5 | Stanford +3.5 (0.5 pt) | Under 152.5 (1.0 pt) |
-|  |  | Player + rotation v4 | Stanford 70.6 / Saint Louis 67.0 | 137.6 | Stanford +3.5 (7.2 pt) | Under 152.5 (14.9 pt) |
-|  |  | Player + opponent + rotation v4 | Stanford 66.8 / Saint Louis 71.2 | 138.0 | Saint Louis -3.5 (1.0 pt) | Under 152.5 (14.5 pt) |
+| 10:59 PM · **Stanford @ Saint Louis** | Saint Louis -4.5 / Total 152.5 (DraftKings) | Team baseline | Stanford 74.9 / Saint Louis 75.9 | 150.8 | Stanford +4.5 (3.5 pt) | Under 152.5 (1.7 pt) |
+|  |  | Player v2 | Stanford 78.0 / Saint Louis 73.8 | 151.8 | Stanford +4.5 (8.6 pt) | Under 152.5 (0.7 pt) |
+|  |  | Player + opponent v3 | Stanford 74.3 / Saint Louis 77.2 | 151.5 | Stanford +4.5 (1.5 pt) | Under 152.5 (1.0 pt) |
+|  |  | Player + rotation v4 | Stanford 70.6 / Saint Louis 67.0 | 137.6 | Stanford +4.5 (8.2 pt) | Under 152.5 (14.9 pt) |
+|  |  | Player + opponent + rotation v4 | Stanford 66.8 / Saint Louis 71.2 | 138.0 | Stanford +4.5 (0.0 pt) | Under 152.5 (14.5 pt) |
 | 11:30 PM · **Clemson @ Colorado State** | Colorado State +3.5 / Total 148.5 (DraftKings) | Team baseline | Clemson 74.5 / Colorado State 74.3 | 148.7 | Colorado State +3.5 (3.3 pt) | Over 148.5 (0.2 pt) |
 |  |  | Player v2 | Clemson 77.0 / Colorado State 72.9 | 149.9 | Clemson -3.5 (0.6 pt) | Over 148.5 (1.4 pt) |
 |  |  | Player + opponent v3 | Clemson 76.7 / Colorado State 73.0 | 149.6 | Clemson -3.5 (0.2 pt) | Over 148.5 (1.1 pt) |
