@@ -137,6 +137,36 @@ def main():
             pending.setdefault(str(final["id"]), final)
     if args.publish:
         execute(store, list(pending.values()), 2027)
+        # Keep verified finals even when the outage left no forecast to grade.
+        first_day = max(cutoff.date(), datetime(2026, 11, 22).date())
+        day = first_day
+        while day <= now.astimezone(ZoneInfo("America/New_York")).date():
+            key = day.strftime("%Y%m%d")
+            if key not in dates:
+                response = session.get(URL, params={"dates":key,"groups":50,"limit":1000},timeout=45)
+                response.raise_for_status()
+                dates[key] = response.json()["events"]
+            if len(dates[key]) >= 1000:
+                raise ValueError("ESPN finals inventory truncated")
+            finals = {}
+            for event in dates[key]:
+                competition, = event["competitions"]
+                status = competition["status"]["type"]
+                if status["name"]!="STATUS_FINAL" or not status["completed"]:
+                    continue
+                sides = {s["homeAway"]:s for s in competition["competitors"]}
+                if set(sides)!={"away","home"}:
+                    raise ValueError("Malformed final")
+                result = {"espn_id":event["id"],"tip_utc":competition["date"],
+                          "central_date":utc_date(competition["date"]).astimezone(ZoneInfo("America/Chicago")).date().isoformat()}
+                for side, competitor in sides.items():
+                    result[side] = competitor["team"]["displayName"]
+                    result[side+"_points"] = int(competitor["score"])
+                if result["home_points"] == result["away_points"] or event["id"] in finals:
+                    raise ValueError("Invalid ESPN final or duplicate event")
+                finals[event["id"]] = result
+            store.put_json(f"{root}/finals/espn-{key}.json",list(finals.values()),immutable=False)
+            day += timedelta(days=1)
 
 if __name__ == "__main__":
     main()
