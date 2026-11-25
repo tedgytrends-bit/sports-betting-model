@@ -1,1 +1,1 @@
-Validate free ESPN capture and independent grading on 2026-11-25.
+2026-11-25: verify original five-model ESPN production workflow including publication and automatic fallback.
