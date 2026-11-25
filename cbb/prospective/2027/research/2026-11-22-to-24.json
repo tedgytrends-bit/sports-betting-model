@@ -79,6 +79,7 @@
         "homeTeamId": "188",
         "awayTeamId": "34",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401902281",
         "espnId": "401902281"
       },
       "retrospective_close": {}
@@ -160,6 +161,7 @@
         "homeTeamId": "317",
         "awayTeamId": "625",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401921088",
         "espnId": "401921088"
       },
       "retrospective_close": {}
@@ -241,6 +243,7 @@
         "homeTeamId": "157",
         "awayTeamId": "50",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401909527",
         "espnId": "401909527"
       },
       "retrospective_close": {}
@@ -322,6 +325,7 @@
         "homeTeamId": "8",
         "awayTeamId": "301",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401912212",
         "espnId": "401912212"
       },
       "retrospective_close": {}
@@ -403,6 +407,7 @@
         "homeTeamId": "146",
         "awayTeamId": "83",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401919809",
         "espnId": "401919809"
       },
       "retrospective_close": {}
@@ -484,6 +489,7 @@
         "homeTeamId": "212",
         "awayTeamId": "64",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401920736",
         "espnId": "401920736"
       },
       "retrospective_close": {}
@@ -565,6 +571,7 @@
         "homeTeamId": "42",
         "awayTeamId": "349",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401929023",
         "espnId": "401929023"
       },
       "retrospective_close": {}
@@ -646,6 +653,7 @@
         "homeTeamId": "91",
         "awayTeamId": "258",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401911200",
         "espnId": "401911200"
       },
       "retrospective_close": {}
@@ -727,6 +735,7 @@
         "homeTeamId": "51",
         "awayTeamId": "318",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401921748",
         "espnId": "401921748"
       },
       "retrospective_close": {}
@@ -808,6 +817,7 @@
         "homeTeamId": "361",
         "awayTeamId": "353",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401918455",
         "espnId": "401918455"
       },
       "retrospective_close": {}
@@ -889,6 +899,7 @@
         "homeTeamId": "330",
         "awayTeamId": "269",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401925942",
         "espnId": "401925942"
       },
       "retrospective_close": {}
@@ -970,6 +981,7 @@
         "homeTeamId": "73",
         "awayTeamId": "358",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401921706",
         "espnId": "401921706"
       },
       "retrospective_close": {}
@@ -1051,6 +1063,7 @@
         "homeTeamId": "350",
         "awayTeamId": "96",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401928802",
         "espnId": "401928802"
       },
       "retrospective_close": {}
@@ -1132,6 +1145,7 @@
         "homeTeamId": "192",
         "awayTeamId": "244",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401928790",
         "espnId": "401928790"
       },
       "retrospective_close": {}
@@ -1213,6 +1227,7 @@
         "homeTeamId": "295",
         "awayTeamId": "365",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401906868",
         "espnId": "401906868"
       },
       "retrospective_close": {}
@@ -1294,6 +1309,7 @@
         "homeTeamId": "265",
         "awayTeamId": "1073",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401922252",
         "espnId": "401922252"
       },
       "retrospective_close": {}
@@ -1375,6 +1391,7 @@
         "homeTeamId": "195",
         "awayTeamId": "302",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401925066",
         "espnId": "401925066"
       },
       "retrospective_close": {}
@@ -1456,6 +1473,7 @@
         "homeTeamId": "165",
         "awayTeamId": "306",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401923323",
         "espnId": "401923323"
       },
       "retrospective_close": {}
@@ -1537,6 +1555,7 @@
         "homeTeamId": "218",
         "awayTeamId": "340",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401920381",
         "espnId": "401920381"
       },
       "retrospective_close": {}
@@ -1618,6 +1637,7 @@
         "homeTeamId": "297",
         "awayTeamId": "162",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401929202",
         "espnId": "401929202"
       },
       "retrospective_close": {}
@@ -1699,6 +1719,7 @@
         "homeTeamId": "78",
         "awayTeamId": "506",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401929387",
         "espnId": "401929387"
       },
       "retrospective_close": {}
@@ -1780,6 +1801,7 @@
         "homeTeamId": "153",
         "awayTeamId": "308",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401917540",
         "espnId": "401917540"
       },
       "retrospective_close": {}
@@ -1861,6 +1883,7 @@
         "homeTeamId": "142",
         "awayTeamId": "242",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401926795",
         "espnId": "401926795"
       },
       "retrospective_close": {}
@@ -1942,6 +1965,7 @@
         "homeTeamId": "26",
         "awayTeamId": "186",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401909556",
         "espnId": "401909556"
       },
       "retrospective_close": {}
@@ -2023,6 +2047,7 @@
         "homeTeamId": "139",
         "awayTeamId": "241",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401925013",
         "espnId": "401925013"
       },
       "retrospective_close": {}
@@ -2104,6 +2129,7 @@
         "homeTeamId": "256",
         "awayTeamId": "319",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401922293",
         "espnId": "401922293"
       },
       "retrospective_close": {}
@@ -2185,6 +2211,7 @@
         "homeTeamId": "143",
         "awayTeamId": "786",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401920708",
         "espnId": "401920708"
       },
       "retrospective_close": {}
@@ -2266,6 +2293,7 @@
         "homeTeamId": "231",
         "awayTeamId": "37",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401920159",
         "espnId": "401920159"
       },
       "retrospective_close": {}
@@ -2347,6 +2375,7 @@
         "homeTeamId": "282",
         "awayTeamId": "289",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401921205",
         "espnId": "401921205"
       },
       "retrospective_close": {}
@@ -2428,6 +2457,7 @@
         "homeTeamId": "173",
         "awayTeamId": "331",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401921420",
         "espnId": "401921420"
       },
       "retrospective_close": {}
@@ -2509,6 +2539,7 @@
         "homeTeamId": "335",
         "awayTeamId": "275",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401928999",
         "espnId": "401928999"
       },
       "retrospective_close": {}
@@ -2590,6 +2621,7 @@
         "homeTeamId": "313",
         "awayTeamId": "66",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401920905",
         "espnId": "401920905"
       },
       "retrospective_close": {}
@@ -2671,6 +2703,7 @@
         "homeTeamId": "305",
         "awayTeamId": "240",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401919020",
         "espnId": "401919020"
       },
       "retrospective_close": {}
@@ -2752,6 +2785,7 @@
         "homeTeamId": "230",
         "awayTeamId": "39",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401917541",
         "espnId": "401917541"
       },
       "retrospective_close": {}
@@ -2833,6 +2867,7 @@
         "homeTeamId": "323",
         "awayTeamId": "148",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401926774",
         "espnId": "401926774"
       },
       "retrospective_close": {}
@@ -2914,6 +2949,7 @@
         "homeTeamId": "253",
         "awayTeamId": "629",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401929595",
         "espnId": "401929595"
       },
       "retrospective_close": {}
@@ -2995,6 +3031,7 @@
         "homeTeamId": "332",
         "awayTeamId": "325",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401921206",
         "espnId": "401921206"
       },
       "retrospective_close": {}
@@ -3076,12 +3113,13 @@
         "homeTeamId": "310",
         "awayTeamId": "262",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401917542",
         "espnId": "401917542"
       },
       "retrospective_close": {
         "home_spread": 1.5,
         "total": 149.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -3162,6 +3200,7 @@
         "homeTeamId": "151",
         "awayTeamId": "260",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401911233",
         "espnId": "401911233"
       },
       "retrospective_close": {}
@@ -3312,12 +3351,13 @@
         "homeTeamId": "63",
         "awayTeamId": "209",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401921700",
         "espnId": "401921700"
       },
       "retrospective_close": {
         "home_spread": -6.5,
         "total": 145.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -3398,6 +3438,7 @@
         "homeTeamId": "103",
         "awayTeamId": "668",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401928389",
         "espnId": "401928389"
       },
       "retrospective_close": {}
@@ -3479,12 +3520,13 @@
         "homeTeamId": "9",
         "awayTeamId": "277",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401927397",
         "espnId": "401927397"
       },
       "retrospective_close": {
         "home_spread": 4.5,
         "total": 138.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -3565,12 +3607,13 @@
         "homeTeamId": "74",
         "awayTeamId": "122",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401921209",
         "espnId": "401921209"
       },
       "retrospective_close": {
         "home_spread": -1.5,
         "total": 150.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -3651,6 +3694,7 @@
         "homeTeamId": "77",
         "awayTeamId": "1017",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401926069",
         "espnId": "401926069"
       },
       "retrospective_close": {}
@@ -3732,12 +3776,13 @@
         "homeTeamId": "89",
         "awayTeamId": "145",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401924266",
         "espnId": "401924266"
       },
       "retrospective_close": {
         "home_spread": -7.5,
         "total": 161.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -3818,12 +3863,13 @@
         "homeTeamId": "88",
         "awayTeamId": "48",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401921701",
         "espnId": "401921701"
       },
       "retrospective_close": {
         "home_spread": 7.5,
         "total": 143.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -3904,12 +3950,13 @@
         "homeTeamId": "357",
         "awayTeamId": "3",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401928830",
         "espnId": "401928830"
       },
       "retrospective_close": {
         "home_spread": -1.5,
         "total": 150.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -3990,12 +4037,13 @@
         "homeTeamId": "224",
         "awayTeamId": "304",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401921658",
         "espnId": "401921658"
       },
       "retrospective_close": {
         "home_spread": -5.5,
         "total": 155.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -4076,12 +4124,13 @@
         "homeTeamId": "52",
         "awayTeamId": "220",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401918076",
         "espnId": "401918076"
       },
       "retrospective_close": {
         "home_spread": 5.5,
         "total": 147.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -4162,12 +4211,13 @@
         "homeTeamId": "273",
         "awayTeamId": "171",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401921207",
         "espnId": "401921207"
       },
       "retrospective_close": {
         "home_spread": -4.5,
         "total": 148.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -4248,12 +4298,13 @@
         "homeTeamId": "115",
         "awayTeamId": "353",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401921177",
         "espnId": "401921177"
       },
       "retrospective_close": {
         "home_spread": 6.5,
         "total": 168.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -4334,12 +4385,13 @@
         "homeTeamId": "13",
         "awayTeamId": "276",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401929445",
         "espnId": "401929445"
       },
       "retrospective_close": {
         "home_spread": -6.5,
         "total": 162.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -4420,12 +4472,13 @@
         "homeTeamId": "100",
         "awayTeamId": "303",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401919006",
         "espnId": "401919006"
       },
       "retrospective_close": {
         "home_spread": -2.5,
         "total": 147.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -4506,12 +4559,13 @@
         "homeTeamId": "22",
         "awayTeamId": "360",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401929286",
         "espnId": "401929286"
       },
       "retrospective_close": {
         "home_spread": -1.5,
         "total": 146.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -4592,12 +4646,13 @@
         "homeTeamId": "189",
         "awayTeamId": "259",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401911457",
         "espnId": "401911457"
       },
       "retrospective_close": {
         "home_spread": -7.5,
         "total": 142.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -4678,12 +4733,13 @@
         "homeTeamId": "18",
         "awayTeamId": "343",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401921708",
         "espnId": "401921708"
       },
       "retrospective_close": {
         "home_spread": -10.5,
         "total": 163.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -4764,6 +4820,7 @@
         "homeTeamId": "33",
         "awayTeamId": "1526",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401911025",
         "espnId": "401911025"
       },
       "retrospective_close": {}
@@ -4845,12 +4902,13 @@
         "homeTeamId": "361",
         "awayTeamId": "159",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401920752",
         "espnId": "401920752"
       },
       "retrospective_close": {
         "home_spread": -12.5,
         "total": 133.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -4931,6 +4989,7 @@
         "homeTeamId": "75",
         "awayTeamId": "707",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401926106",
         "espnId": "401926106"
       },
       "retrospective_close": {}
@@ -5012,6 +5071,7 @@
         "homeTeamId": "137",
         "awayTeamId": "862",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401925813",
         "espnId": "401925813"
       },
       "retrospective_close": {}
@@ -5093,12 +5153,13 @@
         "homeTeamId": "210",
         "awayTeamId": "99",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401921029",
         "espnId": "401921029"
       },
       "retrospective_close": {
         "home_spread": -3.5,
         "total": 164.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -5179,12 +5240,13 @@
         "homeTeamId": "267",
         "awayTeamId": "198",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401921157",
         "espnId": "401921157"
       },
       "retrospective_close": {
         "home_spread": 1.5,
         "total": 147.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -5265,6 +5327,7 @@
         "homeTeamId": "140",
         "awayTeamId": "697",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401919785",
         "espnId": "401919785"
       },
       "retrospective_close": {}
@@ -5346,12 +5409,13 @@
         "homeTeamId": "123",
         "awayTeamId": "84",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401919761",
         "espnId": "401919761"
       },
       "retrospective_close": {
         "home_spread": -9.5,
         "total": 136.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -5432,12 +5496,13 @@
         "homeTeamId": "203",
         "awayTeamId": "43",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401917919",
         "espnId": "401917919"
       },
       "retrospective_close": {
         "home_spread": 8.5,
         "total": 166.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -5518,12 +5583,13 @@
         "homeTeamId": "261",
         "awayTeamId": "119",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401917543",
         "espnId": "401917543"
       },
       "retrospective_close": {
         "home_spread": -3.5,
         "total": 150.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -5604,6 +5670,7 @@
         "homeTeamId": "19",
         "awayTeamId": "831",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401928838",
         "espnId": "401928838"
       },
       "retrospective_close": {}
@@ -5685,6 +5752,7 @@
         "homeTeamId": "114",
         "awayTeamId": "510",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401932055",
         "espnId": "401932055"
       },
       "retrospective_close": {}
@@ -5766,12 +5834,13 @@
         "homeTeamId": "352",
         "awayTeamId": "294",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401919032",
         "espnId": "401919032"
       },
       "retrospective_close": {
         "home_spread": -18.5,
         "total": 141.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -5852,6 +5921,7 @@
         "homeTeamId": "199",
         "awayTeamId": "646",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401927353",
         "espnId": "401927353"
       },
       "retrospective_close": {}
@@ -5933,12 +6003,13 @@
         "homeTeamId": "118",
         "awayTeamId": "354",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401913530",
         "espnId": "401913530"
       },
       "retrospective_close": {
         "home_spread": -43.5,
         "total": 181.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -6019,12 +6090,13 @@
         "homeTeamId": "200",
         "awayTeamId": "178",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401913102",
         "espnId": "401913102"
       },
       "retrospective_close": {
         "home_spread": -18.5,
         "total": 153.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -6105,12 +6177,13 @@
         "homeTeamId": "131",
         "awayTeamId": "68",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401909788",
         "espnId": "401909788"
       },
       "retrospective_close": {
         "home_spread": -31.5,
         "total": 157.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -6191,6 +6264,7 @@
         "homeTeamId": "202",
         "awayTeamId": "768",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401929392",
         "espnId": "401929392"
       },
       "retrospective_close": {}
@@ -6272,12 +6346,13 @@
         "homeTeamId": "235",
         "awayTeamId": "333",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401909536",
         "espnId": "401909536"
       },
       "retrospective_close": {
         "home_spread": -2.5,
         "total": 154.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -6358,6 +6433,7 @@
         "homeTeamId": "117",
         "awayTeamId": "639",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401922263",
         "espnId": "401922263"
       },
       "retrospective_close": {}
@@ -6439,6 +6515,7 @@
         "homeTeamId": "179",
         "awayTeamId": "842",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401922032",
         "espnId": "401922032"
       },
       "retrospective_close": {}
@@ -6520,12 +6597,13 @@
         "homeTeamId": "228",
         "awayTeamId": "320",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401926183",
         "espnId": "401926183"
       },
       "retrospective_close": {
         "home_spread": -10.5,
         "total": 153.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -6606,12 +6684,13 @@
         "homeTeamId": "322",
         "awayTeamId": "80",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401920721",
         "espnId": "401920721"
       },
       "retrospective_close": {
         "home_spread": -8.5,
         "total": 160.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -6692,12 +6771,13 @@
         "homeTeamId": "40",
         "awayTeamId": "6",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401918057",
         "espnId": "401918057"
       },
       "retrospective_close": {
         "home_spread": -17.5,
         "total": 142.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -6778,12 +6858,13 @@
         "homeTeamId": "11",
         "awayTeamId": "57",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401909743",
         "espnId": "401909743"
       },
       "retrospective_close": {
         "home_spread": -17.5,
         "total": 158.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -7140,12 +7221,13 @@
         "homeTeamId": "277",
         "awayTeamId": "357",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401927398",
         "espnId": "401927398"
       },
       "retrospective_close": {
         "home_spread": 1.5,
         "total": 145.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -7226,12 +7308,13 @@
         "homeTeamId": "192",
         "awayTeamId": "215",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401928791",
         "espnId": "401928791"
       },
       "retrospective_close": {
         "home_spread": 5.5,
         "total": 149.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -7312,12 +7395,13 @@
         "homeTeamId": "207",
         "awayTeamId": "246",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401920819",
         "espnId": "401920819"
       },
       "retrospective_close": {
         "home_spread": -2.5,
         "total": 143.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -7398,12 +7482,13 @@
         "homeTeamId": "3",
         "awayTeamId": "22",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401928835",
         "espnId": "401928835"
       },
       "retrospective_close": {
         "home_spread": -2.5,
         "total": 140.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -7484,6 +7569,7 @@
         "homeTeamId": "284",
         "awayTeamId": "704",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401919850",
         "espnId": "401919850"
       },
       "retrospective_close": {}
@@ -7565,12 +7651,13 @@
         "homeTeamId": "89",
         "awayTeamId": "276",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401928358",
         "espnId": "401928358"
       },
       "retrospective_close": {
         "home_spread": -8.5,
         "total": 167.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -7651,12 +7738,13 @@
         "homeTeamId": "217",
         "awayTeamId": "229",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401906806",
         "espnId": "401906806"
       },
       "retrospective_close": {
         "home_spread": 1.5,
         "total": 148.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -7737,12 +7825,13 @@
         "homeTeamId": "315",
         "awayTeamId": "241",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401928859",
         "espnId": "401928859"
       },
       "retrospective_close": {
         "home_spread": -7.5,
         "total": 142.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -7823,12 +7912,13 @@
         "homeTeamId": "259",
         "awayTeamId": "224",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401917676",
         "espnId": "401917676"
       },
       "retrospective_close": {
         "home_spread": 7.5,
         "total": 147.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -7909,12 +7999,13 @@
         "homeTeamId": "168",
         "awayTeamId": "287",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401915941",
         "espnId": "401915941"
       },
       "retrospective_close": {
         "home_spread": -5.5,
         "total": 153.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -7995,12 +8086,13 @@
         "homeTeamId": "160",
         "awayTeamId": "292",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401906853",
         "espnId": "401906853"
       },
       "retrospective_close": {
         "home_spread": 2.5,
         "total": 148.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -8081,12 +8173,13 @@
         "homeTeamId": "69",
         "awayTeamId": "201",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401920546",
         "espnId": "401920546"
       },
       "retrospective_close": {
         "home_spread": 4.5,
         "total": 150.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -8167,12 +8260,13 @@
         "homeTeamId": "360",
         "awayTeamId": "9",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401929285",
         "espnId": "401929285"
       },
       "retrospective_close": {
         "home_spread": 1.5,
         "total": 135.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -8253,12 +8347,13 @@
         "homeTeamId": "13",
         "awayTeamId": "145",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401924267",
         "espnId": "401924267"
       },
       "retrospective_close": {
         "home_spread": -5.5,
         "total": 159.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -8339,12 +8434,13 @@
         "homeTeamId": "1507",
         "awayTeamId": "366",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401929035",
         "espnId": "401929035"
       },
       "retrospective_close": {
         "home_spread": 1.5,
         "total": 133.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -8425,12 +8521,13 @@
         "homeTeamId": "119",
         "awayTeamId": "304",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401921666",
         "espnId": "401921666"
       },
       "retrospective_close": {
         "home_spread": 1.5,
         "total": 143.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -8511,6 +8608,7 @@
         "homeTeamId": "187",
         "awayTeamId": "1561",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401921223",
         "espnId": "401921223"
       },
       "retrospective_close": {}
@@ -8592,6 +8690,7 @@
         "homeTeamId": "341",
         "awayTeamId": "926",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401926061",
         "espnId": "401926061"
       },
       "retrospective_close": {}
@@ -8673,12 +8772,13 @@
         "homeTeamId": "125",
         "awayTeamId": "257",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401909775",
         "espnId": "401909775"
       },
       "retrospective_close": {
         "home_spread": -9.5,
         "total": 142.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -8759,12 +8859,13 @@
         "homeTeamId": "61",
         "awayTeamId": "170",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401909495",
         "espnId": "401909495"
       },
       "retrospective_close": {
         "home_spread": 6.5,
         "total": 162.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -8845,6 +8946,7 @@
         "homeTeamId": "238",
         "awayTeamId": "658",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401924859",
         "espnId": "401924859"
       },
       "retrospective_close": {}
@@ -8926,12 +9028,13 @@
         "homeTeamId": "134",
         "awayTeamId": "358",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401921707",
         "espnId": "401921707"
       },
       "retrospective_close": {
         "home_spread": 9.5,
         "total": 143.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -9012,12 +9115,13 @@
         "homeTeamId": "65",
         "awayTeamId": "236",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401909505",
         "espnId": "401909505"
       },
       "retrospective_close": {
         "home_spread": 3.5,
         "total": 132.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -9098,12 +9202,13 @@
         "homeTeamId": "245",
         "awayTeamId": "250",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401924877",
         "espnId": "401924877"
       },
       "retrospective_close": {
         "home_spread": -22.5,
         "total": 159.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -9184,12 +9289,13 @@
         "homeTeamId": "356",
         "awayTeamId": "362",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401922231",
         "espnId": "401922231"
       },
       "retrospective_close": {
         "home_spread": 1.5,
         "total": 173.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -9270,12 +9376,13 @@
         "homeTeamId": "334",
         "awayTeamId": "365",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401923395",
         "espnId": "401923395"
       },
       "retrospective_close": {
         "home_spread": -4.5,
         "total": 144.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -9356,12 +9463,13 @@
         "homeTeamId": "86",
         "awayTeamId": "164",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401923262",
         "espnId": "401923262"
       },
       "retrospective_close": {
         "home_spread": -7.5,
         "total": 159.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -9442,12 +9550,13 @@
         "homeTeamId": "133",
         "awayTeamId": "79",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401920949",
         "espnId": "401920949"
       },
       "retrospective_close": {
         "home_spread": -5.5,
         "total": 147.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -9528,12 +9637,13 @@
         "homeTeamId": "93",
         "awayTeamId": "81",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401921142",
         "espnId": "401921142"
       },
       "retrospective_close": {
         "home_spread": -7.5,
         "total": 149.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -9614,12 +9724,13 @@
         "homeTeamId": "139",
         "awayTeamId": "244",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401925014",
         "espnId": "401925014"
       },
       "retrospective_close": {
         "home_spread": -2.5,
         "total": 154.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -9700,12 +9811,13 @@
         "homeTeamId": "216",
         "awayTeamId": "336",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401916319",
         "espnId": "401916319"
       },
       "retrospective_close": {
         "home_spread": 2.5,
         "total": 156.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -9786,12 +9898,13 @@
         "homeTeamId": "121",
         "awayTeamId": "127",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401916291",
         "espnId": "401916291"
       },
       "retrospective_close": {
         "home_spread": -27.5,
         "total": 146.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -9872,12 +9985,13 @@
         "homeTeamId": "129",
         "awayTeamId": "47",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401911379",
         "espnId": "401911379"
       },
       "retrospective_close": {
         "home_spread": -12.5,
         "total": 157.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -9958,12 +10072,13 @@
         "homeTeamId": "141",
         "awayTeamId": "24",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401911279",
         "espnId": "401911279"
       },
       "retrospective_close": {
         "home_spread": -9.5,
         "total": 137.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -10044,12 +10159,13 @@
         "homeTeamId": "28",
         "awayTeamId": "94",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401911027",
         "espnId": "401911027"
       },
       "retrospective_close": {
         "home_spread": -12.5,
         "total": 143.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -10130,12 +10246,13 @@
         "homeTeamId": "87",
         "awayTeamId": "172",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401906774",
         "espnId": "401906774"
       },
       "retrospective_close": {
         "home_spread": -34.5,
         "total": 153.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -10216,12 +10333,13 @@
         "homeTeamId": "189",
         "awayTeamId": "261",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401911458",
         "espnId": "401911458"
       },
       "retrospective_close": {
         "home_spread": -1.5,
         "total": 159.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -10302,12 +10420,13 @@
         "homeTeamId": "156",
         "awayTeamId": "31",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401923271",
         "espnId": "401923271"
       },
       "retrospective_close": {
         "home_spread": -2.5,
         "total": 130.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -10388,12 +10507,13 @@
         "homeTeamId": "338",
         "awayTeamId": "59",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401921777",
         "espnId": "401921777"
       },
       "retrospective_close": {
         "home_spread": -34.5,
         "total": 142.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -10474,12 +10594,13 @@
         "homeTeamId": "152",
         "awayTeamId": "243",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401921266",
         "espnId": "401921266"
       },
       "retrospective_close": {
         "home_spread": -3.5,
         "total": 138.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -10560,12 +10681,13 @@
         "homeTeamId": "182",
         "awayTeamId": "183",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401920923",
         "espnId": "401920923"
       },
       "retrospective_close": {
         "home_spread": -1.5,
         "total": 147.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -10646,12 +10768,13 @@
         "homeTeamId": "263",
         "awayTeamId": "190",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401920889",
         "espnId": "401920889"
       },
       "retrospective_close": {
         "home_spread": -20.5,
         "total": 128.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -10732,12 +10855,13 @@
         "homeTeamId": "54",
         "awayTeamId": "41",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401920742",
         "espnId": "401920742"
       },
       "retrospective_close": {
         "home_spread": -1.5,
         "total": 148.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -10818,12 +10942,13 @@
         "homeTeamId": "124",
         "awayTeamId": "317",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401920727",
         "espnId": "401920727"
       },
       "retrospective_close": {
         "home_spread": -28.5,
         "total": 144.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -10904,12 +11029,13 @@
         "homeTeamId": "101",
         "awayTeamId": "256",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401920309",
         "espnId": "401920309"
       },
       "retrospective_close": {
         "home_spread": -9.5,
         "total": 161.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -10990,6 +11116,7 @@
         "homeTeamId": "165",
         "awayTeamId": "617",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401919829",
         "espnId": "401919829"
       },
       "retrospective_close": {}
@@ -11071,12 +11198,13 @@
         "homeTeamId": "271",
         "awayTeamId": "283",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401918996",
         "espnId": "401918996"
       },
       "retrospective_close": {
         "home_spread": -16.5,
         "total": 154.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -11157,12 +11285,13 @@
         "homeTeamId": "345",
         "awayTeamId": "288",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401925950",
         "espnId": "401925950"
       },
       "retrospective_close": {
         "home_spread": -1.5,
         "total": 156.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -11243,12 +11372,13 @@
         "homeTeamId": "49",
         "awayTeamId": "67",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401920976",
         "espnId": "401920976"
       },
       "retrospective_close": {
         "home_spread": -17.5,
         "total": 145.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -11329,12 +11459,13 @@
         "homeTeamId": "264",
         "awayTeamId": "337",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401920695",
         "espnId": "401920695"
       },
       "retrospective_close": {
         "home_spread": -4.5,
         "total": 159.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -11415,12 +11546,13 @@
         "homeTeamId": "107",
         "awayTeamId": "27",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401920358",
         "espnId": "401920358"
       },
       "retrospective_close": {
         "home_spread": -5.5,
         "total": 134.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -11501,6 +11633,7 @@
         "homeTeamId": "233",
         "awayTeamId": "586",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401928348",
         "espnId": "401928348"
       },
       "retrospective_close": {}
@@ -11582,12 +11715,13 @@
         "homeTeamId": "219",
         "awayTeamId": "106",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401926827",
         "espnId": "401926827"
       },
       "retrospective_close": {
         "home_spread": -8.5,
         "total": 129.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -11668,12 +11802,13 @@
         "homeTeamId": "272",
         "awayTeamId": "237",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401926154",
         "espnId": "401926154"
       },
       "retrospective_close": {
         "home_spread": -3.5,
         "total": 149.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -11754,12 +11889,13 @@
         "homeTeamId": "149",
         "awayTeamId": "7",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401925687",
         "espnId": "401925687"
       },
       "retrospective_close": {
         "home_spread": -16.5,
         "total": 145.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -11840,12 +11976,13 @@
         "homeTeamId": "73",
         "awayTeamId": "109",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401920414",
         "espnId": "401920414"
       },
       "retrospective_close": {
         "home_spread": 10.5,
         "total": 140.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -11926,12 +12063,13 @@
         "homeTeamId": "291",
         "awayTeamId": "346",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401917904",
         "espnId": "401917904"
       },
       "retrospective_close": {
         "home_spread": -13.5,
         "total": 163.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -12012,12 +12150,13 @@
         "homeTeamId": "316",
         "awayTeamId": "112",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401917983",
         "espnId": "401917983"
       },
       "retrospective_close": {
         "home_spread": 1.5,
         "total": 148.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -12098,6 +12237,7 @@
         "homeTeamId": "76",
         "awayTeamId": "742",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401929351",
         "espnId": "401929351"
       },
       "retrospective_close": {}
@@ -12179,12 +12319,13 @@
         "homeTeamId": "15",
         "awayTeamId": "2",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401911338",
         "espnId": "401911338"
       },
       "retrospective_close": {
         "home_spread": 3.5,
         "total": 155.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -12265,12 +12406,13 @@
         "homeTeamId": "213",
         "awayTeamId": "45",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401911026",
         "espnId": "401911026"
       },
       "retrospective_close": {
         "home_spread": -20.5,
         "total": 152.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -12351,12 +12493,13 @@
         "homeTeamId": "298",
         "awayTeamId": "150",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401915942",
         "espnId": "401915942"
       },
       "retrospective_close": {
         "home_spread": -2.5,
         "total": 153.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -12437,12 +12580,13 @@
         "homeTeamId": "197",
         "awayTeamId": "4",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401925642",
         "espnId": "401925642"
       },
       "retrospective_close": {
         "home_spread": -3.5,
         "total": 142.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -12523,12 +12667,13 @@
         "homeTeamId": "130",
         "awayTeamId": "105",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401921008",
         "espnId": "401921008"
       },
       "retrospective_close": {
         "home_spread": -1.5,
         "total": 145.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -12609,12 +12754,13 @@
         "homeTeamId": "16",
         "awayTeamId": "143",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401920709",
         "espnId": "401920709"
       },
       "retrospective_close": {
         "home_spread": -24.5,
         "total": 158.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -12695,12 +12841,13 @@
         "homeTeamId": "60",
         "awayTeamId": "32",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401924723",
         "espnId": "401924723"
       },
       "retrospective_close": {
         "home_spread": -11.5,
         "total": 154.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -12781,12 +12928,13 @@
         "homeTeamId": "227",
         "awayTeamId": "71",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401921184",
         "espnId": "401921184"
       },
       "retrospective_close": {
         "home_spread": -6.5,
         "total": 142.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -12867,12 +13015,13 @@
         "homeTeamId": "265",
         "awayTeamId": "85",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401929421",
         "espnId": "401929421"
       },
       "retrospective_close": {
         "home_spread": -17.5,
         "total": 142.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -12953,6 +13102,7 @@
         "homeTeamId": "144",
         "awayTeamId": "539",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401929380",
         "espnId": "401929380"
       },
       "retrospective_close": {}
@@ -13034,12 +13184,13 @@
         "homeTeamId": "324",
         "awayTeamId": "222",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401929359",
         "espnId": "401929359"
       },
       "retrospective_close": {
         "home_spread": -5.5,
         "total": 150.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -13120,12 +13271,13 @@
         "homeTeamId": "327",
         "awayTeamId": "46",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401911535",
         "espnId": "401911535"
       },
       "retrospective_close": {
         "home_spread": 1.5,
         "total": 149.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -13206,6 +13358,7 @@
         "homeTeamId": "148",
         "awayTeamId": "537",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401929456",
         "espnId": "401929456"
       },
       "retrospective_close": {}
@@ -13287,12 +13440,13 @@
         "homeTeamId": "90",
         "awayTeamId": "319",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401909699",
         "espnId": "401909699"
       },
       "retrospective_close": {
         "home_spread": -30.5,
         "total": 159.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -13373,12 +13527,13 @@
         "homeTeamId": "311",
         "awayTeamId": "320",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401926184",
         "espnId": "401926184"
       },
       "retrospective_close": {
         "home_spread": -18.5,
         "total": 145.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -13459,12 +13614,13 @@
         "homeTeamId": "252",
         "awayTeamId": "104",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401911253",
         "espnId": "401911253"
       },
       "retrospective_close": {
         "home_spread": 1.5,
         "total": 163.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -13545,12 +13701,13 @@
         "homeTeamId": "5",
         "awayTeamId": "20",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401906762",
         "espnId": "401906762"
       },
       "retrospective_close": {
         "home_spread": -1.5,
         "total": 174.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -13631,12 +13788,13 @@
         "homeTeamId": "223",
         "awayTeamId": "279",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401915943",
         "espnId": "401915943"
       },
       "retrospective_close": {
         "home_spread": 10.5,
         "total": 157.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -13717,12 +13875,13 @@
         "homeTeamId": "56",
         "awayTeamId": "281",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401909763",
         "espnId": "401909763"
       },
       "retrospective_close": {
         "home_spread": 4.5,
         "total": 140.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -14631,12 +14790,13 @@
         "homeTeamId": "132",
         "awayTeamId": "102",
         "finalScoreSource": "ESPN",
+        "sourceEventId": "401909800",
         "espnId": "401909800"
       },
       "retrospective_close": {
         "home_spread": 14.5,
         "total": 157.5,
-        "provider": "Draft Kings",
+        "provider": "DraftKings",
         "source": "ESPN closing quote retrieved after final"
       }
     }
