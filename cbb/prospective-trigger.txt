@@ -1,9 +1,1 @@
-2026-11-05 initiate pretip CBB 2026–27 shadow capture after verified roster correction.
-2026-11-05 validate quota-efficient second capture and automatic frozen-record grading.
-2026-11-05 verify optional player_opp_v3 in new 2026-27 shadow snapshots and historical freezes unchanged.
-2026-11-05 first live v4 rotation snapshot and shadow-grading integration verification.
-2026-11-06 validate rolling daily 48h/7d performance report and ISO-week rollover fix.
-2026-11-06 verify readable rolling research scorecard publishing, no changes to frozen model history.
-2026-11-06 publish human-readable ATS and total leans for upcoming CBB games on daily results data branch.
-2026-11-23 recover missed scheduled CBB prospective snapshot and grade November 22 results; preserve frozen records.
-2026-11-23 retry after CBBD 429 cache fallback patch; grade November 22 frozen pretip selections.
+Validate free ESPN capture and independent grading on 2026-11-25.
