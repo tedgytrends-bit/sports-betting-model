@@ -26,13 +26,6 @@ jobs:
           path: cbb/data/espn_season
           key: cbb-espn-season-2027-${{ github.run_id }}
           restore-keys: cbb-espn-season-2027-
-      - uses: actions/cache/restore@v4
-        with:
-          path: cbb/data/raw
-          key: cbb-historical-2022-to-2026-v3
-          fail-on-cache-miss: true
-      - name: Inventory validated training and current-season priors
-        run: find cbb/data/raw -maxdepth 2 -type f | sort
       - run: python -m cbb.espn_season_cache
       - uses: actions/cache/save@v4
         if: always()
