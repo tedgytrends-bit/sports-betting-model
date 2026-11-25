@@ -13,5 +13,9 @@ permissions:
   contents: write
 
 jobs:
+  capture:
+    uses: ./.github/workflows/cbb-espn-fit.yml
   publish-available-projections:
+    needs: capture
+    if: failure()
     uses: ./.github/workflows/cbb-espn-daily-board.yml
