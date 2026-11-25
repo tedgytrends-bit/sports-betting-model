@@ -150,7 +150,19 @@
         "training_games": 31259
       },
       "date": "2026-11-22",
-      "final": null
+      "final": {
+        "id": "375222",
+        "season": 2027,
+        "startDate": "2026-11-22T18:00Z",
+        "status": "final",
+        "homePoints": 89,
+        "awayPoints": 55,
+        "homeTeamId": "317",
+        "awayTeamId": "625",
+        "finalScoreSource": "ESPN",
+        "espnId": "401921088"
+      },
+      "retrospective_close": {}
     },
     {
       "id": "372899",
@@ -1677,7 +1689,19 @@
         "training_games": 31259
       },
       "date": "2026-11-22",
-      "final": null
+      "final": {
+        "id": "378089",
+        "season": 2027,
+        "startDate": "2026-11-22T21:00Z",
+        "status": "final",
+        "homePoints": 114,
+        "awayPoints": 85,
+        "homeTeamId": "78",
+        "awayTeamId": "506",
+        "finalScoreSource": "ESPN",
+        "espnId": "401929387"
+      },
+      "retrospective_close": {}
     },
     {
       "id": "375232",
@@ -3057,7 +3081,7 @@
       "retrospective_close": {
         "home_spread": 1.5,
         "total": 149.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -3293,7 +3317,7 @@
       "retrospective_close": {
         "home_spread": -6.5,
         "total": 145.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -3364,7 +3388,19 @@
         "training_games": 31259
       },
       "date": "2026-11-23",
-      "final": null
+      "final": {
+        "id": "378094",
+        "season": 2027,
+        "startDate": "2026-11-23T20:00Z",
+        "status": "final",
+        "homePoints": 126,
+        "awayPoints": 45,
+        "homeTeamId": "103",
+        "awayTeamId": "668",
+        "finalScoreSource": "ESPN",
+        "espnId": "401928389"
+      },
+      "retrospective_close": {}
     },
     {
       "id": "378095",
@@ -3448,7 +3484,7 @@
       "retrospective_close": {
         "home_spread": 4.5,
         "total": 138.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -3534,7 +3570,7 @@
       "retrospective_close": {
         "home_spread": -1.5,
         "total": 150.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -3605,7 +3641,19 @@
         "training_games": 31259
       },
       "date": "2026-11-23",
-      "final": null
+      "final": {
+        "id": "375252",
+        "season": 2027,
+        "startDate": "2026-11-23T18:00Z",
+        "status": "final",
+        "homePoints": 83,
+        "awayPoints": 66,
+        "homeTeamId": "77",
+        "awayTeamId": "1017",
+        "finalScoreSource": "ESPN",
+        "espnId": "401926069"
+      },
+      "retrospective_close": {}
     },
     {
       "id": "375253",
@@ -3689,7 +3737,7 @@
       "retrospective_close": {
         "home_spread": -7.5,
         "total": 161.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -3775,7 +3823,7 @@
       "retrospective_close": {
         "home_spread": 7.5,
         "total": 143.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -3861,7 +3909,7 @@
       "retrospective_close": {
         "home_spread": -1.5,
         "total": 150.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -3947,7 +3995,7 @@
       "retrospective_close": {
         "home_spread": -5.5,
         "total": 155.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -4033,7 +4081,7 @@
       "retrospective_close": {
         "home_spread": 5.5,
         "total": 147.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -4119,7 +4167,7 @@
       "retrospective_close": {
         "home_spread": -4.5,
         "total": 148.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -4205,7 +4253,7 @@
       "retrospective_close": {
         "home_spread": 6.5,
         "total": 168.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -4291,7 +4339,7 @@
       "retrospective_close": {
         "home_spread": -6.5,
         "total": 162.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -4377,7 +4425,7 @@
       "retrospective_close": {
         "home_spread": -2.5,
         "total": 147.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -4463,7 +4511,7 @@
       "retrospective_close": {
         "home_spread": -1.5,
         "total": 146.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -4549,7 +4597,7 @@
       "retrospective_close": {
         "home_spread": -7.5,
         "total": 142.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -4635,7 +4683,7 @@
       "retrospective_close": {
         "home_spread": -10.5,
         "total": 163.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -4802,7 +4850,7 @@
       "retrospective_close": {
         "home_spread": -12.5,
         "total": 133.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -5050,7 +5098,7 @@
       "retrospective_close": {
         "home_spread": -3.5,
         "total": 164.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -5136,7 +5184,7 @@
       "retrospective_close": {
         "home_spread": 1.5,
         "total": 147.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -5303,7 +5351,7 @@
       "retrospective_close": {
         "home_spread": -9.5,
         "total": 136.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -5389,7 +5437,7 @@
       "retrospective_close": {
         "home_spread": 8.5,
         "total": 166.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -5475,7 +5523,7 @@
       "retrospective_close": {
         "home_spread": -3.5,
         "total": 150.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -5723,7 +5771,7 @@
       "retrospective_close": {
         "home_spread": -18.5,
         "total": 141.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -5890,7 +5938,7 @@
       "retrospective_close": {
         "home_spread": -43.5,
         "total": 181.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -5976,7 +6024,7 @@
       "retrospective_close": {
         "home_spread": -18.5,
         "total": 153.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -6062,7 +6110,7 @@
       "retrospective_close": {
         "home_spread": -31.5,
         "total": 157.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -6229,7 +6277,7 @@
       "retrospective_close": {
         "home_spread": -2.5,
         "total": 154.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -6300,7 +6348,19 @@
         "training_games": 31259
       },
       "date": "2026-11-23",
-      "final": null
+      "final": {
+        "id": "375244",
+        "season": 2027,
+        "startDate": "2026-11-24T02:00Z",
+        "status": "final",
+        "homePoints": 88,
+        "awayPoints": 47,
+        "homeTeamId": "117",
+        "awayTeamId": "639",
+        "finalScoreSource": "ESPN",
+        "espnId": "401922263"
+      },
+      "retrospective_close": {}
     },
     {
       "id": "375259",
@@ -6465,7 +6525,7 @@
       "retrospective_close": {
         "home_spread": -10.5,
         "total": 153.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -6551,7 +6611,7 @@
       "retrospective_close": {
         "home_spread": -8.5,
         "total": 160.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -6637,7 +6697,7 @@
       "retrospective_close": {
         "home_spread": -17.5,
         "total": 142.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -6723,7 +6783,7 @@
       "retrospective_close": {
         "home_spread": -17.5,
         "total": 158.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -7085,7 +7145,7 @@
       "retrospective_close": {
         "home_spread": 1.5,
         "total": 145.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -7171,7 +7231,7 @@
       "retrospective_close": {
         "home_spread": 5.5,
         "total": 149.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -7257,7 +7317,7 @@
       "retrospective_close": {
         "home_spread": -2.5,
         "total": 143.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -7343,7 +7403,7 @@
       "retrospective_close": {
         "home_spread": -2.5,
         "total": 140.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -7510,7 +7570,7 @@
       "retrospective_close": {
         "home_spread": -8.5,
         "total": 167.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -7596,7 +7656,7 @@
       "retrospective_close": {
         "home_spread": 1.5,
         "total": 148.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -7682,7 +7742,7 @@
       "retrospective_close": {
         "home_spread": -7.5,
         "total": 142.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -7768,7 +7828,7 @@
       "retrospective_close": {
         "home_spread": 7.5,
         "total": 147.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -7854,7 +7914,7 @@
       "retrospective_close": {
         "home_spread": -5.5,
         "total": 153.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -7940,7 +8000,7 @@
       "retrospective_close": {
         "home_spread": 2.5,
         "total": 148.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -8026,7 +8086,7 @@
       "retrospective_close": {
         "home_spread": 4.5,
         "total": 150.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -8112,7 +8172,7 @@
       "retrospective_close": {
         "home_spread": 1.5,
         "total": 135.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -8198,7 +8258,7 @@
       "retrospective_close": {
         "home_spread": -5.5,
         "total": 159.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -8284,7 +8344,7 @@
       "retrospective_close": {
         "home_spread": 1.5,
         "total": 133.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -8370,7 +8430,7 @@
       "retrospective_close": {
         "home_spread": 1.5,
         "total": 143.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -8618,7 +8678,7 @@
       "retrospective_close": {
         "home_spread": -9.5,
         "total": 142.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -8704,7 +8764,7 @@
       "retrospective_close": {
         "home_spread": 6.5,
         "total": 162.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -8871,7 +8931,7 @@
       "retrospective_close": {
         "home_spread": 9.5,
         "total": 143.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -8957,7 +9017,7 @@
       "retrospective_close": {
         "home_spread": 3.5,
         "total": 132.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -9043,7 +9103,7 @@
       "retrospective_close": {
         "home_spread": -22.5,
         "total": 159.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -9129,7 +9189,7 @@
       "retrospective_close": {
         "home_spread": 1.5,
         "total": 173.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -9215,7 +9275,7 @@
       "retrospective_close": {
         "home_spread": -4.5,
         "total": 144.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -9301,7 +9361,7 @@
       "retrospective_close": {
         "home_spread": -7.5,
         "total": 159.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -9387,7 +9447,7 @@
       "retrospective_close": {
         "home_spread": -5.5,
         "total": 147.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -9473,7 +9533,7 @@
       "retrospective_close": {
         "home_spread": -7.5,
         "total": 149.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -9559,7 +9619,7 @@
       "retrospective_close": {
         "home_spread": -2.5,
         "total": 154.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -9645,7 +9705,7 @@
       "retrospective_close": {
         "home_spread": 2.5,
         "total": 156.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -9731,7 +9791,7 @@
       "retrospective_close": {
         "home_spread": -27.5,
         "total": 146.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -9817,7 +9877,7 @@
       "retrospective_close": {
         "home_spread": -12.5,
         "total": 157.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -9903,7 +9963,7 @@
       "retrospective_close": {
         "home_spread": -9.5,
         "total": 137.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -9989,7 +10049,7 @@
       "retrospective_close": {
         "home_spread": -12.5,
         "total": 143.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -10075,7 +10135,7 @@
       "retrospective_close": {
         "home_spread": -34.5,
         "total": 153.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -10161,7 +10221,7 @@
       "retrospective_close": {
         "home_spread": -1.5,
         "total": 159.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -10247,7 +10307,7 @@
       "retrospective_close": {
         "home_spread": -2.5,
         "total": 130.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -10333,7 +10393,7 @@
       "retrospective_close": {
         "home_spread": -34.5,
         "total": 142.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -10419,7 +10479,7 @@
       "retrospective_close": {
         "home_spread": -3.5,
         "total": 138.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -10505,7 +10565,7 @@
       "retrospective_close": {
         "home_spread": -1.5,
         "total": 147.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -10591,7 +10651,7 @@
       "retrospective_close": {
         "home_spread": -20.5,
         "total": 128.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -10677,7 +10737,7 @@
       "retrospective_close": {
         "home_spread": -1.5,
         "total": 148.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -10763,7 +10823,7 @@
       "retrospective_close": {
         "home_spread": -28.5,
         "total": 144.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -10849,7 +10909,7 @@
       "retrospective_close": {
         "home_spread": -9.5,
         "total": 161.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -10920,7 +10980,19 @@
         "training_games": 31259
       },
       "date": "2026-11-24",
-      "final": null
+      "final": {
+        "id": "375287",
+        "season": 2027,
+        "startDate": "2026-11-25T00:00Z",
+        "status": "final",
+        "homePoints": 95,
+        "awayPoints": 56,
+        "homeTeamId": "165",
+        "awayTeamId": "617",
+        "finalScoreSource": "ESPN",
+        "espnId": "401919829"
+      },
+      "retrospective_close": {}
     },
     {
       "id": "375288",
@@ -11004,7 +11076,7 @@
       "retrospective_close": {
         "home_spread": -16.5,
         "total": 154.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -11090,7 +11162,7 @@
       "retrospective_close": {
         "home_spread": -1.5,
         "total": 156.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -11176,7 +11248,7 @@
       "retrospective_close": {
         "home_spread": -17.5,
         "total": 145.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -11262,7 +11334,7 @@
       "retrospective_close": {
         "home_spread": -4.5,
         "total": 159.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -11348,7 +11420,7 @@
       "retrospective_close": {
         "home_spread": -5.5,
         "total": 134.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -11419,7 +11491,19 @@
         "training_games": 31259
       },
       "date": "2026-11-24",
-      "final": null
+      "final": {
+        "id": "378109",
+        "season": 2027,
+        "startDate": "2026-11-25T00:00Z",
+        "status": "final",
+        "homePoints": 123,
+        "awayPoints": 46,
+        "homeTeamId": "233",
+        "awayTeamId": "586",
+        "finalScoreSource": "ESPN",
+        "espnId": "401928348"
+      },
+      "retrospective_close": {}
     },
     {
       "id": "378110",
@@ -11503,7 +11587,7 @@
       "retrospective_close": {
         "home_spread": -8.5,
         "total": 129.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -11589,7 +11673,7 @@
       "retrospective_close": {
         "home_spread": -3.5,
         "total": 149.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -11675,7 +11759,7 @@
       "retrospective_close": {
         "home_spread": -16.5,
         "total": 145.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -11761,7 +11845,7 @@
       "retrospective_close": {
         "home_spread": 10.5,
         "total": 140.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -11847,7 +11931,7 @@
       "retrospective_close": {
         "home_spread": -13.5,
         "total": 163.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -11933,7 +12017,7 @@
       "retrospective_close": {
         "home_spread": 1.5,
         "total": 148.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -12100,7 +12184,7 @@
       "retrospective_close": {
         "home_spread": 3.5,
         "total": 155.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -12186,7 +12270,7 @@
       "retrospective_close": {
         "home_spread": -20.5,
         "total": 152.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -12272,7 +12356,7 @@
       "retrospective_close": {
         "home_spread": -2.5,
         "total": 153.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -12358,7 +12442,7 @@
       "retrospective_close": {
         "home_spread": -3.5,
         "total": 142.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -12444,7 +12528,7 @@
       "retrospective_close": {
         "home_spread": -1.5,
         "total": 145.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -12530,7 +12614,7 @@
       "retrospective_close": {
         "home_spread": -24.5,
         "total": 158.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -12616,7 +12700,7 @@
       "retrospective_close": {
         "home_spread": -11.5,
         "total": 154.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -12702,7 +12786,7 @@
       "retrospective_close": {
         "home_spread": -6.5,
         "total": 142.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -12788,7 +12872,7 @@
       "retrospective_close": {
         "home_spread": -17.5,
         "total": 142.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -12955,7 +13039,7 @@
       "retrospective_close": {
         "home_spread": -5.5,
         "total": 150.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -13041,7 +13125,7 @@
       "retrospective_close": {
         "home_spread": 1.5,
         "total": 149.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -13208,7 +13292,7 @@
       "retrospective_close": {
         "home_spread": -30.5,
         "total": 159.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -13294,7 +13378,7 @@
       "retrospective_close": {
         "home_spread": -18.5,
         "total": 145.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -13380,7 +13464,7 @@
       "retrospective_close": {
         "home_spread": 1.5,
         "total": 163.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -13466,7 +13550,7 @@
       "retrospective_close": {
         "home_spread": -1.5,
         "total": 174.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -13552,7 +13636,7 @@
       "retrospective_close": {
         "home_spread": 10.5,
         "total": 157.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -13638,7 +13722,7 @@
       "retrospective_close": {
         "home_spread": 4.5,
         "total": 140.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     },
@@ -14552,7 +14636,7 @@
       "retrospective_close": {
         "home_spread": 14.5,
         "total": 157.5,
-        "provider": "DraftKings",
+        "provider": "Draft Kings",
         "source": "ESPN closing quote retrieved after final"
       }
     }
