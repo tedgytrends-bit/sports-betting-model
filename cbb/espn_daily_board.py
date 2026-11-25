@@ -66,8 +66,35 @@ def main():
         raise ValueError("No matchups on the requested Central date")
     target = root / "research" / f"{day}-espn-board.json"
     target.parent.mkdir(exist_ok=True)
-    target.write_text(json.dumps(dict(espn_capture_utc=now.isoformat(), forecast_capture_utc=archive["capture_utc"],
-                           forecast_snapshot=archive["snapshot_path"], rows=rows),indent=2,allow_nan=False)+"\n")
+    payload = json.dumps(dict(espn_capture_utc=now.isoformat(), forecast_capture_utc=archive["capture_utc"],
+                           forecast_snapshot=archive["snapshot_path"], rows=rows),indent=2,allow_nan=False)+"\n"
+    snapshot = target.parent / "espn-boards" / (now.strftime("%Y%m%dT%H%M%S%fZ")+".json")
+    snapshot.parent.mkdir(exist_ok=True)
+    with snapshot.open("x") as handle:
+        handle.write(payload)
+    target.write_text(payload)
+    lines = ["# Tedgy Trends CBB daily board", "",
+             f"ESPN markets observed {now.isoformat()}. Model scores from {archive['capture_utc']}.",
+             "", "Player + rotation v4. All times Central. A dash means the input was unavailable.",
+             "", "| Tip | Away at home | Projected score | ATS lean | Total lean |",
+             "|---|---|---|---|---|"]
+    for r in sorted(rows,key=lambda x:x["tip"]):
+        f = r["forecasts"].get("player_rot_v4",{})
+        score = ats = totals = "—"
+        if f:
+            score = f'{f["projected_away_points"]:.1f}–{f["projected_home_points"]:.1f}'
+            edge = f["ats_edge_home"]
+            if edge is not None:
+                ats = ("Even" if edge == 0 else
+                       f'{r["home"]} {r["home_spread"]:+g}' if edge>0 else
+                       f'{r["away"]} {-r["home_spread"]:+g}')
+            edge = f["total_edge_over"]
+            if edge is not None:
+                totals = "Even" if edge==0 else f'{"Over" if edge>0 else "Under"} {r["total"]:g}'
+        tip = utc_date(r["tip"]).astimezone(ZONE).strftime("%I:%M %p")
+        lines.append(f'| {tip} | {r["away"]} at {r["home"]} | {score} | {ats} | {totals} |')
+    lines.extend(["",f"[All five models and coverage]({target.name})"])
+    target.with_suffix(".md").write_text("\n".join(lines)+"\n")
 
 
 if __name__ == "__main__":
