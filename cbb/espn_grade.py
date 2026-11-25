@@ -97,18 +97,23 @@ def main():
     session = requests.Session()
     retries = Retry(total=4, backoff_factor=1, status_forcelist=(429, 500, 502, 503, 504))
     session.mount("https://", HTTPAdapter(max_retries=retries))
+    official_ids = {}
     for item in tree["tree"]:
         path = item["path"]
         if not path.startswith(root + "/frozen/") or not path.endswith(".json"):
             continue
         ident = path.rsplit("/", 1)[-1][:-5]
-        if ident in known:
+        if ident in known and not args.checkout:
             continue
         frozen = store.read_json(path)
         g = frozen["game"]
         tip = utc_date(g["tip_utc"])
         if not cutoff <= tip < now:
             continue
+        if ident in known and tip.date() < datetime(2026, 11, 23).date():
+            continue
+        if g.get("espn_id"):
+            official_ids[str(g["espn_id"])] = ident
         day = tip.astimezone(ZoneInfo("America/New_York")).strftime("%Y%m%d")
         if day not in dates:
             dates[day] = fetch_finals_day(session,day)
@@ -116,7 +121,9 @@ def main():
                 raise RuntimeError("Incomplete ESPN scoreboard")
         final = match(g, dates[day])
         if final:
-            rows.append(final)
+            official_ids[final["sourceEventId"]] = ident
+            if ident not in known:
+                rows.append(final)
             print("MATCH", ident, g["away"], g["home"], final["awayPoints"], final["homePoints"], final["sourceEventId"])
         else:
             unmatched.append(ident)
@@ -133,10 +140,11 @@ def main():
     pending = {str(g["id"]):g for g in rows}
     for recovered in recovery.get("rows", []):
         final = recovered.get("final")
+        if final and final.get("espnId"):
+            official_ids[str(final["espnId"])] = str(final["id"])
         if final and str(final["id"]) not in known:
             pending.setdefault(str(final["id"]), final)
     if args.publish:
-        execute(store, list(pending.values()), 2027)
         # Keep verified finals even when the outage left no forecast to grade.
         first_day = max(cutoff.date(), datetime(2026, 11, 22).date())
         day = first_day
@@ -162,9 +170,19 @@ def main():
                     result[side+"_points"] = int(competitor["score"])
                 if result["home_points"] == result["away_points"] or event["id"] in finals:
                     raise ValueError("Invalid ESPN final or duplicate event")
+                if result["central_date"] >= "2026-11-23" and result["source"] == "ESPN":
+                    ident = official_ids.get(str(event["id"]), "espn-"+str(event["id"]))
+                    result["model_game_id"] = ident
+                    if ident not in known and ident not in pending:
+                        # Only use synthetic event IDs to inventory games with no freeze.
+                        # Known freezes require the independent two-team identity check above.
+                        if ident.startswith("espn-") and store.read_json(f"{root}/frozen/{ident}.json") is None:
+                            pending[ident] = dict(id=ident,status="final",season=2027,startDate=competition["date"],
+                                                  homePoints=result["home_points"],awayPoints=result["away_points"])
                 finals[event["id"]] = result
             store.put_json(f"{root}/finals/{key}.json",list(finals.values()),immutable=False)
             day += timedelta(days=1)
+        execute(store, list(pending.values()), 2027)
 
 if __name__ == "__main__":
     main()
