@@ -163,6 +163,7 @@ def render_markdown(report: dict) -> str:
         "- Untracked completed games and invalid records are disclosed, never credited as wins or losses.",
         "- This is a short-sample research record. Results do not establish positive expected value.",
         "",
+        "[November 22–24 reconstructed research records](research/2026-11-22-to-24.json) · "
         "[Upcoming projections, projected scores and ATS/totals leans](PROJECTIONS.md) · "
         "[Machine-readable review](performance_report.json) · "
         "[Full threshold scorecard](season_results.json) · "
