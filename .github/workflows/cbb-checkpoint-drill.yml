@@ -1,0 +1,13 @@
+name: CBB historical cache recovery drill
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/cbb-checkpoint-drill.yml']
+permissions:
+  contents: write
+jobs:
+  verify:
+    uses: ./.github/workflows/cbb-espn-fit.yml
+    with:
+      checkpoint_drill: true
