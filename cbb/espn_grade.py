@@ -11,6 +11,7 @@ from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 from cbb.prospective_grade import execute, iso_weeks_between, FIRST_CAPTURE_UTC
 from cbb.prospective import utc_date
+from cbb.finals_source import fetch_finals_day
 from cbb.prospective_publish import GitHubStore
 
 URL = "https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard"
@@ -52,7 +53,8 @@ def match(game, events):
                     "id": game["id"], "season": game["season"], "startDate": c["date"],
                     "status": "final", "homePoints": hp, "awayPoints": ap,
                     "homeTeamId": game["home_team_id"], "awayTeamId": game["away_team_id"],
-                    "finalScoreSource": "ESPN", "espnId": str(event["id"])}))
+                    "finalScoreSource": event.get("source","ESPN"), "sourceEventId": str(event["id"]),
+                    **({"espnId": str(event["id"])} if "source" not in event else {})}))
             except (KeyError, TypeError, ValueError):
                 continue
     unique = {i: g for i, g in candidates}
@@ -109,15 +111,13 @@ def main():
             continue
         day = tip.astimezone(ZoneInfo("America/New_York")).strftime("%Y%m%d")
         if day not in dates:
-            response = session.get(URL, params={"dates": day, "groups": 50, "limit": 1000}, timeout=45)
-            response.raise_for_status()
-            dates[day] = response.json()["events"]
+            dates[day] = fetch_finals_day(session,day)
             if len(dates[day]) >= 1000:
                 raise RuntimeError("Incomplete ESPN scoreboard")
         final = match(g, dates[day])
         if final:
             rows.append(final)
-            print("MATCH", ident, g["away"], g["home"], final["awayPoints"], final["homePoints"], final["espnId"])
+            print("MATCH", ident, g["away"], g["home"], final["awayPoints"], final["homePoints"], final["sourceEventId"])
         else:
             unmatched.append(ident)
             print("UNMATCHED", ident, g["away"], g["home"], g["tip_utc"])
@@ -143,9 +143,7 @@ def main():
         while day <= now.astimezone(ZoneInfo("America/New_York")).date():
             key = day.strftime("%Y%m%d")
             if key not in dates:
-                response = session.get(URL, params={"dates":key,"groups":50,"limit":1000},timeout=45)
-                response.raise_for_status()
-                dates[key] = response.json()["events"]
+                dates[key] = fetch_finals_day(session,key)
             if len(dates[key]) >= 1000:
                 raise ValueError("ESPN finals inventory truncated")
             finals = {}
@@ -157,7 +155,7 @@ def main():
                 sides = {s["homeAway"]:s for s in competition["competitors"]}
                 if set(sides)!={"away","home"}:
                     raise ValueError("Malformed final")
-                result = {"espn_id":event["id"],"tip_utc":competition["date"],
+                result = {"source":event.get("source","ESPN"),"event_id":event["id"],"tip_utc":competition["date"],
                           "central_date":utc_date(competition["date"]).astimezone(ZoneInfo("America/Chicago")).date().isoformat()}
                 for side, competitor in sides.items():
                     result[side] = competitor["team"]["displayName"]
@@ -165,7 +163,7 @@ def main():
                 if result["home_points"] == result["away_points"] or event["id"] in finals:
                     raise ValueError("Invalid ESPN final or duplicate event")
                 finals[event["id"]] = result
-            store.put_json(f"{root}/finals/espn-{key}.json",list(finals.values()),immutable=False)
+            store.put_json(f"{root}/finals/{key}.json",list(finals.values()),immutable=False)
             day += timedelta(days=1)
 
 if __name__ == "__main__":
