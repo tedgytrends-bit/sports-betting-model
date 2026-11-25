@@ -1,5 +1,5 @@
 {
-  "espn_capture_utc": "2026-11-25T18:51:23.061300+00:00",
+  "espn_capture_utc": "2026-11-25T18:52:16.057247+00:00",
   "forecast_capture_utc": "2026-11-22T13:57:59.379135Z",
   "forecast_snapshot": "cbb/prospective/2027/snapshots/20261122T135759379135_45030081991.json",
   "rows": [
@@ -9,17 +9,6 @@
       "away": "Virginia Cavaliers",
       "home": "Marquette Golden Eagles",
       "status": "STATUS_DELAYED",
-      "home_spread": null,
-      "total": null,
-      "forecasts": {},
-      "provider": null
-    },
-    {
-      "id": "401920196",
-      "tip": "2026-11-25T17:00Z",
-      "away": "Penn State Abington Nittany Lions",
-      "home": "Saint Joseph's Hawks",
-      "status": "STATUS_FINAL",
       "home_spread": null,
       "total": null,
       "forecasts": {},
@@ -93,7 +82,7 @@
       "tip": "2026-11-25T18:00Z",
       "away": "Lindenwood Lions",
       "home": "Stony Brook Seawolves",
-      "status": "STATUS_IN_PROGRESS",
+      "status": "STATUS_HALFTIME",
       "home_spread": null,
       "total": null,
       "forecasts": {
@@ -156,7 +145,7 @@
       "tip": "2026-11-25T18:00Z",
       "away": "American International Yellow Jackets",
       "home": "Rhode Island Rams",
-      "status": "STATUS_IN_PROGRESS",
+      "status": "STATUS_HALFTIME",
       "home_spread": null,
       "total": null,
       "forecasts": {
@@ -513,6 +502,17 @@
           "total_edge_over": null
         }
       },
+      "provider": null
+    },
+    {
+      "id": "401920196",
+      "tip": "2026-11-25T17:00Z",
+      "away": "Penn State Abington Nittany Lions",
+      "home": "Saint Joseph's Hawks",
+      "status": "STATUS_FINAL",
+      "home_spread": null,
+      "total": null,
+      "forecasts": {},
       "provider": null
     },
     {

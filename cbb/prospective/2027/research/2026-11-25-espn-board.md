@@ -1,6 +1,6 @@
 # Tedgy Trends CBB daily board
 
-ESPN markets observed 2026-11-25T18:51:23.061300+00:00. Model scores from 2026-11-22T13:57:59.379135Z.
+ESPN markets observed 2026-11-25T18:52:16.057247+00:00. Model scores from 2026-11-22T13:57:59.379135Z.
 
 Player + rotation v4. All times Central. A dash means the input was unavailable.
 
