@@ -1,0 +1,3788 @@
+{
+  "classification": "Archived pretip forecasts matched to independently logged pretip odds; recovery audit, not yet merged into official journal",
+  "forecast_capture": "2026-11-22T13:57:59.379135Z",
+  "forecast_run": 45440117696,
+  "odds_run": 45453709381,
+  "games": [
+    {
+      "id": "378102",
+      "espn_id": "401928358",
+      "home": "Florida International",
+      "away": "Southern Utah",
+      "tip_utc": "2026-11-24T18:00Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": -8.5,
+        "total": 167.5,
+        "as_of_utc": "2026-11-24T17:55:11.7749238Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 3.4080000000000004,
+          "ats_lean": "away",
+          "projected_away_points": 76.67,
+          "projected_home_points": 81.76,
+          "projected_margin_home": 5.092,
+          "projected_total": 158.427,
+          "total_edge": 9.073000000000008,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 2.564,
+          "ats_lean": "home",
+          "projected_away_points": 76.51,
+          "projected_home_points": 87.57,
+          "projected_margin_home": 11.064,
+          "projected_total": 164.082,
+          "total_edge": 3.4180000000000064,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 7.202,
+          "ats_lean": "home",
+          "projected_away_points": 74.47,
+          "projected_home_points": 90.17,
+          "projected_margin_home": 15.702,
+          "projected_total": 164.632,
+          "total_edge": 2.867999999999995,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 0.7620000000000005,
+          "ats_lean": "home",
+          "projected_away_points": 76.14,
+          "projected_home_points": 85.4,
+          "projected_margin_home": 9.262,
+          "projected_total": 161.536,
+          "total_edge": 5.963999999999999,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 5.178000000000001,
+          "ats_lean": "home",
+          "projected_away_points": 74.36,
+          "projected_home_points": 88.03,
+          "projected_margin_home": 13.678,
+          "projected_total": 162.392,
+          "total_edge": 5.108000000000004,
+          "total_lean": "under",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "372926",
+      "espn_id": "401906853",
+      "home": "Maryland",
+      "away": "Tennessee",
+      "tip_utc": "2026-11-24T20:00Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": 2.5,
+        "total": 147.5,
+        "as_of_utc": "2026-11-24T17:55:11.7960991Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 6.459,
+          "ats_lean": "home",
+          "projected_away_points": 69.51,
+          "projected_home_points": 73.47,
+          "projected_margin_home": 3.959,
+          "projected_total": 142.975,
+          "total_edge": 4.525000000000006,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 1.9889999999999999,
+          "ats_lean": "away",
+          "projected_away_points": 78.13,
+          "projected_home_points": 73.64,
+          "projected_margin_home": -4.489,
+          "projected_total": 151.775,
+          "total_edge": 4.275000000000006,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 4.357,
+          "ats_lean": "away",
+          "projected_away_points": 78.42,
+          "projected_home_points": 71.56,
+          "projected_margin_home": -6.857,
+          "projected_total": 149.978,
+          "total_edge": 2.4780000000000086,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 2.258,
+          "ats_lean": "away",
+          "projected_away_points": 76.86,
+          "projected_home_points": 72.11,
+          "projected_margin_home": -4.758,
+          "projected_total": 148.97,
+          "total_edge": 1.4699999999999989,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 4.855,
+          "ats_lean": "away",
+          "projected_away_points": 77.38,
+          "projected_home_points": 70.03,
+          "projected_margin_home": -7.355,
+          "projected_total": 147.405,
+          "total_edge": 0.09499999999999886,
+          "total_lean": "under",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "375292",
+      "espn_id": "401920546",
+      "home": "Detroit Mercy",
+      "away": "North Dakota",
+      "tip_utc": "2026-11-24T20:00Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": 4.5,
+        "total": 150.5,
+        "as_of_utc": "2026-11-24T17:55:11.8051476Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 2.0490000000000004,
+          "ats_lean": "away",
+          "projected_away_points": 78.53,
+          "projected_home_points": 71.98,
+          "projected_margin_home": -6.549,
+          "projected_total": 150.511,
+          "total_edge": 0.01099999999999568,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 0.3860000000000001,
+          "ats_lean": "away",
+          "projected_away_points": 78.76,
+          "projected_home_points": 73.88,
+          "projected_margin_home": -4.886,
+          "projected_total": 152.638,
+          "total_edge": 2.1380000000000052,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 0.3979999999999997,
+          "ats_lean": "home",
+          "projected_away_points": 78.65,
+          "projected_home_points": 74.54,
+          "projected_margin_home": -4.102,
+          "projected_total": 153.188,
+          "total_edge": 2.687999999999988,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 1.8920000000000003,
+          "ats_lean": "away",
+          "projected_away_points": 78.25,
+          "projected_home_points": 71.85,
+          "projected_margin_home": -6.392,
+          "projected_total": 150.098,
+          "total_edge": 0.4019999999999868,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 1.2400000000000002,
+          "ats_lean": "away",
+          "projected_away_points": 78.54,
+          "projected_home_points": 72.8,
+          "projected_margin_home": -5.74,
+          "projected_total": 151.34,
+          "total_edge": 0.8400000000000034,
+          "total_lean": "over",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "378108",
+      "espn_id": "401929285",
+      "home": "Yale",
+      "away": "App State",
+      "tip_utc": "2026-11-24T20:00Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": -1.5,
+        "total": 136.5,
+        "as_of_utc": "2026-11-24T17:55:11.8020975Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 0.5819999999999999,
+          "ats_lean": "home",
+          "projected_away_points": 69.61,
+          "projected_home_points": 71.7,
+          "projected_margin_home": 2.082,
+          "projected_total": 141.309,
+          "total_edge": 4.8089999999999975,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 1.3969999999999998,
+          "ats_lean": "home",
+          "projected_away_points": 69.55,
+          "projected_home_points": 72.45,
+          "projected_margin_home": 2.897,
+          "projected_total": 142.004,
+          "total_edge": 5.503999999999991,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 0.6110000000000002,
+          "ats_lean": "home",
+          "projected_away_points": 70.06,
+          "projected_home_points": 72.17,
+          "projected_margin_home": 2.111,
+          "projected_total": 142.235,
+          "total_edge": 5.735000000000014,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 2.339,
+          "ats_lean": "away",
+          "projected_away_points": 69.58,
+          "projected_home_points": 68.74,
+          "projected_margin_home": -0.839,
+          "projected_total": 138.323,
+          "total_edge": 1.8230000000000075,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 3.512,
+          "ats_lean": "away",
+          "projected_away_points": 70.21,
+          "projected_home_points": 68.19,
+          "projected_margin_home": -2.012,
+          "projected_total": 138.399,
+          "total_edge": 1.899000000000001,
+          "total_lean": "over",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "378106",
+      "espn_id": "401929035",
+      "home": "New Haven",
+      "away": "Lindenwood",
+      "tip_utc": "2026-11-24T21:00Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": 2.5,
+        "total": 133.5,
+        "as_of_utc": "2026-11-24T17:55:11.8110107Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 5.7010000000000005,
+          "ats_lean": "home",
+          "projected_away_points": 67.89,
+          "projected_home_points": 71.09,
+          "projected_margin_home": 3.201,
+          "projected_total": 138.973,
+          "total_edge": 5.473000000000013,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 4.649,
+          "ats_lean": "home",
+          "projected_away_points": 68.17,
+          "projected_home_points": 70.32,
+          "projected_margin_home": 2.149,
+          "projected_total": 138.487,
+          "total_edge": 4.986999999999995,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 5.464,
+          "ats_lean": "home",
+          "projected_away_points": 67.1,
+          "projected_home_points": 70.07,
+          "projected_margin_home": 2.964,
+          "projected_total": 137.172,
+          "total_edge": 3.671999999999997,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 1.7149999999999999,
+          "ats_lean": "home",
+          "projected_away_points": 68.06,
+          "projected_home_points": 67.28,
+          "projected_margin_home": -0.785,
+          "projected_total": 135.336,
+          "total_edge": 1.8360000000000127,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 2.429,
+          "ats_lean": "home",
+          "projected_away_points": 67.47,
+          "projected_home_points": 67.4,
+          "projected_margin_home": -0.071,
+          "projected_total": 134.867,
+          "total_edge": 1.3669999999999902,
+          "total_lean": "over",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "375294",
+      "espn_id": "401921666",
+      "home": "Illinois State",
+      "away": "Tulsa",
+      "tip_utc": "2026-11-24T21:30Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": 1.5,
+        "total": 143.5,
+        "as_of_utc": "2026-11-24T17:55:11.8395874Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 10.576,
+          "ats_lean": "home",
+          "projected_away_points": 69.73,
+          "projected_home_points": 78.81,
+          "projected_margin_home": 9.076,
+          "projected_total": 148.542,
+          "total_edge": 5.042000000000002,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 1.038,
+          "ats_lean": "home",
+          "projected_away_points": 74.95,
+          "projected_home_points": 74.48,
+          "projected_margin_home": -0.462,
+          "projected_total": 149.428,
+          "total_edge": 5.927999999999997,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 2.202,
+          "ats_lean": "away",
+          "projected_away_points": 76.66,
+          "projected_home_points": 72.96,
+          "projected_margin_home": -3.702,
+          "projected_total": 149.619,
+          "total_edge": 6.119,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 0.03699999999999992,
+          "ats_lean": "home",
+          "projected_away_points": 74.9,
+          "projected_home_points": 73.44,
+          "projected_margin_home": -1.463,
+          "projected_total": 148.333,
+          "total_edge": 4.832999999999998,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 3.3339999999999996,
+          "ats_lean": "away",
+          "projected_away_points": 76.73,
+          "projected_home_points": 71.89,
+          "projected_margin_home": -4.834,
+          "projected_total": 148.616,
+          "total_edge": 5.116000000000014,
+          "total_lean": "over",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "372927",
+      "espn_id": "401909775",
+      "home": "Iowa State",
+      "away": "San Diego State",
+      "tip_utc": "2026-11-24T22:30Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": -9.5,
+        "total": 142.5,
+        "as_of_utc": "2026-11-24T17:55:11.8505600Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 7.46,
+          "ats_lean": "away",
+          "projected_away_points": 69.83,
+          "projected_home_points": 71.87,
+          "projected_margin_home": 2.04,
+          "projected_total": 141.7,
+          "total_edge": 0.8000000000000114,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 4.868,
+          "ats_lean": "home",
+          "projected_away_points": 66.52,
+          "projected_home_points": 80.89,
+          "projected_margin_home": 14.368,
+          "projected_total": 147.41,
+          "total_edge": 4.909999999999997,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 3.2110000000000003,
+          "ats_lean": "home",
+          "projected_away_points": 66.45,
+          "projected_home_points": 79.16,
+          "projected_margin_home": 12.711,
+          "projected_total": 145.613,
+          "total_edge": 3.1129999999999995,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 1.4529999999999994,
+          "ats_lean": "home",
+          "projected_away_points": 66.38,
+          "projected_home_points": 77.33,
+          "projected_margin_home": 10.953,
+          "projected_total": 143.712,
+          "total_edge": 1.211999999999989,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 0.7799999999999994,
+          "ats_lean": "away",
+          "projected_away_points": 66.38,
+          "projected_home_points": 75.1,
+          "projected_margin_home": 8.72,
+          "projected_total": 141.486,
+          "total_edge": 1.01400000000001,
+          "total_lean": "under",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "375298",
+      "espn_id": "401921707",
+      "home": "Kent State",
+      "away": "Wyoming",
+      "tip_utc": "2026-11-24T22:30Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": 8.5,
+        "total": 143.5,
+        "as_of_utc": "2026-11-24T17:55:11.8468497Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 8.759,
+          "ats_lean": "home",
+          "projected_away_points": 71.01,
+          "projected_home_points": 71.27,
+          "projected_margin_home": 0.259,
+          "projected_total": 142.288,
+          "total_edge": 1.211999999999989,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 3.9080000000000004,
+          "ats_lean": "home",
+          "projected_away_points": 73.74,
+          "projected_home_points": 69.15,
+          "projected_margin_home": -4.592,
+          "projected_total": 142.882,
+          "total_edge": 0.617999999999995,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 2.4640000000000004,
+          "ats_lean": "home",
+          "projected_away_points": 73.82,
+          "projected_home_points": 67.78,
+          "projected_margin_home": -6.036,
+          "projected_total": 141.605,
+          "total_edge": 1.8950000000000102,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 1.787,
+          "ats_lean": "home",
+          "projected_away_points": 73.74,
+          "projected_home_points": 67.03,
+          "projected_margin_home": -6.713,
+          "projected_total": 140.775,
+          "total_edge": 2.7249999999999943,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 0.15499999999999936,
+          "ats_lean": "home",
+          "projected_away_points": 74.07,
+          "projected_home_points": 65.72,
+          "projected_margin_home": -8.345,
+          "projected_total": 139.788,
+          "total_edge": 3.711999999999989,
+          "total_lean": "under",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "375269",
+      "espn_id": "401924877",
+      "home": "Rutgers",
+      "away": "Sacred Heart",
+      "tip_utc": "2026-11-24T23:00Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": -22.5,
+        "total": 159.5,
+        "as_of_utc": "2026-11-24T17:55:11.8571722Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 3.9540000000000006,
+          "ats_lean": "away",
+          "projected_away_points": 67.82,
+          "projected_home_points": 86.37,
+          "projected_margin_home": 18.546,
+          "projected_total": 154.19,
+          "total_edge": 5.310000000000002,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 2.0130000000000017,
+          "ats_lean": "home",
+          "projected_away_points": 65.99,
+          "projected_home_points": 90.5,
+          "projected_margin_home": 24.513,
+          "projected_total": 156.484,
+          "total_edge": 3.015999999999991,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 3.1670000000000016,
+          "ats_lean": "home",
+          "projected_away_points": 66.28,
+          "projected_home_points": 91.95,
+          "projected_margin_home": 25.667,
+          "projected_total": 158.235,
+          "total_edge": 1.2649999999999864,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 2.1720000000000006,
+          "ats_lean": "away",
+          "projected_away_points": 64.86,
+          "projected_home_points": 85.19,
+          "projected_margin_home": 20.328,
+          "projected_total": 150.048,
+          "total_edge": 9.451999999999998,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 1.6509999999999998,
+          "ats_lean": "away",
+          "projected_away_points": 65.41,
+          "projected_home_points": 86.26,
+          "projected_margin_home": 20.849,
+          "projected_total": 151.663,
+          "total_edge": 7.836999999999989,
+          "total_lean": "under",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "375271",
+      "espn_id": "401922231",
+      "home": "Wofford",
+      "away": "Queens University",
+      "tip_utc": "2026-11-24T23:00Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": -1.5,
+        "total": 172.5,
+        "as_of_utc": "2026-11-24T17:55:11.8669189Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 15.575,
+          "ats_lean": "home",
+          "projected_away_points": 76.35,
+          "projected_home_points": 93.43,
+          "projected_margin_home": 17.075,
+          "projected_total": 169.776,
+          "total_edge": 2.7239999999999895,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 5.239,
+          "ats_lean": "home",
+          "projected_away_points": 82.56,
+          "projected_home_points": 89.3,
+          "projected_margin_home": 6.739,
+          "projected_total": 171.865,
+          "total_edge": 0.6349999999999909,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 2.5389999999999997,
+          "ats_lean": "home",
+          "projected_away_points": 83.76,
+          "projected_home_points": 87.8,
+          "projected_margin_home": 4.039,
+          "projected_total": 171.567,
+          "total_edge": 0.9329999999999927,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 2.309,
+          "ats_lean": "home",
+          "projected_away_points": 83.45,
+          "projected_home_points": 87.26,
+          "projected_margin_home": 3.809,
+          "projected_total": 170.716,
+          "total_edge": 1.7839999999999918,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 0.11699999999999999,
+          "ats_lean": "home",
+          "projected_away_points": 84.5,
+          "projected_home_points": 86.12,
+          "projected_margin_home": 1.617,
+          "projected_total": 170.613,
+          "total_edge": 1.8870000000000005,
+          "total_lean": "under",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "375300",
+      "espn_id": "401923395",
+      "home": "VMI",
+      "away": "Southern Indiana",
+      "tip_utc": "2026-11-24T23:00Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": -5.5,
+        "total": 142.5,
+        "as_of_utc": "2026-11-24T17:55:11.8607344Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 8.143,
+          "ats_lean": "home",
+          "projected_away_points": 67.77,
+          "projected_home_points": 81.41,
+          "projected_margin_home": 13.643,
+          "projected_total": 149.185,
+          "total_edge": 6.685000000000002,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 3.5269999999999992,
+          "ats_lean": "home",
+          "projected_away_points": 70.73,
+          "projected_home_points": 79.76,
+          "projected_margin_home": 9.027,
+          "projected_total": 150.495,
+          "total_edge": 7.9950000000000045,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 1.83,
+          "ats_lean": "away",
+          "projected_away_points": 72.79,
+          "projected_home_points": 76.46,
+          "projected_margin_home": 3.67,
+          "projected_total": 149.252,
+          "total_edge": 6.7520000000000095,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 1.2910000000000004,
+          "ats_lean": "home",
+          "projected_away_points": 70.41,
+          "projected_home_points": 77.2,
+          "projected_margin_home": 6.791,
+          "projected_total": 147.61,
+          "total_edge": 5.110000000000014,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 5.003,
+          "ats_lean": "away",
+          "projected_away_points": 72.79,
+          "projected_home_points": 73.29,
+          "projected_margin_home": 0.497,
+          "projected_total": 146.084,
+          "total_edge": 3.584000000000003,
+          "total_lean": "over",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "375301",
+      "espn_id": "401923262",
+      "home": "Florida Atlantic",
+      "away": "Mercer",
+      "tip_utc": "2026-11-24T23:00Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": -7.5,
+        "total": 159.5,
+        "as_of_utc": "2026-11-24T17:55:11.8639169Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 1.3079999999999998,
+          "ats_lean": "home",
+          "projected_away_points": 72.4,
+          "projected_home_points": 81.2,
+          "projected_margin_home": 8.808,
+          "projected_total": 153.6,
+          "total_edge": 5.900000000000006,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 6.881,
+          "ats_lean": "home",
+          "projected_away_points": 71.83,
+          "projected_home_points": 86.21,
+          "projected_margin_home": 14.381,
+          "projected_total": 158.037,
+          "total_edge": 1.4629999999999939,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 6.833,
+          "ats_lean": "home",
+          "projected_away_points": 71.87,
+          "projected_home_points": 86.21,
+          "projected_margin_home": 14.333,
+          "projected_total": 158.081,
+          "total_edge": 1.4190000000000111,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 5.345000000000001,
+          "ats_lean": "home",
+          "projected_away_points": 72.11,
+          "projected_home_points": 84.95,
+          "projected_margin_home": 12.845,
+          "projected_total": 157.064,
+          "total_edge": 2.436000000000007,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 4.895,
+          "ats_lean": "home",
+          "projected_away_points": 72.39,
+          "projected_home_points": 84.78,
+          "projected_margin_home": 12.395,
+          "projected_total": 157.168,
+          "total_edge": 2.3319999999999936,
+          "total_lean": "under",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "375302",
+      "espn_id": "401920949",
+      "home": "Kennesaw State",
+      "away": "Eastern Michigan",
+      "tip_utc": "2026-11-24T23:00Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": -4.5,
+        "total": 147.5,
+        "as_of_utc": "2026-11-24T17:55:11.8699652Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 2.5389999999999997,
+          "ats_lean": "home",
+          "projected_away_points": 73.26,
+          "projected_home_points": 80.3,
+          "projected_margin_home": 7.039,
+          "projected_total": 153.557,
+          "total_edge": 6.056999999999988,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 2.9480000000000004,
+          "ats_lean": "home",
+          "projected_away_points": 74.26,
+          "projected_home_points": 81.71,
+          "projected_margin_home": 7.448,
+          "projected_total": 155.971,
+          "total_edge": 8.471000000000004,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 1.6159999999999997,
+          "ats_lean": "home",
+          "projected_away_points": 74.44,
+          "projected_home_points": 80.56,
+          "projected_margin_home": 6.116,
+          "projected_total": 155.006,
+          "total_edge": 7.506,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 0.8410000000000002,
+          "ats_lean": "home",
+          "projected_away_points": 74.06,
+          "projected_home_points": 79.4,
+          "projected_margin_home": 5.341,
+          "projected_total": 153.46,
+          "total_edge": 5.960000000000008,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 1.072,
+          "ats_lean": "away",
+          "projected_away_points": 74.29,
+          "projected_home_points": 77.72,
+          "projected_margin_home": 3.428,
+          "projected_total": 152.018,
+          "total_edge": 4.518000000000001,
+          "total_lean": "over",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "375276",
+      "espn_id": "401921142",
+      "home": "Furman",
+      "away": "Elon",
+      "tip_utc": "2026-11-24T23:30Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": -6.5,
+        "total": 148.5,
+        "as_of_utc": "2026-11-24T17:55:11.8790880Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 11.568000000000001,
+          "ats_lean": "home",
+          "projected_away_points": 66.1,
+          "projected_home_points": 84.17,
+          "projected_margin_home": 18.068,
+          "projected_total": 150.271,
+          "total_edge": 1.7709999999999866,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 8.531,
+          "ats_lean": "home",
+          "projected_away_points": 68.21,
+          "projected_home_points": 83.24,
+          "projected_margin_home": 15.031,
+          "projected_total": 151.453,
+          "total_edge": 2.953000000000003,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 2.051,
+          "ats_lean": "home",
+          "projected_away_points": 70.93,
+          "projected_home_points": 79.48,
+          "projected_margin_home": 8.551,
+          "projected_total": 150.418,
+          "total_edge": 1.9180000000000064,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 6.348000000000001,
+          "ats_lean": "home",
+          "projected_away_points": 68.06,
+          "projected_home_points": 80.91,
+          "projected_margin_home": 12.848,
+          "projected_total": 148.964,
+          "total_edge": 0.46399999999999864,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 0.5460000000000003,
+          "ats_lean": "away",
+          "projected_away_points": 70.97,
+          "projected_home_points": 76.92,
+          "projected_margin_home": 5.954,
+          "projected_total": 147.894,
+          "total_edge": 0.6059999999999945,
+          "total_lean": "under",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "375303",
+      "espn_id": "401925014",
+      "home": "Lamar",
+      "away": "Robert Morris",
+      "tip_utc": "2026-11-24T23:30Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": -2.5,
+        "total": 154.5,
+        "as_of_utc": "2026-11-24T17:55:11.8760413Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 16.151,
+          "ats_lean": "home",
+          "projected_away_points": 66.85,
+          "projected_home_points": 85.5,
+          "projected_margin_home": 18.651,
+          "projected_total": 152.346,
+          "total_edge": 2.1539999999999964,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 3.9219999999999997,
+          "ats_lean": "home",
+          "projected_away_points": 70.94,
+          "projected_home_points": 77.36,
+          "projected_margin_home": 6.422,
+          "projected_total": 148.296,
+          "total_edge": 6.204000000000008,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 3.758,
+          "ats_lean": "home",
+          "projected_away_points": 71.64,
+          "projected_home_points": 77.9,
+          "projected_margin_home": 6.258,
+          "projected_total": 149.546,
+          "total_edge": 4.954000000000008,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 2.082,
+          "ats_lean": "home",
+          "projected_away_points": 72.82,
+          "projected_home_points": 77.4,
+          "projected_margin_home": 4.582,
+          "projected_total": 150.22,
+          "total_edge": 4.280000000000001,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 2.4219999999999997,
+          "ats_lean": "home",
+          "projected_away_points": 73.18,
+          "projected_home_points": 78.1,
+          "projected_margin_home": 4.922,
+          "projected_total": 151.283,
+          "total_edge": 3.217000000000013,
+          "total_lean": "under",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "372914",
+      "espn_id": "401916319",
+      "home": "Ohio State",
+      "away": "Vanderbilt",
+      "tip_utc": "2026-11-25T00:00Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": 1.5,
+        "total": 156.5,
+        "as_of_utc": "2026-11-24T17:55:11.8846495Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 3.335,
+          "ats_lean": "home",
+          "projected_away_points": 74.67,
+          "projected_home_points": 76.5,
+          "projected_margin_home": 1.835,
+          "projected_total": 151.173,
+          "total_edge": 5.326999999999998,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 0.46799999999999997,
+          "ats_lean": "away",
+          "projected_away_points": 78.98,
+          "projected_home_points": 77.01,
+          "projected_margin_home": -1.968,
+          "projected_total": 155.988,
+          "total_edge": 0.5120000000000005,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 1.298,
+          "ats_lean": "away",
+          "projected_away_points": 78.92,
+          "projected_home_points": 76.12,
+          "projected_margin_home": -2.798,
+          "projected_total": 155.033,
+          "total_edge": 1.467000000000013,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 2.223,
+          "ats_lean": "away",
+          "projected_away_points": 79.5,
+          "projected_home_points": 75.78,
+          "projected_margin_home": -3.723,
+          "projected_total": 155.286,
+          "total_edge": 1.2139999999999986,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 3.0970000000000004,
+          "ats_lean": "away",
+          "projected_away_points": 79.45,
+          "projected_home_points": 74.86,
+          "projected_margin_home": -4.597,
+          "projected_total": 154.312,
+          "total_edge": 2.187999999999988,
+          "total_lean": "under",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "372915",
+      "espn_id": "401916291",
+      "home": "Indiana",
+      "away": "Jacksonville",
+      "tip_utc": "2026-11-25T00:00Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": -28.5,
+        "total": 146.5,
+        "as_of_utc": "2026-11-24T17:55:11.8876843Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 6.25,
+          "ats_lean": "away",
+          "projected_away_points": 65.07,
+          "projected_home_points": 87.32,
+          "projected_margin_home": 22.25,
+          "projected_total": 152.396,
+          "total_edge": 5.895999999999987,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 6.166,
+          "ats_lean": "away",
+          "projected_away_points": 66.54,
+          "projected_home_points": 88.88,
+          "projected_margin_home": 22.334,
+          "projected_total": 155.416,
+          "total_edge": 8.915999999999997,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 5.175000000000001,
+          "ats_lean": "away",
+          "projected_away_points": 66.09,
+          "projected_home_points": 89.41,
+          "projected_margin_home": 23.325,
+          "projected_total": 155.495,
+          "total_edge": 8.995000000000005,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 6.920999999999999,
+          "ats_lean": "away",
+          "projected_away_points": 66.44,
+          "projected_home_points": 88.02,
+          "projected_margin_home": 21.579,
+          "projected_total": 154.464,
+          "total_edge": 7.963999999999999,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 6.395,
+          "ats_lean": "away",
+          "projected_away_points": 66.24,
+          "projected_home_points": 88.35,
+          "projected_margin_home": 22.105,
+          "projected_total": 154.59,
+          "total_edge": 8.090000000000003,
+          "total_lean": "over",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "372916",
+      "espn_id": "401911379",
+      "home": "James Madison",
+      "away": "Charleston Southern",
+      "tip_utc": "2026-11-25T00:00Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": -13.5,
+        "total": 156.5,
+        "as_of_utc": "2026-11-24T17:55:11.9388206Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 3.9480000000000004,
+          "ats_lean": "home",
+          "projected_away_points": 66.52,
+          "projected_home_points": 83.97,
+          "projected_margin_home": 17.448,
+          "projected_total": 150.496,
+          "total_edge": 6.003999999999991,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 5.317,
+          "ats_lean": "home",
+          "projected_away_points": 66.58,
+          "projected_home_points": 85.39,
+          "projected_margin_home": 18.817,
+          "projected_total": 151.969,
+          "total_edge": 4.531000000000006,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 2.388,
+          "ats_lean": "home",
+          "projected_away_points": 67.54,
+          "projected_home_points": 83.43,
+          "projected_margin_home": 15.888,
+          "projected_total": 150.975,
+          "total_edge": 5.525000000000006,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 1.3550000000000004,
+          "ats_lean": "home",
+          "projected_away_points": 65.98,
+          "projected_home_points": 80.83,
+          "projected_margin_home": 14.855,
+          "projected_total": 146.806,
+          "total_edge": 9.693999999999988,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 1.7739999999999991,
+          "ats_lean": "away",
+          "projected_away_points": 67.02,
+          "projected_home_points": 78.74,
+          "projected_margin_home": 11.726,
+          "projected_total": 145.761,
+          "total_edge": 10.739000000000004,
+          "total_lean": "under",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "372918",
+      "espn_id": "401911279",
+      "home": "Lehigh",
+      "away": "Binghamton",
+      "tip_utc": "2026-11-25T00:00Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": -8.5,
+        "total": 137.5,
+        "as_of_utc": "2026-11-24T17:55:11.9418837Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 3.0679999999999996,
+          "ats_lean": "home",
+          "projected_away_points": 61.36,
+          "projected_home_points": 72.93,
+          "projected_margin_home": 11.568,
+          "projected_total": 134.285,
+          "total_edge": 3.2150000000000034,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 1.1219999999999999,
+          "ats_lean": "away",
+          "projected_away_points": 62.64,
+          "projected_home_points": 70.02,
+          "projected_margin_home": 7.378,
+          "projected_total": 132.665,
+          "total_edge": 4.835000000000008,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 0.7309999999999999,
+          "ats_lean": "home",
+          "projected_away_points": 62.21,
+          "projected_home_points": 71.45,
+          "projected_margin_home": 9.231,
+          "projected_total": 133.66,
+          "total_edge": 3.8400000000000034,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 1.242,
+          "ats_lean": "away",
+          "projected_away_points": 62.99,
+          "projected_home_points": 70.25,
+          "projected_margin_home": 7.258,
+          "projected_total": 133.242,
+          "total_edge": 4.25800000000001,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 0.09600000000000009,
+          "ats_lean": "home",
+          "projected_away_points": 62.76,
+          "projected_home_points": 71.35,
+          "projected_margin_home": 8.596,
+          "projected_total": 134.108,
+          "total_edge": 3.391999999999996,
+          "total_lean": "under",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "372919",
+      "espn_id": "401911027",
+      "home": "Bowling Green",
+      "away": "Gardner-Webb",
+      "tip_utc": "2026-11-25T00:00Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": -12.5,
+        "total": 144.5,
+        "as_of_utc": "2026-11-24T17:55:11.9449311Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 4.655000000000001,
+          "ats_lean": "home",
+          "projected_away_points": 65.58,
+          "projected_home_points": 82.74,
+          "projected_margin_home": 17.155,
+          "projected_total": 148.318,
+          "total_edge": 3.818000000000012,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 5.126000000000001,
+          "ats_lean": "home",
+          "projected_away_points": 67.13,
+          "projected_home_points": 84.75,
+          "projected_margin_home": 17.626,
+          "projected_total": 151.877,
+          "total_edge": 7.3770000000000095,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 2.699,
+          "ats_lean": "home",
+          "projected_away_points": 67.97,
+          "projected_home_points": 83.17,
+          "projected_margin_home": 15.199,
+          "projected_total": 151.147,
+          "total_edge": 6.646999999999991,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 3.716000000000001,
+          "ats_lean": "home",
+          "projected_away_points": 66.36,
+          "projected_home_points": 82.57,
+          "projected_margin_home": 16.216,
+          "projected_total": 148.928,
+          "total_edge": 4.427999999999997,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 0.7140000000000004,
+          "ats_lean": "home",
+          "projected_away_points": 67.49,
+          "projected_home_points": 80.71,
+          "projected_margin_home": 13.214,
+          "projected_total": 148.202,
+          "total_edge": 3.701999999999998,
+          "total_lean": "over",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "372924",
+      "espn_id": "401906774",
+      "home": "Florida",
+      "away": "Milwaukee",
+      "tip_utc": "2026-11-25T00:00Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": -34.5,
+        "total": 152.5,
+        "as_of_utc": "2026-11-24T17:55:11.8818484Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 11.8,
+          "ats_lean": "away",
+          "projected_away_points": 65.07,
+          "projected_home_points": 87.77,
+          "projected_margin_home": 22.7,
+          "projected_total": 152.841,
+          "total_edge": 0.3410000000000082,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 9.629999999999999,
+          "ats_lean": "away",
+          "projected_away_points": 66,
+          "projected_home_points": 90.87,
+          "projected_margin_home": 24.87,
+          "projected_total": 156.863,
+          "total_edge": 4.3629999999999995,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 7.795999999999999,
+          "ats_lean": "away",
+          "projected_away_points": 64.94,
+          "projected_home_points": 91.65,
+          "projected_margin_home": 26.704,
+          "projected_total": 156.594,
+          "total_edge": 4.093999999999994,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 12.579,
+          "ats_lean": "away",
+          "projected_away_points": 66.38,
+          "projected_home_points": 88.3,
+          "projected_margin_home": 21.921,
+          "projected_total": 154.672,
+          "total_edge": 2.171999999999997,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 10.568000000000001,
+          "ats_lean": "away",
+          "projected_away_points": 65.85,
+          "projected_home_points": 89.78,
+          "projected_margin_home": 23.932,
+          "projected_total": 155.626,
+          "total_edge": 3.1260000000000048,
+          "total_lean": "over",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "375270",
+      "espn_id": "401923271",
+      "home": "Marist",
+      "away": "Bryant",
+      "tip_utc": "2026-11-25T00:00Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": -2.5,
+        "total": 131.5,
+        "as_of_utc": "2026-11-24T17:55:11.8971586Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 9.068,
+          "ats_lean": "home",
+          "projected_away_points": 62.86,
+          "projected_home_points": 74.43,
+          "projected_margin_home": 11.568,
+          "projected_total": 137.294,
+          "total_edge": 5.794000000000011,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 10.333,
+          "ats_lean": "home",
+          "projected_away_points": 61.56,
+          "projected_home_points": 74.4,
+          "projected_margin_home": 12.833,
+          "projected_total": 135.963,
+          "total_edge": 4.462999999999994,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 11.272,
+          "ats_lean": "home",
+          "projected_away_points": 60.99,
+          "projected_home_points": 74.77,
+          "projected_margin_home": 13.772,
+          "projected_total": 135.762,
+          "total_edge": 4.2620000000000005,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 10.569,
+          "ats_lean": "home",
+          "projected_away_points": 59.24,
+          "projected_home_points": 72.31,
+          "projected_margin_home": 13.069,
+          "projected_total": 131.542,
+          "total_edge": 0.04200000000000159,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 11.284,
+          "ats_lean": "home",
+          "projected_away_points": 58.8,
+          "projected_home_points": 72.59,
+          "projected_margin_home": 13.784,
+          "projected_total": 131.394,
+          "total_edge": 0.10599999999999454,
+          "total_lean": "under",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "375274",
+      "espn_id": "401921777",
+      "home": "Villanova",
+      "away": "Coppin State",
+      "tip_utc": "2026-11-25T00:00Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": -33.5,
+        "total": 142.5,
+        "as_of_utc": "2026-11-24T17:55:11.8999165Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 13.07,
+          "ats_lean": "away",
+          "projected_away_points": 61.13,
+          "projected_home_points": 81.56,
+          "projected_margin_home": 20.43,
+          "projected_total": 142.684,
+          "total_edge": 0.1839999999999975,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 7.106999999999999,
+          "ats_lean": "away",
+          "projected_away_points": 59.45,
+          "projected_home_points": 85.84,
+          "projected_margin_home": 26.393,
+          "projected_total": 145.293,
+          "total_edge": 2.7930000000000064,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 7.413,
+          "ats_lean": "away",
+          "projected_away_points": 59.18,
+          "projected_home_points": 85.27,
+          "projected_margin_home": 26.087,
+          "projected_total": 144.444,
+          "total_edge": 1.9439999999999884,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 8.376999999999999,
+          "ats_lean": "away",
+          "projected_away_points": 58.15,
+          "projected_home_points": 83.27,
+          "projected_margin_home": 25.123,
+          "projected_total": 141.417,
+          "total_edge": 1.0829999999999984,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 8.881,
+          "ats_lean": "away",
+          "projected_away_points": 58.14,
+          "projected_home_points": 82.75,
+          "projected_margin_home": 24.619,
+          "projected_total": 140.889,
+          "total_edge": 1.61099999999999,
+          "total_lean": "under",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "375275",
+      "espn_id": "401921266",
+      "home": "Loyola Maryland",
+      "away": "Rider",
+      "tip_utc": "2026-11-25T00:00Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": -3.5,
+        "total": 138.5,
+        "as_of_utc": "2026-11-24T17:55:11.9026624Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 7.2669999999999995,
+          "ats_lean": "home",
+          "projected_away_points": 65.79,
+          "projected_home_points": 76.56,
+          "projected_margin_home": 10.767,
+          "projected_total": 142.353,
+          "total_edge": 3.8530000000000086,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 1.1059999999999999,
+          "ats_lean": "away",
+          "projected_away_points": 68.02,
+          "projected_home_points": 70.42,
+          "projected_margin_home": 2.394,
+          "projected_total": 138.44,
+          "total_edge": 0.060000000000002274,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 1.3410000000000002,
+          "ats_lean": "away",
+          "projected_away_points": 68.52,
+          "projected_home_points": 70.68,
+          "projected_margin_home": 2.159,
+          "projected_total": 139.196,
+          "total_edge": 0.695999999999998,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 1.8,
+          "ats_lean": "away",
+          "projected_away_points": 67.77,
+          "projected_home_points": 69.47,
+          "projected_margin_home": 1.7,
+          "projected_total": 137.244,
+          "total_edge": 1.2560000000000002,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 2.802,
+          "ats_lean": "away",
+          "projected_away_points": 68.71,
+          "projected_home_points": 69.41,
+          "projected_margin_home": 0.698,
+          "projected_total": 138.126,
+          "total_edge": 0.3739999999999952,
+          "total_lean": "under",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "375279",
+      "espn_id": "401920923",
+      "home": "Morgan State",
+      "away": "Mount St. Mary's",
+      "tip_utc": "2026-11-25T00:00Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": -1.5,
+        "total": 146.5,
+        "as_of_utc": "2026-11-24T17:55:11.9118780Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 21.493,
+          "ats_lean": "home",
+          "projected_away_points": 62.98,
+          "projected_home_points": 85.97,
+          "projected_margin_home": 22.993,
+          "projected_total": 148.947,
+          "total_edge": 2.4470000000000027,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 13.816,
+          "ats_lean": "home",
+          "projected_away_points": 66.51,
+          "projected_home_points": 81.83,
+          "projected_margin_home": 15.316,
+          "projected_total": 148.342,
+          "total_edge": 1.842000000000013,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 4.749,
+          "ats_lean": "home",
+          "projected_away_points": 69.91,
+          "projected_home_points": 76.16,
+          "projected_margin_home": 6.249,
+          "projected_total": 146.074,
+          "total_edge": 0.4259999999999877,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 10.315,
+          "ats_lean": "home",
+          "projected_away_points": 66.48,
+          "projected_home_points": 78.3,
+          "projected_margin_home": 11.815,
+          "projected_total": 144.782,
+          "total_edge": 1.7179999999999893,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 0.1140000000000001,
+          "ats_lean": "home",
+          "projected_away_points": 69.82,
+          "projected_home_points": 71.43,
+          "projected_margin_home": 1.614,
+          "projected_total": 141.254,
+          "total_edge": 5.246000000000009,
+          "total_lean": "under",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "375280",
+      "espn_id": "401920889",
+      "home": "Seton Hall",
+      "away": "New Hampshire",
+      "tip_utc": "2026-11-25T00:00Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": -20.5,
+        "total": 130.5,
+        "as_of_utc": "2026-11-24T17:55:11.9149342Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 12.01,
+          "ats_lean": "away",
+          "projected_away_points": 63.98,
+          "projected_home_points": 72.47,
+          "projected_margin_home": 8.49,
+          "projected_total": 136.452,
+          "total_edge": 5.951999999999998,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 10.269,
+          "ats_lean": "away",
+          "projected_away_points": 62.78,
+          "projected_home_points": 73.01,
+          "projected_margin_home": 10.231,
+          "projected_total": 135.797,
+          "total_edge": 5.296999999999997,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 8.937,
+          "ats_lean": "away",
+          "projected_away_points": 62.36,
+          "projected_home_points": 73.92,
+          "projected_margin_home": 11.563,
+          "projected_total": 136.278,
+          "total_edge": 5.777999999999992,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 11.633,
+          "ats_lean": "away",
+          "projected_away_points": 62.45,
+          "projected_home_points": 71.32,
+          "projected_margin_home": 8.867,
+          "projected_total": 133.769,
+          "total_edge": 3.2690000000000055,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 10.816,
+          "ats_lean": "away",
+          "projected_away_points": 62.35,
+          "projected_home_points": 72.04,
+          "projected_margin_home": 9.684,
+          "projected_total": 134.393,
+          "total_edge": 3.8930000000000007,
+          "total_lean": "over",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "375281",
+      "espn_id": "401920742",
+      "home": "Coastal Carolina",
+      "away": "Campbell",
+      "tip_utc": "2026-11-25T00:00Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": -1.5,
+        "total": 148.5,
+        "as_of_utc": "2026-11-24T17:55:11.9179705Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 7.67,
+          "ats_lean": "home",
+          "projected_away_points": 68.97,
+          "projected_home_points": 78.14,
+          "projected_margin_home": 9.17,
+          "projected_total": 147.103,
+          "total_edge": 1.3969999999999914,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 7.337,
+          "ats_lean": "home",
+          "projected_away_points": 71.39,
+          "projected_home_points": 80.22,
+          "projected_margin_home": 8.837,
+          "projected_total": 151.607,
+          "total_edge": 3.1069999999999993,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 4.768,
+          "ats_lean": "home",
+          "projected_away_points": 72.85,
+          "projected_home_points": 79.12,
+          "projected_margin_home": 6.268,
+          "projected_total": 151.969,
+          "total_edge": 3.468999999999994,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 4.091,
+          "ats_lean": "home",
+          "projected_away_points": 72.03,
+          "projected_home_points": 77.62,
+          "projected_margin_home": 5.591,
+          "projected_total": 149.641,
+          "total_edge": 1.1409999999999911,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 1.0899999999999999,
+          "ats_lean": "home",
+          "projected_away_points": 73.66,
+          "projected_home_points": 76.25,
+          "projected_margin_home": 2.59,
+          "projected_total": 149.906,
+          "total_edge": 1.406000000000006,
+          "total_lean": "over",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "375282",
+      "espn_id": "401920727",
+      "home": "Iowa",
+      "away": "UMBC",
+      "tip_utc": "2026-11-25T00:00Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": -28.5,
+        "total": 144.5,
+        "as_of_utc": "2026-11-24T17:55:11.9210215Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 8.513000000000002,
+          "ats_lean": "away",
+          "projected_away_points": 63.24,
+          "projected_home_points": 83.23,
+          "projected_margin_home": 19.987,
+          "projected_total": 146.472,
+          "total_edge": 1.9720000000000084,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 0.7759999999999998,
+          "ats_lean": "home",
+          "projected_away_points": 59.55,
+          "projected_home_points": 88.83,
+          "projected_margin_home": 29.276,
+          "projected_total": 148.377,
+          "total_edge": 3.8770000000000095,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 3.4819999999999993,
+          "ats_lean": "home",
+          "projected_away_points": 58.88,
+          "projected_home_points": 90.86,
+          "projected_margin_home": 31.982,
+          "projected_total": 149.736,
+          "total_edge": 5.23599999999999,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 1.9740000000000002,
+          "ats_lean": "away",
+          "projected_away_points": 59.52,
+          "projected_home_points": 86.05,
+          "projected_margin_home": 26.526,
+          "projected_total": 145.574,
+          "total_edge": 1.0740000000000123,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 0.4989999999999988,
+          "ats_lean": "home",
+          "projected_away_points": 59.14,
+          "projected_home_points": 88.14,
+          "projected_margin_home": 28.999,
+          "projected_total": 147.277,
+          "total_edge": 2.776999999999987,
+          "total_lean": "over",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "375285",
+      "espn_id": "401920309",
+      "home": "Georgia Tech",
+      "away": "Samford",
+      "tip_utc": "2026-11-25T00:00Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": -10.5,
+        "total": 161.5,
+        "as_of_utc": "2026-11-24T17:55:11.9301232Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 8.466000000000001,
+          "ats_lean": "home",
+          "projected_away_points": 67.52,
+          "projected_home_points": 86.49,
+          "projected_margin_home": 18.966,
+          "projected_total": 154.004,
+          "total_edge": 7.496000000000009,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 0.17900000000000027,
+          "ats_lean": "home",
+          "projected_away_points": 71.83,
+          "projected_home_points": 82.5,
+          "projected_margin_home": 10.679,
+          "projected_total": 154.33,
+          "total_edge": 7.1699999999999875,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 0.3179999999999996,
+          "ats_lean": "home",
+          "projected_away_points": 71.88,
+          "projected_home_points": 82.69,
+          "projected_margin_home": 10.818,
+          "projected_total": 154.572,
+          "total_edge": 6.927999999999997,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 0.0389999999999997,
+          "ats_lean": "home",
+          "projected_away_points": 71.83,
+          "projected_home_points": 82.37,
+          "projected_margin_home": 10.539,
+          "projected_total": 154.195,
+          "total_edge": 7.305000000000007,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 0.11800000000000033,
+          "ats_lean": "away",
+          "projected_away_points": 72.07,
+          "projected_home_points": 82.45,
+          "projected_margin_home": 10.382,
+          "projected_total": 154.518,
+          "total_edge": 6.981999999999999,
+          "total_lean": "under",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "375288",
+      "espn_id": "401918996",
+      "home": "South Florida",
+      "away": "Stetson",
+      "tip_utc": "2026-11-25T00:00Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": -18.5,
+        "total": 152.5,
+        "as_of_utc": "2026-11-24T17:55:11.9329975Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 1.8850000000000016,
+          "ats_lean": "home",
+          "projected_away_points": 64.41,
+          "projected_home_points": 84.8,
+          "projected_margin_home": 20.385,
+          "projected_total": 149.211,
+          "total_edge": 3.2889999999999873,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 1.8210000000000015,
+          "ats_lean": "home",
+          "projected_away_points": 66.18,
+          "projected_home_points": 86.5,
+          "projected_margin_home": 20.321,
+          "projected_total": 152.674,
+          "total_edge": 0.1740000000000066,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 3.2669999999999995,
+          "ats_lean": "home",
+          "projected_away_points": 65.78,
+          "projected_home_points": 87.55,
+          "projected_margin_home": 21.767,
+          "projected_total": 153.333,
+          "total_edge": 0.8329999999999984,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 0.379999999999999,
+          "ats_lean": "home",
+          "projected_away_points": 65.17,
+          "projected_home_points": 84.05,
+          "projected_margin_home": 18.88,
+          "projected_total": 149.214,
+          "total_edge": 3.2860000000000014,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 1.2029999999999994,
+          "ats_lean": "home",
+          "projected_away_points": 65.36,
+          "projected_home_points": 85.07,
+          "projected_margin_home": 19.703,
+          "projected_total": 150.431,
+          "total_edge": 2.0689999999999884,
+          "total_lean": "under",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "375304",
+      "espn_id": "401925950",
+      "home": "Weber State",
+      "away": "Tarleton State",
+      "tip_utc": "2026-11-25T00:00Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": -1.5,
+        "total": 155.5,
+        "as_of_utc": "2026-11-24T17:55:11.8938109Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 2.747,
+          "ats_lean": "home",
+          "projected_away_points": 74.81,
+          "projected_home_points": 79.05,
+          "projected_margin_home": 4.247,
+          "projected_total": 153.861,
+          "total_edge": 1.63900000000001,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 11.174,
+          "ats_lean": "away",
+          "projected_away_points": 80.48,
+          "projected_home_points": 70.81,
+          "projected_margin_home": -9.674,
+          "projected_total": 151.287,
+          "total_edge": 4.212999999999994,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 10.902,
+          "ats_lean": "away",
+          "projected_away_points": 80.63,
+          "projected_home_points": 71.23,
+          "projected_margin_home": -9.402,
+          "projected_total": 151.865,
+          "total_edge": 3.634999999999991,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 10.067,
+          "ats_lean": "away",
+          "projected_away_points": 80.29,
+          "projected_home_points": 71.72,
+          "projected_margin_home": -8.567,
+          "projected_total": 152.009,
+          "total_edge": 3.491000000000014,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 10.102,
+          "ats_lean": "away",
+          "projected_away_points": 80.54,
+          "projected_home_points": 71.93,
+          "projected_margin_home": -8.602,
+          "projected_total": 152.47,
+          "total_edge": 3.030000000000001,
+          "total_lean": "under",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "375305",
+      "espn_id": "401920976",
+      "home": "Chattanooga",
+      "away": "Delaware State",
+      "tip_utc": "2026-11-25T00:00Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": -16.5,
+        "total": 145.5,
+        "as_of_utc": "2026-11-24T17:55:11.9088338Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 4.769,
+          "ats_lean": "away",
+          "projected_away_points": 70.76,
+          "projected_home_points": 82.49,
+          "projected_margin_home": 11.731,
+          "projected_total": 153.245,
+          "total_edge": 7.7450000000000045,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 3.128,
+          "ats_lean": "away",
+          "projected_away_points": 70.53,
+          "projected_home_points": 83.9,
+          "projected_margin_home": 13.372,
+          "projected_total": 154.428,
+          "total_edge": 8.927999999999997,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 0.11700000000000088,
+          "ats_lean": "away",
+          "projected_away_points": 69.55,
+          "projected_home_points": 85.93,
+          "projected_margin_home": 16.383,
+          "projected_total": 155.483,
+          "total_edge": 9.983000000000004,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 5.849,
+          "ats_lean": "away",
+          "projected_away_points": 69.46,
+          "projected_home_points": 80.11,
+          "projected_margin_home": 10.651,
+          "projected_total": 149.577,
+          "total_edge": 4.076999999999998,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 3.276,
+          "ats_lean": "away",
+          "projected_away_points": 68.59,
+          "projected_home_points": 81.82,
+          "projected_margin_home": 13.224,
+          "projected_total": 150.409,
+          "total_edge": 4.908999999999992,
+          "total_lean": "over",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "375306",
+      "espn_id": "401920695",
+      "home": "Siena",
+      "away": "Vermont",
+      "tip_utc": "2026-11-25T00:00Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": -4.5,
+        "total": 159.5,
+        "as_of_utc": "2026-11-24T17:55:11.9240441Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 1.0750000000000002,
+          "ats_lean": "away",
+          "projected_away_points": 75.35,
+          "projected_home_points": 78.77,
+          "projected_margin_home": 3.425,
+          "projected_total": 154.119,
+          "total_edge": 5.381,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 7.763,
+          "ats_lean": "away",
+          "projected_away_points": 77.43,
+          "projected_home_points": 74.17,
+          "projected_margin_home": -3.263,
+          "projected_total": 151.605,
+          "total_edge": 7.89500000000001,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 6.05,
+          "ats_lean": "away",
+          "projected_away_points": 77.9,
+          "projected_home_points": 76.35,
+          "projected_margin_home": -1.55,
+          "projected_total": 154.245,
+          "total_edge": 5.2549999999999955,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 8.869,
+          "ats_lean": "away",
+          "projected_away_points": 77.01,
+          "projected_home_points": 72.65,
+          "projected_margin_home": -4.369,
+          "projected_total": 149.659,
+          "total_edge": 9.841000000000008,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 7.7379999999999995,
+          "ats_lean": "away",
+          "projected_away_points": 77.51,
+          "projected_home_points": 74.27,
+          "projected_margin_home": -3.238,
+          "projected_total": 151.778,
+          "total_edge": 7.722000000000008,
+          "total_lean": "under",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "375307",
+      "espn_id": "401920358",
+      "home": "Harvard",
+      "away": "Boston University",
+      "tip_utc": "2026-11-25T00:00Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": -5.5,
+        "total": 134.5,
+        "as_of_utc": "2026-11-24T17:55:11.9270806Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 2.6099999999999994,
+          "ats_lean": "home",
+          "projected_away_points": 66.35,
+          "projected_home_points": 74.46,
+          "projected_margin_home": 8.11,
+          "projected_total": 140.805,
+          "total_edge": 6.305000000000007,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 4.545999999999999,
+          "ats_lean": "home",
+          "projected_away_points": 64.32,
+          "projected_home_points": 74.37,
+          "projected_margin_home": 10.046,
+          "projected_total": 138.688,
+          "total_edge": 4.187999999999988,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 3.9860000000000007,
+          "ats_lean": "home",
+          "projected_away_points": 64.74,
+          "projected_home_points": 74.23,
+          "projected_margin_home": 9.486,
+          "projected_total": 138.975,
+          "total_edge": 4.474999999999994,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 1.6390000000000002,
+          "ats_lean": "home",
+          "projected_away_points": 64.47,
+          "projected_home_points": 71.61,
+          "projected_margin_home": 7.139,
+          "projected_total": 136.075,
+          "total_edge": 1.5749999999999886,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 0.20999999999999996,
+          "ats_lean": "home",
+          "projected_away_points": 65.26,
+          "projected_home_points": 70.97,
+          "projected_margin_home": 5.71,
+          "projected_total": 136.233,
+          "total_edge": 1.733000000000004,
+          "total_lean": "over",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "378110",
+      "espn_id": "401926827",
+      "home": "Old Dominion",
+      "away": "Hampton",
+      "tip_utc": "2026-11-25T00:00Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": -7.5,
+        "total": 129.5,
+        "as_of_utc": "2026-11-24T17:55:11.8907868Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 18.72,
+          "ats_lean": "home",
+          "projected_away_points": 55.12,
+          "projected_home_points": 81.34,
+          "projected_margin_home": 26.22,
+          "projected_total": 136.451,
+          "total_edge": 6.950999999999993,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 1.6039999999999992,
+          "ats_lean": "home",
+          "projected_away_points": 64.36,
+          "projected_home_points": 73.46,
+          "projected_margin_home": 9.104,
+          "projected_total": 137.821,
+          "total_edge": 8.320999999999998,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 1.4540000000000006,
+          "ats_lean": "home",
+          "projected_away_points": 64.3,
+          "projected_home_points": 73.25,
+          "projected_margin_home": 8.954,
+          "projected_total": 137.551,
+          "total_edge": 8.050999999999988,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 0.5820000000000007,
+          "ats_lean": "home",
+          "projected_away_points": 63.78,
+          "projected_home_points": 71.86,
+          "projected_margin_home": 8.082,
+          "projected_total": 135.648,
+          "total_edge": 6.147999999999996,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 0.29000000000000004,
+          "ats_lean": "home",
+          "projected_away_points": 64.1,
+          "projected_home_points": 71.89,
+          "projected_margin_home": 7.79,
+          "projected_total": 135.996,
+          "total_edge": 6.496000000000009,
+          "total_lean": "over",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "375266",
+      "espn_id": "401926154",
+      "home": "Southeast Missouri State",
+      "away": "Purdue Fort Wayne",
+      "tip_utc": "2026-11-25T00:30Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": -3.5,
+        "total": 149.5,
+        "as_of_utc": "2026-11-24T17:55:11.9480630Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 3.33,
+          "ats_lean": "home",
+          "projected_away_points": 72.8,
+          "projected_home_points": 79.63,
+          "projected_margin_home": 6.83,
+          "projected_total": 152.434,
+          "total_edge": 2.9339999999999975,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 0.2490000000000001,
+          "ats_lean": "home",
+          "projected_away_points": 73.74,
+          "projected_home_points": 77.48,
+          "projected_margin_home": 3.749,
+          "projected_total": 151.22,
+          "total_edge": 1.7199999999999989,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 1.9640000000000004,
+          "ats_lean": "home",
+          "projected_away_points": 73.85,
+          "projected_home_points": 79.31,
+          "projected_margin_home": 5.464,
+          "projected_total": 153.157,
+          "total_edge": 3.6570000000000107,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 0.5259999999999998,
+          "ats_lean": "away",
+          "projected_away_points": 74.11,
+          "projected_home_points": 77.09,
+          "projected_margin_home": 2.974,
+          "projected_total": 151.203,
+          "total_edge": 1.703000000000003,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 0.6139999999999999,
+          "ats_lean": "home",
+          "projected_away_points": 74.21,
+          "projected_home_points": 78.33,
+          "projected_margin_home": 4.114,
+          "projected_total": 152.541,
+          "total_edge": 3.040999999999997,
+          "total_lean": "over",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "375284",
+      "espn_id": "401920414",
+      "home": "Duquesne",
+      "away": "High Point",
+      "tip_utc": "2026-11-25T00:30Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": 9.5,
+        "total": 141.5,
+        "as_of_utc": "2026-11-24T17:55:11.9511957Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 11.062,
+          "ats_lean": "home",
+          "projected_away_points": 67.33,
+          "projected_home_points": 68.89,
+          "projected_margin_home": 1.562,
+          "projected_total": 136.226,
+          "total_edge": 5.274000000000001,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 0.8510000000000009,
+          "ats_lean": "home",
+          "projected_away_points": 75.23,
+          "projected_home_points": 66.58,
+          "projected_margin_home": -8.649,
+          "projected_total": 141.809,
+          "total_edge": 0.3089999999999975,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 2.5199999999999996,
+          "ats_lean": "away",
+          "projected_away_points": 76.34,
+          "projected_home_points": 64.32,
+          "projected_margin_home": -12.02,
+          "projected_total": 140.656,
+          "total_edge": 0.8439999999999941,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 0.43099999999999916,
+          "ats_lean": "away",
+          "projected_away_points": 74.58,
+          "projected_home_points": 64.65,
+          "projected_margin_home": -9.931,
+          "projected_total": 139.227,
+          "total_edge": 2.272999999999996,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 4.195,
+          "ats_lean": "away",
+          "projected_away_points": 76,
+          "projected_home_points": 62.31,
+          "projected_margin_home": -13.695,
+          "projected_total": 138.306,
+          "total_edge": 3.1939999999999884,
+          "total_lean": "under",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "375289",
+      "espn_id": "401917904",
+      "home": "Tennessee Tech",
+      "away": "West Georgia",
+      "tip_utc": "2026-11-25T00:30Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": -14.5,
+        "total": 163.5,
+        "as_of_utc": "2026-11-24T17:55:11.9572823Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 5.433,
+          "ats_lean": "home",
+          "projected_away_points": 69.66,
+          "projected_home_points": 89.6,
+          "projected_margin_home": 19.933,
+          "projected_total": 159.259,
+          "total_edge": 4.241000000000014,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 2.6769999999999996,
+          "ats_lean": "home",
+          "projected_away_points": 69.32,
+          "projected_home_points": 86.5,
+          "projected_margin_home": 17.177,
+          "projected_total": 155.816,
+          "total_edge": 7.6839999999999975,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 3.4549999999999983,
+          "ats_lean": "home",
+          "projected_away_points": 69.72,
+          "projected_home_points": 87.68,
+          "projected_margin_home": 17.955,
+          "projected_total": 157.402,
+          "total_edge": 6.098000000000013,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 0.19299999999999962,
+          "ats_lean": "home",
+          "projected_away_points": 69.69,
+          "projected_home_points": 84.39,
+          "projected_margin_home": 14.693,
+          "projected_total": 154.081,
+          "total_edge": 9.419000000000011,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 0.9169999999999998,
+          "ats_lean": "home",
+          "projected_away_points": 70.3,
+          "projected_home_points": 85.72,
+          "projected_margin_home": 15.417,
+          "projected_total": 156.018,
+          "total_edge": 7.481999999999999,
+          "total_lean": "under",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "375308",
+      "espn_id": "401917983",
+      "home": "UL Monroe",
+      "away": "Houston Christian",
+      "tip_utc": "2026-11-25T00:30Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": 1.5,
+        "total": 150.5,
+        "as_of_utc": "2026-11-24T17:55:11.9542270Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 5.974,
+          "ats_lean": "home",
+          "projected_away_points": 78.51,
+          "projected_home_points": 82.98,
+          "projected_margin_home": 4.474,
+          "projected_total": 161.486,
+          "total_edge": 10.98599999999999,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 5.343,
+          "ats_lean": "away",
+          "projected_away_points": 79.94,
+          "projected_home_points": 73.1,
+          "projected_margin_home": -6.843,
+          "projected_total": 153.037,
+          "total_edge": 2.537000000000006,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 0.633,
+          "ats_lean": "away",
+          "projected_away_points": 77.6,
+          "projected_home_points": 75.47,
+          "projected_margin_home": -2.133,
+          "projected_total": 153.072,
+          "total_edge": 2.5720000000000027,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 6.7330000000000005,
+          "ats_lean": "away",
+          "projected_away_points": 80.52,
+          "projected_home_points": 72.28,
+          "projected_margin_home": -8.233,
+          "projected_total": 152.803,
+          "total_edge": 2.3029999999999973,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 2.038,
+          "ats_lean": "away",
+          "projected_away_points": 78.25,
+          "projected_home_points": 74.71,
+          "projected_margin_home": -3.538,
+          "projected_total": 152.958,
+          "total_edge": 2.4579999999999984,
+          "total_lean": "over",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "372920",
+      "espn_id": "401911026",
+      "home": "Notre Dame",
+      "away": "Central Michigan",
+      "tip_utc": "2026-11-25T01:00Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": -20.5,
+        "total": 152.5,
+        "as_of_utc": "2026-11-24T17:55:11.9907724Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 3.215,
+          "ats_lean": "away",
+          "projected_away_points": 69.45,
+          "projected_home_points": 86.73,
+          "projected_margin_home": 17.285,
+          "projected_total": 156.184,
+          "total_edge": 3.6839999999999975,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 0.8460000000000001,
+          "ats_lean": "home",
+          "projected_away_points": 68.75,
+          "projected_home_points": 90.09,
+          "projected_margin_home": 21.346,
+          "projected_total": 158.837,
+          "total_edge": 6.336999999999989,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 2.3649999999999984,
+          "ats_lean": "home",
+          "projected_away_points": 68.03,
+          "projected_home_points": 90.9,
+          "projected_margin_home": 22.865,
+          "projected_total": 158.932,
+          "total_edge": 6.431999999999988,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 1.7920000000000016,
+          "ats_lean": "away",
+          "projected_away_points": 69.55,
+          "projected_home_points": 88.26,
+          "projected_margin_home": 18.708,
+          "projected_total": 157.811,
+          "total_edge": 5.311000000000007,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 0.5640000000000001,
+          "ats_lean": "away",
+          "projected_away_points": 69.05,
+          "projected_home_points": 88.98,
+          "projected_margin_home": 19.936,
+          "projected_total": 158.027,
+          "total_edge": 5.526999999999987,
+          "total_lean": "over",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "375268",
+      "espn_id": "401925642",
+      "home": "North Alabama",
+      "away": "Alabama A&M",
+      "tip_utc": "2026-11-25T01:00Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": -2.5,
+        "total": 142.5,
+        "as_of_utc": "2026-11-24T17:55:11.9695603Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 4.743,
+          "ats_lean": "home",
+          "projected_away_points": 70.44,
+          "projected_home_points": 77.69,
+          "projected_margin_home": 7.243,
+          "projected_total": 148.128,
+          "total_edge": 5.627999999999986,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 0.569,
+          "ats_lean": "away",
+          "projected_away_points": 71.39,
+          "projected_home_points": 73.32,
+          "projected_margin_home": 1.931,
+          "projected_total": 144.709,
+          "total_edge": 2.209000000000003,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 2.525,
+          "ats_lean": "away",
+          "projected_away_points": 72.32,
+          "projected_home_points": 72.29,
+          "projected_margin_home": -0.025,
+          "projected_total": 144.612,
+          "total_edge": 2.1119999999999948,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 2.501,
+          "ats_lean": "away",
+          "projected_away_points": 71.28,
+          "projected_home_points": 71.28,
+          "projected_margin_home": -0.001,
+          "projected_total": 142.552,
+          "total_edge": 0.0519999999999925,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 4.47,
+          "ats_lean": "away",
+          "projected_away_points": 72.21,
+          "projected_home_points": 70.24,
+          "projected_margin_home": -1.97,
+          "projected_total": 142.458,
+          "total_edge": 0.04200000000000159,
+          "total_lean": "under",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "375278",
+      "espn_id": "401921008",
+      "home": "Kansas City",
+      "away": "Green Bay",
+      "tip_utc": "2026-11-25T01:00Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": -1.5,
+        "total": 145.5,
+        "as_of_utc": "2026-11-24T17:55:11.9816477Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 8.879,
+          "ats_lean": "home",
+          "projected_away_points": 66.69,
+          "projected_home_points": 77.07,
+          "projected_margin_home": 10.379,
+          "projected_total": 143.769,
+          "total_edge": 1.7309999999999945,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 0.875,
+          "ats_lean": "home",
+          "projected_away_points": 69.81,
+          "projected_home_points": 72.18,
+          "projected_margin_home": 2.375,
+          "projected_total": 141.989,
+          "total_edge": 3.5109999999999957,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 3.383,
+          "ats_lean": "away",
+          "projected_away_points": 71.45,
+          "projected_home_points": 69.57,
+          "projected_margin_home": -1.883,
+          "projected_total": 141.026,
+          "total_edge": 4.4739999999999895,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 0.827,
+          "ats_lean": "home",
+          "projected_away_points": 69.67,
+          "projected_home_points": 72,
+          "projected_margin_home": 2.327,
+          "projected_total": 141.668,
+          "total_edge": 3.8319999999999936,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 3.785,
+          "ats_lean": "away",
+          "projected_away_points": 71.39,
+          "projected_home_points": 69.11,
+          "projected_margin_home": -2.285,
+          "projected_total": 140.498,
+          "total_edge": 5.0020000000000095,
+          "total_lean": "under",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "375283",
+      "espn_id": "401920709",
+      "home": "Auburn",
+      "away": "Lipscomb",
+      "tip_utc": "2026-11-25T01:00Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": -24.5,
+        "total": 157.5,
+        "as_of_utc": "2026-11-24T17:55:11.9846915Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 9.397,
+          "ats_lean": "away",
+          "projected_away_points": 66.76,
+          "projected_home_points": 81.87,
+          "projected_margin_home": 15.103,
+          "projected_total": 148.631,
+          "total_edge": 8.869,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 5.728999999999999,
+          "ats_lean": "away",
+          "projected_away_points": 67.34,
+          "projected_home_points": 86.12,
+          "projected_margin_home": 18.771,
+          "projected_total": 153.459,
+          "total_edge": 4.040999999999997,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 5.323,
+          "ats_lean": "away",
+          "projected_away_points": 67.23,
+          "projected_home_points": 86.41,
+          "projected_margin_home": 19.177,
+          "projected_total": 153.646,
+          "total_edge": 3.8540000000000134,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 6.0120000000000005,
+          "ats_lean": "away",
+          "projected_away_points": 64.31,
+          "projected_home_points": 82.8,
+          "projected_margin_home": 18.488,
+          "projected_total": 147.102,
+          "total_edge": 10.397999999999996,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 6.399999999999999,
+          "ats_lean": "away",
+          "projected_away_points": 64.85,
+          "projected_home_points": 82.95,
+          "projected_margin_home": 18.1,
+          "projected_total": 147.798,
+          "total_edge": 9.701999999999998,
+          "total_lean": "under",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "375309",
+      "espn_id": "401924723",
+      "home": "Cornell",
+      "away": "Bucknell",
+      "tip_utc": "2026-11-25T01:00Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": -10.5,
+        "total": 154.5,
+        "as_of_utc": "2026-11-24T17:55:11.9725836Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 9.588999999999999,
+          "ats_lean": "home",
+          "projected_away_points": 64.83,
+          "projected_home_points": 84.92,
+          "projected_margin_home": 20.089,
+          "projected_total": 149.752,
+          "total_edge": 4.7479999999999905,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 7.324999999999999,
+          "ats_lean": "home",
+          "projected_away_points": 67.59,
+          "projected_home_points": 85.41,
+          "projected_margin_home": 17.825,
+          "projected_total": 152.997,
+          "total_edge": 1.502999999999986,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 6.533999999999999,
+          "ats_lean": "home",
+          "projected_away_points": 67.76,
+          "projected_home_points": 84.79,
+          "projected_margin_home": 17.034,
+          "projected_total": 152.553,
+          "total_edge": 1.9470000000000027,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 3.6210000000000004,
+          "ats_lean": "home",
+          "projected_away_points": 67.93,
+          "projected_home_points": 82.05,
+          "projected_margin_home": 14.121,
+          "projected_total": 149.985,
+          "total_edge": 4.514999999999986,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 3.1020000000000003,
+          "ats_lean": "home",
+          "projected_away_points": 68.56,
+          "projected_home_points": 82.16,
+          "projected_margin_home": 13.602,
+          "projected_total": 150.722,
+          "total_edge": 3.7779999999999916,
+          "total_lean": "under",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "375310",
+      "espn_id": "401921184",
+      "home": "Pennsylvania",
+      "away": "Drexel",
+      "tip_utc": "2026-11-25T01:00Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": -6.5,
+        "total": 142.5,
+        "as_of_utc": "2026-11-24T17:55:11.9786196Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 6.343999999999999,
+          "ats_lean": "home",
+          "projected_away_points": 67.45,
+          "projected_home_points": 80.29,
+          "projected_margin_home": 12.844,
+          "projected_total": 147.736,
+          "total_edge": 5.23599999999999,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 10.908000000000001,
+          "ats_lean": "home",
+          "projected_away_points": 65.66,
+          "projected_home_points": 83.07,
+          "projected_margin_home": 17.408,
+          "projected_total": 148.728,
+          "total_edge": 6.228000000000009,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 9.527000000000001,
+          "ats_lean": "home",
+          "projected_away_points": 66.16,
+          "projected_home_points": 82.18,
+          "projected_margin_home": 16.027,
+          "projected_total": 148.337,
+          "total_edge": 5.836999999999989,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 5.712999999999999,
+          "ats_lean": "home",
+          "projected_away_points": 66.24,
+          "projected_home_points": 78.46,
+          "projected_margin_home": 12.213,
+          "projected_total": 144.701,
+          "total_edge": 2.2009999999999934,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 4.115,
+          "ats_lean": "home",
+          "projected_away_points": 67.2,
+          "projected_home_points": 77.81,
+          "projected_margin_home": 10.615,
+          "projected_total": 145.007,
+          "total_edge": 2.507000000000005,
+          "total_lean": "over",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "378112",
+      "espn_id": "401929421",
+      "home": "South Alabama",
+      "away": "Florida A&M",
+      "tip_utc": "2026-11-25T01:00Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": -18.5,
+        "total": 141.5,
+        "as_of_utc": "2026-11-24T17:55:11.9633391Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 7.638999999999999,
+          "ats_lean": "home",
+          "projected_away_points": 64.93,
+          "projected_home_points": 91.07,
+          "projected_margin_home": 26.139,
+          "projected_total": 155.996,
+          "total_edge": 14.49600000000001,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 1.0859999999999985,
+          "ats_lean": "home",
+          "projected_away_points": 68.74,
+          "projected_home_points": 88.32,
+          "projected_margin_home": 19.586,
+          "projected_total": 157.061,
+          "total_edge": 15.561000000000007,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 2.3419999999999987,
+          "ats_lean": "home",
+          "projected_away_points": 68.63,
+          "projected_home_points": 89.47,
+          "projected_margin_home": 20.842,
+          "projected_total": 158.104,
+          "total_edge": 16.604000000000013,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 1.0139999999999993,
+          "ats_lean": "away",
+          "projected_away_points": 68.71,
+          "projected_home_points": 86.2,
+          "projected_margin_home": 17.486,
+          "projected_total": 154.907,
+          "total_edge": 13.40700000000001,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 0.18299999999999983,
+          "ats_lean": "home",
+          "projected_away_points": 68.72,
+          "projected_home_points": 87.41,
+          "projected_margin_home": 18.683,
+          "projected_total": 156.129,
+          "total_edge": 14.62899999999999,
+          "total_lean": "over",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "378114",
+      "espn_id": "401929359",
+      "home": "UT Arlington",
+      "away": "Oral Roberts",
+      "tip_utc": "2026-11-25T01:00Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": -4.5,
+        "total": 150.5,
+        "as_of_utc": "2026-11-24T17:55:11.9664547Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 8.188,
+          "ats_lean": "home",
+          "projected_away_points": 67.86,
+          "projected_home_points": 80.55,
+          "projected_margin_home": 12.688,
+          "projected_total": 148.418,
+          "total_edge": 2.0819999999999936,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 3.5380000000000003,
+          "ats_lean": "away",
+          "projected_away_points": 71.81,
+          "projected_home_points": 72.77,
+          "projected_margin_home": 0.962,
+          "projected_total": 144.582,
+          "total_edge": 5.918000000000006,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 8.475999999999999,
+          "ats_lean": "away",
+          "projected_away_points": 73.54,
+          "projected_home_points": 69.57,
+          "projected_margin_home": -3.976,
+          "projected_total": 143.114,
+          "total_edge": 7.385999999999996,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 4.595,
+          "ats_lean": "away",
+          "projected_away_points": 72.04,
+          "projected_home_points": 71.95,
+          "projected_margin_home": -0.095,
+          "projected_total": 143.989,
+          "total_edge": 6.510999999999996,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 9.911,
+          "ats_lean": "away",
+          "projected_away_points": 73.77,
+          "projected_home_points": 68.36,
+          "projected_margin_home": -5.411,
+          "projected_total": 142.134,
+          "total_edge": 8.366000000000014,
+          "total_lean": "under",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "372931",
+      "espn_id": "401911535",
+      "home": "UTEP",
+      "away": "Charleston",
+      "tip_utc": "2026-11-25T01:30Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": 2.5,
+        "total": 149.5,
+        "as_of_utc": "2026-11-24T17:55:11.9938811Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 5.839,
+          "ats_lean": "home",
+          "projected_away_points": 72.11,
+          "projected_home_points": 75.45,
+          "projected_margin_home": 3.339,
+          "projected_total": 147.569,
+          "total_edge": 1.9310000000000116,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 3.768,
+          "ats_lean": "away",
+          "projected_away_points": 77.54,
+          "projected_home_points": 71.27,
+          "projected_margin_home": -6.268,
+          "projected_total": 148.808,
+          "total_edge": 0.6920000000000073,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 8.112,
+          "ats_lean": "away",
+          "projected_away_points": 79.52,
+          "projected_home_points": 68.91,
+          "projected_margin_home": -10.612,
+          "projected_total": 148.438,
+          "total_edge": 1.0620000000000118,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 3.5060000000000002,
+          "ats_lean": "away",
+          "projected_away_points": 76.15,
+          "projected_home_points": 70.14,
+          "projected_margin_home": -6.006,
+          "projected_total": 146.29,
+          "total_edge": 3.210000000000008,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 9.075,
+          "ats_lean": "away",
+          "projected_away_points": 78.27,
+          "projected_home_points": 66.69,
+          "projected_margin_home": -11.575,
+          "projected_total": 144.958,
+          "total_edge": 4.542000000000002,
+          "total_lean": "under",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "372921",
+      "espn_id": "401909699",
+      "home": "Florida State",
+      "away": "UNC Asheville",
+      "tip_utc": "2026-11-25T02:00Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": -29.5,
+        "total": 159.5,
+        "as_of_utc": "2026-11-24T17:55:12.0087574Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 5.724,
+          "ats_lean": "away",
+          "projected_away_points": 66.75,
+          "projected_home_points": 90.52,
+          "projected_margin_home": 23.776,
+          "projected_total": 157.268,
+          "total_edge": 2.2319999999999993,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 2.3810000000000002,
+          "ats_lean": "away",
+          "projected_away_points": 64.59,
+          "projected_home_points": 91.71,
+          "projected_margin_home": 27.119,
+          "projected_total": 156.298,
+          "total_edge": 3.201999999999998,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 3.690999999999999,
+          "ats_lean": "away",
+          "projected_away_points": 65.16,
+          "projected_home_points": 90.97,
+          "projected_margin_home": 25.809,
+          "projected_total": 156.122,
+          "total_edge": 3.377999999999986,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 4.876999999999999,
+          "ats_lean": "away",
+          "projected_away_points": 64.52,
+          "projected_home_points": 89.15,
+          "projected_margin_home": 24.623,
+          "projected_total": 153.669,
+          "total_edge": 5.830999999999989,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 6.7280000000000015,
+          "ats_lean": "away",
+          "projected_away_points": 65.39,
+          "projected_home_points": 88.17,
+          "projected_margin_home": 22.772,
+          "projected_total": 153.56,
+          "total_edge": 5.939999999999998,
+          "total_lean": "under",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "375265",
+      "espn_id": "401926184",
+      "home": "UC Santa Barbara",
+      "away": "UNC Greensboro",
+      "tip_utc": "2026-11-25T02:00Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": -17.5,
+        "total": 145.5,
+        "as_of_utc": "2026-11-24T17:55:11.9999373Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 3.0860000000000003,
+          "ats_lean": "away",
+          "projected_away_points": 66.64,
+          "projected_home_points": 81.05,
+          "projected_margin_home": 14.414,
+          "projected_total": 147.685,
+          "total_edge": 2.1850000000000023,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 1.1750000000000007,
+          "ats_lean": "home",
+          "projected_away_points": 66.24,
+          "projected_home_points": 84.92,
+          "projected_margin_home": 18.675,
+          "projected_total": 151.163,
+          "total_edge": 5.663000000000011,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 2.442,
+          "ats_lean": "home",
+          "projected_away_points": 66.01,
+          "projected_home_points": 85.95,
+          "projected_margin_home": 19.942,
+          "projected_total": 151.961,
+          "total_edge": 6.461000000000013,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 2.3049999999999997,
+          "ats_lean": "away",
+          "projected_away_points": 66.63,
+          "projected_home_points": 81.82,
+          "projected_margin_home": 15.195,
+          "projected_total": 148.446,
+          "total_edge": 2.945999999999998,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 1.6080000000000005,
+          "ats_lean": "away",
+          "projected_away_points": 66.61,
+          "projected_home_points": 82.5,
+          "projected_margin_home": 15.892,
+          "projected_total": 149.113,
+          "total_edge": 3.6129999999999995,
+          "total_lean": "over",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "372932",
+      "espn_id": "401911253",
+      "home": "Saint Louis",
+      "away": "Grand Canyon",
+      "tip_utc": "2026-11-25T02:30Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": 1.5,
+        "total": 166.5,
+        "as_of_utc": "2026-11-24T17:55:12.0117930Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 8.325,
+          "ats_lean": "home",
+          "projected_away_points": 75.66,
+          "projected_home_points": 82.49,
+          "projected_margin_home": 6.825,
+          "projected_total": 158.152,
+          "total_edge": 8.348000000000013,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 4.092,
+          "ats_lean": "away",
+          "projected_away_points": 83.47,
+          "projected_home_points": 77.88,
+          "projected_margin_home": -5.592,
+          "projected_total": 161.349,
+          "total_edge": 5.1510000000000105,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 3.487,
+          "ats_lean": "home",
+          "projected_away_points": 80.08,
+          "projected_home_points": 82.06,
+          "projected_margin_home": 1.987,
+          "projected_total": 162.138,
+          "total_edge": 4.361999999999995,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 3.3120000000000003,
+          "ats_lean": "away",
+          "projected_away_points": 84.01,
+          "projected_home_points": 79.2,
+          "projected_margin_home": -4.812,
+          "projected_total": 163.211,
+          "total_edge": 3.2889999999999873,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 4.4239999999999995,
+          "ats_lean": "home",
+          "projected_away_points": 80.92,
+          "projected_home_points": 83.85,
+          "projected_margin_home": 2.924,
+          "projected_total": 164.77,
+          "total_edge": 1.7299999999999898,
+          "total_lean": "under",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "372933",
+      "espn_id": "401906762",
+      "home": "Alabama",
+      "away": "Baylor",
+      "tip_utc": "2026-11-25T03:00Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": -1.5,
+        "total": 174.5,
+        "as_of_utc": "2026-11-24T17:55:12.0147998Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 2.731,
+          "ats_lean": "home",
+          "projected_away_points": 77.55,
+          "projected_home_points": 81.78,
+          "projected_margin_home": 4.231,
+          "projected_total": 159.338,
+          "total_edge": 15.162000000000006,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 0.46399999999999997,
+          "ats_lean": "home",
+          "projected_away_points": 82.43,
+          "projected_home_points": 84.4,
+          "projected_margin_home": 1.964,
+          "projected_total": 166.83,
+          "total_edge": 7.6699999999999875,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 1.6509999999999998,
+          "ats_lean": "home",
+          "projected_away_points": 81.86,
+          "projected_home_points": 85.01,
+          "projected_margin_home": 3.151,
+          "projected_total": 166.876,
+          "total_edge": 7.623999999999995,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 2.552,
+          "ats_lean": "away",
+          "projected_away_points": 82.72,
+          "projected_home_points": 81.67,
+          "projected_margin_home": -1.052,
+          "projected_total": 164.395,
+          "total_edge": 10.10499999999999,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 1.376,
+          "ats_lean": "away",
+          "projected_away_points": 82.27,
+          "projected_home_points": 82.4,
+          "projected_margin_home": 0.124,
+          "projected_total": 164.667,
+          "total_edge": 9.832999999999998,
+          "total_lean": "under",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "372935",
+      "espn_id": "401909763",
+      "home": "Colorado",
+      "away": "Stanford",
+      "tip_utc": "2026-11-25T04:59Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": 4.5,
+        "total": 140.5,
+        "as_of_utc": "2026-11-24T17:55:12.0240060Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 5.308,
+          "ats_lean": "home",
+          "projected_away_points": 70.2,
+          "projected_home_points": 71.01,
+          "projected_margin_home": 0.808,
+          "projected_total": 141.203,
+          "total_edge": 0.703000000000003,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 1.9889999999999999,
+          "ats_lean": "away",
+          "projected_away_points": 75.62,
+          "projected_home_points": 69.13,
+          "projected_margin_home": -6.489,
+          "projected_total": 144.746,
+          "total_edge": 4.246000000000009,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 3.399,
+          "ats_lean": "home",
+          "projected_away_points": 72.44,
+          "projected_home_points": 71.34,
+          "projected_margin_home": -1.101,
+          "projected_total": 143.777,
+          "total_edge": 3.276999999999987,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 3.6189999999999998,
+          "ats_lean": "away",
+          "projected_away_points": 75.32,
+          "projected_home_points": 67.2,
+          "projected_margin_home": -8.119,
+          "projected_total": 142.527,
+          "total_edge": 2.026999999999987,
+          "total_lean": "over",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 1.65,
+          "ats_lean": "home",
+          "projected_away_points": 72.49,
+          "projected_home_points": 69.64,
+          "projected_margin_home": -2.85,
+          "projected_total": 142.128,
+          "total_edge": 1.627999999999986,
+          "total_lean": "over",
+          "training_games": 31259
+        }
+      }
+    },
+    {
+      "id": "372936",
+      "espn_id": "401909800",
+      "home": "Kansas State",
+      "away": "Gonzaga",
+      "tip_utc": "2026-11-25T05:30Z",
+      "market": {
+        "provider": "DraftKings via ESPN",
+        "home_spread": 16.5,
+        "total": 157.5,
+        "as_of_utc": "2026-11-24T17:55:12.0270364Z"
+      },
+      "models": {
+        "baseline": {
+          "ats_edge": 25.099,
+          "ats_lean": "home",
+          "projected_away_points": 70.21,
+          "projected_home_points": 78.81,
+          "projected_margin_home": 8.599,
+          "projected_total": 149.026,
+          "total_edge": 8.47399999999999,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_v2": {
+          "ats_edge": 11.155000000000001,
+          "ats_lean": "home",
+          "projected_away_points": 79.9,
+          "projected_home_points": 74.55,
+          "projected_margin_home": -5.345,
+          "projected_total": 154.455,
+          "total_edge": 3.0449999999999875,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_opp_v3": {
+          "ats_edge": 10.216000000000001,
+          "ats_lean": "home",
+          "projected_away_points": 80.6,
+          "projected_home_points": 74.32,
+          "projected_margin_home": -6.284,
+          "projected_total": 154.922,
+          "total_edge": 2.578000000000003,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_rot_v4": {
+          "ats_edge": 10.583,
+          "ats_lean": "home",
+          "projected_away_points": 80.05,
+          "projected_home_points": 74.14,
+          "projected_margin_home": -5.917,
+          "projected_total": 154.187,
+          "total_edge": 3.312999999999988,
+          "total_lean": "under",
+          "training_games": 31259
+        },
+        "player_all_v4": {
+          "ats_edge": 9.643,
+          "ats_lean": "home",
+          "projected_away_points": 80.9,
+          "projected_home_points": 74.04,
+          "projected_margin_home": -6.857,
+          "projected_total": 154.943,
+          "total_edge": 2.556999999999988,
+          "total_lean": "under",
+          "training_games": 31259
+        }
+      }
+    }
+  ]
+}
