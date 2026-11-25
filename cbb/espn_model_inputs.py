@@ -63,7 +63,12 @@ def main():
             sides = {s["homeAway"]:s for s in c["competitors"]}
             if set(sides)!={"home","away"}:
                 raise ValueError(f"Malformed sides {eid}")
+            if any(norm(s["team"].get("location")) in ("tbd","tba","tobedetermined","")
+                   for s in sides.values()):
+                continue
             teams = {k:team(v["team"]) for k,v in sides.items()}
+            if teams["home"] == teams["away"]:
+                raise ValueError(f"Identical teams for event {eid}")
             tip = utc_date(c["date"])
             matches = [i for i,t in historic[frozenset(teams.values())].items() if abs((t-tip).total_seconds())<=6*3600]
             if eid in source_ids:
