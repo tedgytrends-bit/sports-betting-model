@@ -54,3 +54,19 @@ jobs:
           name: five-model-espn-candidate
           path: cbb/outputs/prospective/latest_capture.json
           if-no-files-found: error
+      - name: Check production state and stage immutable records
+        run: |
+          git -C archive pull --ff-only origin cbb-prospective
+          python -m cbb.espn_capture_release
+      - name: Atomically publish tested projections
+        working-directory: archive
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@users.noreply.github.com
+          git add cbb/prospective/2027
+          git commit -m "Publish five-model ESPN pretip capture"
+          for attempt in 1 2 3; do
+            git push origin HEAD:cbb-prospective && exit 0
+            git pull --rebase origin cbb-prospective || exit 1
+          done
+          exit 1
