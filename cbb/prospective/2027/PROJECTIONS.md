@@ -1,6 +1,6 @@
 # Tedgy Trends CBB — Upcoming Projections
 
-**Updated: November 25, 2026, 01:08 PM CT**
+**Updated: November 25, 2026, 01:11 PM CT**
 
 **Latest projections** update with new results, roster inputs and observed sportsbook lines. The originally frozen pretip forecasts used for the official research scorecard never change.
 
