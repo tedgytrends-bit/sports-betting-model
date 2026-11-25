@@ -69,6 +69,7 @@ def update_roster(team_id):
             raise
         if isinstance(exc,requests.RequestException) and not isinstance(exc,requests.HTTPError):
             raise
+        path.unlink(missing_ok=True)
         return "missing"
     data["_captured_at"] = now.isoformat()
     save(path,data)
