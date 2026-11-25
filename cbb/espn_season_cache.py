@@ -95,6 +95,7 @@ def main():
             if c["status"]["type"]["name"]=="STATUS_FINAL":
                 finals.add(str(e["id"]))
         if not cached:
+            data["scoreboard_observed_utc"] = datetime.now(ZoneInfo("UTC")).isoformat()
             save(path, data)
         day += timedelta(days=1)
     with ThreadPoolExecutor(max_workers=4) as pool:
