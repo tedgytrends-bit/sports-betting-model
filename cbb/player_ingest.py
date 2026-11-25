@@ -43,7 +43,7 @@ def get_collection(session, path, params, api_key):
     raise RuntimeError(f"Could not fetch {path}")
 
 
-def player_inputs(season, root="cbb/data/raw", refresh=False):
+def player_inputs(season, root="cbb/data/raw", refresh=False, refresh_roster_only=False):
     if season < 2022:
         raise ValueError("Player priors are supported from 2022 onward")
     folder = Path(root) / str(season)
@@ -53,7 +53,8 @@ def player_inputs(season, root="cbb/data/raw", refresh=False):
     out = {}
     for name, endpoint, selector in ENDPOINTS:
         path = folder / (name + ".json")
-        if path.exists() and not refresh:
+        refresh_this = refresh or (refresh_roster_only and name == "rosters")
+        if path.exists() and not refresh_this:
             out[name] = json.loads(path.read_text(encoding="utf-8"))
             continue
         if not key:

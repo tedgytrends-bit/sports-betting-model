@@ -1,0 +1,37 @@
+name: CBB daily ESPN research board
+on:
+  workflow_dispatch:
+  workflow_call:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/cbb-espn-daily-board.yml', 'cbb/espn_daily_board.py']
+permissions:
+  contents: write
+concurrency:
+  group: cbb-2027-shadow-capture
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          ref: cbb-prospective
+          path: archive
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt pytest
+      - run: python -m pytest -q cbb/tests
+      - run: python -m cbb.espn_daily_board
+      - working-directory: archive
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@users.noreply.github.com
+          git add cbb/prospective/2027/research/
+          git diff --cached --quiet && exit 0
+          git -c user.name=github-actions -c user.email=github-actions@users.noreply.github.com commit -m "Refresh daily ESPN board and archived score comparisons"
+          git pull --rebase origin cbb-prospective
+          git push origin HEAD:cbb-prospective

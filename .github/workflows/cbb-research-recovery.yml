@@ -1,0 +1,47 @@
+name: CBB archived research recovery
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [".github/workflows/cbb-research-recovery.yml", "cbb/research_recovery.py", "cbb/reconstruction_markets.py", "cbb/espn_grade.py"]
+permissions:
+  contents: write
+concurrency:
+  group: cbb-november-recovery
+  cancel-in-progress: false
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          ref: cbb-prospective
+          path: archive
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt pytest
+      - run: python -m pytest -q cbb/tests
+      - run: python -m cbb.research_recovery
+      - uses: actions/upload-artifact@v4
+        with:
+          name: research-recovery
+          path: research_recovery.json
+      - name: Publish dated research recovery
+        working-directory: archive
+        run: |
+          git pull --ff-only origin cbb-prospective
+          mkdir -p cbb/prospective/2027/research
+          cp ../research_recovery.json cbb/prospective/2027/research/2026-11-22-to-24.json
+          cp ../research_recovery.md cbb/prospective/2027/research/2026-11-22-to-24.md
+          git add cbb/prospective/2027/research/2026-11-22-to-24.{json,md}
+          git diff --cached --quiet && exit 0
+          git -c user.name=github-actions -c user.email=github-actions@users.noreply.github.com commit -m "Publish archived CBB research recovery for November 22–24"
+          git config user.name github-actions
+          git config user.email github-actions@users.noreply.github.com
+          for attempt in 1 2 3; do
+            git push origin HEAD:cbb-prospective && exit 0
+            git pull --rebase origin cbb-prospective || exit 1
+          done
+          exit 1

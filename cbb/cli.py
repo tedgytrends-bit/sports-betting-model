@@ -29,10 +29,11 @@ def main():
     ap.add_argument("--raw-dir",default="cbb/data/raw")
     ap.add_argument("--out-dir",default="cbb/outputs")
     ap.add_argument("--refresh",action="store_true")
+    ap.add_argument("--through-days",type=int,default=None,help="When refreshing current season, fetch through this many days from UTC now (month bounded)")
     args=ap.parse_args()
     if args.command=="fetch":
         for year in args.seasons:
-            fetch_season(year,args.raw_dir,args.refresh)
+            fetch_season(year,args.raw_dir,args.refresh,through_days=args.through_days)
         return
     data=load_seasons(args.seasons,args.raw_dir)
     rows=pregame_rows(data["games"],data["boxes"])

@@ -1,0 +1,39 @@
+name: CBB ESPN season inputs
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '10 9 * 11,12,1,2,3,4 *'
+  push:
+    branches: [main]
+    paths: ['cbb/espn_season_cache.py', '.github/workflows/cbb-espn-season.yml']
+permissions:
+  contents: read
+concurrency:
+  group: cbb-espn-season-inputs
+  cancel-in-progress: false
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - uses: actions/cache/restore@v4
+        with:
+          path: cbb/data/espn_season
+          key: cbb-espn-season-2027-${{ github.run_id }}
+          restore-keys: cbb-espn-season-2027-
+      - run: python -m cbb.espn_season_cache
+      - uses: actions/cache/save@v4
+        if: always()
+        with:
+          path: cbb/data/espn_season
+          key: cbb-espn-season-2027-${{ github.run_id }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: espn-season-coverage
+          path: cbb/data/espn_season/coverage.json
+          if-no-files-found: error

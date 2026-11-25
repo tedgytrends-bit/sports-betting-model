@@ -1,0 +1,21 @@
+name: CBB 2026-27 Pregame Shadow Snapshots
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '5 13,15,18,19,22 * 11,12,1,2,3,4 *'
+  push:
+    branches: [main]
+    paths:
+      - 'cbb/prospective-trigger.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  capture:
+    uses: ./.github/workflows/cbb-espn-fit.yml
+  publish-available-projections:
+    needs: capture
+    if: failure()
+    uses: ./.github/workflows/cbb-espn-daily-board.yml
