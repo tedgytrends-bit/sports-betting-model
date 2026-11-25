@@ -68,7 +68,7 @@ def main():
                 report.append("| "+" | ".join(cells)+" |")
         report.append("")
     report.append("[Game records, final scores and market provenance](2026-11-22-to-24.json)")
-    Path("research_recovery.md").write_text("\\n".join(report)+"\\n")
+    Path("research_recovery.md").write_text("\n".join(report)+"\n")
     print("RESEARCH_RECORDS",json.dumps(result["records"]))
     for day in ("2026-11-22","2026-11-23","2026-11-24"):
         subset=[r for r in rows if r["date"]==day]
