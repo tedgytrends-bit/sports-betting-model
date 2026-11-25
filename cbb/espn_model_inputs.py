@@ -28,10 +28,15 @@ def main():
         for side in ("home","away"):
             names[norm(game[side+"Team"])].add(str(game[side+"TeamId"]))
         index(game["id"],game["startDate"],game["homeTeamId"],game["awayTeamId"])
-    for f in ARCHIVE.glob("snapshots/*.json"):
+    source_ids = {}
+    for f in sorted(ARCHIVE.glob("snapshots/*.json")):
         for g in read(f)["games"]:
+            if g.get("espn_id") or str(g["id"]).startswith("espn-"):
+                eid = str(g.get("espn_id") or str(g["id"]).removeprefix("espn-"))
+                source_ids[eid] = str(g["id"])
             for side in ("home","away"):
-                names[norm(g[side])].add(str(g[side+"_team_id"]))
+                if not str(g[side+"_team_id"]).startswith("espn-"):
+                    names[norm(g[side])].add(str(g[side+"_team_id"]))
             index(g["id"],g["tip_utc"],g["home_team_id"],g["away_team_id"])
     for r in rosters:
         if r.get("team"):
@@ -61,13 +66,15 @@ def main():
             teams = {k:team(v["team"]) for k,v in sides.items()}
             tip = utc_date(c["date"])
             matches = [i for i,t in historic[frozenset(teams.values())].items() if abs((t-tip).total_seconds())<=6*3600]
+            if eid in source_ids:
+                matches = [source_ids[eid]]
             if len(matches)>1:
                 raise ValueError(f"Ambiguous archived game {eid}")
             ident = matches[0] if matches else "espn-"+eid
             if ident in games:
                 raise ValueError(f"Duplicate mapped game {ident}")
             final = state["name"]=="STATUS_FINAL"
-            g = dict(id=ident,season=2027,startDate=c["date"],neutralSite=c.get("neutralSite",False),
+            g = dict(id=ident,espn_id=eid,season=2027,startDate=c["date"],neutralSite=c.get("neutralSite",False),
                      status="final" if final else "scheduled")
             for k,v in sides.items():
                 g[k+"TeamId"]=teams[k]
