@@ -18,8 +18,14 @@ def read(path):
 
 
 def main():
-    old = read(RAW / "games.json")
-    rosters = read(RAW / "rosters.json")
+    from cbb.training_checkpoint import INDEX, save_index
+    if (RAW / "games.json").exists():
+        old = read(RAW / "games.json")
+        save_index(old)
+    else:
+        with gzip.open(INDEX, "rt") as handle:
+            old = json.load(handle)
+    rosters = read(RAW / "rosters.json") if (RAW / "rosters.json").exists() else []
     names = defaultdict(set)
     historic = defaultdict(dict)
     def index(ident, tip, home, away):
