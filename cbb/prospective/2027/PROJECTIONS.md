@@ -1,10 +1,10 @@
 # Tedgy Trends CBB — Upcoming Projections
 
-**Updated: November 25, 2026, 12:56 PM CT**
+**Updated: November 25, 2026, 01:00 PM CT**
 
 **Latest projections** update with new results, roster inputs and observed sportsbook lines. The originally frozen pretip forecasts used for the official research scorecard never change.
 
-**Next eight days:** 409 upcoming games · **With market lines:** 56 · **Without market lines:** 353
+**Next eight days:** 400 upcoming games · **With market lines:** 51 · **Without market lines:** 349
 
 [Results and ROI](README.md) · [Frozen pretip picks](frozen/) · [All upcoming forecasts as JSON](latest.json)
 
@@ -16,31 +16,6 @@ All times Central. ATS leans show **which team and spread** the model favors; pa
 
 | Tip / matchup | Market at capture | Model | Projected score (away / home) | Projected total | ATS lean | Total lean |
 |---|---|---|---|---:|---|---|
-| 01:00 PM · **Manhattan @ NJIT** | NJIT -1.5 / Total 142.5 (Draft Kings) | Team baseline | Manhattan 63.2 / NJIT 76.1 | 139.3 | NJIT -1.5 (11.4 pt) | Under 142.5 (3.2 pt) |
-|  |  | Player v2 | Manhattan 65.5 / NJIT 68.9 | 134.4 | NJIT -1.5 (2.0 pt) | Under 142.5 (8.1 pt) |
-|  |  | Player + opponent v3 | Manhattan 66.5 / NJIT 68.7 | 135.2 | NJIT -1.5 (0.6 pt) | Under 142.5 (7.3 pt) |
-|  |  | Player + rotation v4 | Manhattan 65.3 / NJIT 62.0 | 127.3 | Manhattan +1.5 (4.9 pt) | Under 142.5 (15.2 pt) |
-|  |  | Player + opponent + rotation v4 | Manhattan 66.1 / NJIT 61.7 | 127.9 | Manhattan +1.5 (5.9 pt) | Under 142.5 (14.6 pt) |
-| 01:00 PM · **Abilene Christian @ South Dakota State** | South Dakota State -7.5 / Total 139.5 (Draft Kings) | Team baseline | Abilene Christian 65.9 / South Dakota State 78.9 | 144.8 | South Dakota State -7.5 (5.5 pt) | Over 139.5 (5.3 pt) |
-|  |  | Player v2 | Abilene Christian 66.7 / South Dakota State 79.3 | 146.0 | South Dakota State -7.5 (5.1 pt) | Over 139.5 (6.5 pt) |
-|  |  | Player + opponent v3 | Abilene Christian 67.4 / South Dakota State 77.0 | 144.4 | South Dakota State -7.5 (2.1 pt) | Over 139.5 (4.9 pt) |
-|  |  | Player + rotation v4 | Abilene Christian 66.4 / South Dakota State 77.1 | 143.5 | South Dakota State -7.5 (3.2 pt) | Over 139.5 (4.0 pt) |
-|  |  | Player + opponent + rotation v4 | Abilene Christian 67.5 / South Dakota State 74.9 | 142.4 | Abilene Christian +7.5 (0.1 pt) | Over 139.5 (2.9 pt) |
-| 01:00 PM · **Saint Peter's @ Columbia** | Columbia -12.5 / Total 125.5 (Draft Kings) | Team baseline | Saint Peter's 52.5 / Columbia 80.1 | 132.6 | Columbia -12.5 (15.2 pt) | Over 125.5 (7.1 pt) |
-|  |  | Player v2 | Saint Peter's 54.6 / Columbia 77.2 | 131.7 | Columbia -12.5 (10.1 pt) | Over 125.5 (6.2 pt) |
-|  |  | Player + opponent v3 | Saint Peter's 54.8 / Columbia 76.9 | 131.7 | Columbia -12.5 (9.6 pt) | Over 125.5 (6.2 pt) |
-|  |  | Player + rotation v4 | Saint Peter's 54.2 / Columbia 74.7 | 128.9 | Columbia -12.5 (8.0 pt) | Over 125.5 (3.4 pt) |
-|  |  | Player + opponent + rotation v4 | Saint Peter's 54.7 / Columbia 74.3 | 129.0 | Columbia -12.5 (7.2 pt) | Over 125.5 (3.5 pt) |
-| 01:00 PM · **LSU @ Arizona State** | Arizona State +3.5 / Total 145.5 (Draft Kings) | Team baseline | LSU 72.9 / Arizona State 73.9 | 146.8 | Arizona State +3.5 (4.5 pt) | Over 145.5 (1.3 pt) |
-|  |  | Player v2 | LSU 70.5 / Arizona State 80.4 | 150.9 | Arizona State +3.5 (13.4 pt) | Over 145.5 (5.4 pt) |
-|  |  | Player + opponent v3 | LSU 71.2 / Arizona State 77.6 | 148.9 | Arizona State +3.5 (9.9 pt) | Over 145.5 (3.4 pt) |
-|  |  | Player + rotation v4 | LSU 65.7 / Arizona State 77.0 | 142.8 | Arizona State +3.5 (14.8 pt) | Under 145.5 (2.8 pt) |
-|  |  | Player + opponent + rotation v4 | LSU 66.4 / Arizona State 73.8 | 140.2 | Arizona State +3.5 (11.0 pt) | Under 145.5 (5.3 pt) |
-| 01:00 PM · **Arkansas-Pine Bluff @ South Dakota** | South Dakota -21.5 / Total 150.5 (Draft Kings) | Team baseline | Arkansas-Pine Bluff 61.1 / South Dakota 97.2 | 158.3 | South Dakota -21.5 (14.5 pt) | Over 150.5 (7.8 pt) |
-|  |  | Player v2 | Arkansas-Pine Bluff 65.7 / South Dakota 93.7 | 159.3 | South Dakota -21.5 (6.5 pt) | Over 150.5 (8.8 pt) |
-|  |  | Player + opponent v3 | Arkansas-Pine Bluff 65.4 / South Dakota 93.4 | 158.8 | South Dakota -21.5 (6.5 pt) | Over 150.5 (8.3 pt) |
-|  |  | Player + rotation v4 | Arkansas-Pine Bluff 64.3 / South Dakota 86.0 | 150.3 | South Dakota -21.5 (0.2 pt) | Under 150.5 (0.2 pt) |
-|  |  | Player + opponent + rotation v4 | Arkansas-Pine Bluff 64.2 / South Dakota 86.2 | 150.3 | South Dakota -21.5 (0.5 pt) | Under 150.5 (0.2 pt) |
 | 01:30 PM · **Texas A&M @ Xavier** | Xavier +3.5 / Total 170.5 (Draft Kings) | Team baseline | Texas A&M 77.2 / Xavier 79.3 | 156.5 | Xavier +3.5 (5.7 pt) | Under 170.5 (14.0 pt) |
 |  |  | Player v2 | Texas A&M 82.5 / Xavier 82.4 | 164.8 | Xavier +3.5 (3.4 pt) | Under 170.5 (5.7 pt) |
 |  |  | Player + opponent v3 | Texas A&M 83.0 / Xavier 81.4 | 164.4 | Xavier +3.5 (1.9 pt) | Under 170.5 (6.1 pt) |
@@ -64,8 +39,8 @@ All times Central. ATS leans show **which team and spread** the model favors; pa
 | 02:00 PM · **SE Louisiana @ North Dakota** | North Dakota +1.5 / Total 142.5 (Draft Kings) | Team baseline | SE Louisiana 70.3 / North Dakota 83.0 | 153.2 | North Dakota +1.5 (14.2 pt) | Over 142.5 (10.7 pt) |
 |  |  | Player v2 | SE Louisiana 74.3 / North Dakota 77.3 | 151.5 | North Dakota +1.5 (4.5 pt) | Over 142.5 (9.0 pt) |
 |  |  | Player + opponent v3 | SE Louisiana 75.5 / North Dakota 74.9 | 150.4 | North Dakota +1.5 (0.9 pt) | Over 142.5 (7.9 pt) |
-|  |  | Player + rotation v4 | SE Louisiana 67.9 / North Dakota 73.9 | 141.9 | North Dakota +1.5 (7.5 pt) | Under 142.5 (0.6 pt) |
-|  |  | Player + opponent + rotation v4 | SE Louisiana 69.0 / North Dakota 72.0 | 141.1 | North Dakota +1.5 (4.5 pt) | Under 142.5 (1.4 pt) |
+|  |  | Player + rotation v4 | SE Louisiana 67.2 / North Dakota 70.6 | 137.8 | North Dakota +1.5 (4.8 pt) | Under 142.5 (4.7 pt) |
+|  |  | Player + opponent + rotation v4 | SE Louisiana 68.1 / North Dakota 68.8 | 137.0 | North Dakota +1.5 (2.2 pt) | Under 142.5 (5.5 pt) |
 | 02:30 PM · **Arkansas State @ Florida International** | Florida International -1.5 / Total 176.5 (Draft Kings) | Team baseline | Arkansas State 78.4 / Florida International 85.5 | 164.0 | Florida International -1.5 (5.6 pt) | Under 176.5 (12.5 pt) |
 |  |  | Player v2 | Arkansas State 77.8 / Florida International 89.5 | 167.4 | Florida International -1.5 (10.2 pt) | Under 176.5 (9.1 pt) |
 |  |  | Player + opponent v3 | Arkansas State 77.2 / Florida International 90.0 | 167.2 | Florida International -1.5 (11.4 pt) | Under 176.5 (9.3 pt) |
@@ -159,8 +134,8 @@ All times Central. ATS leans show **which team and spread** the model favors; pa
 | 06:00 PM · **UConn @ Duke** | Duke +1.5 / Total 145.5 (Draft Kings) | Team baseline | UConn 70.2 / Duke 78.6 | 148.8 | Duke +1.5 (9.9 pt) | Over 145.5 (3.3 pt) |
 |  |  | Player v2 | UConn 72.7 / Duke 76.7 | 149.4 | Duke +1.5 (5.4 pt) | Over 145.5 (3.9 pt) |
 |  |  | Player + opponent v3 | UConn 71.9 / Duke 76.5 | 148.4 | Duke +1.5 (6.1 pt) | Over 145.5 (2.9 pt) |
-|  |  | Player + rotation v4 | UConn 72.1 / Duke 76.5 | 148.6 | Duke +1.5 (5.9 pt) | Over 145.5 (3.1 pt) |
-|  |  | Player + opponent + rotation v4 | UConn 71.7 / Duke 76.8 | 148.5 | Duke +1.5 (6.5 pt) | Over 145.5 (3.0 pt) |
+|  |  | Player + rotation v4 | UConn 73.0 / Duke 75.5 | 148.5 | Duke +1.5 (4.0 pt) | Over 145.5 (3.0 pt) |
+|  |  | Player + opponent + rotation v4 | UConn 72.4 / Duke 75.9 | 148.3 | Duke +1.5 (4.9 pt) | Over 145.5 (2.8 pt) |
 | 06:00 PM · **Bellarmine @ Northern Kentucky** | Northern Kentucky -7.5 / Total 146.5 (Draft Kings) | Team baseline | Bellarmine 74.2 / Northern Kentucky 80.5 | 154.7 | Bellarmine +7.5 (1.3 pt) | Over 146.5 (8.2 pt) |
 |  |  | Player v2 | Bellarmine 75.1 / Northern Kentucky 76.1 | 151.2 | Bellarmine +7.5 (6.4 pt) | Over 146.5 (4.7 pt) |
 |  |  | Player + opponent v3 | Bellarmine 75.7 / Northern Kentucky 74.5 | 150.2 | Bellarmine +7.5 (8.7 pt) | Over 146.5 (3.7 pt) |
@@ -169,8 +144,8 @@ All times Central. ATS leans show **which team and spread** the model favors; pa
 | 06:00 PM · **SMU @ Utah State** | Utah State -4.5 / Total 162.5 (Draft Kings) | Team baseline | SMU 76.4 / Utah State 82.8 | 159.2 | Utah State -4.5 (1.9 pt) | Under 162.5 (3.3 pt) |
 |  |  | Player v2 | SMU 76.7 / Utah State 82.1 | 158.8 | Utah State -4.5 (0.9 pt) | Under 162.5 (3.7 pt) |
 |  |  | Player + opponent v3 | SMU 78.4 / Utah State 80.4 | 158.8 | SMU +4.5 (2.5 pt) | Under 162.5 (3.7 pt) |
-|  |  | Player + rotation v4 | SMU 77.7 / Utah State 81.7 | 159.4 | SMU +4.5 (0.5 pt) | Under 162.5 (3.1 pt) |
-|  |  | Player + opponent + rotation v4 | SMU 79.3 / Utah State 79.7 | 159.0 | SMU +4.5 (4.1 pt) | Under 162.5 (3.5 pt) |
+|  |  | Player + rotation v4 | SMU 77.3 / Utah State 82.8 | 160.0 | Utah State -4.5 (1.0 pt) | Under 162.5 (2.5 pt) |
+|  |  | Player + opponent + rotation v4 | SMU 79.0 / Utah State 80.5 | 159.4 | SMU +4.5 (3.0 pt) | Under 162.5 (3.1 pt) |
 | 06:00 PM · **Norfolk State @ NC State** | NC State -27.5 / Total 150.5 (Draft Kings) | Team baseline | Norfolk State 63.7 / NC State 85.3 | 149.0 | Norfolk State +27.5 (6.0 pt) | Under 150.5 (1.5 pt) |
 |  |  | Player v2 | Norfolk State 60.8 / NC State 90.5 | 151.3 | NC State -27.5 (2.2 pt) | Over 150.5 (0.8 pt) |
 |  |  | Player + opponent v3 | Norfolk State 60.0 / NC State 91.0 | 151.1 | NC State -27.5 (3.5 pt) | Over 150.5 (0.6 pt) |
@@ -182,15 +157,15 @@ All times Central. ATS leans show **which team and spread** the model favors; pa
 |  |  | Player + rotation v4 | Longwood 58.6 / George Mason 79.4 | 138.0 | George Mason -16.5 (4.3 pt) | Under 145.5 (7.5 pt) |
 |  |  | Player + opponent + rotation v4 | Longwood 60.0 / George Mason 77.8 | 137.8 | George Mason -16.5 (1.4 pt) | Under 145.5 (7.7 pt) |
 | 06:00 PM · **St. Thomas @ UNC Wilmington** | UNC Wilmington -5.5 / Total 156.5 (Draft Kings) | Team baseline | St. Thomas 75.5 / UNC Wilmington 84.1 | 159.6 | UNC Wilmington -5.5 (3.1 pt) | Over 156.5 (3.1 pt) |
-|  |  | Player v2 | St. Thomas 74.3 / UNC Wilmington 81.8 | 156.1 | UNC Wilmington -5.5 (1.9 pt) | Under 156.5 (0.4 pt) |
-|  |  | Player + opponent v3 | St. Thomas 75.9 / UNC Wilmington 80.8 | 156.8 | St. Thomas +5.5 (0.6 pt) | Over 156.5 (0.3 pt) |
-|  |  | Player + rotation v4 | St. Thomas 75.1 / UNC Wilmington 82.2 | 157.3 | UNC Wilmington -5.5 (1.5 pt) | Over 156.5 (0.8 pt) |
-|  |  | Player + opponent + rotation v4 | St. Thomas 76.8 / UNC Wilmington 80.8 | 157.5 | St. Thomas +5.5 (1.5 pt) | Over 156.5 (1.0 pt) |
+|  |  | Player v2 | St. Thomas 75.8 / UNC Wilmington 83.8 | 159.6 | UNC Wilmington -5.5 (2.4 pt) | Over 156.5 (3.1 pt) |
+|  |  | Player + opponent v3 | St. Thomas 77.3 / UNC Wilmington 82.8 | 160.1 | St. Thomas +5.5 (0.0 pt) | Over 156.5 (3.6 pt) |
+|  |  | Player + rotation v4 | St. Thomas 76.1 / UNC Wilmington 83.7 | 159.7 | UNC Wilmington -5.5 (2.1 pt) | Over 156.5 (3.2 pt) |
+|  |  | Player + opponent + rotation v4 | St. Thomas 77.8 / UNC Wilmington 82.2 | 160.0 | St. Thomas +5.5 (1.1 pt) | Over 156.5 (3.5 pt) |
 | 06:00 PM · **Northern Illinois @ SIU Edwardsville** | SIU Edwardsville +3.5 / Total 137.5 (Draft Kings) | Team baseline | Northern Illinois 69.2 / SIU Edwardsville 75.5 | 144.8 | SIU Edwardsville +3.5 (9.8 pt) | Over 137.5 (7.3 pt) |
 |  |  | Player v2 | Northern Illinois 70.7 / SIU Edwardsville 71.9 | 142.6 | SIU Edwardsville +3.5 (4.7 pt) | Over 137.5 (5.1 pt) |
 |  |  | Player + opponent v3 | Northern Illinois 71.5 / SIU Edwardsville 70.5 | 142.1 | SIU Edwardsville +3.5 (2.5 pt) | Over 137.5 (4.6 pt) |
-|  |  | Player + rotation v4 | Northern Illinois 70.2 / SIU Edwardsville 69.0 | 139.3 | SIU Edwardsville +3.5 (2.3 pt) | Over 137.5 (1.8 pt) |
-|  |  | Player + opponent + rotation v4 | Northern Illinois 71.2 / SIU Edwardsville 67.6 | 138.8 | Northern Illinois -3.5 (0.1 pt) | Over 137.5 (1.3 pt) |
+|  |  | Player + rotation v4 | Northern Illinois 69.7 / SIU Edwardsville 70.0 | 139.7 | SIU Edwardsville +3.5 (3.7 pt) | Over 137.5 (2.2 pt) |
+|  |  | Player + opponent + rotation v4 | Northern Illinois 70.8 / SIU Edwardsville 68.2 | 139.0 | SIU Edwardsville +3.5 (0.8 pt) | Over 137.5 (1.5 pt) |
 | 06:00 PM · **South Carolina Upstate @ The Citadel** | The Citadel -3.5 / Total 138.5 (Draft Kings) | Team baseline | South Carolina Upstate 65.3 / The Citadel 81.6 | 146.9 | The Citadel -3.5 (12.8 pt) | Over 138.5 (8.4 pt) |
 |  |  | Player v2 | South Carolina Upstate 66.8 / The Citadel 79.5 | 146.3 | The Citadel -3.5 (9.2 pt) | Over 138.5 (7.8 pt) |
 |  |  | Player + opponent v3 | South Carolina Upstate 67.2 / The Citadel 77.5 | 144.6 | The Citadel -3.5 (6.8 pt) | Over 138.5 (6.1 pt) |
@@ -214,8 +189,8 @@ All times Central. ATS leans show **which team and spread** the model favors; pa
 | 07:30 PM · **Eastern Michigan @ UTEP** | UTEP -1.5 / Total 131.5 (Draft Kings) | Team baseline | Eastern Michigan 68.3 / UTEP 71.2 | 139.5 | UTEP -1.5 (1.4 pt) | Over 131.5 (8.0 pt) |
 |  |  | Player v2 | Eastern Michigan 69.9 / UTEP 73.5 | 143.4 | UTEP -1.5 (2.1 pt) | Over 131.5 (11.9 pt) |
 |  |  | Player + opponent v3 | Eastern Michigan 69.9 / UTEP 71.2 | 141.0 | Eastern Michigan +1.5 (0.2 pt) | Over 131.5 (9.5 pt) |
-|  |  | Player + rotation v4 | Eastern Michigan 61.6 / UTEP 62.4 | 124.0 | Eastern Michigan +1.5 (0.7 pt) | Under 131.5 (7.5 pt) |
-|  |  | Player + opponent + rotation v4 | Eastern Michigan 61.5 / UTEP 60.2 | 121.7 | Eastern Michigan +1.5 (2.7 pt) | Under 131.5 (9.8 pt) |
+|  |  | Player + rotation v4 | Eastern Michigan 60.9 / UTEP 61.7 | 122.7 | Eastern Michigan +1.5 (0.7 pt) | Under 131.5 (8.8 pt) |
+|  |  | Player + opponent + rotation v4 | Eastern Michigan 60.8 / UTEP 59.4 | 120.2 | Eastern Michigan +1.5 (2.9 pt) | Under 131.5 (11.3 pt) |
 | 08:00 PM · **Eastern Washington @ Loyola Marymount** | Loyola Marymount -7.5 / Total 152.5 (Draft Kings) | Team baseline | Eastern Washington 68.1 / Loyola Marymount 85.9 | 154.0 | Loyola Marymount -7.5 (10.3 pt) | Over 152.5 (1.5 pt) |
 |  |  | Player v2 | Eastern Washington 70.8 / Loyola Marymount 85.2 | 156.0 | Loyola Marymount -7.5 (7.0 pt) | Over 152.5 (3.5 pt) |
 |  |  | Player + opponent v3 | Eastern Washington 72.8 / Loyola Marymount 83.1 | 155.8 | Loyola Marymount -7.5 (2.8 pt) | Over 152.5 (3.3 pt) |
@@ -239,8 +214,8 @@ All times Central. ATS leans show **which team and spread** the model favors; pa
 | 09:30 PM · **Pacific @ Jacksonville State** | Jacksonville State +3.5 / Total 132.5 (Draft Kings) | Team baseline | Pacific 73.0 / Jacksonville State 68.3 | 141.3 | Pacific -3.5 (1.1 pt) | Over 132.5 (8.8 pt) |
 |  |  | Player v2 | Pacific 74.3 / Jacksonville State 65.1 | 139.4 | Pacific -3.5 (5.7 pt) | Over 132.5 (6.9 pt) |
 |  |  | Player + opponent v3 | Pacific 72.1 / Jacksonville State 68.0 | 140.1 | Pacific -3.5 (0.6 pt) | Over 132.5 (7.6 pt) |
-|  |  | Player + rotation v4 | Pacific 69.0 / Jacksonville State 62.6 | 131.7 | Pacific -3.5 (2.9 pt) | Under 132.5 (0.8 pt) |
-|  |  | Player + opponent + rotation v4 | Pacific 67.0 / Jacksonville State 64.7 | 131.7 | Jacksonville State +3.5 (1.2 pt) | Under 132.5 (0.8 pt) |
+|  |  | Player + rotation v4 | Pacific 67.2 / Jacksonville State 60.7 | 127.9 | Pacific -3.5 (3.0 pt) | Under 132.5 (4.6 pt) |
+|  |  | Player + opponent + rotation v4 | Pacific 65.1 / Jacksonville State 62.9 | 128.0 | Jacksonville State +3.5 (1.3 pt) | Under 132.5 (4.5 pt) |
 | 10:59 PM · **Incarnate Word @ Hawai'i** | Hawai'i -16.5 / Total 139.5 (Draft Kings) | Team baseline | Incarnate Word 63.4 / Hawai'i 82.5 | 145.9 | Hawai'i -16.5 (2.6 pt) | Over 139.5 (6.4 pt) |
 |  |  | Player v2 | Incarnate Word 63.7 / Hawai'i 80.8 | 144.5 | Hawai'i -16.5 (0.5 pt) | Over 139.5 (5.0 pt) |
 |  |  | Player + opponent v3 | Incarnate Word 64.2 / Hawai'i 79.0 | 143.1 | Incarnate Word +16.5 (1.7 pt) | Over 139.5 (3.6 pt) |
