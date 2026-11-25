@@ -1,6 +1,6 @@
 # Tedgy Trends CBB — Upcoming Projections
 
-**Updated: November 25, 2026, 01:11 PM CT**
+**Updated: November 25, 2026, 01:13 PM CT**
 
 **Latest projections** update with new results, roster inputs and observed sportsbook lines. The originally frozen pretip forecasts used for the official research scorecard never change.
 
@@ -36,11 +36,11 @@ All times Central. ATS leans show **which team and spread** the model favors; pa
 |  |  | Player + opponent v3 | Akron 72.4 / App State 64.4 | 136.7 | Akron -5.5 (2.5 pt) | Over 134.5 (2.2 pt) |
 |  |  | Player + rotation v4 | Akron 70.9 / App State 59.7 | 130.6 | Akron -5.5 (5.7 pt) | Under 134.5 (4.0 pt) |
 |  |  | Player + opponent + rotation v4 | Akron 70.7 / App State 60.7 | 131.4 | Akron -5.5 (4.4 pt) | Under 134.5 (3.1 pt) |
-| 02:00 PM · **SE Louisiana @ North Dakota** | North Dakota +1.5 / Total 142.5 (DraftKings) | Team baseline | SE Louisiana 70.3 / North Dakota 83.0 | 153.2 | North Dakota +1.5 (14.2 pt) | Over 142.5 (10.7 pt) |
-|  |  | Player v2 | SE Louisiana 74.3 / North Dakota 77.3 | 151.5 | North Dakota +1.5 (4.5 pt) | Over 142.5 (9.0 pt) |
-|  |  | Player + opponent v3 | SE Louisiana 75.5 / North Dakota 74.9 | 150.4 | North Dakota +1.5 (0.9 pt) | Over 142.5 (7.9 pt) |
-|  |  | Player + rotation v4 | SE Louisiana 67.2 / North Dakota 70.6 | 137.8 | North Dakota +1.5 (4.8 pt) | Under 142.5 (4.7 pt) |
-|  |  | Player + opponent + rotation v4 | SE Louisiana 68.1 / North Dakota 68.8 | 137.0 | North Dakota +1.5 (2.2 pt) | Under 142.5 (5.5 pt) |
+| 02:00 PM · **SE Louisiana @ North Dakota** | North Dakota +1.5 / Total 140.5 (DraftKings) | Team baseline | SE Louisiana 70.3 / North Dakota 83.0 | 153.2 | North Dakota +1.5 (14.2 pt) | Over 140.5 (12.7 pt) |
+|  |  | Player v2 | SE Louisiana 74.3 / North Dakota 77.3 | 151.5 | North Dakota +1.5 (4.5 pt) | Over 140.5 (11.0 pt) |
+|  |  | Player + opponent v3 | SE Louisiana 75.5 / North Dakota 74.9 | 150.4 | North Dakota +1.5 (0.9 pt) | Over 140.5 (9.9 pt) |
+|  |  | Player + rotation v4 | SE Louisiana 67.2 / North Dakota 70.6 | 137.8 | North Dakota +1.5 (4.8 pt) | Under 140.5 (2.7 pt) |
+|  |  | Player + opponent + rotation v4 | SE Louisiana 68.1 / North Dakota 68.8 | 137.0 | North Dakota +1.5 (2.2 pt) | Under 140.5 (3.5 pt) |
 | 02:30 PM · **Arkansas State @ Florida International** | Florida International -1.5 / Total 176.5 (DraftKings) | Team baseline | Arkansas State 78.4 / Florida International 85.5 | 164.0 | Florida International -1.5 (5.6 pt) | Under 176.5 (12.5 pt) |
 |  |  | Player v2 | Arkansas State 77.8 / Florida International 89.5 | 167.4 | Florida International -1.5 (10.2 pt) | Under 176.5 (9.1 pt) |
 |  |  | Player + opponent v3 | Arkansas State 77.2 / Florida International 90.0 | 167.2 | Florida International -1.5 (11.4 pt) | Under 176.5 (9.3 pt) |
