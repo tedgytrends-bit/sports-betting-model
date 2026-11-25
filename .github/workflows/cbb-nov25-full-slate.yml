@@ -1,0 +1,36 @@
+name: Recover full November 25 slate
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/cbb-nov25-full-slate.yml']
+permissions:
+  contents: write
+jobs:
+  board:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          ref: cbb-prospective
+          path: archive
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - uses: actions/cache/restore@v4
+        with:
+          path: cbb/data/espn_season
+          key: cbb-espn-season-2027-replay
+          restore-keys: cbb-espn-season-2027-
+      - run: python -m cbb.espn_season_cache && python -m cbb.espn_model_inputs && python -m cbb.nov25_full_slate
+      - working-directory: archive
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@users.noreply.github.com
+          git add cbb/prospective/2027/research/2026-11-25-full-slate.md
+          git diff --cached --quiet && exit 0
+          git commit -m "Publish complete November 25 game projections"
+          git pull --rebase --autostash origin cbb-prospective
+          git push origin HEAD:cbb-prospective
