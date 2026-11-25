@@ -57,7 +57,8 @@ def main():
         return team_ids[eid]
     used = set()
     for f in sorted((ROOT/"scoreboards").glob("*.json")):
-        for e in read(f)["events"]:
+        scoreboard = read(f)
+        for e in scoreboard["events"]:
             eid = str(e["id"])
             if eid in used:
                 continue
@@ -85,7 +86,7 @@ def main():
             if ident in games:
                 raise ValueError(f"Duplicate mapped game {ident}")
             final = state["name"]=="STATUS_FINAL"
-            g = dict(id=ident,espn_id=eid,season=2027,startDate=c["date"],neutralSite=c.get("neutralSite",False),
+            g = dict(id=ident,espn_id=eid,market_observed_utc=scoreboard.get("scoreboard_observed_utc"),season=2027,startDate=c["date"],neutralSite=c.get("neutralSite",False),
                      status="final" if final else "scheduled")
             for k,v in sides.items():
                 g[k+"TeamId"]=teams[k]
