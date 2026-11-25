@@ -7,7 +7,8 @@
     "home": "Illinois Fighting Illini",
     "home_points": 133,
     "away": "Winthrop Eagles",
-    "away_points": 83
+    "away_points": 83,
+    "model_game_id": "372905"
   },
   {
     "source": "ESPN",
@@ -17,7 +18,8 @@
     "home": "Arizona Wildcats",
     "home_points": 96,
     "away": "Colorado State Rams",
-    "away_points": 83
+    "away_points": 83,
+    "model_game_id": "372912"
   },
   {
     "source": "ESPN",
@@ -27,7 +29,8 @@
     "home": "Kansas Jayhawks",
     "home_points": 84,
     "away": "Denver Pioneers",
-    "away_points": 67
+    "away_points": 67,
+    "model_game_id": "372909"
   },
   {
     "source": "ESPN",
@@ -37,7 +40,8 @@
     "home": "BYU Cougars",
     "home_points": 83,
     "away": "Washington Huskies",
-    "away_points": 77
+    "away_points": 77,
+    "model_game_id": "375258"
   },
   {
     "source": "ESPN",
@@ -47,7 +51,8 @@
     "home": "App State Mountaineers",
     "home_points": 65,
     "away": "St. Bonaventure Bonnies",
-    "away_points": 71
+    "away_points": 71,
+    "model_game_id": "378095"
   },
   {
     "source": "ESPN",
@@ -57,7 +62,8 @@
     "home": "Davidson Wildcats",
     "home_points": 79,
     "away": "Northern Iowa Panthers",
-    "away_points": 48
+    "away_points": 48,
+    "model_game_id": "375251"
   },
   {
     "source": "ESPN",
@@ -67,7 +73,8 @@
     "home": "East Carolina Pirates",
     "home_points": 76,
     "away": "Indiana State Sycamores",
-    "away_points": 77
+    "away_points": 77,
+    "model_game_id": "378698"
   },
   {
     "source": "ESPN",
@@ -77,7 +84,8 @@
     "home": "Eastern Illinois Panthers",
     "home_points": 83,
     "away": "IU South Bend Titans",
-    "away_points": 66
+    "away_points": 66,
+    "model_game_id": "375252"
   },
   {
     "source": "ESPN",
@@ -87,7 +95,8 @@
     "home": "Florida International Panthers",
     "home_points": 79,
     "away": "Long Beach State Beach",
-    "away_points": 75
+    "away_points": 75,
+    "model_game_id": "375253"
   },
   {
     "source": "ESPN",
@@ -97,7 +106,8 @@
     "home": "Wright State Raiders",
     "home_points": 66,
     "away": "Akron Zips",
-    "away_points": 64
+    "away_points": 64,
+    "model_game_id": "378096"
   },
   {
     "source": "ESPN",
@@ -107,7 +117,8 @@
     "home": "Florida Gulf Coast Eagles",
     "home_points": 58,
     "away": "Charlotte 49ers",
-    "away_points": 71
+    "away_points": 71,
+    "model_game_id": "375254"
   },
   {
     "source": "ESPN",
@@ -117,7 +128,8 @@
     "home": "Oregon State Beavers",
     "home_points": 69,
     "away": "Tulsa Golden Hurricane",
-    "away_points": 66
+    "away_points": 66,
+    "model_game_id": "375255"
   },
   {
     "source": "ESPN",
@@ -127,7 +139,8 @@
     "home": "Clemson Tigers",
     "home_points": 62,
     "away": "Ole Miss Rebels",
-    "away_points": 82
+    "away_points": 82,
+    "model_game_id": "375256"
   },
   {
     "source": "ESPN",
@@ -137,7 +150,8 @@
     "home": "Grambling Tigers",
     "home_points": 126,
     "away": "Ecclesia Royals",
-    "away_points": 45
+    "away_points": 45,
+    "model_game_id": "378094"
   },
   {
     "source": "ESPN",
@@ -147,7 +161,8 @@
     "home": "Southern Illinois Salukis",
     "home_points": 76,
     "away": "Middle Tennessee Blue Raiders",
-    "away_points": 77
+    "away_points": 77,
+    "model_game_id": "378697"
   },
   {
     "source": "ESPN",
@@ -157,7 +172,8 @@
     "home": "IU Indianapolis Jaguars",
     "home_points": 82,
     "away": "William & Mary Tribe",
-    "away_points": 87
+    "away_points": 87,
+    "model_game_id": "375245"
   },
   {
     "source": "ESPN",
@@ -167,7 +183,8 @@
     "home": "Arkansas State Red Wolves",
     "home_points": 104,
     "away": "Southern Utah Thunderbirds",
-    "away_points": 102
+    "away_points": 102,
+    "model_game_id": "378093"
   },
   {
     "source": "ESPN",
@@ -177,7 +194,8 @@
     "home": "Georgia State Panthers",
     "home_points": 73,
     "away": "Tulane Green Wave",
-    "away_points": 63
+    "away_points": 63,
+    "model_game_id": "375257"
   },
   {
     "source": "ESPN",
@@ -187,7 +205,8 @@
     "home": "Belmont Bruins",
     "home_points": 68,
     "away": "Yale Bulldogs",
-    "away_points": 60
+    "away_points": 60,
+    "model_game_id": "378097"
   },
   {
     "source": "ESPN",
@@ -197,7 +216,8 @@
     "home": "Nevada Wolf Pack",
     "home_points": 71,
     "away": "San Francisco Dons",
-    "away_points": 62
+    "away_points": 62,
+    "model_game_id": "372910"
   },
   {
     "source": "ESPN",
@@ -207,7 +227,8 @@
     "home": "UT Martin Skyhawks",
     "home_points": 90,
     "away": "Temple Owls",
-    "away_points": 81
+    "away_points": 81,
+    "model_game_id": "espn-401921210"
   },
   {
     "source": "ESPN",
@@ -217,7 +238,8 @@
     "home": "Youngstown State Penguins",
     "home_points": 69,
     "away": "Maryland Eastern Shore Hawks",
-    "away_points": 65
+    "away_points": 65,
+    "model_game_id": "375247"
   },
   {
     "source": "ESPN",
@@ -227,7 +249,8 @@
     "home": "Buffalo Bulls",
     "home_points": 93,
     "away": "RIT Tigers",
-    "away_points": 47
+    "away_points": 47,
+    "model_game_id": "372908"
   },
   {
     "source": "ESPN",
@@ -237,7 +260,8 @@
     "home": "Howard Bison",
     "home_points": 101,
     "away": "Notre Dame (MD) Gators",
-    "away_points": 73
+    "away_points": 73,
+    "model_game_id": "378679"
   },
   {
     "source": "ESPN",
@@ -247,7 +271,8 @@
     "home": "Ball State Cardinals",
     "home_points": 94,
     "away": "Spalding Pelicans",
-    "away_points": 36
+    "away_points": 36,
+    "model_game_id": "378098"
   },
   {
     "source": "ESPN",
@@ -257,7 +282,8 @@
     "home": "East Tennessee State Buccaneers",
     "home_points": 108,
     "away": "Kentucky State Thorobreds",
-    "away_points": 56
+    "away_points": 56,
+    "model_game_id": "375242"
   },
   {
     "source": "ESPN",
@@ -267,7 +293,8 @@
     "home": "La Salle Explorers",
     "home_points": 90,
     "away": "Penn State Brandywine Lions",
-    "away_points": 42
+    "away_points": 42,
+    "model_game_id": "375243"
   },
   {
     "source": "ESPN",
@@ -277,7 +304,8 @@
     "home": "South Carolina State Bulldogs",
     "home_points": 60,
     "away": "North Carolina A&T Aggies",
-    "away_points": 62
+    "away_points": 62,
+    "model_game_id": "375260"
   },
   {
     "source": "ESPN",
@@ -287,7 +315,8 @@
     "home": "Northern Kentucky Norse",
     "home_points": 79,
     "away": "Georgia Southern Eagles",
-    "away_points": 84
+    "away_points": 84,
+    "model_game_id": "375246"
   },
   {
     "source": "ESPN",
@@ -297,7 +326,8 @@
     "home": "Le Moyne Dolphins",
     "home_points": 68,
     "away": "Mansfield Mountaineers",
-    "away_points": 58
+    "away_points": 58,
+    "model_game_id": "375261"
   },
   {
     "source": "ESPN",
@@ -307,7 +337,8 @@
     "home": "Iona Gaels",
     "home_points": 46,
     "away": "Fairleigh Dickinson Knights",
-    "away_points": 49
+    "away_points": 49,
+    "model_game_id": "375262"
   },
   {
     "source": "ESPN",
@@ -317,7 +348,8 @@
     "home": "North Florida Ospreys",
     "home_points": 66,
     "away": "Central Arkansas Bears",
-    "away_points": 80
+    "away_points": 80,
+    "model_game_id": "375263"
   },
   {
     "source": "ESPN",
@@ -327,7 +359,8 @@
     "home": "Illinois State Redbirds",
     "home_points": 99,
     "away": "Santa Clara Broncos",
-    "away_points": 102
+    "away_points": 102,
+    "model_game_id": "375264"
   },
   {
     "source": "ESPN",
@@ -337,7 +370,8 @@
     "home": "North Carolina Central Eagles",
     "home_points": 105,
     "away": "Carolina University Bruins",
-    "away_points": 46
+    "away_points": 46,
+    "model_game_id": "378099"
   },
   {
     "source": "ESPN",
@@ -347,7 +381,8 @@
     "home": "Wichita State Shockers",
     "home_points": 91,
     "away": "Texas A&M-Corpus Christi Islanders",
-    "away_points": 73
+    "away_points": 73,
+    "model_game_id": "375249"
   },
   {
     "source": "ESPN",
@@ -357,7 +392,8 @@
     "home": "North Dakota State Bison",
     "home_points": 84,
     "away": "Wisconsin Stout Blue Devils",
-    "away_points": 49
+    "away_points": 49,
+    "model_game_id": "378100"
   },
   {
     "source": "ESPN",
@@ -367,7 +403,8 @@
     "home": "Utah Valley Wolverines",
     "home_points": 72,
     "away": "Stephen F. Austin Lumberjacks",
-    "away_points": 77
+    "away_points": 77,
+    "model_game_id": "espn-401921208"
   },
   {
     "source": "ESPN",
@@ -377,7 +414,8 @@
     "home": "North Carolina Tar Heels",
     "home_points": 85,
     "away": "Monmouth Hawks",
-    "away_points": 45
+    "away_points": 45,
+    "model_game_id": "372906"
   },
   {
     "source": "ESPN",
@@ -387,7 +425,8 @@
     "home": "Idaho Vandals",
     "home_points": 88,
     "away": "Dickinson State Blue Hawks",
-    "away_points": 47
+    "away_points": 47,
+    "model_game_id": "375244"
   },
   {
     "source": "ESPN",
@@ -397,7 +436,8 @@
     "home": "Montana Grizzlies",
     "home_points": 82,
     "away": "Carroll (MT) Fighting Saints",
-    "away_points": 54
+    "away_points": 54,
+    "model_game_id": "375259"
   },
   {
     "source": "ESPN",
@@ -407,7 +447,8 @@
     "home": "Providence Friars",
     "home_points": 72,
     "away": "VCU Rams",
-    "away_points": 66
+    "away_points": 66,
+    "model_game_id": "372911"
   },
   {
     "source": "ESPN",
@@ -417,7 +458,8 @@
     "home": "Pepperdine Waves",
     "home_points": 89,
     "away": "UNC Greensboro Spartans",
-    "away_points": 62
+    "away_points": 62,
+    "model_game_id": "375241"
   },
   {
     "source": "ESPN",
@@ -427,7 +469,8 @@
     "home": "Seattle U Redhawks",
     "home_points": 76,
     "away": "Loyola Chicago Ramblers",
-    "away_points": 63
+    "away_points": 63,
+    "model_game_id": "espn-401921663"
   },
   {
     "source": "ESPN",
@@ -437,7 +480,8 @@
     "home": "UNLV Rebels",
     "home_points": 82,
     "away": "Eastern Washington Eagles",
-    "away_points": 61
+    "away_points": 61,
+    "model_game_id": "375248"
   },
   {
     "source": "ESPN",
@@ -447,7 +491,8 @@
     "home": "California Golden Bears",
     "home_points": 96,
     "away": "Alabama State Hornets",
-    "away_points": 54
+    "away_points": 54,
+    "model_game_id": "375250"
   },
   {
     "source": "ESPN",
@@ -457,6 +502,7 @@
     "home": "UC San Diego Tritons",
     "home_points": 79,
     "away": "San Jos\u00e9 State Spartans",
-    "away_points": 88
+    "away_points": 88,
+    "model_game_id": "espn-401921664"
   }
 ]

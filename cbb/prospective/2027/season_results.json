@@ -2,7 +2,7 @@
   "record_type": "prospective_shadow_results",
   "season": 2027,
   "tracked_games": 764,
-  "untracked_completed_games_since_first_capture": 341,
+  "untracked_completed_games_since_first_capture": 359,
   "grades": [
     {
       "model": "baseline",
@@ -657,8 +657,8 @@
   ],
   "caution": "Hypothetical -110 returns, fixed frozen lines, not personal bets",
   "invalid_snapshots": 0,
-  "updated_utc": "2026-11-25T19:03:07.643054Z",
+  "updated_utc": "2026-11-25T19:04:50.255620Z",
   "newly_graded": 0,
-  "newly_untracked": 0,
+  "newly_untracked": 18,
   "newly_invalid": 0
 }

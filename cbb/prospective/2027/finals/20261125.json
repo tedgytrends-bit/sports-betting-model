@@ -7,7 +7,8 @@
     "home": "Belmont Bruins",
     "home_points": 68,
     "away": "St. Bonaventure Bonnies",
-    "away_points": 71
+    "away_points": 71,
+    "model_game_id": "espn-401927399"
   },
   {
     "source": "ESPN",
@@ -17,7 +18,8 @@
     "home": "Ohio Bobcats",
     "home_points": 74,
     "away": "Rice Owls",
-    "away_points": 82
+    "away_points": 82,
+    "model_game_id": "espn-401928845"
   },
   {
     "source": "ESPN",
@@ -27,7 +29,8 @@
     "home": "Charlotte 49ers",
     "home_points": 85,
     "away": "Northern Iowa Panthers",
-    "away_points": 72
+    "away_points": 72,
+    "model_game_id": "espn-401921702"
   },
   {
     "source": "ESPN",
@@ -37,7 +40,8 @@
     "home": "Fordham Rams",
     "home_points": 104,
     "away": "Mercy Mavericks",
-    "away_points": 56
+    "away_points": 56,
+    "model_game_id": "espn-401911201"
   },
   {
     "source": "ESPN",
@@ -47,7 +51,8 @@
     "home": "Saint Joseph's Hawks",
     "home_points": 104,
     "away": "Penn State Abington Nittany Lions",
-    "away_points": 48
+    "away_points": 48,
+    "model_game_id": "espn-401920196"
   },
   {
     "source": "ESPN",
@@ -57,6 +62,7 @@
     "home": "Fairleigh Dickinson Knights",
     "home_points": 123,
     "away": "Vermont State Randolph Knights",
-    "away_points": 48
+    "away_points": 48,
+    "model_game_id": "espn-401919762"
   }
 ]

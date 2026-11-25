@@ -1,10 +1,10 @@
 # Tedgy Trends CBB — Prospective Research Results
 
-**As of November 25, 2026, 01:03 PM Central Time**
+**As of November 25, 2026, 01:04 PM Central Time**
 
 Research-only performance from projections **actually frozen before tipoff**. No historical picks are retroactively inserted.
 
-**Tracked completed games:** 764 · **Completed without valid frozen record:** 341 · **Invalid frozen records:** 0
+**Tracked completed games:** 764 · **Completed without valid frozen record:** 359 · **Invalid frozen records:** 0
 
 ## Season-to-date — all directional leans (no edge threshold)
 
@@ -95,4 +95,4 @@ Positive = the additional model reduced average point error **on identical froze
 - Untracked completed games and invalid records are disclosed, never credited as wins or losses.
 - This is a short-sample research record. Results do not establish positive expected value.
 
-[November 22–24 reconstructed research records](research/2026-11-22-to-24.json) · [Upcoming projections, projected scores and ATS/totals leans](PROJECTIONS.md) · [Machine-readable review](performance_report.json) · [Full threshold scorecard](season_results.json) · [Original frozen games](frozen/) · [Weekly audit](graded/)
+[Verified final scores by date](finals/) · [November 22–24 reconstructed research records](research/2026-11-22-to-24.md) · [Upcoming projections, projected scores and ATS/totals leans](PROJECTIONS.md) · [Machine-readable review](performance_report.json) · [Full threshold scorecard](season_results.json) · [Original frozen games](frozen/) · [Weekly audit](graded/)
