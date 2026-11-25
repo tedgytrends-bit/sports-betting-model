@@ -6,6 +6,7 @@ from zoneinfo import ZoneInfo
 import requests
 from cbb.espn_grade import match, URL
 from cbb.prospective import utc_date
+from cbb.reconstruction_markets import summarize
 
 MODELS = ("baseline","player_v2","player_opp_v3","player_rot_v4","player_all_v4")
 def main():
@@ -46,6 +47,7 @@ def main():
                 for threshold in (0,3.5):
                     if abs(edge)>=threshold: counts[(model,market,threshold,outcome)]+=1
     result={"classification":"archived_pretip_research","capture_utc":board["capture_utc"],"rows":rows,"records":{"|".join(map(str,k)):v for k,v in counts.items()}}
+    result["research_records_including_retrospective_closes"] = summarize(rows,events)
     Path("research_recovery.json").write_text(json.dumps(result,indent=2))
     print("RESEARCH_RECORDS",json.dumps(result["records"]))
     for day in ("2026-11-22","2026-11-23","2026-11-24"):
