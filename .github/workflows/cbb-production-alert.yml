@@ -1,7 +1,7 @@
 name: CBB production failure alert
 on:
   workflow_run:
-    workflows: ["CBB 2026-27 Pregame Shadow Snapshots", "CBB independent grading audit", "CBB daily ESPN research board", "CBB archived research recovery"]
+    workflows: ["CBB 2026-27 Pregame Shadow Snapshots", "CBB independent grading audit", "CBB daily ESPN research board", "CBB archived research recovery", "CBB five-model ESPN capture", "CBB ESPN season inputs"]
     types: [completed]
 permissions:
   issues: write
