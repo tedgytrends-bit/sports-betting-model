@@ -15,7 +15,13 @@ from cbb.prospective_publish import GitHubStore
 URL = "https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard"
 
 def norm(s):
-    return re.sub(r"[^a-z0-9]", "", unicodedata.normalize("NFKD", str(s)).encode("ascii", "ignore").decode().lower())
+    normalized = re.sub(r"[^a-z0-9]", "", unicodedata.normalize("NFKD", str(s)).encode("ascii", "ignore").decode().lower())
+
+    aliases = {"lancasterbiblecollege": "lancasterbible", "alicelloydcollege": "alicelloyd",
+               "indianasouthbend": "iusouthbend", "dickinsonstatend": "dickinsonstate",
+               "fredoniastate": "sunyfredonia", "carolinachristiancollege": "carolinachristian",
+               "stthomasminnesota": "stthomas"}
+    return aliases.get(normalized, normalized)
 
 def match(game, events):
     candidates = []
@@ -26,7 +32,7 @@ def match(game, events):
                 continue
             try:
                 tip = utc_date(c["date"])
-                if abs(tip - utc_date(game["tip_utc"])) > timedelta(hours=2):
+                if abs(tip - utc_date(game["tip_utc"])) > timedelta(hours=6):
                     continue
                 sides = {x["homeAway"]: x for x in c["competitors"]}
                 if len(c["competitors"]) != 2 or set(sides) != {"home", "away"}:
