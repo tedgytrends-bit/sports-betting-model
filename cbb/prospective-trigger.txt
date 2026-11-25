@@ -1,1 +1,1 @@
-2026-11-25: verify original five-model ESPN production workflow including publication and automatic fallback.
+Verify the complete five-model production path and immutability regressions, 2026-11-25.
