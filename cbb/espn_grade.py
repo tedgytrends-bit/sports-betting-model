@@ -117,8 +117,16 @@ def main():
                     if any(norm(g[k]) == norm(n) for k in ("home", "away") for n in names):
                         print("CANDIDATE", ident, event.get("id"), c.get("date"), c.get("status", {}).get("type", {}).get("name"), names)
     print("ESPN_RECOVERY", len(rows), "matched;", len(unmatched), "unmatched")
-    if args.publish and rows:
-        execute(store, rows, 2027)
+    # An archived forecast can identify a game even when no first-freeze exists.
+    # Hand the final to the original grader; it alone decides official eligibility.
+    recovery = store.read_json(root + "/research/2026-11-22-to-24.json") or {}
+    pending = {str(g["id"]):g for g in rows}
+    for recovered in recovery.get("rows", []):
+        final = recovered.get("final")
+        if final and str(final["id"]) not in known:
+            pending.setdefault(str(final["id"]), final)
+    if args.publish:
+        execute(store, list(pending.values()), 2027)
 
 if __name__ == "__main__":
     main()
