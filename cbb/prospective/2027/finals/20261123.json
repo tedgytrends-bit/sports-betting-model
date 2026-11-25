@@ -1,47 +1,14 @@
 [
   {
     "source": "ESPN",
-    "event_id": "401913530",
-    "tip_utc": "2026-11-24T01:00Z",
+    "event_id": "401921700",
+    "tip_utc": "2026-11-23T16:00Z",
     "central_date": "2026-11-23",
-    "home": "Illinois Fighting Illini",
-    "home_points": 133,
-    "away": "Winthrop Eagles",
-    "away_points": 83,
-    "model_game_id": "372905"
-  },
-  {
-    "source": "ESPN",
-    "event_id": "401909743",
-    "tip_utc": "2026-11-24T04:55Z",
-    "central_date": "2026-11-23",
-    "home": "Arizona Wildcats",
-    "home_points": 96,
-    "away": "Colorado State Rams",
-    "away_points": 83,
-    "model_game_id": "372912"
-  },
-  {
-    "source": "ESPN",
-    "event_id": "401909788",
-    "tip_utc": "2026-11-24T01:00Z",
-    "central_date": "2026-11-23",
-    "home": "Kansas Jayhawks",
-    "home_points": 84,
-    "away": "Denver Pioneers",
-    "away_points": 67,
-    "model_game_id": "372909"
-  },
-  {
-    "source": "ESPN",
-    "event_id": "401921708",
-    "tip_utc": "2026-11-23T22:00Z",
-    "central_date": "2026-11-23",
-    "home": "BYU Cougars",
-    "home_points": 83,
-    "away": "Washington Huskies",
-    "away_points": 77,
-    "model_game_id": "375258"
+    "home": "Davidson Wildcats",
+    "home_points": 79,
+    "away": "Northern Iowa Panthers",
+    "away_points": 48,
+    "model_game_id": "375251"
   },
   {
     "source": "ESPN",
@@ -56,17 +23,6 @@
   },
   {
     "source": "ESPN",
-    "event_id": "401921700",
-    "tip_utc": "2026-11-23T16:00Z",
-    "central_date": "2026-11-23",
-    "home": "Davidson Wildcats",
-    "home_points": 79,
-    "away": "Northern Iowa Panthers",
-    "away_points": 48,
-    "model_game_id": "375251"
-  },
-  {
-    "source": "ESPN",
     "event_id": "401921209",
     "tip_utc": "2026-11-23T17:30Z",
     "central_date": "2026-11-23",
@@ -75,17 +31,6 @@
     "away": "Indiana State Sycamores",
     "away_points": 77,
     "model_game_id": "378698"
-  },
-  {
-    "source": "ESPN",
-    "event_id": "401926069",
-    "tip_utc": "2026-11-23T18:00Z",
-    "central_date": "2026-11-23",
-    "home": "Eastern Illinois Panthers",
-    "home_points": 83,
-    "away": "IU South Bend Titans",
-    "away_points": 66,
-    "model_game_id": "375252"
   },
   {
     "source": "ESPN",
@@ -100,14 +45,14 @@
   },
   {
     "source": "ESPN",
-    "event_id": "401928830",
-    "tip_utc": "2026-11-23T18:30Z",
+    "event_id": "401926069",
+    "tip_utc": "2026-11-23T18:00Z",
     "central_date": "2026-11-23",
-    "home": "Wright State Raiders",
-    "home_points": 66,
-    "away": "Akron Zips",
-    "away_points": 64,
-    "model_game_id": "378096"
+    "home": "Eastern Illinois Panthers",
+    "home_points": 83,
+    "away": "IU South Bend Titans",
+    "away_points": 66,
+    "model_game_id": "375252"
   },
   {
     "source": "ESPN",
@@ -119,6 +64,17 @@
     "away": "Charlotte 49ers",
     "away_points": 71,
     "model_game_id": "375254"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401928830",
+    "tip_utc": "2026-11-23T18:30Z",
+    "central_date": "2026-11-23",
+    "home": "Wright State Raiders",
+    "home_points": 66,
+    "away": "Akron Zips",
+    "away_points": 64,
+    "model_game_id": "378096"
   },
   {
     "source": "ESPN",
@@ -221,6 +177,17 @@
   },
   {
     "source": "ESPN",
+    "event_id": "401921708",
+    "tip_utc": "2026-11-23T22:00Z",
+    "central_date": "2026-11-23",
+    "home": "BYU Cougars",
+    "home_points": 83,
+    "away": "Washington Huskies",
+    "away_points": 77,
+    "model_game_id": "375258"
+  },
+  {
+    "source": "ESPN",
     "event_id": "401921210",
     "tip_utc": "2026-11-23T23:00Z",
     "central_date": "2026-11-23",
@@ -229,17 +196,6 @@
     "away": "Temple Owls",
     "away_points": 81,
     "model_game_id": "espn-401921210"
-  },
-  {
-    "source": "ESPN",
-    "event_id": "401920752",
-    "tip_utc": "2026-11-23T23:30Z",
-    "central_date": "2026-11-23",
-    "home": "Youngstown State Penguins",
-    "home_points": 69,
-    "away": "Maryland Eastern Shore Hawks",
-    "away_points": 65,
-    "model_game_id": "375247"
   },
   {
     "source": "ESPN",
@@ -254,102 +210,14 @@
   },
   {
     "source": "ESPN",
-    "event_id": "401932055",
-    "tip_utc": "2026-11-24T00:00Z",
+    "event_id": "401920752",
+    "tip_utc": "2026-11-23T23:30Z",
     "central_date": "2026-11-23",
-    "home": "Howard Bison",
-    "home_points": 101,
-    "away": "Notre Dame (MD) Gators",
-    "away_points": 73,
-    "model_game_id": "378679"
-  },
-  {
-    "source": "ESPN",
-    "event_id": "401928838",
-    "tip_utc": "2026-11-24T00:00Z",
-    "central_date": "2026-11-23",
-    "home": "Ball State Cardinals",
-    "home_points": 94,
-    "away": "Spalding Pelicans",
-    "away_points": 36,
-    "model_game_id": "378098"
-  },
-  {
-    "source": "ESPN",
-    "event_id": "401926106",
-    "tip_utc": "2026-11-24T00:00Z",
-    "central_date": "2026-11-23",
-    "home": "East Tennessee State Buccaneers",
-    "home_points": 108,
-    "away": "Kentucky State Thorobreds",
-    "away_points": 56,
-    "model_game_id": "375242"
-  },
-  {
-    "source": "ESPN",
-    "event_id": "401925813",
-    "tip_utc": "2026-11-24T00:00Z",
-    "central_date": "2026-11-23",
-    "home": "La Salle Explorers",
-    "home_points": 90,
-    "away": "Penn State Brandywine Lions",
-    "away_points": 42,
-    "model_game_id": "375243"
-  },
-  {
-    "source": "ESPN",
-    "event_id": "401921157",
-    "tip_utc": "2026-11-24T00:00Z",
-    "central_date": "2026-11-23",
-    "home": "South Carolina State Bulldogs",
-    "home_points": 60,
-    "away": "North Carolina A&T Aggies",
-    "away_points": 62,
-    "model_game_id": "375260"
-  },
-  {
-    "source": "ESPN",
-    "event_id": "401921029",
-    "tip_utc": "2026-11-24T00:00Z",
-    "central_date": "2026-11-23",
-    "home": "Northern Kentucky Norse",
-    "home_points": 79,
-    "away": "Georgia Southern Eagles",
-    "away_points": 84,
-    "model_game_id": "375246"
-  },
-  {
-    "source": "ESPN",
-    "event_id": "401919785",
-    "tip_utc": "2026-11-24T00:00Z",
-    "central_date": "2026-11-23",
-    "home": "Le Moyne Dolphins",
-    "home_points": 68,
-    "away": "Mansfield Mountaineers",
-    "away_points": 58,
-    "model_game_id": "375261"
-  },
-  {
-    "source": "ESPN",
-    "event_id": "401919761",
-    "tip_utc": "2026-11-24T00:00Z",
-    "central_date": "2026-11-23",
-    "home": "Iona Gaels",
-    "home_points": 46,
-    "away": "Fairleigh Dickinson Knights",
-    "away_points": 49,
-    "model_game_id": "375262"
-  },
-  {
-    "source": "ESPN",
-    "event_id": "401917919",
-    "tip_utc": "2026-11-24T00:00Z",
-    "central_date": "2026-11-23",
-    "home": "North Florida Ospreys",
-    "home_points": 66,
-    "away": "Central Arkansas Bears",
-    "away_points": 80,
-    "model_game_id": "375263"
+    "home": "Youngstown State Penguins",
+    "home_points": 69,
+    "away": "Maryland Eastern Shore Hawks",
+    "away_points": 65,
+    "model_game_id": "375247"
   },
   {
     "source": "ESPN",
@@ -364,14 +232,102 @@
   },
   {
     "source": "ESPN",
-    "event_id": "401927353",
-    "tip_utc": "2026-11-24T00:30Z",
+    "event_id": "401917919",
+    "tip_utc": "2026-11-24T00:00Z",
     "central_date": "2026-11-23",
-    "home": "North Carolina Central Eagles",
-    "home_points": 105,
-    "away": "Carolina University Bruins",
-    "away_points": 46,
-    "model_game_id": "378099"
+    "home": "North Florida Ospreys",
+    "home_points": 66,
+    "away": "Central Arkansas Bears",
+    "away_points": 80,
+    "model_game_id": "375263"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401919761",
+    "tip_utc": "2026-11-24T00:00Z",
+    "central_date": "2026-11-23",
+    "home": "Iona Gaels",
+    "home_points": 46,
+    "away": "Fairleigh Dickinson Knights",
+    "away_points": 49,
+    "model_game_id": "375262"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401919785",
+    "tip_utc": "2026-11-24T00:00Z",
+    "central_date": "2026-11-23",
+    "home": "Le Moyne Dolphins",
+    "home_points": 68,
+    "away": "Mansfield Mountaineers",
+    "away_points": 58,
+    "model_game_id": "375261"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401921029",
+    "tip_utc": "2026-11-24T00:00Z",
+    "central_date": "2026-11-23",
+    "home": "Northern Kentucky Norse",
+    "home_points": 79,
+    "away": "Georgia Southern Eagles",
+    "away_points": 84,
+    "model_game_id": "375246"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401921157",
+    "tip_utc": "2026-11-24T00:00Z",
+    "central_date": "2026-11-23",
+    "home": "South Carolina State Bulldogs",
+    "home_points": 60,
+    "away": "North Carolina A&T Aggies",
+    "away_points": 62,
+    "model_game_id": "375260"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401925813",
+    "tip_utc": "2026-11-24T00:00Z",
+    "central_date": "2026-11-23",
+    "home": "La Salle Explorers",
+    "home_points": 90,
+    "away": "Penn State Brandywine Lions",
+    "away_points": 42,
+    "model_game_id": "375243"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401926106",
+    "tip_utc": "2026-11-24T00:00Z",
+    "central_date": "2026-11-23",
+    "home": "East Tennessee State Buccaneers",
+    "home_points": 108,
+    "away": "Kentucky State Thorobreds",
+    "away_points": 56,
+    "model_game_id": "375242"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401928838",
+    "tip_utc": "2026-11-24T00:00Z",
+    "central_date": "2026-11-23",
+    "home": "Ball State Cardinals",
+    "home_points": 94,
+    "away": "Spalding Pelicans",
+    "away_points": 36,
+    "model_game_id": "378098"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401932055",
+    "tip_utc": "2026-11-24T00:00Z",
+    "central_date": "2026-11-23",
+    "home": "Howard Bison",
+    "home_points": 101,
+    "away": "Notre Dame (MD) Gators",
+    "away_points": 73,
+    "model_game_id": "378679"
   },
   {
     "source": "ESPN",
@@ -386,25 +342,25 @@
   },
   {
     "source": "ESPN",
-    "event_id": "401929392",
-    "tip_utc": "2026-11-24T01:00Z",
+    "event_id": "401927353",
+    "tip_utc": "2026-11-24T00:30Z",
     "central_date": "2026-11-23",
-    "home": "North Dakota State Bison",
-    "home_points": 84,
-    "away": "Wisconsin Stout Blue Devils",
-    "away_points": 49,
-    "model_game_id": "378100"
+    "home": "North Carolina Central Eagles",
+    "home_points": 105,
+    "away": "Carolina University Bruins",
+    "away_points": 46,
+    "model_game_id": "378099"
   },
   {
     "source": "ESPN",
-    "event_id": "401921208",
+    "event_id": "401909788",
     "tip_utc": "2026-11-24T01:00Z",
     "central_date": "2026-11-23",
-    "home": "Utah Valley Wolverines",
-    "home_points": 72,
-    "away": "Stephen F. Austin Lumberjacks",
-    "away_points": 77,
-    "model_game_id": "espn-401921208"
+    "home": "Kansas Jayhawks",
+    "home_points": 84,
+    "away": "Denver Pioneers",
+    "away_points": 67,
+    "model_game_id": "372909"
   },
   {
     "source": "ESPN",
@@ -419,25 +375,36 @@
   },
   {
     "source": "ESPN",
-    "event_id": "401922263",
-    "tip_utc": "2026-11-24T02:00Z",
+    "event_id": "401913530",
+    "tip_utc": "2026-11-24T01:00Z",
     "central_date": "2026-11-23",
-    "home": "Idaho Vandals",
-    "home_points": 88,
-    "away": "Dickinson State Blue Hawks",
-    "away_points": 47,
-    "model_game_id": "375244"
+    "home": "Illinois Fighting Illini",
+    "home_points": 133,
+    "away": "Winthrop Eagles",
+    "away_points": 83,
+    "model_game_id": "372905"
   },
   {
     "source": "ESPN",
-    "event_id": "401922032",
-    "tip_utc": "2026-11-24T02:00Z",
+    "event_id": "401921208",
+    "tip_utc": "2026-11-24T01:00Z",
     "central_date": "2026-11-23",
-    "home": "Montana Grizzlies",
-    "home_points": 82,
-    "away": "Carroll (MT) Fighting Saints",
-    "away_points": 54,
-    "model_game_id": "375259"
+    "home": "Utah Valley Wolverines",
+    "home_points": 72,
+    "away": "Stephen F. Austin Lumberjacks",
+    "away_points": 77,
+    "model_game_id": "espn-401921208"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401929392",
+    "tip_utc": "2026-11-24T01:00Z",
+    "central_date": "2026-11-23",
+    "home": "North Dakota State Bison",
+    "home_points": 84,
+    "away": "Wisconsin Stout Blue Devils",
+    "away_points": 49,
+    "model_game_id": "378100"
   },
   {
     "source": "ESPN",
@@ -452,14 +419,25 @@
   },
   {
     "source": "ESPN",
-    "event_id": "401926183",
-    "tip_utc": "2026-11-24T02:30Z",
+    "event_id": "401922032",
+    "tip_utc": "2026-11-24T02:00Z",
     "central_date": "2026-11-23",
-    "home": "Pepperdine Waves",
-    "home_points": 89,
-    "away": "UNC Greensboro Spartans",
-    "away_points": 62,
-    "model_game_id": "375241"
+    "home": "Montana Grizzlies",
+    "home_points": 82,
+    "away": "Carroll (MT) Fighting Saints",
+    "away_points": 54,
+    "model_game_id": "375259"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401922263",
+    "tip_utc": "2026-11-24T02:00Z",
+    "central_date": "2026-11-23",
+    "home": "Idaho Vandals",
+    "home_points": 88,
+    "away": "Dickinson State Blue Hawks",
+    "away_points": 47,
+    "model_game_id": "375244"
   },
   {
     "source": "ESPN",
@@ -474,14 +452,14 @@
   },
   {
     "source": "ESPN",
-    "event_id": "401920721",
-    "tip_utc": "2026-11-24T03:00Z",
+    "event_id": "401926183",
+    "tip_utc": "2026-11-24T02:30Z",
     "central_date": "2026-11-23",
-    "home": "UNLV Rebels",
-    "home_points": 82,
-    "away": "Eastern Washington Eagles",
-    "away_points": 61,
-    "model_game_id": "375248"
+    "home": "Pepperdine Waves",
+    "home_points": 89,
+    "away": "UNC Greensboro Spartans",
+    "away_points": 62,
+    "model_game_id": "375241"
   },
   {
     "source": "ESPN",
@@ -493,6 +471,28 @@
     "away": "Alabama State Hornets",
     "away_points": 54,
     "model_game_id": "375250"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401920721",
+    "tip_utc": "2026-11-24T03:00Z",
+    "central_date": "2026-11-23",
+    "home": "UNLV Rebels",
+    "home_points": 82,
+    "away": "Eastern Washington Eagles",
+    "away_points": 61,
+    "model_game_id": "375248"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401909743",
+    "tip_utc": "2026-11-24T04:55Z",
+    "central_date": "2026-11-23",
+    "home": "Arizona Wildcats",
+    "home_points": 96,
+    "away": "Colorado State Rams",
+    "away_points": 83,
+    "model_game_id": "372912"
   },
   {
     "source": "ESPN",

@@ -1,42 +1,43 @@
 # Tedgy Trends CBB — Prospective Research Results
 
-**As of November 25, 2026, 01:04 PM Central Time**
+**As of November 25, 2026, 03:57 PM Central Time**
 
 Research-only performance from projections **actually frozen before tipoff**. No historical picks are retroactively inserted.
 
-**Tracked completed games:** 764 · **Completed without valid frozen record:** 359 · **Invalid frozen records:** 0
+**Tracked completed games:** 770 · **Completed without valid frozen record:** 371 · **Invalid frozen records:** 0
 
 ## Season-to-date — all directional leans (no edge threshold)
 
 | Model | ATS W–L–P | ATS ROI | ATS point error | Totals W–L–P | Totals ROI | Total point error |
 |---|---:|---:|---:|---:|---:|---:|
-| Team baseline | 381-369-8 | -2.99% | 12.24 | 398-360-6 | +0.24% | 13.88 |
-| Player v2 | 403-347-8 | +2.55% | 10.82 | 415-343-6 | +4.49% | 13.61 |
-| Player + opponent v3 | 376-332-7 | +1.37% | 10.76 | 389-326-6 | +3.83% | 13.47 |
-| Player + rotation v4 | 382-326-7 | +2.98% | 10.71 | 390-325-6 | +4.10% | 13.37 |
-| Player + opponent + rotation v4 | 384-324-7 | +3.51% | 10.56 | 392-323-6 | +4.63% | 13.31 |
+| Team baseline | 384-372-8 | -3.00% | 12.23 | 400-364-6 | -0.05% | 13.98 |
+| Player v2 | 406-350-8 | +2.50% | 10.83 | 418-346-6 | +4.42% | 13.70 |
+| Player + opponent v3 | 379-335-7 | +1.32% | 10.75 | 391-330-6 | +3.50% | 13.57 |
+| Player + rotation v4 | 386-328-7 | +3.18% | 10.72 | 392-329-6 | +3.76% | 13.49 |
+| Player + opponent + rotation v4 | 389-325-7 | +3.97% | 10.56 | 394-327-6 | +4.29% | 13.44 |
 
 ## ATS results when projected edge is at least 3.5 points
 
 | Model | ATS record | Hypothetical ROI | Number of selected games |
 |---|---:|---:|---:|
-| Team baseline | 293-265-5 | +0.24% | 563 |
-| Player v2 | 241-213-3 | +1.33% | 457 |
-| Player + opponent v3 | 232-202-3 | +2.04% | 437 |
-| Player + rotation v4 | 224-185-3 | +4.52% | 412 |
-| Player + opponent + rotation v4 | 228-187-1 | +4.87% | 416 |
+| Team baseline | 296-268-5 | +0.19% | 569 |
+| Player v2 | 244-215-3 | +1.48% | 462 |
+| Player + opponent v3 | 235-203-3 | +2.41% | 441 |
+| Player + rotation v4 | 227-186-3 | +4.90% | 416 |
+| Player + opponent + rotation v4 | 231-188-1 | +5.24% | 420 |
 
 ## Recent tracking windows
 
 | Window | Tracked completed games | Player v2 ATS | Player v2 ATS ROI | Player v2 totals | Player v2 totals ROI |
 |---|---:|---:|---:|---:|---:|
-| Past 48 hours | 0 | — | — | — | — |
-| Past 7 days | 215 | 111-98-2 | +1.38% | 122-92-1 | +8.79% |
+| Past 48 hours | 6 | 3-3 | -4.55% | 3-3 | -4.55% |
+| Past 7 days | 221 | 114-101-2 | +1.21% | 125-95-1 | +8.43% |
 
 ## By game date (Central Time)
 
 | Date | Tracked games | Player v2 ATS | Player v2 totals |
 |---|---:|---:|---:|
+| 2026-11-25 | 6 | 3-3 | 3-3 |
 | 2026-11-22 | 35 | 17-17 | 23-12 |
 | 2026-11-21 | 44 | 22-19 | 28-16 |
 | 2026-11-20 | 51 | 27-23-1 | 25-26 |
@@ -50,7 +51,6 @@ Research-only performance from projections **actually frozen before tipoff**. No
 | 2026-11-12 | 24 | 9-15 | 15-9 |
 | 2026-11-11 | 46 | 28-17-1 | 30-16 |
 | 2026-11-10 | 56 | 28-28 | 33-23 |
-| 2026-11-09 | 34 | 17-17 | 16-18 |
 
 ## Matched-game spread error relative to team baseline
 
@@ -58,15 +58,21 @@ Positive = the additional model reduced average point error **on identical froze
 
 | Model | Matched games | ATS error reduction | Totals error reduction |
 |---|---:|---:|---:|
-| Player v2 | 764 | +1.419 | +0.272 |
-| Player + opponent v3 | 721 | +1.453 | +0.338 |
-| Player + rotation v4 | 721 | +1.497 | +0.437 |
-| Player + opponent + rotation v4 | 721 | +1.645 | +0.492 |
+| Player v2 | 770 | +1.400 | +0.273 |
+| Player + opponent v3 | 727 | +1.446 | +0.335 |
+| Player + rotation v4 | 727 | +1.475 | +0.414 |
+| Player + opponent + rotation v4 | 727 | +1.635 | +0.464 |
 
 ## Most recently completed tracked games
 
 | Date (Central) | Matchup | Final (away–home) | Frozen home spread | Frozen total | Player v2 ATS | Player v2 total |
 |---|---|---:|---:|---:|---:|---:|
+| 2026-11-25 | Ole Miss @ Arizona | 73.0-84.0 | -5.5 | 153.5 | L | W |
+| 2026-11-25 | Arkansas-Pine Bluff @ South Dakota | 50.0-86.0 | -21.5 | 150.5 | W | L |
+| 2026-11-25 | LSU @ Arizona State | 94.0-92.0 | 3.5 | 145.5 | W | W |
+| 2026-11-25 | Saint Peter's @ Columbia | 44.0-65.0 | -12.5 | 125.5 | W | L |
+| 2026-11-25 | Abilene Christian @ South Dakota State | 101.0-95.0 | -7.5 | 139.5 | L | W |
+| 2026-11-25 | Manhattan @ NJIT | 81.0-70.0 | -1.5 | 142.5 | L | L |
 | 2026-11-22 | San José State @ Loyola Chicago | 63.0-72.0 | -3.5 | 146.5 | L | L |
 | 2026-11-22 | Seattle U @ UC San Diego | 90.0-64.0 | — | 145.5 | — | W |
 | 2026-11-22 | UT Martin @ Utah Valley | 76.0-78.0 | -7.5 | 145.5 | L | W |
@@ -81,12 +87,6 @@ Positive = the additional model reduced average point error **on identical froze
 | 2026-11-22 | UNC Asheville @ Samford | 77.0-80.0 | -9.5 | 155.5 | L | L |
 | 2026-11-22 | Rice @ Lamar | 85.0-81.0 | -2.5 | 165.5 | L | L |
 | 2026-11-22 | NJIT @ Boston College | 59.0-79.0 | -24.5 | 136.5 | L | W |
-| 2026-11-22 | Richmond @ Liberty | 92.0-88.0 | -1.5 | 142.5 | L | W |
-| 2026-11-22 | UC Irvine @ Loyola Marymount | 68.0-72.0 | 3.0 | 138.5 | W | W |
-| 2026-11-22 | McNeese @ Texas State | 69.0-95.0 | -2.5 | 142.5 | W | W |
-| 2026-11-22 | Virginia Tech @ Oklahoma State | 80.0-106.0 | 1.5 | 159.5 | W | W |
-| 2026-11-22 | UAlbany @ Mercyhurst | 75.0-78.0 | 1.5 | 129.5 | W | W |
-| 2026-11-22 | Troy @ Nicholls | 78.0-77.0 | 5.5 | 135.5 | W | W |
 
 ## Interpretation
 
