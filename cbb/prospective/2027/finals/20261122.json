@@ -1,0 +1,422 @@
+[
+  {
+    "source": "ESPN",
+    "event_id": "401906868",
+    "tip_utc": "2026-11-22T20:00Z",
+    "central_date": "2026-11-22",
+    "home": "Texas Longhorns",
+    "home_points": 97,
+    "away": "Southern Indiana Screaming Eagles",
+    "away_points": 61
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401920905",
+    "tip_utc": "2026-11-23T00:00Z",
+    "central_date": "2026-11-22",
+    "home": "UCLA Bruins",
+    "home_points": 85,
+    "away": "Delaware Blue Hens",
+    "away_points": 48
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401926774",
+    "tip_utc": "2026-11-23T01:00Z",
+    "central_date": "2026-11-22",
+    "home": "USC Trojans",
+    "home_points": 82,
+    "away": "Louisiana Ragin' Cajuns",
+    "away_points": 56
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401902281",
+    "tip_utc": "2026-11-22T17:00Z",
+    "central_date": "2026-11-22",
+    "home": "Butler Bulldogs",
+    "home_points": 74,
+    "away": "Nebraska Cornhuskers",
+    "away_points": 76
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401911024",
+    "tip_utc": "2026-11-22T17:00Z",
+    "central_date": "2026-11-22",
+    "home": "UIC Flames",
+    "home_points": 60,
+    "away": "Miami (OH) RedHawks",
+    "away_points": 71
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401929023",
+    "tip_utc": "2026-11-22T18:00Z",
+    "central_date": "2026-11-22",
+    "home": "Canisius Golden Griffins",
+    "home_points": 46,
+    "away": "Western Illinois Leathernecks",
+    "away_points": 66
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401921088",
+    "tip_utc": "2026-11-22T18:00Z",
+    "central_date": "2026-11-22",
+    "home": "UMBC Retrievers",
+    "home_points": 89,
+    "away": "Lancaster Bible Chargers",
+    "away_points": 55
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401920736",
+    "tip_utc": "2026-11-22T18:00Z",
+    "central_date": "2026-11-22",
+    "home": "Northwestern Wildcats",
+    "home_points": 79,
+    "away": "Dayton Flyers",
+    "away_points": 55
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401919809",
+    "tip_utc": "2026-11-22T18:00Z",
+    "central_date": "2026-11-22",
+    "home": "Long Island University Sharks",
+    "home_points": 71,
+    "away": "Fairfield Stags",
+    "away_points": 74
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401912212",
+    "tip_utc": "2026-11-22T18:00Z",
+    "central_date": "2026-11-22",
+    "home": "American University Eagles",
+    "home_points": 86,
+    "away": "Towson Tigers",
+    "away_points": 75
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401909527",
+    "tip_utc": "2026-11-22T18:00Z",
+    "central_date": "2026-11-22",
+    "home": "Marquette Golden Eagles",
+    "home_points": 106,
+    "away": "Chicago State Cougars",
+    "away_points": 62
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401928802",
+    "tip_utc": "2026-11-22T19:00Z",
+    "central_date": "2026-11-22",
+    "home": "Western Kentucky Hilltoppers",
+    "home_points": 86,
+    "away": "George Washington Revolutionaries",
+    "away_points": 78
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401925942",
+    "tip_utc": "2026-11-22T19:00Z",
+    "central_date": "2026-11-22",
+    "home": "Utah Tech Trailblazers",
+    "home_points": 73,
+    "away": "South Dakota Coyotes",
+    "away_points": 74
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401921748",
+    "tip_utc": "2026-11-22T19:00Z",
+    "central_date": "2026-11-22",
+    "home": "Cincinnati Bearcats",
+    "home_points": 78,
+    "away": "UMass Lowell River Hawks",
+    "away_points": 68
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401921706",
+    "tip_utc": "2026-11-22T19:00Z",
+    "central_date": "2026-11-22",
+    "home": "Duquesne Dukes",
+    "home_points": 61,
+    "away": "Wyoming Cowboys",
+    "away_points": 79
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401918988",
+    "tip_utc": "2026-11-22T19:00Z",
+    "central_date": "2026-11-22",
+    "home": "Memphis Tigers",
+    "home_points": 82,
+    "away": "Evansville Purple Aces",
+    "away_points": 62
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401918455",
+    "tip_utc": "2026-11-22T19:00Z",
+    "central_date": "2026-11-22",
+    "home": "Youngstown State Penguins",
+    "home_points": 63,
+    "away": "William & Mary Tribe",
+    "away_points": 75
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401911200",
+    "tip_utc": "2026-11-22T19:00Z",
+    "central_date": "2026-11-22",
+    "home": "San Diego Toreros",
+    "home_points": 80,
+    "away": "Fordham Rams",
+    "away_points": 58
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401928790",
+    "tip_utc": "2026-11-22T19:30Z",
+    "central_date": "2026-11-22",
+    "home": "New Mexico State Aggies",
+    "home_points": 79,
+    "away": "Robert Morris Colonials",
+    "away_points": 84
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401925066",
+    "tip_utc": "2026-11-22T20:00Z",
+    "central_date": "2026-11-22",
+    "home": "Nicholls Colonels",
+    "home_points": 77,
+    "away": "Troy Trojans",
+    "away_points": 78
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401922252",
+    "tip_utc": "2026-11-22T20:00Z",
+    "central_date": "2026-11-22",
+    "home": "South Alabama Jaguars",
+    "home_points": 79,
+    "away": "West Florida Argonauts",
+    "away_points": 66
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401929202",
+    "tip_utc": "2026-11-22T20:30Z",
+    "central_date": "2026-11-22",
+    "home": "Texas State Bobcats",
+    "home_points": 95,
+    "away": "McNeese Cowboys",
+    "away_points": 69
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401923323",
+    "tip_utc": "2026-11-22T20:30Z",
+    "central_date": "2026-11-22",
+    "home": "UAlbany Great Danes",
+    "home_points": 75,
+    "away": "Mercyhurst Lakers",
+    "away_points": 78
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401920381",
+    "tip_utc": "2026-11-22T20:30Z",
+    "central_date": "2026-11-22",
+    "home": "Oklahoma State Cowboys",
+    "home_points": 106,
+    "away": "Virginia Tech Hokies",
+    "away_points": 80
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401929387",
+    "tip_utc": "2026-11-22T21:00Z",
+    "central_date": "2026-11-22",
+    "home": "Eastern Kentucky Colonels",
+    "home_points": 114,
+    "away": "Alice Lloyd Eagles",
+    "away_points": 85
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401926795",
+    "tip_utc": "2026-11-22T21:30Z",
+    "central_date": "2026-11-22",
+    "home": "Liberty Flames",
+    "home_points": 88,
+    "away": "Richmond Spiders",
+    "away_points": 92
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401921176",
+    "tip_utc": "2026-11-22T21:30Z",
+    "central_date": "2026-11-22",
+    "home": "Maryland Eastern Shore Hawks",
+    "home_points": 61,
+    "away": "IU Indianapolis Jaguars",
+    "away_points": 81
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401917540",
+    "tip_utc": "2026-11-22T21:30Z",
+    "central_date": "2026-11-22",
+    "home": "UC Irvine Anteaters",
+    "home_points": 68,
+    "away": "Loyola Marymount Lions",
+    "away_points": 72
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401925013",
+    "tip_utc": "2026-11-22T22:00Z",
+    "central_date": "2026-11-22",
+    "home": "Lamar Cardinals",
+    "home_points": 81,
+    "away": "Rice Owls",
+    "away_points": 85
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401922293",
+    "tip_utc": "2026-11-22T22:00Z",
+    "central_date": "2026-11-22",
+    "home": "Samford Bulldogs",
+    "home_points": 80,
+    "away": "UNC Asheville Bulldogs",
+    "away_points": 77
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401920708",
+    "tip_utc": "2026-11-22T22:00Z",
+    "central_date": "2026-11-22",
+    "home": "Lipscomb Bisons",
+    "home_points": 92,
+    "away": "Milligan Buffaloes",
+    "away_points": 67
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401920159",
+    "tip_utc": "2026-11-22T22:00Z",
+    "central_date": "2026-11-22",
+    "home": "Portland State Vikings",
+    "home_points": 75,
+    "away": "Cal State Fullerton Titans",
+    "away_points": 92
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401909556",
+    "tip_utc": "2026-11-22T22:00Z",
+    "central_date": "2026-11-22",
+    "home": "Boston College Eagles",
+    "home_points": 79,
+    "away": "NJIT Highlanders",
+    "away_points": 59
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401921205",
+    "tip_utc": "2026-11-22T22:30Z",
+    "central_date": "2026-11-22",
+    "home": "Stephen F. Austin Lumberjacks",
+    "home_points": 72,
+    "away": "Temple Owls",
+    "away_points": 70
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401928999",
+    "tip_utc": "2026-11-22T23:00Z",
+    "central_date": "2026-11-22",
+    "home": "Valparaiso Beacons",
+    "home_points": 89,
+    "away": "Southern Miss Golden Eagles",
+    "away_points": 99
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401921420",
+    "tip_utc": "2026-11-22T23:00Z",
+    "central_date": "2026-11-22",
+    "home": "Minnesota Golden Gophers",
+    "home_points": 77,
+    "away": "Utah Utes",
+    "away_points": 62
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401917541",
+    "tip_utc": "2026-11-23T00:00Z",
+    "central_date": "2026-11-22",
+    "home": "California Baptist Lancers",
+    "home_points": 79,
+    "away": "Portland Pilots",
+    "away_points": 71
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401919020",
+    "tip_utc": "2026-11-23T00:40Z",
+    "central_date": "2026-11-22",
+    "home": "UAB Blazers",
+    "home_points": 64,
+    "away": "Rhode Island Rams",
+    "away_points": 79
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401929595",
+    "tip_utc": "2026-11-23T01:00Z",
+    "central_date": "2026-11-22",
+    "home": "Saint Mary's Gaels",
+    "home_points": 94,
+    "away": "Menlo Oaks",
+    "away_points": 78
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401921206",
+    "tip_utc": "2026-11-23T01:10Z",
+    "central_date": "2026-11-22",
+    "home": "Utah Valley Wolverines",
+    "home_points": 78,
+    "away": "UT Martin Skyhawks",
+    "away_points": 76
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401917542",
+    "tip_utc": "2026-11-23T02:45Z",
+    "central_date": "2026-11-22",
+    "home": "Seattle U Redhawks",
+    "home_points": 90,
+    "away": "UC San Diego Tritons",
+    "away_points": 64
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401911233",
+    "tip_utc": "2026-11-23T04:59Z",
+    "central_date": "2026-11-22",
+    "home": "San Jos\u00e9 State Spartans",
+    "home_points": 63,
+    "away": "Loyola Chicago Ramblers",
+    "away_points": 72
+  }
+]

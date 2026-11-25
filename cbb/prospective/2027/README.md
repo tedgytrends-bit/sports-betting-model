@@ -1,6 +1,6 @@
 # Tedgy Trends CBB — Prospective Research Results
 
-**As of November 25, 2026, 12:58 PM Central Time**
+**As of November 25, 2026, 01:00 PM Central Time**
 
 Research-only performance from projections **actually frozen before tipoff**. No historical picks are retroactively inserted.
 

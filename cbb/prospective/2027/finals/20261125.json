@@ -1,0 +1,62 @@
+[
+  {
+    "source": "ESPN",
+    "event_id": "401927399",
+    "tip_utc": "2026-11-25T15:00Z",
+    "central_date": "2026-11-25",
+    "home": "Belmont Bruins",
+    "home_points": 68,
+    "away": "St. Bonaventure Bonnies",
+    "away_points": 71
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401928845",
+    "tip_utc": "2026-11-25T16:00Z",
+    "central_date": "2026-11-25",
+    "home": "Ohio Bobcats",
+    "home_points": 74,
+    "away": "Rice Owls",
+    "away_points": 82
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401921702",
+    "tip_utc": "2026-11-25T16:00Z",
+    "central_date": "2026-11-25",
+    "home": "Charlotte 49ers",
+    "home_points": 85,
+    "away": "Northern Iowa Panthers",
+    "away_points": 72
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401911201",
+    "tip_utc": "2026-11-25T16:00Z",
+    "central_date": "2026-11-25",
+    "home": "Fordham Rams",
+    "home_points": 104,
+    "away": "Mercy Mavericks",
+    "away_points": 56
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401920196",
+    "tip_utc": "2026-11-25T17:00Z",
+    "central_date": "2026-11-25",
+    "home": "Saint Joseph's Hawks",
+    "home_points": 104,
+    "away": "Penn State Abington Nittany Lions",
+    "away_points": 48
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401919762",
+    "tip_utc": "2026-11-25T17:00Z",
+    "central_date": "2026-11-25",
+    "home": "Fairleigh Dickinson Knights",
+    "home_points": 123,
+    "away": "Vermont State Randolph Knights",
+    "away_points": 48
+  }
+]
