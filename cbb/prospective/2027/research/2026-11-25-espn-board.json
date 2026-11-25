@@ -1,0 +1,2283 @@
+{
+  "espn_capture_utc": "2026-11-25T18:47:10.080881+00:00",
+  "forecast_capture_utc": "2026-11-22T13:57:59.379135Z",
+  "forecast_snapshot": "cbb/prospective/2027/snapshots/20261122T135759379135_45030081991.json",
+  "rows": [
+    {
+      "id": "401920428",
+      "tip": "2026-11-25T17:00Z",
+      "away": "Virginia Cavaliers",
+      "home": "Marquette Golden Eagles",
+      "status": "STATUS_DELAYED",
+      "home_spread": null,
+      "total": null,
+      "forecasts": {},
+      "provider": null
+    },
+    {
+      "id": "401920196",
+      "tip": "2026-11-25T17:00Z",
+      "away": "Penn State Abington Nittany Lions",
+      "home": "Saint Joseph's Hawks",
+      "status": "STATUS_FINAL",
+      "home_spread": null,
+      "total": null,
+      "forecasts": {},
+      "provider": null
+    },
+    {
+      "id": "401920547",
+      "tip": "2026-11-25T17:30Z",
+      "away": "Northern Colorado Bears",
+      "home": "Detroit Mercy Titans",
+      "status": "STATUS_IN_PROGRESS",
+      "home_spread": null,
+      "total": null,
+      "forecasts": {},
+      "provider": null
+    },
+    {
+      "id": "401928831",
+      "tip": "2026-11-25T17:31Z",
+      "away": "Yale Bulldogs",
+      "home": "Wright State Raiders",
+      "status": "STATUS_IN_PROGRESS",
+      "home_spread": null,
+      "total": null,
+      "forecasts": {
+        "baseline": {
+          "projected_away_points": 67.35,
+          "projected_home_points": 81.39,
+          "projected_margin_home": 14.034,
+          "projected_total": 148.744,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_v2": {
+          "projected_away_points": 69.01,
+          "projected_home_points": 81.94,
+          "projected_margin_home": 12.927,
+          "projected_total": 150.953,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_opp_v3": {
+          "projected_away_points": 69.21,
+          "projected_home_points": 80.98,
+          "projected_margin_home": 11.763,
+          "projected_total": 150.191,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_rot_v4": {
+          "projected_away_points": 68.08,
+          "projected_home_points": 79.61,
+          "projected_margin_home": 11.529,
+          "projected_total": 147.699,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_all_v4": {
+          "projected_away_points": 68.22,
+          "projected_home_points": 78.69,
+          "projected_margin_home": 10.468,
+          "projected_total": 146.908,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        }
+      },
+      "provider": null
+    },
+    {
+      "id": "401926835",
+      "tip": "2026-11-25T18:00Z",
+      "away": "Lindenwood Lions",
+      "home": "Stony Brook Seawolves",
+      "status": "STATUS_IN_PROGRESS",
+      "home_spread": null,
+      "total": null,
+      "forecasts": {
+        "baseline": {
+          "projected_away_points": 63.81,
+          "projected_home_points": 80.57,
+          "projected_margin_home": 16.764,
+          "projected_total": 144.382,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_v2": {
+          "projected_away_points": 65.03,
+          "projected_home_points": 79.11,
+          "projected_margin_home": 14.081,
+          "projected_total": 144.147,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_opp_v3": {
+          "projected_away_points": 66.3,
+          "projected_home_points": 77.5,
+          "projected_margin_home": 11.201,
+          "projected_total": 143.796,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_rot_v4": {
+          "projected_away_points": 65.08,
+          "projected_home_points": 76.64,
+          "projected_margin_home": 11.558,
+          "projected_total": 141.723,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_all_v4": {
+          "projected_away_points": 66.53,
+          "projected_home_points": 74.48,
+          "projected_margin_home": 7.95,
+          "projected_total": 141.007,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        }
+      },
+      "provider": null
+    },
+    {
+      "id": "401924268",
+      "tip": "2026-11-25T18:00Z",
+      "away": "Southern Utah Thunderbirds",
+      "home": "Long Beach State Beach",
+      "status": "STATUS_IN_PROGRESS",
+      "home_spread": null,
+      "total": null,
+      "forecasts": {},
+      "provider": null
+    },
+    {
+      "id": "401920067",
+      "tip": "2026-11-25T18:00Z",
+      "away": "American International Yellow Jackets",
+      "home": "Rhode Island Rams",
+      "status": "STATUS_IN_PROGRESS",
+      "home_spread": null,
+      "total": null,
+      "forecasts": {
+        "baseline": {
+          "projected_away_points": 56.36,
+          "projected_home_points": 88.48,
+          "projected_margin_home": 32.118,
+          "projected_total": 144.845,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_v2": {
+          "projected_away_points": 51.95,
+          "projected_home_points": 90.81,
+          "projected_margin_home": 38.856,
+          "projected_total": 142.762,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_opp_v3": {
+          "projected_away_points": 53.17,
+          "projected_home_points": 90.14,
+          "projected_margin_home": 36.969,
+          "projected_total": 143.317,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_rot_v4": {
+          "projected_away_points": 50.82,
+          "projected_home_points": 97.98,
+          "projected_margin_home": 47.164,
+          "projected_total": 148.805,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_all_v4": {
+          "projected_away_points": 51.9,
+          "projected_home_points": 96.41,
+          "projected_margin_home": 44.508,
+          "projected_total": 148.312,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        }
+      },
+      "provider": null
+    },
+    {
+      "id": "401911029",
+      "tip": "2026-11-25T18:00Z",
+      "away": "Eastern Kentucky Colonels",
+      "home": "Miami (OH) RedHawks",
+      "status": "STATUS_IN_PROGRESS",
+      "home_spread": null,
+      "total": null,
+      "forecasts": {
+        "baseline": {
+          "projected_away_points": 74.18,
+          "projected_home_points": 78.96,
+          "projected_margin_home": 4.782,
+          "projected_total": 153.132,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_v2": {
+          "projected_away_points": 73.54,
+          "projected_home_points": 88.56,
+          "projected_margin_home": 15.024,
+          "projected_total": 162.1,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_opp_v3": {
+          "projected_away_points": 73.3,
+          "projected_home_points": 89.38,
+          "projected_margin_home": 16.086,
+          "projected_total": 162.68,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_rot_v4": {
+          "projected_away_points": 73.51,
+          "projected_home_points": 84.63,
+          "projected_margin_home": 11.117,
+          "projected_total": 158.143,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_all_v4": {
+          "projected_away_points": 73.49,
+          "projected_home_points": 85.23,
+          "projected_margin_home": 11.741,
+          "projected_total": 158.722,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        }
+      },
+      "provider": null
+    },
+    {
+      "id": "401919007",
+      "tip": "2026-11-25T18:30Z",
+      "away": "Tulane Green Wave",
+      "home": "Davidson Wildcats",
+      "status": "STATUS_IN_PROGRESS",
+      "home_spread": null,
+      "total": null,
+      "forecasts": {
+        "baseline": {
+          "projected_away_points": 66.3,
+          "projected_home_points": 75.61,
+          "projected_margin_home": 9.303,
+          "projected_total": 141.909,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_v2": {
+          "projected_away_points": 70.03,
+          "projected_home_points": 75.3,
+          "projected_margin_home": 5.275,
+          "projected_total": 145.325,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_opp_v3": {
+          "projected_away_points": 70.49,
+          "projected_home_points": 75.17,
+          "projected_margin_home": 4.677,
+          "projected_total": 145.655,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_rot_v4": {
+          "projected_away_points": 70.51,
+          "projected_home_points": 73.59,
+          "projected_margin_home": 3.079,
+          "projected_total": 144.106,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_all_v4": {
+          "projected_away_points": 71.08,
+          "projected_home_points": 73.28,
+          "projected_margin_home": 2.203,
+          "projected_total": 144.354,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        }
+      },
+      "provider": null
+    },
+    {
+      "id": "401927399",
+      "tip": "2026-11-25T15:00Z",
+      "away": "St. Bonaventure Bonnies",
+      "home": "Belmont Bruins",
+      "status": "STATUS_FINAL",
+      "home_spread": null,
+      "total": null,
+      "forecasts": {
+        "baseline": {
+          "projected_away_points": 66.46,
+          "projected_home_points": 71.95,
+          "projected_margin_home": 5.489,
+          "projected_total": 138.418,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_v2": {
+          "projected_away_points": 67.17,
+          "projected_home_points": 71.83,
+          "projected_margin_home": 4.657,
+          "projected_total": 138.998,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_opp_v3": {
+          "projected_away_points": 66.92,
+          "projected_home_points": 70.79,
+          "projected_margin_home": 3.874,
+          "projected_total": 137.706,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_rot_v4": {
+          "projected_away_points": 67.26,
+          "projected_home_points": 69.55,
+          "projected_margin_home": 2.287,
+          "projected_total": 136.811,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_all_v4": {
+          "projected_away_points": 67.17,
+          "projected_home_points": 68.6,
+          "projected_margin_home": 1.427,
+          "projected_total": 135.775,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        }
+      },
+      "provider": null
+    },
+    {
+      "id": "401928845",
+      "tip": "2026-11-25T16:00Z",
+      "away": "Rice Owls",
+      "home": "Ohio Bobcats",
+      "status": "STATUS_FINAL",
+      "home_spread": null,
+      "total": null,
+      "forecasts": {
+        "baseline": {
+          "projected_away_points": 71.33,
+          "projected_home_points": 78.62,
+          "projected_margin_home": 7.286,
+          "projected_total": 149.947,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_v2": {
+          "projected_away_points": 73.21,
+          "projected_home_points": 84.43,
+          "projected_margin_home": 11.227,
+          "projected_total": 157.638,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_opp_v3": {
+          "projected_away_points": 73.13,
+          "projected_home_points": 84.34,
+          "projected_margin_home": 11.215,
+          "projected_total": 157.474,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_rot_v4": {
+          "projected_away_points": 73.67,
+          "projected_home_points": 80.69,
+          "projected_margin_home": 7.021,
+          "projected_total": 154.366,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_all_v4": {
+          "projected_away_points": 73.92,
+          "projected_home_points": 80.6,
+          "projected_margin_home": 6.686,
+          "projected_total": 154.521,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        }
+      },
+      "provider": null
+    },
+    {
+      "id": "401921702",
+      "tip": "2026-11-25T16:00Z",
+      "away": "Northern Iowa Panthers",
+      "home": "Charlotte 49ers",
+      "status": "STATUS_FINAL",
+      "home_spread": null,
+      "total": null,
+      "forecasts": {
+        "baseline": {
+          "projected_away_points": 69.88,
+          "projected_home_points": 78.21,
+          "projected_margin_home": 8.334,
+          "projected_total": 148.09,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_v2": {
+          "projected_away_points": 70.7,
+          "projected_home_points": 78.29,
+          "projected_margin_home": 7.594,
+          "projected_total": 148.994,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_opp_v3": {
+          "projected_away_points": 70.35,
+          "projected_home_points": 79.78,
+          "projected_margin_home": 9.431,
+          "projected_total": 150.136,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_rot_v4": {
+          "projected_away_points": 70.59,
+          "projected_home_points": 76.76,
+          "projected_margin_home": 6.167,
+          "projected_total": 147.352,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_all_v4": {
+          "projected_away_points": 70.47,
+          "projected_home_points": 78.45,
+          "projected_margin_home": 7.984,
+          "projected_total": 148.926,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        }
+      },
+      "provider": null
+    },
+    {
+      "id": "401911201",
+      "tip": "2026-11-25T16:00Z",
+      "away": "Mercy Mavericks",
+      "home": "Fordham Rams",
+      "status": "STATUS_FINAL",
+      "home_spread": null,
+      "total": null,
+      "forecasts": {
+        "baseline": {
+          "projected_away_points": 59.07,
+          "projected_home_points": 88.92,
+          "projected_margin_home": 29.854,
+          "projected_total": 147.994,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_v2": {
+          "projected_away_points": 53.0,
+          "projected_home_points": 93.8,
+          "projected_margin_home": 40.8,
+          "projected_total": 146.792,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_opp_v3": {
+          "projected_away_points": 53.8,
+          "projected_home_points": 92.42,
+          "projected_margin_home": 38.626,
+          "projected_total": 146.217,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_rot_v4": {
+          "projected_away_points": 51.8,
+          "projected_home_points": 99.8,
+          "projected_margin_home": 47.998,
+          "projected_total": 151.594,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_all_v4": {
+          "projected_away_points": 52.51,
+          "projected_home_points": 97.96,
+          "projected_margin_home": 45.454,
+          "projected_total": 150.471,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        }
+      },
+      "provider": null
+    },
+    {
+      "id": "401919762",
+      "tip": "2026-11-25T17:00Z",
+      "away": "Vermont State Randolph Knights",
+      "home": "Fairleigh Dickinson Knights",
+      "status": "STATUS_FINAL",
+      "home_spread": null,
+      "total": null,
+      "forecasts": {
+        "baseline": {
+          "projected_away_points": 63.72,
+          "projected_home_points": 84.39,
+          "projected_margin_home": 20.672,
+          "projected_total": 148.103,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_v2": {
+          "projected_away_points": 60.96,
+          "projected_home_points": 83.7,
+          "projected_margin_home": 22.737,
+          "projected_total": 144.664,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_opp_v3": {
+          "projected_away_points": 62.07,
+          "projected_home_points": 82.82,
+          "projected_margin_home": 20.749,
+          "projected_total": 144.895,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_rot_v4": {
+          "projected_away_points": 59.75,
+          "projected_home_points": 90.58,
+          "projected_margin_home": 30.831,
+          "projected_total": 150.333,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_all_v4": {
+          "projected_away_points": 60.87,
+          "projected_home_points": 89.2,
+          "projected_margin_home": 28.339,
+          "projected_total": 150.069,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        }
+      },
+      "provider": null
+    },
+    {
+      "id": "401921669",
+      "tip": "2026-11-25T19:00Z",
+      "away": "LSU Tigers",
+      "home": "Arizona State Sun Devils",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": 3.5,
+      "total": 145.5,
+      "forecasts": {},
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401929406",
+      "tip": "2026-11-25T19:00Z",
+      "away": "Arkansas-Pine Bluff Golden Lions",
+      "home": "South Dakota Coyotes",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": -21.5,
+      "total": 150.5,
+      "forecasts": {
+        "baseline": {
+          "projected_away_points": 61.22,
+          "projected_home_points": 95.58,
+          "projected_margin_home": 34.364,
+          "projected_total": 156.804,
+          "ats_edge_home": 12.864,
+          "total_edge_over": 6.304
+        },
+        "player_v2": {
+          "projected_away_points": 65.51,
+          "projected_home_points": 92.91,
+          "projected_margin_home": 27.403,
+          "projected_total": 158.414,
+          "ats_edge_home": 5.903,
+          "total_edge_over": 7.914
+        },
+        "player_opp_v3": {
+          "projected_away_points": 64.76,
+          "projected_home_points": 93.87,
+          "projected_margin_home": 29.101,
+          "projected_total": 158.629,
+          "ats_edge_home": 7.601,
+          "total_edge_over": 8.129
+        },
+        "player_rot_v4": {
+          "projected_away_points": 65.44,
+          "projected_home_points": 91.63,
+          "projected_margin_home": 26.189,
+          "projected_total": 157.069,
+          "ats_edge_home": 4.689,
+          "total_edge_over": 6.569
+        },
+        "player_all_v4": {
+          "projected_away_points": 65.1,
+          "projected_home_points": 92.58,
+          "projected_margin_home": 27.485,
+          "projected_total": 157.676,
+          "ats_edge_home": 5.985,
+          "total_edge_over": 7.176
+        }
+      },
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401928850",
+      "tip": "2026-11-25T19:00Z",
+      "away": "Grace Christian Tigers",
+      "home": "Western Michigan Broncos",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": null,
+      "total": null,
+      "forecasts": {
+        "baseline": {
+          "projected_away_points": 55.48,
+          "projected_home_points": 88.5,
+          "projected_margin_home": 33.023,
+          "projected_total": 143.974,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_v2": {
+          "projected_away_points": 51.53,
+          "projected_home_points": 94.71,
+          "projected_margin_home": 43.177,
+          "projected_total": 146.245,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_opp_v3": {
+          "projected_away_points": 51.99,
+          "projected_home_points": 94.84,
+          "projected_margin_home": 42.846,
+          "projected_total": 146.83,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_rot_v4": {
+          "projected_away_points": 50.54,
+          "projected_home_points": 101.18,
+          "projected_margin_home": 50.639,
+          "projected_total": 151.725,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_all_v4": {
+          "projected_away_points": 50.94,
+          "projected_home_points": 100.88,
+          "projected_margin_home": 49.937,
+          "projected_total": 151.816,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        }
+      },
+      "provider": null
+    },
+    {
+      "id": "401926207",
+      "tip": "2026-11-25T19:00Z",
+      "away": "Montreat Cavaliers",
+      "home": "Western Carolina Catamounts",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": null,
+      "total": null,
+      "forecasts": {
+        "baseline": {
+          "projected_away_points": 61.65,
+          "projected_home_points": 92.19,
+          "projected_margin_home": 30.538,
+          "projected_total": 153.84,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_v2": {
+          "projected_away_points": 60.21,
+          "projected_home_points": 95.12,
+          "projected_margin_home": 34.907,
+          "projected_total": 155.331,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_opp_v3": {
+          "projected_away_points": 61.86,
+          "projected_home_points": 91.4,
+          "projected_margin_home": 29.538,
+          "projected_total": 153.263,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_rot_v4": {
+          "projected_away_points": 58.18,
+          "projected_home_points": 98.2,
+          "projected_margin_home": 40.016,
+          "projected_total": 156.383,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_all_v4": {
+          "projected_away_points": 59.88,
+          "projected_home_points": 94.64,
+          "projected_margin_home": 34.762,
+          "projected_total": 154.526,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        }
+      },
+      "provider": null
+    },
+    {
+      "id": "401924705",
+      "tip": "2026-11-25T19:00Z",
+      "away": "Saint Peter's Peacocks",
+      "home": "Columbia Lions",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": -13.5,
+      "total": 125.5,
+      "forecasts": {
+        "baseline": {
+          "projected_away_points": 52.08,
+          "projected_home_points": 79.96,
+          "projected_margin_home": 27.873,
+          "projected_total": 132.039,
+          "ats_edge_home": 14.373,
+          "total_edge_over": 6.539
+        },
+        "player_v2": {
+          "projected_away_points": 54.23,
+          "projected_home_points": 76.89,
+          "projected_margin_home": 22.658,
+          "projected_total": 131.119,
+          "ats_edge_home": 9.158,
+          "total_edge_over": 5.619
+        },
+        "player_opp_v3": {
+          "projected_away_points": 54.74,
+          "projected_home_points": 76.4,
+          "projected_margin_home": 21.666,
+          "projected_total": 131.137,
+          "ats_edge_home": 8.166,
+          "total_edge_over": 5.637
+        },
+        "player_rot_v4": {
+          "projected_away_points": 53.5,
+          "projected_home_points": 74.78,
+          "projected_margin_home": 21.28,
+          "projected_total": 128.273,
+          "ats_edge_home": 7.78,
+          "total_edge_over": 2.773
+        },
+        "player_all_v4": {
+          "projected_away_points": 54.26,
+          "projected_home_points": 73.98,
+          "projected_margin_home": 19.723,
+          "projected_total": 128.24,
+          "ats_edge_home": 6.223,
+          "total_edge_over": 2.74
+        }
+      },
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401922223",
+      "tip": "2026-11-25T19:00Z",
+      "away": "Warner Royals",
+      "home": "North Florida Ospreys",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": null,
+      "total": null,
+      "forecasts": {},
+      "provider": null
+    },
+    {
+      "id": "401920868",
+      "tip": "2026-11-25T19:00Z",
+      "away": "Manhattan Jaspers",
+      "home": "NJIT Highlanders",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": -1.5,
+      "total": 142.5,
+      "forecasts": {
+        "baseline": {
+          "projected_away_points": 63.24,
+          "projected_home_points": 75.25,
+          "projected_margin_home": 12.003,
+          "projected_total": 138.491,
+          "ats_edge_home": 10.503,
+          "total_edge_over": -4.009
+        },
+        "player_v2": {
+          "projected_away_points": 65.24,
+          "projected_home_points": 68.69,
+          "projected_margin_home": 3.453,
+          "projected_total": 133.93,
+          "ats_edge_home": 1.953,
+          "total_edge_over": -8.57
+        },
+        "player_opp_v3": {
+          "projected_away_points": 66.63,
+          "projected_home_points": 67.56,
+          "projected_margin_home": 0.933,
+          "projected_total": 134.188,
+          "ats_edge_home": -0.567,
+          "total_edge_over": -8.312
+        },
+        "player_rot_v4": {
+          "projected_away_points": 65.67,
+          "projected_home_points": 68.05,
+          "projected_margin_home": 2.387,
+          "projected_total": 133.719,
+          "ats_edge_home": 0.887,
+          "total_edge_over": -8.781
+        },
+        "player_all_v4": {
+          "projected_away_points": 67.16,
+          "projected_home_points": 66.4,
+          "projected_margin_home": -0.758,
+          "projected_total": 133.563,
+          "ats_edge_home": -2.258,
+          "total_edge_over": -8.937
+        }
+      },
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401917967",
+      "tip": "2026-11-25T19:00Z",
+      "away": "Abilene Christian Wildcats",
+      "home": "South Dakota State Jackrabbits",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": -7.5,
+      "total": 139.5,
+      "forecasts": {
+        "baseline": {
+          "projected_away_points": 65.85,
+          "projected_home_points": 78.71,
+          "projected_margin_home": 12.867,
+          "projected_total": 144.559,
+          "ats_edge_home": 5.367,
+          "total_edge_over": 5.059
+        },
+        "player_v2": {
+          "projected_away_points": 66.65,
+          "projected_home_points": 79.14,
+          "projected_margin_home": 12.498,
+          "projected_total": 145.789,
+          "ats_edge_home": 4.998,
+          "total_edge_over": 6.289
+        },
+        "player_opp_v3": {
+          "projected_away_points": 67.29,
+          "projected_home_points": 77.05,
+          "projected_margin_home": 9.757,
+          "projected_total": 144.334,
+          "ats_edge_home": 2.257,
+          "total_edge_over": 4.834
+        },
+        "player_rot_v4": {
+          "projected_away_points": 67.02,
+          "projected_home_points": 76.3,
+          "projected_margin_home": 9.278,
+          "projected_total": 143.318,
+          "ats_edge_home": 1.778,
+          "total_edge_over": 3.818
+        },
+        "player_all_v4": {
+          "projected_away_points": 67.93,
+          "projected_home_points": 74.37,
+          "projected_margin_home": 6.434,
+          "projected_total": 142.304,
+          "ats_edge_home": -1.066,
+          "total_edge_over": 2.804
+        }
+      },
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401911311",
+      "tip": "2026-11-25T19:00Z",
+      "away": "Johnson & Wales Griffins",
+      "home": "Brown Bears",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": null,
+      "total": null,
+      "forecasts": {},
+      "provider": null
+    },
+    {
+      "id": "401921715",
+      "tip": "2026-11-25T19:30Z",
+      "away": "Ole Miss Rebels",
+      "home": "Arizona Wildcats",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": -5.5,
+      "total": 153.5,
+      "forecasts": {},
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401920809",
+      "tip": "2026-11-25T19:30Z",
+      "away": "Texas A&M Aggies",
+      "home": "Xavier Musketeers",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": 3.5,
+      "total": 170.5,
+      "forecasts": {},
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401928836",
+      "tip": "2026-11-25T20:00Z",
+      "away": "Akron Zips",
+      "home": "App State Mountaineers",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": 5.5,
+      "total": 134.5,
+      "forecasts": {
+        "baseline": {
+          "projected_away_points": 66.6,
+          "projected_home_points": 71.32,
+          "projected_margin_home": 4.715,
+          "projected_total": 137.917,
+          "ats_edge_home": 10.215,
+          "total_edge_over": 3.417
+        },
+        "player_v2": {
+          "projected_away_points": 73.12,
+          "projected_home_points": 65.87,
+          "projected_margin_home": -7.251,
+          "projected_total": 138.982,
+          "ats_edge_home": -1.751,
+          "total_edge_over": 4.482
+        },
+        "player_opp_v3": {
+          "projected_away_points": 72.36,
+          "projected_home_points": 67.37,
+          "projected_margin_home": -4.989,
+          "projected_total": 139.737,
+          "ats_edge_home": 0.511,
+          "total_edge_over": 5.237
+        },
+        "player_rot_v4": {
+          "projected_away_points": 73.37,
+          "projected_home_points": 63.92,
+          "projected_margin_home": -9.449,
+          "projected_total": 137.299,
+          "ats_edge_home": -3.949,
+          "total_edge_over": 2.799
+        },
+        "player_all_v4": {
+          "projected_away_points": 72.78,
+          "projected_home_points": 65.22,
+          "projected_margin_home": -7.56,
+          "projected_total": 137.995,
+          "ats_edge_home": -2.06,
+          "total_edge_over": 3.495
+        }
+      },
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401920548",
+      "tip": "2026-11-25T20:00Z",
+      "away": "SE Louisiana Lions",
+      "home": "North Dakota Fighting Hawks",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": 1.5,
+      "total": 142.5,
+      "forecasts": {},
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401919042",
+      "tip": "2026-11-25T20:00Z",
+      "away": "Jackson State Tigers",
+      "home": "Oklahoma State Cowboys",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": -35.5,
+      "total": 160.5,
+      "forecasts": {
+        "baseline": {
+          "projected_away_points": 64.2,
+          "projected_home_points": 91.56,
+          "projected_margin_home": 27.366,
+          "projected_total": 155.76,
+          "ats_edge_home": -8.134,
+          "total_edge_over": -4.74
+        },
+        "player_v2": {
+          "projected_away_points": 65.41,
+          "projected_home_points": 96.09,
+          "projected_margin_home": 30.679,
+          "projected_total": 161.492,
+          "ats_edge_home": -4.821,
+          "total_edge_over": 0.992
+        },
+        "player_opp_v3": {
+          "projected_away_points": 64.34,
+          "projected_home_points": 96.13,
+          "projected_margin_home": 31.789,
+          "projected_total": 160.477,
+          "ats_edge_home": -3.711,
+          "total_edge_over": -0.023
+        },
+        "player_rot_v4": {
+          "projected_away_points": 65.24,
+          "projected_home_points": 94.47,
+          "projected_margin_home": 29.226,
+          "projected_total": 159.712,
+          "ats_edge_home": -6.274,
+          "total_edge_over": -0.788
+        },
+        "player_all_v4": {
+          "projected_away_points": 64.85,
+          "projected_home_points": 95.06,
+          "projected_margin_home": 30.211,
+          "projected_total": 159.902,
+          "ats_edge_home": -5.289,
+          "total_edge_over": -0.598
+        }
+      },
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401928359",
+      "tip": "2026-11-25T20:30Z",
+      "away": "Arkansas State Red Wolves",
+      "home": "Florida International Panthers",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": -1.5,
+      "total": 176.5,
+      "forecasts": {
+        "baseline": {
+          "projected_away_points": 72.67,
+          "projected_home_points": 85.81,
+          "projected_margin_home": 13.138,
+          "projected_total": 158.474,
+          "ats_edge_home": 11.638,
+          "total_edge_over": -18.026
+        },
+        "player_v2": {
+          "projected_away_points": 74.24,
+          "projected_home_points": 88.59,
+          "projected_margin_home": 14.356,
+          "projected_total": 162.83,
+          "ats_edge_home": 12.856,
+          "total_edge_over": -13.67
+        },
+        "player_opp_v3": {
+          "projected_away_points": 72.99,
+          "projected_home_points": 89.94,
+          "projected_margin_home": 16.945,
+          "projected_total": 162.931,
+          "ats_edge_home": 15.445,
+          "total_edge_over": -13.569
+        },
+        "player_rot_v4": {
+          "projected_away_points": 75.14,
+          "projected_home_points": 86.2,
+          "projected_margin_home": 11.067,
+          "projected_total": 161.338,
+          "ats_edge_home": 9.567,
+          "total_edge_over": -15.162
+        },
+        "player_all_v4": {
+          "projected_away_points": 74.19,
+          "projected_home_points": 87.76,
+          "projected_margin_home": 13.569,
+          "projected_total": 161.956,
+          "ats_edge_home": 12.069,
+          "total_edge_over": -14.544
+        }
+      },
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401925943",
+      "tip": "2026-11-25T21:00Z",
+      "away": "Bethesda Flames",
+      "home": "Utah Tech Trailblazers",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": null,
+      "total": null,
+      "forecasts": {},
+      "provider": null
+    },
+    {
+      "id": "401925050",
+      "tip": "2026-11-25T21:00Z",
+      "away": "Grambling Tigers",
+      "home": "LSU New Orleans Privateers",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": -3.5,
+      "total": 148.5,
+      "forecasts": {},
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401924737",
+      "tip": "2026-11-25T21:00Z",
+      "away": "Princeton Tigers",
+      "home": "Liberty Flames",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": -3.5,
+      "total": 137.5,
+      "forecasts": {},
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401921703",
+      "tip": "2026-11-25T21:00Z",
+      "away": "Georgia State Panthers",
+      "home": "Florida Gulf Coast Eagles",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": 1.5,
+      "total": 142.5,
+      "forecasts": {
+        "baseline": {
+          "projected_away_points": 73.5,
+          "projected_home_points": 79.22,
+          "projected_margin_home": 5.721,
+          "projected_total": 152.721,
+          "ats_edge_home": 7.221,
+          "total_edge_over": 10.221
+        },
+        "player_v2": {
+          "projected_away_points": 79.89,
+          "projected_home_points": 71.26,
+          "projected_margin_home": -8.624,
+          "projected_total": 151.146,
+          "ats_edge_home": -7.124,
+          "total_edge_over": 8.646
+        },
+        "player_opp_v3": {
+          "projected_away_points": 79.5,
+          "projected_home_points": 72.25,
+          "projected_margin_home": -7.25,
+          "projected_total": 151.759,
+          "ats_edge_home": -5.75,
+          "total_edge_over": 9.259
+        },
+        "player_rot_v4": {
+          "projected_away_points": 80.36,
+          "projected_home_points": 70.34,
+          "projected_margin_home": -10.014,
+          "projected_total": 150.701,
+          "ats_edge_home": -8.514,
+          "total_edge_over": 8.201
+        },
+        "player_all_v4": {
+          "projected_away_points": 79.89,
+          "projected_home_points": 71.43,
+          "projected_margin_home": -8.463,
+          "projected_total": 151.32,
+          "ats_edge_home": -6.963,
+          "total_edge_over": 8.82
+        }
+      },
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401920858",
+      "tip": "2026-11-25T21:00Z",
+      "away": "Prairie View A&M Panthers",
+      "home": "Marshall Thundering Herd",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": -14.5,
+      "total": 150.5,
+      "forecasts": {
+        "baseline": {
+          "projected_away_points": 66.74,
+          "projected_home_points": 85.79,
+          "projected_margin_home": 19.055,
+          "projected_total": 152.533,
+          "ats_edge_home": 4.555,
+          "total_edge_over": 2.033
+        },
+        "player_v2": {
+          "projected_away_points": 69.06,
+          "projected_home_points": 83.24,
+          "projected_margin_home": 14.183,
+          "projected_total": 152.296,
+          "ats_edge_home": -0.317,
+          "total_edge_over": 1.796
+        },
+        "player_opp_v3": {
+          "projected_away_points": 69.06,
+          "projected_home_points": 83.07,
+          "projected_margin_home": 14.003,
+          "projected_total": 152.129,
+          "ats_edge_home": -0.497,
+          "total_edge_over": 1.629
+        },
+        "player_rot_v4": {
+          "projected_away_points": 67.92,
+          "projected_home_points": 80.44,
+          "projected_margin_home": 12.517,
+          "projected_total": 148.355,
+          "ats_edge_home": -1.983,
+          "total_edge_over": -2.145
+        },
+        "player_all_v4": {
+          "projected_away_points": 68.18,
+          "projected_home_points": 80.21,
+          "projected_margin_home": 12.028,
+          "projected_total": 148.382,
+          "ats_edge_home": -2.472,
+          "total_edge_over": -2.118
+        }
+      },
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401921670",
+      "tip": "2026-11-25T21:30Z",
+      "away": "South Carolina Gamecocks",
+      "home": "USC Trojans",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": -10.5,
+      "total": 144.5,
+      "forecasts": {},
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401926065",
+      "tip": "2026-11-25T22:00Z",
+      "away": "Southern Jaguars",
+      "home": "Nebraska Cornhuskers",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": -34.5,
+      "total": 149.5,
+      "forecasts": {
+        "baseline": {
+          "projected_away_points": 58.86,
+          "projected_home_points": 90.12,
+          "projected_margin_home": 31.263,
+          "projected_total": 148.979,
+          "ats_edge_home": -3.237,
+          "total_edge_over": -0.521
+        },
+        "player_v2": {
+          "projected_away_points": 57.15,
+          "projected_home_points": 92.72,
+          "projected_margin_home": 35.564,
+          "projected_total": 149.871,
+          "ats_edge_home": 1.064,
+          "total_edge_over": 0.371
+        },
+        "player_opp_v3": {
+          "projected_away_points": 56.78,
+          "projected_home_points": 92.31,
+          "projected_margin_home": 35.526,
+          "projected_total": 149.088,
+          "ats_edge_home": 1.026,
+          "total_edge_over": -0.412
+        },
+        "player_rot_v4": {
+          "projected_away_points": 56.62,
+          "projected_home_points": 91.14,
+          "projected_margin_home": 34.519,
+          "projected_total": 147.755,
+          "ats_edge_home": 0.019,
+          "total_edge_over": -1.745
+        },
+        "player_all_v4": {
+          "projected_away_points": 56.96,
+          "projected_home_points": 91.18,
+          "projected_margin_home": 34.215,
+          "projected_total": 148.136,
+          "ats_edge_home": -0.285,
+          "total_edge_over": -1.364
+        }
+      },
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401917182",
+      "tip": "2026-11-25T22:00Z",
+      "away": "Memphis Tigers",
+      "home": "Penn State Nittany Lions",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": 4.5,
+      "total": 162.5,
+      "forecasts": {
+        "baseline": {
+          "projected_away_points": 68.59,
+          "projected_home_points": 87.16,
+          "projected_margin_home": 18.568,
+          "projected_total": 155.757,
+          "ats_edge_home": 23.068,
+          "total_edge_over": -6.743
+        },
+        "player_v2": {
+          "projected_away_points": 80.25,
+          "projected_home_points": 79.5,
+          "projected_margin_home": -0.742,
+          "projected_total": 159.749,
+          "ats_edge_home": 3.758,
+          "total_edge_over": -2.751
+        },
+        "player_opp_v3": {
+          "projected_away_points": 82.04,
+          "projected_home_points": 78.87,
+          "projected_margin_home": -3.164,
+          "projected_total": 160.91,
+          "ats_edge_home": 1.336,
+          "total_edge_over": -1.59
+        },
+        "player_rot_v4": {
+          "projected_away_points": 78.62,
+          "projected_home_points": 79.02,
+          "projected_margin_home": 0.402,
+          "projected_total": 157.642,
+          "ats_edge_home": 4.902,
+          "total_edge_over": -4.858
+        },
+        "player_all_v4": {
+          "projected_away_points": 80.53,
+          "projected_home_points": 78.27,
+          "projected_margin_home": -2.258,
+          "projected_total": 158.795,
+          "ats_edge_home": 2.242,
+          "total_edge_over": -3.705
+        }
+      },
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401925917",
+      "tip": "2026-11-25T22:00Z",
+      "away": "Portland State Vikings",
+      "home": "UC Riverside Highlanders",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": -2.5,
+      "total": 152.5,
+      "forecasts": {
+        "baseline": {
+          "projected_away_points": 72.23,
+          "projected_home_points": 78.85,
+          "projected_margin_home": 6.627,
+          "projected_total": 151.078,
+          "ats_edge_home": 4.127,
+          "total_edge_over": -1.422
+        },
+        "player_v2": {
+          "projected_away_points": 71.01,
+          "projected_home_points": 78.74,
+          "projected_margin_home": 7.736,
+          "projected_total": 149.748,
+          "ats_edge_home": 5.236,
+          "total_edge_over": -2.752
+        },
+        "player_opp_v3": {
+          "projected_away_points": 71.92,
+          "projected_home_points": 78.42,
+          "projected_margin_home": 6.507,
+          "projected_total": 150.339,
+          "ats_edge_home": 4.007,
+          "total_edge_over": -2.161
+        },
+        "player_rot_v4": {
+          "projected_away_points": 68.87,
+          "projected_home_points": 75.94,
+          "projected_margin_home": 7.074,
+          "projected_total": 144.815,
+          "ats_edge_home": 4.574,
+          "total_edge_over": -7.685
+        },
+        "player_all_v4": {
+          "projected_away_points": 69.88,
+          "projected_home_points": 75.19,
+          "projected_margin_home": 5.312,
+          "projected_total": 145.069,
+          "ats_edge_home": 2.812,
+          "total_edge_over": -7.431
+        }
+      },
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401925688",
+      "tip": "2026-11-25T22:00Z",
+      "away": "Alcorn State Braves",
+      "home": "Texas State Bobcats",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": -26.5,
+      "total": 147.5,
+      "forecasts": {},
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401920237",
+      "tip": "2026-11-25T22:00Z",
+      "away": "Holy Cross Crusaders",
+      "home": "Dartmouth Big Green",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": -11.5,
+      "total": 147.5,
+      "forecasts": {
+        "baseline": {
+          "projected_away_points": 62.13,
+          "projected_home_points": 88.97,
+          "projected_margin_home": 26.842,
+          "projected_total": 151.092,
+          "ats_edge_home": 15.342,
+          "total_edge_over": 3.592
+        },
+        "player_v2": {
+          "projected_away_points": 65.57,
+          "projected_home_points": 81.96,
+          "projected_margin_home": 16.395,
+          "projected_total": 147.533,
+          "ats_edge_home": 4.895,
+          "total_edge_over": 0.033
+        },
+        "player_opp_v3": {
+          "projected_away_points": 66.95,
+          "projected_home_points": 81.56,
+          "projected_margin_home": 14.607,
+          "projected_total": 148.517,
+          "ats_edge_home": 3.107,
+          "total_edge_over": 1.017
+        },
+        "player_rot_v4": {
+          "projected_away_points": 65.81,
+          "projected_home_points": 80.71,
+          "projected_margin_home": 14.895,
+          "projected_total": 146.52,
+          "ats_edge_home": 3.395,
+          "total_edge_over": -0.98
+        },
+        "player_all_v4": {
+          "projected_away_points": 67.22,
+          "projected_home_points": 80.21,
+          "projected_margin_home": 12.993,
+          "projected_total": 147.432,
+          "ats_edge_home": 1.493,
+          "total_edge_over": -0.068
+        }
+      },
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401921716",
+      "tip": "2026-11-25T22:30Z",
+      "away": "BYU Cougars",
+      "home": "Providence Friars",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": 1.5,
+      "total": 154.5,
+      "forecasts": {},
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401922253",
+      "tip": "2026-11-25T23:00Z",
+      "away": "West Florida Argonauts",
+      "home": "Northwestern State Demons",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": -1.5,
+      "total": 139.5,
+      "forecasts": {},
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401920549",
+      "tip": "2026-11-25T23:00Z",
+      "away": "Kennesaw State Owls",
+      "home": "Charleston Cougars",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": -1.5,
+      "total": 160.5,
+      "forecasts": {},
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401920299",
+      "tip": "2026-11-25T23:00Z",
+      "away": "Cal State Northridge Matadors",
+      "home": "Weber State Wildcats",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": 1.5,
+      "total": 168.5,
+      "forecasts": {
+        "baseline": {
+          "projected_away_points": 76.15,
+          "projected_home_points": 83.73,
+          "projected_margin_home": 7.58,
+          "projected_total": 159.878,
+          "ats_edge_home": 9.08,
+          "total_edge_over": -8.622
+        },
+        "player_v2": {
+          "projected_away_points": 80.86,
+          "projected_home_points": 77.12,
+          "projected_margin_home": -3.73,
+          "projected_total": 157.98,
+          "ats_edge_home": -2.23,
+          "total_edge_over": -10.52
+        },
+        "player_opp_v3": {
+          "projected_away_points": 81.94,
+          "projected_home_points": 76.88,
+          "projected_margin_home": -5.058,
+          "projected_total": 158.825,
+          "ats_edge_home": -3.558,
+          "total_edge_over": -9.675
+        },
+        "player_rot_v4": {
+          "projected_away_points": 79.62,
+          "projected_home_points": 76.83,
+          "projected_margin_home": -2.793,
+          "projected_total": 156.45,
+          "ats_edge_home": -1.293,
+          "total_edge_over": -12.05
+        },
+        "player_all_v4": {
+          "projected_away_points": 80.81,
+          "projected_home_points": 76.26,
+          "projected_margin_home": -4.547,
+          "projected_total": 157.066,
+          "ats_edge_home": -3.047,
+          "total_edge_over": -11.434
+        }
+      },
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401911241",
+      "tip": "2026-11-25T23:00Z",
+      "away": "Bethune-Cookman Wildcats",
+      "home": "Richmond Spiders",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": -11.5,
+      "total": 146.5,
+      "forecasts": {},
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401909720",
+      "tip": "2026-11-25T23:00Z",
+      "away": "UAlbany Great Danes",
+      "home": "Syracuse Orange",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": -26.5,
+      "total": 146.5,
+      "forecasts": {},
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401909568",
+      "tip": "2026-11-26T00:00Z",
+      "away": "UConn Huskies",
+      "home": "Duke Blue Devils",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": 1.5,
+      "total": 145.5,
+      "forecasts": {
+        "baseline": {
+          "projected_away_points": 69.91,
+          "projected_home_points": 78.3,
+          "projected_margin_home": 8.387,
+          "projected_total": 148.215,
+          "ats_edge_home": 9.887,
+          "total_edge_over": 2.715
+        },
+        "player_v2": {
+          "projected_away_points": 72.45,
+          "projected_home_points": 76.29,
+          "projected_margin_home": 3.84,
+          "projected_total": 148.745,
+          "ats_edge_home": 5.34,
+          "total_edge_over": 3.245
+        },
+        "player_opp_v3": {
+          "projected_away_points": 71.68,
+          "projected_home_points": 76.52,
+          "projected_margin_home": 4.839,
+          "projected_total": 148.205,
+          "ats_edge_home": 6.339,
+          "total_edge_over": 2.705
+        },
+        "player_rot_v4": {
+          "projected_away_points": 72.71,
+          "projected_home_points": 75.09,
+          "projected_margin_home": 2.384,
+          "projected_total": 147.794,
+          "ats_edge_home": 3.884,
+          "total_edge_over": 2.294
+        },
+        "player_all_v4": {
+          "projected_away_points": 72.14,
+          "projected_home_points": 75.66,
+          "projected_margin_home": 3.524,
+          "projected_total": 147.802,
+          "ats_edge_home": 5.024,
+          "total_edge_over": 2.302
+        }
+      },
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401922285",
+      "tip": "2026-11-26T00:00Z",
+      "away": "South Carolina Upstate Spartans",
+      "home": "The Citadel Bulldogs",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": -3.5,
+      "total": 138.5,
+      "forecasts": {},
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401921170",
+      "tip": "2026-11-26T00:00Z",
+      "away": "Case Western Reserve Spartans",
+      "home": "Cleveland State Vikings",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": null,
+      "total": null,
+      "forecasts": {
+        "baseline": {
+          "projected_away_points": 63.52,
+          "projected_home_points": 86.34,
+          "projected_margin_home": 22.814,
+          "projected_total": 149.862,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_v2": {
+          "projected_away_points": 61.82,
+          "projected_home_points": 86.54,
+          "projected_margin_home": 24.729,
+          "projected_total": 148.36,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_opp_v3": {
+          "projected_away_points": 61.2,
+          "projected_home_points": 87.91,
+          "projected_margin_home": 26.718,
+          "projected_total": 149.111,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_rot_v4": {
+          "projected_away_points": 60.42,
+          "projected_home_points": 93.74,
+          "projected_margin_home": 33.317,
+          "projected_total": 154.16,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_all_v4": {
+          "projected_away_points": 59.85,
+          "projected_home_points": 94.97,
+          "projected_margin_home": 35.119,
+          "projected_total": 154.817,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        }
+      },
+      "provider": null
+    },
+    {
+      "id": "401921108",
+      "tip": "2026-11-26T00:00Z",
+      "away": "Bellarmine Knights",
+      "home": "Northern Kentucky Norse",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": -7.5,
+      "total": 146.5,
+      "forecasts": {
+        "baseline": {
+          "projected_away_points": 70.36,
+          "projected_home_points": 82.58,
+          "projected_margin_home": 12.226,
+          "projected_total": 152.936,
+          "ats_edge_home": 4.726,
+          "total_edge_over": 6.436
+        },
+        "player_v2": {
+          "projected_away_points": 72.56,
+          "projected_home_points": 76.21,
+          "projected_margin_home": 3.651,
+          "projected_total": 148.772,
+          "ats_edge_home": -3.849,
+          "total_edge_over": 2.272
+        },
+        "player_opp_v3": {
+          "projected_away_points": 73.49,
+          "projected_home_points": 75.1,
+          "projected_margin_home": 1.606,
+          "projected_total": 148.592,
+          "ats_edge_home": -5.894,
+          "total_edge_over": 2.092
+        },
+        "player_rot_v4": {
+          "projected_away_points": 72.66,
+          "projected_home_points": 76.08,
+          "projected_margin_home": 3.421,
+          "projected_total": 148.738,
+          "ats_edge_home": -4.079,
+          "total_edge_over": 2.238
+        },
+        "player_all_v4": {
+          "projected_away_points": 73.94,
+          "projected_home_points": 75.19,
+          "projected_margin_home": 1.255,
+          "projected_total": 149.13,
+          "ats_edge_home": -6.245,
+          "total_edge_over": 2.63
+        }
+      },
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401920916",
+      "tip": "2026-11-26T00:00Z",
+      "away": "Northern Illinois Huskies",
+      "home": "SIU Edwardsville Cougars",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": 3.5,
+      "total": 137.5,
+      "forecasts": {},
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401920847",
+      "tip": "2026-11-26T00:00Z",
+      "away": "St. Thomas Tommies",
+      "home": "UNC Wilmington Seahawks",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": -5.5,
+      "total": 156.5,
+      "forecasts": {},
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401920076",
+      "tip": "2026-11-26T00:00Z",
+      "away": "Longwood Lancers",
+      "home": "George Mason Patriots",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": -16.5,
+      "total": 145.5,
+      "forecasts": {},
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401918971",
+      "tip": "2026-11-26T00:00Z",
+      "away": "SMU Mustangs",
+      "home": "Utah State Aggies",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": -3.5,
+      "total": 162.5,
+      "forecasts": {
+        "baseline": {
+          "projected_away_points": 76.28,
+          "projected_home_points": 82.44,
+          "projected_margin_home": 6.165,
+          "projected_total": 158.715,
+          "ats_edge_home": 2.665,
+          "total_edge_over": -3.785
+        },
+        "player_v2": {
+          "projected_away_points": 76.55,
+          "projected_home_points": 81.75,
+          "projected_margin_home": 5.204,
+          "projected_total": 158.294,
+          "ats_edge_home": 1.704,
+          "total_edge_over": -4.206
+        },
+        "player_opp_v3": {
+          "projected_away_points": 77.73,
+          "projected_home_points": 80.93,
+          "projected_margin_home": 3.196,
+          "projected_total": 158.663,
+          "ats_edge_home": -0.304,
+          "total_edge_over": -3.837
+        },
+        "player_rot_v4": {
+          "projected_away_points": 77.09,
+          "projected_home_points": 82.35,
+          "projected_margin_home": 5.257,
+          "projected_total": 159.44,
+          "ats_edge_home": 1.757,
+          "total_edge_over": -3.06
+        },
+        "player_all_v4": {
+          "projected_away_points": 78.28,
+          "projected_home_points": 80.93,
+          "projected_margin_home": 2.656,
+          "projected_total": 159.211,
+          "ats_edge_home": -0.844,
+          "total_edge_over": -3.289
+        }
+      },
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401918960",
+      "tip": "2026-11-26T00:00Z",
+      "away": "Norfolk State Spartans",
+      "home": "NC State Wolfpack",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": -27.5,
+      "total": 150.5,
+      "forecasts": {},
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401911028",
+      "tip": "2026-11-26T00:00Z",
+      "away": "Northeastern Huskies",
+      "home": "Wisconsin Badgers",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": -19.5,
+      "total": 154.5,
+      "forecasts": {
+        "baseline": {
+          "projected_away_points": 66.56,
+          "projected_home_points": 83.59,
+          "projected_margin_home": 17.029,
+          "projected_total": 150.152,
+          "ats_edge_home": -2.471,
+          "total_edge_over": -4.348
+        },
+        "player_v2": {
+          "projected_away_points": 68.39,
+          "projected_home_points": 85.63,
+          "projected_margin_home": 17.235,
+          "projected_total": 154.015,
+          "ats_edge_home": -2.265,
+          "total_edge_over": -0.485
+        },
+        "player_opp_v3": {
+          "projected_away_points": 68.66,
+          "projected_home_points": 85.82,
+          "projected_margin_home": 17.158,
+          "projected_total": 154.486,
+          "ats_edge_home": -2.342,
+          "total_edge_over": -0.014
+        },
+        "player_rot_v4": {
+          "projected_away_points": 68.57,
+          "projected_home_points": 83.48,
+          "projected_margin_home": 14.915,
+          "projected_total": 152.053,
+          "ats_edge_home": -4.585,
+          "total_edge_over": -2.447
+        },
+        "player_all_v4": {
+          "projected_away_points": 69.17,
+          "projected_home_points": 83.84,
+          "projected_margin_home": 14.673,
+          "projected_total": 153.008,
+          "ats_edge_home": -4.827,
+          "total_edge_over": -1.492
+        }
+      },
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401929287",
+      "tip": "2026-11-26T00:30Z",
+      "away": "Wake Forest Demon Deacons",
+      "home": "Mississippi State Bulldogs",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": -3.5,
+      "total": 148.5,
+      "forecasts": {
+        "baseline": {
+          "projected_away_points": 69.75,
+          "projected_home_points": 76.34,
+          "projected_margin_home": 6.591,
+          "projected_total": 146.097,
+          "ats_edge_home": 3.091,
+          "total_edge_over": -2.403
+        },
+        "player_v2": {
+          "projected_away_points": 73.15,
+          "projected_home_points": 79.23,
+          "projected_margin_home": 6.079,
+          "projected_total": 152.382,
+          "ats_edge_home": 2.579,
+          "total_edge_over": 3.882
+        },
+        "player_opp_v3": {
+          "projected_away_points": 72.42,
+          "projected_home_points": 78.98,
+          "projected_margin_home": 6.56,
+          "projected_total": 151.402,
+          "ats_edge_home": 3.06,
+          "total_edge_over": 2.902
+        },
+        "player_rot_v4": {
+          "projected_away_points": 73.19,
+          "projected_home_points": 77.17,
+          "projected_margin_home": 3.978,
+          "projected_total": 150.366,
+          "ats_edge_home": 0.478,
+          "total_edge_over": 1.866
+        },
+        "player_all_v4": {
+          "projected_away_points": 72.67,
+          "projected_home_points": 77.01,
+          "projected_margin_home": 4.346,
+          "projected_total": 149.676,
+          "ats_edge_home": 0.846,
+          "total_edge_over": 1.176
+        }
+      },
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401920138",
+      "tip": "2026-11-26T01:00Z",
+      "away": "Cal State Bakersfield Roadrunners",
+      "home": "Pepperdine Waves",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": -9.5,
+      "total": 159.5,
+      "forecasts": {
+        "baseline": {
+          "projected_away_points": 71.31,
+          "projected_home_points": 90.6,
+          "projected_margin_home": 19.293,
+          "projected_total": 161.903,
+          "ats_edge_home": 9.793,
+          "total_edge_over": 2.403
+        },
+        "player_v2": {
+          "projected_away_points": 73.43,
+          "projected_home_points": 95.32,
+          "projected_margin_home": 21.883,
+          "projected_total": 168.747,
+          "ats_edge_home": 12.383,
+          "total_edge_over": 9.247
+        },
+        "player_opp_v3": {
+          "projected_away_points": 74.19,
+          "projected_home_points": 93.68,
+          "projected_margin_home": 19.494,
+          "projected_total": 167.873,
+          "ats_edge_home": 9.994,
+          "total_edge_over": 8.373
+        },
+        "player_rot_v4": {
+          "projected_away_points": 75.3,
+          "projected_home_points": 91.3,
+          "projected_margin_home": 16.009,
+          "projected_total": 166.6,
+          "ats_edge_home": 6.509,
+          "total_edge_over": 7.1
+        },
+        "player_all_v4": {
+          "projected_away_points": 75.72,
+          "projected_home_points": 89.32,
+          "projected_margin_home": 13.597,
+          "projected_total": 165.035,
+          "ats_edge_home": 4.097,
+          "total_edge_over": 5.535
+        }
+      },
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401911522",
+      "tip": "2026-11-26T01:00Z",
+      "away": "Omaha Mavericks",
+      "home": "UC Davis Aggies",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": -4.5,
+      "total": 146.5,
+      "forecasts": {},
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401920550",
+      "tip": "2026-11-26T01:30Z",
+      "away": "Eastern Michigan Eagles",
+      "home": "UTEP Miners",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": -1.5,
+      "total": 131.5,
+      "forecasts": {},
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401925880",
+      "tip": "2026-11-26T02:00Z",
+      "away": "Northwest Indian RedHawks",
+      "home": "Montana State Bobcats",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": null,
+      "total": null,
+      "forecasts": {
+        "baseline": {
+          "projected_away_points": 60.2,
+          "projected_home_points": 91.25,
+          "projected_margin_home": 31.051,
+          "projected_total": 151.452,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_v2": {
+          "projected_away_points": 56.93,
+          "projected_home_points": 95.25,
+          "projected_margin_home": 38.324,
+          "projected_total": 152.177,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_opp_v3": {
+          "projected_away_points": 56.59,
+          "projected_home_points": 95.56,
+          "projected_margin_home": 38.966,
+          "projected_total": 152.156,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_rot_v4": {
+          "projected_away_points": 53.85,
+          "projected_home_points": 100.0,
+          "projected_margin_home": 46.156,
+          "projected_total": 153.848,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        },
+        "player_all_v4": {
+          "projected_away_points": 53.84,
+          "projected_home_points": 100.58,
+          "projected_margin_home": 46.741,
+          "projected_total": 154.425,
+          "ats_edge_home": null,
+          "total_edge_over": null
+        }
+      },
+      "provider": null
+    },
+    {
+      "id": "401924897",
+      "tip": "2026-11-26T02:00Z",
+      "away": "Mississippi Valley State Delta Devils",
+      "home": "New Mexico Lobos",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": -36.5,
+      "total": 152.5,
+      "forecasts": {
+        "baseline": {
+          "projected_away_points": 61.42,
+          "projected_home_points": 90.06,
+          "projected_margin_home": 28.639,
+          "projected_total": 151.481,
+          "ats_edge_home": -7.861,
+          "total_edge_over": -1.019
+        },
+        "player_v2": {
+          "projected_away_points": 60.39,
+          "projected_home_points": 94.5,
+          "projected_margin_home": 34.112,
+          "projected_total": 154.895,
+          "ats_edge_home": -2.388,
+          "total_edge_over": 2.395
+        },
+        "player_opp_v3": {
+          "projected_away_points": 61.21,
+          "projected_home_points": 93.11,
+          "projected_margin_home": 31.909,
+          "projected_total": 154.321,
+          "ats_edge_home": -4.591,
+          "total_edge_over": 1.821
+        },
+        "player_rot_v4": {
+          "projected_away_points": 61.44,
+          "projected_home_points": 93.16,
+          "projected_margin_home": 31.718,
+          "projected_total": 154.595,
+          "ats_edge_home": -4.782,
+          "total_edge_over": 2.095
+        },
+        "player_all_v4": {
+          "projected_away_points": 62.42,
+          "projected_home_points": 91.96,
+          "projected_margin_home": 29.536,
+          "projected_total": 154.375,
+          "ats_edge_home": -6.964,
+          "total_edge_over": 1.875
+        }
+      },
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401917545",
+      "tip": "2026-11-26T02:00Z",
+      "away": "Eastern Washington Eagles",
+      "home": "Loyola Marymount Lions",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": -7.5,
+      "total": 152.5,
+      "forecasts": {
+        "baseline": {
+          "projected_away_points": 65.81,
+          "projected_home_points": 88.2,
+          "projected_margin_home": 22.387,
+          "projected_total": 154.008,
+          "ats_edge_home": 14.887,
+          "total_edge_over": 1.508
+        },
+        "player_v2": {
+          "projected_away_points": 69.97,
+          "projected_home_points": 85.69,
+          "projected_margin_home": 15.712,
+          "projected_total": 155.661,
+          "ats_edge_home": 8.212,
+          "total_edge_over": 3.161
+        },
+        "player_opp_v3": {
+          "projected_away_points": 72.91,
+          "projected_home_points": 82.53,
+          "projected_margin_home": 9.615,
+          "projected_total": 155.444,
+          "ats_edge_home": 2.115,
+          "total_edge_over": 2.944
+        },
+        "player_rot_v4": {
+          "projected_away_points": 70.09,
+          "projected_home_points": 83.07,
+          "projected_margin_home": 12.981,
+          "projected_total": 153.162,
+          "ats_edge_home": 5.481,
+          "total_edge_over": 0.662
+        },
+        "player_all_v4": {
+          "projected_away_points": 73.29,
+          "projected_home_points": 78.78,
+          "projected_margin_home": 5.493,
+          "projected_total": 152.074,
+          "ats_edge_home": -2.007,
+          "total_edge_over": -0.426
+        }
+      },
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401921671",
+      "tip": "2026-11-26T02:30Z",
+      "away": "Grand Canyon Lopes",
+      "home": "Colorado Buffaloes",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": 9.5,
+      "total": 154.5,
+      "forecasts": {},
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401921713",
+      "tip": "2026-11-26T03:00Z",
+      "away": "Washington Huskies",
+      "home": "VCU Rams",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": -3.5,
+      "total": 144.5,
+      "forecasts": {},
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401917544",
+      "tip": "2026-11-26T03:30Z",
+      "away": "Pacific Tigers",
+      "home": "Jacksonville State Gamecocks",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": 3.5,
+      "total": 132.5,
+      "forecasts": {},
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401929005",
+      "tip": "2026-11-26T04:59Z",
+      "away": "Incarnate Word Cardinals",
+      "home": "Hawai'i Rainbow Warriors",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": -16.5,
+      "total": 139.5,
+      "forecasts": {
+        "baseline": {
+          "projected_away_points": 63.44,
+          "projected_home_points": 81.65,
+          "projected_margin_home": 18.21,
+          "projected_total": 145.096,
+          "ats_edge_home": 1.71,
+          "total_edge_over": 5.596
+        },
+        "player_v2": {
+          "projected_away_points": 63.63,
+          "projected_home_points": 80.02,
+          "projected_margin_home": 16.396,
+          "projected_total": 143.654,
+          "ats_edge_home": -0.104,
+          "total_edge_over": 4.154
+        },
+        "player_opp_v3": {
+          "projected_away_points": 64.2,
+          "projected_home_points": 78.54,
+          "projected_margin_home": 14.345,
+          "projected_total": 142.745,
+          "ats_edge_home": -2.155,
+          "total_edge_over": 3.245
+        },
+        "player_rot_v4": {
+          "projected_away_points": 67.65,
+          "projected_home_points": 81.89,
+          "projected_margin_home": 14.244,
+          "projected_total": 149.545,
+          "ats_edge_home": -2.256,
+          "total_edge_over": 10.045
+        },
+        "player_all_v4": {
+          "projected_away_points": 67.86,
+          "projected_home_points": 79.85,
+          "projected_margin_home": 11.985,
+          "projected_total": 147.715,
+          "ats_edge_home": -4.515,
+          "total_edge_over": 8.215
+        }
+      },
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401921672",
+      "tip": "2026-11-26T04:59Z",
+      "away": "Stanford Cardinal",
+      "home": "Saint Louis Billikens",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": -3.5,
+      "total": 152.5,
+      "forecasts": {},
+      "provider": "Draft Kings"
+    },
+    {
+      "id": "401921714",
+      "tip": "2026-11-26T05:30Z",
+      "away": "Clemson Tigers",
+      "home": "Colorado State Rams",
+      "status": "STATUS_SCHEDULED",
+      "home_spread": 3.5,
+      "total": 148.5,
+      "forecasts": {},
+      "provider": "Draft Kings"
+    }
+  ]
+}
