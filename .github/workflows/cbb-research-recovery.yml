@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: [".github/workflows/cbb-research-recovery.yml", "cbb/research_recovery.py", "cbb/reconstruction_markets.py"]
+    paths: [".github/workflows/cbb-research-recovery.yml", "cbb/research_recovery.py", "cbb/reconstruction_markets.py", "cbb/espn_grade.py"]
 permissions:
   contents: write
 jobs:
