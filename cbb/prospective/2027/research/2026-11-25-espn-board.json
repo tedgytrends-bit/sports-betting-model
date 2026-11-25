@@ -1,5 +1,5 @@
 {
-  "espn_capture_utc": "2026-11-25T18:47:10.080881+00:00",
+  "espn_capture_utc": "2026-11-25T18:51:23.061300+00:00",
   "forecast_capture_utc": "2026-11-22T13:57:59.379135Z",
   "forecast_snapshot": "cbb/prospective/2027/snapshots/20261122T135759379135_45030081991.json",
   "rows": [
@@ -576,7 +576,7 @@
       "home_spread": 3.5,
       "total": 145.5,
       "forecasts": {},
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401929406",
@@ -628,7 +628,7 @@
           "total_edge_over": 7.176
         }
       },
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401928850",
@@ -740,7 +740,7 @@
       "away": "Saint Peter's Peacocks",
       "home": "Columbia Lions",
       "status": "STATUS_SCHEDULED",
-      "home_spread": -13.5,
+      "home_spread": -12.5,
       "total": 125.5,
       "forecasts": {
         "baseline": {
@@ -748,7 +748,7 @@
           "projected_home_points": 79.96,
           "projected_margin_home": 27.873,
           "projected_total": 132.039,
-          "ats_edge_home": 14.373,
+          "ats_edge_home": 15.373,
           "total_edge_over": 6.539
         },
         "player_v2": {
@@ -756,7 +756,7 @@
           "projected_home_points": 76.89,
           "projected_margin_home": 22.658,
           "projected_total": 131.119,
-          "ats_edge_home": 9.158,
+          "ats_edge_home": 10.158,
           "total_edge_over": 5.619
         },
         "player_opp_v3": {
@@ -764,7 +764,7 @@
           "projected_home_points": 76.4,
           "projected_margin_home": 21.666,
           "projected_total": 131.137,
-          "ats_edge_home": 8.166,
+          "ats_edge_home": 9.166,
           "total_edge_over": 5.637
         },
         "player_rot_v4": {
@@ -772,7 +772,7 @@
           "projected_home_points": 74.78,
           "projected_margin_home": 21.28,
           "projected_total": 128.273,
-          "ats_edge_home": 7.78,
+          "ats_edge_home": 8.78,
           "total_edge_over": 2.773
         },
         "player_all_v4": {
@@ -780,11 +780,11 @@
           "projected_home_points": 73.98,
           "projected_margin_home": 19.723,
           "projected_total": 128.24,
-          "ats_edge_home": 6.223,
+          "ats_edge_home": 7.223,
           "total_edge_over": 2.74
         }
       },
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401922223",
@@ -847,7 +847,7 @@
           "total_edge_over": -8.937
         }
       },
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401917967",
@@ -899,7 +899,7 @@
           "total_edge_over": 2.804
         }
       },
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401911311",
@@ -921,7 +921,7 @@
       "home_spread": -5.5,
       "total": 153.5,
       "forecasts": {},
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401920809",
@@ -932,7 +932,7 @@
       "home_spread": 3.5,
       "total": 170.5,
       "forecasts": {},
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401928836",
@@ -984,7 +984,7 @@
           "total_edge_over": 3.495
         }
       },
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401920548",
@@ -995,7 +995,7 @@
       "home_spread": 1.5,
       "total": 142.5,
       "forecasts": {},
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401919042",
@@ -1047,7 +1047,7 @@
           "total_edge_over": -0.598
         }
       },
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401928359",
@@ -1099,7 +1099,7 @@
           "total_edge_over": -14.544
         }
       },
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401925943",
@@ -1121,7 +1121,7 @@
       "home_spread": -3.5,
       "total": 148.5,
       "forecasts": {},
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401924737",
@@ -1132,7 +1132,7 @@
       "home_spread": -3.5,
       "total": 137.5,
       "forecasts": {},
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401921703",
@@ -1184,7 +1184,7 @@
           "total_edge_over": 8.82
         }
       },
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401920858",
@@ -1236,7 +1236,7 @@
           "total_edge_over": -2.118
         }
       },
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401921670",
@@ -1247,7 +1247,7 @@
       "home_spread": -10.5,
       "total": 144.5,
       "forecasts": {},
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401926065",
@@ -1299,7 +1299,7 @@
           "total_edge_over": -1.364
         }
       },
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401917182",
@@ -1351,7 +1351,7 @@
           "total_edge_over": -3.705
         }
       },
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401925917",
@@ -1403,7 +1403,7 @@
           "total_edge_over": -7.431
         }
       },
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401925688",
@@ -1414,7 +1414,7 @@
       "home_spread": -26.5,
       "total": 147.5,
       "forecasts": {},
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401920237",
@@ -1466,7 +1466,7 @@
           "total_edge_over": -0.068
         }
       },
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401921716",
@@ -1477,7 +1477,7 @@
       "home_spread": 1.5,
       "total": 154.5,
       "forecasts": {},
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401922253",
@@ -1488,7 +1488,7 @@
       "home_spread": -1.5,
       "total": 139.5,
       "forecasts": {},
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401920549",
@@ -1499,7 +1499,7 @@
       "home_spread": -1.5,
       "total": 160.5,
       "forecasts": {},
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401920299",
@@ -1551,7 +1551,7 @@
           "total_edge_over": -11.434
         }
       },
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401911241",
@@ -1562,7 +1562,7 @@
       "home_spread": -11.5,
       "total": 146.5,
       "forecasts": {},
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401909720",
@@ -1573,7 +1573,7 @@
       "home_spread": -26.5,
       "total": 146.5,
       "forecasts": {},
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401909568",
@@ -1625,7 +1625,7 @@
           "total_edge_over": 2.302
         }
       },
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401922285",
@@ -1636,7 +1636,7 @@
       "home_spread": -3.5,
       "total": 138.5,
       "forecasts": {},
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401921170",
@@ -1740,7 +1740,7 @@
           "total_edge_over": 2.63
         }
       },
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401920916",
@@ -1751,7 +1751,7 @@
       "home_spread": 3.5,
       "total": 137.5,
       "forecasts": {},
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401920847",
@@ -1762,7 +1762,7 @@
       "home_spread": -5.5,
       "total": 156.5,
       "forecasts": {},
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401920076",
@@ -1773,7 +1773,7 @@
       "home_spread": -16.5,
       "total": 145.5,
       "forecasts": {},
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401918971",
@@ -1781,7 +1781,7 @@
       "away": "SMU Mustangs",
       "home": "Utah State Aggies",
       "status": "STATUS_SCHEDULED",
-      "home_spread": -3.5,
+      "home_spread": -4.5,
       "total": 162.5,
       "forecasts": {
         "baseline": {
@@ -1789,7 +1789,7 @@
           "projected_home_points": 82.44,
           "projected_margin_home": 6.165,
           "projected_total": 158.715,
-          "ats_edge_home": 2.665,
+          "ats_edge_home": 1.665,
           "total_edge_over": -3.785
         },
         "player_v2": {
@@ -1797,7 +1797,7 @@
           "projected_home_points": 81.75,
           "projected_margin_home": 5.204,
           "projected_total": 158.294,
-          "ats_edge_home": 1.704,
+          "ats_edge_home": 0.704,
           "total_edge_over": -4.206
         },
         "player_opp_v3": {
@@ -1805,7 +1805,7 @@
           "projected_home_points": 80.93,
           "projected_margin_home": 3.196,
           "projected_total": 158.663,
-          "ats_edge_home": -0.304,
+          "ats_edge_home": -1.304,
           "total_edge_over": -3.837
         },
         "player_rot_v4": {
@@ -1813,7 +1813,7 @@
           "projected_home_points": 82.35,
           "projected_margin_home": 5.257,
           "projected_total": 159.44,
-          "ats_edge_home": 1.757,
+          "ats_edge_home": 0.757,
           "total_edge_over": -3.06
         },
         "player_all_v4": {
@@ -1821,11 +1821,11 @@
           "projected_home_points": 80.93,
           "projected_margin_home": 2.656,
           "projected_total": 159.211,
-          "ats_edge_home": -0.844,
+          "ats_edge_home": -1.844,
           "total_edge_over": -3.289
         }
       },
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401918960",
@@ -1836,7 +1836,7 @@
       "home_spread": -27.5,
       "total": 150.5,
       "forecasts": {},
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401911028",
@@ -1888,7 +1888,7 @@
           "total_edge_over": -1.492
         }
       },
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401929287",
@@ -1940,7 +1940,7 @@
           "total_edge_over": 1.176
         }
       },
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401920138",
@@ -1992,7 +1992,7 @@
           "total_edge_over": 5.535
         }
       },
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401911522",
@@ -2003,7 +2003,7 @@
       "home_spread": -4.5,
       "total": 146.5,
       "forecasts": {},
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401920550",
@@ -2014,7 +2014,7 @@
       "home_spread": -1.5,
       "total": 131.5,
       "forecasts": {},
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401925880",
@@ -2074,7 +2074,7 @@
       "away": "Mississippi Valley State Delta Devils",
       "home": "New Mexico Lobos",
       "status": "STATUS_SCHEDULED",
-      "home_spread": -36.5,
+      "home_spread": -35.5,
       "total": 152.5,
       "forecasts": {
         "baseline": {
@@ -2082,7 +2082,7 @@
           "projected_home_points": 90.06,
           "projected_margin_home": 28.639,
           "projected_total": 151.481,
-          "ats_edge_home": -7.861,
+          "ats_edge_home": -6.861,
           "total_edge_over": -1.019
         },
         "player_v2": {
@@ -2090,7 +2090,7 @@
           "projected_home_points": 94.5,
           "projected_margin_home": 34.112,
           "projected_total": 154.895,
-          "ats_edge_home": -2.388,
+          "ats_edge_home": -1.388,
           "total_edge_over": 2.395
         },
         "player_opp_v3": {
@@ -2098,7 +2098,7 @@
           "projected_home_points": 93.11,
           "projected_margin_home": 31.909,
           "projected_total": 154.321,
-          "ats_edge_home": -4.591,
+          "ats_edge_home": -3.591,
           "total_edge_over": 1.821
         },
         "player_rot_v4": {
@@ -2106,7 +2106,7 @@
           "projected_home_points": 93.16,
           "projected_margin_home": 31.718,
           "projected_total": 154.595,
-          "ats_edge_home": -4.782,
+          "ats_edge_home": -3.782,
           "total_edge_over": 2.095
         },
         "player_all_v4": {
@@ -2114,11 +2114,11 @@
           "projected_home_points": 91.96,
           "projected_margin_home": 29.536,
           "projected_total": 154.375,
-          "ats_edge_home": -6.964,
+          "ats_edge_home": -5.964,
           "total_edge_over": 1.875
         }
       },
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401917545",
@@ -2170,7 +2170,7 @@
           "total_edge_over": -0.426
         }
       },
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401921671",
@@ -2181,7 +2181,7 @@
       "home_spread": 9.5,
       "total": 154.5,
       "forecasts": {},
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401921713",
@@ -2192,7 +2192,7 @@
       "home_spread": -3.5,
       "total": 144.5,
       "forecasts": {},
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401917544",
@@ -2203,7 +2203,7 @@
       "home_spread": 3.5,
       "total": 132.5,
       "forecasts": {},
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401929005",
@@ -2255,7 +2255,7 @@
           "total_edge_over": 8.215
         }
       },
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401921672",
@@ -2266,7 +2266,7 @@
       "home_spread": -3.5,
       "total": 152.5,
       "forecasts": {},
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     },
     {
       "id": "401921714",
@@ -2277,7 +2277,7 @@
       "home_spread": 3.5,
       "total": 148.5,
       "forecasts": {},
-      "provider": "Draft Kings"
+      "provider": "DraftKings"
     }
   ]
 }
