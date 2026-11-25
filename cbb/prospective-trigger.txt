@@ -1,1 +1,1 @@
-Verify the complete five-model production path and immutability regressions, 2026-11-25.
+2026-11-25: exercise the corrected ESPN identity and tournament-slot checks in production.
