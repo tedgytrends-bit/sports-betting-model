@@ -15,6 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     env:
+      CBB_SAVE_DERIVED_TRAINING: "1"
       CBB_SOURCE_DESCRIPTION: ESPN scoreboards, pretip markets, rosters and completed boxes; archived training, recruitment, transfers and prior-season talent. ESPN player boxes omit advanced usage and efficiency when unavailable.
     steps:
       - uses: actions/checkout@v4
@@ -31,12 +32,12 @@ jobs:
         with:
           path: cbb/data/raw
           key: cbb-historical-2022-to-2026-v3
-          fail-on-cache-miss: true
+          fail-on-cache-miss: false
       - uses: actions/cache/restore@v4
         with:
           path: cbb/data/rotation
           key: cbb-rotation-game-boxes-2022-to-2026-v1
-          fail-on-cache-miss: true
+          fail-on-cache-miss: false
       - uses: actions/cache/restore@v4
         with:
           path: cbb/data/rotation_live
@@ -48,7 +49,12 @@ jobs:
           restore-keys: cbb-espn-season-2027-
       - run: python -m cbb.espn_season_cache
       - run: python -m cbb.espn_model_inputs
-      - run: python -m cbb.prospective
+      - name: Fit with validated archive or recover from versioned training features
+        run: |
+          if [ -f cbb/data/raw/2022/games.json ] && [ -f cbb/data/rotation/2026_game_players.json.gz ]; then
+            python -m cbb.prospective
+          fi
+          python -m cbb.training_checkpoint
       - uses: actions/upload-artifact@v4
         with:
           name: five-model-espn-candidate
