@@ -180,7 +180,22 @@ def main():
                             pending[ident] = dict(id=ident,status="final",season=2027,startDate=competition["date"],
                                                   homePoints=result["home_points"],awayPoints=result["away_points"])
                 finals[event["id"]] = result
-            store.put_json(f"{root}/finals/{key}.json",list(finals.values()),immutable=False)
+            filename = f"{root}/finals/{key}.json"
+            previous = store.read_json(filename) or []
+            incoming = list(finals.values())
+            # Keep previously verified finals through a short or partial provider response.
+            aliases = {(r["tip_utc"],norm(r["away"]),norm(r["home"])) for r in incoming}
+            for r in previous:
+                if str(r["event_id"]) in finals:
+                    continue
+                if (r["tip_utc"],norm(r["away"]),norm(r["home"])) in aliases:
+                    continue
+                if incoming and r.get("source") != incoming[0].get("source"):
+                    # Preserve separate provider observations until identity is verified.
+                    store.put_json(f"{root}/finals/source-observations/{key}-{r['event_id']}.json",r,immutable=True)
+                else:
+                    incoming.append(r)
+            store.put_json(filename,sorted(incoming,key=lambda r:(r["tip_utc"],r["event_id"])),immutable=False)
             day += timedelta(days=1)
         execute(store, list(pending.values()), 2027)
 
