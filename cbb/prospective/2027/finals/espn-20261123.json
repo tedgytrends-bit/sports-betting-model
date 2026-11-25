@@ -1,0 +1,416 @@
+[
+  {
+    "espn_id": "401913530",
+    "tip_utc": "2026-11-24T01:00Z",
+    "central_date": "2026-11-23",
+    "home": "Illinois Fighting Illini",
+    "home_points": 133,
+    "away": "Winthrop Eagles",
+    "away_points": 83
+  },
+  {
+    "espn_id": "401909743",
+    "tip_utc": "2026-11-24T04:55Z",
+    "central_date": "2026-11-23",
+    "home": "Arizona Wildcats",
+    "home_points": 96,
+    "away": "Colorado State Rams",
+    "away_points": 83
+  },
+  {
+    "espn_id": "401909788",
+    "tip_utc": "2026-11-24T01:00Z",
+    "central_date": "2026-11-23",
+    "home": "Kansas Jayhawks",
+    "home_points": 84,
+    "away": "Denver Pioneers",
+    "away_points": 67
+  },
+  {
+    "espn_id": "401921708",
+    "tip_utc": "2026-11-23T22:00Z",
+    "central_date": "2026-11-23",
+    "home": "BYU Cougars",
+    "home_points": 83,
+    "away": "Washington Huskies",
+    "away_points": 77
+  },
+  {
+    "espn_id": "401927397",
+    "tip_utc": "2026-11-23T16:00Z",
+    "central_date": "2026-11-23",
+    "home": "App State Mountaineers",
+    "home_points": 65,
+    "away": "St. Bonaventure Bonnies",
+    "away_points": 71
+  },
+  {
+    "espn_id": "401921700",
+    "tip_utc": "2026-11-23T16:00Z",
+    "central_date": "2026-11-23",
+    "home": "Davidson Wildcats",
+    "home_points": 79,
+    "away": "Northern Iowa Panthers",
+    "away_points": 48
+  },
+  {
+    "espn_id": "401921209",
+    "tip_utc": "2026-11-23T17:30Z",
+    "central_date": "2026-11-23",
+    "home": "East Carolina Pirates",
+    "home_points": 76,
+    "away": "Indiana State Sycamores",
+    "away_points": 77
+  },
+  {
+    "espn_id": "401926069",
+    "tip_utc": "2026-11-23T18:00Z",
+    "central_date": "2026-11-23",
+    "home": "Eastern Illinois Panthers",
+    "home_points": 83,
+    "away": "IU South Bend Titans",
+    "away_points": 66
+  },
+  {
+    "espn_id": "401924266",
+    "tip_utc": "2026-11-23T18:00Z",
+    "central_date": "2026-11-23",
+    "home": "Florida International Panthers",
+    "home_points": 79,
+    "away": "Long Beach State Beach",
+    "away_points": 75
+  },
+  {
+    "espn_id": "401928830",
+    "tip_utc": "2026-11-23T18:30Z",
+    "central_date": "2026-11-23",
+    "home": "Wright State Raiders",
+    "home_points": 66,
+    "away": "Akron Zips",
+    "away_points": 64
+  },
+  {
+    "espn_id": "401921701",
+    "tip_utc": "2026-11-23T18:30Z",
+    "central_date": "2026-11-23",
+    "home": "Florida Gulf Coast Eagles",
+    "home_points": 58,
+    "away": "Charlotte 49ers",
+    "away_points": 71
+  },
+  {
+    "espn_id": "401921658",
+    "tip_utc": "2026-11-23T19:00Z",
+    "central_date": "2026-11-23",
+    "home": "Oregon State Beavers",
+    "home_points": 69,
+    "away": "Tulsa Golden Hurricane",
+    "away_points": 66
+  },
+  {
+    "espn_id": "401918076",
+    "tip_utc": "2026-11-23T19:30Z",
+    "central_date": "2026-11-23",
+    "home": "Clemson Tigers",
+    "home_points": 62,
+    "away": "Ole Miss Rebels",
+    "away_points": 82
+  },
+  {
+    "espn_id": "401928389",
+    "tip_utc": "2026-11-23T20:00Z",
+    "central_date": "2026-11-23",
+    "home": "Grambling Tigers",
+    "home_points": 126,
+    "away": "Ecclesia Royals",
+    "away_points": 45
+  },
+  {
+    "espn_id": "401921207",
+    "tip_utc": "2026-11-23T20:20Z",
+    "central_date": "2026-11-23",
+    "home": "Southern Illinois Salukis",
+    "home_points": 76,
+    "away": "Middle Tennessee Blue Raiders",
+    "away_points": 77
+  },
+  {
+    "espn_id": "401921177",
+    "tip_utc": "2026-11-23T20:30Z",
+    "central_date": "2026-11-23",
+    "home": "IU Indianapolis Jaguars",
+    "home_points": 82,
+    "away": "William & Mary Tribe",
+    "away_points": 87
+  },
+  {
+    "espn_id": "401929445",
+    "tip_utc": "2026-11-23T20:45Z",
+    "central_date": "2026-11-23",
+    "home": "Arkansas State Red Wolves",
+    "home_points": 104,
+    "away": "Southern Utah Thunderbirds",
+    "away_points": 102
+  },
+  {
+    "espn_id": "401919006",
+    "tip_utc": "2026-11-23T21:00Z",
+    "central_date": "2026-11-23",
+    "home": "Georgia State Panthers",
+    "home_points": 73,
+    "away": "Tulane Green Wave",
+    "away_points": 63
+  },
+  {
+    "espn_id": "401929286",
+    "tip_utc": "2026-11-23T21:15Z",
+    "central_date": "2026-11-23",
+    "home": "Belmont Bruins",
+    "home_points": 68,
+    "away": "Yale Bulldogs",
+    "away_points": 60
+  },
+  {
+    "espn_id": "401911457",
+    "tip_utc": "2026-11-23T21:30Z",
+    "central_date": "2026-11-23",
+    "home": "Nevada Wolf Pack",
+    "home_points": 71,
+    "away": "San Francisco Dons",
+    "away_points": 62
+  },
+  {
+    "espn_id": "401921210",
+    "tip_utc": "2026-11-23T23:00Z",
+    "central_date": "2026-11-23",
+    "home": "UT Martin Skyhawks",
+    "home_points": 90,
+    "away": "Temple Owls",
+    "away_points": 81
+  },
+  {
+    "espn_id": "401920752",
+    "tip_utc": "2026-11-23T23:30Z",
+    "central_date": "2026-11-23",
+    "home": "Youngstown State Penguins",
+    "home_points": 69,
+    "away": "Maryland Eastern Shore Hawks",
+    "away_points": 65
+  },
+  {
+    "espn_id": "401911025",
+    "tip_utc": "2026-11-23T23:30Z",
+    "central_date": "2026-11-23",
+    "home": "Buffalo Bulls",
+    "home_points": 93,
+    "away": "RIT Tigers",
+    "away_points": 47
+  },
+  {
+    "espn_id": "401932055",
+    "tip_utc": "2026-11-24T00:00Z",
+    "central_date": "2026-11-23",
+    "home": "Howard Bison",
+    "home_points": 101,
+    "away": "Notre Dame (MD) Gators",
+    "away_points": 73
+  },
+  {
+    "espn_id": "401928838",
+    "tip_utc": "2026-11-24T00:00Z",
+    "central_date": "2026-11-23",
+    "home": "Ball State Cardinals",
+    "home_points": 94,
+    "away": "Spalding Pelicans",
+    "away_points": 36
+  },
+  {
+    "espn_id": "401926106",
+    "tip_utc": "2026-11-24T00:00Z",
+    "central_date": "2026-11-23",
+    "home": "East Tennessee State Buccaneers",
+    "home_points": 108,
+    "away": "Kentucky State Thorobreds",
+    "away_points": 56
+  },
+  {
+    "espn_id": "401925813",
+    "tip_utc": "2026-11-24T00:00Z",
+    "central_date": "2026-11-23",
+    "home": "La Salle Explorers",
+    "home_points": 90,
+    "away": "Penn State Brandywine Lions",
+    "away_points": 42
+  },
+  {
+    "espn_id": "401921157",
+    "tip_utc": "2026-11-24T00:00Z",
+    "central_date": "2026-11-23",
+    "home": "South Carolina State Bulldogs",
+    "home_points": 60,
+    "away": "North Carolina A&T Aggies",
+    "away_points": 62
+  },
+  {
+    "espn_id": "401921029",
+    "tip_utc": "2026-11-24T00:00Z",
+    "central_date": "2026-11-23",
+    "home": "Northern Kentucky Norse",
+    "home_points": 79,
+    "away": "Georgia Southern Eagles",
+    "away_points": 84
+  },
+  {
+    "espn_id": "401919785",
+    "tip_utc": "2026-11-24T00:00Z",
+    "central_date": "2026-11-23",
+    "home": "Le Moyne Dolphins",
+    "home_points": 68,
+    "away": "Mansfield Mountaineers",
+    "away_points": 58
+  },
+  {
+    "espn_id": "401919761",
+    "tip_utc": "2026-11-24T00:00Z",
+    "central_date": "2026-11-23",
+    "home": "Iona Gaels",
+    "home_points": 46,
+    "away": "Fairleigh Dickinson Knights",
+    "away_points": 49
+  },
+  {
+    "espn_id": "401917919",
+    "tip_utc": "2026-11-24T00:00Z",
+    "central_date": "2026-11-23",
+    "home": "North Florida Ospreys",
+    "home_points": 66,
+    "away": "Central Arkansas Bears",
+    "away_points": 80
+  },
+  {
+    "espn_id": "401917543",
+    "tip_utc": "2026-11-24T00:00Z",
+    "central_date": "2026-11-23",
+    "home": "Illinois State Redbirds",
+    "home_points": 99,
+    "away": "Santa Clara Broncos",
+    "away_points": 102
+  },
+  {
+    "espn_id": "401927353",
+    "tip_utc": "2026-11-24T00:30Z",
+    "central_date": "2026-11-23",
+    "home": "North Carolina Central Eagles",
+    "home_points": 105,
+    "away": "Carolina University Bruins",
+    "away_points": 46
+  },
+  {
+    "espn_id": "401919032",
+    "tip_utc": "2026-11-24T00:30Z",
+    "central_date": "2026-11-23",
+    "home": "Wichita State Shockers",
+    "home_points": 91,
+    "away": "Texas A&M-Corpus Christi Islanders",
+    "away_points": 73
+  },
+  {
+    "espn_id": "401929392",
+    "tip_utc": "2026-11-24T01:00Z",
+    "central_date": "2026-11-23",
+    "home": "North Dakota State Bison",
+    "home_points": 84,
+    "away": "Wisconsin Stout Blue Devils",
+    "away_points": 49
+  },
+  {
+    "espn_id": "401921208",
+    "tip_utc": "2026-11-24T01:00Z",
+    "central_date": "2026-11-23",
+    "home": "Utah Valley Wolverines",
+    "home_points": 72,
+    "away": "Stephen F. Austin Lumberjacks",
+    "away_points": 77
+  },
+  {
+    "espn_id": "401913102",
+    "tip_utc": "2026-11-24T01:00Z",
+    "central_date": "2026-11-23",
+    "home": "North Carolina Tar Heels",
+    "home_points": 85,
+    "away": "Monmouth Hawks",
+    "away_points": 45
+  },
+  {
+    "espn_id": "401922263",
+    "tip_utc": "2026-11-24T02:00Z",
+    "central_date": "2026-11-23",
+    "home": "Idaho Vandals",
+    "home_points": 88,
+    "away": "Dickinson State Blue Hawks",
+    "away_points": 47
+  },
+  {
+    "espn_id": "401922032",
+    "tip_utc": "2026-11-24T02:00Z",
+    "central_date": "2026-11-23",
+    "home": "Montana Grizzlies",
+    "home_points": 82,
+    "away": "Carroll (MT) Fighting Saints",
+    "away_points": 54
+  },
+  {
+    "espn_id": "401909536",
+    "tip_utc": "2026-11-24T02:00Z",
+    "central_date": "2026-11-23",
+    "home": "Providence Friars",
+    "home_points": 72,
+    "away": "VCU Rams",
+    "away_points": 66
+  },
+  {
+    "espn_id": "401926183",
+    "tip_utc": "2026-11-24T02:30Z",
+    "central_date": "2026-11-23",
+    "home": "Pepperdine Waves",
+    "home_points": 89,
+    "away": "UNC Greensboro Spartans",
+    "away_points": 62
+  },
+  {
+    "espn_id": "401921663",
+    "tip_utc": "2026-11-24T02:30Z",
+    "central_date": "2026-11-23",
+    "home": "Seattle U Redhawks",
+    "home_points": 76,
+    "away": "Loyola Chicago Ramblers",
+    "away_points": 63
+  },
+  {
+    "espn_id": "401920721",
+    "tip_utc": "2026-11-24T03:00Z",
+    "central_date": "2026-11-23",
+    "home": "UNLV Rebels",
+    "home_points": 82,
+    "away": "Eastern Washington Eagles",
+    "away_points": 61
+  },
+  {
+    "espn_id": "401918057",
+    "tip_utc": "2026-11-24T03:00Z",
+    "central_date": "2026-11-23",
+    "home": "California Golden Bears",
+    "home_points": 96,
+    "away": "Alabama State Hornets",
+    "away_points": 54
+  },
+  {
+    "espn_id": "401921664",
+    "tip_utc": "2026-11-24T04:59Z",
+    "central_date": "2026-11-23",
+    "home": "UC San Diego Tritons",
+    "home_points": 79,
+    "away": "San Jos\u00e9 State Spartans",
+    "away_points": 88
+  }
+]
