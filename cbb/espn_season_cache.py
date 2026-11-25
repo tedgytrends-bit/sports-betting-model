@@ -1,6 +1,7 @@
 """Incrementally cache current-season schedules, markets, rosters and completed boxes."""
 import json
 from concurrent.futures import ThreadPoolExecutor
+from collections import Counter
 from datetime import datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -51,16 +52,27 @@ def update_box(event_id):
 
 def update_roster(team_id):
     path = ROOT / "rosters" / f"{team_id}.json"
+    now = datetime.now(ZoneInfo("America/Chicago"))
+    previous = json.loads(path.read_text()) if path.exists() else {}
+    stamp = previous.get("_captured_at")
+    age = now-datetime.fromisoformat(stamp) if stamp else None
+    if age is not None and age >= timedelta(0) and datetime.fromisoformat(stamp).date()==now.date():
+        return "today"
     try:
         data = read_resource(f"{API}/teams/{team_id}/roster", path)
-    except requests.HTTPError as exc:
-        if exc.response.status_code in (400, 404):
-            return False
-        raise
-    if str(data.get("team",{}).get("id")) != team_id or not data.get("athletes"):
-        return False
+        if str(data.get("team",{}).get("id")) != team_id or not data.get("athletes"):
+            raise ValueError("Empty roster or wrong team")
+    except (requests.RequestException, ValueError) as exc:
+        if age is not None and timedelta(0)<=age<=timedelta(days=3):
+            return "recent_fallback"
+        if isinstance(exc,requests.HTTPError) and exc.response.status_code not in (400,404):
+            raise
+        if isinstance(exc,requests.RequestException) and not isinstance(exc,requests.HTTPError):
+            raise
+        return "missing"
+    data["_captured_at"] = now.isoformat()
     save(path,data)
-    return True
+    return "fresh"
 
 
 def main():
@@ -86,9 +98,10 @@ def main():
         day += timedelta(days=1)
     with ThreadPoolExecutor(max_workers=4) as pool:
         boxes = sum(pool.map(update_box, sorted(finals)))
-        rosters = sum(pool.map(update_roster, sorted(teams)))
+        roster_status = Counter(pool.map(update_roster, sorted(teams)))
+        rosters = sum(n for status,n in roster_status.items() if status!="missing")
     audit = dict(as_of=now.isoformat(), final_games=len(finals), usable_boxes=boxes,
-                 teams=len(teams), usable_rosters=rosters)
+                 teams=len(teams), usable_rosters=rosters, roster_status=dict(roster_status))
     print(audit,flush=True)
     if not boxes or not rosters:
         raise ValueError("No usable team/player coverage")
