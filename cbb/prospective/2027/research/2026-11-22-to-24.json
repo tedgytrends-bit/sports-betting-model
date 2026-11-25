@@ -3054,7 +3054,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401917542"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": 1.5,
+        "total": 149.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "372904",
@@ -3285,7 +3290,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401921700"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -6.5,
+        "total": 145.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "378094",
@@ -3435,7 +3445,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401927397"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": 4.5,
+        "total": 138.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "378698",
@@ -3516,7 +3531,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401921209"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -1.5,
+        "total": 150.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375252",
@@ -3666,7 +3686,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401924266"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -7.5,
+        "total": 161.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375254",
@@ -3747,7 +3772,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401921701"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": 7.5,
+        "total": 143.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "378096",
@@ -3828,7 +3858,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401928830"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -1.5,
+        "total": 150.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375255",
@@ -3909,7 +3944,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401921658"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -5.5,
+        "total": 155.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375256",
@@ -3990,7 +4030,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401918076"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": 5.5,
+        "total": 147.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "378697",
@@ -4071,7 +4116,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401921207"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -4.5,
+        "total": 148.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375245",
@@ -4152,7 +4202,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401921177"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": 6.5,
+        "total": 168.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "378093",
@@ -4233,7 +4288,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401929445"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -6.5,
+        "total": 162.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375257",
@@ -4314,7 +4374,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401919006"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -2.5,
+        "total": 147.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "378097",
@@ -4395,7 +4460,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401929286"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -1.5,
+        "total": 146.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "372910",
@@ -4476,7 +4546,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401911457"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -7.5,
+        "total": 142.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375258",
@@ -4557,7 +4632,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401921708"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -10.5,
+        "total": 163.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "372908",
@@ -4719,7 +4799,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401920752"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -12.5,
+        "total": 133.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375242",
@@ -4962,7 +5047,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401921029"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -3.5,
+        "total": 164.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375260",
@@ -5043,7 +5133,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401921157"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": 1.5,
+        "total": 147.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375261",
@@ -5205,7 +5300,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401919761"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -9.5,
+        "total": 136.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375263",
@@ -5286,7 +5386,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401917919"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": 8.5,
+        "total": 166.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375264",
@@ -5367,7 +5472,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401917543"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -3.5,
+        "total": 150.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "378098",
@@ -5610,7 +5720,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401919032"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -18.5,
+        "total": 141.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "378099",
@@ -5772,7 +5887,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401913530"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -43.5,
+        "total": 181.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "372906",
@@ -5853,7 +5973,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401913102"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -18.5,
+        "total": 153.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "372909",
@@ -5934,7 +6059,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401909788"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -31.5,
+        "total": 157.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "378100",
@@ -6096,7 +6226,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401909536"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -2.5,
+        "total": 154.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375244",
@@ -6327,7 +6462,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401926183"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -10.5,
+        "total": 153.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375248",
@@ -6408,7 +6548,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401920721"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -8.5,
+        "total": 160.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375250",
@@ -6489,7 +6634,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401918057"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -17.5,
+        "total": 142.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "372912",
@@ -6570,7 +6720,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401909743"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -17.5,
+        "total": 158.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375272",
@@ -6927,7 +7082,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401927398"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": 1.5,
+        "total": 145.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "378104",
@@ -7008,7 +7168,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401928791"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": 5.5,
+        "total": 149.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375290",
@@ -7089,7 +7254,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401920819"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -2.5,
+        "total": 143.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "378105",
@@ -7170,7 +7340,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401928835"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -2.5,
+        "total": 140.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375286",
@@ -7332,7 +7507,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401928358"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -8.5,
+        "total": 167.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "372923",
@@ -7413,7 +7593,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401906806"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": 1.5,
+        "total": 148.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "378107",
@@ -7494,7 +7679,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401928859"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -7.5,
+        "total": 142.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375291",
@@ -7575,7 +7765,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401917676"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": 7.5,
+        "total": 147.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "372925",
@@ -7656,7 +7851,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401915941"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -5.5,
+        "total": 153.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "372926",
@@ -7737,7 +7937,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401906853"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": 2.5,
+        "total": 148.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375292",
@@ -7818,7 +8023,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401920546"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": 4.5,
+        "total": 150.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "378108",
@@ -7899,7 +8109,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401929285"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": 1.5,
+        "total": 135.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375293",
@@ -7980,7 +8195,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401924267"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -5.5,
+        "total": 159.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "378106",
@@ -8061,7 +8281,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401929035"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": 1.5,
+        "total": 133.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375294",
@@ -8142,7 +8367,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401921666"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": 1.5,
+        "total": 143.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375295",
@@ -8385,7 +8615,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401909775"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -9.5,
+        "total": 142.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "372928",
@@ -8466,7 +8701,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401909495"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": 6.5,
+        "total": 162.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375297",
@@ -8628,7 +8868,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401921707"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": 9.5,
+        "total": 143.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "372922",
@@ -8709,7 +8954,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401909505"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": 3.5,
+        "total": 132.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375269",
@@ -8790,7 +9040,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401924877"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -22.5,
+        "total": 159.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375271",
@@ -8871,7 +9126,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401922231"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": 1.5,
+        "total": 173.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375300",
@@ -8952,7 +9212,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401923395"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -4.5,
+        "total": 144.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375301",
@@ -9033,7 +9298,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401923262"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -7.5,
+        "total": 159.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375302",
@@ -9114,7 +9384,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401920949"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -5.5,
+        "total": 147.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375276",
@@ -9195,7 +9470,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401921142"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -7.5,
+        "total": 149.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375303",
@@ -9276,7 +9556,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401925014"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -2.5,
+        "total": 154.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "372914",
@@ -9357,7 +9642,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401916319"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": 2.5,
+        "total": 156.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "372915",
@@ -9438,7 +9728,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401916291"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -27.5,
+        "total": 146.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "372916",
@@ -9519,7 +9814,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401911379"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -12.5,
+        "total": 157.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "372918",
@@ -9600,7 +9900,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401911279"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -9.5,
+        "total": 137.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "372919",
@@ -9681,7 +9986,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401911027"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -12.5,
+        "total": 143.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "372924",
@@ -9762,7 +10072,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401906774"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -34.5,
+        "total": 153.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "372929",
@@ -9843,7 +10158,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401911458"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -1.5,
+        "total": 159.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375270",
@@ -9924,7 +10244,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401923271"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -2.5,
+        "total": 130.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375274",
@@ -10005,7 +10330,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401921777"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -34.5,
+        "total": 142.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375275",
@@ -10086,7 +10416,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401921266"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -3.5,
+        "total": 138.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375279",
@@ -10167,7 +10502,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401920923"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -1.5,
+        "total": 147.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375280",
@@ -10248,7 +10588,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401920889"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -20.5,
+        "total": 128.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375281",
@@ -10329,7 +10674,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401920742"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -1.5,
+        "total": 148.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375282",
@@ -10410,7 +10760,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401920727"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -28.5,
+        "total": 144.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375285",
@@ -10491,7 +10846,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401920309"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -9.5,
+        "total": 161.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375287",
@@ -10641,7 +11001,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401918996"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -16.5,
+        "total": 154.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375304",
@@ -10722,7 +11087,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401925950"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -1.5,
+        "total": 156.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375305",
@@ -10803,7 +11173,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401920976"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -17.5,
+        "total": 145.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375306",
@@ -10884,7 +11259,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401920695"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -4.5,
+        "total": 159.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375307",
@@ -10965,7 +11345,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401920358"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -5.5,
+        "total": 134.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "378109",
@@ -11115,7 +11500,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401926827"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -8.5,
+        "total": 129.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375266",
@@ -11196,7 +11586,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401926154"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -3.5,
+        "total": 149.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375267",
@@ -11277,7 +11672,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401925687"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -16.5,
+        "total": 145.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375284",
@@ -11358,7 +11758,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401920414"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": 10.5,
+        "total": 140.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375289",
@@ -11439,7 +11844,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401917904"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -13.5,
+        "total": 163.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375308",
@@ -11520,7 +11930,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401917983"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": 1.5,
+        "total": 148.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "378111",
@@ -11682,7 +12097,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401911338"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": 3.5,
+        "total": 155.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "372920",
@@ -11763,7 +12183,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401911026"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -20.5,
+        "total": 152.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "372930",
@@ -11844,7 +12269,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401915942"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -2.5,
+        "total": 153.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375268",
@@ -11925,7 +12355,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401925642"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -3.5,
+        "total": 142.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375278",
@@ -12006,7 +12441,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401921008"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -1.5,
+        "total": 145.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375283",
@@ -12087,7 +12527,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401920709"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -24.5,
+        "total": 158.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375309",
@@ -12168,7 +12613,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401924723"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -11.5,
+        "total": 154.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375310",
@@ -12249,7 +12699,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401921184"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -6.5,
+        "total": 142.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "378112",
@@ -12330,7 +12785,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401929421"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -17.5,
+        "total": 142.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "378113",
@@ -12492,7 +12952,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401929359"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -5.5,
+        "total": 150.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "372931",
@@ -12573,7 +13038,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401911535"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": 1.5,
+        "total": 149.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "378115",
@@ -12735,7 +13205,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401909699"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -30.5,
+        "total": 159.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "375265",
@@ -12816,7 +13291,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401926184"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -18.5,
+        "total": 145.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "372932",
@@ -12897,7 +13377,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401911253"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": 1.5,
+        "total": 163.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "372933",
@@ -12978,7 +13463,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401906762"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": -1.5,
+        "total": 174.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "372934",
@@ -13059,7 +13549,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401915943"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": 10.5,
+        "total": 157.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "372935",
@@ -13140,7 +13635,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401909763"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": 4.5,
+        "total": 140.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     },
     {
       "id": "372937",
@@ -14049,7 +14549,12 @@
         "finalScoreSource": "ESPN",
         "espnId": "401909800"
       },
-      "retrospective_close": {}
+      "retrospective_close": {
+        "home_spread": 14.5,
+        "total": 157.5,
+        "provider": "DraftKings",
+        "source": "ESPN closing quote retrieved after final"
+      }
     }
   ],
   "records": {
@@ -14097,123 +14602,123 @@
   "research_records_including_retrospective_closes": {
     "2026-11-22|baseline|ats|0": {
       "W": 17,
-      "L": 17,
+      "L": 18,
       "P": 0,
-      "roi_pct_flat_minus110": -4.545
+      "roi_pct_flat_minus110": -7.273
     },
     "combined|baseline|ats|0": {
-      "W": 17,
-      "L": 17,
+      "W": 69,
+      "L": 66,
       "P": 0,
-      "roi_pct_flat_minus110": -4.545
+      "roi_pct_flat_minus110": -2.424
     },
     "2026-11-22|baseline|ats|3.5": {
       "W": 14,
-      "L": 8,
+      "L": 9,
       "P": 0,
-      "roi_pct_flat_minus110": 21.488
+      "roi_pct_flat_minus110": 16.206
     },
     "combined|baseline|ats|3.5": {
-      "W": 14,
-      "L": 8,
+      "W": 55,
+      "L": 46,
       "P": 0,
-      "roi_pct_flat_minus110": 21.488
+      "roi_pct_flat_minus110": 3.96
     },
     "2026-11-22|player_v2|ats|0": {
       "W": 17,
-      "L": 17,
+      "L": 18,
       "P": 0,
-      "roi_pct_flat_minus110": -4.545
+      "roi_pct_flat_minus110": -7.273
     },
     "combined|player_v2|ats|0": {
-      "W": 17,
-      "L": 17,
+      "W": 75,
+      "L": 60,
       "P": 0,
-      "roi_pct_flat_minus110": -4.545
+      "roi_pct_flat_minus110": 6.061
     },
     "2026-11-22|player_v2|ats|3.5": {
       "W": 7,
-      "L": 9,
+      "L": 10,
       "P": 0,
-      "roi_pct_flat_minus110": -16.477
+      "roi_pct_flat_minus110": -21.39
     },
     "combined|player_v2|ats|3.5": {
-      "W": 7,
-      "L": 9,
+      "W": 39,
+      "L": 36,
       "P": 0,
-      "roi_pct_flat_minus110": -16.477
+      "roi_pct_flat_minus110": -0.727
     },
     "2026-11-22|player_opp_v3|ats|0": {
       "W": 15,
-      "L": 19,
+      "L": 20,
       "P": 0,
-      "roi_pct_flat_minus110": -15.775
+      "roi_pct_flat_minus110": -18.182
     },
     "combined|player_opp_v3|ats|0": {
-      "W": 15,
-      "L": 19,
+      "W": 74,
+      "L": 61,
       "P": 0,
-      "roi_pct_flat_minus110": -15.775
+      "roi_pct_flat_minus110": 4.646
     },
     "2026-11-22|player_opp_v3|ats|3.5": {
       "W": 11,
-      "L": 8,
+      "L": 9,
       "P": 0,
-      "roi_pct_flat_minus110": 10.526
+      "roi_pct_flat_minus110": 5.0
     },
     "combined|player_opp_v3|ats|3.5": {
-      "W": 11,
-      "L": 8,
+      "W": 39,
+      "L": 32,
       "P": 0,
-      "roi_pct_flat_minus110": 10.526
+      "roi_pct_flat_minus110": 4.866
     },
     "2026-11-22|player_rot_v4|ats|0": {
       "W": 20,
-      "L": 14,
+      "L": 15,
       "P": 0,
-      "roi_pct_flat_minus110": 12.299
+      "roi_pct_flat_minus110": 9.091
     },
     "combined|player_rot_v4|ats|0": {
-      "W": 20,
-      "L": 14,
+      "W": 78,
+      "L": 57,
       "P": 0,
-      "roi_pct_flat_minus110": 12.299
+      "roi_pct_flat_minus110": 10.303
     },
     "2026-11-22|player_rot_v4|ats|3.5": {
       "W": 6,
-      "L": 5,
+      "L": 6,
       "P": 0,
-      "roi_pct_flat_minus110": 4.132
+      "roi_pct_flat_minus110": -4.545
     },
     "combined|player_rot_v4|ats|3.5": {
-      "W": 6,
-      "L": 5,
+      "W": 29,
+      "L": 30,
       "P": 0,
-      "roi_pct_flat_minus110": 4.132
+      "roi_pct_flat_minus110": -6.163
     },
     "2026-11-22|player_all_v4|ats|0": {
       "W": 21,
-      "L": 13,
+      "L": 14,
       "P": 0,
-      "roi_pct_flat_minus110": 17.914
+      "roi_pct_flat_minus110": 14.545
     },
     "combined|player_all_v4|ats|0": {
-      "W": 21,
-      "L": 13,
+      "W": 73,
+      "L": 62,
       "P": 0,
-      "roi_pct_flat_minus110": 17.914
+      "roi_pct_flat_minus110": 3.232
     },
     "2026-11-22|player_all_v4|ats|3.5": {
       "W": 8,
-      "L": 6,
+      "L": 7,
       "P": 0,
-      "roi_pct_flat_minus110": 9.091
+      "roi_pct_flat_minus110": 1.818
     },
     "combined|player_all_v4|ats|3.5": {
-      "W": 8,
-      "L": 6,
+      "W": 30,
+      "L": 28,
       "P": 0,
-      "roi_pct_flat_minus110": 9.091
+      "roi_pct_flat_minus110": -1.254
     },
     "2026-11-22|baseline|total|0": {
       "W": 20,
@@ -14222,10 +14727,10 @@
       "roi_pct_flat_minus110": 9.091
     },
     "combined|baseline|total|0": {
-      "W": 20,
-      "L": 15,
+      "W": 66,
+      "L": 69,
       "P": 0,
-      "roi_pct_flat_minus110": 9.091
+      "roi_pct_flat_minus110": -6.667
     },
     "2026-11-22|baseline|total|3.5": {
       "W": 14,
@@ -14234,10 +14739,10 @@
       "roi_pct_flat_minus110": 21.488
     },
     "combined|baseline|total|3.5": {
-      "W": 14,
-      "L": 8,
+      "W": 45,
+      "L": 43,
       "P": 0,
-      "roi_pct_flat_minus110": 21.488
+      "roi_pct_flat_minus110": -2.376
     },
     "2026-11-22|player_v2|total|0": {
       "W": 23,
@@ -14246,10 +14751,10 @@
       "roi_pct_flat_minus110": 25.455
     },
     "combined|player_v2|total|0": {
-      "W": 23,
-      "L": 12,
+      "W": 71,
+      "L": 64,
       "P": 0,
-      "roi_pct_flat_minus110": 25.455
+      "roi_pct_flat_minus110": 0.404
     },
     "2026-11-22|player_v2|total|3.5": {
       "W": 17,
@@ -14258,10 +14763,10 @@
       "roi_pct_flat_minus110": 24.825
     },
     "combined|player_v2|total|3.5": {
-      "W": 17,
-      "L": 9,
+      "W": 44,
+      "L": 41,
       "P": 0,
-      "roi_pct_flat_minus110": 24.825
+      "roi_pct_flat_minus110": -1.176
     },
     "2026-11-22|player_opp_v3|total|0": {
       "W": 23,
@@ -14270,10 +14775,10 @@
       "roi_pct_flat_minus110": 25.455
     },
     "combined|player_opp_v3|total|0": {
-      "W": 23,
-      "L": 12,
+      "W": 68,
+      "L": 67,
       "P": 0,
-      "roi_pct_flat_minus110": 25.455
+      "roi_pct_flat_minus110": -3.838
     },
     "2026-11-22|player_rot_v4|total|0": {
       "W": 21,
@@ -14282,10 +14787,10 @@
       "roi_pct_flat_minus110": 14.545
     },
     "combined|player_rot_v4|total|0": {
-      "W": 21,
-      "L": 14,
+      "W": 75,
+      "L": 60,
       "P": 0,
-      "roi_pct_flat_minus110": 14.545
+      "roi_pct_flat_minus110": 6.061
     },
     "2026-11-22|player_all_v4|total|0": {
       "W": 21,
@@ -14294,10 +14799,10 @@
       "roi_pct_flat_minus110": 14.545
     },
     "combined|player_all_v4|total|0": {
-      "W": 21,
-      "L": 14,
+      "W": 72,
+      "L": 63,
       "P": 0,
-      "roi_pct_flat_minus110": 14.545
+      "roi_pct_flat_minus110": 1.818
     },
     "2026-11-22|player_opp_v3|total|3.5": {
       "W": 18,
@@ -14306,10 +14811,10 @@
       "roi_pct_flat_minus110": 43.182
     },
     "combined|player_opp_v3|total|3.5": {
-      "W": 18,
-      "L": 6,
+      "W": 44,
+      "L": 36,
       "P": 0,
-      "roi_pct_flat_minus110": 43.182
+      "roi_pct_flat_minus110": 5.0
     },
     "2026-11-22|player_rot_v4|total|3.5": {
       "W": 14,
@@ -14318,10 +14823,10 @@
       "roi_pct_flat_minus110": 21.488
     },
     "combined|player_rot_v4|total|3.5": {
-      "W": 14,
-      "L": 8,
+      "W": 37,
+      "L": 36,
       "P": 0,
-      "roi_pct_flat_minus110": 21.488
+      "roi_pct_flat_minus110": -3.238
     },
     "2026-11-22|player_all_v4|total|3.5": {
       "W": 14,
@@ -14330,10 +14835,250 @@
       "roi_pct_flat_minus110": 16.206
     },
     "combined|player_all_v4|total|3.5": {
-      "W": 14,
+      "W": 39,
+      "L": 38,
+      "P": 0,
+      "roi_pct_flat_minus110": -3.306
+    },
+    "2026-11-23|baseline|ats|0": {
+      "W": 17,
+      "L": 13,
+      "P": 0,
+      "roi_pct_flat_minus110": 8.182
+    },
+    "2026-11-23|player_v2|ats|0": {
+      "W": 16,
+      "L": 14,
+      "P": 0,
+      "roi_pct_flat_minus110": 1.818
+    },
+    "2026-11-23|player_opp_v3|ats|0": {
+      "W": 16,
+      "L": 14,
+      "P": 0,
+      "roi_pct_flat_minus110": 1.818
+    },
+    "2026-11-23|player_rot_v4|ats|0": {
+      "W": 17,
+      "L": 13,
+      "P": 0,
+      "roi_pct_flat_minus110": 8.182
+    },
+    "2026-11-23|player_all_v4|ats|0": {
+      "W": 13,
+      "L": 17,
+      "P": 0,
+      "roi_pct_flat_minus110": -17.273
+    },
+    "2026-11-23|baseline|total|0": {
+      "W": 19,
+      "L": 11,
+      "P": 0,
+      "roi_pct_flat_minus110": 20.909
+    },
+    "2026-11-23|player_v2|total|0": {
+      "W": 18,
+      "L": 12,
+      "P": 0,
+      "roi_pct_flat_minus110": 14.545
+    },
+    "2026-11-23|player_v2|total|3.5": {
+      "W": 11,
+      "L": 7,
+      "P": 0,
+      "roi_pct_flat_minus110": 16.667
+    },
+    "2026-11-23|player_opp_v3|total|0": {
+      "W": 16,
+      "L": 14,
+      "P": 0,
+      "roi_pct_flat_minus110": 1.818
+    },
+    "2026-11-23|player_opp_v3|total|3.5": {
+      "W": 10,
+      "L": 7,
+      "P": 0,
+      "roi_pct_flat_minus110": 12.299
+    },
+    "2026-11-23|player_rot_v4|total|0": {
+      "W": 21,
       "L": 9,
       "P": 0,
-      "roi_pct_flat_minus110": 16.206
+      "roi_pct_flat_minus110": 33.636
+    },
+    "2026-11-23|player_rot_v4|total|3.5": {
+      "W": 10,
+      "L": 7,
+      "P": 0,
+      "roi_pct_flat_minus110": 12.299
+    },
+    "2026-11-23|player_all_v4|total|0": {
+      "W": 20,
+      "L": 10,
+      "P": 0,
+      "roi_pct_flat_minus110": 27.273
+    },
+    "2026-11-23|player_all_v4|total|3.5": {
+      "W": 11,
+      "L": 7,
+      "P": 0,
+      "roi_pct_flat_minus110": 16.667
+    },
+    "2026-11-23|baseline|ats|3.5": {
+      "W": 11,
+      "L": 10,
+      "P": 0,
+      "roi_pct_flat_minus110": 0.0
+    },
+    "2026-11-23|player_v2|ats|3.5": {
+      "W": 6,
+      "L": 9,
+      "P": 0,
+      "roi_pct_flat_minus110": -23.636
+    },
+    "2026-11-23|player_opp_v3|ats|3.5": {
+      "W": 8,
+      "L": 7,
+      "P": 0,
+      "roi_pct_flat_minus110": 1.818
+    },
+    "2026-11-23|player_rot_v4|ats|3.5": {
+      "W": 5,
+      "L": 9,
+      "P": 0,
+      "roi_pct_flat_minus110": -31.818
+    },
+    "2026-11-23|player_all_v4|ats|3.5": {
+      "W": 6,
+      "L": 7,
+      "P": 0,
+      "roi_pct_flat_minus110": -11.888
+    },
+    "2026-11-23|baseline|total|3.5": {
+      "W": 14,
+      "L": 8,
+      "P": 0,
+      "roi_pct_flat_minus110": 21.488
+    },
+    "2026-11-24|baseline|ats|0": {
+      "W": 35,
+      "L": 35,
+      "P": 0,
+      "roi_pct_flat_minus110": -4.545
+    },
+    "2026-11-24|baseline|ats|3.5": {
+      "W": 30,
+      "L": 27,
+      "P": 0,
+      "roi_pct_flat_minus110": 0.478
+    },
+    "2026-11-24|player_v2|ats|0": {
+      "W": 42,
+      "L": 28,
+      "P": 0,
+      "roi_pct_flat_minus110": 14.545
+    },
+    "2026-11-24|player_opp_v3|ats|0": {
+      "W": 43,
+      "L": 27,
+      "P": 0,
+      "roi_pct_flat_minus110": 17.273
+    },
+    "2026-11-24|player_rot_v4|ats|0": {
+      "W": 41,
+      "L": 29,
+      "P": 0,
+      "roi_pct_flat_minus110": 11.818
+    },
+    "2026-11-24|player_all_v4|ats|0": {
+      "W": 39,
+      "L": 31,
+      "P": 0,
+      "roi_pct_flat_minus110": 6.364
+    },
+    "2026-11-24|baseline|total|0": {
+      "W": 27,
+      "L": 43,
+      "P": 0,
+      "roi_pct_flat_minus110": -26.364
+    },
+    "2026-11-24|player_v2|total|0": {
+      "W": 30,
+      "L": 40,
+      "P": 0,
+      "roi_pct_flat_minus110": -18.182
+    },
+    "2026-11-24|player_opp_v3|total|0": {
+      "W": 29,
+      "L": 41,
+      "P": 0,
+      "roi_pct_flat_minus110": -20.909
+    },
+    "2026-11-24|player_rot_v4|total|0": {
+      "W": 33,
+      "L": 37,
+      "P": 0,
+      "roi_pct_flat_minus110": -10.0
+    },
+    "2026-11-24|player_all_v4|total|0": {
+      "W": 31,
+      "L": 39,
+      "P": 0,
+      "roi_pct_flat_minus110": -15.455
+    },
+    "2026-11-24|baseline|total|3.5": {
+      "W": 17,
+      "L": 27,
+      "P": 0,
+      "roi_pct_flat_minus110": -26.24
+    },
+    "2026-11-24|player_v2|ats|3.5": {
+      "W": 26,
+      "L": 17,
+      "P": 0,
+      "roi_pct_flat_minus110": 15.433
+    },
+    "2026-11-24|player_opp_v3|ats|3.5": {
+      "W": 20,
+      "L": 16,
+      "P": 0,
+      "roi_pct_flat_minus110": 6.061
+    },
+    "2026-11-24|player_rot_v4|ats|3.5": {
+      "W": 18,
+      "L": 15,
+      "P": 0,
+      "roi_pct_flat_minus110": 4.132
+    },
+    "2026-11-24|player_all_v4|ats|3.5": {
+      "W": 16,
+      "L": 14,
+      "P": 0,
+      "roi_pct_flat_minus110": 1.818
+    },
+    "2026-11-24|player_v2|total|3.5": {
+      "W": 16,
+      "L": 25,
+      "P": 0,
+      "roi_pct_flat_minus110": -25.499
+    },
+    "2026-11-24|player_opp_v3|total|3.5": {
+      "W": 16,
+      "L": 23,
+      "P": 0,
+      "roi_pct_flat_minus110": -21.678
+    },
+    "2026-11-24|player_rot_v4|total|3.5": {
+      "W": 13,
+      "L": 21,
+      "P": 0,
+      "roi_pct_flat_minus110": -27.005
+    },
+    "2026-11-24|player_all_v4|total|3.5": {
+      "W": 14,
+      "L": 22,
+      "P": 0,
+      "roi_pct_flat_minus110": -25.758
     }
   }
 }
