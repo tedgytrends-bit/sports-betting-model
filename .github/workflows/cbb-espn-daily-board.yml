@@ -28,6 +28,8 @@ jobs:
       - run: python -m cbb.espn_daily_board
       - working-directory: archive
         run: |
+          git config user.name github-actions
+          git config user.email github-actions@users.noreply.github.com
           git add cbb/prospective/2027/research/
           git diff --cached --quiet && exit 0
           git -c user.name=github-actions -c user.email=github-actions@users.noreply.github.com commit -m "Refresh daily ESPN board and archived score comparisons"
