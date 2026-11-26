@@ -728,6 +728,2582 @@
         }
       },
       "source": "Frozen Draft Kings odds; hypothetical -110 stakes"
+    },
+    "espn-401920847": {
+      "id": "espn-401920847",
+      "date": "2026-11-26",
+      "away": "St. Thomas",
+      "home": "UNC Wilmington",
+      "tip_utc": "2026-11-26T00:00:00Z",
+      "captured_utc": "2026-11-25T18:56:16.078204Z",
+      "home_points": 86.0,
+      "away_points": 77.0,
+      "home_spread": -5.5,
+      "market_total": 156.5,
+      "market_provider": "Draft Kings",
+      "models": {
+        "baseline": {
+          "ats_edge": 3.081,
+          "total_edge": 3.149,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 0.419,
+          "total_mae": 3.351
+        },
+        "player_v2": {
+          "ats_edge": 1.914,
+          "total_edge": -0.42,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 1.586,
+          "total_mae": 6.92
+        },
+        "player_opp_v3": {
+          "ats_edge": -0.577,
+          "total_edge": 0.257,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 4.077,
+          "total_mae": 6.243
+        },
+        "player_rot_v4": {
+          "ats_edge": 1.527,
+          "total_edge": 0.786,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 1.973,
+          "total_mae": 5.714
+        },
+        "player_all_v4": {
+          "ats_edge": -1.496,
+          "total_edge": 0.996,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 4.996,
+          "total_mae": 5.504
+        }
+      },
+      "source": "Frozen Draft Kings odds; hypothetical -110 stakes"
+    },
+    "375341": {
+      "id": "375341",
+      "date": "2026-11-25",
+      "away": "Texas A&M",
+      "home": "Xavier",
+      "tip_utc": "2026-11-25T21:13:00Z",
+      "captured_utc": "2026-11-25T18:56:16.078204Z",
+      "home_points": 88.0,
+      "away_points": 83.0,
+      "home_spread": 3.5,
+      "market_total": 170.5,
+      "market_provider": "Draft Kings",
+      "models": {
+        "baseline": {
+          "ats_edge": 5.684,
+          "total_edge": -13.994,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 2.816,
+          "total_mae": 14.494
+        },
+        "player_v2": {
+          "ats_edge": 3.409,
+          "total_edge": -5.654,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 5.091,
+          "total_mae": 6.154
+        },
+        "player_opp_v3": {
+          "ats_edge": 1.939,
+          "total_edge": -6.13,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 6.561,
+          "total_mae": 6.63
+        },
+        "player_rot_v4": {
+          "ats_edge": 2.598,
+          "total_edge": -6.564,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 5.902,
+          "total_mae": 7.064
+        },
+        "player_all_v4": {
+          "ats_edge": 0.746,
+          "total_edge": -6.967,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 7.754,
+          "total_mae": 7.467
+        }
+      },
+      "source": "Frozen Draft Kings odds; hypothetical -110 stakes"
+    },
+    "375354": {
+      "id": "375354",
+      "date": "2026-11-26",
+      "away": "South Carolina",
+      "home": "Arizona State",
+      "tip_utc": "2026-11-26T19:00:00Z",
+      "captured_utc": "2026-11-26T02:10:16.508408Z",
+      "home_points": 73.0,
+      "away_points": 80.0,
+      "home_spread": -3.5,
+      "market_total": 138.5,
+      "market_provider": "DraftKings",
+      "models": {
+        "baseline": {
+          "ats_edge": -1.158,
+          "total_edge": 5.224,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 9.342,
+          "total_mae": 9.276
+        },
+        "player_v2": {
+          "ats_edge": 0.921,
+          "total_edge": 7.617,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 11.421,
+          "total_mae": 6.883
+        },
+        "player_opp_v3": {
+          "ats_edge": 0.893,
+          "total_edge": 7.847,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 11.393,
+          "total_mae": 6.653
+        },
+        "player_rot_v4": {
+          "ats_edge": -1.298,
+          "total_edge": -9.416,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 9.202,
+          "total_mae": 23.916
+        },
+        "player_all_v4": {
+          "ats_edge": -0.76,
+          "total_edge": -9.673,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 9.74,
+          "total_mae": 24.173
+        }
+      },
+      "source": "Frozen DraftKings odds; hypothetical -110 stakes"
+    },
+    "378117": {
+      "id": "378117",
+      "date": "2026-11-25",
+      "away": "Arkansas State",
+      "home": "Florida International",
+      "tip_utc": "2026-11-25T20:30:00Z",
+      "captured_utc": "2026-11-25T18:56:16.078204Z",
+      "home_points": 88.0,
+      "away_points": 92.0,
+      "home_spread": -1.5,
+      "market_total": 176.5,
+      "market_provider": "Draft Kings",
+      "models": {
+        "baseline": {
+          "ats_edge": 5.608,
+          "total_edge": -12.54,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 11.108,
+          "total_mae": 16.04
+        },
+        "player_v2": {
+          "ats_edge": 10.194,
+          "total_edge": -9.123,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 15.694,
+          "total_mae": 12.623
+        },
+        "player_opp_v3": {
+          "ats_edge": 11.37,
+          "total_edge": -9.306,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 16.87,
+          "total_mae": 12.806
+        },
+        "player_rot_v4": {
+          "ats_edge": 8.924,
+          "total_edge": -11.154,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 14.424,
+          "total_mae": 14.654
+        },
+        "player_all_v4": {
+          "ats_edge": 9.731,
+          "total_edge": -10.944,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 15.231,
+          "total_mae": 14.444
+        }
+      },
+      "source": "Frozen Draft Kings odds; hypothetical -110 stakes"
+    },
+    "375313": {
+      "id": "375313",
+      "date": "2026-11-25",
+      "away": "Portland State",
+      "home": "UC Riverside",
+      "tip_utc": "2026-11-25T22:00:00Z",
+      "captured_utc": "2026-11-25T18:56:16.078204Z",
+      "home_points": 65.0,
+      "away_points": 72.0,
+      "home_spread": -2.5,
+      "market_total": 152.5,
+      "market_provider": "Draft Kings",
+      "models": {
+        "baseline": {
+          "ats_edge": 2.17,
+          "total_edge": -0.877,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 11.67,
+          "total_mae": 14.623
+        },
+        "player_v2": {
+          "ats_edge": 5.381,
+          "total_edge": -1.56,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 14.881,
+          "total_mae": 13.94
+        },
+        "player_opp_v3": {
+          "ats_edge": 3.884,
+          "total_edge": -1.671,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 13.384,
+          "total_mae": 13.829
+        },
+        "player_rot_v4": {
+          "ats_edge": 8.178,
+          "total_edge": -9.459,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 17.678,
+          "total_mae": 6.041
+        },
+        "player_all_v4": {
+          "ats_edge": 6.164,
+          "total_edge": -9.762,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 15.664,
+          "total_mae": 5.738
+        }
+      },
+      "source": "Frozen Draft Kings odds; hypothetical -110 stakes"
+    },
+    "espn-401920549": {
+      "id": "espn-401920549",
+      "date": "2026-11-25",
+      "away": "Kennesaw State",
+      "home": "Charleston",
+      "tip_utc": "2026-11-25T23:00:00Z",
+      "captured_utc": "2026-11-25T18:56:16.078204Z",
+      "home_points": 91.0,
+      "away_points": 77.0,
+      "home_spread": -1.5,
+      "market_total": 160.5,
+      "market_provider": "Draft Kings",
+      "models": {
+        "baseline": {
+          "ats_edge": -0.404,
+          "total_edge": -2.009,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 12.904,
+          "total_mae": 9.509
+        },
+        "player_v2": {
+          "ats_edge": 2.975,
+          "total_edge": 0.617,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 9.525,
+          "total_mae": 6.883
+        },
+        "player_opp_v3": {
+          "ats_edge": 3.592,
+          "total_edge": 0.061,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 8.908,
+          "total_mae": 7.439
+        },
+        "player_rot_v4": {
+          "ats_edge": 6.687,
+          "total_edge": -2.612,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 5.813,
+          "total_mae": 10.112
+        },
+        "player_all_v4": {
+          "ats_edge": 6.997,
+          "total_edge": -2.857,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 5.503,
+          "total_mae": 10.357
+        }
+      },
+      "source": "Frozen Draft Kings odds; hypothetical -110 stakes"
+    },
+    "espn-401918960": {
+      "id": "espn-401918960",
+      "date": "2026-11-26",
+      "away": "Norfolk State",
+      "home": "NC State",
+      "tip_utc": "2026-11-26T00:00:00Z",
+      "captured_utc": "2026-11-25T18:56:16.078204Z",
+      "home_points": 80.0,
+      "away_points": 49.0,
+      "home_spread": -27.5,
+      "market_total": 150.5,
+      "market_provider": "Draft Kings",
+      "models": {
+        "baseline": {
+          "ats_edge": -5.976,
+          "total_edge": -1.514,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 9.476,
+          "total_mae": 19.986
+        },
+        "player_v2": {
+          "ats_edge": 2.247,
+          "total_edge": 0.786,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 1.253,
+          "total_mae": 22.286
+        },
+        "player_opp_v3": {
+          "ats_edge": 3.493,
+          "total_edge": 0.567,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 0.007,
+          "total_mae": 22.067
+        },
+        "player_rot_v4": {
+          "ats_edge": 0.839,
+          "total_edge": -1.437,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 2.661,
+          "total_mae": 20.063
+        },
+        "player_all_v4": {
+          "ats_edge": 1.733,
+          "total_edge": -1.262,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 1.767,
+          "total_mae": 20.238
+        }
+      },
+      "source": "Frozen Draft Kings odds; hypothetical -110 stakes"
+    },
+    "378125": {
+      "id": "378125",
+      "date": "2026-11-26",
+      "away": "Incarnate Word",
+      "home": "Hawai'i",
+      "tip_utc": "2026-11-26T04:59:00Z",
+      "captured_utc": "2026-11-25T18:56:16.078204Z",
+      "home_points": 83.0,
+      "away_points": 81.0,
+      "home_spread": -16.5,
+      "market_total": 139.5,
+      "market_provider": "Draft Kings",
+      "models": {
+        "baseline": {
+          "ats_edge": 2.579,
+          "total_edge": 6.386,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 17.079,
+          "total_mae": 18.114
+        },
+        "player_v2": {
+          "ats_edge": 0.514,
+          "total_edge": 4.989,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 15.014,
+          "total_mae": 19.511
+        },
+        "player_opp_v3": {
+          "ats_edge": -1.677,
+          "total_edge": 3.637,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 12.823,
+          "total_mae": 20.863
+        },
+        "player_rot_v4": {
+          "ats_edge": 3.861,
+          "total_edge": -2.352,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 18.361,
+          "total_mae": 26.852
+        },
+        "player_all_v4": {
+          "ats_edge": 1.198,
+          "total_edge": -4.447,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 15.698,
+          "total_mae": 28.947
+        }
+      },
+      "source": "Frozen Draft Kings odds; hypothetical -110 stakes"
+    },
+    "375342": {
+      "id": "375342",
+      "date": "2026-11-25",
+      "away": "Georgia State",
+      "home": "Florida Gulf Coast",
+      "tip_utc": "2026-11-25T21:00:00Z",
+      "captured_utc": "2026-11-25T18:56:16.078204Z",
+      "home_points": 77.0,
+      "away_points": 72.0,
+      "home_spread": 1.5,
+      "market_total": 142.5,
+      "market_provider": "Draft Kings",
+      "models": {
+        "baseline": {
+          "ats_edge": 3.379,
+          "total_edge": 8.721,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 3.121,
+          "total_mae": 2.221
+        },
+        "player_v2": {
+          "ats_edge": -8.123,
+          "total_edge": 7.458,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 14.623,
+          "total_mae": 0.958
+        },
+        "player_opp_v3": {
+          "ats_edge": -6.522,
+          "total_edge": 7.934,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 13.022,
+          "total_mae": 1.434
+        },
+        "player_rot_v4": {
+          "ats_edge": -6.134,
+          "total_edge": -3.836,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 12.634,
+          "total_mae": 10.336
+        },
+        "player_all_v4": {
+          "ats_edge": -3.991,
+          "total_edge": -3.16,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 10.491,
+          "total_mae": 9.66
+        }
+      },
+      "source": "Frozen Draft Kings odds; hypothetical -110 stakes"
+    },
+    "375351": {
+      "id": "375351",
+      "date": "2026-11-26",
+      "away": "Eastern Washington",
+      "home": "Loyola Marymount",
+      "tip_utc": "2026-11-26T02:00:00Z",
+      "captured_utc": "2026-11-25T18:56:16.078204Z",
+      "home_points": 81.0,
+      "away_points": 72.0,
+      "home_spread": -7.5,
+      "market_total": 152.5,
+      "market_provider": "Draft Kings",
+      "models": {
+        "baseline": {
+          "ats_edge": 10.278,
+          "total_edge": 1.521,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 8.778,
+          "total_mae": 1.021
+        },
+        "player_v2": {
+          "ats_edge": 6.979,
+          "total_edge": 3.51,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 5.479,
+          "total_mae": 3.01
+        },
+        "player_opp_v3": {
+          "ats_edge": 2.788,
+          "total_edge": 3.332,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 1.288,
+          "total_mae": 2.832
+        },
+        "player_rot_v4": {
+          "ats_edge": 6.553,
+          "total_edge": -9.303,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 5.053,
+          "total_mae": 9.803
+        },
+        "player_all_v4": {
+          "ats_edge": 1.667,
+          "total_edge": -10.196,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 0.167,
+          "total_mae": 10.696
+        }
+      },
+      "source": "Frozen Draft Kings odds; hypothetical -110 stakes"
+    },
+    "375350": {
+      "id": "375350",
+      "date": "2026-11-26",
+      "away": "Cal State Bakersfield",
+      "home": "Pepperdine",
+      "tip_utc": "2026-11-26T01:00:00Z",
+      "captured_utc": "2026-11-25T18:56:16.078204Z",
+      "home_points": 70.0,
+      "away_points": 68.0,
+      "home_spread": -9.5,
+      "market_total": 159.5,
+      "market_provider": "Draft Kings",
+      "models": {
+        "baseline": {
+          "ats_edge": 12.892,
+          "total_edge": 3.515,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 20.392,
+          "total_mae": 25.015
+        },
+        "player_v2": {
+          "ats_edge": 13.562,
+          "total_edge": 9.41,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 21.062,
+          "total_mae": 30.91
+        },
+        "player_opp_v3": {
+          "ats_edge": 10.875,
+          "total_edge": 8.582,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 18.375,
+          "total_mae": 30.082
+        },
+        "player_rot_v4": {
+          "ats_edge": 5.414,
+          "total_edge": 6.929,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 12.914,
+          "total_mae": 28.429
+        },
+        "player_all_v4": {
+          "ats_edge": 3.274,
+          "total_edge": 5.924,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 10.774,
+          "total_mae": 27.424
+        }
+      },
+      "source": "Frozen Draft Kings odds; hypothetical -110 stakes"
+    },
+    "espn-401920076": {
+      "id": "espn-401920076",
+      "date": "2026-11-26",
+      "away": "Longwood",
+      "home": "George Mason",
+      "tip_utc": "2026-11-26T00:00:00Z",
+      "captured_utc": "2026-11-25T18:56:16.078204Z",
+      "home_points": 93.0,
+      "away_points": 58.0,
+      "home_spread": -16.5,
+      "market_total": 145.5,
+      "market_provider": "Draft Kings",
+      "models": {
+        "baseline": {
+          "ats_edge": -5.419,
+          "total_edge": 0.303,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 23.919,
+          "total_mae": 5.197
+        },
+        "player_v2": {
+          "ats_edge": 2.486,
+          "total_edge": 6.371,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 16.014,
+          "total_mae": 0.871
+        },
+        "player_opp_v3": {
+          "ats_edge": 0.541,
+          "total_edge": 6.406,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 17.959,
+          "total_mae": 0.906
+        },
+        "player_rot_v4": {
+          "ats_edge": 4.271,
+          "total_edge": -7.479,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 14.229,
+          "total_mae": 12.979
+        },
+        "player_all_v4": {
+          "ats_edge": 1.367,
+          "total_edge": -7.701,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 17.133,
+          "total_mae": 13.201
+        }
+      },
+      "source": "Frozen Draft Kings odds; hypothetical -110 stakes"
+    },
+    "378126": {
+      "id": "378126",
+      "date": "2026-11-26",
+      "away": "Georgia",
+      "home": "Cincinnati",
+      "tip_utc": "2026-11-26T16:00:00Z",
+      "captured_utc": "2026-11-26T02:10:16.508408Z",
+      "home_points": 83.0,
+      "away_points": 81.0,
+      "home_spread": -2.5,
+      "market_total": 156.5,
+      "market_provider": "DraftKings",
+      "models": {
+        "baseline": {
+          "ats_edge": 3.721,
+          "total_edge": -8.749,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 4.221,
+          "total_mae": 16.249
+        },
+        "player_v2": {
+          "ats_edge": 6.936,
+          "total_edge": -0.235,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 7.436,
+          "total_mae": 7.735
+        },
+        "player_opp_v3": {
+          "ats_edge": 7.146,
+          "total_edge": -0.503,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 7.646,
+          "total_mae": 8.003
+        },
+        "player_rot_v4": {
+          "ats_edge": 0.235,
+          "total_edge": -9.267,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 0.735,
+          "total_mae": 16.767
+        },
+        "player_all_v4": {
+          "ats_edge": 0.993,
+          "total_edge": -8.491,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 1.493,
+          "total_mae": 15.991
+        }
+      },
+      "source": "Frozen DraftKings odds; hypothetical -110 stakes"
+    },
+    "espn-401925050": {
+      "id": "espn-401925050",
+      "date": "2026-11-25",
+      "away": "Grambling",
+      "home": "LSU New Orleans",
+      "tip_utc": "2026-11-25T21:00:00Z",
+      "captured_utc": "2026-11-25T18:56:16.078204Z",
+      "home_points": 80.0,
+      "away_points": 81.0,
+      "home_spread": -3.5,
+      "market_total": 148.5,
+      "market_provider": "Draft Kings",
+      "models": {
+        "baseline": {
+          "ats_edge": 2.365,
+          "total_edge": 9.583,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 6.865,
+          "total_mae": 2.917
+        },
+        "player_v2": {
+          "ats_edge": 5.236,
+          "total_edge": 11.838,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 9.736,
+          "total_mae": 0.662
+        },
+        "player_opp_v3": {
+          "ats_edge": 4.427,
+          "total_edge": 11.96,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 8.927,
+          "total_mae": 0.54
+        },
+        "player_rot_v4": {
+          "ats_edge": 6.757,
+          "total_edge": -2.859,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 11.257,
+          "total_mae": 15.359
+        },
+        "player_all_v4": {
+          "ats_edge": 5.687,
+          "total_edge": -2.695,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 10.187,
+          "total_mae": 15.195
+        }
+      },
+      "source": "Frozen Draft Kings odds; hypothetical -110 stakes"
+    },
+    "375347": {
+      "id": "375347",
+      "date": "2026-11-25",
+      "away": "Cal State Northridge",
+      "home": "Weber State",
+      "tip_utc": "2026-11-25T23:00:00Z",
+      "captured_utc": "2026-11-25T18:56:16.078204Z",
+      "home_points": 67.0,
+      "away_points": 89.0,
+      "home_spread": 1.5,
+      "market_total": 168.5,
+      "market_provider": "Draft Kings",
+      "models": {
+        "baseline": {
+          "ats_edge": 8.942,
+          "total_edge": -8.425,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 29.442,
+          "total_mae": 4.075
+        },
+        "player_v2": {
+          "ats_edge": -2.279,
+          "total_edge": -10.274,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 18.221,
+          "total_mae": 2.226
+        },
+        "player_opp_v3": {
+          "ats_edge": -3.257,
+          "total_edge": -9.311,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 17.243,
+          "total_mae": 3.189
+        },
+        "player_rot_v4": {
+          "ats_edge": -0.623,
+          "total_edge": -10.163,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 19.877,
+          "total_mae": 2.337
+        },
+        "player_all_v4": {
+          "ats_edge": -2.001,
+          "total_edge": -9.399,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 18.499,
+          "total_mae": 3.101
+        }
+      },
+      "source": "Frozen Draft Kings odds; hypothetical -110 stakes"
+    },
+    "espn-401921672": {
+      "id": "espn-401921672",
+      "date": "2026-11-26",
+      "away": "Stanford",
+      "home": "Saint Louis",
+      "tip_utc": "2026-11-26T06:08:00Z",
+      "captured_utc": "2026-11-25T18:56:16.078204Z",
+      "home_points": 66.0,
+      "away_points": 64.0,
+      "home_spread": -3.5,
+      "market_total": 152.5,
+      "market_provider": "Draft Kings",
+      "models": {
+        "baseline": {
+          "ats_edge": -2.518,
+          "total_edge": -1.723,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 1.018,
+          "total_mae": 20.777
+        },
+        "player_v2": {
+          "ats_edge": -7.624,
+          "total_edge": -0.708,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 6.124,
+          "total_mae": 21.792
+        },
+        "player_opp_v3": {
+          "ats_edge": -0.534,
+          "total_edge": -1.022,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 0.966,
+          "total_mae": 21.478
+        },
+        "player_rot_v4": {
+          "ats_edge": -7.192,
+          "total_edge": -14.909,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 5.692,
+          "total_mae": 7.591
+        },
+        "player_all_v4": {
+          "ats_edge": 0.964,
+          "total_edge": -14.515,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 2.464,
+          "total_mae": 7.985
+        }
+      },
+      "source": "Frozen Draft Kings odds; hypothetical -110 stakes"
+    },
+    "375325": {
+      "id": "375325",
+      "date": "2026-11-25",
+      "away": "Prairie View A&M",
+      "home": "Marshall",
+      "tip_utc": "2026-11-25T21:00:00Z",
+      "captured_utc": "2026-11-25T18:56:16.078204Z",
+      "home_points": 64.0,
+      "away_points": 58.0,
+      "home_spread": -14.5,
+      "market_total": 150.5,
+      "market_provider": "Draft Kings",
+      "models": {
+        "baseline": {
+          "ats_edge": 4.756,
+          "total_edge": 2.779,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 13.256,
+          "total_mae": 31.279
+        },
+        "player_v2": {
+          "ats_edge": -0.122,
+          "total_edge": 2.578,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 8.378,
+          "total_mae": 31.078
+        },
+        "player_opp_v3": {
+          "ats_edge": 0.825,
+          "total_edge": 2.477,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 9.325,
+          "total_mae": 30.977
+        },
+        "player_rot_v4": {
+          "ats_edge": -1.761,
+          "total_edge": -1.306,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 6.739,
+          "total_mae": 27.194
+        },
+        "player_all_v4": {
+          "ats_edge": -0.966,
+          "total_edge": -0.955,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 7.534,
+          "total_mae": 27.545
+        }
+      },
+      "source": "Frozen Draft Kings odds; hypothetical -110 stakes"
+    },
+    "espn-401920550": {
+      "id": "espn-401920550",
+      "date": "2026-11-26",
+      "away": "Eastern Michigan",
+      "home": "UTEP",
+      "tip_utc": "2026-11-26T01:45:00Z",
+      "captured_utc": "2026-11-25T18:56:16.078204Z",
+      "home_points": 72.0,
+      "away_points": 54.0,
+      "home_spread": -1.5,
+      "market_total": 131.5,
+      "market_provider": "Draft Kings",
+      "models": {
+        "baseline": {
+          "ats_edge": 1.373,
+          "total_edge": 8.009,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 15.127,
+          "total_mae": 13.509
+        },
+        "player_v2": {
+          "ats_edge": 2.142,
+          "total_edge": 11.883,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 14.358,
+          "total_mae": 17.383
+        },
+        "player_opp_v3": {
+          "ats_edge": -0.237,
+          "total_edge": 9.546,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 16.737,
+          "total_mae": 15.046
+        },
+        "player_rot_v4": {
+          "ats_edge": -0.662,
+          "total_edge": -7.542,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 17.162,
+          "total_mae": 2.042
+        },
+        "player_all_v4": {
+          "ats_edge": -2.738,
+          "total_edge": -9.787,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 19.238,
+          "total_mae": 4.287
+        }
+      },
+      "source": "Frozen Draft Kings odds; hypothetical -110 stakes"
+    },
+    "375330": {
+      "id": "375330",
+      "date": "2026-11-25",
+      "away": "Jackson State",
+      "home": "Oklahoma State",
+      "tip_utc": "2026-11-25T20:00:00Z",
+      "captured_utc": "2026-11-25T18:56:16.078204Z",
+      "home_points": 93.0,
+      "away_points": 58.0,
+      "home_spread": -35.5,
+      "market_total": 160.5,
+      "market_provider": "Draft Kings",
+      "models": {
+        "baseline": {
+          "ats_edge": -4.989,
+          "total_edge": -1.102,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 4.489,
+          "total_mae": 8.398
+        },
+        "player_v2": {
+          "ats_edge": -4.45,
+          "total_edge": 3.028,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 3.95,
+          "total_mae": 12.528
+        },
+        "player_opp_v3": {
+          "ats_edge": -2.607,
+          "total_edge": 1.974,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 2.107,
+          "total_mae": 11.474
+        },
+        "player_rot_v4": {
+          "ats_edge": -9.51,
+          "total_edge": -2.566,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 9.01,
+          "total_mae": 6.934
+        },
+        "player_all_v4": {
+          "ats_edge": -7.023,
+          "total_edge": -2.246,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 6.523,
+          "total_mae": 7.254
+        }
+      },
+      "source": "Frozen Draft Kings odds; hypothetical -110 stakes"
+    },
+    "espn-401911241": {
+      "id": "espn-401911241",
+      "date": "2026-11-25",
+      "away": "Bethune-Cookman",
+      "home": "Richmond",
+      "tip_utc": "2026-11-25T23:00:00Z",
+      "captured_utc": "2026-11-25T18:56:16.078204Z",
+      "home_points": 86.0,
+      "away_points": 79.0,
+      "home_spread": -11.5,
+      "market_total": 146.5,
+      "market_provider": "Draft Kings",
+      "models": {
+        "baseline": {
+          "ats_edge": 11.564,
+          "total_edge": 8.775,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 16.064,
+          "total_mae": 9.725
+        },
+        "player_v2": {
+          "ats_edge": 1.128,
+          "total_edge": 9.148,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 5.628,
+          "total_mae": 9.352
+        },
+        "player_opp_v3": {
+          "ats_edge": -0.348,
+          "total_edge": 9.158,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 4.152,
+          "total_mae": 9.342
+        },
+        "player_rot_v4": {
+          "ats_edge": -2.425,
+          "total_edge": 0.939,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 2.075,
+          "total_mae": 17.561
+        },
+        "player_all_v4": {
+          "ats_edge": -3.949,
+          "total_edge": 1.52,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 0.551,
+          "total_mae": 16.98
+        }
+      },
+      "source": "Frozen Draft Kings odds; hypothetical -110 stakes"
+    },
+    "372942": {
+      "id": "372942",
+      "date": "2026-11-26",
+      "away": "Northeastern",
+      "home": "Wisconsin",
+      "tip_utc": "2026-11-26T00:00:00Z",
+      "captured_utc": "2026-11-25T18:56:16.078204Z",
+      "home_points": 91.0,
+      "away_points": 54.0,
+      "home_spread": -19.5,
+      "market_total": 154.5,
+      "market_provider": "Draft Kings",
+      "models": {
+        "baseline": {
+          "ats_edge": -2.516,
+          "total_edge": -3.871,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 20.016,
+          "total_mae": 5.629
+        },
+        "player_v2": {
+          "ats_edge": -2.228,
+          "total_edge": 0.058,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 19.728,
+          "total_mae": 9.558
+        },
+        "player_opp_v3": {
+          "ats_edge": -2.855,
+          "total_edge": 0.377,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 20.355,
+          "total_mae": 9.877
+        },
+        "player_rot_v4": {
+          "ats_edge": -4.517,
+          "total_edge": -1.836,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 22.017,
+          "total_mae": 7.664
+        },
+        "player_all_v4": {
+          "ats_edge": -5.264,
+          "total_edge": -0.966,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 22.764,
+          "total_mae": 8.534
+        }
+      },
+      "source": "Frozen Draft Kings odds; hypothetical -110 stakes"
+    },
+    "375318": {
+      "id": "375318",
+      "date": "2026-11-25",
+      "away": "Princeton",
+      "home": "Liberty",
+      "tip_utc": "2026-11-25T21:00:00Z",
+      "captured_utc": "2026-11-25T18:56:16.078204Z",
+      "home_points": 72.0,
+      "away_points": 79.0,
+      "home_spread": -3.5,
+      "market_total": 137.5,
+      "market_provider": "Draft Kings",
+      "models": {
+        "baseline": {
+          "ats_edge": 4.019,
+          "total_edge": 4.713,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 14.519,
+          "total_mae": 8.787
+        },
+        "player_v2": {
+          "ats_edge": -1.089,
+          "total_edge": 0.11,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 9.411,
+          "total_mae": 13.39
+        },
+        "player_opp_v3": {
+          "ats_edge": 0.381,
+          "total_edge": -0.128,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 10.881,
+          "total_mae": 13.628
+        },
+        "player_rot_v4": {
+          "ats_edge": -6.676,
+          "total_edge": -9.104,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 3.824,
+          "total_mae": 22.604
+        },
+        "player_all_v4": {
+          "ats_edge": -4.217,
+          "total_edge": -8.726,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 6.283,
+          "total_mae": 22.226
+        }
+      },
+      "source": "Frozen Draft Kings odds; hypothetical -110 stakes"
+    },
+    "375322": {
+      "id": "375322",
+      "date": "2026-11-26",
+      "away": "Bellarmine",
+      "home": "Northern Kentucky",
+      "tip_utc": "2026-11-26T00:00:00Z",
+      "captured_utc": "2026-11-25T18:56:16.078204Z",
+      "home_points": 52.0,
+      "away_points": 66.0,
+      "home_spread": -7.5,
+      "market_total": 146.5,
+      "market_provider": "Draft Kings",
+      "models": {
+        "baseline": {
+          "ats_edge": -1.275,
+          "total_edge": 8.174,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 20.225,
+          "total_mae": 36.674
+        },
+        "player_v2": {
+          "ats_edge": -6.435,
+          "total_edge": 4.702,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 15.065,
+          "total_mae": 33.202
+        },
+        "player_opp_v3": {
+          "ats_edge": -8.738,
+          "total_edge": 3.688,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 12.762,
+          "total_mae": 32.188
+        },
+        "player_rot_v4": {
+          "ats_edge": -6.129,
+          "total_edge": -9.372,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 15.371,
+          "total_mae": 19.128
+        },
+        "player_all_v4": {
+          "ats_edge": -8.171,
+          "total_edge": -9.971,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 13.329,
+          "total_mae": 18.529
+        }
+      },
+      "source": "Frozen Draft Kings odds; hypothetical -110 stakes"
+    },
+    "espn-401922285": {
+      "id": "espn-401922285",
+      "date": "2026-11-26",
+      "away": "South Carolina Upstate",
+      "home": "The Citadel",
+      "tip_utc": "2026-11-26T00:00:00Z",
+      "captured_utc": "2026-11-25T18:56:16.078204Z",
+      "home_points": 72.0,
+      "away_points": 54.0,
+      "home_spread": -3.5,
+      "market_total": 138.5,
+      "market_provider": "Draft Kings",
+      "models": {
+        "baseline": {
+          "ats_edge": 12.825,
+          "total_edge": 8.393,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 1.675,
+          "total_mae": 20.893
+        },
+        "player_v2": {
+          "ats_edge": 9.154,
+          "total_edge": 7.84,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 5.346,
+          "total_mae": 20.34
+        },
+        "player_opp_v3": {
+          "ats_edge": 6.781,
+          "total_edge": 6.112,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 7.719,
+          "total_mae": 18.612
+        },
+        "player_rot_v4": {
+          "ats_edge": 5.361,
+          "total_edge": 6.552,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 9.139,
+          "total_mae": 19.052
+        },
+        "player_all_v4": {
+          "ats_edge": 2.603,
+          "total_edge": 4.155,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 11.897,
+          "total_mae": 16.655
+        }
+      },
+      "source": "Frozen Draft Kings odds; hypothetical -110 stakes"
+    },
+    "375311": {
+      "id": "375311",
+      "date": "2026-11-25",
+      "away": "Southern",
+      "home": "Nebraska",
+      "tip_utc": "2026-11-25T22:00:00Z",
+      "captured_utc": "2026-11-25T18:56:16.078204Z",
+      "home_points": 101.0,
+      "away_points": 72.0,
+      "home_spread": -34.5,
+      "market_total": 149.5,
+      "market_provider": "Draft Kings",
+      "models": {
+        "baseline": {
+          "ats_edge": -2.275,
+          "total_edge": 1.346,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 3.225,
+          "total_mae": 22.154
+        },
+        "player_v2": {
+          "ats_edge": -0.146,
+          "total_edge": 1.161,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 5.354,
+          "total_mae": 22.339
+        },
+        "player_opp_v3": {
+          "ats_edge": -0.715,
+          "total_edge": 0.146,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 4.785,
+          "total_mae": 23.354
+        },
+        "player_rot_v4": {
+          "ats_edge": -6.599,
+          "total_edge": -8.808,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 1.099,
+          "total_mae": 32.308
+        },
+        "player_all_v4": {
+          "ats_edge": -6.6,
+          "total_edge": -8.492,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 1.1,
+          "total_mae": 31.992
+        }
+      },
+      "source": "Frozen Draft Kings odds; hypothetical -110 stakes"
+    },
+    "375349": {
+      "id": "375349",
+      "date": "2026-11-26",
+      "away": "SMU",
+      "home": "Utah State",
+      "tip_utc": "2026-11-26T00:50:00Z",
+      "captured_utc": "2026-11-25T18:56:16.078204Z",
+      "home_points": 93.0,
+      "away_points": 59.0,
+      "home_spread": -4.5,
+      "market_total": 162.5,
+      "market_provider": "Draft Kings",
+      "models": {
+        "baseline": {
+          "ats_edge": 1.922,
+          "total_edge": -3.3,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 27.578,
+          "total_mae": 7.2
+        },
+        "player_v2": {
+          "ats_edge": 0.909,
+          "total_edge": -3.683,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 28.591,
+          "total_mae": 6.817
+        },
+        "player_opp_v3": {
+          "ats_edge": -2.467,
+          "total_edge": -3.727,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 31.967,
+          "total_mae": 6.773
+        },
+        "player_rot_v4": {
+          "ats_edge": -0.524,
+          "total_edge": -3.146,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 30.024,
+          "total_mae": 7.354
+        },
+        "player_all_v4": {
+          "ats_edge": -4.063,
+          "total_edge": -3.461,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 33.563,
+          "total_mae": 7.039
+        }
+      },
+      "source": "Frozen Draft Kings odds; hypothetical -110 stakes"
+    },
+    "espn-401911522": {
+      "id": "espn-401911522",
+      "date": "2026-11-26",
+      "away": "Omaha",
+      "home": "UC Davis",
+      "tip_utc": "2026-11-26T01:00:00Z",
+      "captured_utc": "2026-11-25T18:56:16.078204Z",
+      "home_points": 80.0,
+      "away_points": 78.0,
+      "home_spread": -4.5,
+      "market_total": 146.5,
+      "market_provider": "Draft Kings",
+      "models": {
+        "baseline": {
+          "ats_edge": 10.253,
+          "total_edge": -1.851,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 12.753,
+          "total_mae": 13.351
+        },
+        "player_v2": {
+          "ats_edge": 6.087,
+          "total_edge": -3.272,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 8.587,
+          "total_mae": 14.772
+        },
+        "player_opp_v3": {
+          "ats_edge": 0.944,
+          "total_edge": -5.38,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 3.444,
+          "total_mae": 16.88
+        },
+        "player_rot_v4": {
+          "ats_edge": 6.462,
+          "total_edge": -4.898,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 8.962,
+          "total_mae": 16.398
+        },
+        "player_all_v4": {
+          "ats_edge": 0.716,
+          "total_edge": -7.054,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 3.216,
+          "total_mae": 18.554
+        }
+      },
+      "source": "Frozen Draft Kings odds; hypothetical -110 stakes"
+    },
+    "espn-401925688": {
+      "id": "espn-401925688",
+      "date": "2026-11-25",
+      "away": "Alcorn State",
+      "home": "Texas State",
+      "tip_utc": "2026-11-25T22:00:00Z",
+      "captured_utc": "2026-11-25T18:56:16.078204Z",
+      "home_points": 97.0,
+      "away_points": 70.0,
+      "home_spread": -26.5,
+      "market_total": 147.5,
+      "market_provider": "Draft Kings",
+      "models": {
+        "baseline": {
+          "ats_edge": 10.691,
+          "total_edge": 7.205,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 10.191,
+          "total_mae": 12.295
+        },
+        "player_v2": {
+          "ats_edge": 9.904,
+          "total_edge": 6.234,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 9.404,
+          "total_mae": 13.266
+        },
+        "player_opp_v3": {
+          "ats_edge": 7.825,
+          "total_edge": 4.66,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 7.325,
+          "total_mae": 14.84
+        },
+        "player_rot_v4": {
+          "ats_edge": 4.174,
+          "total_edge": -0.462,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 3.674,
+          "total_mae": 19.962
+        },
+        "player_all_v4": {
+          "ats_edge": 2.705,
+          "total_edge": -1.339,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 2.205,
+          "total_mae": 20.839
+        }
+      },
+      "source": "Frozen Draft Kings odds; hypothetical -110 stakes"
+    },
+    "372949": {
+      "id": "372949",
+      "date": "2026-11-26",
+      "away": "Oklahoma",
+      "home": "Purdue",
+      "tip_utc": "2026-11-26T17:00:00Z",
+      "captured_utc": "2026-11-26T02:10:16.508408Z",
+      "home_points": 63.0,
+      "away_points": 70.0,
+      "home_spread": -4.5,
+      "market_total": 142.5,
+      "market_provider": "DraftKings",
+      "models": {
+        "baseline": {
+          "ats_edge": 2.57,
+          "total_edge": 1.289,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 14.07,
+          "total_mae": 10.789
+        },
+        "player_v2": {
+          "ats_edge": -9.762,
+          "total_edge": 4.05,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 1.738,
+          "total_mae": 13.55
+        },
+        "player_opp_v3": {
+          "ats_edge": -5.761,
+          "total_edge": 4.382,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 5.739,
+          "total_mae": 13.882
+        },
+        "player_rot_v4": {
+          "ats_edge": -10.801,
+          "total_edge": -11.683,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 0.699,
+          "total_mae": 2.183
+        },
+        "player_all_v4": {
+          "ats_edge": -5.619,
+          "total_edge": -10.897,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 5.881,
+          "total_mae": 1.397
+        }
+      },
+      "source": "Frozen DraftKings odds; hypothetical -110 stakes"
+    },
+    "espn-401921716": {
+      "id": "espn-401921716",
+      "date": "2026-11-25",
+      "away": "BYU",
+      "home": "Providence",
+      "tip_utc": "2026-11-25T22:30:00Z",
+      "captured_utc": "2026-11-25T18:56:16.078204Z",
+      "home_points": 82.0,
+      "away_points": 85.0,
+      "home_spread": 1.5,
+      "market_total": 154.5,
+      "market_provider": "Draft Kings",
+      "models": {
+        "baseline": {
+          "ats_edge": -1.003,
+          "total_edge": -6.434,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 0.497,
+          "total_mae": 18.934
+        },
+        "player_v2": {
+          "ats_edge": -2.055,
+          "total_edge": -3.626,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 0.555,
+          "total_mae": 16.126
+        },
+        "player_opp_v3": {
+          "ats_edge": -2.477,
+          "total_edge": -4.431,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 0.977,
+          "total_mae": 16.931
+        },
+        "player_rot_v4": {
+          "ats_edge": -2.125,
+          "total_edge": -10.495,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 0.625,
+          "total_mae": 22.995
+        },
+        "player_all_v4": {
+          "ats_edge": -1.84,
+          "total_edge": -10.493,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 0.34,
+          "total_mae": 22.993
+        }
+      },
+      "source": "Frozen Draft Kings odds; hypothetical -110 stakes"
+    },
+    "espn-401909720": {
+      "id": "espn-401909720",
+      "date": "2026-11-25",
+      "away": "UAlbany",
+      "home": "Syracuse",
+      "tip_utc": "2026-11-25T23:00:00Z",
+      "captured_utc": "2026-11-25T18:56:16.078204Z",
+      "home_points": 74.0,
+      "away_points": 53.0,
+      "home_spread": -26.5,
+      "market_total": 146.5,
+      "market_provider": "Draft Kings",
+      "models": {
+        "baseline": {
+          "ats_edge": -13.862,
+          "total_edge": 0.479,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 8.362,
+          "total_mae": 19.979
+        },
+        "player_v2": {
+          "ats_edge": -3.985,
+          "total_edge": 1.695,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 1.515,
+          "total_mae": 21.195
+        },
+        "player_opp_v3": {
+          "ats_edge": 2.917,
+          "total_edge": 3.415,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 8.417,
+          "total_mae": 22.915
+        },
+        "player_rot_v4": {
+          "ats_edge": -0.57,
+          "total_edge": -5.407,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 4.93,
+          "total_mae": 14.093
+        },
+        "player_all_v4": {
+          "ats_edge": 5.691,
+          "total_edge": -3.685,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 11.191,
+          "total_mae": 15.815
+        }
+      },
+      "source": "Frozen Draft Kings odds; hypothetical -110 stakes"
+    },
+    "espn-401924897": {
+      "id": "espn-401924897",
+      "date": "2026-11-26",
+      "away": "Mississippi Valley State",
+      "home": "New Mexico",
+      "tip_utc": "2026-11-26T02:00:00Z",
+      "captured_utc": "2026-11-25T18:56:16.078204Z",
+      "home_points": 100.0,
+      "away_points": 77.0,
+      "home_spread": -35.5,
+      "market_total": 152.5,
+      "market_provider": "Draft Kings",
+      "models": {
+        "baseline": {
+          "ats_edge": -7.015,
+          "total_edge": -0.935,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 5.485,
+          "total_mae": 25.435
+        },
+        "player_v2": {
+          "ats_edge": -1.461,
+          "total_edge": 2.525,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 11.039,
+          "total_mae": 21.975
+        },
+        "player_opp_v3": {
+          "ats_edge": -3.228,
+          "total_edge": 1.789,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 9.272,
+          "total_mae": 22.711
+        },
+        "player_rot_v4": {
+          "ats_edge": -10.388,
+          "total_edge": -6.851,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 2.112,
+          "total_mae": 31.351
+        },
+        "player_all_v4": {
+          "ats_edge": -11.201,
+          "total_edge": -6.837,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 1.299,
+          "total_mae": 31.337
+        }
+      },
+      "source": "Frozen Draft Kings odds; hypothetical -110 stakes"
+    },
+    "espn-401921713": {
+      "id": "espn-401921713",
+      "date": "2026-11-26",
+      "away": "Washington",
+      "home": "VCU",
+      "tip_utc": "2026-11-26T03:00:00Z",
+      "captured_utc": "2026-11-25T18:56:16.078204Z",
+      "home_points": 80.0,
+      "away_points": 78.0,
+      "home_spread": -3.5,
+      "market_total": 144.5,
+      "market_provider": "Draft Kings",
+      "models": {
+        "baseline": {
+          "ats_edge": -2.639,
+          "total_edge": 4.388,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 1.139,
+          "total_mae": 9.112
+        },
+        "player_v2": {
+          "ats_edge": 2.844,
+          "total_edge": 9.653,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 4.344,
+          "total_mae": 3.847
+        },
+        "player_opp_v3": {
+          "ats_edge": 1.3,
+          "total_edge": 8.818,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 2.8,
+          "total_mae": 4.682
+        },
+        "player_rot_v4": {
+          "ats_edge": 0.982,
+          "total_edge": 4.14,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 2.482,
+          "total_mae": 9.36
+        },
+        "player_all_v4": {
+          "ats_edge": -0.272,
+          "total_edge": 3.527,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 1.228,
+          "total_mae": 9.973
+        }
+      },
+      "source": "Frozen Draft Kings odds; hypothetical -110 stakes"
+    },
+    "375346": {
+      "id": "375346",
+      "date": "2026-11-26",
+      "away": "Memphis",
+      "home": "Penn State",
+      "tip_utc": "2026-11-26T00:00:00Z",
+      "captured_utc": "2026-11-25T18:56:16.078204Z",
+      "home_points": 70.0,
+      "away_points": 83.0,
+      "home_spread": 4.5,
+      "market_total": 162.5,
+      "market_provider": "Draft Kings",
+      "models": {
+        "baseline": {
+          "ats_edge": 15.022,
+          "total_edge": -8.07,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 23.522,
+          "total_mae": 1.43
+        },
+        "player_v2": {
+          "ats_edge": 2.168,
+          "total_edge": -3.126,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 10.668,
+          "total_mae": 6.374
+        },
+        "player_opp_v3": {
+          "ats_edge": 0.173,
+          "total_edge": -2.045,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 8.673,
+          "total_mae": 7.455
+        },
+        "player_rot_v4": {
+          "ats_edge": 6.373,
+          "total_edge": -12.8,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 14.873,
+          "total_mae": 3.3
+        },
+        "player_all_v4": {
+          "ats_edge": 3.96,
+          "total_edge": -11.921,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 12.46,
+          "total_mae": 2.421
+        }
+      },
+      "source": "Frozen Draft Kings odds; hypothetical -110 stakes"
+    },
+    "espn-401920528": {
+      "id": "espn-401920528",
+      "date": "2026-11-26",
+      "away": "San Diego State",
+      "home": "Maryland",
+      "tip_utc": "2026-11-26T18:00:00Z",
+      "captured_utc": "2026-11-25T18:56:16.078204Z",
+      "home_points": 71.0,
+      "away_points": 75.0,
+      "home_spread": -4.5,
+      "market_total": 153.5,
+      "market_provider": "Draft Kings",
+      "models": {
+        "baseline": {
+          "ats_edge": -2.122,
+          "total_edge": -4.087,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 6.378,
+          "total_mae": 3.413
+        },
+        "player_v2": {
+          "ats_edge": 5.349,
+          "total_edge": 0.747,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 13.849,
+          "total_mae": 8.247
+        },
+        "player_opp_v3": {
+          "ats_edge": 5.669,
+          "total_edge": 0.166,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 14.169,
+          "total_mae": 7.666
+        },
+        "player_rot_v4": {
+          "ats_edge": 2.044,
+          "total_edge": -20.091,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 10.544,
+          "total_mae": 12.591
+        },
+        "player_all_v4": {
+          "ats_edge": 2.831,
+          "total_edge": -20.299,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 11.331,
+          "total_mae": 12.799
+        }
+      },
+      "source": "Frozen Draft Kings odds; hypothetical -110 stakes"
+    },
+    "espn-401917544": {
+      "id": "espn-401917544",
+      "date": "2026-11-26",
+      "away": "Pacific",
+      "home": "Jacksonville State",
+      "tip_utc": "2026-11-26T03:55:00Z",
+      "captured_utc": "2026-11-25T18:56:16.078204Z",
+      "home_points": 83.0,
+      "away_points": 76.0,
+      "home_spread": 3.5,
+      "market_total": 132.5,
+      "market_provider": "Draft Kings",
+      "models": {
+        "baseline": {
+          "ats_edge": -1.141,
+          "total_edge": 8.823,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 11.641,
+          "total_mae": 17.677
+        },
+        "player_v2": {
+          "ats_edge": -5.749,
+          "total_edge": 6.942,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 16.249,
+          "total_mae": 19.558
+        },
+        "player_opp_v3": {
+          "ats_edge": -0.619,
+          "total_edge": 7.64,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 11.119,
+          "total_mae": 18.86
+        },
+        "player_rot_v4": {
+          "ats_edge": -2.912,
+          "total_edge": -0.827,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 13.412,
+          "total_mae": 27.327
+        },
+        "player_all_v4": {
+          "ats_edge": 1.2,
+          "total_edge": -0.758,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 9.3,
+          "total_mae": 27.258
+        }
+      },
+      "source": "Frozen Draft Kings odds; hypothetical -110 stakes"
+    },
+    "375344": {
+      "id": "375344",
+      "date": "2026-11-25",
+      "away": "South Carolina",
+      "home": "USC",
+      "tip_utc": "2026-11-25T22:17:00Z",
+      "captured_utc": "2026-11-25T18:56:16.078204Z",
+      "home_points": 71.0,
+      "away_points": 69.0,
+      "home_spread": -10.5,
+      "market_total": 144.5,
+      "market_provider": "Draft Kings",
+      "models": {
+        "baseline": {
+          "ats_edge": 2.694,
+          "total_edge": 1.866,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 11.194,
+          "total_mae": 6.366
+        },
+        "player_v2": {
+          "ats_edge": 3.506,
+          "total_edge": 4.387,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 12.006,
+          "total_mae": 8.887
+        },
+        "player_opp_v3": {
+          "ats_edge": 5.35,
+          "total_edge": 4.978,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 13.85,
+          "total_mae": 9.478
+        },
+        "player_rot_v4": {
+          "ats_edge": -5.868,
+          "total_edge": -4.007,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 2.632,
+          "total_mae": 0.493
+        },
+        "player_all_v4": {
+          "ats_edge": -3.453,
+          "total_edge": -3.809,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 5.047,
+          "total_mae": 0.691
+        }
+      },
+      "source": "Frozen Draft Kings odds; hypothetical -110 stakes"
+    },
+    "espn-401920548": {
+      "id": "espn-401920548",
+      "date": "2026-11-25",
+      "away": "SE Louisiana",
+      "home": "North Dakota",
+      "tip_utc": "2026-11-25T20:00:00Z",
+      "captured_utc": "2026-11-25T18:56:16.078204Z",
+      "home_points": 72.0,
+      "away_points": 73.0,
+      "home_spread": 1.5,
+      "market_total": 142.5,
+      "market_provider": "Draft Kings",
+      "models": {
+        "baseline": {
+          "ats_edge": 14.188,
+          "total_edge": 10.741,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 13.688,
+          "total_mae": 8.241
+        },
+        "player_v2": {
+          "ats_edge": 4.493,
+          "total_edge": 9.022,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 3.993,
+          "total_mae": 6.522
+        },
+        "player_opp_v3": {
+          "ats_edge": 0.926,
+          "total_edge": 7.853,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 0.426,
+          "total_mae": 5.353
+        },
+        "player_rot_v4": {
+          "ats_edge": 7.475,
+          "total_edge": -0.637,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 6.975,
+          "total_mae": 3.137
+        },
+        "player_all_v4": {
+          "ats_edge": 4.544,
+          "total_edge": -1.449,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 4.044,
+          "total_mae": 3.949
+        }
+      },
+      "source": "Frozen Draft Kings odds; hypothetical -110 stakes"
+    },
+    "espn-401922253": {
+      "id": "espn-401922253",
+      "date": "2026-11-25",
+      "away": "West Florida",
+      "home": "Northwestern State",
+      "tip_utc": "2026-11-25T23:00:00Z",
+      "captured_utc": "2026-11-25T18:56:16.078204Z",
+      "home_points": 71.0,
+      "away_points": 57.0,
+      "home_spread": -1.5,
+      "market_total": 139.5,
+      "market_provider": "Draft Kings",
+      "models": {
+        "baseline": {
+          "ats_edge": -5.557,
+          "total_edge": 9.116,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 18.057,
+          "total_mae": 20.616
+        },
+        "player_v2": {
+          "ats_edge": -0.802,
+          "total_edge": 7.715,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 13.302,
+          "total_mae": 19.215
+        },
+        "player_opp_v3": {
+          "ats_edge": -0.214,
+          "total_edge": 7.105,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 12.714,
+          "total_mae": 18.605
+        },
+        "player_rot_v4": {
+          "ats_edge": 0.775,
+          "total_edge": -2.72,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 11.725,
+          "total_mae": 8.78
+        },
+        "player_all_v4": {
+          "ats_edge": 1.383,
+          "total_edge": -3.101,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 11.117,
+          "total_mae": 8.399
+        }
+      },
+      "source": "Frozen Draft Kings odds; hypothetical -110 stakes"
+    },
+    "377906": {
+      "id": "377906",
+      "date": "2026-11-26",
+      "away": "Boston College",
+      "home": "UCF",
+      "tip_utc": "2026-11-26T18:30:00Z",
+      "captured_utc": "2026-11-26T02:10:16.508408Z",
+      "home_points": 73.0,
+      "away_points": 75.0,
+      "home_spread": -2.5,
+      "market_total": 145.5,
+      "market_provider": "DraftKings",
+      "models": {
+        "baseline": {
+          "ats_edge": -5.096,
+          "total_edge": -1.991,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 0.596,
+          "total_mae": 4.491
+        },
+        "player_v2": {
+          "ats_edge": -9.026,
+          "total_edge": 7.854,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 4.526,
+          "total_mae": 5.354
+        },
+        "player_opp_v3": {
+          "ats_edge": -3.726,
+          "total_edge": 9.648,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 0.774,
+          "total_mae": 7.148
+        },
+        "player_rot_v4": {
+          "ats_edge": -5.31,
+          "total_edge": -3.358,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 0.81,
+          "total_mae": 5.858
+        },
+        "player_all_v4": {
+          "ats_edge": -0.62,
+          "total_edge": -1.655,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 3.88,
+          "total_mae": 4.155
+        }
+      },
+      "source": "Frozen DraftKings odds; hypothetical -110 stakes"
+    },
+    "espn-401921671": {
+      "id": "espn-401921671",
+      "date": "2026-11-26",
+      "away": "Grand Canyon",
+      "home": "Colorado",
+      "tip_utc": "2026-11-26T03:30:00Z",
+      "captured_utc": "2026-11-25T18:56:16.078204Z",
+      "home_points": 73.0,
+      "away_points": 79.0,
+      "home_spread": 9.5,
+      "market_total": 154.5,
+      "market_provider": "Draft Kings",
+      "models": {
+        "baseline": {
+          "ats_edge": 7.537,
+          "total_edge": -1.247,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 4.037,
+          "total_mae": 1.253
+        },
+        "player_v2": {
+          "ats_edge": 0.702,
+          "total_edge": 4.634,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 2.798,
+          "total_mae": 7.134
+        },
+        "player_opp_v3": {
+          "ats_edge": 4.186,
+          "total_edge": 3.802,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 0.686,
+          "total_mae": 6.302
+        },
+        "player_rot_v4": {
+          "ats_edge": -0.407,
+          "total_edge": -12.203,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 3.907,
+          "total_mae": 9.703
+        },
+        "player_all_v4": {
+          "ats_edge": 3.546,
+          "total_edge": -12.499,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 0.046,
+          "total_mae": 9.999
+        }
+      },
+      "source": "Frozen Draft Kings odds; hypothetical -110 stakes"
+    },
+    "378123": {
+      "id": "378123",
+      "date": "2026-11-25",
+      "away": "Akron",
+      "home": "App State",
+      "tip_utc": "2026-11-25T20:00:00Z",
+      "captured_utc": "2026-11-25T18:56:16.078204Z",
+      "home_points": 76.0,
+      "away_points": 66.0,
+      "home_spread": 5.5,
+      "market_total": 134.5,
+      "market_provider": "Draft Kings",
+      "models": {
+        "baseline": {
+          "ats_edge": 3.048,
+          "total_edge": 0.7,
+          "ats": "W",
+          "total": "W",
+          "margin_mae": 12.452,
+          "total_mae": 6.8
+        },
+        "player_v2": {
+          "ats_edge": -3.845,
+          "total_edge": 1.631,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 19.345,
+          "total_mae": 5.869
+        },
+        "player_opp_v3": {
+          "ats_edge": -2.482,
+          "total_edge": 2.247,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 17.982,
+          "total_mae": 5.253
+        },
+        "player_rot_v4": {
+          "ats_edge": -5.668,
+          "total_edge": -3.95,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 21.168,
+          "total_mae": 11.45
+        },
+        "player_all_v4": {
+          "ats_edge": -4.405,
+          "total_edge": -3.107,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 19.905,
+          "total_mae": 10.607
+        }
+      },
+      "source": "Frozen Draft Kings odds; hypothetical -110 stakes"
+    },
+    "378124": {
+      "id": "378124",
+      "date": "2026-11-26",
+      "away": "Wake Forest",
+      "home": "Mississippi State",
+      "tip_utc": "2026-11-26T02:29:00Z",
+      "captured_utc": "2026-11-25T18:56:16.078204Z",
+      "home_points": 71.0,
+      "away_points": 78.0,
+      "home_spread": -3.5,
+      "market_total": 148.5,
+      "market_provider": "Draft Kings",
+      "models": {
+        "baseline": {
+          "ats_edge": 3.256,
+          "total_edge": -1.877,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 13.756,
+          "total_mae": 2.377
+        },
+        "player_v2": {
+          "ats_edge": 2.728,
+          "total_edge": 4.461,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 13.228,
+          "total_mae": 3.961
+        },
+        "player_opp_v3": {
+          "ats_edge": 4.161,
+          "total_edge": 3.278,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 14.661,
+          "total_mae": 2.778
+        },
+        "player_rot_v4": {
+          "ats_edge": 5.497,
+          "total_edge": -6.278,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 15.997,
+          "total_mae": 6.778
+        },
+        "player_all_v4": {
+          "ats_edge": 6.777,
+          "total_edge": -7.328,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 17.277,
+          "total_mae": 7.828
+        }
+      },
+      "source": "Frozen Draft Kings odds; hypothetical -110 stakes"
+    },
+    "372944": {
+      "id": "372944",
+      "date": "2026-11-26",
+      "away": "UConn",
+      "home": "Duke",
+      "tip_utc": "2026-11-26T00:00:00Z",
+      "captured_utc": "2026-11-25T18:56:16.078204Z",
+      "home_points": 77.0,
+      "away_points": 63.0,
+      "home_spread": 1.5,
+      "market_total": 145.5,
+      "market_provider": "Draft Kings",
+      "models": {
+        "baseline": {
+          "ats_edge": 9.941,
+          "total_edge": 3.311,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 5.559,
+          "total_mae": 8.811
+        },
+        "player_v2": {
+          "ats_edge": 5.444,
+          "total_edge": 3.913,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 10.056,
+          "total_mae": 9.413
+        },
+        "player_opp_v3": {
+          "ats_edge": 6.13,
+          "total_edge": 2.936,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 9.37,
+          "total_mae": 8.436
+        },
+        "player_rot_v4": {
+          "ats_edge": 5.933,
+          "total_edge": 3.146,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 9.567,
+          "total_mae": 8.646
+        },
+        "player_all_v4": {
+          "ats_edge": 6.546,
+          "total_edge": 2.957,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 8.954,
+          "total_mae": 8.457
+        }
+      },
+      "source": "Frozen Draft Kings odds; hypothetical -110 stakes"
+    },
+    "espn-401920237": {
+      "id": "espn-401920237",
+      "date": "2026-11-25",
+      "away": "Holy Cross",
+      "home": "Dartmouth",
+      "tip_utc": "2026-11-25T22:00:00Z",
+      "captured_utc": "2026-11-25T18:56:16.078204Z",
+      "home_points": 65.0,
+      "away_points": 67.0,
+      "home_spread": -11.5,
+      "market_total": 147.5,
+      "market_provider": "Draft Kings",
+      "models": {
+        "baseline": {
+          "ats_edge": 15.027,
+          "total_edge": 3.686,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 28.527,
+          "total_mae": 19.186
+        },
+        "player_v2": {
+          "ats_edge": 5.368,
+          "total_edge": -1.434,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 18.868,
+          "total_mae": 14.066
+        },
+        "player_opp_v3": {
+          "ats_edge": 3.291,
+          "total_edge": -0.333,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 16.791,
+          "total_mae": 15.167
+        },
+        "player_rot_v4": {
+          "ats_edge": 3.223,
+          "total_edge": -2.748,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 16.723,
+          "total_mae": 12.752
+        },
+        "player_all_v4": {
+          "ats_edge": 1.012,
+          "total_edge": -1.598,
+          "ats": "L",
+          "total": "W",
+          "margin_mae": 14.512,
+          "total_mae": 13.902
+        }
+      },
+      "source": "Frozen Draft Kings odds; hypothetical -110 stakes"
+    },
+    "espn-401920916": {
+      "id": "espn-401920916",
+      "date": "2026-11-26",
+      "away": "Northern Illinois",
+      "home": "SIU Edwardsville",
+      "tip_utc": "2026-11-26T00:00:00Z",
+      "captured_utc": "2026-11-25T18:56:16.078204Z",
+      "home_points": 65.0,
+      "away_points": 68.0,
+      "home_spread": 3.5,
+      "market_total": 137.5,
+      "market_provider": "Draft Kings",
+      "models": {
+        "baseline": {
+          "ats_edge": 9.806,
+          "total_edge": 7.26,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 9.306,
+          "total_mae": 11.76
+        },
+        "player_v2": {
+          "ats_edge": 4.693,
+          "total_edge": 5.122,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 4.193,
+          "total_mae": 9.622
+        },
+        "player_opp_v3": {
+          "ats_edge": 2.503,
+          "total_edge": 4.578,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 2.003,
+          "total_mae": 9.078
+        },
+        "player_rot_v4": {
+          "ats_edge": 2.327,
+          "total_edge": 1.766,
+          "ats": "W",
+          "total": "L",
+          "margin_mae": 1.827,
+          "total_mae": 6.266
+        },
+        "player_all_v4": {
+          "ats_edge": -0.133,
+          "total_edge": 1.334,
+          "ats": "L",
+          "total": "L",
+          "margin_mae": 0.633,
+          "total_mae": 5.834
+        }
+      },
+      "source": "Frozen Draft Kings odds; hypothetical -110 stakes"
     }
   },
   "untracked": {
@@ -882,7 +3458,11 @@
     "espn-401928850": "No pre-tip frozen observation",
     "espn-401926207": "No pre-tip frozen observation",
     "espn-401922223": "No pre-tip frozen observation",
-    "espn-401911311": "No pre-tip frozen observation"
+    "espn-401911311": "No pre-tip frozen observation",
+    "espn-401925943": "No pre-tip frozen observation",
+    "espn-401921170": "No pre-tip frozen observation",
+    "espn-401925880": "No pre-tip frozen observation",
+    "espn-401912231": "No pre-tip frozen observation"
   },
   "week": "2026-W48"
 }

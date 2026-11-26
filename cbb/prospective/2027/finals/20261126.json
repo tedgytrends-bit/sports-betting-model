@@ -1,0 +1,68 @@
+[
+  {
+    "source": "ESPN",
+    "event_id": "401929281",
+    "tip_utc": "2026-11-26T16:00Z",
+    "central_date": "2026-11-26",
+    "home": "Cincinnati Bearcats",
+    "home_points": 83,
+    "away": "Georgia Bulldogs",
+    "away_points": 81,
+    "model_game_id": "378126"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401906807",
+    "tip_utc": "2026-11-26T17:00Z",
+    "central_date": "2026-11-26",
+    "home": "Purdue Boilermakers",
+    "home_points": 63,
+    "away": "Oklahoma Sooners",
+    "away_points": 70,
+    "model_game_id": "372949"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401912231",
+    "tip_utc": "2026-11-26T17:00Z",
+    "central_date": "2026-11-26",
+    "home": "UTSA Roadrunners",
+    "home_points": 61,
+    "away": "Army Black Knights",
+    "away_points": 79,
+    "model_game_id": "espn-401912231"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401920528",
+    "tip_utc": "2026-11-26T18:00Z",
+    "central_date": "2026-11-26",
+    "home": "San Diego State Aztecs",
+    "home_points": 75,
+    "away": "Maryland Terrapins",
+    "away_points": 71,
+    "model_game_id": "espn-401920528"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401929282",
+    "tip_utc": "2026-11-26T18:30Z",
+    "central_date": "2026-11-26",
+    "home": "UCF Knights",
+    "home_points": 73,
+    "away": "Boston College Eagles",
+    "away_points": 75,
+    "model_game_id": "377906"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401921674",
+    "tip_utc": "2026-11-26T19:00Z",
+    "central_date": "2026-11-26",
+    "home": "South Carolina Gamecocks",
+    "home_points": 80,
+    "away": "Arizona State Sun Devils",
+    "away_points": 73,
+    "model_game_id": "375354"
+  }
+]
