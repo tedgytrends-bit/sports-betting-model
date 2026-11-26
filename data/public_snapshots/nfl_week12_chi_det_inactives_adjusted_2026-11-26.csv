@@ -1,0 +1,2 @@
+game_id,season,week,away_team,home_team,model,projected_home,projected_away,projected_total,kickoff_utc,published_at_utc,publication_status,model_captured_at_utc,injury_source
+2026_12_CHI_DET,2026,12,CHI,DET,injury,27.996064086819505,22.47453139767244,50.470595484491945,2026-11-26T18:00:00+00:00,2026-11-26T17:44:03+00:00,GAMEDAY_INACTIVES_PREGAME,2026-11-26T17:44:03+00:00,data/injury_snapshots/injuries_2026_week_12_20261126T174339Z.csv
