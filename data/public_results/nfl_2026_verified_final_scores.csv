@@ -26,3 +26,4 @@ season,week,game_id,away_team,home_team,kickoff_utc,actual_away,actual_home,fina
 2026,11,2026_11_PIT_PHI,PIT,PHI,2026-11-22T18:00:00+00:00,16,19,FINAL,https://www.espn.com/nfl/game/_/gameId/401873076,2026-11-23T00:23:01+00:00
 2026,11,2026_11_TB_DET,TB,DET,2026-11-22T18:00:00+00:00,21,31,FINAL,https://www.espn.com/nfl/game/_/gameId/401873072,2026-11-23T00:23:01+00:00
 2026,11,2026_11_TEN_DAL,TEN,DAL,2026-11-22T18:00:00+00:00,30,51,FINAL,https://www.espn.com/nfl/game/_/gameId/401873073,2026-11-23T00:23:01+00:00
+2026,12,2026_12_GB_LA,GB,LA,2026-11-26T01:00:00+00:00,13,26,FINAL,https://www.espn.com/nfl/game/_/gameId/401873079,2026-11-26T16:25:49+00:00

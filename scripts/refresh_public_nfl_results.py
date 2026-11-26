@@ -445,7 +445,7 @@ def main():
         score_lookup=load_espn_finals(score_dates(kickoffs.values()),now,fetcher=lambda day:payload[day])
     elif kickoffs:
         # Query only unverified games, never re-download the whole season.
-        outstanding=[kickoffs[g] for g in games if g not in verified]
+        outstanding=[kickoffs[g] for g in games if g not in verified and kickoffs[g]<=now]
         score_lookup=load_espn_finals(score_dates(outstanding),now) if outstanding else {}
     else:
         score_lookup={}

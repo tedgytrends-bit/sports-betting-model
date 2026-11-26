@@ -1,0 +1,28 @@
+game_id,team,player_name,position,injury,final_game_status,report_date,source_url
+2026_12_KC_BUF,BUF,Christian Benford,CB,Groin,QUESTIONABLE,2026-11-25,https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2026.csv
+2026_12_KC_BUF,BUF,O'Cyrus Torrence,G,Ankle,QUESTIONABLE,2026-11-25,https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2026.csv
+2026_12_KC_BUF,BUF,Dorian Williams,LB,Calf,QUESTIONABLE,2026-11-25,https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2026.csv
+2026_12_KC_BUF,BUF,Dalton Kincaid,TE,Thumb,QUESTIONABLE,2026-11-25,https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2026.csv
+2026_12_KC_BUF,BUF,T.J. Sanders,DE,Shoulder,QUESTIONABLE,2026-11-25,https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2026.csv
+2026_12_CHI_DET,CHI,Elijah Hicks,S,Concussion,OUT,2026-11-25,https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2026.csv
+2026_12_CHI_DET,CHI,D'Marco Jackson,LB,Elbow,QUESTIONABLE,2026-11-25,https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2026.csv
+2026_12_CHI_DET,CHI,Kyler Gordon,CB,Shoulder,OUT,2026-11-25,https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2026.csv
+2026_12_CHI_DET,CHI,Roschon Johnson,RB,Ankle,OUT,2026-11-25,https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2026.csv
+2026_12_CHI_DET,CHI,Tyrique Stevenson,CB,Groin,QUESTIONABLE,2026-11-25,https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2026.csv
+2026_12_PHI_DAL,DAL,P.J. Locke,S,Concussion,OUT,2026-11-25,https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2026.csv
+2026_12_PHI_DAL,DAL,Jalen Thompson,S,Hamstring,QUESTIONABLE,2026-11-25,https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2026.csv
+2026_12_PHI_DAL,DAL,Jake Ferguson,TE,Knee,OUT,2026-11-25,https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2026.csv
+2026_12_PHI_DAL,DAL,Jonathan Mingo,WR,Ankle,OUT,2026-11-25,https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2026.csv
+2026_12_PHI_DAL,DAL,Tyler Booker,G,Ankle,OUT,2026-11-25,https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2026.csv
+2026_12_PHI_DAL,DAL,Devin Moore,CB,Hip,QUESTIONABLE,2026-11-25,https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2026.csv
+2026_12_CHI_DET,DET,Chuck Clark,S,Hamstring,QUESTIONABLE,2026-11-25,https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2026.csv
+2026_12_CHI_DET,DET,DJ Wonnum,DE,Back,QUESTIONABLE,2026-11-25,https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2026.csv
+2026_12_CHI_DET,DET,Ennis Rakestraw Jr.,CB,Shoulder,OUT,2026-11-25,https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2026.csv
+2026_12_CHI_DET,DET,Skyler Gill-Howard,DT,Knee,OUT,2026-11-25,https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2026.csv
+2026_12_KC_BUF,KC,Jaylon Moore,T,Ankle,OUT,2026-11-25,https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2026.csv
+2026_12_KC_BUF,KC,Noah Gray,TE,Rib,QUESTIONABLE,2026-11-25,https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2026.csv
+2026_12_KC_BUF,KC,Kenneth Walker III,RB,Groin,OUT,2026-11-25,https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2026.csv
+2026_12_KC_BUF,KC,Omarr Norman-Lott,DT,Knee,OUT,2026-11-25,https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2026.csv
+2026_12_KC_BUF,KC,Peter Woods,DT,Neck,QUESTIONABLE,2026-11-25,https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2026.csv
+2026_12_PHI_DAL,PHI,Jonathan Jones,CB,Ankle,OUT,2026-11-25,https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2026.csv
+2026_12_PHI_DAL,PHI,Arnold Ebiketie,LB,Oblique,OUT,2026-11-25,https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2026.csv
