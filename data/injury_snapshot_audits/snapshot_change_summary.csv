@@ -486,7 +486,7 @@ season,week,team,change_type,change_count
 2026,12,BUF,report_status,5
 2026,12,CHI,feed_membership,1
 2026,12,CHI,report_primary_injury,4
-2026,12,CHI,report_status,4
+2026,12,CHI,report_status,8
 2026,12,DAL,practice_status,2
 2026,12,DAL,report_primary_injury,6
 2026,12,DAL,report_secondary_injury,1
@@ -495,7 +495,7 @@ season,week,team,change_type,change_count
 2026,12,DEN,report_status,2
 2026,12,DET,practice_status,1
 2026,12,DET,report_primary_injury,4
-2026,12,DET,report_status,4
+2026,12,DET,report_status,8
 2026,12,KC,practice_status,1
 2026,12,KC,report_primary_injury,5
 2026,12,KC,report_status,5
