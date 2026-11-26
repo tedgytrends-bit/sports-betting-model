@@ -116,7 +116,10 @@ async function main(){
           assert.ok(await page.locator('.game-injuries').count()>=10,'Official injury information unexpectedly missing');
           assert.equal(await page.locator('.game-injuries[open]').count(),0,
             'Detailed injury lists should be collapsed by default');
-          }else{
+          }else if(currentWeek===12){
+            assert.match(await page.locator('#view-board .hero p').innerText(),/posted after kickoff/);
+            assert.equal(await page.locator('.game-card [data-game]').first().getAttribute('data-game'),'2026_12_GB_LA');
+          }else if(currentWeek===11){
             assert.match(await page.locator('#board-snapshot-label').innerText(),new RegExp('Week '+currentWeek));
             assert.match(await page.locator('.game-card').first().innerText(),/IND @ HOU/);
             await page.locator('[data-game="2026_11_ARI_KC"]').click();

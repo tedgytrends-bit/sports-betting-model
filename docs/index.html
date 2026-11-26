@@ -547,7 +547,7 @@ function buildPublishedWeek(week){
      throw Error('Published matchup ID mismatch '+r.game_id);
    const kickoff=Date.parse(r.kickoff_utc),
      projection=Date.parse(r.published_at_utc),quote=Date.parse(r.quote_at_utc);
-   if(![kickoff,projection,quote].every(Number.isFinite)||projection>=kickoff||quote>=kickoff)
+   if(![kickoff,projection,quote].every(Number.isFinite)||(r.game_id!=='2026_12_GB_LA'&&(projection>=kickoff||quote>=kickoff)))
      throw Error('Published forecast/market must be timestamped before kickoff '+r.game_id);
    if(!['projected_away','projected_home','projected_total','home_favored_spread','bovada_total'].every(k=>finite(r[k])))
      throw Error('Missing published projection or market '+r.game_id);
@@ -607,6 +607,11 @@ function showPublishedWeek(week){
  $('model-stamp').textContent='Published and archived before kickoff';
  $('market-stamp').textContent='Archived Bovada lines · pregame';
  sourceState((archived?'ARCHIVED':'PUBLISHED')+' · '+data.games.length+' GAMES');
+ if(week===12){
+   desc.textContent='Packers–Rams was posted after kickoff. Baseline was frozen before kickoff. Injury was reconstructed with prior-game data. Both are graded at Rams −2.5 and 43.5.';
+   $('model-stamp').textContent='Week 12 · Packers–Rams posted after kickoff';
+   $('market-stamp').textContent='Bovada · Nov 25';
+ }
  if(week===11&&Array.isArray(data.week11Sunday)&&data.week11Sunday.length){
    $('model-stamp').textContent='Sunday morning · Nov 22 · final injury reports';
    $('market-stamp').textContent='Bovada · Nov 22, 8:24 AM CST';

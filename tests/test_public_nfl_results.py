@@ -50,6 +50,10 @@ class PublicResultsTests(unittest.TestCase):
         self.assertIn("nfl_week10_initial_projections",rows[("2026_10_WAS_NYG","injury")]["forecast_file"])
         self.assertIn("nfl_week10_sunday_pregame",rows[("2026_10_MIA_IND","baseline")]["forecast_file"])
         for row in rows.values():
+            if row["game_id"]=="2026_12_GB_LA":
+                self.assertIn("Posted after kickoff", row["source_warning"])
+                self.assertGreater(datetime.fromisoformat(row["published_at_utc"]),datetime.fromisoformat(row["kickoff_utc"]))
+                continue
             self.assertLess(datetime.fromisoformat(row["published_at_utc"]),datetime.fromisoformat(row["kickoff_utc"]))
             self.assertLess(datetime.fromisoformat(row["quote_at_utc"]),datetime.fromisoformat(row["kickoff_utc"]))
 

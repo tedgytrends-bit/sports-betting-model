@@ -335,13 +335,19 @@ def eligible_published(sources,kickoffs,quotes,now):
         if kick>now:
             # Still show the game as pending; it was published in advance.
             pass
-        eligible=[(t,p,r) for t,p,r in records if t<kick]
+        # The owner requested normal settlement for this late-posted opener.
+        late_opener = game_id == "2026_12_GB_LA"
+        eligible=[(t,p,r) for t,p,r in records if t<kick or (
+            late_opener and r.get("publication_status")=="POST_KICKOFF_RELEASE"
+            and p.name=="nfl_week12_initial_2026-11-25.csv")]
         if not eligible:raise ValueError("No pregame published forecast "+game_id+" "+model)
         eligible.sort(key=lambda x:(x[0],str(x[1])))
         pub,p,row=eligible[-1]
         week=int(row["week"])
         away,home=canon(row["away_team"]),canon(row["home_team"])
-        book=[(t,q) for t,q in quotes.get((week,away,home),[]) if t<kick]
+        book=[(t,q) for t,q in quotes.get((week,away,home),[]) if t<kick or (
+            late_opener and q.get("note")=="Pregame line reported after kickoff by owner"
+            and number(q["home_favorite_spread"])==2.5 and number(q["total_line"])==43.5)]
         if not book:
             raise ValueError("Missing archived pregame Bovada line for "+game_id)
         book.sort(key=lambda x:x[0])
@@ -364,6 +370,8 @@ def eligible_published(sources,kickoffs,quotes,now):
                               if model=="injury" and game_id=="2026_10_MIA_IND"
                               else "Model spread lean is not a verified profitable wager"),
         }
+        if late_opener:
+            entry["source_warning"]="Posted after kickoff. Pregame Baseline archived; Injury reconstructed from prior-game data. Owner supplied pregame line after kickoff."
         base[(game_id,model)]=entry
     return base
 
@@ -411,6 +419,7 @@ def summarize(rows,now):
 def main():
     parser=argparse.ArgumentParser()
     parser.add_argument("--offline-scores",help="Fixture JSON for regression tests; never set on production schedule")
+    parser.add_argument("--publish-only", action="store_true", help="Publish projections while retaining previously verified finals; scheduled grader retrieves new scores")
     args=parser.parse_args()
     now=datetime.now(timezone.utc).replace(microsecond=0)
     existing={ (r["game_id"],r["model"]):r for r in read(OLD) }
@@ -429,7 +438,9 @@ def main():
     if len({r["game_id"] for r in old_verified})!=len(old_verified):
         raise ValueError("Duplicate previously verified final NFL games")
     verified={r["game_id"]:r for r in old_verified}
-    if args.offline_scores:
+    if args.publish_only:
+        score_lookup={}
+    elif args.offline_scores:
         payload=json.loads(Path(args.offline_scores).read_text())
         score_lookup=load_espn_finals(score_dates(kickoffs.values()),now,fetcher=lambda day:payload[day])
     elif kickoffs:
