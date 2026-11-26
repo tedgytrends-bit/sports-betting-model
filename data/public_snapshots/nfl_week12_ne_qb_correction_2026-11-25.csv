@@ -1,0 +1,2 @@
+game_id,season,week,away_team,home_team,model,projected_home,projected_away,projected_total,kickoff_utc,published_at_utc,publication_status,model_captured_at_utc
+2026_12_NE_LAC,2026,12,NE,LAC,injury,21.704419763830277,21.728217544882263,43.43263730871254,2026-11-29T21:05:00+00:00,2026-11-26T02:37:59+00:00,PREGAME_QB_CORRECTION,2026-11-26T02:37:59+00:00

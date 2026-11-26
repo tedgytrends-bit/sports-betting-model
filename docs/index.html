@@ -304,7 +304,7 @@ function openDrawer(id){
       ?(primary.atsTeam==='No edge'?'Model matches the market':primary.atsTeam+' '+sign(primary.atsSpread))
       :'Market unavailable';
    $('drawer-content').innerHTML='<div class="drawer-headline">Week '+esc(selected.id.split('_')[1])
-     +' · '+esc(dateLabel(selected.date))+' · '+esc(kickoffLabel(selected))+' · saved before kickoff</div>'
+     +' · '+esc(dateLabel(selected.date))+' · '+esc(kickoffLabel(selected))+(id==='2026_12_GB_LA'?' · posted after kickoff':' · saved before kickoff')+'</div>'
      +'<div class="drawer-score"><div class="drawer-team"><div class="large">'+f(primary.a)+'</div><div class="tname">'+esc(selected.away)+'</div><div class="loc">PROJECTED</div></div><div class="versus">AT</div><div class="drawer-team"><div class="large">'+f(primary.h)+'</div><div class="tname">'+esc(selected.home)+'</div><div class="loc">PROJECTED</div></div></div>'
      +'<div class="detail-columns"><div class="detail-panel"><h4>Spread</h4><div class="detail-row"><span>Bovada</span><strong>'+esc(marketFav(selected))+'</strong></div><div class="detail-row"><span>Model direction</span><strong>'+esc(marginText)+'</strong></div><div class="detail-row"><span>Difference</span><strong>'+f(primary.atsEdge)+' pts</strong></div></div>'
      +'<div class="detail-panel"><h4>Total</h4><div class="detail-row"><span>Bovada</span><strong>'+f(selected.market.total_line)+'</strong></div><div class="detail-row"><span>Projected</span><strong>'+f(primary.total)+'</strong></div><div class="detail-row"><span>Difference</span><strong>'+f(primary.totalEdge)+' pts</strong></div></div></div>'
@@ -536,6 +536,40 @@ function publishedWeekNumbers(){
    Number(r.week)>=11&&r.record_class==='PUBLIC_PUBLISHED'&&
    ['injury','baseline'].includes(r.model)).map(r=>Number(r.week)))].sort((a,b)=>b-a);
 }
+const week12Quarterbacks = {
+  "ARI": "Josh Johnson · if Carson Beck cannot play",
+  "ATL": "Michael Penix Jr.",
+  "BAL": "Jacoby Brissett",
+  "BUF": "Josh Allen",
+  "CAR": "Bryce Young",
+  "CHI": "Caleb Williams",
+  "CIN": "Joe Burrow",
+  "CLE": "Deshaun Watson",
+  "DAL": "Dak Prescott",
+  "DEN": "Bo Nix",
+  "DET": "Jared Goff",
+  "GB": "Jordan Love",
+  "HOU": "C.J. Stroud",
+  "IND": "Anthony Richardson",
+  "JAX": "Trevor Lawrence",
+  "KC": "Patrick Mahomes",
+  "LA": "Matthew Stafford",
+  "LAC": "Justin Herbert · concussion protocol",
+  "LV": "Fernando Mendoza",
+  "MIA": "Kyle McCord",
+  "MIN": "Kirk Cousins",
+  "NE": "Tommy DeVito · expected",
+  "NO": "Tyler Shough",
+  "NYG": "J.J. McCarthy",
+  "NYJ": "Geno Smith",
+  "PHI": "Joe Milton III",
+  "PIT": "Mason Rudolph · team announced",
+  "SEA": "Sam Darnold · pending practice",
+  "SF": "Brock Purdy",
+  "TB": "Baker Mayfield",
+  "TEN": "Cam Ward",
+  "WAS": "Jayden Daniels"
+};
 function buildPublishedWeek(week){
  const cohort=data.resultsGames.filter(r=>Number(r.week)===week&&
    Number(r.season)===2026&&r.record_class==='PUBLIC_PUBLISHED'&&
@@ -565,6 +599,10 @@ function buildPublishedWeek(week){
        market:{home_favorite_spread:r.home_favored_spread,
          total_line:r.bovada_total,captured_at_utc:r.quote_at_utc},
        modelArchive:r.forecast_file};
+     if(week===12){
+       g.qbInfo.away=week12Quarterbacks[away];
+       g.qbInfo.home=week12Quarterbacks[home];
+     }
      byGame.set(r.game_id,g);
    }
    if(g.models[r.model]||g.away!==away||g.home!==home||g.kickoffUtc!==r.kickoff_utc||
