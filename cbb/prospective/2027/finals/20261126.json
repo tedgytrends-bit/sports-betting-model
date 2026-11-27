@@ -64,5 +64,170 @@
     "away": "Arizona State Sun Devils",
     "away_points": 73,
     "model_game_id": "375354"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401906869",
+    "tip_utc": "2026-11-26T19:30Z",
+    "central_date": "2026-11-26",
+    "home": "Texas Longhorns",
+    "home_points": 92,
+    "away": "Georgetown Hoyas",
+    "away_points": 83,
+    "model_game_id": "372950"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401920529",
+    "tip_utc": "2026-11-26T20:30Z",
+    "central_date": "2026-11-26",
+    "home": "Iowa State Cyclones",
+    "home_points": 64,
+    "away": "Tennessee Volunteers",
+    "away_points": 75,
+    "model_game_id": "espn-401920529"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401920537",
+    "tip_utc": "2026-11-26T20:30Z",
+    "central_date": "2026-11-26",
+    "home": "Michigan Wolverines",
+    "home_points": 70,
+    "away": "Miami Hurricanes",
+    "away_points": 97,
+    "model_game_id": "espn-401920537"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401921673",
+    "tip_utc": "2026-11-26T21:30Z",
+    "central_date": "2026-11-26",
+    "home": "Utah State Aggies",
+    "home_points": 78,
+    "away": "USC Trojans",
+    "away_points": 74,
+    "model_game_id": "375355"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401925757",
+    "tip_utc": "2026-11-26T21:30Z",
+    "central_date": "2026-11-26",
+    "home": "Michigan State Spartans",
+    "home_points": 70,
+    "away": "Arkansas Razorbacks",
+    "away_points": 67,
+    "model_game_id": "375352"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401917547",
+    "tip_utc": "2026-11-26T22:00Z",
+    "central_date": "2026-11-26",
+    "home": "Saint Mary's Gaels",
+    "home_points": 85,
+    "away": "UCLA Bruins",
+    "away_points": 70,
+    "model_game_id": "375356"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401920538",
+    "tip_utc": "2026-11-26T23:00Z",
+    "central_date": "2026-11-26",
+    "home": "Creighton Bluejays",
+    "home_points": 95,
+    "away": "TCU Horned Frogs",
+    "away_points": 87,
+    "model_game_id": "espn-401920538"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401909506",
+    "tip_utc": "2026-11-27T00:00Z",
+    "central_date": "2026-11-26",
+    "home": "Pittsburgh Panthers",
+    "home_points": 71,
+    "away": "DePaul Blue Demons",
+    "away_points": 64,
+    "model_game_id": "372948"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401918972",
+    "tip_utc": "2026-11-27T00:00Z",
+    "central_date": "2026-11-26",
+    "home": "SMU Mustangs",
+    "home_points": 86,
+    "away": "LSU Tigers",
+    "away_points": 95,
+    "model_game_id": "375357"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401911523",
+    "tip_utc": "2026-11-27T01:00Z",
+    "central_date": "2026-11-26",
+    "home": "Jacksonville State Gamecocks",
+    "home_points": 63,
+    "away": "UC Davis Aggies",
+    "away_points": 68,
+    "model_game_id": "espn-401911523"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401920530",
+    "tip_utc": "2026-11-27T02:00Z",
+    "central_date": "2026-11-26",
+    "home": "St. John's Red Storm",
+    "home_points": 90,
+    "away": "Louisville Cardinals",
+    "away_points": 93,
+    "model_game_id": "espn-401920530"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401920539",
+    "tip_utc": "2026-11-27T02:00Z",
+    "central_date": "2026-11-26",
+    "home": "Kansas State Wildcats",
+    "home_points": 91,
+    "away": "Alabama Crimson Tide",
+    "away_points": 104,
+    "model_game_id": "espn-401920539"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401917546",
+    "tip_utc": "2026-11-27T03:30Z",
+    "central_date": "2026-11-26",
+    "home": "Omaha Mavericks",
+    "home_points": 62,
+    "away": "Pacific Tigers",
+    "away_points": 71,
+    "model_game_id": "375353"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401920540",
+    "tip_utc": "2026-11-27T04:53Z",
+    "central_date": "2026-11-26",
+    "home": "Gonzaga Bulldogs",
+    "home_points": 72,
+    "away": "Baylor Bears",
+    "away_points": 64,
+    "model_game_id": "espn-401920540"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401920531",
+    "tip_utc": "2026-11-27T04:57Z",
+    "central_date": "2026-11-26",
+    "home": "Oregon Ducks",
+    "home_points": 59,
+    "away": "Texas Tech Red Raiders",
+    "away_points": 62,
+    "model_game_id": "espn-401920531"
   }
 ]

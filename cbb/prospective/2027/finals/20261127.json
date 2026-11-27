@@ -1,0 +1,134 @@
+[
+  {
+    "source": "ESPN",
+    "event_id": "401920429",
+    "tip_utc": "2026-11-27T16:00Z",
+    "central_date": "2026-11-27",
+    "home": "Xavier Musketeers",
+    "home_points": 71,
+    "away": "Virginia Cavaliers",
+    "away_points": 83,
+    "model_game_id": "375374"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401920848",
+    "tip_utc": "2026-11-27T17:00Z",
+    "central_date": "2026-11-27",
+    "home": "Liberty Flames",
+    "home_points": 76,
+    "away": "St. Thomas Tommies",
+    "away_points": 67,
+    "model_game_id": "espn-401920848"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401920533",
+    "tip_utc": "2026-11-27T18:00Z",
+    "central_date": "2026-11-27",
+    "home": "St. John's Red Storm",
+    "home_points": 80,
+    "away": "Iowa State Cyclones",
+    "away_points": 75,
+    "model_game_id": "espn-401920533"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401920753",
+    "tip_utc": "2026-11-27T18:00Z",
+    "central_date": "2026-11-27",
+    "home": "Youngstown State Penguins",
+    "home_points": 96,
+    "away": "Bryant & Stratton (OH) Bobcats",
+    "away_points": 66,
+    "model_game_id": "espn-401920753"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401921416",
+    "tip_utc": "2026-11-27T18:00Z",
+    "central_date": "2026-11-27",
+    "home": "Hampton Pirates",
+    "home_points": 55,
+    "away": "UMass Lowell River Hawks",
+    "away_points": 72,
+    "model_game_id": "espn-401921416"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401924810",
+    "tip_utc": "2026-11-27T18:00Z",
+    "central_date": "2026-11-27",
+    "home": "Vermont Catamounts",
+    "home_points": 57,
+    "away": "Merrimack Warriors",
+    "away_points": 75,
+    "model_game_id": "espn-401924810"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401929288",
+    "tip_utc": "2026-11-27T18:30Z",
+    "central_date": "2026-11-27",
+    "home": "Wake Forest Demon Deacons",
+    "home_points": 85,
+    "away": "Memphis Tigers",
+    "away_points": 88,
+    "model_game_id": "espn-401929288"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401919786",
+    "tip_utc": "2026-11-27T19:00Z",
+    "central_date": "2026-11-27",
+    "home": "Le Moyne Dolphins",
+    "home_points": 86,
+    "away": "Maine Black Bears",
+    "away_points": 90,
+    "model_game_id": "espn-401919786"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401921224",
+    "tip_utc": "2026-11-27T19:00Z",
+    "central_date": "2026-11-27",
+    "home": "Fairfield Stags",
+    "home_points": 75,
+    "away": "Navy Midshipmen",
+    "away_points": 59,
+    "model_game_id": "espn-401921224"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401921827",
+    "tip_utc": "2026-11-27T19:00Z",
+    "central_date": "2026-11-27",
+    "home": "Vanderbilt Commodores",
+    "home_points": 111,
+    "away": "Southern Jaguars",
+    "away_points": 56,
+    "model_game_id": "espn-401921827"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401929181",
+    "tip_utc": "2026-11-27T19:00Z",
+    "central_date": "2026-11-27",
+    "home": "South Alabama Jaguars",
+    "home_points": 61,
+    "away": "Fresno State Bulldogs",
+    "away_points": 81,
+    "model_game_id": "espn-401929181"
+  },
+  {
+    "source": "ESPN",
+    "event_id": "401929407",
+    "tip_utc": "2026-11-27T19:00Z",
+    "central_date": "2026-11-27",
+    "home": "South Dakota Coyotes",
+    "home_points": 99,
+    "away": "Clarke Pride",
+    "away_points": 47,
+    "model_game_id": "espn-401929407"
+  }
+]
