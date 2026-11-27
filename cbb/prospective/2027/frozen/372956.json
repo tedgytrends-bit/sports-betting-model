@@ -1,0 +1,124 @@
+{
+  "capture_version": 1,
+  "capture_type": "research_shadow",
+  "capture_utc": "2026-11-27T21:56:49.711952Z",
+  "model_commit": "91452b5dc0af8c5275e2a239dad9a642bd0f88b8",
+  "source": "ESPN scoreboards, pretip markets, rosters and completed boxes; archived training, recruitment, transfers and prior-season talent. ESPN player boxes omit advanced usage and efficiency when unavailable.",
+  "source_sha256": {
+    "boxes.json": "5d5a06a912afbc36bb72f67e5fb530e4d49e92583a9f8c2725b5bf6a2f765072",
+    "games.json": "c30dbeddd92511085b7e38d5c3d5d5bcba10ccd3cf4f86a177f8524029f7731c",
+    "historical_game_players_2022_gzip": "3fc80e7d3b0963611757d7554e2ab25f8fa9b452db6b1c93ae4c8c911ec66d8d",
+    "historical_game_players_2023_gzip": "28ec46bff415aea0e871ec2c59c7d97326cbb1b72396e66fb3db3d5a91c73fa3",
+    "historical_game_players_2024_gzip": "da66322378204140f5bbd9a0500f20914cfa11d2ea789261bfb12840f9a68ff3",
+    "historical_game_players_2025_gzip": "c650c07c0ceeb6b25ff1877a04490eec5b5dfa2a73d4456157cdd618e17d0b2b",
+    "historical_game_players_2026_gzip": "f1d1f95b023e4e340a95f9eb9ee15546863fbbeed218ac01119ae8d20f345414",
+    "lines.json": "228f01102b2238023e626d1304bed0c8aa5bbdb47169ca3a0e36d0efd1de5cf8",
+    "live_game_players_gzip": "35acd456eb1615234aa7c0b72ce2e034bbaef100e34fba1aef0ee9ac0a7107b7",
+    "portal.json": "1120680b643a03192b5f9361ae57e37e6a535c5a40b4622761ab597962101951",
+    "prior_players.json": "b0ef0a21b4e64a811eb29fd569f711257f4088ebd2abbfad89921542d577638e",
+    "recruits.json": "e6d4bbefdadeb90fa70b094eca3aa2cbd19b76397daaab1b1e9c847059ec2bff",
+    "rosters.json": "d15ce060010075aee77312c6a851fa1056163e357cab43bea9b914b215362b2d"
+  },
+  "game": {
+    "away": "Bowling Green",
+    "away_team_id": "28",
+    "baseline": {
+      "ats_edge": -6.08,
+      "ats_lean": "away",
+      "projected_away_points": 69.64,
+      "projected_home_points": 85.06,
+      "projected_margin_home": 15.42,
+      "projected_total": 154.702,
+      "total_edge": 3.202,
+      "total_lean": "over",
+      "training_games": 31259
+    },
+    "coverage": {
+      "away_elite_recruits": 0,
+      "away_games_played": 6,
+      "away_prior_matched": 8,
+      "away_roster_eligible": 15,
+      "away_verified_portal": 4,
+      "home_elite_recruits": 3,
+      "home_games_played": 7,
+      "home_prior_matched": 10,
+      "home_roster_eligible": 17,
+      "home_verified_portal": 7
+    },
+    "espn_id": "401911030",
+    "freeze_candidate": true,
+    "home": "Indiana",
+    "home_team_id": "121",
+    "id": "372956",
+    "market": {
+      "as_of_utc": "2026-11-27T21:55:49.409056+00:00",
+      "home_spread": -21.5,
+      "provider": "DraftKings",
+      "total": 151.5
+    },
+    "neutral_site": false,
+    "player_all_v4": {
+      "ats_edge": -2.263,
+      "ats_lean": "away",
+      "projected_away_points": 61.59,
+      "projected_home_points": 80.83,
+      "projected_margin_home": 19.237,
+      "projected_total": 142.416,
+      "total_edge": -9.084,
+      "total_lean": "under",
+      "training_games": 31259
+    },
+    "player_opp_v3": {
+      "ats_edge": 0.346,
+      "ats_lean": "home",
+      "projected_away_points": 70.02,
+      "projected_home_points": 91.87,
+      "projected_margin_home": 21.846,
+      "projected_total": 161.895,
+      "total_edge": 10.395,
+      "total_lean": "over",
+      "training_games": 31259
+    },
+    "player_rot_v4": {
+      "ats_edge": -4.936,
+      "ats_lean": "away",
+      "projected_away_points": 62.88,
+      "projected_home_points": 79.45,
+      "projected_margin_home": 16.564,
+      "projected_total": 142.33,
+      "total_edge": -9.17,
+      "total_lean": "under",
+      "training_games": 31259
+    },
+    "player_v2": {
+      "ats_edge": -2.029,
+      "ats_lean": "away",
+      "projected_away_points": 71.09,
+      "projected_home_points": 90.56,
+      "projected_margin_home": 19.471,
+      "projected_total": 161.657,
+      "total_edge": 10.157,
+      "total_lean": "over",
+      "training_games": 31259
+    },
+    "research_quality": "adequate",
+    "rotation_coverage": {
+      "away": {
+        "box_coverage": 1.0,
+        "last_box_present": true,
+        "past_game_boxes": 5,
+        "prior_key_minutes_missing": 0.75
+      },
+      "home": {
+        "box_coverage": 1.0,
+        "last_box_present": true,
+        "past_game_boxes": 5,
+        "prior_key_minutes_missing": 0.75
+      }
+    },
+    "season": 2027,
+    "tip_utc": "2026-11-27T23:00:00Z"
+  },
+  "frozen_rule": "First snapshot within 24 hours before tip with at least one market line",
+  "snapshot_path": "cbb/prospective/2027/snapshots/20261127T215649711952_46073329494.json"
+}
